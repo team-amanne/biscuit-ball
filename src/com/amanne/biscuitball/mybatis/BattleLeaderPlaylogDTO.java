@@ -7,17 +7,17 @@ package com.amanne.biscuitball.mybatis;
 
 public class BattleLeaderPlaylogDTO
 {
-	private String leaderPlaylogCode; 			// ¸®´õÇÃ·¹ÀÌ·Î±×ÄÚµå
-	private String battleRequestCode; 			// ´ëÀü½ÅÃ»ÄÚµå
-	private String inputCrewCode; 				// ÀÔ·ÂÅ©·çÄÚµå
-	private String inputCrewName; 				// ÀÔ·ÂÅ©·ç¸í
-	private String inputDate; 					// ÀÔ·ÂÀÏ½Ã
-	private double rivalCrewFairplayScore; 		// »ó´ëÅ©·çfps
-	private String battleResultTypeCode; 		// ´ëÀü°á°úÄÚµå
-	private String battleResult; 				// ´ëÀü°á°ú
-	private String mvpBattleJoinCode; 			// mvp ´ëÀüÂü°¡ÄÚµå
-	private String mvpAccountCode; 				// mvp °èÁ¤ÄÚµå
-	private String mvpNickname; 				// mvp ´Ğ³×ÀÓ
+	private String leaderPlaylogCode; 			// ë¦¬ë”í”Œë ˆì´ë¡œê·¸ì½”ë“œ
+	private String battleRequestCode; 			// ëŒ€ì „ì‹ ì²­ì½”ë“œ
+	private String inputCrewCode; 				// ì…ë ¥í¬ë£¨ì½”ë“œ
+	private String inputCrewName; 				// ì…ë ¥í¬ë£¨ëª…
+	private String inputDate; 					// ì…ë ¥ì¼ì‹œ
+	private double rivalCrewFairplayScore; 		// ìƒëŒ€í¬ë£¨fps
+	private String battleResultTypeCode; 		// ëŒ€ì „ê²°ê³¼ì½”ë“œ
+	private String battleResult; 				// ëŒ€ì „ê²°ê³¼
+	private String mvpBattleJoinCode; 			// mvp ëŒ€ì „ì°¸ê°€ì½”ë“œ
+	private String mvpAccountCode; 				// mvp ê³„ì •ì½”ë“œ
+	private String mvpNickname; 				// mvp ë‹‰ë„¤ì„
 
 	public String getLeaderPlaylogCode()
 	{

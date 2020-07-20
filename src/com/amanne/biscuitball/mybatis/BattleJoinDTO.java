@@ -7,11 +7,11 @@ package com.amanne.biscuitball.mybatis;
 
 public class BattleJoinDTO
 {
-	private String battleJoinCode; 			// ´ëÀüÂü°¡ÄÚµå
-	private String battleRequestCode; 		// Âü°¡´ëÀü½ÅÃ»ÄÚµå
-	private String crewMemberCode; 			// ´ëÀüÂü°¡¸â¹öÄÚµå
-	private String joinMemberAccountCode; 	// ´ëÀüÂü°¡¸â¹ö°èÁ¤ÄÚµå
-	private String joinMemberNickname; 		// ´ëÀüÂü°¡¸â¹ö´Ğ³×ÀÓ
+	private String battleJoinCode; 			// ëŒ€ì „ì°¸ê°€ì½”ë“œ
+	private String battleRequestCode; 		// ì°¸ê°€ëŒ€ì „ì‹ ì²­ì½”ë“œ
+	private String crewMemberCode; 			// ëŒ€ì „ì°¸ê°€ë©¤ë²„ì½”ë“œ
+	private String joinMemberAccountCode; 	// ëŒ€ì „ì°¸ê°€ë©¤ë²„ê³„ì •ì½”ë“œ
+	private String joinMemberNickname; 		// ëŒ€ì „ì°¸ê°€ë©¤ë²„ë‹‰ë„¤ì„
 
 	public String getBattleJoinCode()
 	{

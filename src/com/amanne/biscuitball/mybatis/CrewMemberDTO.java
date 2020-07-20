@@ -7,26 +7,26 @@ package com.amanne.biscuitball.mybatis;
 
 public class CrewMemberDTO
 {
-	private String courtReviewCode; 			// ÄÚÆ®¸®ºäÄÚµå
-	private String courtReviewContent; 			// ÄÚÆ®¸®ºä³»¿ë
-	private double courtReviewManageScore; 		// °ü¸®º°Á¡
-	private String courtReviewRegisteredDate; 	// µî·ÏÀÏ½Ã
-	private double courtReviewSatisfaction; 	// ¸¸Á·µµ
-	private String courtCapacityCode; 			// ÀûÁ¤ÀÎ¿ø¼öÄÚµå
-	private int minCourtCapacity; 				// ÃÖ¼ÒÀÎ¿ø¼ö
-	private int maxCourtCapacity; 				// ÃÖ´ëÀÎ¿ø¼ö
-	private String courtCode; 					// ÄÚÆ®ÄÚµå
-	private String registrantAccountCode; 		// µî·ÏÈ¸¿ø°èÁ¤ÄÚµå
-	private String registrantNickname; 			// µî·ÏÈ¸¿ø´Ğ³×ÀÓ
-	private String courtReviewDelDate; 			// »èÁ¦ÀÏ½Ã
-	private String courtReviewStatus; 			// »óÅÂ
-	private int likes; 							// ÁÁ¾Æ¿ä¼ö
-	private int dislikes; 						// ½È¾î¿ä¼ö
-	private boolean toilet; 					// È­Àå½ÇÀ¯¹«
-	private boolean shower; 					// »ş¿öÀåÀ¯¹«
-	private boolean parkinglot; 				// ÁÖÂ÷ÀåÀ¯¹«
-	private boolean pollOrNot; 					// ÅõÇ¥ ¿©ºÎ
-	private boolean pollLikeOrDislike; 			// ÁÁ¾Æ¿ä/½È¾î¿ä ÅõÇ¥¿©ºÎ
+	private String courtReviewCode; 			// ì½”íŠ¸ë¦¬ë·°ì½”ë“œ
+	private String courtReviewContent; 			// ì½”íŠ¸ë¦¬ë·°ë‚´ìš©
+	private double courtReviewManageScore; 		// ê´€ë¦¬ë³„ì 
+	private String courtReviewRegisteredDate; 	// ë“±ë¡ì¼ì‹œ
+	private double courtReviewSatisfaction; 	// ë§Œì¡±ë„
+	private String courtCapacityCode; 			// ì ì •ì¸ì›ìˆ˜ì½”ë“œ
+	private int minCourtCapacity; 				// ìµœì†Œì¸ì›ìˆ˜
+	private int maxCourtCapacity; 				// ìµœëŒ€ì¸ì›ìˆ˜
+	private String courtCode; 					// ì½”íŠ¸ì½”ë“œ
+	private String registrantAccountCode; 		// ë“±ë¡íšŒì›ê³„ì •ì½”ë“œ
+	private String registrantNickname; 			// ë“±ë¡íšŒì›ë‹‰ë„¤ì„
+	private String courtReviewDelDate; 			// ì‚­ì œì¼ì‹œ
+	private String courtReviewStatus; 			// ìƒíƒœ
+	private int likes; 							// ì¢‹ì•„ìš”ìˆ˜
+	private int dislikes; 						// ì‹«ì–´ìš”ìˆ˜
+	private boolean toilet; 					// í™”ì¥ì‹¤ìœ ë¬´
+	private boolean shower; 					// ìƒ¤ì›Œì¥ìœ ë¬´
+	private boolean parkinglot; 				// ì£¼ì°¨ì¥ìœ ë¬´
+	private boolean pollOrNot; 					// íˆ¬í‘œ ì—¬ë¶€
+	private boolean pollLikeOrDislike; 			// ì¢‹ì•„ìš”/ì‹«ì–´ìš” íˆ¬í‘œì—¬ë¶€
 
 	public String getCourtReviewCode()
 	{

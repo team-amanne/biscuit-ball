@@ -7,8 +7,8 @@ package com.amanne.biscuitball.mybatis;
 
 public class RegionDTO
 {
-	private String regionCode; // ±¤¿ª½Ãµµ¹øÈ£(PK)
-	private String regionName; // ±¤¿ª½ÃµµÀÌ¸§
+	private String regionCode; // ê´‘ì—­ì‹œë„ë²ˆí˜¸(PK)
+	private String regionName; // ê´‘ì—­ì‹œë„ì´ë¦„
 
 	public String getRegionCode()
 	{

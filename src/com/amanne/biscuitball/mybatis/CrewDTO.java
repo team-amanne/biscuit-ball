@@ -9,37 +9,37 @@ import java.util.ArrayList;
 
 public class CrewDTO
 {
-	private String crewCode; 						// Å©·çÄÚµå
-	private String crewName; 						// Å©·çÀÌ¸§
-	private String crewOpenDate; 					// Å©·ç°³¼³ÀÏ½Ã
-	private String titleAchievementGetCode; 		// ´ëÇ¥¾÷ÀûÈ¹µæÄÚµå
-	private String titleAchievementCode; 			// ´ëÇ¥¾÷ÀûÄÚµå
-	private String titleAchievementName; 			// ´ëÇ¥¾÷Àû¸í
-	private String titleAchievementImg;				// ´ëÇ¥¾÷Àû¾ÆÀÌÄÜ°æ·Î
-	private String crewCourtCode; 					// È¨ÄÚÆ®ÄÚµå
-	private String crewCourtName; 					// È¨ÄÚÆ®ÀÌ¸§
-	private String crewFavoriteBattleModeCode;	 	// ¼±È£´ëÀü¹æ½ÄÄÚµå
-	private String crewFavoriteBattleMode; 			// ¼±È£´ëÀü¹æ½Ä
-	private String crewBattleRefuseCode; 			// ´ëÀü½ÅÃ»°¡´É¿©ºÎÄÚµå
-	private String crewBattleRefuse; 				// ´ëÀü½ÅÃ»°¡´É¿©ºÎ
-	private int crewJoinMinBirthyear; 				// ÃÖ¼Ò°¡ÀÔ»ı³âÁ¶°Ç
-	private int crewJoinMaxBirthyear; 				// ÃÖ´ë°¡ÀÔ»ı³âÁ¶°Ç
-	private double crewJoinMinFairplayScore; 		// ÃÖ¼Ò°¡ÀÔfpsÁ¶°Ç
-	private String crewJoinAbilityLimitCode; 		// ÃÖ¼Ò°¡ÀÔ½Ç·ÂÁ¶°ÇÄÚµå
-	private String crewJoinMinTierCode; 			// ÃÖ¼Ò°¡ÀÔÆ¼¾îÁ¶°Ç
-	private String crewJoinMaxTierCode; 			// ÃÖ´ë°¡ÀÔÆ¼¾îÁ¶°Ç
-	private int crewJoinMinAbilityScore; 			// ÃÖ¼Ò°¡ÀÔ½Ç·ÂÁ¡¼öÁ¶°Ç
-	private int crewJoinMaxAbilityScore; 			// ÃÖ´ë°¡ÀÔ½Ç·ÂÁ¡¼öÁ¶°Ç
-	private double crewFairplayScore; 				// Æò±Õfps
-	private String leaderMemberCode; 				// ¸®´õ ¸â¹öÄÚµå
-	private String leaderAccountCode; 				// ¸®´õ °èÁ¤ÄÚµå
-	private String leaderNickname; 					// ¸®´õ ´Ğ³×ÀÓ
-	private String crewStatus; 						// Å©·ç »óÅÂ
-	private ArrayList crewMemberList; 				// Å©·ç ¸â¹ö ¸ñ·Ï
-	private int penaltyCount; 						// Á¦ÀçÈ½¼ö
-	private String crewPenaltyStatus; 				// Á¦Àç»óÅÂ
-	private ArrayList<RegionDTO> crewBaseAreaList; 	// Å©·ç°ÅÁ¡Áö¿ª¸ñ·Ï
-	private String crewProfileImg; 					// Å©·çÇÁ·ÎÇÊ»çÁø
+	private String crewCode; 						// í¬ë£¨ì½”ë“œ
+	private String crewName; 						// í¬ë£¨ì´ë¦„
+	private String crewOpenDate; 					// í¬ë£¨ê°œì„¤ì¼ì‹œ
+	private String titleAchievementGetCode; 		// ëŒ€í‘œì—…ì íšë“ì½”ë“œ
+	private String titleAchievementCode; 			// ëŒ€í‘œì—…ì ì½”ë“œ
+	private String titleAchievementName; 			// ëŒ€í‘œì—…ì ëª…
+	private String titleAchievementImg;				// ëŒ€í‘œì—…ì ì•„ì´ì½˜ê²½ë¡œ
+	private String crewCourtCode; 					// í™ˆì½”íŠ¸ì½”ë“œ
+	private String crewCourtName; 					// í™ˆì½”íŠ¸ì´ë¦„
+	private String crewFavoriteBattleModeCode;	 	// ì„ í˜¸ëŒ€ì „ë°©ì‹ì½”ë“œ
+	private String crewFavoriteBattleMode; 			// ì„ í˜¸ëŒ€ì „ë°©ì‹
+	private String crewBattleRefuseCode; 			// ëŒ€ì „ì‹ ì²­ê°€ëŠ¥ì—¬ë¶€ì½”ë“œ
+	private String crewBattleRefuse; 				// ëŒ€ì „ì‹ ì²­ê°€ëŠ¥ì—¬ë¶€
+	private int crewJoinMinBirthyear; 				// ìµœì†Œê°€ì…ìƒë…„ì¡°ê±´
+	private int crewJoinMaxBirthyear; 				// ìµœëŒ€ê°€ì…ìƒë…„ì¡°ê±´
+	private double crewJoinMinFairplayScore; 		// ìµœì†Œê°€ì…fpsì¡°ê±´
+	private String crewJoinAbilityLimitCode; 		// ìµœì†Œê°€ì…ì‹¤ë ¥ì¡°ê±´ì½”ë“œ
+	private String crewJoinMinTierCode; 			// ìµœì†Œê°€ì…í‹°ì–´ì¡°ê±´
+	private String crewJoinMaxTierCode; 			// ìµœëŒ€ê°€ì…í‹°ì–´ì¡°ê±´
+	private int crewJoinMinAbilityScore; 			// ìµœì†Œê°€ì…ì‹¤ë ¥ì ìˆ˜ì¡°ê±´
+	private int crewJoinMaxAbilityScore; 			// ìµœëŒ€ê°€ì…ì‹¤ë ¥ì ìˆ˜ì¡°ê±´
+	private double crewFairplayScore; 				// í‰ê· fps
+	private String leaderMemberCode; 				// ë¦¬ë” ë©¤ë²„ì½”ë“œ
+	private String leaderAccountCode; 				// ë¦¬ë” ê³„ì •ì½”ë“œ
+	private String leaderNickname; 					// ë¦¬ë” ë‹‰ë„¤ì„
+	private String crewStatus; 						// í¬ë£¨ ìƒíƒœ
+	private ArrayList crewMemberList; 				// í¬ë£¨ ë©¤ë²„ ëª©ë¡
+	private int penaltyCount; 						// ì œì¬íšŸìˆ˜
+	private String crewPenaltyStatus; 				// ì œì¬ìƒíƒœ
+	private ArrayList<RegionDTO> crewBaseAreaList; 	// í¬ë£¨ê±°ì ì§€ì—­ëª©ë¡
+	private String crewProfileImg; 					// í¬ë£¨í”„ë¡œí•„ì‚¬ì§„
 
 	public String getCrewCode()
 	{

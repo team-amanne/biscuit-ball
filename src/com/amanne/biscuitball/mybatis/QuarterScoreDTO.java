@@ -7,10 +7,10 @@ package com.amanne.biscuitball.mybatis;
 
 public class QuarterScoreDTO
 {
-	private int quarter; 				// ÄõÅÍ
-	private String refereePLCode; 		// ½ÉÆÇÇÃ·¹ÀÌ·Î±×ÄÚµå
-	private int senderScore; 			// ½ÅÃ»Å©·ç µæÁ¡
-	private int receiverScore; 			// ½ÅÃ»¹ŞÀºÅ©·ç µæÁ¡
+	private int quarter; 				// ì¿¼í„°
+	private String refereePLCode; 		// ì‹¬íŒí”Œë ˆì´ë¡œê·¸ì½”ë“œ
+	private int senderScore; 			// ì‹ ì²­í¬ë£¨ ë“ì 
+	private int receiverScore; 			// ì‹ ì²­ë°›ì€í¬ë£¨ ë“ì 
 
 	public int getQuarter()
 	{

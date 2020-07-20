@@ -7,13 +7,13 @@ package com.amanne.biscuitball.mybatis;
 
 public class CrewAchievementDTO
 {
-	private String crewAchievementGetCode; 			// Å©·ç¾÷ÀûÈ¹µæ¹øÈ£
-	private String crewAchievementCode; 			// Å©·ç¾÷Àû¹øÈ£
-	private String crewAchievementName; 			// ¾÷Àû¸í
-	private String crewAchievementImg; 				// ¾÷Àû¾ÆÀÌÄÜ°æ·Î
-	private String crewAchievementCondition; 		// ¾÷ÀûÁ¶°Ç³»¿ë
-	private String getterCrewCode; 					// È¹µæÅ©·çÄÚµå
-	private String crewAchievementGetDate; 			// È¹µæÀÏ½Ã
+	private String crewAchievementGetCode; 			// í¬ë£¨ì—…ì íšë“ë²ˆí˜¸
+	private String crewAchievementCode; 			// í¬ë£¨ì—…ì ë²ˆí˜¸
+	private String crewAchievementName; 			// ì—…ì ëª…
+	private String crewAchievementImg; 				// ì—…ì ì•„ì´ì½˜ê²½ë¡œ
+	private String crewAchievementCondition; 		// ì—…ì ì¡°ê±´ë‚´ìš©
+	private String getterCrewCode; 					// íšë“í¬ë£¨ì½”ë“œ
+	private String crewAchievementGetDate; 			// íšë“ì¼ì‹œ
 
 	public String getCrewAchievementGetCode()
 	{

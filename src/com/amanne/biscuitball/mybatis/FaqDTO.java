@@ -8,14 +8,14 @@ package com.amanne.biscuitball.mybatis;
 public class FaqDTO
 {
 
-	private String faqCode; 				// °øÁöÄÚµå
-	private String faqSubjec; 				// °øÁöÁ¦¸ñ
-	private String faqContent; 				// °øÁö³»¿ë
-	private String registeredDate;			// µî·ÏÀÏ½Ã
-	private String authorAdminCode; 		// µî·Ï°ü¸®ÀÚÄÚµå
-	private String authorAdminNickname; 	// µî·Ï°ü¸®ÀÚ´Ğ³×ÀÓ
-	private String categoryCode; 			// Ä«Å×°í¸®ÄÚµå
-	private String categoryName; 			// Ä«Å×°í¸® ÀÌ¸§
+	private String faqCode; 				// ê³µì§€ì½”ë“œ
+	private String faqSubjec; 				// ê³µì§€ì œëª©
+	private String faqContent; 				// ê³µì§€ë‚´ìš©
+	private String registeredDate;			// ë“±ë¡ì¼ì‹œ
+	private String authorAdminCode; 		// ë“±ë¡ê´€ë¦¬ìì½”ë“œ
+	private String authorAdminNickname; 	// ë“±ë¡ê´€ë¦¬ìë‹‰ë„¤ì„
+	private String categoryCode; 			// ì¹´í…Œê³ ë¦¬ì½”ë“œ
+	private String categoryName; 			// ì¹´í…Œê³ ë¦¬ ì´ë¦„
 
 	public String getFaqCode()
 	{

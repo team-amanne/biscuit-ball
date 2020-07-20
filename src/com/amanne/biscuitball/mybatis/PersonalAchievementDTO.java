@@ -7,13 +7,13 @@ package com.amanne.biscuitball.mybatis;
 
 public class PersonalAchievementDTO
 {
-	private String personalAchievementGetCode; 		// °³ÀÎ¾÷ÀûÈ¹µæ¹øÈ£
-	private String personalAchievementCode; 		// °³ÀÎ¾÷Àû¹øÈ£(PK)
-	private String personalAchievementName; 		// ¾÷Àû¸í
-	private String personalAchievementImg; 			// ¾÷Àû¾ÆÀÌÄÜ°æ·Î
-	private String personalAchievementCondition; 	// ¾÷ÀûÁ¶°Ç³»¿ë
-	private String getterAccountCode; 				// È¹µæÈ¸¿ø°èÁ¤ÄÚµå
-	private String personalAchievementGetDate;	 	// È¹µæÀÏ½Ã
+	private String personalAchievementGetCode; 		// ê°œì¸ì—…ì íšë“ë²ˆí˜¸
+	private String personalAchievementCode; 		// ê°œì¸ì—…ì ë²ˆí˜¸(PK)
+	private String personalAchievementName; 		// ì—…ì ëª…
+	private String personalAchievementImg; 			// ì—…ì ì•„ì´ì½˜ê²½ë¡œ
+	private String personalAchievementCondition; 	// ì—…ì ì¡°ê±´ë‚´ìš©
+	private String getterAccountCode; 				// íšë“íšŒì›ê³„ì •ì½”ë“œ
+	private String personalAchievementGetDate;	 	// íšë“ì¼ì‹œ
 
 	public String getPersonalAchievementGetCode()
 	{

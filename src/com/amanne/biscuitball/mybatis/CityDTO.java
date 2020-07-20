@@ -7,8 +7,8 @@ package com.amanne.biscuitball.mybatis;
 
 public class CityDTO
 {
-	private String cityCode; // ½Ã±º±¸¹øÈ£(PK)
-	private String cityName; // ½Ã±º±¸ÀÌ¸§
+	private String cityCode; // ì‹œêµ°êµ¬ë²ˆí˜¸(PK)
+	private String cityName; // ì‹œêµ°êµ¬ì´ë¦„
 
 	public String getCityCode()
 	{

@@ -9,30 +9,30 @@ import java.util.ArrayList;
 public class BattleDTO
 {
 
-	private String battleRequestCode; 								// ´ëÀü½ÅÃ»ÄÚµå
-	private String battleRequestedDate; 							// ´ëÀü½ÅÃ»ÀÏ½Ã
-	private String battleRequestResolvedDate; 						// ´ëÀü½ÅÃ»ÀÀ´äÀÏ½Ã
-	private String battleDate; 										// ´ëÀüÀÏ½Ã
-	private String battleModeCode; 									// ´ëÀü¹æ½ÄÄÚµå
-	private String battleMode; 										// ´ëÀü¹æ½Ä
-	private String battleCourtCode; 								// ´ëÀüÄÚÆ®ÄÚµå
-	private String battleCourtName; 								// ´ëÀüÄÚÆ®ÀÌ¸§
-	private String senderCrewCode; 									// ½ÅÃ»Å©·çÄÚµå
-	private String receiverCrewCode; 								// ½ÅÃ»¹ŞÀºÅ©·çÄÚµå
-	private String senderCrewName; 									// ½ÅÃ»Å©·ç¸í
-	private String receiverCrewName; 								// ½ÅÃ»¹ŞÀºÅ©·ç¸í
-	private String refereeMemberCode; 								// ½ÉÆÇ¸â¹öÄÚµå
-	private String refereeAccountCode; 								// ½ÉÆÇ°èÁ¤ÄÚµå
-	private String refereeNickname; 								// ½ÉÆÇ´Ğ³×ÀÓ
-	private String battleAcceptTypeCode; 							// ´ëÀü¼ö¶ô/Àç°í/°ÅÀı¿©ºÎÄÚµå
-	private String battleAcceptType; 								// ´ëÀü¼ö¶ô/Àç°í/°ÅÀı¿©ºÎ
-	private String battleRequestCancelDate; 						// ½ÅÃ»Ãë¼ÒÀÏ½Ã
-	private String recosiderAnswerContent; 							// ´ëÀüÀç°í ¸Ş½ÃÁö
-	private ArrayList<BattleJoinDTO> battleSenderJoinList; 			// ½ÅÃ»Å©·çÂü°¡¸â¹ö¸®½ºÆ®
-	private ArrayList<BattleJoinDTO> battleReceiverJoinList; 		// ½ÅÃ»¹ŞÀºÅ©·çÂü°¡¸â¹ö¸®½ºÆ®
-	private BattleLeaderPlaylogDTO senderBattleLeaderPlaylog; 		// ÀÔ·ÂÇÑ ¸®´õÇÃ·¹ÀÌ·Î±×(½ÅÃ»ÇÑÅ©·ç)
-	private BattleLeaderPlaylogDTO receiverBattleLeaderPlaylog; 	// ÀÔ·ÂÇÑ ¸®´õÇÃ·¹ÀÌ·Î±×(½ÅÃ»¹ŞÀºÅ©·ç)
-	private BattleRefereePlaylogDTO battleRefereePlaylog; 			// ÀÔ·ÂÇÑ ½ÉÆÇÇÃ·¹ÀÌ·Î±×
+	private String battleRequestCode; 								// ëŒ€ì „ì‹ ì²­ì½”ë“œ
+	private String battleRequestedDate; 							// ëŒ€ì „ì‹ ì²­ì¼ì‹œ
+	private String battleRequestResolvedDate; 						// ëŒ€ì „ì‹ ì²­ì‘ë‹µì¼ì‹œ
+	private String battleDate; 										// ëŒ€ì „ì¼ì‹œ
+	private String battleModeCode; 									// ëŒ€ì „ë°©ì‹ì½”ë“œ
+	private String battleMode; 										// ëŒ€ì „ë°©ì‹
+	private String battleCourtCode; 								// ëŒ€ì „ì½”íŠ¸ì½”ë“œ
+	private String battleCourtName; 								// ëŒ€ì „ì½”íŠ¸ì´ë¦„
+	private String senderCrewCode; 									// ì‹ ì²­í¬ë£¨ì½”ë“œ
+	private String receiverCrewCode; 								// ì‹ ì²­ë°›ì€í¬ë£¨ì½”ë“œ
+	private String senderCrewName; 									// ì‹ ì²­í¬ë£¨ëª…
+	private String receiverCrewName; 								// ì‹ ì²­ë°›ì€í¬ë£¨ëª…
+	private String refereeMemberCode; 								// ì‹¬íŒë©¤ë²„ì½”ë“œ
+	private String refereeAccountCode; 								// ì‹¬íŒê³„ì •ì½”ë“œ
+	private String refereeNickname; 								// ì‹¬íŒë‹‰ë„¤ì„
+	private String battleAcceptTypeCode; 							// ëŒ€ì „ìˆ˜ë½/ì¬ê³ /ê±°ì ˆì—¬ë¶€ì½”ë“œ
+	private String battleAcceptType; 								// ëŒ€ì „ìˆ˜ë½/ì¬ê³ /ê±°ì ˆì—¬ë¶€
+	private String battleRequestCancelDate; 						// ì‹ ì²­ì·¨ì†Œì¼ì‹œ
+	private String recosiderAnswerContent; 							// ëŒ€ì „ì¬ê³  ë©”ì‹œì§€
+	private ArrayList<BattleJoinDTO> battleSenderJoinList; 			// ì‹ ì²­í¬ë£¨ì°¸ê°€ë©¤ë²„ë¦¬ìŠ¤íŠ¸
+	private ArrayList<BattleJoinDTO> battleReceiverJoinList; 		// ì‹ ì²­ë°›ì€í¬ë£¨ì°¸ê°€ë©¤ë²„ë¦¬ìŠ¤íŠ¸
+	private BattleLeaderPlaylogDTO senderBattleLeaderPlaylog; 		// ì…ë ¥í•œ ë¦¬ë”í”Œë ˆì´ë¡œê·¸(ì‹ ì²­í•œí¬ë£¨)
+	private BattleLeaderPlaylogDTO receiverBattleLeaderPlaylog; 	// ì…ë ¥í•œ ë¦¬ë”í”Œë ˆì´ë¡œê·¸(ì‹ ì²­ë°›ì€í¬ë£¨)
+	private BattleRefereePlaylogDTO battleRefereePlaylog; 			// ì…ë ¥í•œ ì‹¬íŒí”Œë ˆì´ë¡œê·¸
 
 	public String getBattleRequestCode()
 	{

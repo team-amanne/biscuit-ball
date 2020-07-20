@@ -9,14 +9,14 @@ import java.util.ArrayList;
 
 public class BattleRefereePlaylogDTO
 {
-	private String refereePlaylogCode; 					// ½ÉÆÇÇÃ·¹ÀÌ·Î±×ÄÚµå
-	private String battleRequestCode; 					// ´ëÀü½ÅÃ»ÄÚµå
-	private boolean battleCancelOrNot; 					// ÇÕÀÇÃë¼Ò¿©ºÎ
-	private String inputDate; 							// ÀÔ·ÂÀÏ½Ã
-	private String battleResult; 						// ´ëÀü°á°ú
-	private ArrayList<QuarterScoreDTO> quarterScores; 	// ÄõÅÍº°Á¡¼ö¸®½ºÆ®
-	private int senderScore; 							// ½ÅÃ»Å©·ç ÃÑ µæÁ¡
-	private int receiverScore; 							// ½ÅÃ»¹ŞÀº Å©·ç ÃÑ µæÁ¡
+	private String refereePlaylogCode; 					// ì‹¬íŒí”Œë ˆì´ë¡œê·¸ì½”ë“œ
+	private String battleRequestCode; 					// ëŒ€ì „ì‹ ì²­ì½”ë“œ
+	private boolean battleCancelOrNot; 					// í•©ì˜ì·¨ì†Œì—¬ë¶€
+	private String inputDate; 							// ì…ë ¥ì¼ì‹œ
+	private String battleResult; 						// ëŒ€ì „ê²°ê³¼
+	private ArrayList<QuarterScoreDTO> quarterScores; 	// ì¿¼í„°ë³„ì ìˆ˜ë¦¬ìŠ¤íŠ¸
+	private int senderScore; 							// ì‹ ì²­í¬ë£¨ ì´ ë“ì 
+	private int receiverScore; 							// ì‹ ì²­ë°›ì€ í¬ë£¨ ì´ ë“ì 
 
 	public String getRefereePlaylogCode()
 	{

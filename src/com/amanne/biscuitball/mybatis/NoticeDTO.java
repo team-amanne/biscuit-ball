@@ -8,12 +8,12 @@ package com.amanne.biscuitball.mybatis;
 public class NoticeDTO
 {
 
-	private String noticeCode; 			// °øÁöÄÚµå
-	private String noticeSubject; 		// °øÁöÁ¦¸ñ
-	private String noticeContent; 		// °øÁö³»¿ë
-	private String registeredDate; 		// µî·ÏÀÏ½Ã
-	private String authorAdminCode;		// µî·Ï°ü¸®ÀÚÄÚµå
-	private String authorAdminNickname; // µî·Ï°ü¸®ÀÚ´Ğ³×ÀÓ
+	private String noticeCode; 			// ê³µì§€ì½”ë“œ
+	private String noticeSubject; 		// ê³µì§€ì œëª©
+	private String noticeContent; 		// ê³µì§€ë‚´ìš©
+	private String registeredDate; 		// ë“±ë¡ì¼ì‹œ
+	private String authorAdminCode;		// ë“±ë¡ê´€ë¦¬ìì½”ë“œ
+	private String authorAdminNickname; // ë“±ë¡ê´€ë¦¬ìë‹‰ë„¤ì„
 
 	public String getNoticeCode()
 	{
