@@ -1,0 +1,153 @@
+package com.amanne.biscuitball.mybatis;
+
+public class ReportCrewDTO {
+	private String	reportType;					//	신고타입	
+	private String	crewReportCode;				//	신고코드	
+	private String	crewReportContent;			//	신고내용	
+	private String	crewReportAcceptedDate;		//	신고날짜	
+	private String	subjectCrewCode;			//	신고크루코드	
+	private String	subjectCrewName;			//	신고크루명	
+	private String	applicantAccountCode;		//	신고자-유저코드	
+	private String	applicantAccountNickname;	//	신고자-유저닉네임	
+	private String	applicantAdminCode;			//	신고자-관리자코드	
+	private String	applicantAdminNickname;		//	신고자-관리자닉네임	
+	private String	crewReportAssignmentCode;	//	담당코드	
+	private String	crewReportAssignedDate;		//	담당일	
+	private String	assignedAdminCode;			//	담당자 코드	
+	private String	assignedAdminNickname;		//	담당자 닉네임	
+	private String	crewReportAnswerCode;		//	신고답변코드	
+	private String	crewReportAnswerContent;	//	신고답변내용	
+	private String	crewReportResolveCode;		//	신고처리코드	
+	private String	crewReportResolvedDate;		//	신고처리날짜	
+	private String	reportStatus;				//	신고상태	
+	private String	reportResultCode;			//	신고결과코드	
+	private String	reportResult;				//	신고결과
+	
+	public String getReportType() {
+		return reportType;
+	}
+	public void setReportType(String reportType) {
+		this.reportType = reportType;
+	}
+	public String getCrewReportCode() {
+		return crewReportCode;
+	}
+	public void setCrewReportCode(String crewReportCode) {
+		this.crewReportCode = crewReportCode;
+	}
+	public String getCrewReportContent() {
+		return crewReportContent;
+	}
+	public void setCrewReportContent(String crewReportContent) {
+		this.crewReportContent = crewReportContent;
+	}
+	public String getCrewReportAcceptedDate() {
+		return crewReportAcceptedDate;
+	}
+	public void setCrewReportAcceptedDate(String crewReportAcceptedDate) {
+		this.crewReportAcceptedDate = crewReportAcceptedDate;
+	}
+	public String getSubjectCrewCode() {
+		return subjectCrewCode;
+	}
+	public void setSubjectCrewCode(String subjectCrewCode) {
+		this.subjectCrewCode = subjectCrewCode;
+	}
+	public String getSubjectCrewName() {
+		return subjectCrewName;
+	}
+	public void setSubjectCrewName(String subjectCrewName) {
+		this.subjectCrewName = subjectCrewName;
+	}
+	public String getApplicantAccountCode() {
+		return applicantAccountCode;
+	}
+	public void setApplicantAccountCode(String applicantAccountCode) {
+		this.applicantAccountCode = applicantAccountCode;
+	}
+	public String getApplicantAccountNickname() {
+		return applicantAccountNickname;
+	}
+	public void setApplicantAccountNickname(String applicantAccountNickname) {
+		this.applicantAccountNickname = applicantAccountNickname;
+	}
+	public String getApplicantAdminCode() {
+		return applicantAdminCode;
+	}
+	public void setApplicantAdminCode(String applicantAdminCode) {
+		this.applicantAdminCode = applicantAdminCode;
+	}
+	public String getApplicantAdminNickname() {
+		return applicantAdminNickname;
+	}
+	public void setApplicantAdminNickname(String applicantAdminNickname) {
+		this.applicantAdminNickname = applicantAdminNickname;
+	}
+	public String getCrewReportAssignmentCode() {
+		return crewReportAssignmentCode;
+	}
+	public void setCrewReportAssignmentCode(String crewReportAssignmentCode) {
+		this.crewReportAssignmentCode = crewReportAssignmentCode;
+	}
+	public String getCrewReportAssignedDate() {
+		return crewReportAssignedDate;
+	}
+	public void setCrewReportAssignedDate(String crewReportAssignedDate) {
+		this.crewReportAssignedDate = crewReportAssignedDate;
+	}
+	public String getAssignedAdminCode() {
+		return assignedAdminCode;
+	}
+	public void setAssignedAdminCode(String assignedAdminCode) {
+		this.assignedAdminCode = assignedAdminCode;
+	}
+	public String getAssignedAdminNickname() {
+		return assignedAdminNickname;
+	}
+	public void setAssignedAdminNickname(String assignedAdminNickname) {
+		this.assignedAdminNickname = assignedAdminNickname;
+	}
+	public String getCrewReportAnswerCode() {
+		return crewReportAnswerCode;
+	}
+	public void setCrewReportAnswerCode(String crewReportAnswerCode) {
+		this.crewReportAnswerCode = crewReportAnswerCode;
+	}
+	public String getCrewReportAnswerContent() {
+		return crewReportAnswerContent;
+	}
+	public void setCrewReportAnswerContent(String crewReportAnswerContent) {
+		this.crewReportAnswerContent = crewReportAnswerContent;
+	}
+	public String getCrewReportResolveCode() {
+		return crewReportResolveCode;
+	}
+	public void setCrewReportResolveCode(String crewReportResolveCode) {
+		this.crewReportResolveCode = crewReportResolveCode;
+	}
+	public String getCrewReportResolvedDate() {
+		return crewReportResolvedDate;
+	}
+	public void setCrewReportResolvedDate(String crewReportResolvedDate) {
+		this.crewReportResolvedDate = crewReportResolvedDate;
+	}
+	public String getReportStatus() {
+		return reportStatus;
+	}
+	public void setReportStatus(String reportStatus) {
+		this.reportStatus = reportStatus;
+	}
+	public String getReportResultCode() {
+		return reportResultCode;
+	}
+	public void setReportResultCode(String reportResultCode) {
+		this.reportResultCode = reportResultCode;
+	}
+	public String getReportResult() {
+		return reportResult;
+	}
+	public void setReportResult(String reportResult) {
+		this.reportResult = reportResult;
+	}
+	
+}
