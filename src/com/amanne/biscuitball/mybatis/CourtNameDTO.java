@@ -1,6 +1,13 @@
+/*============================================
+ 	CourtNameDTO.java
+ 	생성일: 2020.07.20
+ 	최근수정일: 2020.07.21
+=============================================*/
+
 package com.amanne.biscuitball.mybatis;
 
-public class CourtNameDTO {
+public class CourtNameDTO 
+{
 	private String courtNameCode; 				// 코트이름코드
 	private String courtName; 					// 코트이름
 	private String courtNameRegisteredDate; 	// 코트이름등록일시
@@ -13,6 +20,7 @@ public class CourtNameDTO {
 	private String courtNameStatus; 			// 상태
 	private int rank; 							// 득표순위
 	private boolean pollOrNot; 					// 투표 여부
+	private boolean returnValue;
 	
 	public String getCourtNameCode() {
 		return courtNameCode;
@@ -85,6 +93,12 @@ public class CourtNameDTO {
 	}
 	public void setPollOrNot(boolean pollOrNot) {
 		this.pollOrNot = pollOrNot;
+	}
+	public boolean isReturnValue() {
+		return returnValue;
+	}
+	public void setReturnValue(boolean returnValue) {
+		this.returnValue = returnValue;
 	}
 	
 }

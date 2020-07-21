@@ -1,6 +1,7 @@
 /*============================================
  	CrewDTO.java
- 	2020.07.30
+ 	생성일: 2020.07.20
+ 	최근수정일: 2020.07.21
 =============================================*/
 
 package com.amanne.biscuitball.mybatis;
@@ -35,11 +36,12 @@ public class CrewDTO
 	private String leaderAccountCode; 				// 리더 계정코드
 	private String leaderNickname; 					// 리더 닉네임
 	private String crewStatus; 						// 크루 상태
-	private ArrayList crewMemberList; 				// 크루 멤버 목록
+	private ArrayList<CrewMemberDTO> crewMemberList;// 크루 멤버 목록
 	private int penaltyCount; 						// 제재횟수
 	private String crewPenaltyStatus; 				// 제재상태
 	private ArrayList<RegionDTO> crewBaseAreaList; 	// 크루거점지역목록
 	private String crewProfileImg; 					// 크루프로필사진
+	private boolean returnValue;
 
 	public String getCrewCode()
 	{
@@ -301,16 +303,6 @@ public class CrewDTO
 		this.crewStatus = crewStatus;
 	}
 
-	public ArrayList getCrewMemberList()
-	{
-		return crewMemberList;
-	}
-
-	public void setCrewMemberList(ArrayList crewMemberList)
-	{
-		this.crewMemberList = crewMemberList;
-	}
-
 	public int getPenaltyCount()
 	{
 		return penaltyCount;
@@ -349,6 +341,22 @@ public class CrewDTO
 	public void setCrewProfileImg(String crewProfileImg)
 	{
 		this.crewProfileImg = crewProfileImg;
+	}
+
+	public boolean isReturnValue() {
+		return returnValue;
+	}
+
+	public void setReturnValue(boolean returnValue) {
+		this.returnValue = returnValue;
+	}
+
+	public void setCrewMemberList(ArrayList<CrewMemberDTO> crewMemberList) {
+		this.crewMemberList = crewMemberList;
+	}
+
+	public ArrayList<CrewMemberDTO> getCrewMemberList() {
+		return crewMemberList;
 	}
 
 }

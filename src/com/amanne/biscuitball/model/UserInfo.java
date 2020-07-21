@@ -1,6 +1,13 @@
+/*============================================
+ 	UserInfo.java
+ 	생성일: 2020.07.20
+ 	최근수정일: 2020.07.20
+=============================================*/
+
 package com.amanne.biscuitball.model;
 
-public class UserInfo {
+public class UserInfo 
+{
 	private String	userCode;		//	회원코드	
 	private String	userAcctCode;	//	회원계정코드	
 	private String	userNickname;	//	닉네임	

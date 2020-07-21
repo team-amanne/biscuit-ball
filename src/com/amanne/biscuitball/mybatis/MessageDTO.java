@@ -1,6 +1,13 @@
+/*============================================
+ 	MessageDTO.java
+ 	생성일: 2020.07.20
+ 	최근수정일: 2020.07.21
+=============================================*/
+
 package com.amanne.biscuitball.mybatis;
 
-public class MessageDTO {
+public class MessageDTO 
+{
 
 	private String	messageCode;			//	메시지생성코드	
 	private String	senderAccountCode;		//	발신자계정코드	
@@ -13,6 +20,7 @@ public class MessageDTO {
 	private String	receiverReadDate;		//	수신자열람일시	
 	private String	senderDelDate;			//	발신자삭제일시	
 	private String	receiverDelDate;		//	수신자삭제일시	
+	private boolean returnValue;
 	
 	public String getMessageCode() {
 		return messageCode;
@@ -79,5 +87,11 @@ public class MessageDTO {
 	}
 	public void setReceiverDelDate(String receiverDelDate) {
 		this.receiverDelDate = receiverDelDate;
+	}
+	public boolean isReturnValue() {
+		return returnValue;
+	}
+	public void setReturnValue(boolean returnValue) {
+		this.returnValue = returnValue;
 	}
 }

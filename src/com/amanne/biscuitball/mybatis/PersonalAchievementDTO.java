@@ -1,6 +1,7 @@
 /*============================================
- 	PersonalAchievementDTO.java
- 	2020.07.30
+	PersonalAchievementDTO.java
+ 	생성일: 2020.07.20
+ 	최근수정일: 2020.07.21
 =============================================*/
 
 package com.amanne.biscuitball.mybatis;
@@ -14,6 +15,7 @@ public class PersonalAchievementDTO
 	private String personalAchievementCondition; 	// 업적조건내용
 	private String getterAccountCode; 				// 획득회원계정코드
 	private String personalAchievementGetDate;	 	// 획득일시
+	private boolean returnValue;
 
 	public String getPersonalAchievementGetCode()
 	{
@@ -83,6 +85,14 @@ public class PersonalAchievementDTO
 	public void setPersonalAchievementGetDate(String personalAchievementGetDate)
 	{
 		this.personalAchievementGetDate = personalAchievementGetDate;
+	}
+
+	public boolean isReturnValue() {
+		return returnValue;
+	}
+
+	public void setReturnValue(boolean returnValue) {
+		this.returnValue = returnValue;
 	}
 
 }

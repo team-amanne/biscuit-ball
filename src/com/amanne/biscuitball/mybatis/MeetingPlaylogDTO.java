@@ -1,8 +1,15 @@
+/*============================================
+ 	MeetingPlaylogDTO.java
+ 	생성일: 2020.07.20
+ 	최근수정일: 2020.07.21
+=============================================*/
+
 package com.amanne.biscuitball.mybatis;
 
 import java.util.ArrayList;
 
-public class MeetingPlaylogDTO {
+public class MeetingPlaylogDTO 
+{
 	private String playlogCode; 						// 모임플레이로그 코드
 	private String meetTypeName; 						// 모임타입명
 	private String meetSubject; 						// 모임명
@@ -15,6 +22,7 @@ public class MeetingPlaylogDTO {
 	private String joinAccountCode; 					// 참가자계정코드
 	private ArrayList<EvaluationDTO> evaluationList; 	// 평가리스트
 	private ArrayList<NoshowDTO> noshowList; 			// 노쇼리스트
+	private boolean returnValue;
 	
 	public String getPlaylogCode() {
 		return playlogCode;
@@ -87,5 +95,11 @@ public class MeetingPlaylogDTO {
 	}
 	public void setNoshowList(ArrayList<NoshowDTO> noshowList) {
 		this.noshowList = noshowList;
+	}
+	public boolean isReturnValue() {
+		return returnValue;
+	}
+	public void setReturnValue(boolean returnValue) {
+		this.returnValue = returnValue;
 	}
 }

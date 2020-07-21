@@ -1,231 +1,138 @@
 /*============================================
- 	CrewMemberDTO.java
- 	2020.07.30
+	CrewMemberDTO.java
+ 	생성일: 2020.07.20
+ 	최근수정일: 2020.07.21
 =============================================*/
 
 package com.amanne.biscuitball.mybatis;
 
-public class CrewMemberDTO
+public class CrewMemberDTO 
 {
-	private String courtReviewCode; 			// 코트리뷰코드
-	private String courtReviewContent; 			// 코트리뷰내용
-	private double courtReviewManageScore; 		// 관리별점
-	private String courtReviewRegisteredDate; 	// 등록일시
-	private double courtReviewSatisfaction; 	// 만족도
-	private String courtCapacityCode; 			// 적정인원수코드
-	private int minCourtCapacity; 				// 최소인원수
-	private int maxCourtCapacity; 				// 최대인원수
-	private String courtCode; 					// 코트코드
-	private String registrantAccountCode; 		// 등록회원계정코드
-	private String registrantNickname; 			// 등록회원닉네임
-	private String courtReviewDelDate; 			// 삭제일시
-	private String courtReviewStatus; 			// 상태
-	private int likes; 							// 좋아요수
-	private int dislikes; 						// 싫어요수
-	private boolean toilet; 					// 화장실유무
-	private boolean shower; 					// 샤워장유무
-	private boolean parkinglot; 				// 주차장유무
-	private boolean pollOrNot; 					// 투표 여부
-	private boolean pollLikeOrDislike; 			// 좋아요/싫어요 투표여부
-
-	public String getCourtReviewCode()
-	{
-		return courtReviewCode;
+	private String crewMemberCode; 			// 크루멤버코드
+	private String crewJoinDate; 			// 크루가입일시
+	private String crewCode; 				// 크루코드
+	private String crewName; 				// 크루이름
+	private String memberAcctCode; 			// 멤버계정코드
+	private String memberNickname; 			// 멤버닉네임
+	private boolean leaderOrNot; 			// 리더여부
+	private String crewJoinRequestCode; 	// 크루가입신청코드
+	private String crewInvitationCode; 		// 크루초대코드
+	private String requestedDate; 			// 신청/초대일시
+	private String resultCode; 				// 결과코드
+	private String fairplayScore; 			// 페어플레이점수
+	private String tierCode; 				// 티어
+	private String tierName; 				// 티어
+	private String positionCode; 			// 선호포지션코드
+	private String positionName; 			// 선호포지션명
+	private String positionAbbr; 			// 선호포지션약칭
+	private boolean returnValue;
+	
+	public String getCrewMemberCode() {
+		return crewMemberCode;
 	}
-
-	public void setCourtReviewCode(String courtReviewCode)
-	{
-		this.courtReviewCode = courtReviewCode;
+	public void setCrewMemberCode(String crewMemberCode) {
+		this.crewMemberCode = crewMemberCode;
 	}
-
-	public String getCourtReviewContent()
-	{
-		return courtReviewContent;
+	public String getCrewJoinDate() {
+		return crewJoinDate;
 	}
-
-	public void setCourtReviewContent(String courtReviewContent)
-	{
-		this.courtReviewContent = courtReviewContent;
+	public void setCrewJoinDate(String crewJoinDate) {
+		this.crewJoinDate = crewJoinDate;
 	}
-
-	public double getCourtReviewManageScore()
-	{
-		return courtReviewManageScore;
+	public String getCrewCode() {
+		return crewCode;
 	}
-
-	public void setCourtReviewManageScore(double courtReviewManageScore)
-	{
-		this.courtReviewManageScore = courtReviewManageScore;
+	public void setCrewCode(String crewCode) {
+		this.crewCode = crewCode;
 	}
-
-	public String getCourtReviewRegisteredDate()
-	{
-		return courtReviewRegisteredDate;
+	public String getCrewName() {
+		return crewName;
 	}
-
-	public void setCourtReviewRegisteredDate(String courtReviewRegisteredDate)
-	{
-		this.courtReviewRegisteredDate = courtReviewRegisteredDate;
+	public void setCrewName(String crewName) {
+		this.crewName = crewName;
 	}
-
-	public double getCourtReviewSatisfaction()
-	{
-		return courtReviewSatisfaction;
+	public String getMemberAcctCode() {
+		return memberAcctCode;
 	}
-
-	public void setCourtReviewSatisfaction(double courtReviewSatisfaction)
-	{
-		this.courtReviewSatisfaction = courtReviewSatisfaction;
+	public void setMemberAcctCode(String memberAcctCode) {
+		this.memberAcctCode = memberAcctCode;
 	}
-
-	public String getCourtCapacityCode()
-	{
-		return courtCapacityCode;
+	public String getMemberNickname() {
+		return memberNickname;
 	}
-
-	public void setCourtCapacityCode(String courtCapacityCode)
-	{
-		this.courtCapacityCode = courtCapacityCode;
+	public void setMemberNickname(String memberNickname) {
+		this.memberNickname = memberNickname;
 	}
-
-	public int getMinCourtCapacity()
-	{
-		return minCourtCapacity;
+	public boolean isLeaderOrNot() {
+		return leaderOrNot;
 	}
-
-	public void setMinCourtCapacity(int minCourtCapacity)
-	{
-		this.minCourtCapacity = minCourtCapacity;
+	public void setLeaderOrNot(boolean leaderOrNot) {
+		this.leaderOrNot = leaderOrNot;
 	}
-
-	public int getMaxCourtCapacity()
-	{
-		return maxCourtCapacity;
+	public String getCrewJoinRequestCode() {
+		return crewJoinRequestCode;
 	}
-
-	public void setMaxCourtCapacity(int maxCourtCapacity)
-	{
-		this.maxCourtCapacity = maxCourtCapacity;
+	public void setCrewJoinRequestCode(String crewJoinRequestCode) {
+		this.crewJoinRequestCode = crewJoinRequestCode;
 	}
-
-	public String getCourtCode()
-	{
-		return courtCode;
+	public String getCrewInvitationCode() {
+		return crewInvitationCode;
 	}
-
-	public void setCourtCode(String courtCode)
-	{
-		this.courtCode = courtCode;
+	public void setCrewInvitationCode(String crewInvitationCode) {
+		this.crewInvitationCode = crewInvitationCode;
 	}
-
-	public String getRegistrantAccountCode()
-	{
-		return registrantAccountCode;
+	public String getRequestedDate() {
+		return requestedDate;
 	}
-
-	public void setRegistrantAccountCode(String registrantAccountCode)
-	{
-		this.registrantAccountCode = registrantAccountCode;
+	public void setRequestedDate(String requestedDate) {
+		this.requestedDate = requestedDate;
 	}
-
-	public String getRegistrantNickname()
-	{
-		return registrantNickname;
+	public String getResultCode() {
+		return resultCode;
 	}
-
-	public void setRegistrantNickname(String registrantNickname)
-	{
-		this.registrantNickname = registrantNickname;
+	public void setResultCode(String resultCode) {
+		this.resultCode = resultCode;
 	}
-
-	public String getCourtReviewDelDate()
-	{
-		return courtReviewDelDate;
+	public String getFairplayScore() {
+		return fairplayScore;
 	}
-
-	public void setCourtReviewDelDate(String courtReviewDelDate)
-	{
-		this.courtReviewDelDate = courtReviewDelDate;
+	public void setFairplayScore(String fairplayScore) {
+		this.fairplayScore = fairplayScore;
 	}
-
-	public String getCourtReviewStatus()
-	{
-		return courtReviewStatus;
+	public String getTierCode() {
+		return tierCode;
 	}
-
-	public void setCourtReviewStatus(String courtReviewStatus)
-	{
-		this.courtReviewStatus = courtReviewStatus;
+	public void setTierCode(String tierCode) {
+		this.tierCode = tierCode;
 	}
-
-	public int getLikes()
-	{
-		return likes;
+	public String getTierName() {
+		return tierName;
 	}
-
-	public void setLikes(int likes)
-	{
-		this.likes = likes;
+	public void setTierName(String tierName) {
+		this.tierName = tierName;
 	}
-
-	public int getDislikes()
-	{
-		return dislikes;
+	public String getPositionCode() {
+		return positionCode;
 	}
-
-	public void setDislikes(int dislikes)
-	{
-		this.dislikes = dislikes;
+	public void setPositionCode(String positionCode) {
+		this.positionCode = positionCode;
 	}
-
-	public boolean isToilet()
-	{
-		return toilet;
+	public String getPositionName() {
+		return positionName;
 	}
-
-	public void setToilet(boolean toilet)
-	{
-		this.toilet = toilet;
+	public void setPositionName(String positionName) {
+		this.positionName = positionName;
 	}
-
-	public boolean isShower()
-	{
-		return shower;
+	public String getPositionAbbr() {
+		return positionAbbr;
 	}
-
-	public void setShower(boolean shower)
-	{
-		this.shower = shower;
+	public void setPositionAbbr(String positionAbbr) {
+		this.positionAbbr = positionAbbr;
 	}
-
-	public boolean isParkinglot()
-	{
-		return parkinglot;
+	public boolean isReturnValue() {
+		return returnValue;
 	}
-
-	public void setParkinglot(boolean parkinglot)
-	{
-		this.parkinglot = parkinglot;
+	public void setReturnValue(boolean returnValue) {
+		this.returnValue = returnValue;
 	}
-
-	public boolean isPollOrNot()
-	{
-		return pollOrNot;
-	}
-
-	public void setPollOrNot(boolean pollOrNot)
-	{
-		this.pollOrNot = pollOrNot;
-	}
-
-	public boolean isPollLikeOrDislike()
-	{
-		return pollLikeOrDislike;
-	}
-
-	public void setPollLikeOrDislike(boolean pollLikeOrDislike)
-	{
-		this.pollLikeOrDislike = pollLikeOrDislike;
-	}
-
 }

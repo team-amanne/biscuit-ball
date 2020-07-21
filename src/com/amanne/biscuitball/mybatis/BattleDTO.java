@@ -1,7 +1,9 @@
 /*============================================
  	BattleDTO.java
- 	2020.07.30
+ 	생성일: 2020.07.20
+ 	최근수정일: 2020.07.21
 =============================================*/
+
 package com.amanne.biscuitball.mybatis;
 
 import java.util.ArrayList;
@@ -33,6 +35,7 @@ public class BattleDTO
 	private BattleLeaderPlaylogDTO senderBattleLeaderPlaylog; 		// 입력한 리더플레이로그(신청한크루)
 	private BattleLeaderPlaylogDTO receiverBattleLeaderPlaylog; 	// 입력한 리더플레이로그(신청받은크루)
 	private BattleRefereePlaylogDTO battleRefereePlaylog; 			// 입력한 심판플레이로그
+	private boolean returnValue;
 
 	public String getBattleRequestCode()
 	{
@@ -272,6 +275,14 @@ public class BattleDTO
 	public void setBattleRefereePlaylog(BattleRefereePlaylogDTO battleRefereePlaylog)
 	{
 		this.battleRefereePlaylog = battleRefereePlaylog;
+	}
+
+	public boolean isReturnValue() {
+		return returnValue;
+	}
+
+	public void setReturnValue(boolean returnValue) {
+		this.returnValue = returnValue;
 	}
 
 }

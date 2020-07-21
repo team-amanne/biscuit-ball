@@ -1,6 +1,13 @@
+/*============================================
+ 	ReportUserDTO.java
+ 	생성일: 2020.07.20
+ 	최근수정일: 2020.07.21
+=============================================*/
+
 package com.amanne.biscuitball.mybatis;
 
-public class ReportUserDTO {
+public class ReportUserDTO 
+{
 
 	private String	reportType;					//	신고타입	
 	private String	userReportCode;				//	신고코드	
@@ -23,6 +30,7 @@ public class ReportUserDTO {
 	private String	reportStatus;				//	신고상태	
 	private String	reportResultCode;			//	신고결과코드	
 	private String	reportResult;				//	신고결과
+	private boolean returnValue;
 	
 	public String getReportType() {
 		return reportType;
@@ -149,6 +157,12 @@ public class ReportUserDTO {
 	}
 	public void setReportResult(String reportResult) {
 		this.reportResult = reportResult;
+	}
+	public boolean isReturnValue() {
+		return returnValue;
+	}
+	public void setReturnValue(boolean returnValue) {
+		this.returnValue = returnValue;
 	}
 	
 }

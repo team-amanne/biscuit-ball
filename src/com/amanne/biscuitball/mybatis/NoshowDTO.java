@@ -1,12 +1,20 @@
+/*============================================
+ 	NoshowDTO.java
+ 	생성일: 2020.07.20
+ 	최근수정일: 2020.07.21
+=============================================*/
+
 package com.amanne.biscuitball.mybatis;
 
-public class NoshowDTO {
+public class NoshowDTO 
+{
 	private String noshowCode; 				// 노쇼코드
 	private String playlogCode; 			// 플레이로그코드
 	private String noshowUserJoinCode; 		// 노쇼유저참가코드
 	private String meetingCode; 			// 참여모임코드
 	private String noshowUserAccountCode; 	// 노쇼유저계정코드
 	private String noshowUserNickname; 		// 노쇼유저닉네임
+	private boolean returnValue;
 	
 	public String getNoshowCode() {
 		return noshowCode;
@@ -43,5 +51,11 @@ public class NoshowDTO {
 	}
 	public void setNoshowUserNickname(String noshowUserNickname) {
 		this.noshowUserNickname = noshowUserNickname;
+	}
+	public boolean isReturnValue() {
+		return returnValue;
+	}
+	public void setReturnValue(boolean returnValue) {
+		this.returnValue = returnValue;
 	}
 }

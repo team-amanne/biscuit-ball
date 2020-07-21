@@ -1,6 +1,13 @@
+/*============================================
+ 	NotificationDTO.java
+ 	생성일: 2020.07.20
+ 	최근수정일: 2020.07.21
+=============================================*/
+
 package com.amanne.biscuitball.mybatis;
 
-public class NotificationDTO {
+public class NotificationDTO 
+{
 	private String notificationCode; 		// 알림코드
 	private String userAccountcode; 		// 알림받는 회원계정코드
 	private String notificationTypeCode; 	// 알림종류코드
@@ -9,6 +16,7 @@ public class NotificationDTO {
 	private String createDate; 				// 알림생성일시
 	private String readDate; 				// 열람일시
 	private String url; 					// 알림URL
+	private boolean returnValue;
 	
 	public String getNotificationCode() {
 		return notificationCode;
@@ -57,6 +65,12 @@ public class NotificationDTO {
 	}
 	public void setUrl(String url) {
 		this.url = url;
+	}
+	public boolean isReturnValue() {
+		return returnValue;
+	}
+	public void setReturnValue(boolean returnValue) {
+		this.returnValue = returnValue;
 	}
 	
 }

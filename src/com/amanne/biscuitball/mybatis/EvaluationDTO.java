@@ -1,6 +1,13 @@
+/*============================================
+ 	EvaluationDTO.java
+ 	생성일: 2020.07.20
+ 	최근수정일: 2020.07.21
+=============================================*/
+
 package com.amanne.biscuitball.mybatis;
 
-public class EvaluationDTO {
+public class EvaluationDTO 
+{
 	private String playlogCode; 					// 플레이로그코드
 	private String personalAbilityEvaluationCode; 	// 실력평가코드
 	private String fairplayScoreCode; 				// 페어플레이점수평가코드
@@ -12,6 +19,7 @@ public class EvaluationDTO {
 	private double fairplayScore; 					// 페어플레이점수
 	private String abilityEvaluationTypeCode; 		// 평가종류코드
 	private String abilityEvaluationType; 			// 평가종류
+	private boolean returnValue;
 	
 	public String getPlaylogCode() {
 		return playlogCode;
@@ -78,6 +86,12 @@ public class EvaluationDTO {
 	}
 	public void setAbilityEvaluationType(String abilityEvaluationType) {
 		this.abilityEvaluationType = abilityEvaluationType;
+	}
+	public boolean isReturnValue() {
+		return returnValue;
+	}
+	public void setReturnValue(boolean returnValue) {
+		this.returnValue = returnValue;
 	}
 	
 }

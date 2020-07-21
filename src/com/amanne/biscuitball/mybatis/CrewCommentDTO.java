@@ -1,6 +1,13 @@
+/*============================================
+ 	CrewCommentDTO.java
+ 	생성일: 2020.07.20
+ 	최근수정일: 2020.07.21
+=============================================*/
+
 package com.amanne.biscuitball.mybatis;
 
-public class CrewCommentDTO {
+public class CrewCommentDTO 
+{
 	private String crewCommentCode; 			// 크루댓글코드
 	private String crewPostCode; 				// 댓글이 달린 크루게시물코드
 	private String parentCommentCode; 			// 최상위 댓글 코드
@@ -12,6 +19,7 @@ public class CrewCommentDTO {
 	private String crewCommentUpdateDate; 		// 갱신일시
 	private String crewCommentDelDate; 			// 삭제일시
 	private String crewCommentStatus; 			// 댓글상태
+	private boolean returnValue;
 	
 	public String getCrewCommentCode() {
 		return crewCommentCode;
@@ -78,5 +86,11 @@ public class CrewCommentDTO {
 	}
 	public void setCrewCommentStatus(String crewCommentStatus) {
 		this.crewCommentStatus = crewCommentStatus;
+	}
+	public boolean isReturnValue() {
+		return returnValue;
+	}
+	public void setReturnValue(boolean returnValue) {
+		this.returnValue = returnValue;
 	}
 }

@@ -1,8 +1,15 @@
+/*============================================
+ 	CourtDTO.java
+ 	생성일: 2020.07.20
+ 	최근수정일: 2020.07.21
+=============================================*/
+
 package com.amanne.biscuitball.mybatis;
 
 import java.util.ArrayList;
 
-public class CourtDTO {
+public class CourtDTO 
+{
 	private String courtCode; 							// 코트등록코드
 	private String courtRegisteredDate; 				// 등록일시
 	private String mapPosition; 						// 좌표
@@ -41,6 +48,7 @@ public class CourtDTO {
 	private String courtStatus; 						// 코트상태
 	private ArrayList<CourtReviewDTO> courtReviewList; 	// 코트리뷰리스트
 	private ArrayList<CourtReviewDTO> courtNameList; 	// 코트이름리스트
+	private boolean returnValue;
 	
 	public String getCourtCode() {
 		return courtCode;
@@ -269,5 +277,11 @@ public class CourtDTO {
 	}
 	public void setCourtNameList(ArrayList<CourtReviewDTO> courtNameList) {
 		this.courtNameList = courtNameList;
+	}
+	public boolean isReturnValue() {
+		return returnValue;
+	}
+	public void setReturnValue(boolean returnValue) {
+		this.returnValue = returnValue;
 	}
 }

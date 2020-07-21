@@ -1,6 +1,13 @@
+/*============================================
+ 	ReportTotalDTO.java
+ 	생성일: 2020.07.20
+ 	최근수정일: 2020.07.21
+=============================================*/
+
 package com.amanne.biscuitball.mybatis;
 
-public class ReportTotalDTO {
+public class ReportTotalDTO 
+{
 	private String	reportType;				//	신고타입	
 	private String	reportCode;				//	신고코드	
 	private String	assignedAdminCode;		//	담당자 코드	
@@ -11,6 +18,7 @@ public class ReportTotalDTO {
 	private String	reportAssignedDate;		//	신고담당자배정일	
 	private String	reportStatus;			//	신고상태	
 	private String	reportResolveDate;		//	신고처리날짜
+	private boolean returnValue;
 	
 	public String getReportType() {
 		return reportType;
@@ -71,6 +79,12 @@ public class ReportTotalDTO {
 	}
 	public void setReportResolveDate(String reportResolveDate) {
 		this.reportResolveDate = reportResolveDate;
+	}
+	public boolean isReturnValue() {
+		return returnValue;
+	}
+	public void setReturnValue(boolean returnValue) {
+		this.returnValue = returnValue;
 	}
 	
 }

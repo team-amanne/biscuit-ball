@@ -1,6 +1,7 @@
 /*============================================
- 	FaqDTO.java
- 	2020.07.30
+	FaqDTO.java
+ 	생성일: 2020.07.20
+ 	최근수정일: 2020.07.21
 =============================================*/
 
 package com.amanne.biscuitball.mybatis;
@@ -9,13 +10,14 @@ public class FaqDTO
 {
 
 	private String faqCode; 				// 공지코드
-	private String faqSubjec; 				// 공지제목
+	private String faqSubject; 				// 공지제목
 	private String faqContent; 				// 공지내용
 	private String registeredDate;			// 등록일시
 	private String authorAdminCode; 		// 등록관리자코드
 	private String authorAdminNickname; 	// 등록관리자닉네임
 	private String categoryCode; 			// 카테고리코드
 	private String categoryName; 			// 카테고리 이름
+	private boolean returnValue;
 
 	public String getFaqCode()
 	{
@@ -27,14 +29,14 @@ public class FaqDTO
 		this.faqCode = faqCode;
 	}
 
-	public String getFaqSubjec()
+	public String getFaqSubject()
 	{
-		return faqSubjec;
+		return faqSubject;
 	}
 
-	public void setFaqSubjec(String faqSubjec)
+	public void setFaqSubject(String faqSubject)
 	{
-		this.faqSubjec = faqSubjec;
+		this.faqSubject = faqSubject;
 	}
 
 	public String getFaqContent()
@@ -95,6 +97,14 @@ public class FaqDTO
 	public void setCategoryName(String categoryName)
 	{
 		this.categoryName = categoryName;
+	}
+
+	public boolean isReturnValue() {
+		return returnValue;
+	}
+
+	public void setReturnValue(boolean returnValue) {
+		this.returnValue = returnValue;
 	}
 
 }

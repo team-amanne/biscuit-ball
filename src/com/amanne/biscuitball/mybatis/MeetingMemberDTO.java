@@ -1,6 +1,13 @@
+/*============================================
+ 	MeetingMemberDTO.java
+ 	생성일: 2020.07.20
+ 	최근수정일: 2020.07.21
+=============================================*/
+
 package com.amanne.biscuitball.mybatis;
 
-public class MeetingMemberDTO {
+public class MeetingMemberDTO 
+{
 	private String meetJoinCode; 		// 모임참가코드
 	private String meetCode; 			// 모임등록코드
 	private String meetJoinDate; 		// 모임참가일
@@ -8,6 +15,7 @@ public class MeetingMemberDTO {
 	private String userNickname; 		// 참가자 닉네임
 	private String captainOrNot; 		// 캡틴여부
 	private String ballExistOrNot; 		// 공지참여부
+	private boolean returnValue;
 	
 	public String getMeetJoinCode() {
 		return meetJoinCode;
@@ -50,5 +58,11 @@ public class MeetingMemberDTO {
 	}
 	public void setBallExistOrNot(String ballExistOrNot) {
 		this.ballExistOrNot = ballExistOrNot;
+	}
+	public boolean isReturnValue() {
+		return returnValue;
+	}
+	public void setReturnValue(boolean returnValue) {
+		this.returnValue = returnValue;
 	}
 }

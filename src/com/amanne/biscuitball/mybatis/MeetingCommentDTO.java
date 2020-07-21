@@ -1,6 +1,13 @@
+/*============================================
+ 	MeetingCommentDTO.java
+ 	생성일: 2020.07.20
+ 	최근수정일: 2020.07.21
+=============================================*/
+
 package com.amanne.biscuitball.mybatis;
 
-public class MeetingCommentDTO {
+public class MeetingCommentDTO 
+{
 	private String meetingCommentCode; 				// 모임댓글코드
 	private String meetingCommentContent; 			// 모임댓글내용
 	private String meetingCommentRegistrationDate; 	// 등록일시
@@ -11,6 +18,7 @@ public class MeetingCommentDTO {
 	private String authorNickname; 					// 등록자닉네임
 	private String meetingCode; 					// 모임코드
 	private boolean deletePossibleOrNot; 			// 삭제가능여부
+	private boolean returnValue;
 	
 	public String getMeetingCommentCode() {
 		return meetingCommentCode;
@@ -71,6 +79,12 @@ public class MeetingCommentDTO {
 	}
 	public void setDeletePossibleOrNot(boolean deletePossibleOrNot) {
 		this.deletePossibleOrNot = deletePossibleOrNot;
+	}
+	public boolean isReturnValue() {
+		return returnValue;
+	}
+	public void setReturnValue(boolean returnValue) {
+		this.returnValue = returnValue;
 	}
 	
 }

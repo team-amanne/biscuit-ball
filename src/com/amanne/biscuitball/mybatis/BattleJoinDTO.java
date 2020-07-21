@@ -1,6 +1,7 @@
 /*============================================
  	BattleJoinDTO.java
- 	2020.07.30
+ 	생성일: 2020.07.20
+ 	최근수정일: 2020.07.21
 =============================================*/
 
 package com.amanne.biscuitball.mybatis;
@@ -12,6 +13,7 @@ public class BattleJoinDTO
 	private String crewMemberCode; 			// 대전참가멤버코드
 	private String joinMemberAccountCode; 	// 대전참가멤버계정코드
 	private String joinMemberNickname; 		// 대전참가멤버닉네임
+	private boolean returnValue;
 
 	public String getBattleJoinCode()
 	{
@@ -61,6 +63,14 @@ public class BattleJoinDTO
 	public void setJoinMemberNickname(String joinMemberNickname)
 	{
 		this.joinMemberNickname = joinMemberNickname;
+	}
+
+	public boolean isReturnValue() {
+		return returnValue;
+	}
+
+	public void setReturnValue(boolean returnValue) {
+		this.returnValue = returnValue;
 	}
 
 }

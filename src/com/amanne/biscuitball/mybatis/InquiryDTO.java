@@ -1,6 +1,13 @@
+/*============================================
+ 	InquiryDTO.java
+ 	생성일: 2020.07.20
+ 	최근수정일: 2020.07.21
+=============================================*/
+
 package com.amanne.biscuitball.mybatis;
 
-public class InquiryDTO {
+public class InquiryDTO 
+{
 
 	private String	inquiryCode;			//	문의등록번호	
 	private String	inquirySubject;			//	문의제목	
@@ -15,6 +22,7 @@ public class InquiryDTO {
 	private String	inquiryAnswerContent;	//	문의답변내용	
 	private String	inquiryAnswerCode;		//	문의답변코드	
 	private String	inquiryStatus;			//	문의상태
+	private boolean returnValue;
 	
 	public String getInquiryCode() {
 		return inquiryCode;
@@ -93,5 +101,11 @@ public class InquiryDTO {
 	}
 	public void setInquiryStatus(String inquiryStatus) {
 		this.inquiryStatus = inquiryStatus;
+	}
+	public boolean isReturnValue() {
+		return returnValue;
+	}
+	public void setReturnValue(boolean returnValue) {
+		this.returnValue = returnValue;
 	}
 }

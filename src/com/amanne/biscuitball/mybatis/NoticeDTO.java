@@ -1,6 +1,7 @@
 /*============================================
- 	NoticeDTO.java
- 	2020.07.30
+	NoticeDTO.java
+ 	생성일: 2020.07.20
+ 	최근수정일: 2020.07.21
 =============================================*/
 
 package com.amanne.biscuitball.mybatis;
@@ -14,6 +15,7 @@ public class NoticeDTO
 	private String registeredDate; 		// 등록일시
 	private String authorAdminCode;		// 등록관리자코드
 	private String authorAdminNickname; // 등록관리자닉네임
+	private boolean returnValue;
 
 	public String getNoticeCode()
 	{
@@ -73,6 +75,14 @@ public class NoticeDTO
 	public void setAuthorAdminNickname(String authorAdminNickname)
 	{
 		this.authorAdminNickname = authorAdminNickname;
+	}
+
+	public boolean isReturnValue() {
+		return returnValue;
+	}
+
+	public void setReturnValue(boolean returnValue) {
+		this.returnValue = returnValue;
 	}
 
 }

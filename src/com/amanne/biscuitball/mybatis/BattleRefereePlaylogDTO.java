@@ -1,6 +1,7 @@
 /*============================================
  	BattleRefereePlaylogDTO.java
- 	2020.07.30
+ 	생성일: 2020.07.20
+ 	최근수정일: 2020.07.21
 =============================================*/
 
 package com.amanne.biscuitball.mybatis;
@@ -17,6 +18,7 @@ public class BattleRefereePlaylogDTO
 	private ArrayList<QuarterScoreDTO> quarterScores; 	// 쿼터별점수리스트
 	private int senderScore; 							// 신청크루 총 득점
 	private int receiverScore; 							// 신청받은 크루 총 득점
+	private boolean returnValue;
 
 	public String getRefereePlaylogCode()
 	{
@@ -96,6 +98,14 @@ public class BattleRefereePlaylogDTO
 	public void setReceiverScore(int receiverScore)
 	{
 		this.receiverScore = receiverScore;
+	}
+
+	public boolean isReturnValue() {
+		return returnValue;
+	}
+
+	public void setReturnValue(boolean returnValue) {
+		this.returnValue = returnValue;
 	}
 
 }

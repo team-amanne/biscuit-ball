@@ -1,8 +1,15 @@
+/*============================================
+ 	UserDTO.java
+ 	생성일: 2020.07.20
+ 	최근수정일: 2020.07.21
+=============================================*/
+
 package com.amanne.biscuitball.mybatis;
 
 import java.util.ArrayList;
 
-public class UserDTO {
+public class UserDTO 
+{
 
 	private String	userCode;					//	회원코드	
 	private String	userAccountCode;			//	회원계정코드	
@@ -45,7 +52,7 @@ public class UserDTO {
 	private int	penaltyCount;					//	제재횟수	
 	private String	userStatus;					//	제재상태	
 	private String	userDeleteRequestedDate;	//	탈퇴요청일	
-	
+	private boolean returnValue;
 	
 	public String getUserCode() {
 		return userCode;
@@ -292,5 +299,11 @@ public class UserDTO {
 	}
 	public void setUserDeleteRequestedDate(String userDeleteRequestedDate) {
 		this.userDeleteRequestedDate = userDeleteRequestedDate;
+	}
+	public boolean isReturnValue() {
+		return returnValue;
+	}
+	public void setReturnValue(boolean returnValue) {
+		this.returnValue = returnValue;
 	}	
 }

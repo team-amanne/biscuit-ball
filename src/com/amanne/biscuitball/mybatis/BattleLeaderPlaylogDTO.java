@@ -1,6 +1,7 @@
 /*============================================
  	BattleLeaderPlaylogDTO.java
- 	2020.07.30
+ 	생성일: 2020.07.20
+ 	최근수정일: 2020.07.21
 =============================================*/
 
 package com.amanne.biscuitball.mybatis;
@@ -18,6 +19,7 @@ public class BattleLeaderPlaylogDTO
 	private String mvpBattleJoinCode; 			// mvp 대전참가코드
 	private String mvpAccountCode; 				// mvp 계정코드
 	private String mvpNickname; 				// mvp 닉네임
+	private boolean returnValue;
 
 	public String getLeaderPlaylogCode()
 	{
@@ -127,6 +129,14 @@ public class BattleLeaderPlaylogDTO
 	public void setMvpNickname(String mvpNickname)
 	{
 		this.mvpNickname = mvpNickname;
+	}
+
+	public boolean isReturnValue() {
+		return returnValue;
+	}
+
+	public void setReturnValue(boolean returnValue) {
+		this.returnValue = returnValue;
 	}
 
 }

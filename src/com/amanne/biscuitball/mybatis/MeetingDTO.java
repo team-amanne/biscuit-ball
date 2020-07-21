@@ -1,6 +1,13 @@
+/*============================================
+ 	MeetingDTO.java
+ 	생성일: 2020.07.20
+ 	최근수정일: 2020.07.21
+=============================================*/
+
 package com.amanne.biscuitball.mybatis;
 
-public class MeetingDTO {
+public class MeetingDTO 
+{
 	private String meetingCode; 			// 모임등록번호
 	private String meetingSubject; 			// 모임제목
 	private int meetingPeopleNumber; 		// 모임참가자수
@@ -17,6 +24,7 @@ public class MeetingDTO {
 	private int maxTierCode; 				// 최대티어
 	private String confirmOrNot; 			// 모임확정여부
 	private String blindOrNot; 				// 블라인드여부
+	private boolean returnValue;
 	
 	public String getMeetingCode() {
 		return meetingCode;
@@ -113,6 +121,12 @@ public class MeetingDTO {
 	}
 	public void setBlindOrNot(String blindOrNot) {
 		this.blindOrNot = blindOrNot;
+	}
+	public boolean isReturnValue() {
+		return returnValue;
+	}
+	public void setReturnValue(boolean returnValue) {
+		this.returnValue = returnValue;
 	}
 	
 }

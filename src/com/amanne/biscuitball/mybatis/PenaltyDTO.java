@@ -1,6 +1,13 @@
+/*============================================
+ 	PenaltyDTO.java
+ 	생성일: 2020.07.20
+ 	최근수정일: 2020.07.21
+=============================================*/
+
 package com.amanne.biscuitball.mybatis;
 
-public class PenaltyDTO {
+public class PenaltyDTO 
+{
 	private String penaltyCode; 		// 제재 번호
 	private String penaltyStartDate; 	// 제재 시작일시
 	private String penaltyEndDate; 		// 제재 종료일시
@@ -9,6 +16,7 @@ public class PenaltyDTO {
 	private String penaltyReason; 		// 제재 사유
 	private String reportContentCode; 	// 신고 콘텐츠 코드
 	private String reportContentType; 	// 신고 콘텐츠 타입
+	private boolean returnValue;
 	
 	public String getPenaltyCode() {
 		return penaltyCode;
@@ -57,5 +65,11 @@ public class PenaltyDTO {
 	}
 	public void setReportContentType(String reportContentType) {
 		this.reportContentType = reportContentType;
+	}
+	public boolean isReturnValue() {
+		return returnValue;
+	}
+	public void setReturnValue(boolean returnValue) {
+		this.returnValue = returnValue;
 	}
 }

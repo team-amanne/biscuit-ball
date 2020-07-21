@@ -1,6 +1,13 @@
+/*============================================
+ 	CourtReviewDTO.java
+ 	생성일: 2020.07.20
+ 	최근수정일: 2020.07.21
+=============================================*/
+
 package com.amanne.biscuitball.mybatis;
 
-public class CourtReviewDTO {
+public class CourtReviewDTO 
+{
 	private String courtReviewCode; 			// 코트리뷰코드
 	private String courtReviewContent; 			// 코트리뷰내용
 	private double courtReviewManageScore;	 	// 관리별점
@@ -21,6 +28,7 @@ public class CourtReviewDTO {
 	private boolean parkinglot; 				// 주차장유무
 	private boolean pollOrNot; 					// 투표 여부
 	private boolean pollLikeOrDislike; 			// 좋아요/싫어요 투표여부
+	private boolean returnValue;
 	
 	public String getCourtReviewCode() {
 		return courtReviewCode;
@@ -141,5 +149,11 @@ public class CourtReviewDTO {
 	}
 	public void setPollLikeOrDislike(boolean pollLikeOrDislike) {
 		this.pollLikeOrDislike = pollLikeOrDislike;
+	}
+	public boolean isReturnValue() {
+		return returnValue;
+	}
+	public void setReturnValue(boolean returnValue) {
+		this.returnValue = returnValue;
 	}
 }

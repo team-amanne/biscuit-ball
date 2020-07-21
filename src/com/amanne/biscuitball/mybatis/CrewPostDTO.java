@@ -1,8 +1,15 @@
+/*============================================
+ 	CrewPostDTO.java
+ 	생성일: 2020.07.20
+ 	최근수정일: 2020.07.21
+=============================================*/
+
 package com.amanne.biscuitball.mybatis;
 
 import java.util.ArrayList;
 
-public class CrewPostDTO {
+public class CrewPostDTO 
+{
 	private String crewPostCode; // 크루게시물코드
 	private String crewPostSubject; // 크루게시물제목
 	private String crewPostContent; // 크루게시물내용
@@ -15,6 +22,7 @@ public class CrewPostDTO {
 	private String crewPostDelDate; // 삭제일시
 	private String crewPostStatus; // 게시물상태
 	private ArrayList<CrewCommentDTO> crewCommentList; // 크루댓글 리스트
+	private boolean returnValue;
 	
 	public String getCrewPostCode() {
 		return crewPostCode;
@@ -87,6 +95,12 @@ public class CrewPostDTO {
 	}
 	public void setCrewCommentList(ArrayList<CrewCommentDTO> crewCommentList) {
 		this.crewCommentList = crewCommentList;
+	}
+	public boolean isReturnValue() {
+		return returnValue;
+	}
+	public void setReturnValue(boolean returnValue) {
+		this.returnValue = returnValue;
 	}
 	
 }

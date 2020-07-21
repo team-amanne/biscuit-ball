@@ -1,6 +1,7 @@
 /*============================================
  	CrewAchievementDTO.java
- 	2020.07.30
+ 	생성일: 2020.07.20
+ 	최근수정일: 2020.07.21
 =============================================*/
 
 package com.amanne.biscuitball.mybatis;
@@ -14,7 +15,8 @@ public class CrewAchievementDTO
 	private String crewAchievementCondition; 		// 업적조건내용
 	private String getterCrewCode; 					// 획득크루코드
 	private String crewAchievementGetDate; 			// 획득일시
-
+	private boolean returnValue;
+	
 	public String getCrewAchievementGetCode()
 	{
 		return crewAchievementGetCode;
@@ -83,6 +85,14 @@ public class CrewAchievementDTO
 	public void setCrewAchievementGetDate(String crewAchievementGetDate)
 	{
 		this.crewAchievementGetDate = crewAchievementGetDate;
+	}
+
+	public boolean isReturnValue() {
+		return returnValue;
+	}
+
+	public void setReturnValue(boolean returnValue) {
+		this.returnValue = returnValue;
 	}
 
 }
