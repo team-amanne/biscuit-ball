@@ -19,7 +19,7 @@ public class EvaluationDTO
 	private double fairplayScore; 					// 페어플레이점수
 	private String abilityEvaluationTypeCode; 		// 평가종류코드
 	private String abilityEvaluationType; 			// 평가종류
-	private boolean returnValue;
+	private String returnValue;
 	
 	public String getPlaylogCode() {
 		return playlogCode;
@@ -87,10 +87,10 @@ public class EvaluationDTO
 	public void setAbilityEvaluationType(String abilityEvaluationType) {
 		this.abilityEvaluationType = abilityEvaluationType;
 	}
-	public boolean isReturnValue() {
+	public String isReturnValue() {
 		return returnValue;
 	}
-	public void setReturnValue(boolean returnValue) {
+	public void setReturnValue(String returnValue) {
 		this.returnValue = returnValue;
 	}
 	

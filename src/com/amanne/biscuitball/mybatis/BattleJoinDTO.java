@@ -13,7 +13,7 @@ public class BattleJoinDTO
 	private String crewMemberCode; 			// 대전참가멤버코드
 	private String joinMemberAccountCode; 	// 대전참가멤버계정코드
 	private String joinMemberNickname; 		// 대전참가멤버닉네임
-	private boolean returnValue;
+	private String returnValue;
 
 	public String getBattleJoinCode()
 	{
@@ -65,11 +65,11 @@ public class BattleJoinDTO
 		this.joinMemberNickname = joinMemberNickname;
 	}
 
-	public boolean isReturnValue() {
+	public String isReturnValue() {
 		return returnValue;
 	}
 
-	public void setReturnValue(boolean returnValue) {
+	public void setReturnValue(String returnValue) {
 		this.returnValue = returnValue;
 	}
 

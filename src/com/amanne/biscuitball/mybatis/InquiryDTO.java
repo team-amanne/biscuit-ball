@@ -22,7 +22,7 @@ public class InquiryDTO
 	private String	inquiryAnswerContent;	//	문의답변내용	
 	private String	inquiryAnswerCode;		//	문의답변코드	
 	private String	inquiryStatus;			//	문의상태
-	private boolean returnValue;
+	private String returnValue;
 	
 	public String getInquiryCode() {
 		return inquiryCode;
@@ -102,10 +102,10 @@ public class InquiryDTO
 	public void setInquiryStatus(String inquiryStatus) {
 		this.inquiryStatus = inquiryStatus;
 	}
-	public boolean isReturnValue() {
+	public String isReturnValue() {
 		return returnValue;
 	}
-	public void setReturnValue(boolean returnValue) {
+	public void setReturnValue(String returnValue) {
 		this.returnValue = returnValue;
 	}
 }

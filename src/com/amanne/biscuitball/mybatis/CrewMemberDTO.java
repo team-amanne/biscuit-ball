@@ -14,7 +14,7 @@ public class CrewMemberDTO
 	private String crewName; 				// 크루이름
 	private String memberAcctCode; 			// 멤버계정코드
 	private String memberNickname; 			// 멤버닉네임
-	private boolean leaderOrNot; 			// 리더여부
+	private String leaderOrNot; 			// 리더여부
 	private String crewJoinRequestCode; 	// 크루가입신청코드
 	private String crewInvitationCode; 		// 크루초대코드
 	private String requestedDate; 			// 신청/초대일시
@@ -25,7 +25,7 @@ public class CrewMemberDTO
 	private String positionCode; 			// 선호포지션코드
 	private String positionName; 			// 선호포지션명
 	private String positionAbbr; 			// 선호포지션약칭
-	private boolean returnValue;
+	private String returnValue;
 	
 	public String getCrewMemberCode() {
 		return crewMemberCode;
@@ -63,10 +63,10 @@ public class CrewMemberDTO
 	public void setMemberNickname(String memberNickname) {
 		this.memberNickname = memberNickname;
 	}
-	public boolean isLeaderOrNot() {
+	public String isLeaderOrNot() {
 		return leaderOrNot;
 	}
-	public void setLeaderOrNot(boolean leaderOrNot) {
+	public void setLeaderOrNot(String leaderOrNot) {
 		this.leaderOrNot = leaderOrNot;
 	}
 	public String getCrewJoinRequestCode() {
@@ -129,10 +129,10 @@ public class CrewMemberDTO
 	public void setPositionAbbr(String positionAbbr) {
 		this.positionAbbr = positionAbbr;
 	}
-	public boolean isReturnValue() {
+	public String isReturnValue() {
 		return returnValue;
 	}
-	public void setReturnValue(boolean returnValue) {
+	public void setReturnValue(String returnValue) {
 		this.returnValue = returnValue;
 	}
 }

@@ -12,8 +12,8 @@ public class AdminDTO
 	private String adminNickname; 	// 회원계정코드
 	private String adminEmail; 		// 이메일
 	private String adminPassword; 	// 비밀번호
-	private boolean chiefAdmin; 	// 최고관리자여부
-	private boolean returnValue;
+	private String chiefAdmin; 	// 최고관리자여부
+	private String returnValue;
 	
 	public String getAdminCode() {
 		return adminCode;
@@ -39,16 +39,16 @@ public class AdminDTO
 	public void setAdminPassword(String adminPassword) {
 		this.adminPassword = adminPassword;
 	}
-	public boolean isChiefAdmin() {
+	public String isChiefAdmin() {
 		return chiefAdmin;
 	}
-	public void setChiefAdmin(boolean chiefAdmin) {
+	public void setChiefAdmin(String chiefAdmin) {
 		this.chiefAdmin = chiefAdmin;
 	}
-	public boolean isReturnValue() {
+	public String isReturnValue() {
 		return returnValue;
 	}
-	public void setReturnValue(boolean returnValue) {
+	public void setReturnValue(String returnValue) {
 		this.returnValue = returnValue;
 	}
 }

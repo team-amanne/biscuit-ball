@@ -41,7 +41,7 @@ public class CrewDTO
 	private String crewPenaltyStatus; 				// 제재상태
 	private ArrayList<RegionDTO> crewBaseAreaList; 	// 크루거점지역목록
 	private String crewProfileImg; 					// 크루프로필사진
-	private boolean returnValue;
+	private String returnValue;
 
 	public String getCrewCode()
 	{
@@ -343,11 +343,11 @@ public class CrewDTO
 		this.crewProfileImg = crewProfileImg;
 	}
 
-	public boolean isReturnValue() {
+	public String isReturnValue() {
 		return returnValue;
 	}
 
-	public void setReturnValue(boolean returnValue) {
+	public void setReturnValue(String returnValue) {
 		this.returnValue = returnValue;
 	}
 

@@ -16,7 +16,7 @@ public class NotificationDTO
 	private String createDate; 				// 알림생성일시
 	private String readDate; 				// 열람일시
 	private String url; 					// 알림URL
-	private boolean returnValue;
+	private String returnValue;
 	
 	public String getNotificationCode() {
 		return notificationCode;
@@ -66,10 +66,10 @@ public class NotificationDTO
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	public boolean isReturnValue() {
+	public String isReturnValue() {
 		return returnValue;
 	}
-	public void setReturnValue(boolean returnValue) {
+	public void setReturnValue(String returnValue) {
 		this.returnValue = returnValue;
 	}
 	

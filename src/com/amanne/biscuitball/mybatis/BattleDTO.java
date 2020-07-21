@@ -35,7 +35,7 @@ public class BattleDTO
 	private BattleLeaderPlaylogDTO senderBattleLeaderPlaylog; 		// 입력한 리더플레이로그(신청한크루)
 	private BattleLeaderPlaylogDTO receiverBattleLeaderPlaylog; 	// 입력한 리더플레이로그(신청받은크루)
 	private BattleRefereePlaylogDTO battleRefereePlaylog; 			// 입력한 심판플레이로그
-	private boolean returnValue;
+	private String returnValue;
 
 	public String getBattleRequestCode()
 	{
@@ -277,11 +277,11 @@ public class BattleDTO
 		this.battleRefereePlaylog = battleRefereePlaylog;
 	}
 
-	public boolean isReturnValue() {
+	public String isReturnValue() {
 		return returnValue;
 	}
 
-	public void setReturnValue(boolean returnValue) {
+	public void setReturnValue(String returnValue) {
 		this.returnValue = returnValue;
 	}
 

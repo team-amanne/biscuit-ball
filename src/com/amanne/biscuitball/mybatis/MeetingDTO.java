@@ -24,7 +24,7 @@ public class MeetingDTO
 	private int maxTierCode; 				// 최대티어
 	private String confirmOrNot; 			// 모임확정여부
 	private String blindOrNot; 				// 블라인드여부
-	private boolean returnValue;
+	private String returnValue;
 	
 	public String getMeetingCode() {
 		return meetingCode;
@@ -122,10 +122,10 @@ public class MeetingDTO
 	public void setBlindOrNot(String blindOrNot) {
 		this.blindOrNot = blindOrNot;
 	}
-	public boolean isReturnValue() {
+	public String isReturnValue() {
 		return returnValue;
 	}
-	public void setReturnValue(boolean returnValue) {
+	public void setReturnValue(String returnValue) {
 		this.returnValue = returnValue;
 	}
 	

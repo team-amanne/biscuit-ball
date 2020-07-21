@@ -19,7 +19,7 @@ public class CrewCommentDTO
 	private String crewCommentUpdateDate; 		// 갱신일시
 	private String crewCommentDelDate; 			// 삭제일시
 	private String crewCommentStatus; 			// 댓글상태
-	private boolean returnValue;
+	private String returnValue;
 	
 	public String getCrewCommentCode() {
 		return crewCommentCode;
@@ -87,10 +87,10 @@ public class CrewCommentDTO
 	public void setCrewCommentStatus(String crewCommentStatus) {
 		this.crewCommentStatus = crewCommentStatus;
 	}
-	public boolean isReturnValue() {
+	public String isReturnValue() {
 		return returnValue;
 	}
-	public void setReturnValue(boolean returnValue) {
+	public void setReturnValue(String returnValue) {
 		this.returnValue = returnValue;
 	}
 }

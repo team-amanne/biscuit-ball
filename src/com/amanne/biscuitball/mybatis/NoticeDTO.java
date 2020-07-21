@@ -15,7 +15,7 @@ public class NoticeDTO
 	private String registeredDate; 		// 등록일시
 	private String authorAdminCode;		// 등록관리자코드
 	private String authorAdminNickname; // 등록관리자닉네임
-	private boolean returnValue;
+	private String returnValue;
 
 	public String getNoticeCode()
 	{
@@ -77,11 +77,11 @@ public class NoticeDTO
 		this.authorAdminNickname = authorAdminNickname;
 	}
 
-	public boolean isReturnValue() {
+	public String isReturnValue() {
 		return returnValue;
 	}
 
-	public void setReturnValue(boolean returnValue) {
+	public void setReturnValue(String returnValue) {
 		this.returnValue = returnValue;
 	}
 

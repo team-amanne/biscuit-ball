@@ -15,7 +15,7 @@ public class CrewAchievementDTO
 	private String crewAchievementCondition; 		// 업적조건내용
 	private String getterCrewCode; 					// 획득크루코드
 	private String crewAchievementGetDate; 			// 획득일시
-	private boolean returnValue;
+	private String returnValue;
 	
 	public String getCrewAchievementGetCode()
 	{
@@ -87,11 +87,11 @@ public class CrewAchievementDTO
 		this.crewAchievementGetDate = crewAchievementGetDate;
 	}
 
-	public boolean isReturnValue() {
+	public String isReturnValue() {
 		return returnValue;
 	}
 
-	public void setReturnValue(boolean returnValue) {
+	public void setReturnValue(String returnValue) {
 		this.returnValue = returnValue;
 	}
 

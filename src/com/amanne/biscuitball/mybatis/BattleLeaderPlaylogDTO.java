@@ -19,7 +19,7 @@ public class BattleLeaderPlaylogDTO
 	private String mvpBattleJoinCode; 			// mvp 대전참가코드
 	private String mvpAccountCode; 				// mvp 계정코드
 	private String mvpNickname; 				// mvp 닉네임
-	private boolean returnValue;
+	private String returnValue;
 
 	public String getLeaderPlaylogCode()
 	{
@@ -131,11 +131,11 @@ public class BattleLeaderPlaylogDTO
 		this.mvpNickname = mvpNickname;
 	}
 
-	public boolean isReturnValue() {
+	public String isReturnValue() {
 		return returnValue;
 	}
 
-	public void setReturnValue(boolean returnValue) {
+	public void setReturnValue(String returnValue) {
 		this.returnValue = returnValue;
 	}
 

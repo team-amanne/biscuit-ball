@@ -17,7 +17,7 @@ public class FaqDTO
 	private String authorAdminNickname; 	// 등록관리자닉네임
 	private String categoryCode; 			// 카테고리코드
 	private String categoryName; 			// 카테고리 이름
-	private boolean returnValue;
+	private String returnValue;
 
 	public String getFaqCode()
 	{
@@ -99,11 +99,11 @@ public class FaqDTO
 		this.categoryName = categoryName;
 	}
 
-	public boolean isReturnValue() {
+	public String isReturnValue() {
 		return returnValue;
 	}
 
-	public void setReturnValue(boolean returnValue) {
+	public void setReturnValue(String returnValue) {
 		this.returnValue = returnValue;
 	}
 

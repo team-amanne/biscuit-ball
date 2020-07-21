@@ -20,7 +20,7 @@ public class MessageDTO
 	private String	receiverReadDate;		//	수신자열람일시	
 	private String	senderDelDate;			//	발신자삭제일시	
 	private String	receiverDelDate;		//	수신자삭제일시	
-	private boolean returnValue;
+	private String returnValue;
 	
 	public String getMessageCode() {
 		return messageCode;
@@ -88,10 +88,10 @@ public class MessageDTO
 	public void setReceiverDelDate(String receiverDelDate) {
 		this.receiverDelDate = receiverDelDate;
 	}
-	public boolean isReturnValue() {
+	public String isReturnValue() {
 		return returnValue;
 	}
-	public void setReturnValue(boolean returnValue) {
+	public void setReturnValue(String returnValue) {
 		this.returnValue = returnValue;
 	}
 }

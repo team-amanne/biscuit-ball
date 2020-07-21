@@ -12,7 +12,7 @@ public class QuarterScoreDTO
 	private String refereePLCode; 		// 심판플레이로그코드
 	private int senderScore; 			// 신청크루 득점
 	private int receiverScore; 			// 신청받은크루 득점
-	private boolean returnValue;
+	private String returnValue;
 	
 	public int getQuarter()
 	{
@@ -54,11 +54,11 @@ public class QuarterScoreDTO
 		this.receiverScore = receiverScore;
 	}
 
-	public boolean isReturnValue() {
+	public String isReturnValue() {
 		return returnValue;
 	}
 
-	public void setReturnValue(boolean returnValue) {
+	public void setReturnValue(String returnValue) {
 		this.returnValue = returnValue;
 	}
 }

@@ -30,11 +30,11 @@ public class CourtDTO
 	private String courtCapacityCode; 					// 코트적정인원수코드
 	private int minCourtCapacity; 						// 최소코트인원수
 	private int maxCourtCapacity; 						// 최대코트인원수
-	private boolean toilet; 							// 화장실유무
+	private String toilet; 							// 화장실유무
 	private double toiletConfidence; 					// 신뢰도
-	private boolean shower; 							// 샤워장유무
+	private String shower; 							// 샤워장유무
 	private double showerConfidence; 					// 신뢰도
-	private boolean parkinglot; 						// 주차장유무
+	private String parkinglot; 						// 주차장유무
 	private double parkinglotConfidence; 				// 신뢰도
 	private String enrollYesCount; 						// 코트등록찬성수
 	private String enrollNoCount; 						// 코트등록반대수
@@ -48,7 +48,7 @@ public class CourtDTO
 	private String courtStatus; 						// 코트상태
 	private ArrayList<CourtReviewDTO> courtReviewList; 	// 코트리뷰리스트
 	private ArrayList<CourtReviewDTO> courtNameList; 	// 코트이름리스트
-	private boolean returnValue;
+	private String returnValue;
 	
 	public String getCourtCode() {
 		return courtCode;
@@ -170,10 +170,10 @@ public class CourtDTO
 	public void setMaxCourtCapacity(int maxCourtCapacity) {
 		this.maxCourtCapacity = maxCourtCapacity;
 	}
-	public boolean isToilet() {
+	public String isToilet() {
 		return toilet;
 	}
-	public void setToilet(boolean toilet) {
+	public void setToilet(String toilet) {
 		this.toilet = toilet;
 	}
 	public double getToiletConfidence() {
@@ -182,10 +182,10 @@ public class CourtDTO
 	public void setToiletConfidence(double toiletConfidence) {
 		this.toiletConfidence = toiletConfidence;
 	}
-	public boolean isShower() {
+	public String isShower() {
 		return shower;
 	}
-	public void setShower(boolean shower) {
+	public void setShower(String shower) {
 		this.shower = shower;
 	}
 	public double getShowerConfidence() {
@@ -194,10 +194,10 @@ public class CourtDTO
 	public void setShowerConfidence(double showerConfidence) {
 		this.showerConfidence = showerConfidence;
 	}
-	public boolean isParkinglot() {
+	public String isParkinglot() {
 		return parkinglot;
 	}
-	public void setParkinglot(boolean parkinglot) {
+	public void setParkinglot(String parkinglot) {
 		this.parkinglot = parkinglot;
 	}
 	public double getParkinglotConfidence() {
@@ -278,10 +278,10 @@ public class CourtDTO
 	public void setCourtNameList(ArrayList<CourtReviewDTO> courtNameList) {
 		this.courtNameList = courtNameList;
 	}
-	public boolean isReturnValue() {
+	public String isReturnValue() {
 		return returnValue;
 	}
-	public void setReturnValue(boolean returnValue) {
+	public void setReturnValue(String returnValue) {
 		this.returnValue = returnValue;
 	}
 }

@@ -17,8 +17,8 @@ public class MeetingCommentDTO
 	private String authorAccountCode; 				// 등록자계정코드
 	private String authorNickname; 					// 등록자닉네임
 	private String meetingCode; 					// 모임코드
-	private boolean deletePossibleOrNot; 			// 삭제가능여부
-	private boolean returnValue;
+	private String deletePossibleOrNot; 			// 삭제가능여부
+	private String returnValue;
 	
 	public String getMeetingCommentCode() {
 		return meetingCommentCode;
@@ -74,16 +74,16 @@ public class MeetingCommentDTO
 	public void setMeetingCode(String meetingCode) {
 		this.meetingCode = meetingCode;
 	}
-	public boolean isDeletePossibleOrNot() {
+	public String isDeletePossibleOrNot() {
 		return deletePossibleOrNot;
 	}
-	public void setDeletePossibleOrNot(boolean deletePossibleOrNot) {
+	public void setDeletePossibleOrNot(String deletePossibleOrNot) {
 		this.deletePossibleOrNot = deletePossibleOrNot;
 	}
-	public boolean isReturnValue() {
+	public String isReturnValue() {
 		return returnValue;
 	}
-	public void setReturnValue(boolean returnValue) {
+	public void setReturnValue(String returnValue) {
 		this.returnValue = returnValue;
 	}
 	

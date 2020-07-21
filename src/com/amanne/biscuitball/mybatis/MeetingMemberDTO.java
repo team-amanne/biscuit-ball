@@ -15,7 +15,7 @@ public class MeetingMemberDTO
 	private String userNickname; 		// 참가자 닉네임
 	private String captainOrNot; 		// 캡틴여부
 	private String ballExistOrNot; 		// 공지참여부
-	private boolean returnValue;
+	private String returnValue;
 	
 	public String getMeetJoinCode() {
 		return meetJoinCode;
@@ -59,10 +59,10 @@ public class MeetingMemberDTO
 	public void setBallExistOrNot(String ballExistOrNot) {
 		this.ballExistOrNot = ballExistOrNot;
 	}
-	public boolean isReturnValue() {
+	public String isReturnValue() {
 		return returnValue;
 	}
-	public void setReturnValue(boolean returnValue) {
+	public void setReturnValue(String returnValue) {
 		this.returnValue = returnValue;
 	}
 }

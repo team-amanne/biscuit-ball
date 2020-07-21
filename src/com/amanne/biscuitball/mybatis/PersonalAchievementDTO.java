@@ -15,7 +15,7 @@ public class PersonalAchievementDTO
 	private String personalAchievementCondition; 	// 업적조건내용
 	private String getterAccountCode; 				// 획득회원계정코드
 	private String personalAchievementGetDate;	 	// 획득일시
-	private boolean returnValue;
+	private String returnValue;
 
 	public String getPersonalAchievementGetCode()
 	{
@@ -87,11 +87,11 @@ public class PersonalAchievementDTO
 		this.personalAchievementGetDate = personalAchievementGetDate;
 	}
 
-	public boolean isReturnValue() {
+	public String isReturnValue() {
 		return returnValue;
 	}
 
-	public void setReturnValue(boolean returnValue) {
+	public void setReturnValue(String returnValue) {
 		this.returnValue = returnValue;
 	}
 

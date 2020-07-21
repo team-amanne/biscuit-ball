@@ -14,7 +14,7 @@ public class NoshowDTO
 	private String meetingCode; 			// 참여모임코드
 	private String noshowUserAccountCode; 	// 노쇼유저계정코드
 	private String noshowUserNickname; 		// 노쇼유저닉네임
-	private boolean returnValue;
+	private String returnValue;
 	
 	public String getNoshowCode() {
 		return noshowCode;
@@ -52,10 +52,10 @@ public class NoshowDTO
 	public void setNoshowUserNickname(String noshowUserNickname) {
 		this.noshowUserNickname = noshowUserNickname;
 	}
-	public boolean isReturnValue() {
+	public String isReturnValue() {
 		return returnValue;
 	}
-	public void setReturnValue(boolean returnValue) {
+	public void setReturnValue(String returnValue) {
 		this.returnValue = returnValue;
 	}
 }

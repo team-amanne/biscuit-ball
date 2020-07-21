@@ -22,7 +22,7 @@ public class CrewPostDTO
 	private String crewPostDelDate; // 삭제일시
 	private String crewPostStatus; // 게시물상태
 	private ArrayList<CrewCommentDTO> crewCommentList; // 크루댓글 리스트
-	private boolean returnValue;
+	private String returnValue;
 	
 	public String getCrewPostCode() {
 		return crewPostCode;
@@ -96,10 +96,10 @@ public class CrewPostDTO
 	public void setCrewCommentList(ArrayList<CrewCommentDTO> crewCommentList) {
 		this.crewCommentList = crewCommentList;
 	}
-	public boolean isReturnValue() {
+	public String isReturnValue() {
 		return returnValue;
 	}
-	public void setReturnValue(boolean returnValue) {
+	public void setReturnValue(String returnValue) {
 		this.returnValue = returnValue;
 	}
 	

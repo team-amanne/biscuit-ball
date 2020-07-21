@@ -14,7 +14,7 @@ public class UserDTO
 	private String	userCode;					//	회원코드	
 	private String	userAccountCode;			//	회원계정코드	
 	private String	userNickname;				//	닉네임	
-	private boolean	snsSync;					//	sns연동여부	
+	private String	snsSync;					//	sns연동여부	
 	private String	userName;					//	이름	
 	private String	userEmail;					//	이메일	
 	private String	userPassword;				//	비밀번호	
@@ -39,12 +39,12 @@ public class UserDTO
 	private String	titleAchievementCode;		//	획득업적코드	
 	private String	titleAchievementName;		//	획득업적명	
 	private String	titleAchievementImg;		//	획득업적아이콘경로	
-	private boolean	smsReceive;					//	sms수신여부	
-	private boolean	cityOpen;					//	거점지역공개여부	
-	private boolean	achvOpen;					//	획득업적공개여부	
-	private boolean	genderOpen;					//	성별공개여부	
-	private boolean	courtOpen;					//	내코트공개여부	
-	private boolean	playlogOpen;				//	플레이로그공개여부	
+	private String	smsReceive;					//	sms수신여부	
+	private String	cityOpen;					//	거점지역공개여부	
+	private String	achvOpen;					//	획득업적공개여부	
+	private String	genderOpen;					//	성별공개여부	
+	private String	courtOpen;					//	내코트공개여부	
+	private String	playlogOpen;				//	플레이로그공개여부	
 	private String	msgBlockCode;				//	메시지블록종류코드	
 	private String	msgBlockType;				//	메시지블록종류		
 	private ArrayList<UserDTO>	friendList;		//	친구목록	
@@ -52,7 +52,7 @@ public class UserDTO
 	private int	penaltyCount;					//	제재횟수	
 	private String	userStatus;					//	제재상태	
 	private String	userDeleteRequestedDate;	//	탈퇴요청일	
-	private boolean returnValue;
+	private String returnValue;
 	
 	public String getUserCode() {
 		return userCode;
@@ -72,10 +72,10 @@ public class UserDTO
 	public void setUserNickname(String userNickname) {
 		this.userNickname = userNickname;
 	}
-	public boolean isSnsSync() {
+	public String isSnsSync() {
 		return snsSync;
 	}
-	public void setSnsSync(boolean snsSync) {
+	public void setSnsSync(String snsSync) {
 		this.snsSync = snsSync;
 	}
 	public String getUserName() {
@@ -222,40 +222,40 @@ public class UserDTO
 	public void setTitleAchievementImg(String titleAchievementImg) {
 		this.titleAchievementImg = titleAchievementImg;
 	}
-	public boolean isSmsReceive() {
+	public String isSmsReceive() {
 		return smsReceive;
 	}
-	public void setSmsReceive(boolean smsReceive) {
+	public void setSmsReceive(String smsReceive) {
 		this.smsReceive = smsReceive;
 	}
-	public boolean isCityOpen() {
+	public String isCityOpen() {
 		return cityOpen;
 	}
-	public void setCityOpen(boolean cityOpen) {
+	public void setCityOpen(String cityOpen) {
 		this.cityOpen = cityOpen;
 	}
-	public boolean isAchvOpen() {
+	public String isAchvOpen() {
 		return achvOpen;
 	}
-	public void setAchvOpen(boolean achvOpen) {
+	public void setAchvOpen(String achvOpen) {
 		this.achvOpen = achvOpen;
 	}
-	public boolean isGenderOpen() {
+	public String isGenderOpen() {
 		return genderOpen;
 	}
-	public void setGenderOpen(boolean genderOpen) {
+	public void setGenderOpen(String genderOpen) {
 		this.genderOpen = genderOpen;
 	}
-	public boolean isCourtOpen() {
+	public String isCourtOpen() {
 		return courtOpen;
 	}
-	public void setCourtOpen(boolean courtOpen) {
+	public void setCourtOpen(String courtOpen) {
 		this.courtOpen = courtOpen;
 	}
-	public boolean isPlaylogOpen() {
+	public String isPlaylogOpen() {
 		return playlogOpen;
 	}
-	public void setPlaylogOpen(boolean playlogOpen) {
+	public void setPlaylogOpen(String playlogOpen) {
 		this.playlogOpen = playlogOpen;
 	}
 	public String getMsgBlockCode() {
@@ -300,10 +300,10 @@ public class UserDTO
 	public void setUserDeleteRequestedDate(String userDeleteRequestedDate) {
 		this.userDeleteRequestedDate = userDeleteRequestedDate;
 	}
-	public boolean isReturnValue() {
+	public String isReturnValue() {
 		return returnValue;
 	}
-	public void setReturnValue(boolean returnValue) {
+	public void setReturnValue(String returnValue) {
 		this.returnValue = returnValue;
 	}	
 }

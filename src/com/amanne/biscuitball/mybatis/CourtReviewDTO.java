@@ -23,12 +23,12 @@ public class CourtReviewDTO
 	private String courtReviewStatus; 			// 상태
 	private int likes; 							// 좋아요수
 	private int dislikes; 						// 싫어요수
-	private boolean toilet; 					// 화장실유무
-	private boolean shower; 					// 샤워장유무
-	private boolean parkinglot; 				// 주차장유무
-	private boolean pollOrNot; 					// 투표 여부
-	private boolean pollLikeOrDislike; 			// 좋아요/싫어요 투표여부
-	private boolean returnValue;
+	private String toilet; 					// 화장실유무
+	private String shower; 					// 샤워장유무
+	private String parkinglot; 				// 주차장유무
+	private String pollOrNot; 					// 투표 여부
+	private String pollLikeOrDislike; 			// 좋아요/싫어요 투표여부
+	private String returnValue;
 	
 	public String getCourtReviewCode() {
 		return courtReviewCode;
@@ -120,40 +120,40 @@ public class CourtReviewDTO
 	public void setDislikes(int dislikes) {
 		this.dislikes = dislikes;
 	}
-	public boolean isToilet() {
+	public String isToilet() {
 		return toilet;
 	}
-	public void setToilet(boolean toilet) {
+	public void setToilet(String toilet) {
 		this.toilet = toilet;
 	}
-	public boolean isShower() {
+	public String isShower() {
 		return shower;
 	}
-	public void setShower(boolean shower) {
+	public void setShower(String shower) {
 		this.shower = shower;
 	}
-	public boolean isParkinglot() {
+	public String isParkinglot() {
 		return parkinglot;
 	}
-	public void setParkinglot(boolean parkinglot) {
+	public void setParkinglot(String parkinglot) {
 		this.parkinglot = parkinglot;
 	}
-	public boolean isPollOrNot() {
+	public String isPollOrNot() {
 		return pollOrNot;
 	}
-	public void setPollOrNot(boolean pollOrNot) {
+	public void setPollOrNot(String pollOrNot) {
 		this.pollOrNot = pollOrNot;
 	}
-	public boolean isPollLikeOrDislike() {
+	public String isPollLikeOrDislike() {
 		return pollLikeOrDislike;
 	}
-	public void setPollLikeOrDislike(boolean pollLikeOrDislike) {
+	public void setPollLikeOrDislike(String pollLikeOrDislike) {
 		this.pollLikeOrDislike = pollLikeOrDislike;
 	}
-	public boolean isReturnValue() {
+	public String isReturnValue() {
 		return returnValue;
 	}
-	public void setReturnValue(boolean returnValue) {
+	public void setReturnValue(String returnValue) {
 		this.returnValue = returnValue;
 	}
 }

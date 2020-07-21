@@ -16,7 +16,7 @@ public class PenaltyDTO
 	private String penaltyReason; 		// 제재 사유
 	private String reportContentCode; 	// 신고 콘텐츠 코드
 	private String reportContentType; 	// 신고 콘텐츠 타입
-	private boolean returnValue;
+	private String returnValue;
 	
 	public String getPenaltyCode() {
 		return penaltyCode;
@@ -66,10 +66,10 @@ public class PenaltyDTO
 	public void setReportContentType(String reportContentType) {
 		this.reportContentType = reportContentType;
 	}
-	public boolean isReturnValue() {
+	public String isReturnValue() {
 		return returnValue;
 	}
-	public void setReturnValue(boolean returnValue) {
+	public void setReturnValue(String returnValue) {
 		this.returnValue = returnValue;
 	}
 }

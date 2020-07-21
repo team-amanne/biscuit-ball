@@ -12,13 +12,13 @@ public class BattleRefereePlaylogDTO
 {
 	private String refereePlaylogCode; 					// 심판플레이로그코드
 	private String battleRequestCode; 					// 대전신청코드
-	private boolean battleCancelOrNot; 					// 합의취소여부
+	private String battleCancelOrNot; 					// 합의취소여부
 	private String inputDate; 							// 입력일시
 	private String battleResult; 						// 대전결과
 	private ArrayList<QuarterScoreDTO> quarterScores; 	// 쿼터별점수리스트
 	private int senderScore; 							// 신청크루 총 득점
 	private int receiverScore; 							// 신청받은 크루 총 득점
-	private boolean returnValue;
+	private String returnValue;
 
 	public String getRefereePlaylogCode()
 	{
@@ -40,12 +40,12 @@ public class BattleRefereePlaylogDTO
 		this.battleRequestCode = battleRequestCode;
 	}
 
-	public boolean isBattleCancelOrNot()
+	public String isBattleCancelOrNot()
 	{
 		return battleCancelOrNot;
 	}
 
-	public void setBattleCancelOrNot(boolean battleCancelOrNot)
+	public void setBattleCancelOrNot(String battleCancelOrNot)
 	{
 		this.battleCancelOrNot = battleCancelOrNot;
 	}
@@ -100,11 +100,11 @@ public class BattleRefereePlaylogDTO
 		this.receiverScore = receiverScore;
 	}
 
-	public boolean isReturnValue() {
+	public String isReturnValue() {
 		return returnValue;
 	}
 
-	public void setReturnValue(boolean returnValue) {
+	public void setReturnValue(String returnValue) {
 		this.returnValue = returnValue;
 	}
 

@@ -18,7 +18,7 @@ public class ReportTotalDTO
 	private String	reportAssignedDate;		//	신고담당자배정일	
 	private String	reportStatus;			//	신고상태	
 	private String	reportResolveDate;		//	신고처리날짜
-	private boolean returnValue;
+	private String returnValue;
 	
 	public String getReportType() {
 		return reportType;
@@ -80,10 +80,10 @@ public class ReportTotalDTO
 	public void setReportResolveDate(String reportResolveDate) {
 		this.reportResolveDate = reportResolveDate;
 	}
-	public boolean isReturnValue() {
+	public String isReturnValue() {
 		return returnValue;
 	}
-	public void setReturnValue(boolean returnValue) {
+	public void setReturnValue(String returnValue) {
 		this.returnValue = returnValue;
 	}
 	

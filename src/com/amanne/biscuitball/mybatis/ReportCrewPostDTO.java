@@ -28,7 +28,7 @@ public class ReportCrewPostDTO
 	private String reportStatus; 					// 신고상태
 	private String reportResultCode; 				// 신고결과코드
 	private String reportResult; 					// 신고결과
-	private boolean returnValue;
+	private String returnValue;
 	
 	public String getReportType() {
 		return reportType;
@@ -150,10 +150,10 @@ public class ReportCrewPostDTO
 	public void setReportResult(String reportResult) {
 		this.reportResult = reportResult;
 	}
-	public boolean isReturnValue() {
+	public String isReturnValue() {
 		return returnValue;
 	}
-	public void setReturnValue(boolean returnValue) {
+	public void setReturnValue(String returnValue) {
 		this.returnValue = returnValue;
 	}
 }

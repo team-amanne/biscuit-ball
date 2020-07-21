@@ -12,15 +12,15 @@ public class CourtNameDTO
 	private String courtName; 					// 코트이름
 	private String courtNameRegisteredDate; 	// 코트이름등록일시
 	private String courtCode; 					// 코트코드
-	private boolean adminRegister; 				// 관리자등록여부
+	private String adminRegister; 				// 관리자등록여부
 	private String registrantAccountCode; 		// 등록자계정코드
 	private String registrantNickname; 			// 등록자닉네임
 	private int pollCount; 						// 득표수
 	private double pollRate; 					// 득표율
 	private String courtNameStatus; 			// 상태
 	private int rank; 							// 득표순위
-	private boolean pollOrNot; 					// 투표 여부
-	private boolean returnValue;
+	private String pollOrNot; 					// 투표 여부
+	private String returnValue;
 	
 	public String getCourtNameCode() {
 		return courtNameCode;
@@ -46,10 +46,10 @@ public class CourtNameDTO
 	public void setCourtCode(String courtCode) {
 		this.courtCode = courtCode;
 	}
-	public boolean isAdminRegister() {
+	public String isAdminRegister() {
 		return adminRegister;
 	}
-	public void setAdminRegister(boolean adminRegister) {
+	public void setAdminRegister(String adminRegister) {
 		this.adminRegister = adminRegister;
 	}
 	public String getRegistrantAccountCode() {
@@ -88,16 +88,16 @@ public class CourtNameDTO
 	public void setRank(int rank) {
 		this.rank = rank;
 	}
-	public boolean isPollOrNot() {
+	public String isPollOrNot() {
 		return pollOrNot;
 	}
-	public void setPollOrNot(boolean pollOrNot) {
+	public void setPollOrNot(String pollOrNot) {
 		this.pollOrNot = pollOrNot;
 	}
-	public boolean isReturnValue() {
+	public String isReturnValue() {
 		return returnValue;
 	}
-	public void setReturnValue(boolean returnValue) {
+	public void setReturnValue(String returnValue) {
 		this.returnValue = returnValue;
 	}
 	
