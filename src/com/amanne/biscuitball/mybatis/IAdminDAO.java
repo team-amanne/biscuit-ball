@@ -42,9 +42,9 @@ public interface IAdminDAO
 
 	public int addReportUserPenalty(PenaltyDTO penaltyDTO); // (신고처리후)회원제재
 
-	public int cancleReportUserPenalty(String penaltyCode); // 회원제재취소
+	public int cancelReportUserPenalty(String penaltyCode); // 회원제재취소
 
-	public int cancleReportUser(String userReportCode); // 신고취소
+	public int cancelReportUser(String userReportCode); // 신고취소
 
 	public int addReportCrew(ReportCrewDTO reportCrewDTO); // 크루신고
 
@@ -58,9 +58,9 @@ public interface IAdminDAO
 
 	public int addReportCrewPenalty(PenaltyDTO penaltyDTO); // 크루제재
 
-	public int cancleReportCrewPenalty(String penaltyCode); // 크루제재취소
+	public int cancelReportCrewPenalty(String penaltyCode); // 크루제재취소
 
-	public int cancleReportCrew(String crewReportCode); // 신고취소
+	public int cancelReportCrew(String crewReportCode); // 신고취소
 
 	public int addReportCrewPost(ReportCrewPostDTO reportCrewPostDTO); // 크루게시글신고
 
@@ -74,9 +74,9 @@ public interface IAdminDAO
 
 	public int addReportCrewPostPenalty(PenaltyDTO penaltyDTO); // 크루게시글제재
 
-	public int cancleReportCrewPostPenalty(String penaltyCode); // 제재취소
+	public int cancelReportCrewPostPenalty(String penaltyCode); // 제재취소
 
-	public int cancleReportCrewPost(String crewPostReportCode); // 신고취소
+	public int cancelReportCrewPost(String crewPostReportCode); // 신고취소
 
 	public int addReportCrewComment(ReportCrewCommentDTO reportCommentDTO); // 크루댓글 신고
 
@@ -90,9 +90,9 @@ public interface IAdminDAO
 
 	public int addReportCrewCommentPenalty(PenaltyDTO penaltyDTO); // 크루댓글제재
 
-	public int cancleReportCrewCommentPenalty(String penaltyCode); // 제재취소
+	public int cancelReportCrewCommentPenalty(String penaltyCode); // 제재취소
 
-	public int cancleReportCrewComment(String crewCommentReportCode); // 신고취소
+	public int cancelReportCrewComment(String crewCommentReportCode); // 신고취소
 
 	public int addReportMeet(ReportMeetDTO reportMeetDTO); // 모임신고
 
@@ -106,9 +106,9 @@ public interface IAdminDAO
 
 	public int addReportMeetPenalty(PenaltyDTO penaltyDTO); // 모임제재
 
-	public int cancleReportMeetPenalty(String penaltyCode); // 제재취소
+	public int cancelReportMeetPenalty(String penaltyCode); // 제재취소
 
-	public int cancleReportMeet(String meetReportCode); // 신고취소
+	public int cancelReportMeet(String meetReportCode); // 신고취소
 
 	public int addReportMeetComment(ReportMeetCommentDTO reportMeetCommentDTO); // 모임댓글신고
 
@@ -122,9 +122,9 @@ public interface IAdminDAO
 
 	public int addReportMeetCommentPenalty(PenaltyDTO penaltyDTO); // 모임댓글제재
 
-	public int cancleReportMeetCommentPenalty(String penaltyCode); // 제재취소
+	public int cancelReportMeetCommentPenalty(String penaltyCode); // 제재취소
 
-	public int cancleReportMeetComment(String meetCommentReportCode); // 신고취소
+	public int cancelReportMeetComment(String meetCommentReportCode); // 신고취소
 
 	public int addReportCourtName(ReportCourtNameDTO reportCourtNameDTO); // 코트이름신고
 
@@ -138,9 +138,9 @@ public interface IAdminDAO
 
 	public int addReportCourtNamePenalty(PenaltyDTO penaltyDTO); // 코트이름제재
 
-	public int cancleReportCourtNamePenalty(String penaltyCode); // 제재취소
+	public int cancelReportCourtNamePenalty(String penaltyCode); // 제재취소
 
-	public int cancleReportCourtName(String courtNameReportCode); // 신고취소
+	public int cancelReportCourtName(String courtNameReportCode); // 신고취소
 
 	public int addReportCourtReview(ReportCourtReviewDTO reportCourtReviewDTO); // 코트리뷰신고
 
@@ -154,9 +154,9 @@ public interface IAdminDAO
 
 	public int addReportCourtReviewPenalty(PenaltyDTO penaltyDTO); // 코트이름제재
 
-	public int cancleReportCourtReviewPenalty(String penaltyCode); // 제재취소
+	public int cancelReportCourtReviewPenalty(String penaltyCode); // 제재취소
 
-	public int cancleReportCourtReview(String courtReviewReportCode); // 신고취소
+	public int cancelReportCourtReview(String courtReviewReportCode); // 신고취소
 
 	public int addInquiry(InquiryDTO inquiryDTO); // 문의입력
 

@@ -16,7 +16,7 @@ public class PenaltyDTO
 	private String penaltyReason; 		// 제재 사유
 	private String reportContentCode; 	// 신고 콘텐츠 코드
 	private String reportContentType; 	// 신고 콘텐츠 타입
-	private String returnValue;
+	private String adminCode;			// 관리자 코드
 	
 	public String getPenaltyCode() {
 		return penaltyCode;
@@ -66,10 +66,10 @@ public class PenaltyDTO
 	public void setReportContentType(String reportContentType) {
 		this.reportContentType = reportContentType;
 	}
-	public String isReturnValue() {
-		return returnValue;
+	public String getAdminCode() {
+		return adminCode;
 	}
-	public void setReturnValue(String returnValue) {
-		this.returnValue = returnValue;
+	public void setAdminCode(String adminCode) {
+		this.adminCode = adminCode;
 	}
 }
