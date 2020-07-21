@@ -4,6 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.amanne.biscuitball.mybatis.IAdminDAO">
+
 	<!-- 	public int addNotice(NoticeDTO dto); // 공지사항등록 -->
 	<insert id="addNotice" parameterType="com.amanne.biscuitball.mybatis.NoticeDTO">
 		INSERT INTO TBL_NOTICE(NOTICE_CODE, NOTICE_SUBJECT, NOTICE_CONTENT, REG_ADMIN_CODE)
@@ -147,8 +148,8 @@
 		VALUES
 		(
 		    FN_CREATE_CODE('TBL_USER_PENALTY', SEQ_USER_PENALTY.NEXTVAL)
-		    , TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH:MI')
-		    , TO_DATE(#{penaltyEndDate}, 'YYYY-MM-DD HH:MI')
+		    , TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH24:MI')
+		    , TO_DATE(#{penaltyEndDate}, 'YYYY-MM-DD HH24:MI')
 		    , #{reportResolveCode}
 		    , #{penaltyReasonCode}
 		)			
@@ -221,8 +222,8 @@
 		VALUES
 		(
 		    FN_CREATE_CODE('TBL_CREW_PENALTY', SEQ_CREW_PENALTY.NEXTVAL)
-		    , TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH:MI')
-		    , TO_DATE(#{penaltyEndDate}, 'YYYY-MM-DD HH:MI')
+		    , TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH24:MI')
+		    , TO_DATE(#{penaltyEndDate}, 'YYYY-MM-DD HH24:MI')
 		    , #{reportResolveCode}
 		    , #{penaltyReasonCode}
 		)
@@ -295,8 +296,8 @@
 		VALUES
 		(
 		    FN_CREATE_CODE('TBL_CREW_POST_PENALTY', SEQ_CREW_POST_PENALTY.NEXTVAL)
-		    , TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH:MI')
-		    , TO_DATE(#{penaltyEndDate}, 'YYYY-MM-DD HH:MI')
+		    , TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH24:MI')
+		    , TO_DATE(#{penaltyEndDate}, 'YYYY-MM-DD HH24:MI')
 		    , #{reportResolveCode}
 		    , #{penaltyReasonCode}
 		)
@@ -369,8 +370,8 @@
 		VALUES
 		(
 		    FN_CREATE_CODE('TBL_CREW_CMNT_PENALTY', SEQ_CREW_CMNT_PENALTY.NEXTVAL)
-		    , TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH:MI')
-		    , TO_DATE(#{penaltyEndDate}, 'YYYY-MM-DD HH:MI')
+		    , TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH24:MI')
+		    , TO_DATE(#{penaltyEndDate}, 'YYYY-MM-DD HH24:MI')
 		    , #{reportResolveCode}
 		    , #{penaltyReasonCode}
 		)
@@ -442,8 +443,8 @@
 		VALUES
 		(
 		    FN_CREATE_CODE('TBL_MEET_PENALTY', SEQ_MEET_PENALTY.NEXTVAL)
-		    , TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH:MI')
-		    , TO_DATE(#{penaltyEndDate}, 'YYYY-MM-DD HH:MI')
+		    , TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH24:MI')
+		    , TO_DATE(#{penaltyEndDate}, 'YYYY-MM-DD HH24:MI')
 		    , #{reportResolveCode}
 		    , #{penaltyReasonCode}
 		)
@@ -516,8 +517,8 @@
 		VALUES
 		(
 		    FN_CREATE_CODE('TBL_MEET_CMNT_PENALTY', SEQ_MEET_CMNT_PENALTY.NEXTVAL)
-		    , TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH:MI')
-		    , TO_DATE(#{penaltyEndDate}, 'YYYY-MM-DD HH:MI')
+		    , TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH24:MI')
+		    , TO_DATE(#{penaltyEndDate}, 'YYYY-MM-DD HH24:MI')
 		    , #{reportResolveCode}
 		    , #{penaltyReasonCode}
 		)
@@ -590,8 +591,8 @@
 		VALUES
 		(
 		    FN_CREATE_CODE('TBL_COURT_NAME_PENALTY', SEQ_COURT_NAME_PENALTY.NEXTVAL)
-		    , TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH:MI')
-		    , TO_DATE(#{penaltyEndDate}, 'YYYY-MM-DD HH:MI')
+		    , TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH24:MI')
+		    , TO_DATE(#{penaltyEndDate}, 'YYYY-MM-DD HH24:MI')
 		    , #{reportResolveCode}
 		    , #{penaltyReasonCode}
 		)
@@ -664,8 +665,8 @@
 		VALUES
 		(
 		    FN_CREATE_CODE('TBL_COURT_REV_PENALTY', SEQ_COURT_REV_PENALTY.NEXTVAL)
-		    , TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH:MI')
-		    , TO_DATE(#{penaltyEndDate}, 'YYYY-MM-DD HH:MI')
+		    , TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH24:MI')
+		    , TO_DATE(#{penaltyEndDate}, 'YYYY-MM-DD HH24:MI')
 		    , #{reportResolveCode}
 		    , #{penaltyReasonCode}
 		)
@@ -742,8 +743,8 @@
 	 statementType="CALLABLE"
 	 parameterType="com.amanne.biscuitball.mybatis.PenaltyDTO" >
 		{ call PRC_USER_PENALTY
-			( TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH:MI')
-		    , TO_DATE(#{penaltyEndDate}, 'YYYY-MM-DD HH:MI')
+			( TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH24:MI')
+		    , TO_DATE(#{penaltyEndDate}, 'YYYY-MM-DD HH24:MI')
 			, #{penaltyReasonCode}
 			, #{reportContentCode}
 			, #{adminCode}
@@ -757,8 +758,8 @@
 	 statementType="CALLABLE"
 	 parameterType="com.amanne.biscuitball.mybatis.PenaltyDTO" >
 		{ call PRC_CREW_PENALTY
-			( TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH:MI')
-		    , TO_DATE(#{penaltyEndDate}, 'YYYY-MM-DD HH:MI')
+			( TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH24:MI')
+		    , TO_DATE(#{penaltyEndDate}, 'YYYY-MM-DD HH24:MI')
 			, #{penaltyReasonCode}
 			, #{reportContentCode}
 			, #{adminCode}
@@ -772,7 +773,7 @@
 	 statementType="CALLABLE"
 	 parameterType="com.amanne.biscuitball.mybatis.PenaltyDTO" >
 		{ call PRC_CREW_POST_PENALTY
-			( TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH:MI')
+			( TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH24:MI')
 			, #{penaltyReasonCode}
 			, #{reportContentCode}
 			, #{adminCode}
@@ -786,7 +787,7 @@
 	 statementType="CALLABLE"
 	 parameterType="com.amanne.biscuitball.mybatis.PenaltyDTO" >
 		{ call PRC_CREW_COMMENTS_PENALTY
-			( TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH:MI')
+			( TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH24:MI')
 			, #{penaltyReasonCode}
 			, #{reportContentCode}
 			, #{adminCode}
@@ -800,7 +801,7 @@
 	 statementType="CALLABLE"
 	 parameterType="com.amanne.biscuitball.mybatis.PenaltyDTO" >
 		{ call PRC_MEET_PENALTY
-			( TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH:MI')
+			( TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH24:MI')
 			, #{penaltyReasonCode}
 			, #{reportContentCode}
 			, #{adminCode}
@@ -814,7 +815,7 @@
 	 statementType="CALLABLE"
 	 parameterType="com.amanne.biscuitball.mybatis.PenaltyDTO" >
 		{ call PRC_MEET_COMMENT_PENALTY
-			( TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH:MI')
+			( TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH24:MI')
 			, #{penaltyReasonCode}
 			, #{reportContentCode}
 			, #{adminCode}
@@ -828,7 +829,7 @@
 	 statementType="CALLABLE"
 	 parameterType="com.amanne.biscuitball.mybatis.PenaltyDTO" >
 		{ call PRC_COURT_NAME_PENALTY
-			( TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH:MI')
+			( TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH24:MI')
 			, #{penaltyReasonCode}
 			, #{reportContentCode}
 			, #{adminCode}
@@ -842,7 +843,7 @@
 	 statementType="CALLABLE"
 	 parameterType="com.amanne.biscuitball.mybatis.PenaltyDTO" >
 		{ call PRC_COURT_REV_PENALTY
-			( TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH:MI')
+			( TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH24:MI')
 			, #{penaltyReasonCode}
 			, #{reportContentCode}
 			, #{adminCode}
@@ -852,28 +853,516 @@
 	</select>
 	
 	<!-- 	public List<NoticeDTO> getNoticeList(String searchKey, String searchValue, int start, int end); // 공지사항 조회 -->
+	<select id="getNoticeList" resultType="com.amanne.biscuitball.mybatis.NoticeDTO">
+	<![CDATA[
+		SELECT NOTICE_CODE AS noticeCode
+		     , NOTICE_SUBJECT AS noticeSubject
+		     , NOTICE_CONTENT AS noticeContent
+		     , TO_CHAR(NOTICE_REG_DATE, 'YYYY-MM-DD HH24:MI') AS registeredDate
+		     , ADMIN_CODE AS authorAdminCode
+		     , ADMIN_NICKNAME AS authorAdminNickname
+		FROM
+		(
+			SELECT ROWNUM AS RNUM
+			     , N.NOTICE_CODE
+			     , N.NOTICE_SUBJECT
+			     , N.NOTICE_CONTENT
+			     , N.NOTICE_REG_DATE
+			     , A.ADMIN_CODE
+			     , A.ADMIN_NICKNAME
+			FROM TBL_NOTICE N
+			LEFT JOIN TBL_ADMIN A
+			ON N.REG_ADMIN_CODE = A.ADMIN_CODE
+	]]>
+	<if test='searchKey != null'>
+		<if test='searchKey.equals("SUBJECT")'>
+			WHERE N.NOTICE_SUBJECT LIKE '%' || #{searchValue} || '%'
+		</if>
+		<if test='searchKey.equals("CONTENT")'>
+			WHERE N.NOTICE_CONTENT LIKE '%' || #{searchValue} || '%'
+		</if>
+		<if test='searchKey.equals("NICKNAME")'>
+			WHERE A.ADMIN_NICKNAME LIKE '%' || #{searchValue} || '%'
+		</if>
+	</if>
+	<![CDATA[
+			ORDER BY N.NOTICE_REG_DATE DESC
+		)
+		WHERE RNUM >= #{start} AND RNUM <= #{end}
+	]]>
+	</select>
 	
+	<!-- 	public int countNotices(String searchKey, String searchValue); // 공지사항 전체 수 -->
+	<select id="countNotices" resultType="java.lang.Integer">
+	<![CDATA[
+		SELECT COUNT(*) AS COUNT
+		FROM TBL_NOTICE N
+		LEFT JOIN TBL_ADMIN A
+		ON N.REG_ADMIN_CODE = A.ADMIN_CODE
+	]]>
+	<if test='searchKey != null'>
+		<if test='searchKey.equals("SUBJECT")'>
+			WHERE N.NOTICE_SUBJECT LIKE '%' || #{searchValue} || '%'
+		</if>
+		<if test='searchKey.equals("CONTENT")'>
+			WHERE N.NOTICE_CONTENT LIKE '%' || #{searchValue} || '%'
+		</if>
+		<if test='searchKey.equals("NICKNAME")'>
+			WHERE A.ADMIN_NICKNAME LIKE '%' || #{searchValue} || '%'
+		</if>
+	</if>
+	</select>
 	
-	<!-- 	public int getNotices(String searchKey, String searchValue); // 공지사항 전체 수 -->
 	<!-- 	public NoticeDTO getNotice(String noticeCode); // 특정 공지 조회 -->
+	<select id="getNotice" resultType="com.amanne.biscuitball.mybatis.NoticeDTO">
+	<![CDATA[
+		SELECT N.NOTICE_CODE AS noticeCode
+		     , N.NOTICE_SUBJECT AS noticeSubject
+		     , N.NOTICE_CONTENT AS noticeContent
+		     , TO_CHAR(N.NOTICE_REG_DATE, 'YYYY-MM-DD HH24:MI') AS registeredDate 
+		     , A.ADMIN_CODE AS authorAdminCode
+		     , A.ADMIN_NICKNAME AS authorAdminNickname
+		FROM TBL_NOTICE N
+		LEFT JOIN TBL_ADMIN A
+		ON N.REG_ADMIN_CODE = A.ADMIN_CODE
+		WHERE NOTICE_CODE = ${noticeCode}
+	]]>
+	</select>
+	
 	<!-- 	public List<FaqDTO> getFaqList(String searchKey, String searchValue, int start, int end); // FAQ 조회 -->
+	<select id="getFaqList" resultType="com.amanne.biscuitball.mybatis.FaqDTO">
+	<![CDATA[
+		SELECT FAQ_CODE AS faqCode
+		     , FAQ_SUBJECT AS faqSubject
+		     , FAQ_CONTENT AS faqContent
+		     , TO_CHAR(FAQ_REG_DATE, 'YYYY-MM-DD HH24:MI') AS registeredDate
+		     , ADMIN_CODE AS authorAdminCode
+		     , ADMIN_NICKNAME AS authorAdminNickname
+		FROM
+		(
+			SELECT ROWNUM AS RNUM
+			     , F.FAQ_CODE
+			     , F.FAQ_SUBJECT
+			     , F.FAQ_CONTENT
+			     , F.FAQ_REG_DATE
+			     , A.ADMIN_CODE
+			     , A.ADMIN_NICKNAME
+			FROM TBL_FAQ F
+			LEFT JOIN TBL_ADMIN A
+			ON F.REG_ADMIN_CODE = A.ADMIN_CODE
+	]]>
+	<if test='searchKey != null'>
+		<if test='searchKey.equals("SUBJECT")'>
+			WHERE F.FAQ_SUBJECT LIKE '%' || #{searchValue} || '%'
+		</if>
+		<if test='searchKey.equals("CONTENT")'>
+			WHERE F.FAQ_CONTENT LIKE '%' || #{searchValue} || '%'
+		</if>
+		<if test='searchKey.equals("NICKNAME")'>
+			WHERE A.ADMIN_NICKNAME LIKE '%' || #{searchValue} || '%'
+		</if>
+	</if>
+	<![CDATA[
+			ORDER BY F.FAQ_REG_DATE DESC
+		)
+		WHERE RNUM >= #{start} AND RNUM <= #{end}
+	]]>
+	</select>
+
 	<!-- 	public int countFaqs(String searchKey, String searchValue); // FAQ 전체 수 -->
+	<select id="countFaqs" resultType="java.lang.Integer">
+	<![CDATA[	
+		SELECT COUNT(*)
+		FROM TBL_FAQ F
+		LEFT JOIN TBL_ADMIN A
+		ON F.REG_ADMIN_CODE = A.ADMIN_CODE
+	]]>
+	<if test='searchKey != null'>
+		<if test='searchKey.equals("SUBJECT")'>
+			WHERE F.FAQ_SUBJECT LIKE '%' || #{searchValue} || '%'
+		</if>
+		<if test='searchKey.equals("CONTENT")'>
+			WHERE F.FAQ_CONTENT LIKE '%' || #{searchValue} || '%'
+		</if>
+		<if test='searchKey.equals("NICKNAME")'>
+			WHERE A.ADMIN_NICKNAME LIKE '%' || #{searchValue} || '%'
+		</if>
+	</if>
+	</select>
+	
 	<!-- 	public FaqDTO getFaq(String faqCode); // 특정 FAQ 조회 -->
+	<select id="getFaq" resultType="com.amanne.biscuitball.mybatis.FaqDTO">
+	<![CDATA[
+		SELECT F.FAQ_CODE
+		     , F.FAQ_SUBJECT
+		     , F.FAQ_CONTENT
+		     , F.FAQ_REG_DATE
+		     , A.ADMIN_CODE
+		     , A.ADMIN_NICKNAME
+		FROM TBL_FAQ F
+		LEFT JOIN TBL_ADMIN A
+		ON F.REG_ADMIN_CODE = A.ADMIN_CODE
+		WHERE F.FAQ_CODE = #{faqCode}
+	]]>
+	</select>
+	
 	<!-- 	public List<ReportTotalDTO> getReportList(String searchKey, String searchValue, int start, int end); // 전체 신고 조회 -->
+	<select id="getReportList" resultType="com.amanne.biscuitball.mybatis.ReportTotalDTO">
+	<![CDATA[
+		SELECT RPT_TYPES AS reportType
+		     , RPT_CODE AS reportCode
+		     , ASGN_ADMIN_CODE AS assignedAdminCode
+		     , ASGN_ADMIN_NICKNAME AS assignedAdminNickname
+		     , TO_CHAR(RPT_ACPT_DATE, 'YYYY-MM-DD HH24:MI') AS reportAcceptedDate
+		     , APPLICANT_ACCT_CODE AS reporterAccountCode
+		     , APPLICANT_ACC_USER_NICKNAME AS reporterNickname
+		     , RPT_ASGN_DATE AS reportAssignedDate
+		     , RPT_STATUS AS reportStatus
+		     , TO_CHAR(RPT_RSLV_DATE, 'YYYY-MM-DD HH24:MI') AS reportResolveDate
+		FROM		
+		(
+			SELECT ROWNUM AS RNUM
+			     , V.*
+			FROM VIEW_RPT_TOTAL V
+			WHERE V.APPLICANT_ADMIN_CODE IS NULL
+	]]>
+	<if test='searchKey != null'>
+		<if test='searchKey.equals("ADMIN")'>
+			  AND V.ASGN_ADMIN_CODE = #{searchValue}
+		</if>
+		<if test='searchKey.equals("STATUS")'>
+			  AND V.RPT_STATUS = #{searchValue}
+		</if>
+		<if test='searchKey.equals("APPLICANT")'>
+			  AND V.APPLICANT_ACCT_CODE = #{searchValue}
+		</if>
+	</if>
+	<![CDATA[
+			ORDER BY RPT_ACPT_DATE DESC
+		)
+		WHERE RNUM >= #{start} AND RNUM <= #{end}
+	]]>
+	</select>
+	
 	<!-- 	public int countReports(String searchKey, String searchValue); // 전체 신고 수 -->
+	<select id="countReports" resultType="java.lang.Integer">
+	<![CDATA[
+		SELECT COUNT(*)
+		FROM VIEW_RPT_TOTAL V
+		WHERE V.APPLICANT_ADMIN_CODE IS NULL
+	]]>
+	<if test='searchKey != null'>
+		<if test='searchKey.equals("ADMIN")'>
+			  AND V.ASGN_ADMIN_CODE = #{searchValue}
+		</if>
+		<if test='searchKey.equals("STATUS")'>
+			  AND V.RPT_STATUS = #{searchValue}
+		</if>
+		<if test='searchKey.equals("APPLICANT")'>
+			  AND V.APPLICANT_ACCT_CODE = #{searchValue}
+		</if>
+	</if>
+	</select>
+	
 	<!-- 	public List<InquiryDTO> getInquiryList(String searchKey, String searchValue, int start, int end); // 전체 문의 조회 -->
+	<select id="getInquiryList" resultType="com.amanne.biscuitball.mybatis.InquiryDTO">
+	<![CDATA[
+		SELECT INQ_CODE AS inquiryCode
+		     , INQ_SUBJECT AS inquirySubject
+		     , INQ_CONTENT AS inquiryContent
+		     , TO_CHAR(INQ_ACPT_DATE, 'YYYY-MM-DD HH24:MI') AS inquiryAcceptedDate
+		     , ADMIN_POST_CATEGORY_TYPE AS postCategoryName
+		     , USER_ACCT_CODE AS inquirerAccountCode
+		     , USER_NICKNAME AS inquirerNickname
+		     , ADMIN_CODE AS assignedAdminCode
+		     , ADMIN_NICKNAME AS assignedAdminNickname
+		     , INQ_ANS_CODE AS inquiryAnswerCode
+		     , INQ_ANS_CONTENT AS inquiryAnswerContent
+		     , INQ_STATUS AS inquiryStatus
+		FROM		
+		(
+			SELECT ROWNUM AS RNUM
+			     , V.*
+			FROM VIEW_INQUIRY_TOTAL V
+	]]>
+	<if test='searchKey != null'>
+		<if test='searchKey.equals("ADMIN")'>
+			WHERE V.ADMIN_CODE = #{searchValue}
+		</if>
+		<if test='searchKey.equals("STATUS")'>
+			WHERE V.INQ_STATUS = #{searchValue}
+		</if>
+		<if test='searchKey.equals("APPLICANT")'>
+			WHERE V.USER_ACCT_CODE = #{searchValue}
+		</if>
+	</if>
+	<![CDATA[
+			ORDER BY INQ_ACPT_DATE DESC
+		)
+		WHERE RNUM >= #{start} AND RNUM <= #{end}
+	]]>
+	</select>
+	
 	<!-- 	public int countInquiries(String searchKey, String searchValue); // 전체 문의 수 -->
+	<select id="countInquiries" resultType="java.lang.Integer">
+	<![CDATA[
+		SELECT COUNT(*)
+		FROM VIEW_INQUIRY_TOTAL V
+	]]>
+	<if test='searchKey != null'>
+		<if test='searchKey.equals("ADMIN")'>
+			WHERE V.ADMIN_CODE = #{searchValue}
+		</if>
+		<if test='searchKey.equals("STATUS")'>
+			WHERE V.INQ_STATUS = #{searchValue}
+		</if>
+		<if test='searchKey.equals("APPLICANT")'>
+			WHERE V.USER_ACCT_CODE = #{searchValue}
+		</if>
+	</if>
+	</select>
+	
 	<!-- 	public InquiryDTO getInquiry(String inquiryCode); // 특정 문의 조회 -->
+	<select id="getInquiry" resultType="com.amanne.biscuitball.mybatis.InquiryDTO">
+	<![CDATA[
+		SELECT INQ_CODE AS inquiryCode
+		     , INQ_SUBJECT AS inquirySubject
+		     , INQ_CONTENT AS inquiryContent
+		     , TO_CHAR(INQ_ACPT_DATE, 'YYYY-MM-DD HH24:MI') AS inquiryAcceptedDate
+		     , ADMIN_POST_CATEGORY_TYPE AS postCategoryName
+		     , USER_ACCT_CODE AS inquirerAccountCode
+		     , USER_NICKNAME AS inquirerNickname
+		     , ADMIN_CODE AS assignedAdminCode
+		     , ADMIN_NICKNAME AS assignedAdminNickname
+		     , INQ_ANS_CODE AS inquiryAnswerCode
+		     , INQ_ANS_CONTENT AS inquiryAnswerContent
+		     , INQ_STATUS AS inquiryStatus
+		FROM VIEW_INQUIRY_TOTAL
+		WHERE INQ_CODE = #{inquiryCode}
+	]]>
+	</select>
+	
 	<!-- 	public ReportUserDTO getUserReport(String reportCode); // 특정 회원신고 조회 -->
+	<select id="getUserReport" resultType="com.amanne.biscuitball.mybatis.ReportUserDTO">
+	<![CDATA[
+		SELECT RPT_TYPES AS reportType
+		     , USER_RPT_CODE AS userReportCode
+		     , USER_RPT_CONTENT AS userReportContent
+		     , TO_CHAR(USER_RPT_ACPT_DATE, 'YYYY-MM-DD HH24:MI') AS userReportAcceptedDate
+		     , APPLICANT_ACCT_CODE AS applicantAccountCode
+		     , APPLICANT_ACCT_USER_NICKNAME AS applicantUserNickname
+		     , SUBJ_ACCT_CODE AS subjectAccountCode
+		     , SUBJ_ACCT_USER_NICKDNAME AS subjectUserNickdname
+		     , APPLICANT_ADMIN_CODE AS applicantAdminCode
+		     , APPLICANT_ADMIN_NICKNAME AS applicantAdminNickname
+		     , ASGN_ADMIN_CODE AS assignedAdminCode
+		     , ASGN_ADMIN_NICKNAME AS assignedAdminNickname
+		     , USER_RPT_ASGN_CODE AS userReportAssignmentCode
+		     , TO_CHAR(USER_RPT_ASGN_DATE, 'YYYY-MM-DD HH24:MI') AS userReportAssignedDate
+		     , USER_RPT_ANS_CODE AS userReportAnswerCode
+		     , USER_RPT_ANS_CONTENT AS userReportAnswerContent
+		     , USER_RPT_RSLV_CODE AS userReportResolveCode
+		     , TO_CHAR(USER_RPT_RSLV_DATE, 'YYYY-MM-DD HH24:MI') AS userReportResolvedDate
+		     , RPT_STATUS AS reportStatus
+		     , RPT_RSLV_RESULT AS reportResult
+		FROM VIEW_USER_RPT_TOTAL
+		WHERE USER_RPT_CODE = #{reportCode}	
+	]]>
+	</select>
+	
 	<!-- 	public ReportCrewDTO getCrewReport(String reportCode); // 특정 크루신고 조회 -->
+	<select id="getCrewReport" resultType="com.amanne.biscuitball.mybatis.ReportCrewDTO">
+	<![CDATA[
+		SELECT RPT_TYPES AS reportType
+		     , CREW_RPT_CODE AS crewReportCode
+		     , CREW_RPT_CONTENT AS crewReportContent
+		     , TO_CHAR(CREW_RPT_ACPT_DATE, 'YYYY-MM-DD HH24:MI') AS crewReportAcceptedDate
+		     , APPLICANT_ACCT_CODE AS applicantAccountCode
+		     , APPLICANT_ACCT_USER_NICKNAME AS applicantAccountNickname
+		     , SUBJ_CREW_CODE AS subjectCrewCode
+		     , SUBJ_CREW_NAME AS subjectCrewName
+		     , APPLICANT_ADMIN_CODE AS applicantAdminCode
+		     , APPLICANT_ADMIN_NICKNAME AS applicantAdminNickname
+		     , ASGN_ADMIN_CODE AS assignedAdminCode
+		     , ASGN_ADMIN_NICKNAME AS assignedAdminNickname
+		     , CREW_RPT_ASGN_CODE AS crewReportAssignmentCode
+		     , TO_CHAR(CREW_RPT_ASGN_DATE, 'YYYY-MM-DD HH24:MI') AS crewReportAssignedDate
+		     , CREW_RPT_ANS_CODE AS crewReportAnswerCode
+		     , CREW_RPT_ANS_CONTENT AS crewReportAnswerContent
+		     , CREW_RPT_RSLV_CODE AS crewReportResolveCode
+		     , TO_CHAR(CREW_RPT_RSLV_DATE, 'YYYY-MM-DD HH24:MI') AS crewReportResolvedDate
+		     , RPT_STATUS AS reportStatus
+		     , RPT_RSLV_RESULT AS reportResult
+		FROM VIEW_CREW_RPT_TOTAL
+		WHERE CREW_RPT_CODE = #{reportCode}	
+	]]>
+	</select>
+	
 	<!-- 	public ReportCrewPostDTO getCrewPostReport(String reportCode); // 특정 크루게시글신고 조회 -->
+	<select id="getCrewPostReport" resultType="com.amanne.biscuitball.mybatis.ReportCrewPostDTO">
+	<![CDATA[
+		SELECT RPT_TYPES AS reportType
+		     , CREW_POST_RPT_CODE AS crewPostReportCode
+		     , CREW_POST_RPT_CONTENT AS crewPostReportContent
+		     , TO_CHAR(CREW_POST_RPT_ACPT_DATE, 'YYYY-MM-DD HH24:MI') AS crewPostReportAcceptedDate
+		     , APPLICANT_ACCT_CODE AS applicantAccountCode
+		     , APPLICANT_ACCT_USER_NICKNAME AS applicantUserNickname
+		     , SUBJ_CREW_POST_CODE AS subjectCrewPostCode
+		     , APPLICANT_ADMIN_CODE AS applicantAdminCode
+		     , APPLICANT_ADMIN_NICKNAME AS applicantAdminNickname
+		     , ASGN_ADMIN_CODE AS assignedAdminCode
+		     , ASGN_ADMIN_NICKNAME AS assignedAdminNickname
+		     , CREW_POST_RPT_ASGN_CODE AS crewPostReportAssignmentCode
+		     , TO_CHAR(CREW_POST_RPT_ASGN_DATE, 'YYYY-MM-DD HH24:MI') AS crewPostReportAssignedDate
+		     , CREW_POST_RPT_ANS_CODE AS crewPostReportAnswerCode
+		     , CREW_POST_RPT_ANS_CONTENT AS crewPostReportAnswerContent
+		     , CREW_POST_RPT_RSLV_CODE AS crewPostReportResolveCode
+		     , TO_CHAR(CREW_POST_RPT_RSLV_DATE, 'YYYY-MM-DD HH24:MI') AS crewPostReportResolvedDate
+		     , RPT_STATUS AS reportStatus
+		     , RPT_RSLV_RESULT AS reportResult
+		FROM VIEW_CREW_POST_RPT_TOTAL
+		WHERE CREW_POST_RPT_CODE = #{reportCode}	
+	]]>
+	</select>
+	
 	<!-- 	public ReportCrewCommentDTO getCrewCommentReport(String reportCode); // 특정 크루댓글신고 조회 -->
+	<select id="getCrewCommentReport" resultType="com.amanne.biscuitball.mybatis.ReportCrewCommentDTO">
+	<![CDATA[
+		SELECT RPT_TYPES AS reportType
+		     , CREW_CMNT_RPT_CODE AS crewCommentReportCode
+		     , CREW_CMNT_RPT_CONTENT AS crewCommentReportContent
+		     , TO_CHAR(CREW_CMNT_RPT_ACPT_DATE, 'YYYY-MM-DD HH24:MI') AS crewCommentReportAcceptedDate
+		     , APPLICANT_ACCT_CODE AS applicantAccountCode
+		     , APPLICANT_ACCT_NICKNAME AS applicantUserNickname
+		     , CREW_POST_CODE AS crewPostCode
+		     , SUBJ_CREW_CMNT_CODE AS subjectCrewCommentCode
+		     , APPLICANT_ADMIN_CODE AS applicantAdminCode
+		     , APPLICANT_ADMIN_NICKNAME AS applicantAdminNickname
+		     , ASGN_ADMIN_CODE AS assignedAdminCode
+		     , ASGN_ADMIN_NICKNAME AS assignedAdminNickname
+		     , CREW_CMNT_RPT_ASGN_CODE AS crewCommentReportAssignmentCode
+		     , TO_CHAR(CREW_CMNT_RPT_ASGN_DATE, 'YYYY-MM-DD HH24:MI') AS crewCommentReportAssignedDate
+		     , CREW_CMNT_RPT_ANS_CODE AS crewCommentReportAnswerCode
+		     , CREW_CMNT_RPT_ANS_CONTENT AS crewCommentReportAnswerContent
+		     , CREW_CMNT_RPT_RSLV_CODE AS crewCommentReportResolveCode
+		     , TO_CHAR(CREW_CMNT_RPT_RSLV_DATE, 'YYYY-MM-DD HH24:MI') AS crewCommentReportResolvedDate
+		     , RPT_STATUS AS reportStatus
+		     , RPT_RSLV_RESULT AS reportResult
+		FROM VIEW_CREW_CMNT_RPT_TOTAL
+		WHERE CREW_CMNT_RPT_CODE = #{reportCode}	
+	]]>
+	</select>
+	
 	<!-- 	public ReportMeetDTO getMeetingReport(String reportCode); // 특정 모임신고 조회 -->
+	<select id="getMeetingReport" resultType="com.amanne.biscuitball.mybatis.ReportMeetDTO">
+	<![CDATA[
+		SELECT RPT_TYPES AS reportType
+		     , MEET_RPT_CODE AS meetReportCode
+		     , MEET_RPT_CONTENT AS meetReportContent
+		     , TO_CHAR(MEET_RPT_ACPT_DATE, 'YYYY-MM-DD HH24:MI') AS meetReportAcceptedDate
+		     , APPLICANT_ACCT_CODE AS applicantAccountCode
+		     , APPLICANT_ACCT_NICKNAME AS applicantUserNickname
+		     , SUBJ_MEET_CODE AS subjectMeetCode
+		     , SUBJ_MEET_SUBJECT AS subjectMeetSubject
+		     , APPLICANT_ADMIN_CODE AS applicantAdminCode
+		     , APPLICANT_ADMIN_NICKNAME AS applicantAdminNickname
+		     , ASGN_ADMIN_CODE AS assignedAdminCode
+		     , ASGN_ADMIN_NICKNAME AS assignedAdminNickname
+		     , MEET_RPT_ASGN_CODE AS meetReportAssignmentCode
+		     , TO_CHAR(MEET_RPT_ASGN_DATE, 'YYYY-MM-DD HH24:MI') AS meetReportAssignedDate
+		     , MEET_RPT_ANS_CODE AS meetReportAnswerCode
+		     , MEET_RPT_ANS_CONTENT AS meetReportAnswerContent
+		     , MEET_RPT_RSLV_CODE AS meetReportResolveCode
+		     , TO_CHAR(MEET_RPT_RSLV_DATE, 'YYYY-MM-DD HH24:MI') AS meetReportResolvedDate
+		     , RPT_STATUS AS reportStatus
+		     , RPT_RSLV_RESULT AS reportResult
+		FROM VIEW_MEET_RPT_TOTAL
+		WHERE MEET_RPT_CODE = #{reportCode}	
+	]]>
+	</select>
+	
 	<!-- 	public ReportMeetCommentDTO getMeetingCommentReport(String reportCode); // 특정 모임댓글신고 조회 -->
+	<select id="getMeetingCommentReport" resultType="com.amanne.biscuitball.mybatis.ReportMeetCommentDTO">
+	<![CDATA[
+		SELECT RPT_TYPES AS reportType
+		     , MEET_CMNT_RPT_CODE AS meetCommentReportCode
+		     , MEET_CMNT_RPT_CONTENT AS meetCommentReportContent
+		     , TO_CHAR(MEET_CMNT_RPT_ACPT_DATE, 'YYYY-MM-DD HH24:MI') AS meetCommentReportAcceptedDate
+		     , APPLICANT_ACCT_CODE AS applicantAccountCode
+		     , APPLICANT_ACCT_NICKNAME AS applicantUserNickname
+		     , SUBJ_MEET_CMNT_CODE AS subjectMeetCommentCode
+		     , SUBJ_MEET_CODE AS subjectMeetCode
+		     , APPLICANT_ADMIN_CODE AS applicantAdminCode
+		     , APPLICANT_ADMIN_NICKNAME AS applicantAdminNickname
+		     , ASGN_ADMIN_CODE AS assignedAdminCode
+		     , ASGN_ADMIN_NICKNAME AS assignedAdminNickname
+		     , MEET_CMNT_RPT_ASGN_CODE AS meetCommentReportAssignmentCode
+		     , TO_CHAR(MEET_CMNT_RPT_ASGN_DATE, 'YYYY-MM-DD HH24:MI') AS meetCommentReportAssignedDate
+		     , MEET_CMNT_RPT_ANS_CODE AS meetCommentReportAnswerCode
+		     , MEET_CMNT_RPT_ANS_CONTENT AS meetCommentReportAnswerContent
+		     , MEET_CMNT_RPT_RSLV_CODE AS meetCommentReportResolveCode
+		     , TO_CHAR(MEET_CMNT_RPT_RSLV_DATE, 'YYYY-MM-DD HH24:MI') AS meetCommentReportResolvedDate
+		     , RPT_STATUS AS reportStatus
+		     , RPT_RSLV_RESULT AS reportResult
+		FROM VIEW_MEET_CMNT_RPT_TOTAL
+		WHERE MEET_CMNT_RPT_CODE = #{reportCode}	
+	]]>
+	</select>
+	
 	<!-- 	public ReportCourtReviewDTO getCourtReviewReport(String reportCode); // 특정 코트리뷰신고 조회 -->
+	<select id="getCourtReviewReport" resultType="com.amanne.biscuitball.mybatis.ReportCourtReviewDTO">
+	<![CDATA[
+		SELECT RPT_TYPES AS reportType
+		     , COURT_REV_RPT_CODE AS courtReviewReportCode
+		     , COURT_REV_RPT_CONTENT AS courtReviewReportContent
+		     , TO_CHAR(COURT_REV_RPT_ACPT_DATE, 'YYYY-MM-DD HH24:MI') AS courtReviewReportAcceptedDate
+		     , APPLICANT_ACCT_CODE AS applicantAccountCode
+		     , APPLICANT_ACCT_NICKNAME AS applicantUserNickname
+		     , SUBJ_COURT_REVIEW_CODE AS subjectCourtReviewCode
+		     , SUBJ_COURT_REVIEW_CONTENT AS subjectCourtReviewContent
+		     , APPLICANT_ADMIN_CODE AS applicantAdminCode
+		     , APPLICANT_ADMIN_NICKNAME AS applicantAdminNickname
+		     , ASGN_ADMIN_CODE AS assignedAdminCode
+		     , ASGN_ADMIN_NICKNAME AS assignedAdminNickname
+		     , COURT_REV_RPT_ASGN_CODE AS courtReviewReportAssignmentCode
+		     , TO_CHAR(COURT_REV_RPT_ASGN_DATE, 'YYYY-MM-DD HH24:MI') AS courtReviewReportAssignedDate
+		     , COURT_REV_RPT_ANS_CODE AS courtReviewReportAnswerCode
+		     , COURT_REV_RPT_ANS_CONTENT AS courtReviewReportAnswerContent
+		     , COURT_REV_RPT_RSLV_CODE AS courtReviewReportResolveCode
+		     , TO_CHAR(COURT_REV_RPT_RSLV_DATE, 'YYYY-MM-DD HH24:MI') AS courtReviewReportResolvedDate
+		     , RPT_STATUS AS reportStatus
+		     , RPT_RSLV_RESULT AS reportResult
+		FROM VIEW_COURT_REVIEW_RPT_TOTAL
+		WHERE COURT_REV_RPT_CODE = #{reportCode}	
+	]]>
+	</select>
+	
 	<!-- 	public ReportCourtNameDTO getCourtNameReport(String reportCode); // 특정 코트이름신고 조회 -->
-	
-	
-	
+	<select id="getCourtNameReport" resultType="com.amanne.biscuitball.mybatis.ReportCourtNameDTO">
+	<![CDATA[
+		SELECT RPT_TYPES AS reportType
+		     , COURT_NAME_RPT_CODE AS courtNameReportCode
+		     , COURT_NAME_RPT_CONTENT AS courtNameReportContent
+		     , TO_CHAR(COURT_NAME_RPT_ACPT_DATE, 'YYYY-MM-DD HH24:MI') AS courtNameReportAcceptedDate
+		     , APPLICANT_ACCT_CODE AS applicantAccountCode
+		     , APPLICANT_ACCT_NICKNAME AS applicantUserNickname
+		     , SUBJ_COURT_NAME_CODE AS subjectCourtNameCode
+		     , SUBJ_COURT_NAME AS subjectCourtName
+		     , APPLICANT_ADMIN_CODE AS applicantAdminCode
+		     , APPLICANT_ADMIN_NICKNAME AS applicantAdminNickname
+		     , ASGN_ADMIN_CODE AS assignedAdminCode
+		     , ASGN_ADMIN_NICKNAME AS assignedAdminNickname
+		     , COURT_NAME_RPT_ASGN_CODE AS courtNameReportAssignmentCode
+		     , TO_CHAR(COURT_NAME_RPT_ASGN_DATE, 'YYYY-MM-DD HH24:MI') AS courtNameReportAssignedDate
+		     , COURT_NAME_RPT_ANS_CODE AS courtNameReportAnswerCode
+		     , COURT_NAME_RPT_ANS_CONTENT AS courtNameReportAnswerContent
+		     , COURT_NAME_RPT_RSLV_CODE AS courtNameReportResolveCode
+		     , TO_CHAR(COURT_NAME_RPT_RSLV_DATE, 'YYYY-MM-DD HH24:MI') AS courtNameReportResolvedDate
+		     , RPT_STATUS AS reportStatus
+		     , RPT_RSLV_RESULT AS reportResult
+		FROM VIEW_COURT_NAME_RPT_TOTAL
+		WHERE COURT_NAME_RPT_CODE = #{reportCode}	
+	]]>
+	</select>
 	
 </mapper>

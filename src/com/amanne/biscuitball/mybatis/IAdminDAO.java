@@ -8,6 +8,8 @@ package com.amanne.biscuitball.mybatis;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 public interface IAdminDAO 
 {
 	public int addNotice(NoticeDTO dto); // 공지사항등록
@@ -28,7 +30,7 @@ public interface IAdminDAO
 
 	public int removeAdmin(String adminCode); // 관리자계정삭제
 
-	public String changeInquiryToReport(String reportType, InquiryDTO dto); // 관리자문의신고전환
+	public String changeInquiryToReport(@Param("reportType") String reportType, @Param("inqDto") InquiryDTO dto); // 관리자문의신고전환
 
 	public int addReportUser(ReportUserDTO reportUserDTO); // 회원신고
 
@@ -186,25 +188,25 @@ public interface IAdminDAO
 
 	public int makeCourtReviewPenalty(PenaltyDTO dto); // 관리자 코트 리뷰 제재
 
-	public List<NoticeDTO> getNoticeList(String searchKey, String searchValue, int start, int end); // 공지사항 조회
+	public List<NoticeDTO> getNoticeList(@Param("searchKey") String searchKey, @Param("searchValue") String searchValue, @Param("start") int start, @Param("end") int end); // 공지사항 조회
 
-	public int getNotices(String searchKey, String searchValue); // 공지사항 전체 수
+	public int countNotices(@Param("searchKey") String searchKey, @Param("searchValue") String searchValue); // 공지사항 전체 수
 
 	public NoticeDTO getNotice(String noticeCode); // 특정 공지 조회
 
-	public List<FaqDTO> getFaqList(String searchKey, String searchValue, int start, int end); // FAQ 조회
+	public List<FaqDTO> getFaqList(@Param("searchKey") String searchKey, @Param("searchValue") String searchValue, @Param("start") int start, @Param("end") int end); // FAQ 조회
 
-	public int countFaqs(String searchKey, String searchValue); // FAQ 전체 수
+	public int countFaqs(@Param("searchKey") String searchKey, @Param("searchValue") String searchValue); // FAQ 전체 수
 
 	public FaqDTO getFaq(String faqCode); // 특정 FAQ 조회
 
-	public List<ReportTotalDTO> getReportList(String searchKey, String searchValue, int start, int end); // 전체 신고 조회
+	public List<ReportTotalDTO> getReportList(@Param("searchKey") String searchKey, @Param("searchValue") String searchValue, @Param("start") int start, @Param("end") int end); // 전체 신고 조회
 
-	public int countReports(String searchKey, String searchValue); // 전체 신고 수
+	public int countReports(@Param("searchKey") String searchKey, @Param("searchValue") String searchValue); // 전체 신고 수
 
-	public List<InquiryDTO> getInquiryList(String searchKey, String searchValue, int start, int end); // 전체 문의 조회
+	public List<InquiryDTO> getInquiryList(@Param("searchKey") String searchKey, @Param("searchValue") String searchValue, @Param("start") int start, @Param("end") int end); // 전체 문의 조회
 
-	public int countInquiries(String searchKey, String searchValue); // 전체 문의 수
+	public int countInquiries(@Param("searchKey") String searchKey, @Param("searchValue") String searchValue); // 전체 문의 수
 
 	public InquiryDTO getInquiry(String inquiryCode); // 특정 문의 조회
 
