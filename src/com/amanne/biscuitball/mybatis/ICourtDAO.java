@@ -24,9 +24,8 @@ public interface ICourtDAO
 
 	public int addCourtReview(CourtReviewDTO dto); // 코트리뷰등록
 
-	public int approveCourtDeleteRequest(String courtDeleteRequestCode, String adminCode); // 코트삭제승인
+	public int approveCourtDeleteRequest(CourtDTO courtDTO, String reslutCode); // 코트삭제승인
 
-	
 	
 	public List<CourtDTO> getCourtListByMapPostion(String posX, String posY); // 특정좌표 근처 코트 조회
 
