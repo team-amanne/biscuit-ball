@@ -1,0 +1,879 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.amanne.biscuitball.mybatis.IAdminDAO">
+	<!-- 	public int addNotice(NoticeDTO dto); // 공지사항등록 -->
+	<insert id="addNotice" parameterType="com.amanne.biscuitball.mybatis.NoticeDTO">
+		INSERT INTO TBL_NOTICE(NOTICE_CODE, NOTICE_SUBJECT, NOTICE_CONTENT, REG_ADMIN_CODE)
+		VALUES(FN_CREATE_CODE('TBL_NOTICE', SEQ_NOTICE.NEXTVAL), #{noticeSubject}, #{noticeContent}, #{authorAdminCode})
+	</insert>	
+	
+	<!-- 	public int updateNotice(NoticeDTO dto); // 공지사항수정 -->
+	<update id="updateNotice" parameterType="com.amanne.biscuitball.mybatis.NoticeDTO">
+		UPDATE TBL_NOTICE
+		SET NOTICE_SUBJECT=#{noticeSubject}, NOTICE_CONTENT=#{noticeContent}
+		WHERE NOTICE_CODE=#{noticeCode}
+	</update>
+	
+	<!-- 	public int removeNotice(String noticeCode); // 공지사항삭제 -->
+	<delete id="removeNotice" parameterType="java.lang.String">
+		DELETE
+		FROM TBL_NOTICE
+		WHERE NOTICE_CODE=#{noticeCode}
+	</delete>
+	
+	<!-- 	public int addFaq(FaqDTO dto); // FAQ등록 -->
+	<insert id="addFaq" parameterType="com.amanne.biscuitball.mybatis.FaqDTO" >
+		INSERT INTO TBL_FAQ(FAQ_CODE, FAQ_SUBJECT, FAQ_CONTENT, FAQ_REG_DATE, REG_ADMIN_CODE, ADMIN_POST_CATEGORY_CODE)
+		VALUES(FN_CREATE_CODE('TBL_FAQ', SEQ_FAQ.NEXTVAL), #{faqSubject}, #{faqContent}, SYSDATE, #{authorAdminCode}, #{categoryCode})
+	</insert>
+	
+	<!-- 	public int updateFaq(FaqDTO dto); // FAQ수정 -->
+	<update id="updateFaq" parameterType="com.amanne.biscuitball.mybatis.FaqDTO" >
+		UPDATE  TBL_FAQ
+		SET     FAQ_SUBJECT=#{faqSubject}
+		      , FAQ_CONTENT=#{faqContent}
+		      , ADMIN_POST_CATEGORY_CODE=#{categoryCode}
+		WHERE   FAQ_CODE=#{faqCode}
+	</update>
+	
+	<!-- 	public int removeFaq(String faqCode); // FAQ삭제 -->
+	<delete id="removeFaq" parameterType="java.lang.String">
+		DELETE
+		FROM TBL_FAQ
+		WHERE FAQ_CODE=#{faqCode} 
+	</delete>
+	
+	<!-- 	public int registerAdmin(AdminDTO dto); // 관리자계정등록 -->
+	<insert id="registerAdmin" parameterType="com.amanne.biscuitball.mybatis.AdminDTO" >
+		INSERT INTO TBL_ADMIN(ADMIN_CODE, ADMIN_EMAIL, ADMIN_PWD, ADMIN_NICKNAME, CHIEF_ADMIN_CODE)
+		VALUES(
+			#{adminCode},
+			#{adminEmail},
+			#{adminPassword},
+			#{adminNickname},
+			<choose>
+				<when test="chiefAdmin">
+					'ZU01'
+				</when>
+				<otherwise>
+					'ZU02'
+				</otherwise>
+			</choose>
+		)
+	</insert>
+	
+	<!-- 	public int updateAdmin(AdminDTO dto); // 관리자계정수정 -->
+	<update id="updateAdmin" parameterType="com.amanne.biscuitball.mybatis.AdminDTO" >
+		UPDATE TBL_ADMIN
+		SET ADMIN_EMAIL=#{adminEmail}
+		  , ADMIN_PWD=#{adminPassword}
+		  , ADMIN_NICKNAME=#{adminNickname}
+		WHERE ADMIN_CODE=#{adminCode}
+	</update>
+	
+	<!-- 	public int removeAdmin(String adminCode); // 관리자계정삭제 -->
+	<delete id="removeAdmin" parameterType="java.lang.String">
+		DELETE FROM TBL_ADMIN
+		WHERE ADMIN_CODE=#{adminCode}
+	</delete>
+	
+	<!-- 	public String changeInquiryToReport(String reportType, InquiryDTO dto); // 관리자문의신고전환 -->
+	
+	<!-- 	public int addReportUser(ReportUserDTO reportUserDTO); // 회원신고 -->
+	<insert id="addReportUser" parameterType="com.amanne.biscuitball.mybatis.ReportUserDTO" >
+		INSERT INTO TBL_USER_RPT(USER_RPT_CODE, USER_RPT_CONTENT, APPLICANT_ACCT_CODE, SUBJ_ACCT_CODE)
+		VALUES(
+			FN_CREATE_CODE('TBL_USER_RPT', SEQ_USER_RPT.NEXTVAL), 
+			#{userReportContent}, 
+			#{applicantAccountCode}, 
+			#{subjectAccountCode}
+		)
+	</insert>
+	
+	<!-- 	public int addReportUserAssignment(ReportUserDTO reportUserDTO); // 회원신고담당 -->
+	<insert id="addReportUserAssignment" parameterType="com.amanne.biscuitball.mybatis.ReportUserDTO" >
+		INSERT INTO TBL_USER_RPT_ASGN(USER_RPT_ASGN_CODE, USER_RPT_CODE, ASGN_ADMIN_CODE)
+		VALUES(
+			FN_CREATE_CODE('TBL_USER_RPT_ASGN', SEQ_USER_RPT_ASGN.NEXTVAL), 
+			#{userReportCode}, 
+			#{assignedAdminCode}
+		)
+	</insert>
+
+	<!-- 	public int addReportUserAnswer(ReportUserDTO reportUserDTO); // 회원신고답변 -->
+	<insert id="addReportUserAnswer" parameterType="com.amanne.biscuitball.mybatis.ReportUserDTO" >
+		INSERT INTO TBL_USER_RPT_ANS(USER_RPT_ANS_CODE, USER_RPT_ANS_CONTENT, USER_RPT_ASGN_CODE)
+		VALUES(
+		    FN_CREATE_CODE('TBL_USER_RPT_ANS', SEQ_USER_RPT_ANS.NEXTVAL)
+		    , #{userReportAnswerContent}
+		    , ( SELECT USER_RPT_ASGN_CODE
+		        FROM VIEW_USER_RPT_TOTAL
+		        WHERE USER_RPT_CODE = #{userReportCode})
+		)
+	</insert>
+	
+	<!-- 	public int updateReportUserAnswer(ReportUserDTO reportUserDTO); // 회원신고답변수정 -->
+	<update id="updateReportUserAnswer" parameterType="com.amanne.biscuitball.mybatis.ReportUserDTO" >
+		UPDATE TBL_USER_RPT_ANS
+		SET USER_RPT_ANS_CONTENT=#{userReportAnswerContent}
+		WHERE USER_RPT_ANS_CODE = 
+		(
+		    (SELECT USER_RPT_ANS_CODE
+		     FROM VIEW_USER_RPT_TOTAL
+		     WHERE USER_RPT_CODE = #{userReportCode})
+		)
+	</update>
+	
+	<!-- 	public int addReportUserResolve(ReportUserDTO reportUserDTO); // 회원신고처리 -->
+	<select id="addReportUserResolve"
+	 statementType="CALLABLE"
+	 parameterType="com.amanne.biscuitball.mybatis.ReportUserDTO" >
+		{ call PRC_USER_RPT_RSLV
+			(
+			    #{userReportCode},
+			    #{reportResultCode},
+			    #{returnValue ,mode=OUT, jdbcType=VARCHAR}
+			)
+		}
+	</select>
+	
+	<!-- 	public int addReportUserPenalty(PenaltyDTO penaltyDTO); // (신고처리후)회원제재 -->
+	<insert id="addReportUserPenalty"
+	 parameterType="com.amanne.biscuitball.mybatis.PenaltyDTO">
+		INSERT INTO TBL_USER_PENALTY(USER_PENALTY_CODE,USER_PENALTY_START_DATE,USER_PENALTY_END_DATE,USER_RPT_RSLV_CODE, USER_PENALTY_REASON_CODE)
+		VALUES
+		(
+		    FN_CREATE_CODE('TBL_USER_PENALTY', SEQ_USER_PENALTY.NEXTVAL)
+		    , TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH:MI')
+		    , TO_DATE(#{penaltyEndDate}, 'YYYY-MM-DD HH:MI')
+		    , #{reportResolveCode}
+		    , #{penaltyReasonCode}
+		)			
+	</insert>
+	
+	<!-- 	public int cancelReportUserPenalty(String penaltyCode); // 회원제재취소 -->
+	<insert id="cancelReportUserPenalty" parameterType="java.lang.String" >
+		INSERT INTO TBL_USER_PEN_CANCEL(USER_PENALTY_CANCEL_CODE, USER_PENALTY_CODE)
+		VALUES(FN_CREATE_CODE('TBL_USER_PEN_CANCEL', SEQ_USER_PEN_CANCEL.NEXTVAL), #{penaltyCode})
+	</insert>
+	
+	<!-- 	public int cancelReportUser(String userReportCode); // 신고취소 -->
+	<delete id="cancelReportUser" parameterType="java.lang.String" >
+		DELETE FROM TBL_USER_RPT
+		WHERE USER_RPT_CODE = #{userReportCode}
+	</delete>
+	
+	<!-- 	public int addReportCrew(ReportCrewDTO reportCrewDTO); // 크루신고 -->
+	<insert id="addReportCrew" parameterType="com.amanne.biscuitball.mybatis.ReportCrewDTO">
+		INSERT INTO TBL_CREW_RPT(CREW_RPT_CODE, CREW_RPT_CONTENT, APPLICANT_ACCT_CODE, SUBJ_CREW_CODE)
+		VALUES(FN_CREATE_CODE('TBL_CREW_RPT', SEQ_CREW_RPT.NEXTVAL), #{crewReportContent}, #{applicantAccountCode}, #{subjectCrewCode})
+	</insert>
+	
+	<!-- 	public int addReportCrewAssignment(ReportCrewDTO reportCrewDTO); // 크루신고담당 -->
+	<insert id="addReportCrewAssignment" parameterType="com.amanne.biscuitball.mybatis.ReportCrewDTO">
+		INSERT INTO TBL_CREW_RPT_ASGN(CREW_RPT_ASGN_CODE, CREW_RPT_CODE, ASGN_ADMIN_CODE)
+		VALUES(FN_CREATE_CODE('TBL_CREW_RPT_ASGN', SEQ_CREW_RPT_ASGN.NEXTVAL), #{crewReportCode}, #{assignedAdminCode})
+	</insert>
+	
+	<!-- 	public int addReportCrewAnswer(ReportCrewDTO reportCrewDTO); // 크루신고답변 -->
+	<insert id="addReportCrewAnswer" parameterType="com.amanne.biscuitball.mybatis.ReportCrewDTO">
+		INSERT INTO TBL_CREW_RPT_ANS(CREW_RPT_ANS_CODE, CREW_RPT_ANS_CONTENT, CREW_RPT_ASGN_CODE)
+		VALUES(
+		    FN_CREATE_CODE('TBL_CREW_RPT_ANS', SEQ_CREW_RPT_ANS.NEXTVAL)
+		    , #{crewReportAnswerContent}
+		    , ( SELECT CREW_RPT_ASGN_CODE
+		        FROM VIEW_CREW_RPT_TOTAL
+		        WHERE CREW_RPT_CODE = #{crewReportCode})
+		)
+	</insert>
+
+	<!-- 	public int updateReportCrewAnswer(ReportCrewDTO reportCrewDTO); // 크루신고답변수정 -->
+	<update id="updateReportCrewAnswer" parameterType="com.amanne.biscuitball.mybatis.ReportCrewDTO">
+		UPDATE TBL_CREW_RPT_ANS
+		SET CREW_RPT_ANS_CONTENT=#{crewReportAnswerContent}
+		WHERE CREW_RPT_ANS_CODE = 
+		(
+		    (SELECT CREW_RPT_ANS_CODE
+		     FROM VIEW_CREW_RPT_TOTAL
+		     WHERE CREW_RPT_CODE = #{crewReportCode})
+		)
+	</update>
+	
+	<!-- 	public int addReportCrewResolve(ReportCrewDTO reportCrewDTO); // 크루신고처리 -->
+	<select id="addReportCrewResolve"
+	 statementType="CALLABLE"
+	 parameterType="com.amanne.biscuitball.mybatis.ReportCrewDTO" >
+		{ call PRC_CREW_RPT_RSLV
+			(
+				#{crewReportCode},
+			    #{reportResultCode},
+			    #{returnValue ,mode=OUT, jdbcType=VARCHAR}
+			)
+		}
+	</select>
+
+	<!-- 	public int addReportCrewPenalty(PenaltyDTO penaltyDTO); // 크루제재 -->
+	<insert id="addReportCrewPenalty" parameterType="com.amanne.biscuitball.mybatis.PenaltyDTO">
+		INSERT INTO TBL_CREW_PENALTY(CREW_PENALTY_CODE,CREW_PENALTY_START_DATE,CREW_PENALTY_END_DATE,CREW_RPT_RSLV_CODE, CREW_PENALTY_REASON_CODE)
+		VALUES
+		(
+		    FN_CREATE_CODE('TBL_CREW_PENALTY', SEQ_CREW_PENALTY.NEXTVAL)
+		    , TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH:MI')
+		    , TO_DATE(#{penaltyEndDate}, 'YYYY-MM-DD HH:MI')
+		    , #{reportResolveCode}
+		    , #{penaltyReasonCode}
+		)
+	</insert>
+
+	<!-- 	public int cancelReportCrewPenalty(String penaltyCode); // 크루제재취소 -->
+	<insert id="cancelReportCrewPenalty" parameterType="java.lang.String" >
+		INSERT INTO TBL_CREW_PEN_CANCEL(CREW_PENALTY_CANCEL_CODE, CREW_PENALTY_CODE)
+		VALUES(FN_CREATE_CODE('TBL_CREW_PEN_CANCEL', SEQ_CREW_PEN_CANCEL.NEXTVAL), #{penaltyCode})
+	</insert>
+
+	<!-- 	public int cancelReportCrew(String crewReportCode); // 신고취소 -->
+	<delete id="cancelReportCrew" parameterType="java.lang.String">
+		DELETE FROM TBL_CREW_RPT
+		WHERE CREW_RPT_CODE = #{crewReportCode}
+	</delete>
+	
+	<!-- 	public int addReportCrewPost(ReportCrewPostDTO reportCrewPostDTO); // 크루게시글신고 -->
+	<insert id="addReportCrewPost" parameterType="com.amanne.biscuitball.mybatis.ReportCrewPostDTO">
+		INSERT INTO TBL_CREW_POST_RPT(CREW_POST_RPT_CODE, CREW_POST_RPT_CONTENT, APPLICANT_ACCT_CODE, SUBJ_CREW_POST_CODE)
+		VALUES(FN_CREATE_CODE('TBL_CREW_POST_RPT', SEQ_CREW_POST_RPT.NEXTVAL), #{crewPostReportContent}, #{applicantAccountCode}, #{subjectCrewPostCode})
+	</insert>
+	
+	<!-- 	public int addReportCrewPostAssignment(ReportCrewPostDTO reportCrewPostDTO); // 신고담당 -->
+	<insert id="addReportCrewPostAssignment" parameterType="com.amanne.biscuitball.mybatis.ReportCrewPostDTO">
+		INSERT INTO TBL_CREW_POST_RPT_ASGN(CREW_POST_RPT_ASGN_CODE, CREW_POST_RPT_CODE, ASGN_ADMIN_CODE)
+		VALUES(FN_CREATE_CODE('TBL_CREW_POST_RPT_ASGN', SEQ_CREW_POST_RPT_ASGN.NEXTVAL), #{crewPostReportCode}, #{assignedAdminCode})
+	</insert>
+	
+	<!-- 	public int addReportCrewPostAnswer(ReportCrewPostDTO reportCrewPostDTO); // 신고답변 -->
+	<insert id="addReportCrewPostAnswer" parameterType="com.amanne.biscuitball.mybatis.ReportCrewPostDTO">
+		INSERT INTO TBL_CREW_POST_RPT_ANS(CREW_POST_RPT_ANS_CODE, CREW_POST_RPT_ANS_CONTENT, CREW_POST_RPT_ASGN_CODE)
+		VALUES(
+		    FN_CREATE_CODE('TBL_CREW_POST_RPT_ANS', SEQ_CREW_POST_RPT_ANS.NEXTVAL)
+		    , #{crewPostReportAnswerContent}
+		    , ( SELECT CREW_POST_RPT_ASGN_CODE
+		        FROM VIEW_CREW_POST_RPT_TOTAL
+		        WHERE CREW_POST_RPT_CODE = #{crewPostReportCode})
+		)
+	</insert>
+	
+	<!-- 	public int updateReportCrewPostAnswer(ReportCrewPostDTO reportCrewPostDTO); // 신고답변수정 -->
+	<update id="updateReportCrewPostAnswer" parameterType="com.amanne.biscuitball.mybatis.ReportCrewPostDTO">
+		UPDATE TBL_CREW_POST_RPT_ANS
+		SET CREW_POST_RPT_ANS_CONTENT=#{crewPostReportAnswerContent}
+		WHERE CREW_POST_RPT_ANS_CODE = 
+		(
+		    (SELECT CREW_POST_RPT_ANS_CODE
+		     FROM VIEW_CREW_POST_RPT_TOTAL
+		     WHERE CREW_POST_RPT_CODE = #{crewPostReportCode})
+		)
+	</update>
+	
+	<!-- 	public int addReportCrewPostResolve(ReportCrewPostDTO reportCrewPostDTO); // 신고처리 -->
+	<select id="addReportCrewPostResolve"
+	 statementType="CALLABLE"
+	 parameterType="com.amanne.biscuitball.mybatis.ReportCrewPostDTO" >
+		{ call PRC_CREW_POST_RPT_RSLV
+			(
+				#{crewPostReportCode},
+			    #{reportResultCode},
+			    #{returnValue ,mode=OUT, jdbcType=VARCHAR}
+			)
+		}
+	</select>
+	
+	<!-- 	public int addReportCrewPostPenalty(PenaltyDTO penaltyDTO); // 크루게시글제재 -->
+	<insert id="addReportCrewPostPenalty" parameterType="com.amanne.biscuitball.mybatis.PenaltyDTO">
+		INSERT INTO TBL_CREW_POST_PENALTY(CREW_POST_PENALTY_CODE,CREW_POST_PENALTY_START_DATE,CREW_POST_PENALTY_END_DATE,CREW_POST_RPT_RSLV_CODE, CREW_POST_PENALTY_REASON_CODE)
+		VALUES
+		(
+		    FN_CREATE_CODE('TBL_CREW_POST_PENALTY', SEQ_CREW_POST_PENALTY.NEXTVAL)
+		    , TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH:MI')
+		    , TO_DATE(#{penaltyEndDate}, 'YYYY-MM-DD HH:MI')
+		    , #{reportResolveCode}
+		    , #{penaltyReasonCode}
+		)
+	</insert>
+	
+	<!-- 	public int cancelReportCrewPostPenalty(String penaltyCode); // 제재취소 -->
+	<insert id="cancelReportCrewPostPenalty" parameterType="java.lang.String">
+		INSERT INTO TBL_CREW_POST_PEN_CANCEL(CREW_POST_PENALTY_CANCEL_CODE, CREW_POST_PENALTY_CODE)
+		VALUES(FN_CREATE_CODE('TBL_CREW_POST_PEN_CANCEL', SEQ_CREW_POST_PEN_CANCEL.NEXTVAL), #{penaltyCode})
+	</insert>
+	
+	<!-- 	public int cancelReportCrewPost(String crewPostReportCode); // 신고취소 -->
+	<delete id="cancelReportCrewPost" parameterType="java.lang.String">
+		DELETE FROM TBL_CREW_POST_RPT
+		WHERE CREW_POST_RPT_CODE = #{crewPostReportCode}
+	</delete>
+	
+	<!-- 	public int addReportCrewComment(ReportCrewCommentDTO reportCommentDTO); // 크루댓글 신고 -->
+	<insert id="addReportCrewComment" parameterType="com.amanne.biscuitball.mybatis.ReportCrewCommentDTO">
+		INSERT INTO TBL_CREW_CMNT_RPT(CREW_CMNT_RPT_CODE, CREW_CMNT_RPT_CONTENT, APPLICANT_ACCT_CODE, SUBJ_CREW_CMNT_CODE)
+		VALUES(FN_CREATE_CODE('TBL_CREW_CMNT_RPT', SEQ_CREW_CMNT_RPT.NEXTVAL), #{crewCommentReportContent}, #{applicantAccountCode}, #{subjectCrewCommentCode})
+	</insert>
+	
+	<!-- 	public int addReportCrewCommentAssignment(ReportCrewCommentDTO reportCommentDTO); // 신고담당 -->
+	<insert id="addReportCrewCommentAssignment" parameterType="com.amanne.biscuitball.mybatis.ReportCrewCommentDTO">
+		INSERT INTO TBL_CREW_CMNT_RPT_ASGN(CREW_CMNT_RPT_ASGN_CODE, CREW_CMNT_RPT_CODE, ASGN_ADMIN_CODE)
+		VALUES(FN_CREATE_CODE('TBL_CREW_CMNT_RPT_ASGN', SEQ_CREW_CMNT_RPT_ASGN.NEXTVAL), #{crewCommentReportCode}, #{assignedAdminCode})
+	</insert>
+	
+	<!-- 	public int addReportCrewCommentAnswer(ReportCrewCommentDTO reportCommentDTO); // 신고답변 -->
+	<insert id="addReportCrewCommentAnswer" parameterType="com.amanne.biscuitball.mybatis.ReportCrewCommentDTO">
+		INSERT INTO TBL_CREW_CMNT_RPT_ANS(CREW_CMNT_RPT_ANS_CODE, CREW_CMNT_RPT_ANS_CONTENT, CREW_CMNT_RPT_ASGN_CODE)
+		VALUES(
+		    FN_CREATE_CODE('TBL_CREW_CMNT_RPT_ANS', SEQ_CREW_CMNT_RPT_ANS.NEXTVAL)
+		    , #{crewCommentReportAnswerContent}
+		    , ( SELECT CREW_CMNT_RPT_ASGN_CODE
+		        FROM VIEW_CREW_CMNT_RPT_TOTAL
+		        WHERE CREW_CMNT_RPT_CODE = #{crewCommentReportCode})
+		)
+	</insert>
+	
+	<!-- 	public int updateReportCrewCommentAnswer(ReportCrewCommentDTO reportCommentDTO); // 신고답변수정 -->
+	<update id="updateReportCrewCommentAnswer" parameterType="com.amanne.biscuitball.mybatis.ReportCrewCommentDTO" >
+		UPDATE TBL_CREW_CMNT_RPT_ANS
+		SET CREW_CMNT_RPT_ANS_CONTENT=#{crewCommentReportAnswerContent}
+		WHERE CREW_CMNT_RPT_ANS_CODE = 
+		(
+		    (SELECT CREW_CMNT_RPT_ANS_CODE
+		     FROM VIEW_CREW_CMNT_RPT_TOTAL
+		     WHERE CREW_CMNT_RPT_CODE = #{crewCommentReportCode})
+		)
+	</update>
+	
+	<!-- 	public int addReportCrewCommentResolve(ReportCrewCommentDTO reportCommentDTO); // 신고처리 -->
+	<select id="addReportCrewCommentResolve"
+	 statementType="CALLABLE"
+	 parameterType="com.amanne.biscuitball.mybatis.ReportCrewCommentDTO" >
+		{ call PRC_CREW_CMNT_RPT_RSLV
+			(
+				#{crewCommentReportCode},
+			    #{reportResultCode},
+			    #{returnValue ,mode=OUT, jdbcType=VARCHAR}
+			)
+		}
+	</select>
+	
+	<!-- 	public int addReportCrewCommentPenalty(PenaltyDTO penaltyDTO); // 크루댓글제재 -->
+	<insert id="addReportCrewCommentPenalty" parameterType="com.amanne.biscuitball.mybatis.PenaltyDTO">
+		INSERT INTO TBL_CREW_CMNT_PENALTY(CREW_CMNT_PENALTY_CODE,CREW_CMNT_PENALTY_START_DATE,CREW_CMNT_PENALTY_END_DATE,CREW_CMNT_RPT_RSLV_CODE, CREW_CMNT_PENALTY_REASON_CODE)
+		VALUES
+		(
+		    FN_CREATE_CODE('TBL_CREW_CMNT_PENALTY', SEQ_CREW_CMNT_PENALTY.NEXTVAL)
+		    , TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH:MI')
+		    , TO_DATE(#{penaltyEndDate}, 'YYYY-MM-DD HH:MI')
+		    , #{reportResolveCode}
+		    , #{penaltyReasonCode}
+		)
+	</insert>
+	
+	<!-- 	public int cancelReportCrewCommentPenalty(String penaltyCode); // 제재취소 -->
+	<insert id="cancelReportCrewCommentPenalty" parameterType="java.lang.String">
+		INSERT INTO TBL_CREW_CMNT_PEN_CANCEL(CREW_CMNT_PENALTY_CANCEL_CODE, CREW_CMNT_PENALTY_CODE)
+		VALUES(FN_CREATE_CODE('TBL_CREW_CMNT_PEN_CANCEL', SEQ_CREW_CMNT_PEN_CANCEL.NEXTVAL), #{penaltyCode})
+	</insert>
+	
+	<!-- 	public int cancelReportCrewComment(String crewCommentReportCode); // 신고취소 -->
+	<delete id="cancelReportCrewComment" parameterType="java.lang.String">
+		DELETE FROM TBL_CREW_CMNT_RPT
+		WHERE CREW_CMNT_RPT_CODE = #{crewCommentReportCode}
+	</delete>
+	
+	<!-- 	public int addReportMeet(ReportMeetDTO reportMeetDTO); // 모임신고 -->
+	<insert id="addReportMeet" parameterType="com.amanne.biscuitball.mybatis.ReportMeetDTO">
+		INSERT INTO TBL_MEET_RPT(MEET_RPT_CODE, MEET_RPT_CONTENT, APPLICANT_ACCT_CODE, SUBJ_MEET_CODE)
+		VALUES(FN_CREATE_CODE('TBL_MEET_RPT', SEQ_MEET_RPT.NEXTVAL), #{meetReportContent}, #{applicantAccountCode}, #{subjectMeetCode})
+	</insert>
+	<!-- 	public int addReportMeetAssignment(ReportMeetDTO reportMeetDTO); // 신고담당 -->
+	<insert id="addReportMeetAssignment" parameterType="com.amanne.biscuitball.mybatis.ReportMeetDTO">
+		INSERT INTO TBL_MEET_RPT_ASGN(MEET_RPT_ASGN_CODE, MEET_RPT_CODE, ASGN_ADMIN_CODE)
+		VALUES(FN_CREATE_CODE('TBL_MEET_RPT_ASGN', SEQ_MEET_RPT_ASGN.NEXTVAL), #{meetReportCode}, #{assignedAdminCode})
+	</insert>
+	
+	<!-- 	public int addReportMeetAnswer(ReportMeetDTO reportMeetDTO); // 신고답변 -->
+	<insert id="addReportMeetAnswer" parameterType="com.amanne.biscuitball.mybatis.ReportMeetDTO">
+		INSERT INTO TBL_MEET_RPT_ANS(MEET_RPT_ANS_CODE, MEET_RPT_ANS_CONTENT, MEET_RPT_ASGN_CODE)
+		VALUES(
+		    FN_CREATE_CODE('TBL_MEET_RPT_ANS', SEQ_MEET_RPT_ANS.NEXTVAL)
+		    , #{meetReportAnswerContent}
+		    , ( SELECT MEET_RPT_ASGN_CODE
+		        FROM VIEW_MEET_RPT_TOTAL
+		        WHERE MEET_RPT_CODE = #{meetReportCode})
+		)
+	</insert>
+	
+	<!-- 	public int updateReportMeetAnswer(ReportMeetDTO reportMeetDTO); // 신고답변수정 -->
+	<update id="updateReportMeetAnswer" parameterType="com.amanne.biscuitball.mybatis.ReportMeetDTO">
+		UPDATE TBL_MEET_RPT_ANS
+		SET MEET_RPT_ANS_CONTENT=#{meetReportAnswerContent}
+		WHERE MEET_RPT_ANS_CODE = 
+		(
+		    (SELECT MEET_RPT_ANS_CODE
+		     FROM VIEW_MEET_RPT_TOTAL
+		     WHERE MEET_RPT_CODE = #{meetReportCode})
+		)
+	</update>
+	
+	<!-- 	public int addReportMeetResolve(ReportMeetDTO reportMeetDTO); // 신고처리 -->
+	<select id="addReportMeetResolve"
+	 statementType="CALLABLE"
+	 parameterType="com.amanne.biscuitball.mybatis.ReportMeetDTO" >
+		{ call PRC_MEET_RPT_RSLV
+			(
+				#{meetReportCode},
+			    #{reportResultCode},
+			    #{returnValue ,mode=OUT, jdbcType=VARCHAR}
+			)
+		}
+	</select>
+	
+	<!-- 	public int addReportMeetPenalty(PenaltyDTO penaltyDTO); // 모임제재 -->
+	<insert id="" parameterType="com.amanne.biscuitball.mybatis.PenaltyDTO">
+		INSERT INTO TBL_MEET_PENALTY(MEET_PENALTY_CODE,MEET_PENALTY_START_DATE,MEET_PENALTY_END_DATE,MEET_RPT_RSLV_CODE, MEET_PENALTY_REASON_CODE)
+		VALUES
+		(
+		    FN_CREATE_CODE('TBL_MEET_PENALTY', SEQ_MEET_PENALTY.NEXTVAL)
+		    , TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH:MI')
+		    , TO_DATE(#{penaltyEndDate}, 'YYYY-MM-DD HH:MI')
+		    , #{reportResolveCode}
+		    , #{penaltyReasonCode}
+		)
+	</insert>
+	
+	<!-- 	public int cancelReportMeetPenalty(String penaltyCode); // 제재취소 -->
+	<insert id="cancelReportMeetPenalty" parameterType="java.lang.String">
+		INSERT INTO TBL_MEET_PEN_CANCEL(MEET_PENALTY_CANCEL_CODE, MEET_PENALTY_CODE)
+		VALUES(FN_CREATE_CODE('TBL_MEET_PEN_CANCEL', SEQ_MEET_PEN_CANCEL.NEXTVAL), #{penaltyCode})
+	</insert>
+	
+	<!-- 	public int cancelReportMeet(String meetReportCode); // 신고취소 -->
+	<delete id="cancelReportMeetComment" parameterType="java.lang.String">
+		DELETE FROM TBL_MEET_RPT
+		WHERE MEET_RPT_CODE = #{meetReportCode}
+	</delete>
+	
+	<!-- 	public int addReportMeetComment(ReportMeetCommentDTO reportMeetCommentDTO); // 모임댓글신고 -->
+	<insert id="addReportMeetComment" parameterType="com.amanne.biscuitball.mybatis.ReportMeetCommentDTO">
+		INSERT INTO TBL_MEET_CMNT_RPT(MEET_CMNT_RPT_CODE, MEET_CMNT_RPT_CONTENT, APPLICANT_ACCT_CODE, SUBJ_MEET_CMNT_CODE)
+		VALUES(FN_CREATE_CODE('TBL_MEET_CMNT_RPT', SEQ_MEET_CMNT_RPT.NEXTVAL), #{meetCommentReportContent}, #{applicantAccountCode}, #{subjectMeetCommentCode})
+	</insert>
+	
+	<!-- 	public int addReportMeetCommentAssignment(ReportMeetCommentDTO reportMeetCommentDTO); // 신고담당 -->
+	<insert id="addReportMeetCommentAssignment" parameterType="com.amanne.biscuitball.mybatis.ReportMeetCommentDTO">
+		INSERT INTO TBL_MEET_CMNT_RPT_ASGN(MEET_CMNT_RPT_ASGN_CODE, MEET_CMNT_RPT_CODE, ASGN_ADMIN_CODE)
+		VALUES(FN_CREATE_CODE('TBL_MEET_CMNT_RPT_ASGN', SEQ_MEET_CMNT_RPT_ASGN.NEXTVAL), #{meetCommentReportCode}, #{assignedAdminCode})
+	</insert>
+	
+	<!-- 	public int addReportMeetCommentAnswer(ReportMeetCommentDTO reportMeetCommentDTO); // 신고답변 -->
+	<insert id="addReportMeetCommentAnswer" parameterType="com.amanne.biscuitball.mybatis.ReportMeetCommentDTO">
+		INSERT INTO TBL_MEET_CMNT_RPT_ANS(MEET_CMNT_RPT_ANS_CODE, MEET_CMNT_RPT_ANS_CONTENT, MEET_CMNT_RPT_ASGN_CODE)
+		VALUES(
+		    FN_CREATE_CODE('TBL_MEET_CMNT_RPT_ANS', SEQ_MEET_CMNT_RPT_ANS.NEXTVAL)
+		    , #{meetCommentReportAnswerContent}
+		    , ( SELECT MEET_CMNT_RPT_ASGN_CODE
+		        FROM VIEW_MEET_CMNT_RPT_TOTAL
+		        WHERE MEET_CMNT_RPT_CODE = #{meetCommentReportCode})
+		)
+	</insert>
+	
+	<!-- 	public int updateReportMeetCommentAnswer(ReportMeetCommentDTO reportMeetCommentDTO); // 신고답변수정 -->
+	<update id="updateReportMeetCommentAnswer" parameterType="com.amanne.biscuitball.mybatis.ReportMeetCommentDTO">
+		UPDATE TBL_MEET_CMNT_RPT_ANS
+		SET MEET_CMNT_RPT_ANS_CONTENT=#{meetCommentReportAnswerContent}
+		WHERE MEET_CMNT_RPT_ANS_CODE = 
+		(
+		    (SELECT MEET_CMNT_RPT_ANS_CODE
+		     FROM VIEW_MEET_CMNT_RPT_TOTAL
+		     WHERE MEET_CMNT_RPT_CODE = #{meetCommentReportCode})
+		)
+	</update>
+	
+	<!-- 	public int addReportMeetCommentResolve(ReportMeetCommentDTO reportMeetCommentDTO); // 신고처리 -->
+	<select id="addReportMeetCommentResolve"
+	 statementType="CALLABLE"
+	 parameterType="com.amanne.biscuitball.mybatis.ReportMeetCommentDTO" >
+		{ call PRC_MEET_CMNT_RPT_RSLV
+			(
+				#{meetCommentReportCode},
+			    #{reportResultCode},
+			    #{returnValue ,mode=OUT, jdbcType=VARCHAR}
+			)
+		}
+	</select>
+	
+	<!-- 	public int addReportMeetCommentPenalty(PenaltyDTO penaltyDTO); // 모임댓글제재 -->
+	<insert id="addReportMeetCommentPenalty" parameterType="com.amanne.biscuitball.mybatis.PenaltyDTO">
+		INSERT INTO TBL_MEET_CMNT_PENALTY(MEET_CMNT_PENALTY_CODE,MEET_CMNT_PENALTY_START_DATE,MEET_CMNT_PENALTY_END_DATE,MEET_CMNT_RPT_RSLV_CODE, MEET_CMNT_PENALTY_REASON_CODE)
+		VALUES
+		(
+		    FN_CREATE_CODE('TBL_MEET_CMNT_PENALTY', SEQ_MEET_CMNT_PENALTY.NEXTVAL)
+		    , TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH:MI')
+		    , TO_DATE(#{penaltyEndDate}, 'YYYY-MM-DD HH:MI')
+		    , #{reportResolveCode}
+		    , #{penaltyReasonCode}
+		)
+	</insert>
+	
+	<!-- 	public int cancelReportMeetCommentPenalty(String penaltyCode); // 제재취소 -->
+	<insert id="cancelReportMeetCommentPenalty" parameterType="java.lang.String">
+		INSERT INTO TBL_MEET_CMNT_PEN_CANCEL(MEET_CMNT_PENALTY_CANCEL_CODE, MEET_CMNT_PENALTY_CODE)
+		VALUES(FN_CREATE_CODE('TBL_MEET_CMNT_PEN_CANCEL', SEQ_MEET_CMNT_PEN_CANCEL.NEXTVAL), #{penaltyCode})
+	</insert>
+	
+	<!-- 	public int cancelReportMeetComment(String meetCommentReportCode); // 신고취소 -->
+	<delete id="cancelReportMeetComment" parameterType="java.lang.String">
+		DELETE FROM TBL_MEET_CMNT_RPT
+		WHERE MEET_CMNT_RPT_CODE = #{meetCommentReportCode}
+	</delete>
+	
+	<!-- 	public int addReportCourtName(ReportCourtNameDTO reportCourtNameDTO); // 코트이름신고 -->
+	<insert id="addReportCourtName" parameterType="com.amanne.biscuitball.mybatis.ReportCourtNameDTO">
+		INSERT INTO TBL_COURT_NAME_RPT(COURT_NAME_RPT_CODE, COURT_NAME_RPT_CONTENT, APPLICANT_ACCT_CODE, SUBJ_COURT_NAME_CODE)
+		VALUES(FN_CREATE_CODE('TBL_COURT_NAME_RPT', SEQ_COURT_NAME_RPT.NEXTVAL), #{courtNameReportContent}, #{applicantAccountCode}, #{subjectCourtNameCode})
+	</insert>
+	
+	<!-- 	public int addReportCourtNameAssignment(ReportCourtNameDTO reportCourtNameDTO); // 신고담당 -->
+	<insert id="addReportCourtNameAssignment" parameterType="com.amanne.biscuitball.mybatis.ReportCourtNameDTO">
+		INSERT INTO TBL_COURT_NAME_RPT_ASSIGN(COURT_NAME_RPT_ASGN_CODE, COURT_NAME_RPT_CODE, ASGN_ADMIN_CODE)
+		VALUES(FN_CREATE_CODE('TBL_COURT_NAME_RPT_ASGN', SEQ_COURT_NAME_RPT_ASGN.NEXTVAL), #{courtNameReportCode}, #{assignedAdminCode})
+	</insert>
+	
+	<!-- 	public int addReportCourtNameAnswer(ReportCourtNameDTO reportCourtNameDTO); // 신고답변 -->
+	<insert id="addReportCourtNameAnswer" parameterType="com.amanne.biscuitball.mybatis.ReportCourtNameDTO">
+		INSERT INTO TBL_COURT_NAME_RPT_ANS(MEET_CMNT_RPT_ANS_CODE, COURT_NAME_RPT_ANS_CONTENT, COURT_NAME_RPT_ASGN_CODE)
+		VALUES(
+		    FN_CREATE_CODE('TBL_COURT_NAME_RPT_ANS', SEQ_COURT_NAME_RPT_ANS.NEXTVAL)
+		    , #{courtNameReportAnswerContent}
+		    , ( SELECT COURT_NAME_RPT_ASGN_CODE
+		        FROM VIEW_COURT_NAME_RPT_TOTAL
+		        WHERE COURT_NAME_RPT_CODE = #{courtNameReportCode})
+		)
+	</insert>
+	
+	<!-- 	public int updateReportCourtNameAnswer(ReportCourtNameDTO reportCourtNameDTO); // 신고답변수정 -->
+	<update id="updateReportCourtNameAnswer" parameterType="com.amanne.biscuitball.mybatis.ReportCourtNameDTO">
+		UPDATE TBL_COURT_NAME_RPT_ANS
+		SET COURT_NAME_RPT_ANS_CONTENT=#{courtNameReportAnswerContent}
+		WHERE COURT_NAME_RPT_ANS_CODE = 
+		(
+		    (SELECT COURT_NAME_RPT_ANS_CODE
+		     FROM VIEW_COURT_NAME_RPT_TOTAL
+		     WHERE COURT_NAME_RPT_CODE = #{courtNameReportCode})
+		)
+	</update>
+	
+	<!-- 	public int addReportCourtNameResolve(ReportCourtNameDTO reportCourtNameDTO); // 신고처리 -->
+	<select id="addReportCourtNameResolve"
+	 statementType="CALLABLE"
+	 parameterType="com.amanne.biscuitball.mybatis.ReportCourtNameDTO" >
+		{ call PRC_COURT_NAME_RPT_RSLV
+			(
+				#{courtNameReportCode},
+			    #{reportResultCode},
+			    #{returnValue ,mode=OUT, jdbcType=VARCHAR}
+			)
+		}
+	</select>
+	
+	<!-- 	public int addReportCourtNamePenalty(PenaltyDTO penaltyDTO); // 코트이름제재 -->
+	<insert id="addReportCourtNamePenalty" parameterType="com.amanne.biscuitball.mybatis.PenaltyDTO">
+		INSERT INTO TBL_COURT_NAME_PENALTY(COURT_NAME_PENALTY_CODE,COURT_NAME_PENALTY_START_DATE,COURT_NAME_PENALTY_END_DATE,COURT_NAME_RPT_RSLV_CODE, COURT_NAME_PENALTY_REASON_CODE)
+		VALUES
+		(
+		    FN_CREATE_CODE('TBL_COURT_NAME_PENALTY', SEQ_COURT_NAME_PENALTY.NEXTVAL)
+		    , TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH:MI')
+		    , TO_DATE(#{penaltyEndDate}, 'YYYY-MM-DD HH:MI')
+		    , #{reportResolveCode}
+		    , #{penaltyReasonCode}
+		)
+	</insert>
+	
+	<!-- 	public int cancelReportCourtNamePenalty(String penaltyCode); // 제재취소 -->
+	<insert id="cancelReportCourtNamePenalty" parameterType="java.lang.String">
+		INSERT INTO TBL_COURT_NAME_PEN_CANCEL(COURT_NAME_PENALTY_CANCEL_CODE, COURT_NAME_PENALTY_CODE)
+		VALUES(FN_CREATE_CODE('TBL_COURT_NAME_PEN_CANCEL', SEQ_COURT_NAME_PEN_CANCEL.NEXTVAL), #{penaltyCode})
+	</insert>
+	
+	<!-- 	public int cancelReportCourtName(String courtNameReportCode); // 신고취소 -->
+	<delete id="" parameterType="java.lang.String">
+		DELETE FROM TBL_COURT_NAME_RPT
+		WHERE COURT_NAME_RPT_CODE=#{courtNameReportCode}
+	</delete>
+	
+	<!-- 	public int addReportCourtReview(ReportCourtReviewDTO reportCourtReviewDTO); // 코트리뷰신고 -->
+	<insert id="addReportCourtReview" parameterType="com.amanne.biscuitball.mybatis.ReportCourtReviewDTO">
+		INSERT INTO TBL_COURT_REVIEW_RPT(COURT_REV_RPT_CODE, COURT_REV_RPT_CONTENT, APPLICANT_ACCT_CODE, SUBJ_COURT_REVIEW_CODE)
+		VALUES(FN_CREATE_CODE('TBL_COURT_REVIEW_RPT', SEQ_COURT_REVIEW_RPT.NEXTVAL), #{courtReviewReportContent}, #{applicantAccountCode}, #{subjectCourtReviewCode})
+	</insert>
+	
+	<!-- 	public int addReportCourtReviewAssignment(ReportCourtReviewDTO reportCourtReviewDTO); // 신고담당 -->
+	<insert id="addReportCourtReviewAssignment" parameterType="com.amanne.biscuitball.mybatis.ReportCourtReviewDTO">
+		INSERT INTO TBL_COURT_REVIEW_RPT_ASGN(COURT_REV_RPT_ASGN_CODE, COURT_REV_RPT_CODE, ASGN_ADMIN_CODE)
+		VALUES(FN_CREATE_CODE('TBL_COURT_REV_RPT_ASGN', SEQ_COURT_REV_RPT_ASGN.NEXTVAL), #{courtReviewReportCode}, #{assignedAdminCode})
+	</insert>
+	
+	<!-- 	public int addReportCourtReviewAnswer(ReportCourtReviewDTO reportCourtReviewDTO); // 신고답변 -->
+	<insert id="addReportCourtReviewAnswer" parameterType="com.amanne.biscuitball.mybatis.ReportCourtReviewDTO">
+		INSERT INTO TBL_COURT_REV_RPT_ANS(COURT_REV_RPT_ANS_CODE, COURT_REV_RPT_ANS_CONTENT, COURT_REV_RPT_ASGN_CODE)
+		VALUES(
+		    FN_CREATE_CODE('TBL_COURT_REV_RPT_ANS', SEQ_COURT_REV_RPT_ANS.NEXTVAL)
+		    , #{courtReviewReportAnswerContent}
+		    , ( SELECT COURT_REV_RPT_ASGN_CODE
+		        FROM VIEW_COURT_REVIEW_RPT_TOTAL
+		        WHERE COURT_REV_RPT_CODE = #{courtReviewReportCode})
+		)
+	</insert>
+	
+	<!-- 	public int updateReportCourtReviewAnswer(ReportCourtReviewDTO reportCourtReviewDTO); // 신고답변수정 -->
+	<update id="updateReportCourtReviewAnswer" parameterType="com.amanne.biscuitball.mybatis.ReportCourtReviewDTO">
+		UPDATE TBL_COURT_REV_RPT_ANS
+		SET COURT_REV_RPT_ANS_CONTENT=#{courtReviewReportAnswerContent}
+		WHERE COURT_REV_RPT_ANS_CODE = 
+		(
+		    (SELECT COURT_REV_RPT_ANS_CODE
+		     FROM VIEW_COURT_REVIEW_RPT_TOTAL
+		     WHERE COURT_REV_RPT_CODE = #{courtReviewReportCode})
+		)
+	</update>
+	
+	<!-- 	public int addReportCourtReviewResolve(ReportCourtReviewDTO reportCourtReviewDTO); // 신고처리 -->
+	<select id="addReportCourtReviewResolve"
+	 statementType="CALLABLE"
+	 parameterType="com.amanne.biscuitball.mybatis.ReportCourtReviewDTO" >
+		{ call PRC_COURT_REV_RPT_RSLV
+			(
+				#{courtReviewReportCode},
+			    #{reportResultCode},
+			    #{returnValue ,mode=OUT, jdbcType=VARCHAR}
+			)
+		}
+	</select>
+	
+	<!-- 	public int addReportCourtReviewPenalty(PenaltyDTO penaltyDTO); // 코트이름제재 -->
+	<insert id="addReportCourtReviewPenalty" parameterType="com.amanne.biscuitball.mybatis.PenaltyDTO">
+		INSERT INTO TBL_COURT_REV_PENALTY(COURT_REV_PENALTY_CODE,COURT_REV_PENALTY_START_DATE,COURT_REV_PENALTY_END_DATE,COURT_REV_RPT_RSLV_CODE, COURT_REV_PENALTY_REASON_CODE)
+		VALUES
+		(
+		    FN_CREATE_CODE('TBL_COURT_REV_PENALTY', SEQ_COURT_REV_PENALTY.NEXTVAL)
+		    , TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH:MI')
+		    , TO_DATE(#{penaltyEndDate}, 'YYYY-MM-DD HH:MI')
+		    , #{reportResolveCode}
+		    , #{penaltyReasonCode}
+		)
+	</insert>
+	
+	<!-- 	public int cancelReportCourtReviewPenalty(String penaltyCode); // 제재취소 -->
+	<insert id="cancelReportCourtReviewPenalty" parameterType="java.lang.String">
+		INSERT INTO TBL_COURT_REV_PEN_CANCEL(COURT_REV_PEN_CANCEL_CODE, COURT_REV_PENALTY_CODE)
+		VALUES(FN_CREATE_CODE('TBL_COURT_REV_PEN_CANCEL', SEQ_COURT_REV_PEN_CANCEL.NEXTVAL), #{penaltyCode})
+	</insert>
+	
+	<!-- 	public int cancelReportCourtReview(String courtReviewReportCode); // 신고취소 -->
+	<delete id="cancelReportCourtReview" parameterType="java.lang.String">
+		DELETE FROM TBL_COURT_REVIEW_RPT
+		WHERE COURT_REV_RPT_CODE = #{courtReviewReportCode}
+	</delete>
+	
+	<!-- 	public int addInquiry(InquiryDTO inquiryDTO); // 문의입력 -->
+	<insert id="addInquiry" parameterType="com.amanne.biscuitball.mybatis.InquiryDTO">
+		INSERT INTO TBL_INQUIRY(INQ_CODE, INQ_SUBJECT, INQ_CONTENT, ADMIN_POST_CATEGORY_CODE, INQUIRER_ACCT_CODE)
+		VALUES(FN_CREATE_CODE('TBL_INQUIRY', SEQ_INQUIRY.NEXTVAL), #{inquirySubject}, #{inquiryContent}, #{postCategoryCode}, #{inquirerAccountCode})
+	</insert>
+	
+	<!-- 	public int addInquiryAssignment(InquiryDTO inquiryDTO); // 문의담당 -->
+	<insert id="addInquiryAssignment" parameterType="com.amanne.biscuitball.mybatis.InquiryDTO">
+		INSERT INTO TBL_INQUIRY_ASSIGN(INQ_ASGN_CODE, INQ_CODE, ASGN_ADMIN_CODE)
+		VALUES(FN_CREATE_CODE('TBL_INQUIRY_ASSIGN', SEQ_INQUIRY_ASSIGN.NEXTVAL), #{inquiryCode}, #{assignedAdminCode})
+	</insert>
+	
+	<!-- 	public int addInquiryAnswer(InquiryDTO inquiryDTO); // 문의답변 -->
+	<insert id="addInquiryAnswer" parameterType="com.amanne.biscuitball.mybatis.InquiryDTO">
+		INSERT INTO TBL_INQUIRY_ANSWER(INQ_ANS_CODE, INQ_ANS_CONTENT, INQ_ASGN_CODE)
+		VALUES(
+		    FN_CREATE_CODE('TBL_INQUIRY_ANSWER', SEQ_INQUIRY_ANSWER.NEXTVAL)
+		    , #{inquiryAnswerContent}
+		    , ( SELECT INQ_ASGN_CODE
+		        FROM VIEW_INQUIRY_TOTAL
+		        WHERE INQ_CODE = #{inquiryCode})
+		)
+	</insert>
+	
+	<!-- 	public int updateInquiryAnswer(InquiryDTO inquiryDTO); // 문의답변수정 -->
+	<update id="updateInquiryAnswer" parameterType="com.amanne.biscuitball.mybatis.InquiryDTO">
+		UPDATE TBL_INQUIRY_ANSWER
+		SET INQ_ANS_CONTENT=#{inquiryAnswerContent}
+		WHERE INQ_ANS_CODE = 
+		(
+		    SELECT INQ_ANS_CODE
+		     FROM VIEW_INQUIRY_TOTAL
+		     WHERE INQ_CODE = #{inquiryCode}
+		)	
+	</update>
+
+	<!-- 	public int addInquiryResolve(InquiryDTO inquiryDTO); // 문의처리 -->
+	<select id="addInquiryResolve"
+	 statementType="CALLABLE"
+	 parameterType="com.amanne.biscuitball.mybatis.InquiryDTO" >
+		{ call PRC_INQUIRY_RSLV
+			(
+				#{inquiryCode},
+			    #{returnValue ,mode=OUT, jdbcType=VARCHAR}
+			)
+		}
+	</select>
+	
+	<!-- 	public int removeInquiry(String inquiryCode); // 문의취소 -->
+	<delete id="" parameterType="java.lang.String">
+		DELETE FROM TBL_INQUIRY
+		WHERE INQ_CODE = #{inquiryCode}
+	</delete>
+	
+	<!-- 	public int makeUserPenalty(PenaltyDTO dto); // 관리자 회원 제재 -->
+	<select id="makeUserPenalty"
+	 statementType="CALLABLE"
+	 parameterType="com.amanne.biscuitball.mybatis.PenaltyDTO" >
+		{ call PRC_USER_PENALTY
+			( TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH:MI')
+		    , TO_DATE(#{penaltyEndDate}, 'YYYY-MM-DD HH:MI')
+			, #{penaltyReasonCode}
+			, #{reportContentCode}
+			, #{adminCode}
+			, #{returnValue}
+			)
+		}
+	</select>
+	
+	<!-- 	public int makeCrewPenalty(PenaltyDTO dto); // 관리자 크루 제재 -->
+	<select id="makeCrewPenalty"
+	 statementType="CALLABLE"
+	 parameterType="com.amanne.biscuitball.mybatis.PenaltyDTO" >
+		{ call PRC_CREW_PENALTY
+			( TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH:MI')
+		    , TO_DATE(#{penaltyEndDate}, 'YYYY-MM-DD HH:MI')
+			, #{penaltyReasonCode}
+			, #{reportContentCode}
+			, #{adminCode}
+			, #{returnValue}
+			)
+		}
+	</select>
+	
+	<!-- 	public int makeCrewPostPenalty(PenaltyDTO dto); // 관리자 크루 게시글 제재 -->
+	<select id="makeCrewPostPenalty"
+	 statementType="CALLABLE"
+	 parameterType="com.amanne.biscuitball.mybatis.PenaltyDTO" >
+		{ call PRC_CREW_POST_PENALTY
+			( TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH:MI')
+			, #{penaltyReasonCode}
+			, #{reportContentCode}
+			, #{adminCode}
+			, #{returnValue}
+			)
+		}
+	</select>
+	
+	<!-- 	public int makeCrewCommentPenalty(PenaltyDTO dto); // 관리자 크루 댓글 제재 -->
+	<select id="makeCrewCommentPenalty"
+	 statementType="CALLABLE"
+	 parameterType="com.amanne.biscuitball.mybatis.PenaltyDTO" >
+		{ call PRC_CREW_COMMENTS_PENALTY
+			( TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH:MI')
+			, #{penaltyReasonCode}
+			, #{reportContentCode}
+			, #{adminCode}
+			, #{returnValue}
+			)
+		}
+	</select>
+	
+	<!-- 	public int makeMeetPenalty(PenaltyDTO dto); // 관리자 모임 제재 -->
+	<select id="makeMeetPenalty"
+	 statementType="CALLABLE"
+	 parameterType="com.amanne.biscuitball.mybatis.PenaltyDTO" >
+		{ call PRC_MEET_PENALTY
+			( TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH:MI')
+			, #{penaltyReasonCode}
+			, #{reportContentCode}
+			, #{adminCode}
+			, #{returnValue}
+			)
+		}
+	</select>
+	
+	<!-- 	public int makeMeetCommentPenalty(PenaltyDTO dto); // 관리자 모임 댓글 제재 -->
+	<select id="makeMeetCommentPenalty"
+	 statementType="CALLABLE"
+	 parameterType="com.amanne.biscuitball.mybatis.PenaltyDTO" >
+		{ call PRC_MEET_COMMENT_PENALTY
+			( TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH:MI')
+			, #{penaltyReasonCode}
+			, #{reportContentCode}
+			, #{adminCode}
+			, #{returnValue}
+			)
+		}
+	</select>
+	
+	<!-- 	public int makeCourtNamePenalty(PenaltyDTO dto); // 관리자 코트 이름 제재 -->
+	<select id="makeCourtNamePenalty"
+	 statementType="CALLABLE"
+	 parameterType="com.amanne.biscuitball.mybatis.PenaltyDTO" >
+		{ call PRC_COURT_NAME_PENALTY
+			( TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH:MI')
+			, #{penaltyReasonCode}
+			, #{reportContentCode}
+			, #{adminCode}
+			, #{returnValue}
+			)
+		}
+	</select>
+	
+	<!-- 	public int makeCourtReviewPenalty(PenaltyDTO dto); // 관리자 코트 리뷰 제재 -->
+	<select id="makeCourtReviewPenalty"
+	 statementType="CALLABLE"
+	 parameterType="com.amanne.biscuitball.mybatis.PenaltyDTO" >
+		{ call PRC_COURT_REV_PENALTY
+			( TO_DATE(#{penaltyStartDate}, 'YYYY-MM-DD HH:MI')
+			, #{penaltyReasonCode}
+			, #{reportContentCode}
+			, #{adminCode}
+			, #{returnValue}
+			)
+		}
+	</select>
+	
+	<!-- 	public List<NoticeDTO> getNoticeList(String searchKey, String searchValue, int start, int end); // 공지사항 조회 -->
+	
+	
+	<!-- 	public int getNotices(String searchKey, String searchValue); // 공지사항 전체 수 -->
+	<!-- 	public NoticeDTO getNotice(String noticeCode); // 특정 공지 조회 -->
+	<!-- 	public List<FaqDTO> getFaqList(String searchKey, String searchValue, int start, int end); // FAQ 조회 -->
+	<!-- 	public int countFaqs(String searchKey, String searchValue); // FAQ 전체 수 -->
+	<!-- 	public FaqDTO getFaq(String faqCode); // 특정 FAQ 조회 -->
+	<!-- 	public List<ReportTotalDTO> getReportList(String searchKey, String searchValue, int start, int end); // 전체 신고 조회 -->
+	<!-- 	public int countReports(String searchKey, String searchValue); // 전체 신고 수 -->
+	<!-- 	public List<InquiryDTO> getInquiryList(String searchKey, String searchValue, int start, int end); // 전체 문의 조회 -->
+	<!-- 	public int countInquiries(String searchKey, String searchValue); // 전체 문의 수 -->
+	<!-- 	public InquiryDTO getInquiry(String inquiryCode); // 특정 문의 조회 -->
+	<!-- 	public ReportUserDTO getUserReport(String reportCode); // 특정 회원신고 조회 -->
+	<!-- 	public ReportCrewDTO getCrewReport(String reportCode); // 특정 크루신고 조회 -->
+	<!-- 	public ReportCrewPostDTO getCrewPostReport(String reportCode); // 특정 크루게시글신고 조회 -->
+	<!-- 	public ReportCrewCommentDTO getCrewCommentReport(String reportCode); // 특정 크루댓글신고 조회 -->
+	<!-- 	public ReportMeetDTO getMeetingReport(String reportCode); // 특정 모임신고 조회 -->
+	<!-- 	public ReportMeetCommentDTO getMeetingCommentReport(String reportCode); // 특정 모임댓글신고 조회 -->
+	<!-- 	public ReportCourtReviewDTO getCourtReviewReport(String reportCode); // 특정 코트리뷰신고 조회 -->
+	<!-- 	public ReportCourtNameDTO getCourtNameReport(String reportCode); // 특정 코트이름신고 조회 -->
+	
+	
+	
+	
+</mapper>

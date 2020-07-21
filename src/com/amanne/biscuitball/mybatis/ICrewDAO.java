@@ -64,11 +64,11 @@ public interface ICrewDAO
 
 	public int countCrewJoinRequests(String crewCode); // 특정크루 미처리된 가입신청 조회
 
-	public List<CrewPostDTO> getCrewPostList(String crewCode, String getKey, String getValue, int start, int end); // 특정크루
+	public List<CrewPostDTO> getCrewPostList(String crewCode, String searchKey, String searchValue, int start, int end); // 특정크루
 																													// 크루게시글
 																													// 조회
 
-	public int countCrewPosts(String crewCode, String getKey, String getValue); // 특정크루 크루게시글 수
+	public int countCrewPosts(String crewCode, String searchKey, String searchValue); // 특정크루 크루게시글 수
 
 	public CrewPostDTO getCrewPost(String crewPostCode); // 특정크루게시글 조회
 

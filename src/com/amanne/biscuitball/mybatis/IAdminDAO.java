@@ -186,25 +186,25 @@ public interface IAdminDAO
 
 	public int makeCourtReviewPenalty(PenaltyDTO dto); // 관리자 코트 리뷰 제재
 
-	public List<NoticeDTO> getNoticeList(String getKey, String getValue, int start, int end); // 공지사항 조회
+	public List<NoticeDTO> getNoticeList(String searchKey, String searchValue, int start, int end); // 공지사항 조회
 
-	public int getNotices(String getKey, String getValue); // 공지사항 전체 수
+	public int getNotices(String searchKey, String searchValue); // 공지사항 전체 수
 
 	public NoticeDTO getNotice(String noticeCode); // 특정 공지 조회
 
-	public List<FaqDTO> getFaqList(String getKey, String getValue, int start, int end); // FAQ 조회
+	public List<FaqDTO> getFaqList(String searchKey, String searchValue, int start, int end); // FAQ 조회
 
-	public int countFaqs(String getKey, String getValue); // FAQ 전체 수
+	public int countFaqs(String searchKey, String searchValue); // FAQ 전체 수
 
 	public FaqDTO getFaq(String faqCode); // 특정 FAQ 조회
 
-	public List<ReportTotalDTO> getReportList(String getKey, String getValue, int start, int end); // 전체 신고 조회
+	public List<ReportTotalDTO> getReportList(String searchKey, String searchValue, int start, int end); // 전체 신고 조회
 
-	public int countReports(String getKey, String getValue); // 전체 신고 수
+	public int countReports(String searchKey, String searchValue); // 전체 신고 수
 
-	public List<InquiryDTO> getInquiryList(String getKey, String getValue, int start, int end); // 전체 문의 조회
+	public List<InquiryDTO> getInquiryList(String searchKey, String searchValue, int start, int end); // 전체 문의 조회
 
-	public int countInquiries(String getKey, String getValue); // 전체 문의 수
+	public int countInquiries(String searchKey, String searchValue); // 전체 문의 수
 
 	public InquiryDTO getInquiry(String inquiryCode); // 특정 문의 조회
 
