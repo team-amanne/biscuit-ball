@@ -1422,4 +1422,19 @@
 		LEFT JOIN TBL_YES_NO YN
 		ON A.CHIEF_ADMIN_CODE = YN.YES_NO_CODE
 	</select>
+	
+	<!-- public void loginAsAdmin(AdminDTO dto); -->
+	<select id="loginAsAdmin"
+	 statementType="CALLABLE"
+	 parameterType="com.amanne.biscuitball.mybatis.AdminDTO" >
+		{ call PRC_ADMIN_LOGIN
+			(
+				#{adminEmail},
+			    #{adminPassword},
+			    #{ipAddress},
+			    #{returnValue ,mode=OUT, jdbcType=VARCHAR}
+			)
+		}
+	</select>
+	
 </mapper>
