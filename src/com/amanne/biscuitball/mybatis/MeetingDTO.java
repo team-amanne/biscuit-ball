@@ -28,7 +28,9 @@ public class MeetingDTO
 	private String confirmOrNot; 			// 모임확정여부
 	private String blindOrNot; 				// 블라인드여부
 	private String openerAcctCode;			// 개설자 계정 코드
+	
 	private ArrayList<MeetingMemberDTO> getMeetingMemberList; // 모임 참가 멤버 리스트
+	
 	private String returnValue;
 	
 	

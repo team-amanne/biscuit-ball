@@ -139,7 +139,8 @@
 				 , MEET_TYPE_CODE
 				 , MEET_QUICK_PLAY_CODE
 			FROM TBL_MEETING
-			WHERE MEET_COURT_CODE = #{courtCode}
+			WHERE MEET_COURT_REG_CODE = #{courtCode}
+            AND MEET_DATE > SYSDATE
 		]]>
 		</select>
 
@@ -149,7 +150,8 @@
 		<![CDATA[
 			SELECT COUNT(*) AS COUNT
 			FROM TBL_MEETING
-			WHERE MEET_COURT_CODE = #{courtCode}
+			WHERE MEET_COURT_REG_CODE = #{courtCode}
+            AND MEET_DATE > SYSDATE
 		]]>
 		</select>
 		
@@ -167,6 +169,8 @@
 				 , CAPTAIN_OR_NOT
 			FROM VIEW_MEETING_JOIN
 			WHERE JOIN_ACCT_CODE = #{userAccountCode}
+			AND MEET_JOIN_CANCEL_CODE IS NULL
+			AND MEET_END_DATE < SYSDATE
 		]]>
 		</select>
 
@@ -177,6 +181,8 @@
 			SELECT COUNT(*) AS COUNT
 			FROM VIEW_MEETING_JOIN
 			WHERE JOIN_ACCT_CODE = #{userAccountCode}
+			AND MEET_JOIN_CANCEL_CODE IS NULL
+			AND MEET_END_DATE < SYSDATE
 		]]>
 		</select>
 
@@ -196,6 +202,7 @@
 			WHERE PL.PL_CODE IS NULL
 			AND MJ.MEET_JOIN_CANCEL_CODE IS NULL
 			AND MJ.JOIN_ACCT_CODE = #{userAccountCode}
+			AND MEET_END_DATE < SYSDATE
 		]]>
 		</select>
 
@@ -209,16 +216,93 @@
 			WHERE PL.PL_CODE IS NULL
 			AND MJ.MEET_JOIN_CANCEL_CODE IS NULL
 			AND MJ.JOIN_ACCT_CODE = #{userAccountCode}
+			AND MEET_END_DATE < SYSDATE
 		]]>
 		</select>
 
 <!--	public List<MeetingDTO> getJoinMeetingList(String userAccountCode); // 참여신청한 모임 조회(예정)  -->
 
+		<select id="getJoinMeetingList" resultType="com.amanne.biscuitball.mybatis.MeetingDTO">
+		<![CDATA[
+			SELECT MJ.MEET_JOIN_CODE
+            , MT.MEET_CODE
+            , MT.MEET_SUBJECT
+            , MT.MEET_PEOPLE_NUMBER
+            , MT.MEET_DATE
+            , MT.MEET_END_DATE
+            , MT.MEET_TYPE_CODE
+            , MT.MEET_TYPE_NAME
+            , MJ.MEET_JOIN_DATE
+            , MJ.JOIN_ACCT_CODE
+            , MJ.USER_NICKNAME
+            , MJ.CAPTAIN_OR_NOT
+            , MJ.BALL_EXIST_OR_NOT
+            , MT.QUICK_PLAY
+            , MT.COURT_REG_CODE
+            , MT.MIN_TIER
+            , MT.MAX_TIER
+            , MT.CONFIRM_OR_NOT
+			FROM VIEW_MEETING_JOIN MJ
+			LEFT JOIN VIEW_MEETING MT
+			ON MJ.MEET_CODE = MT.MEET_CODE
+			WHERE MJ.JOIN_ACCT_CODE = #{userAccountCode}
+			AND MT.MEET_DATE > SYSDATE
+			AND MJ.MEET_JOIN_CANCEL_CODE IS NULL
+		]]>
+		</select>
+
 <!--	public int countJoinMeeting(String userAccountCode); // 참여신청한 모임 전체 수(예정)  -->
+
+		<select id="countJoinMeeting" resultType="java.lang.Integer">
+		<![CDATA[
+			SELECT COUNT(*) AS COUNT
+			FROM VIEW_MEETING_JOIN MJ
+			LEFT JOIN VIEW_MEETING MT
+			ON MJ.MEET_CODE = MT.MEET_CODE
+			WHERE MJ.JOIN_ACCT_CODE = #{userAccountCode}
+			AND MT.MEET_DATE > SYSDATE
+			AND MJ.MEET_JOIN_CANCEL_CODE IS NULL
+		]]>
+		</select>
 
 <!--	public MeetingDTO getMeeting(String meetingCode); // 특정모임 조회  -->
 
+		<select id="getMeeting" resultType="com.amanne.biscuitball.mybatis.MeetingDTO">
+		<![CDATA[
+			SELECT MEET_CODE
+            , MEET_SUBJECT
+            , MEET_PEOPLE_NUMBER
+            , MEET_DATE
+            , MEET_END_DATE
+            , MEET_CLOSE_DATE
+            , MEET_NOTICE
+            , MEET_TYPE_CODE
+            , MEET_TYPE_NAME
+            , QUICK_PLAY
+            , COURT_REG_CODE
+            , MIN_TIER
+            , MAX_TIER
+            , CONFIRM_OR_NOT
+			FROM VIEW_MEETING
+			WHERE MEET_CODE = #{meetingCode}
+		]]>
+		</select>
+
 <!--    public List<MeetingMemberDTO> getMeetingMemberList(String meetingCode); // 특정모임 참가자 조회 -->
+	
+		<select id="getMeetingMemberList" resultType="com.amanne.biscuitball.mybatis.MeetingMemberDTO">
+		<![CDATA[
+			SELECT MEET_JOIN_CODE
+            , MEET_CODE
+            , MEET_JOIN_DATE
+            , JOIN_ACCT_CODE
+            , USER_NICKNAME
+            , CATAIN_OR_NOT
+            , BALL_EXIST_OR_NOT
+			FROM VIEW_MEETING_JOIN
+			WHERE MEET_CODE = #{meetingCode}
+		]]>
+		</select>
 
 
 </mapper>
