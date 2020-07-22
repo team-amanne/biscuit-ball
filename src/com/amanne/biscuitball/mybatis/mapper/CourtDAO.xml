@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.amanne.biscuitball.mybatis.ICourtDAO">
+
+	<!-- public int registerCourt(CourtDTO dto); // 코트등록 -->
+	<insert id="registerCourt" parameterType="com.amanne.biscuitball.mybatis.CourtDTO">
+		INSERT INTO TBL_COURT_REGISTRATION(
+		    COURT_REG_CODE
+		    , COURT_REG_DATE
+		    , COURT_MAP_POSITION
+		    , COURT_NAME
+		    , COURT_IMG1
+		    , COURT_IMG2
+		    , COURT_IMG3
+		    , REGISTRANT_ACCT_CODE
+		    , COURT_REG_CAPACITY
+		)
+		VALUES(
+		    FN_CREATE_CODE('TBL_COURT_REGISTRATION', SEQ_COURT_REGISTRATION.NEXTVAL)
+		    , SYSDATE
+		    , #{mapPosition}
+		    , #{courtName}
+		    , #{courtImg1}
+		    , #{courtImg2}
+		    , #{courtImg3}
+		    , #{registrantAccountCode}
+		    , #{courtCapacityCode}
+		)
+	</insert>
+	
+	<!-- public void pollCourtRegistrationYes(PollDTO dto); // 코트등록찬성투표 -->
+	<select id="pollCourtRegistrationYes"
+	 statementType="CALLABLE"
+	 parameterType="com.amanne.biscuitball.mybatis.PollDTO">
+		{ call PRC_COURT_REGISTRATION_NOTIF
+			( #{pollSubjectCode}
+			, #{voterAccountCode}
+			, 'ZU01'                          
+			, #{returnValue, mode=OUT, jdbcType=VARCHAR}
+			) 
+		}
+	</select>
+	
+	<!-- public void pollCourtRegistrationNo(PollDTO dto); // 코트등록반대투표 -->
+	<select id="pollCourtRegistrationNo"
+	 statementType="CALLABLE"
+	 parameterType="com.amanne.biscuitball.mybatis.PollDTO">
+		{ call PRC_COURT_REGISTRATION_NOTIF
+			( #{pollSubjectCode}
+			, #{voterAccountCode}
+			, 'ZU02'                          
+			, #{returnValue, mode=OUT, jdbcType=VARCHAR}
+			) 
+		}
+	</select>
+	
+	<!-- public void makeCourtDeleteRequest(CourtDeleteRequestDTO dto); // 코트삭제요청 -->
+	<select id="makeCourtDeleteRequest"
+	 statementType="CALLABLE"
+	 parameterType="com.amanne.biscuitball.mybatis.CourtDeleteRequestDTO">
+		{ call PRC_COURT_DELETE_REQ
+			( #{courtCode}
+			, #{applicantAccountCode, mode=IN, jdbcType=VARCHAR}
+			, #{returnValue, mode=OUT, jdbcType=VARCHAR}
+			) 
+		}
+	</select>
+	
+	<!-- public void pollCourtDeleteRequestYes(PollDTO dto); // 코트삭제찬성투표 -->
+	<select id="pollCourtDeleteRequestYes"
+	 statementType="CALLABLE"
+	 parameterType="com.amanne.biscuitball.mybatis.PollDTO">
+		{ call PRC_COURT_DELETE_POLL
+			( #{pollSubjectCode}
+			, 'ZU01'
+			, #{voterAccountCode}
+			, #{returnValue, mode=OUT, jdbcType=VARCHAR}
+			) 
+		}
+	</select>
+	
+	<!-- public void pollCourtDeleteRequestNo(PollDTO dto); // 코트삭제반대투표 -->
+	<select id="pollCourtDeleteRequestNo"
+	 statementType="CALLABLE"
+	 parameterType="com.amanne.biscuitball.mybatis.PollDTO">
+		{ call PRC_COURT_DELETE_POLL
+			( #{pollSubjectCode}
+			, 'ZU01'
+			, #{voterAccountCode}
+			, #{returnValue, mode=OUT, jdbcType=VARCHAR}
+			) 
+		}
+	</select>
+
+	<!-- public int addCourtName(CourtNameDTO dto); // 코트이름등록 -->
+	<insert id="addCourtName" parameterType="com.amanne.biscuitball.mybatis.CourtNameDTO">
+		INSERT INTO TBL_COURT_NAME(
+			COURT_NAME_CODE
+			, COURT_NAME
+			, COURT_NAME_REG_DATE
+			, COURT_REG_CODE
+			, REG_ACCT_CODE
+		)
+		VALUES(
+			FN_CREATE_CODE('TBL_COURT_NAME', SEQ_COURT_NAME.NEXTVAL)
+			, #{courtName}
+			, SYSDATE
+			, #{courtCode}
+			, #{registrantAccountCode}
+		)
+	</insert>
+	
+	<!-- public int pollCourtName(PollDTO dto); // 코트이름투표 -->
+	<insert id="pollCourtName" parameterType="com.amanne.biscuitball.mybatis.PollDTO">
+		INSERT INTO TBL_COURT_NAME_POLL(
+			COURT_NAME_POLL_CODE
+			, COURT_NAME_CODE
+			, VOTER_ACCT_CODE
+			, POLL_DATE
+		)
+		VALUES(
+			FN_CREATE_CODE('TBL_COURT_NAME_POLL',SEQ_COURT_NAME_POLL.NEXTVAL)
+			, #{pollSubjectCode}
+			, #{voterAccountCode}
+			, SYSDATE
+		)
+	</insert>
+	
+	<!-- public int addCourtTelephone(String courtCode, String telephone, String userAccountCode); // 코트연락처등록 -->
+	<insert id="addCourtTelephone">
+		INSERT INTO TBL_COURT_TELEPHONE(
+			COURT_TEL_CODE
+			, COURT_TEL
+			, COURT_TEL_REG_DATE
+			, COURT_REG_CODE
+			, REG_ACCT_CODE
+		)
+		VALUES(
+			FN_CREATE_CODE('TBL_COURT_TELEPHONE',SEQ_COURT_TELEPHONE.NEXTVAL)
+			, #{telephone}
+			, SYSDATE
+			, #{courtCode}
+			, #{userAccountCode}
+		)
+	</insert>
+	
+	<!-- public void addCourtReview(CourtReviewDTO dto); // 코트리뷰등록 -->
+	<select id="addCourtReview"
+	 statementType="CALLABLE"
+	 parameterType="com.amanne.biscuitball.mybatis.CourtReviewDTO">
+		{ call PRC_COURT_REVIEW
+			( #{courtReviewContent}
+			, #{courtReviewManageScore}
+			, #{courtReviewSatisfaction}
+			, #{courtCapacityCode}
+			, #{courtCode}         
+			, #{registrantAccountCode}
+			, #{toilet, mode=IN, jdbcType=VARCHAR}
+			, #{shower, mode=IN, jdbcType=VARCHAR}
+			, #{parkinglot, mode=IN, jdbcType=VARCHAR}
+			, #{returnValue, mode=OUT, jdbcType=VARCHAR}
+			)
+		}
+	</select>
+	
+	<!-- public void approveCourtDeleteRequest(CourtDeleteRequestDTO dto); // 코트삭제승인 -->
+	<select id="approveCourtDeleteRequest"
+	 statementType="CALLABLE"
+	 parameterType="com.amanne.biscuitball.mybatis.CourtDeleteRequestDTO">
+		{ call PRC_COURT_DEL_REQ_APPROVE
+			( #{courtDeleteRequestCode}
+			, #{courtCode}
+			, #{approvedAdminCode, mode=IN, jdbcType=VARCHAR}
+			, #{requestResultCode}
+			, #{returnValue, mode=OUT, jdbcType=VARCHAR}
+			) 
+		}
+	</select>
+	
+	<!-- public ArrayList<CourtDTO> getCourtListByMapPosition(String posX, String posY, double distance); // 특정좌표 근처 코트 조회 -->
+	<select id="getCourtListByMapPosition" resultType="com.amanne.biscuitball.mybatis.CourtDTO">
+	<![CDATA[
+		SELECT COURT_CODE AS courtCode
+		     , TO_CHAR(COURT_REG_DATE, 'YYYY-MM-DD HH24:MI') AS courtRegisteredDate
+		     , COURT_MAP_POSITION AS mapPosition
+		     , POSX AS mapPositionX
+		     , POSY AS mapPositionY
+		     , REGISTRANT_ACCT_CODE AS registrantAccountCode
+		     , USER_NICKNAME AS registrantNickname
+		     , NVL(MY_COURT_COUNT,0) AS myCourtCount
+		     , COURT_IMG1 AS courtImg1
+		     , COURT_IMG2 AS courtImg2
+		     , COURT_IMG3 AS courtImg3
+		     , COURT_NAME_CODE AS courtNameCode
+		     , COURT_NAME AS courtName
+		     , COURT_NAME_TOTAL_PERCENT AS courtNamePollRate
+		     , AVG_COURT_MNG_SCORE AS avgCourtManageScore
+		     , AVG_COURT_SATISFACTION AS avgCourtSatisfaction
+		     , COURT_RATING AS courtRating
+		     , MIN_COURT_CAPACITY AS minCourtCapacity
+		     , MAX_COURT_CAPACITY AS maxCourtCapacity
+		     , WASHROOM AS toilet
+		     , CONFIDENCE_WASHROOM AS toiletConfidence
+		     , SHWER_ROMM AS shower
+		     , CONFIDENCE_SHWER_ROMM AS showerConfidence
+		     , PARKING_LOT AS parkinglot
+		     , CONFIDENCE_PARKING_LOT AS parkinglotConfidence
+		     , ENROLLMENT_YES_COUNT AS enrollYesCount
+		     , ENROLLMENT_NO_COUNT AS enrollNoCount
+		     , COURT_DELREQ_CODE AS delRequestCode
+		     , TO_CHAR(COURT_DELREQ_DATE, 'YYYY-MM-DD HH24:MI') AS delRequestDate
+		     , TO_CHAR(APPROVE_DATE, 'YYYY-MM-DD HH24:MI') AS delApproveDate
+		     , COURT_DELETE_POLL_YES AS delRequestPollYesCount
+		     , COURT_DELETE_POLL_NO AS delRequestPollNoCount
+		     , DEL_ADMIN_CODE AS delAdminCode
+		     , TO_CHAR(ADMIN_COURT_DEL_DATE, 'YYYY-MM-DD HH24:MI') AS adminDelDate
+		     , COURT_STATUS AS courtStatus
+		     , BLIND_STATUS AS blindStatus
+		FROM
+		(
+		    SELECT TO_NUMBER(SUBSTR(COURT_MAP_POSITION, 1, INSTR(COURT_MAP_POSITION, ',', 1, 1) - 1)) AS POSX
+		         , TO_NUMBER(SUBSTR(COURT_MAP_POSITION, INSTR(COURT_MAP_POSITION, ',', 1, 1) + 1)) AS POSY
+		         , C.*
+		    FROM VIEW_COURT C
+		) A
+		WHERE POWER(POSX-#{posX},2) + POWER(POSY-#{posY},2) <= POWER(#{distance},2)
+	]]>
+	</select>
+	
+	<!-- public ArrayList<CourtNameDTO> getCourtNameList(String courtCode, String userAccountCode, int start, int end, String order); // 특정코트 코트이름 조회 -->
+	<select id="getCourtNameList" resultType="com.amanne.biscuitball.mybatis.CourtNameDTO">
+	<![CDATA[
+		SELECT COURT_NAME_CODE AS courtNameCode
+		     , COURT_NAME AS courtName
+		     , TO_CHAR(COURT_NAME_REG_DATE,'YYYY-MM-DD HH24:MI') AS courtNameRegisteredDate
+		     , COURT_REG_CODE AS courtCode
+		     , ADMIN_REG AS adminRegister
+		     , REG_ACCT_CODE AS registrantAccountCode
+		     , REG_NICKNAME AS registrantNickname
+		     , POLL_COUNT AS pollCount
+		     , POLL_RATE AS pollRate
+		     , COURT_NAME_STATUS AS courtNameStatus
+		     , RANK AS rank
+		     , CASE WHEN P.VOTER_ACCT_CODE IS NOT NULL THEN 'YES'
+		            ELSE 'NO'
+		       END AS pollOrNot
+		FROM
+		(
+			SELECT ROWNUM AS RNUM, V.*
+			FROM VIEW_COURT_NAME V
+			LEFT JOIN
+			(
+				SELECT *
+				FROM TBL_COURT_NAME_POLL
+	]]>
+	<if test="userAccountCode != null">
+				WHERE VOTER_ACCT_CODE=#{userAccountCode}
+	</if>
+	<![CDATA[
+			) P
+			ON B.COURT_NAME_CODE = P.COURT_NAME_CODE
+			WHERE COURT_NAME_STATUS NOT LIKE '제재'
+			  AND COURT_REG_CODE = #{courtCode}
+	]]>
+	<if test='order != null and order.eqauls("DATE")'>
+			ORDER BY COURT_NAME_REG_DATE DESC, RANK ASC
+	</if>
+	<if test='order == null or order.equals("RANK")'>
+			ORDER BY RANK ASC, COURT_NAME_REG_DATE DESC
+	</if>
+	<![CDATA[
+		)
+		WHERE RNUM >= #{start} AND RNUM <= #{end}
+	]]>
+	</select>
+	
+	<!-- public int countCourtNames(String courtCode); // 특정코트 코트이름 전체 수 -->
+	<select id="countCourtNames" resultType="java.lang.Integer">
+	<![CDATA[	
+		SELECT COUNT(*)
+		FROM VIEW_COURT_NAME
+		WHERE COURT_NAME_STATUS NOT LIKE '제재'
+		  AND COURT_REG_CODE = #{courtCode}
+	]]>
+	</select>
+	
+	<!-- public ArrayList<CourtReviewDTO> getCourtReviewList(String courtCode, String userAccountCode, int start, int end, String order); // 특정코트 코트리뷰 조회 -->
+	<select id="getCourtReviewList" resultType="com.amanne.biscuitball.mybatis.CourtReviewDTO">
+	<![CDATA[	
+		SELECT COURT_REVIEW_CODE AS courtReviewCode
+		     , COURT_REVIEW_CONTENT AS courtReviewContent
+		     , COURT_REVIEW_MNG_SCORE AS courtReviewManageScore
+		     , TO_CHAR(COURT_REVIEW_REG_DATE, 'YYYY-MM-DD HH24:MI') AS courtReviewRegisteredDate
+		     , COURT_REVIEW_SATISFACTION AS courtReviewSatisfaction
+		     , MIN_COURT_CAPACITY AS minCourtCapacity
+		     , MAX_COURT_CAPACITY AS maxCourtCapacity
+		     , COURT_REG_CODE AS courtCode
+		     , REGISTRANT_ACCT_CODE AS registrantAccountCode
+		     , REGISTRANT_NICKNAME AS registrantNickname
+		     , COURT_REVIEW_DEL_DATE AS courtReviewDelDate
+		     , COURT_REVIEW_STATUS AS courtReviewStatus
+		     , LIKES AS likes
+		     , DISLIKES AS dislikes
+		     , TOILET AS toilet
+		     , SHOWER AS shower
+		     , PARK AS parkinglot
+		     , CASE WHEN E.VOTER_ACCT_CODE IS NOT NULL THEN 'YES'
+		            ELSE 'NO'
+		       END AS pollOrNot
+		     , CASE WHEN E.COURT_REVIEW_LIKE_CODE IS NULL THEN NULL
+		            WHEN E.COURT_REVIEW_LIKE_CODE = 'ZU01' THEN 'LIKE'
+		            ELSE 'DISLIKE'
+		       END AS pollLikeOrDislike
+		FROM
+		(
+			SELECT ROWNUM AS RNUM, V.*
+			FROM VIEW_COURT_REVIEW V
+			LEFT JOIN
+			(
+			    SELECT *
+			    FROM TBL_CORUT_REV_POLL
+	]]>
+	<if test="userAccountCode != null">	  
+			    WHERE VOTER_ACCT_CODE=#{userAccountCode}
+	</if>
+	<![CDATA[
+			) E
+			ON V.COURT_REVIEW_CODE = E.COURT_REVIEW_CODE
+			WHERE COURT_REVIEW_STATUS NOT LIKE '삭제'
+			  AND COURT_REVIEW_STATUS NOT LIKE '제재'
+	]]>
+	<if test='order == null or order.equals("LIKE")'>	
+			ORDER BY (LIKES-DISLIKES) DESC, COURT_REVIEW_REG_DATE DESC
+	</if>
+	<if test='order != null and order.eqauls("DATE")'>
+			ORDER BY COURT_REVIEW_REG_DATE DESC, (LIKES-DISLIKES) DESC 
+	</if>
+	<![CDATA[
+		)
+		WHERE RNUM >= #{start} AND RNUM <= #{end}
+	]]>
+	</select>
+	
+	<!-- public int countCourtReviews(String courtCode); // 특정코트 코트리뷰 전체 수 -->
+	<select id="countCourtReviews" parameterType="java.lang.String" resultType="java.lang.Integer">
+	<![CDATA[
+		SELECT COUNT(*)
+		FROM VIEW_COURT_REVIEW
+		WHERE COURT_REG_CODE = #{courtCode}
+		  AND COURT_REVIEW_STATUS != '삭제'
+		  AND COURT_REVIEW_STATUS != '제재'
+	]]>
+	</select>
+	<!-- public CourtDTO getCourt(String courtCode); // 특정코트 조회 -->
+	<select id="getCourt" resultType="com.amanne.biscuitball.mybatis.CourtDTO">
+		SELECT COURT_REG_CODE AS courtCode
+		     , TO_CHAR(COURT_REG_DATE, 'YYYY-MM-DD HH24:MI') AS courtRegisteredDate
+		     , COURT_MAP_POSITION AS mapPosition
+		     , REGISTRANT_ACCT_CODE AS registrantAccountCode
+		     , USER_NICKNAME AS registrantNickname
+		     , NVL(MY_COURT_COUNT,0) AS myCourtCount
+		     , COURT_IMG1 AS courtImg1
+		     , COURT_IMG2 AS courtImg2
+		     , COURT_IMG3 AS courtImg3
+		     , COURT_NAME_CODE AS courtNameCode
+		     , COURT_NAME AS courtName
+		     , COURT_NAME_TOTAL_PERCENT AS courtNamePollRate
+		     , AVG_COURT_MNG_SCORE AS avgCourtManageScore
+		     , AVG_COURT_SATISFACTION AS avgCourtSatisfaction
+		     , COURT_RATING AS courtRating
+		     , MIN_COURT_CAPACITY AS minCourtCapacity
+		     , MAX_COURT_CAPACITY AS maxCourtCapacity
+		     , WASHROOM AS toilet
+		     , CONFIDENCE_WASHROOM AS toiletConfidence
+		     , SHWER_ROMM AS shower
+		     , CONFIDENCE_SHWER_ROMM AS showerConfidence
+		     , PARKING_LOT AS parkinglot
+		     , CONFIDENCE_PARKING_LOT AS parkinglotConfidence
+		     , ENROLLMENT_YES_COUNT AS enrollYesCount
+		     , ENROLLMENT_NO_COUNT AS enrollNoCount
+		     , COURT_DELREQ_CODE AS delRequestCode
+		     , TO_CHAR(COURT_DELREQ_DATE, 'YYYY-MM-DD HH24:MI') AS delRequestDate
+		     , TO_CHAR(APPROVE_DATE, 'YYYY-MM-DD HH24:MI') AS delApproveDate
+		     , COURT_DELETE_POLL_YES AS delRequestPollYesCount
+		     , COURT_DELETE_POLL_NO AS delRequestPollNoCount
+		     , DEL_ADMIN_CODE AS delAdminCode
+		     , TO_CHAR(ADMIN_COURT_DEL_DATE, 'YYYY-MM-DD HH24:MI') AS adminDelDate
+		     , COURT_STATUS AS courtStatus
+		     , BLIND_STATUS AS blindStatus
+		FROM VIEW_COURT
+		WHERE COURT_REG_CODE = #{courtCode}
+	</select>
+	
+	<!-- public String getCourtReviewByAuthor(String courtCode, String userAccountCode); // 특정코트 코트리뷰 등록 여부 -->
+	<select id="getCourtReviewByAuthor" resultType="com.amanne.biscuitball.mybatis.CourtReviewDTO">
+		SELECT COURT_REVIEW_CODE AS courtReviewCode
+		     , COURT_REVIEW_CONTENT AS courtReviewContent
+		     , COURT_REVIEW_MNG_SCORE AS courtReviewManageScore
+		     , COURT_REVIEW_REG_DATE AS courtReviewRegisteredDate
+		     , COURT_REVIEW_SATISFACTION AS courtReviewSatisfaction
+		     , MIN_COURT_CAPACITY AS minCourtCapacity
+		     , MAX_COURT_CAPACITY AS maxCourtCapacity
+		     , COURT_REG_CODE AS courtCode
+		     , REGISTRANT_ACCT_CODE AS registrantAccountCode
+		     , REGISTRANT_NICKNAME AS registrantNickname
+		     , TO_CHAR(COURT_REVIEW_DEL_DATE, 'YYYY-MM-DD HH24:MI') AS courtReviewDelDate
+		     , COURT_REVIEW_STATUS AS courtReviewStatus
+		     , LIKES AS likes
+		     , DISLIKES AS dislikes
+		     , TOILET AS toilet
+		     , SHOWER AS shower
+		     , PARK AS parkinglot
+		FROM VIEW_COURT_REVIEW
+		WHERE COURT_REG_CODE=#{courtCode}
+		  AND REGISTRANT_ACCT_CODE=#{userAccountCode}
+	</select>
+
+</mapper>

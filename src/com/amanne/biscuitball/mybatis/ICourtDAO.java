@@ -1,43 +1,44 @@
 package com.amanne.biscuitball.mybatis;
 
-import java.util.List;
+import java.util.ArrayList;
+
+import org.apache.ibatis.annotations.Param;
 
 public interface ICourtDAO
 {
 	public int registerCourt(CourtDTO dto); // 코트등록
 
-	public int pollCourtRegistrationYes(String courtCode, String userAccountCode); // 코트등록찬성투표
+	public void pollCourtRegistrationYes(PollDTO dto); // 코트등록찬성투표
 
-	public int pollCourtRegistrationNo(String courtCode, String userAccountCode); // 코트등록반대투표
+	public void pollCourtRegistrationNo(PollDTO dto); // 코트등록반대투표
 
-	public int makeCourtDeleteRequest(String courtCode, String userAccountCode); // 코트삭제요청
+	public void makeCourtDeleteRequest(CourtDeleteRequestDTO dto); // 코트삭제요청
 
-	public int pollCourtDeleteRequestYes(String courtDelRequestCode, String userAccountCode); // 코트삭제찬성투표
+	public void pollCourtDeleteRequestYes(PollDTO dto); // 코트삭제찬성투표
 
-	public int pollDeleteRequestNo(String courtDelRequestCode, String userAccountCode); // 코트삭제반대투표
+	public void pollCourtDeleteRequestNo(PollDTO dto); // 코트삭제반대투표
 
 	public int addCourtName(CourtNameDTO dto); // 코트이름등록
 
-	public int pollCourtName(String courtNameCode, String userAccountCode); // 코트이름투표
+	public int pollCourtName(PollDTO dto); // 코트이름투표
 
-	public int addCourtTelephone(String courtCode, String telephone, String userAccountCode); // 코트연락처등록
+	public int addCourtTelephone(@Param("courtCode") String courtCode, @Param("telephone") String telephone, @Param("userAccountCode") String userAccountCode); // 코트연락처등록
 
-	public int addCourtReview(CourtReviewDTO dto); // 코트리뷰등록
+	public void addCourtReview(CourtReviewDTO dto); // 코트리뷰등록
 
-	public int approveCourtDeleteRequest(CourtDTO courtDTO, String reslutCode); // 코트삭제승인
-
+	public void approveCourtDeleteRequest(CourtDeleteRequestDTO dto); // 코트삭제승인
 	
-	public List<CourtDTO> getCourtListByMapPostion(String posX, String posY); // 특정좌표 근처 코트 조회
+	public ArrayList<CourtDTO> getCourtListByMapPosition(@Param("posX") String posX, @Param("posY") String posY, @Param("distance") double distance); // 특정좌표 근처 코트 조회
 
-	public List<CourtNameDTO> getCourtNameList(String courtCode, int start, int end); // 특정코트 코트이름 조회
+	public ArrayList<CourtNameDTO> getCourtNameList(@Param("courtCode") String courtCode, @Param("userAccountCode") String userAccountCode, @Param("start") int start, @Param("end") int end, @Param("order") String order); // 특정코트 코트이름 조회
 
 	public int countCourtNames(String courtCode); // 특정코트 코트이름 전체 수
 
-	public List<CourtReviewDTO> getCourtReviewList(String courtCode, int start, int end); // 특정코트 코트리뷰 조회
+	public ArrayList<CourtReviewDTO> getCourtReviewList(@Param("courtCode") String courtCode, @Param("userAccountCode") String userAccountCode, @Param("start") int start, @Param("end") int end, @Param("order") String order); // 특정코트 코트리뷰 조회
 
 	public int countCourtReviews(String courtCode); // 특정코트 코트리뷰 전체 수
 
 	public CourtDTO getCourt(String courtCode); // 특정코트 조회
 
-	public String isReviewPossible(String courtCode, String userAccountCode); // 특정코트 코트리뷰 등록 여부
+	public CourtReviewDTO getCourtReviewByAuthor(@Param("courtCode") String courtCode, @Param("userAccountCode") String userAccountCode); // 특정코트 코트리뷰 등록 여부
 }
