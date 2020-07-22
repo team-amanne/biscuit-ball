@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.amanne.biscuitball.mybatis.IMeetingDAO">
+
+<!--	public int registerMeeting(MeetingDTO meetingDTO, MeetingMemberDTO meetingMemberDTO); // 모임개설  -->
+		<select id="registerMeeting"
+ 		statementType="CALLABLE">
+		{ call PRC_MEETING
+			(
+			    #{meetingDTO.meetingSubject}, 			<!-- 모임 제목  -->
+			    #{meetingDTO.meetingPeopleNumber}, 		<!-- 모임 총 인원수 -->
+			    #{meetingDTO.meetingDate},				<!-- 모임 시작시간 -->		
+			    #{meetingDTO.meetingEndDate},			<!-- 모임 종료시간 -->
+			    #{meetingDTO.meetingCloseDate},			<!-- 모임 모집 종료시간 -->
+			    #{meetingDTO.meetingNotice},			<!-- 모임 공지사항 -->
+			    #{meetingDTO.ablLimitCode},				<!-- 모임 실력 조건 -->
+			    #{meetingDTO.meetingTypeCode},			<!-- 모임 타입 코드 -->
+			    #{meetingDTO.quickPlayOrNot},			<!-- 빠른 농구 가능 여부 -->
+			    #{meetingDTO.courtRegistrationCode},	<!-- 모임 장소(코트) -->
+			    #{meetingDTO.openerAcctCode},			<!-- 개설자 계정 코드 -->
+			    #{meetingMemberDTO.ballExistOrNot}      <!-- 개설자 공 소유 여부 -->
+		   
+			)
+		}
+		</select>
+
+<!--	public int joinMeeting(MeetingMemberDTO meetingMemberDTO); // 모임참가  -->
+
+<!--	public int cancelJoinMeeting(MeetingMemberDTO meetingMemberDTO); // 모임참가취소  -->
+
+<!--	public int inputMeetingPlaylog(MeetingPlaylogDTO meetingPlaylogDTO); // 플레이로그등록  -->
+
+<!--	public int inputFairplayScore(EvaluationDTO fairplayScoreDTO); // FPS 평가  -->
+<!--	public int inputPersonalAbilityEvaluation(EvaluationDTO personalAbilityEvaluationDTO); // 실력평가  -->
+<!--	public int inputNoshow(NoshowDTO noshowDTO); // 노쇼기록  -->
+<!--	public int updateMeetingNotice(MeetingDTO meetingDTO); // 모임공지사항수정  -->
+<!--	public int registerMeetingCommentComment(MeetingCommentDTO meetingCommentDTO); // 모임댓글등록  -->
+<!--	public int updateMeetingCommentComment(MeetingCommentDTO meetingCommentDTO); // 모임댓글수정  -->
+<!--	public int removeMeetingCommentComment(MeetingCommentDTO meetingCommentDTO); // 모임댓글삭제  -->
+<!--	public List<MeetingDTO> getMeetingByMapPosition(String posX, String posY); // 코트중심 예정 모임 조회  -->
+<!--	public int countMeetingByMapPosition(String posX, String posY); // 코트중심 예정 모임 전체 수  -->
+<!--	public List<MeetingDTO> getMeetingListByCourt(String courtCode); // 특정코트의 예정 모임 조회  -->
+<!--	public int countMeetingsByCourt(String courtCode); // 특정코트의 예정 모임 수  -->
+<!--	public List<MeetingDTO> getPastMeetingList(String userAccountCode); // 참여했던 모임 조회  -->
+<!--	public int countMetList(String userAccountCode); // 참여했던 모임 전체 수  -->
+<!--	public List<MeetingDTO> getMeetingListNotInputPlaylog(String userAccountCode); // PL입력x 모임 조회  -->
+<!--	public int countMeetingsNotInputPlaylog(String userAccountCode); // PL입력x 모임 전체 수  -->
+<!--	public List<MeetingDTO> getJoinMeetingList(String userAccountCode); // 참여신청한 모임 조회(예정)  -->
+<!--	public int countJoinMeeting(String userAccountCode); // 참여신청한 모임 전체 수(예정)  -->
+<!--	public MeetingDTO getMeeting(String meetingCode); // 특정모임 조회  -->
+<!--    public List<MeetingMemberDTO> getMeetingMemberList(String meetingCode); // 특정모임 참가자 조회 -->
+
+
+</mapper>

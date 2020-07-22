@@ -20,113 +20,170 @@ public class MeetingDTO
 	private String meetingTypeName; 		// 모임타입
 	private String quickPlayOrNot; 			// 빠른농구 가능여부
 	private String courtRegistrationCode; 	// 모임코트개설번호
-	private int minTierCode; 				// 최소티어
-	private int maxTierCode; 				// 최대티어
+	private String minTierGrade; 			// 최소티어
+	private String maxTierGrade; 			// 최대티어
+	private String ablLimitCode;			// 실력조건코드
 	private String confirmOrNot; 			// 모임확정여부
 	private String blindOrNot; 				// 블라인드여부
+	private String openerAcctCode;			// 개설자 계정 코드
 	private String returnValue;
 	
-	public String getMeetingCode() {
+	
+	public String getMeetingCode()
+	{
 		return meetingCode;
 	}
-	public void setMeetingCode(String meetingCode) {
+	public void setMeetingCode(String meetingCode)
+	{
 		this.meetingCode = meetingCode;
 	}
-	public String getMeetingSubject() {
+	public String getMeetingSubject()
+	{
 		return meetingSubject;
 	}
-	public void setMeetingSubject(String meetingSubject) {
+	public void setMeetingSubject(String meetingSubject)
+	{
 		this.meetingSubject = meetingSubject;
 	}
-	public int getMeetingPeopleNumber() {
+	public int getMeetingPeopleNumber()
+	{
 		return meetingPeopleNumber;
 	}
-	public void setMeetingPeopleNumber(int meetingPeopleNumber) {
+	public void setMeetingPeopleNumber(int meetingPeopleNumber)
+	{
 		this.meetingPeopleNumber = meetingPeopleNumber;
 	}
-	public String getMeetingOpenDate() {
+	public String getMeetingOpenDate()
+	{
 		return meetingOpenDate;
 	}
-	public void setMeetingOpenDate(String meetingOpenDate) {
+	public void setMeetingOpenDate(String meetingOpenDate)
+	{
 		this.meetingOpenDate = meetingOpenDate;
 	}
-	public String getMeetingDate() {
+	public String getMeetingDate()
+	{
 		return meetingDate;
 	}
-	public void setMeetingDate(String meetingDate) {
+	public void setMeetingDate(String meetingDate)
+	{
 		this.meetingDate = meetingDate;
 	}
-	public String getMeetingCloseDate() {
+	public String getMeetingCloseDate()
+	{
 		return meetingCloseDate;
 	}
-	public void setMeetingCloseDate(String meetingCloseDate) {
+	public void setMeetingCloseDate(String meetingCloseDate)
+	{
 		this.meetingCloseDate = meetingCloseDate;
 	}
-	public String getMeetingEndDate() {
+	public String getMeetingEndDate()
+	{
 		return meetingEndDate;
 	}
-	public void setMeetingEndDate(String meetingEndDate) {
+	public void setMeetingEndDate(String meetingEndDate)
+	{
 		this.meetingEndDate = meetingEndDate;
 	}
-	public String getMeetingNotice() {
+	public String getMeetingNotice()
+	{
 		return meetingNotice;
 	}
-	public void setMeetingNotice(String meetingNotice) {
+	public void setMeetingNotice(String meetingNotice)
+	{
 		this.meetingNotice = meetingNotice;
 	}
-	public String getMeetingTypeCode() {
+	public String getMeetingTypeCode()
+	{
 		return meetingTypeCode;
 	}
-	public void setMeetingTypeCode(String meetingTypeCode) {
+	public void setMeetingTypeCode(String meetingTypeCode)
+	{
 		this.meetingTypeCode = meetingTypeCode;
 	}
-	public String getMeetingTypeName() {
+	public String getMeetingTypeName()
+	{
 		return meetingTypeName;
 	}
-	public void setMeetingTypeName(String meetingTypeName) {
+	public void setMeetingTypeName(String meetingTypeName)
+	{
 		this.meetingTypeName = meetingTypeName;
 	}
-	public String getQuickPlayOrNot() {
+	public String getQuickPlayOrNot()
+	{
 		return quickPlayOrNot;
 	}
-	public void setQuickPlayOrNot(String quickPlayOrNot) {
+	public void setQuickPlayOrNot(String quickPlayOrNot)
+	{
 		this.quickPlayOrNot = quickPlayOrNot;
 	}
-	public String getCourtRegistrationCode() {
+	public String getCourtRegistrationCode()
+	{
 		return courtRegistrationCode;
 	}
-	public void setCourtRegistrationCode(String courtRegistrationCode) {
+	public void setCourtRegistrationCode(String courtRegistrationCode)
+	{
 		this.courtRegistrationCode = courtRegistrationCode;
 	}
-	public int getMinTierCode() {
-		return minTierCode;
+	public String getMinTierGrade()
+	{
+		return minTierGrade;
 	}
-	public void setMinTierCode(int minTierCode) {
-		this.minTierCode = minTierCode;
+	public void setMinTierGrade(String minTierGrade)
+	{
+		this.minTierGrade = minTierGrade;
 	}
-	public int getMaxTierCode() {
-		return maxTierCode;
+	public String getMaxTierGrade()
+	{
+		return maxTierGrade;
 	}
-	public void setMaxTierCode(int maxTierCode) {
-		this.maxTierCode = maxTierCode;
+	public void setMaxTierGrade(String maxTierGrade)
+	{
+		this.maxTierGrade = maxTierGrade;
 	}
-	public String getConfirmOrNot() {
+	public String getAblLimitCode()
+	{
+		return ablLimitCode;
+	}
+	public void setAblLimitCode(String ablLimitCode)
+	{
+		this.ablLimitCode = ablLimitCode;
+	}
+	public String getConfirmOrNot()
+	{
 		return confirmOrNot;
 	}
-	public void setConfirmOrNot(String confirmOrNot) {
+	public void setConfirmOrNot(String confirmOrNot)
+	{
 		this.confirmOrNot = confirmOrNot;
 	}
-	public String getBlindOrNot() {
+	public String getBlindOrNot()
+	{
 		return blindOrNot;
 	}
-	public void setBlindOrNot(String blindOrNot) {
+	public void setBlindOrNot(String blindOrNot)
+	{
 		this.blindOrNot = blindOrNot;
 	}
-	public String isReturnValue() {
+	public String getOpenerAcctCode()
+	{
+		return openerAcctCode;
+	}
+	public void setOpenerAcctCode(String openerAcctCode)
+	{
+		this.openerAcctCode = openerAcctCode;
+	}
+	public String getReturnValue()
+	{
 		return returnValue;
 	}
-	public void setReturnValue(String returnValue) {
+	public void setReturnValue(String returnValue)
+	{
 		this.returnValue = returnValue;
 	}
+	
+	
+	
+	
 	
 }
