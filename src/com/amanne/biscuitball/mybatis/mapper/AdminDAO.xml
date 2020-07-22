@@ -128,7 +128,7 @@
 		)
 	</update>
 	
-	<!-- 	public int addReportUserResolve(ReportUserDTO reportUserDTO); // 회원신고처리 -->
+	<!-- 	public void addReportUserResolve(ReportUserDTO reportUserDTO); // 회원신고처리 -->
 	<select id="addReportUserResolve"
 	 statementType="CALLABLE"
 	 parameterType="com.amanne.biscuitball.mybatis.ReportUserDTO" >
@@ -203,7 +203,7 @@
 		)
 	</update>
 	
-	<!-- 	public int addReportCrewResolve(ReportCrewDTO reportCrewDTO); // 크루신고처리 -->
+	<!-- 	public void addReportCrewResolve(ReportCrewDTO reportCrewDTO); // 크루신고처리 -->
 	<select id="addReportCrewResolve"
 	 statementType="CALLABLE"
 	 parameterType="com.amanne.biscuitball.mybatis.ReportCrewDTO" >
@@ -277,7 +277,7 @@
 		)
 	</update>
 	
-	<!-- 	public int addReportCrewPostResolve(ReportCrewPostDTO reportCrewPostDTO); // 신고처리 -->
+	<!-- 	public void addReportCrewPostResolve(ReportCrewPostDTO reportCrewPostDTO); // 신고처리 -->
 	<select id="addReportCrewPostResolve"
 	 statementType="CALLABLE"
 	 parameterType="com.amanne.biscuitball.mybatis.ReportCrewPostDTO" >
@@ -351,7 +351,7 @@
 		)
 	</update>
 	
-	<!-- 	public int addReportCrewCommentResolve(ReportCrewCommentDTO reportCommentDTO); // 신고처리 -->
+	<!-- 	public void addReportCrewCommentResolve(ReportCrewCommentDTO reportCommentDTO); // 신고처리 -->
 	<select id="addReportCrewCommentResolve"
 	 statementType="CALLABLE"
 	 parameterType="com.amanne.biscuitball.mybatis.ReportCrewCommentDTO" >
@@ -424,7 +424,7 @@
 		)
 	</update>
 	
-	<!-- 	public int addReportMeetResolve(ReportMeetDTO reportMeetDTO); // 신고처리 -->
+	<!-- 	public void addReportMeetResolve(ReportMeetDTO reportMeetDTO); // 신고처리 -->
 	<select id="addReportMeetResolve"
 	 statementType="CALLABLE"
 	 parameterType="com.amanne.biscuitball.mybatis.ReportMeetDTO" >
@@ -457,7 +457,7 @@
 	</insert>
 	
 	<!-- 	public int cancelReportMeet(String meetReportCode); // 신고취소 -->
-	<delete id="cancelReportMeetComment" parameterType="java.lang.String">
+	<delete id="cancelReportMeet" parameterType="java.lang.String">
 		DELETE FROM TBL_MEET_RPT
 		WHERE MEET_RPT_CODE = #{meetReportCode}
 	</delete>
@@ -498,7 +498,7 @@
 		)
 	</update>
 	
-	<!-- 	public int addReportMeetCommentResolve(ReportMeetCommentDTO reportMeetCommentDTO); // 신고처리 -->
+	<!-- 	public void addReportMeetCommentResolve(ReportMeetCommentDTO reportMeetCommentDTO); // 신고처리 -->
 	<select id="addReportMeetCommentResolve"
 	 statementType="CALLABLE"
 	 parameterType="com.amanne.biscuitball.mybatis.ReportMeetCommentDTO" >
@@ -572,7 +572,7 @@
 		)
 	</update>
 	
-	<!-- 	public int addReportCourtNameResolve(ReportCourtNameDTO reportCourtNameDTO); // 신고처리 -->
+	<!-- 	public void addReportCourtNameResolve(ReportCourtNameDTO reportCourtNameDTO); // 신고처리 -->
 	<select id="addReportCourtNameResolve"
 	 statementType="CALLABLE"
 	 parameterType="com.amanne.biscuitball.mybatis.ReportCourtNameDTO" >
@@ -605,7 +605,7 @@
 	</insert>
 	
 	<!-- 	public int cancelReportCourtName(String courtNameReportCode); // 신고취소 -->
-	<delete id="" parameterType="java.lang.String">
+	<delete id="cancelReportCourtName" parameterType="java.lang.String">
 		DELETE FROM TBL_COURT_NAME_RPT
 		WHERE COURT_NAME_RPT_CODE=#{courtNameReportCode}
 	</delete>
@@ -646,7 +646,7 @@
 		)
 	</update>
 	
-	<!-- 	public int addReportCourtReviewResolve(ReportCourtReviewDTO reportCourtReviewDTO); // 신고처리 -->
+	<!-- 	public void addReportCourtReviewResolve(ReportCourtReviewDTO reportCourtReviewDTO); // 신고처리 -->
 	<select id="addReportCourtReviewResolve"
 	 statementType="CALLABLE"
 	 parameterType="com.amanne.biscuitball.mybatis.ReportCourtReviewDTO" >
@@ -720,7 +720,7 @@
 		)	
 	</update>
 
-	<!-- 	public int addInquiryResolve(InquiryDTO inquiryDTO); // 문의처리 -->
+	<!-- 	public void addInquiryResolve(InquiryDTO inquiryDTO); // 문의처리 -->
 	<select id="addInquiryResolve"
 	 statementType="CALLABLE"
 	 parameterType="com.amanne.biscuitball.mybatis.InquiryDTO" >
@@ -733,12 +733,12 @@
 	</select>
 	
 	<!-- 	public int removeInquiry(String inquiryCode); // 문의취소 -->
-	<delete id="" parameterType="java.lang.String">
+	<delete id="removeInquiry" parameterType="java.lang.String">
 		DELETE FROM TBL_INQUIRY
 		WHERE INQ_CODE = #{inquiryCode}
 	</delete>
 	
-	<!-- 	public int makeUserPenalty(PenaltyDTO dto); // 관리자 회원 제재 -->
+	<!-- 	public void makeUserPenalty(PenaltyDTO dto); // 관리자 회원 제재 -->
 	<select id="makeUserPenalty"
 	 statementType="CALLABLE"
 	 parameterType="com.amanne.biscuitball.mybatis.PenaltyDTO" >
@@ -753,7 +753,7 @@
 		}
 	</select>
 	
-	<!-- 	public int makeCrewPenalty(PenaltyDTO dto); // 관리자 크루 제재 -->
+	<!-- 	public void makeCrewPenalty(PenaltyDTO dto); // 관리자 크루 제재 -->
 	<select id="makeCrewPenalty"
 	 statementType="CALLABLE"
 	 parameterType="com.amanne.biscuitball.mybatis.PenaltyDTO" >
@@ -768,7 +768,7 @@
 		}
 	</select>
 	
-	<!-- 	public int makeCrewPostPenalty(PenaltyDTO dto); // 관리자 크루 게시글 제재 -->
+	<!-- 	public void makeCrewPostPenalty(PenaltyDTO dto); // 관리자 크루 게시글 제재 -->
 	<select id="makeCrewPostPenalty"
 	 statementType="CALLABLE"
 	 parameterType="com.amanne.biscuitball.mybatis.PenaltyDTO" >
@@ -782,7 +782,7 @@
 		}
 	</select>
 	
-	<!-- 	public int makeCrewCommentPenalty(PenaltyDTO dto); // 관리자 크루 댓글 제재 -->
+	<!-- 	public void makeCrewCommentPenalty(PenaltyDTO dto); // 관리자 크루 댓글 제재 -->
 	<select id="makeCrewCommentPenalty"
 	 statementType="CALLABLE"
 	 parameterType="com.amanne.biscuitball.mybatis.PenaltyDTO" >
@@ -796,7 +796,7 @@
 		}
 	</select>
 	
-	<!-- 	public int makeMeetPenalty(PenaltyDTO dto); // 관리자 모임 제재 -->
+	<!-- 	public void makeMeetPenalty(PenaltyDTO dto); // 관리자 모임 제재 -->
 	<select id="makeMeetPenalty"
 	 statementType="CALLABLE"
 	 parameterType="com.amanne.biscuitball.mybatis.PenaltyDTO" >
@@ -810,7 +810,7 @@
 		}
 	</select>
 	
-	<!-- 	public int makeMeetCommentPenalty(PenaltyDTO dto); // 관리자 모임 댓글 제재 -->
+	<!-- 	public void makeMeetCommentPenalty(PenaltyDTO dto); // 관리자 모임 댓글 제재 -->
 	<select id="makeMeetCommentPenalty"
 	 statementType="CALLABLE"
 	 parameterType="com.amanne.biscuitball.mybatis.PenaltyDTO" >
@@ -824,7 +824,7 @@
 		}
 	</select>
 	
-	<!-- 	public int makeCourtNamePenalty(PenaltyDTO dto); // 관리자 코트 이름 제재 -->
+	<!-- 	public void makeCourtNamePenalty(PenaltyDTO dto); // 관리자 코트 이름 제재 -->
 	<select id="makeCourtNamePenalty"
 	 statementType="CALLABLE"
 	 parameterType="com.amanne.biscuitball.mybatis.PenaltyDTO" >
@@ -838,7 +838,7 @@
 		}
 	</select>
 	
-	<!-- 	public int makeCourtReviewPenalty(PenaltyDTO dto); // 관리자 코트 리뷰 제재 -->
+	<!-- 	public void makeCourtReviewPenalty(PenaltyDTO dto); // 관리자 코트 리뷰 제재 -->
 	<select id="makeCourtReviewPenalty"
 	 statementType="CALLABLE"
 	 parameterType="com.amanne.biscuitball.mybatis.PenaltyDTO" >
@@ -1365,4 +1365,61 @@
 	]]>
 	</select>
 	
+	<!-- public ArrayList<AdminDTO> getAdminList(String searchKey, String searchValue, int start, int end); // 전체 관리자 -->
+	<select id="getAdminList" resultType="com.amanne.biscuitball.mybatis.AdminDTO">
+	<![CDATA[
+		SELECT ADMIN_CODE AS adminCode
+		     , ADMIN_EMAIL AS adminEmail
+		     , ADMIN_NICKNAME AS adminNickname
+		     , CHIEF_OR_NOT AS chiefAdmin
+		FROM
+		(
+			SELECT ROWNUM AS RNUM
+			     , A.ADMIN_CODE
+			     , A.ADMIN_EMAIL
+			     , A.ADMIN_NICKNAME
+			     , YN.YES_NO AS CHIEF_OR_NOT
+			FROM TBL_ADMIN A
+			LEFT JOIN TBL_YES_NO YN
+			ON A.CHIEF_ADMIN_CODE = YN.YES_NO_CODE
+	]]> 
+		<if test='searchKey != null'>
+			<if test='searchKey.equals("NICKNAME")'>
+				WHERE ADMIN_NICKNAME LIKE '%' || #{searchValue} || '%'
+			</if>
+			<if test='searchKey.equals("EMAIL")'>
+				WHERE ADMIN_EMAIL LIKE '%' || #{searchValue} || '%'
+			</if>
+		</if>
+	<![CDATA[	
+		)
+		WHERE RNUM >= #{start} AND RNUM <= #{end}
+	]]> 
+	</select>
+	
+	<!-- public int countAdmins(String searchKey, String searchValue); // 전체 관리자 수	 -->
+	<select id="countAdmins" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM TBL_ADMIN
+	<if test='searchKey != null'>
+		<if test='searchKey.equals("NICKNAME")'>
+			WHERE ADMIN_NICKNAME LIKE '%' || #{searchValue} || '%'
+		</if>
+		<if test='searchKey.equals("EMAIL")'>
+			WHERE ADMIN_EMAIL LIKE '%' || #{searchValue} || '%'
+		</if>
+	</if>
+	</select>
+	
+	<!-- public AdminDTO getAdmin(String adminCode);	// 특정 관리자 조회 -->
+	<select id="getAdmin" resultType="com.amanne.biscuitball.mybatis.AdminDTO">
+		SELECT A.ADMIN_CODE AS adminCode
+		     , A.ADMIN_EMAIL AS adminEmail
+		     , A.ADMIN_PWD AS adminPassword
+		     , A.ADMIN_NICKNAME AS adminNickname
+		     , YN.YES_NO AS chiefAdmin
+		FROM TBL_ADMIN A
+		LEFT JOIN TBL_YES_NO YN
+		ON A.CHIEF_ADMIN_CODE = YN.YES_NO_CODE
+	</select>
 </mapper>
