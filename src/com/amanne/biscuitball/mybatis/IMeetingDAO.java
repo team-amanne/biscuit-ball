@@ -44,7 +44,7 @@ public interface IMeetingDAO
 	
 	public List<MeetingDTO> getPastMeetingList(String userAccountCode); // 참여했던 모임 조회
 
-	public int countMetList(String userAccountCode); // 참여했던 모임 전체 수
+	public int countMeetList(String userAccountCode); // 참여했던 모임 전체 수
 
 	
 	

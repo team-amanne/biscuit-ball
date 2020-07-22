@@ -6,6 +6,7 @@
 <mapper namespace="com.amanne.biscuitball.mybatis.IMeetingDAO">
 
 <!--	public int registerMeeting(MeetingDTO meetingDTO, MeetingMemberDTO meetingMemberDTO); // 모임개설  -->
+		
 		<select id="registerMeeting"
  		statementType="CALLABLE">
 		{ call PRC_MEETING
@@ -28,29 +29,195 @@
 		</select>
 
 <!--	public int joinMeeting(MeetingMemberDTO meetingMemberDTO); // 모임참가  -->
+		
+		<insert id="joinMeeting" parameterType="com.amanne.biscuitball.mybatis.MeetingMemberDTO">
+		INSERT INTO TBL_MEETING_JOIN(MEET_JOIN_CODE, MEET_CODE, MEET_JOIN_DATE , JOIN_ACCT_CODE, CAPTAIN_CODE, BALL_EXIST_CODE)
+		VALUES(FN_CREATE_CODE('TBL_MEETING_JOIN', SEQ_MEETING_JOIN.NEXTVAL), #{meetCode}, SYSDATE , #{joinAccountCode}, #{captainOrNot}, #{ballExistOrNot})
+		</insert>	
+		
 
 <!--	public int cancelJoinMeeting(MeetingMemberDTO meetingMemberDTO); // 모임참가취소  -->
-
+		
+		<select id="cancelJoinMeeting"
+ 		statementType="CALLABLE"
+ 		parameterType="com.amanne.biscuitball.mybatis.MeetingMemberDTO" >
+		{ call PRC_MEETING_JOIN_CANCEL
+			(
+			    #{joinAccountCode}, 			<!-- 모임 취소 회원 코드  -->
+			    #{meetCode}, 					<!-- 취소할 모임 번호 -->
+			)
+		}
+		</select>
+		
 <!--	public int inputMeetingPlaylog(MeetingPlaylogDTO meetingPlaylogDTO); // 플레이로그등록  -->
 
+		<insert id="inputMeetingPlaylog" parameterType="com.amanne.biscuitball.mybatis.MeetingPlaylogDTO">
+		INSERT INTO TBL_PLAYLOG(PL_CODE, PL_REG_DATE, EVALUATOR_MEET_JOIN_CODE , PLAYTIME)
+		VALUES(FN_CREATE_CODE('TBL_PLAYLOG', SEQ_PLAYLOG.NEXTVAL), SYSDATE , #{meetJoinCode},#{playTime} )
+		</insert>	
+
 <!--	public int inputFairplayScore(EvaluationDTO fairplayScoreDTO); // FPS 평가  -->
+		
+		<insert id="inputFairplayScore" parameterType="com.amanne.biscuitball.mybatis.EvaluationDTO">
+		INSERT INTO TBL_FAIRPLAYSCORE(FPS_CODE, FAIRPLAYSCORE , PL_CODE , EVALUATEE_MEET_JOIN_CODE)
+		VALUES(FN_CREATE_CODE('TBL_FAIRPLAYSCORE', SEQ_FAIRPLAYSCORE.NEXTVAL), #{fairplayScoreCode},#{playlogCode},#{evaluateeMeetingJoinCode})
+		</insert>
+		
 <!--	public int inputPersonalAbilityEvaluation(EvaluationDTO personalAbilityEvaluationDTO); // 실력평가  -->
+
+		<insert id="inputPersonalAbilityEvaluation" parameterType="com.amanne.biscuitball.mybatis.EvaluationDTO">
+		INSERT INTO TBL_PERSONAL_ABILITY_EVAL(PER_ABL_EVAL_CODE, PL_CODE , EVALUATEE_MEET_JOIN_CODE , ABL_EVAL_TYPE_CODE)
+		VALUES(FN_CREATE_CODE('TBL_PERSONAL_ABILITY_EVAL', SEQ_PERSONAL_ABILITY_EVAL.NEXTVAL), #{playlogCode},#{evaluateeMeetingJoinCode},#{abilityEvaluationTypeCode})
+		</insert>
+
 <!--	public int inputNoshow(NoshowDTO noshowDTO); // 노쇼기록  -->
-<!--	public int updateMeetingNotice(MeetingDTO meetingDTO); // 모임공지사항수정  -->
-<!--	public int registerMeetingCommentComment(MeetingCommentDTO meetingCommentDTO); // 모임댓글등록  -->
-<!--	public int updateMeetingCommentComment(MeetingCommentDTO meetingCommentDTO); // 모임댓글수정  -->
-<!--	public int removeMeetingCommentComment(MeetingCommentDTO meetingCommentDTO); // 모임댓글삭제  -->
-<!--	public List<MeetingDTO> getMeetingByMapPosition(String posX, String posY); // 코트중심 예정 모임 조회  -->
-<!--	public int countMeetingByMapPosition(String posX, String posY); // 코트중심 예정 모임 전체 수  -->
+
+		<insert id="inputNoshow" parameterType="com.amanne.biscuitball.mybatis.NoshowDTO">
+		INSERT INTO TBL_NOSHOW(NOSHOW_CODE, PL_CODE , NOSHOW_USER_JOIN_CODE)
+		VALUES(FN_CREATE_CODE('TBL_NOSHOW', SEQ_NOSHOW.NEXTVAL), #{playlogCode},#{noshowUserJoinCode})
+		</insert>
+
+<!--   public int updateMeetingNotice(MeetingDTO meetingDTO); // 모임공지사항수정  성철-->
+
+      <select id="updateMeetingNotice" parameterType="com.amanne.biscuitball.mybatis.MeetingDTO">
+         UPDATE TBL_MEETING
+         SET MEET_NOTICE=#{meetingNotice}
+         WHERE OPENER_ACCT_CODE=#{openerAcctCode}
+      </select>
+<!--   public int registerMeetingCommentComment(MeetingCommentDTO meetingCommentDTO); // 모임댓글등록 성철 -->
+
+      <select id="MeetingCommentDTO" parameterType="com.amanne.biscuitball.mybatis.MeetingCommentDTO">
+         INSERT INTO TBL_MEETING_COMMENT(MEET_CMNT_CODE, MEET_CMNT_CONTENT, MEET_CMNT_UPDATE_DATE, MEET_CMNT_REG_DATE
+         , MEET_JOIN_CODE, MEET_CMNT_DEL_DATE)
+         VALUES(FN_CREATE_CODE('TBL_MEETING_COMMENT', SEQ_MEETING_COMMENT.NEXTVAL), #{meetingCommentContent}, #{meetingCommentUpdateDate}
+         , #{meetingCommentUpdateDate}, #{meetingCode}, #{meetingCommentDelDate})      
+      </select>
+<!--   public int updateMeetingCommentComment(MeetingCommentDTO meetingCommentDTO); // 모임댓글수정 성철 -->
+
+      <select id="updateMeetingCommentComment" parameterType="com.amanne.biscuitball.mybatis.MeetingCommentDTO">
+         UPDATE TBL_MEETING_COMMENT
+         SET MEET_CMNT_CONTENT=#{meetingCommentContent}
+         WHERE MEET_CMNT_CODE = 
+         (
+             (SELECT MEET_CMNT_CODE
+              FROM VIEW_MEETING_COMMENT
+              WHERE MEET_CMNT_CODE = #{meetingCommentCode})
+         )
+      </select>
+<!--   public int removeMeetingCommentComment(MeetingCommentDTO meetingCommentDTO); // 모임댓글삭제 성철 -->
+
+      <select id="removeMeetingCommentComment" parameterType="com.amanne.biscuitball.mybatis.MeetingCommentDTO">
+         UPDATE TBL_MEETING_COMMENT
+         SET MEET_CMNT_DEL_DATE=#{SYSDATE}
+         WHERE MEET_CMNT_CODE = #{meetingCommentCode}
+         AND MEET_JOIN_CODE = 
+         (
+         	SELECT MEET_JOIN_CODE
+         	FROM VIEW_MEETING_JOIN
+         	WHERE JOIN_ACCT_CODE = #{authorAccountCode}
+         )
+         
+      </select>
+
+<!--	public List<MeetingDTO> getMeetingByMapPosition(String posX, String posY); // 코트중심 예정 모임 조회  보류ㅠㅠ-->
+		
+<!--	public int countMeetingByMapPosition(String posX, String posY); // 코트중심 예정 모임 전체 수  보류 ㅠㅠ -->
+
 <!--	public List<MeetingDTO> getMeetingListByCourt(String courtCode); // 특정코트의 예정 모임 조회  -->
+
+		<select id="getMeetingListByCourt" resultType="com.amanne.biscuitball.mybatis.MeetingDTO">
+		<![CDATA[
+			SELECT MEET_CODE
+				 , MEET_SUBJECT
+				 , MEET_PEOPLE_NUMBER
+				 , MEET_OP_DATE
+				 , MEET_DATE
+				 , MEET_END_DATE
+				 , MEET_CLOSE_DATE
+				 , MEET_NOTICE
+				 , MEET_ABL_LIMIT_CODE
+				 , MEET_TYPE_CODE
+				 , MEET_QUICK_PLAY_CODE
+			FROM TBL_MEETING
+			WHERE MEET_COURT_CODE = #{courtCode}
+		]]>
+		</select>
+
 <!--	public int countMeetingsByCourt(String courtCode); // 특정코트의 예정 모임 수  -->
+
+		<select id="countMeetingsByCourt" resultType="java.lang.Integer">
+		<![CDATA[
+			SELECT COUNT(*) AS COUNT
+			FROM TBL_MEETING
+			WHERE MEET_COURT_CODE = #{courtCode}
+		]]>
+		</select>
+		
 <!--	public List<MeetingDTO> getPastMeetingList(String userAccountCode); // 참여했던 모임 조회  -->
-<!--	public int countMetList(String userAccountCode); // 참여했던 모임 전체 수  -->
+
+		<select id="getPastMeetingList" resultType="com.amanne.biscuitball.mybatis.MeetingDTO">
+		<![CDATA[
+			SELECT MEET_CODE
+				 , MEET_SUBJECT
+				 , MEET_PEOPLE_NUMBER
+				 , MEET_TYPE_CODE
+				 , MEET_JOIN_DATE
+				 , JOIN_ACCT_CODE
+				 , USER_NICKNAME
+				 , CAPTAIN_OR_NOT
+			FROM VIEW_MEETING_JOIN
+			WHERE JOIN_ACCT_CODE = #{userAccountCode}
+		]]>
+		</select>
+
+<!--	public int countMeetList(String userAccountCode); // 참여했던 모임 전체 수  -->
+
+		<select id="countMeetList" resultType="java.lang.Integer">
+		<![CDATA[
+			SELECT COUNT(*) AS COUNT
+			FROM VIEW_MEETING_JOIN
+			WHERE JOIN_ACCT_CODE = #{userAccountCode}
+		]]>
+		</select>
+
 <!--	public List<MeetingDTO> getMeetingListNotInputPlaylog(String userAccountCode); // PL입력x 모임 조회  -->
+
+		<select id="getMeetingListNotInputPlaylog" resultType="com.amanne.biscuitball.mybatis.MeetingDTO">
+		<![CDATA[
+			SELECT MJ.MEET_CODE
+				 , MJ.MEET_SUBJECT
+				 , MJ.MEET_PEOPLE_NUMBER
+				 , MJ.MEET_JOIN_DATE
+				 , MJ.JOIN_ACCT_CODE
+				 , MJ.USER_NICKNAME
+			FROM VIEW_EETING_JOIN MJ
+			LEFT JOIN TBL_PLAYLOG
+			ON MJ.MEET_JOIN_CODE = PL.EVALUATOR_MEET_JOIN_CODE
+			WHERE PL.PL_CODE IS NULL
+			AND MJ.MEET_JOIN_CANCEL_CODE IS NULL
+			AND MJ.JOIN_ACCT_CODE = #{userAccountCode}
+		]]>
+		</select>
+
 <!--	public int countMeetingsNotInputPlaylog(String userAccountCode); // PL입력x 모임 전체 수  -->
+		<select id="countMeetingsNotInputPlaylog" resultType="java.lang.Integer">
+		<![CDATA[
+			SELECT COUNT(*) AS COUNT
+			FROM VIEW_EETING_JOIN MJ
+			LEFT JOIN TBL_PLAYLOG
+			ON MJ.MEET_JOIN_CODE = PL.EVALUATOR_MEET_JOIN_CODE
+			WHERE PL.PL_CODE IS NULL
+			AND MJ.MEET_JOIN_CANCEL_CODE IS NULL
+			AND MJ.JOIN_ACCT_CODE = #{userAccountCode}
+		]]>
+		</select>
+
 <!--	public List<MeetingDTO> getJoinMeetingList(String userAccountCode); // 참여신청한 모임 조회(예정)  -->
+
 <!--	public int countJoinMeeting(String userAccountCode); // 참여신청한 모임 전체 수(예정)  -->
+
 <!--	public MeetingDTO getMeeting(String meetingCode); // 특정모임 조회  -->
+
 <!--    public List<MeetingMemberDTO> getMeetingMemberList(String meetingCode); // 특정모임 참가자 조회 -->
 
 
