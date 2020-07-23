@@ -63,7 +63,7 @@
                      <li><a href="#">친구관리</a></li>
                      <li><a href="#">차단관리</a></li>
                      <li class="divider"></li>
-                     <li><a href="#">로그아웃</a></li>
+                     <li><a href="#" id="userLogout">로그아웃</a></li>
                   </ul>
                </li>
                
@@ -80,7 +80,7 @@
                <li class="dropdown box text-right">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                      <span class="glyphicon glyphicon-user left"></span>
-                     <span class="box-content left">당근당근</span>
+                     <span class="box-content left">${sessionScope.adminInfo.adminNickname }</span>
                      <span class="caret"></span>
                   </a>
                   <ul class="dropdown-menu" role="menu">
@@ -97,7 +97,7 @@
                      <li><a href="#">친구관리</a></li>
                      <li><a href="#">차단관리</a></li>
                      <li class="divider"></li>
-                     <li><a href="#">로그아웃</a></li>
+                     <li><a href="#" id="adminLogout">로그아웃</a></li>
                   </ul>
                </li>
                
@@ -216,7 +216,7 @@
                <li><a href="#">친구관리</a></li>
                <li><a href="#">차단관리</a></li>
                <li class="divider"></li>
-               <li><a href="#">로그아웃</a></li>
+               <li><a href="#" id="MobileUserLogout">로그아웃</a></li>
             </ul>
          </div>
          

@@ -2,12 +2,12 @@ package com.amanne.biscuitball.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.amanne.biscuitball.model.LoginModel;
 import com.amanne.biscuitball.model.SignUpModel;
@@ -15,8 +15,6 @@ import com.amanne.biscuitball.model.UserInfo;
 import com.amanne.biscuitball.mybatis.LoginDTO;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.amanne.biscuitball.mybatis.IRegionDAO;
-import com.amanne.biscuitball.mybatis.IUserDAO;
 import com.amanne.biscuitball.mybatis.UserDTO;
 
 @Controller
@@ -77,6 +75,15 @@ public class RootController
 			}
 		}
 
+	}
+	
+	// 로그아웃
+	@RequestMapping("/logout")
+	public String logout(SessionStatus sessionStatus)
+	{
+		sessionStatus.setComplete();
+		
+		return "redirect:/";
 	}
 
 	// 회원가입 Form 불러옴

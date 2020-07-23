@@ -66,6 +66,17 @@ margin-top: 23%;
 }
 </style>
 <link rel="stylesheet" href="<%=cp %>/css/default.css" />
+
+<script type="text/javascript">
+
+		$(document).ready(function()
+		{
+			$("#userLogout").click(function()
+			{
+				$(location).attr("href", "<%=cp%>/logout");
+			});			
+		});
+</script>
 </head>
 <body>
 
