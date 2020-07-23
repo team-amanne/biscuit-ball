@@ -34,7 +34,7 @@ public class RootController
 	private SqlSession sqlSession;
 
 	// login Form 불러옴
-	@RequestMapping("/login")
+	@RequestMapping("/login/**")
 	public String login()
 	{
 		return "/login/Login";
@@ -78,7 +78,7 @@ public class RootController
 	}
 
 	// 회원가입 Form 불러옴
-	@RequestMapping("signup/")
+	@RequestMapping({"/signup/**", "/signup/"})
 	public String signUpForm(Model model)
 	{
 
