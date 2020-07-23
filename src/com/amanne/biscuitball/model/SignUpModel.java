@@ -28,9 +28,10 @@ public class SignUpModel
 		String result = user.getUserRegisteredDate();	// 처리 결과
 		
 		if(result.equals("1"))  // 회원가입성공
-			return "/signup/User_SignupComplete";
+			return "redirect:/signup/User_SignupComplete";
 
-		return "/base/User_SignupComplete";
+		return "redirect:/";
+
 	}
 	
 	public ArrayList<RegionDTO> signUpUserForm()
