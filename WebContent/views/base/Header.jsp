@@ -15,7 +15,7 @@
       <!-- 데스크탑 메뉴 바 -->
       <div class="container display-lg-up">
          <div class="navbar-header">
-            <a class="navbar-brand" href="#">BiscuitBall</a>
+            <a class="navbar-brand" href="<%=cp%>/">BiscuitBall</a>
          </div>
          <div>
             <form class="searchform navbar-form navbar-left border-left" role="search">
@@ -25,7 +25,7 @@
                </div>
             </form>
             <ul class="nav navbar-nav navbar-center">
-               <li><a href="#">농구하기</a></li>
+               <li><a href="<%=cp %>/play/party">농구하기</a></li>
                <li><a href="#">코트검색</a></li>
                <li><a href="#">크루</a></li>
                <li><a href="#">대전</a></li>
@@ -105,7 +105,7 @@
                
                <c:otherwise>
                
-               <li><a href="#">로그인</a></li>
+               <li><a href="<%=cp %>/login">로그인</a></li>
                <li><a href="#" class="btn-register">회원가입</a></li>
                
                </c:otherwise>
@@ -176,7 +176,7 @@
          <!-- 모바일 메뉴 아이콘 클릭했을 때 확장되는 화면 -->
          <div class="collapse navbar-collapse" id="display-sm-collapse-menu">
             <ul class="nav navbar-nav">
-               <li><a href="#">농구하기</a></li>
+               <li><a href="<%=cp %>/play/party">농구하기</a></li>
                <li><a href="#">코트검색</a></li>
                <li><a href="#">크루</a></li>
                <li><a href="#">대전</a></li>
