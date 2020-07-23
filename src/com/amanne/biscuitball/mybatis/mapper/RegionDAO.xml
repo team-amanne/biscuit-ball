@@ -3,20 +3,22 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.amanne.biscuitball.mybatis.ILegendDAO">
-	<!-- 	public List<RegionDTO> getRegionList(); // 광역시/도 조회 -->
+<mapper namespace="com.amanne.biscuitball.mybatis.IRegionDAO">
+	<!-- 	public ArrayList<RegionDTO> getRegionList(); // 광역시/도 조회 -->
 	<select id="getRegionList" resultType="com.amanne.biscuitball.mybatis.RegionDTO">
-		SELECT REGION_CODE, REGION_NAME
+		SELECT REGION_CODE AS "regionCode", REGION_NAME AS "regionName"
 		FROM TBL_REGION
 	</select>	
 	
-	<!-- 	public List<CityDTO> getCityList(String regionCode); // 시군구 조회 -->
+	<!-- 	public ArrayList<CityDTO> getCityList(String regionCode); // 시군구 조회 -->
 	<select id="getCityList" 	
 		parameterType="java.lang.String"
 		resultType="com.amanne.biscuitball.mybatis.CityDTO">
-		SELECT CITY_CODE, CITY_NAME, REGION_CODE
+		SELECT CITY_CODE  AS "cityCode", CITY_NAME AS "cityName", REGION_CODE AS "regionCode"
 		FROM TBL_CITY
 		WHERE REGION_CODE = #{regionCode}
 	</select>
+	
+	
 	
 </mapper>

@@ -20,7 +20,7 @@ public class UserDTO
 	private String	userPassword;				//	비밀번호	
 	private String	userTel;					//	전화번호	
 	private String	userBirthday;				//	생일	
-	private int	userHeight;						//	키	
+	private int		userHeight;					//	키	
 	private String	userRegisteredDate;			//	등록일시	
 	private String	userGenderCode;				//	성별코드	
 	private String	userGender;					//	성별	

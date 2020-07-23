@@ -9,6 +9,11 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입.jsp</title>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+
+<script type="text/javascript" src="<%=cp%>/js/jquery-ui.js"></script>
+
 <style type="text/css">
 
 /* flex 용 */
@@ -253,6 +258,18 @@
 }
 
 </style>
+
+<script type="text/javascript">
+
+$(function() 
+{
+	$("#sign_up").click(function() 
+	{
+		$("#member").submit();
+	});
+}); 
+
+</script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -273,10 +290,12 @@
          <h5>메인 홈 > 회원가입</h5>
          <hr />
       </div>
+   <form action="signup.do" id="member" method="post">
 	<div class="row">
 		<div class="col-md-3">
 		</div>
 		<div class="col-md-6 input_content">
+		
 			<div class="flex">
 				<label class="f_size">이메일*</label>
 				<span><input type="email" class="form-control" id="email" placeholder="email"></span>
@@ -293,7 +312,7 @@
 			</div>
 			<div class="flex">
 				<label class="f_size">이름*</label>
-				<input type="text" class="form-control" id="name" placeholder="홍길동규">
+				<input type="text" class="form-control" id="userName" name="userName" placeholder="홍길동규">
 			</div>
 			<div class="flex">
 				<label class="f_size">닉네임*</label>
@@ -352,7 +371,7 @@
 			</div>
 			<div class="flex">
 				<label class="f_size">전화번호*</label>
-				<select class="form-control" id="tel1">
+				<select class="form-control" id="userTel">
 					<option selected="selected">선택</option>
 					<option>010</option>
 					<option>011</option>
@@ -396,7 +415,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-3">
-		</div>
+		</div> 
 		<div class="col-md-6 flex">
 			<div class="last_button">
 				<button class="btn btn-warning" id="sign_up">회원가입</button>
@@ -406,31 +425,9 @@
 		<div class="col-md-3">
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-md-3">
-		</div>
-		<div class="col-md-6">			
-		</div>
-		<div class="col-md-3">
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-3">
-		</div>
-		<div class="col-md-6">
-		</div>
-		<div class="col-md-3">
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-3">
-		</div>
-		<div class="col-md-6">
-		</div>
-		<div class="col-md-3">
-		</div>
-	</div>
+	</form>
 </div>
+
 
 <c:import url="../base/Footer.jsp"></c:import>
 
