@@ -5,6 +5,7 @@
   
 <mapper namespace="com.amanne.biscuitball.mybatis.IAdminDAO">
 
+
 	<!-- 	public int addNotice(NoticeDTO dto); // 공지사항등록 -->
 	<insert id="addNotice" parameterType="com.amanne.biscuitball.mybatis.NoticeDTO">
 		INSERT INTO TBL_NOTICE(NOTICE_CODE, NOTICE_SUBJECT, NOTICE_CONTENT, REG_ADMIN_CODE)
@@ -1423,10 +1424,10 @@
 		ON A.CHIEF_ADMIN_CODE = YN.YES_NO_CODE
 	</select>
 	
-	<!-- public void loginAsAdmin(AdminDTO dto); -->
+	<!-- public void loginAsAdmin(LoginDTO dto); -->
 	<select id="loginAsAdmin"
 	 statementType="CALLABLE"
-	 parameterType="com.amanne.biscuitball.mybatis.AdminDTO" >
+	 parameterType="com.amanne.biscuitball.mybatis.LoginDTO" >
 		{ call PRC_ADMIN_LOGIN
 			(
 				#{adminEmail},

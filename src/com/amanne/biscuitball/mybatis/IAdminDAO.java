@@ -232,5 +232,5 @@ public interface IAdminDAO
 	
 	public AdminDTO getAdmin(String adminCode);
 	
-	public void loginAsAdmin(AdminDTO dto);
+	public void loginAsAdmin(LoginDTO dto);
 }
