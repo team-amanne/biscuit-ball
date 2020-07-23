@@ -1,7 +1,7 @@
 /*============================================
  	CourtDTO.java
  	생성일: 2020.07.20
- 	최근수정일: 2020.07.21
+ 	최근수정일: 2020.07.23
 =============================================*/
 
 package com.amanne.biscuitball.mybatis;
@@ -48,240 +48,328 @@ public class CourtDTO
 	private String courtStatus; 						// 코트상태
 	private ArrayList<CourtReviewDTO> courtReviewList; 	// 코트리뷰리스트
 	private ArrayList<CourtReviewDTO> courtNameList; 	// 코트이름리스트
+	private String blindStatus;							// 블라인드 상태
 	private String returnValue;
 	
-	public String getCourtCode() {
+	public String getCourtCode()
+	{
 		return courtCode;
 	}
-	public void setCourtCode(String courtCode) {
+	public void setCourtCode(String courtCode)
+	{
 		this.courtCode = courtCode;
 	}
-	public String getCourtRegisteredDate() {
+	public String getCourtRegisteredDate()
+	{
 		return courtRegisteredDate;
 	}
-	public void setCourtRegisteredDate(String courtRegisteredDate) {
+	public void setCourtRegisteredDate(String courtRegisteredDate)
+	{
 		this.courtRegisteredDate = courtRegisteredDate;
 	}
-	public String getMapPosition() {
+	public String getMapPosition()
+	{
 		return mapPosition;
 	}
-	public void setMapPosition(String mapPosition) {
+	public void setMapPosition(String mapPosition)
+	{
 		this.mapPosition = mapPosition;
 	}
-	public String getMapPositionX() {
+	public String getMapPositionX()
+	{
 		return mapPositionX;
 	}
-	public void setMapPositionX(String mapPositionX) {
+	public void setMapPositionX(String mapPositionX)
+	{
 		this.mapPositionX = mapPositionX;
 	}
-	public String getMapPositionY() {
+	public String getMapPositionY()
+	{
 		return mapPositionY;
 	}
-	public void setMapPositionY(String mapPositionY) {
+	public void setMapPositionY(String mapPositionY)
+	{
 		this.mapPositionY = mapPositionY;
 	}
-	public String getRegistrantAccountCode() {
+	public String getRegistrantAccountCode()
+	{
 		return registrantAccountCode;
 	}
-	public void setRegistrantAccountCode(String registrantAccountCode) {
+	public void setRegistrantAccountCode(String registrantAccountCode)
+	{
 		this.registrantAccountCode = registrantAccountCode;
 	}
-	public String getRegistrantNickname() {
+	public String getRegistrantNickname()
+	{
 		return registrantNickname;
 	}
-	public void setRegistrantNickname(String registrantNickname) {
+	public void setRegistrantNickname(String registrantNickname)
+	{
 		this.registrantNickname = registrantNickname;
 	}
-	public int getMyCourtCount() {
+	public int getMyCourtCount()
+	{
 		return myCourtCount;
 	}
-	public void setMyCourtCount(int myCourtCount) {
+	public void setMyCourtCount(int myCourtCount)
+	{
 		this.myCourtCount = myCourtCount;
 	}
-	public String getCourtImg1() {
+	public String getCourtImg1()
+	{
 		return courtImg1;
 	}
-	public void setCourtImg1(String courtImg1) {
+	public void setCourtImg1(String courtImg1)
+	{
 		this.courtImg1 = courtImg1;
 	}
-	public String getCourtImg2() {
+	public String getCourtImg2()
+	{
 		return courtImg2;
 	}
-	public void setCourtImg2(String courtImg2) {
+	public void setCourtImg2(String courtImg2)
+	{
 		this.courtImg2 = courtImg2;
 	}
-	public String getCourtImg3() {
+	public String getCourtImg3()
+	{
 		return courtImg3;
 	}
-	public void setCourtImg3(String courtImg3) {
+	public void setCourtImg3(String courtImg3)
+	{
 		this.courtImg3 = courtImg3;
 	}
-	public String getCourtNameCode() {
+	public String getCourtNameCode()
+	{
 		return courtNameCode;
 	}
-	public void setCourtNameCode(String courtNameCode) {
+	public void setCourtNameCode(String courtNameCode)
+	{
 		this.courtNameCode = courtNameCode;
 	}
-	public String getCourtName() {
+	public String getCourtName()
+	{
 		return courtName;
 	}
-	public void setCourtName(String courtName) {
+	public void setCourtName(String courtName)
+	{
 		this.courtName = courtName;
 	}
-	public String getCourtNamePollRate() {
+	public String getCourtNamePollRate()
+	{
 		return courtNamePollRate;
 	}
-	public void setCourtNamePollRate(String courtNamePollRate) {
+	public void setCourtNamePollRate(String courtNamePollRate)
+	{
 		this.courtNamePollRate = courtNamePollRate;
 	}
-	public double getAvgCourtManageScore() {
+	public double getAvgCourtManageScore()
+	{
 		return avgCourtManageScore;
 	}
-	public void setAvgCourtManageScore(double avgCourtManageScore) {
+	public void setAvgCourtManageScore(double avgCourtManageScore)
+	{
 		this.avgCourtManageScore = avgCourtManageScore;
 	}
-	public double getAvgCourtSatisfaction() {
+	public double getAvgCourtSatisfaction()
+	{
 		return avgCourtSatisfaction;
 	}
-	public void setAvgCourtSatisfaction(double avgCourtSatisfaction) {
+	public void setAvgCourtSatisfaction(double avgCourtSatisfaction)
+	{
 		this.avgCourtSatisfaction = avgCourtSatisfaction;
 	}
-	public String getCourtRating() {
+	public String getCourtRating()
+	{
 		return courtRating;
 	}
-	public void setCourtRating(String courtRating) {
+	public void setCourtRating(String courtRating)
+	{
 		this.courtRating = courtRating;
 	}
-	public String getCourtCapacityCode() {
+	public String getCourtCapacityCode()
+	{
 		return courtCapacityCode;
 	}
-	public void setCourtCapacityCode(String courtCapacityCode) {
+	public void setCourtCapacityCode(String courtCapacityCode)
+	{
 		this.courtCapacityCode = courtCapacityCode;
 	}
-	public int getMinCourtCapacity() {
+	public int getMinCourtCapacity()
+	{
 		return minCourtCapacity;
 	}
-	public void setMinCourtCapacity(int minCourtCapacity) {
+	public void setMinCourtCapacity(int minCourtCapacity)
+	{
 		this.minCourtCapacity = minCourtCapacity;
 	}
-	public int getMaxCourtCapacity() {
+	public int getMaxCourtCapacity()
+	{
 		return maxCourtCapacity;
 	}
-	public void setMaxCourtCapacity(int maxCourtCapacity) {
+	public void setMaxCourtCapacity(int maxCourtCapacity)
+	{
 		this.maxCourtCapacity = maxCourtCapacity;
 	}
-	public String isToilet() {
+	public String getToilet()
+	{
 		return toilet;
 	}
-	public void setToilet(String toilet) {
+	public void setToilet(String toilet)
+	{
 		this.toilet = toilet;
 	}
-	public double getToiletConfidence() {
+	public double getToiletConfidence()
+	{
 		return toiletConfidence;
 	}
-	public void setToiletConfidence(double toiletConfidence) {
+	public void setToiletConfidence(double toiletConfidence)
+	{
 		this.toiletConfidence = toiletConfidence;
 	}
-	public String isShower() {
+	public String getShower()
+	{
 		return shower;
 	}
-	public void setShower(String shower) {
+	public void setShower(String shower)
+	{
 		this.shower = shower;
 	}
-	public double getShowerConfidence() {
+	public double getShowerConfidence()
+	{
 		return showerConfidence;
 	}
-	public void setShowerConfidence(double showerConfidence) {
+	public void setShowerConfidence(double showerConfidence)
+	{
 		this.showerConfidence = showerConfidence;
 	}
-	public String isParkinglot() {
+	public String getParkinglot()
+	{
 		return parkinglot;
 	}
-	public void setParkinglot(String parkinglot) {
+	public void setParkinglot(String parkinglot)
+	{
 		this.parkinglot = parkinglot;
 	}
-	public double getParkinglotConfidence() {
+	public double getParkinglotConfidence()
+	{
 		return parkinglotConfidence;
 	}
-	public void setParkinglotConfidence(double parkinglotConfidence) {
+	public void setParkinglotConfidence(double parkinglotConfidence)
+	{
 		this.parkinglotConfidence = parkinglotConfidence;
 	}
-	public String getEnrollYesCount() {
+	public String getEnrollYesCount()
+	{
 		return enrollYesCount;
 	}
-	public void setEnrollYesCount(String enrollYesCount) {
+	public void setEnrollYesCount(String enrollYesCount)
+	{
 		this.enrollYesCount = enrollYesCount;
 	}
-	public String getEnrollNoCount() {
+	public String getEnrollNoCount()
+	{
 		return enrollNoCount;
 	}
-	public void setEnrollNoCount(String enrollNoCount) {
+	public void setEnrollNoCount(String enrollNoCount)
+	{
 		this.enrollNoCount = enrollNoCount;
 	}
-	public String getDelRequestCode() {
+	public String getDelRequestCode()
+	{
 		return delRequestCode;
 	}
-	public void setDelRequestCode(String delRequestCode) {
+	public void setDelRequestCode(String delRequestCode)
+	{
 		this.delRequestCode = delRequestCode;
 	}
-	public String getDelRequestDate() {
+	public String getDelRequestDate()
+	{
 		return delRequestDate;
 	}
-	public void setDelRequestDate(String delRequestDate) {
+	public void setDelRequestDate(String delRequestDate)
+	{
 		this.delRequestDate = delRequestDate;
 	}
-	public String getDelApproveDate() {
+	public String getDelApproveDate()
+	{
 		return delApproveDate;
 	}
-	public void setDelApproveDate(String delApproveDate) {
+	public void setDelApproveDate(String delApproveDate)
+	{
 		this.delApproveDate = delApproveDate;
 	}
-	public String getDelRequestPollYesCount() {
+	public String getDelRequestPollYesCount()
+	{
 		return delRequestPollYesCount;
 	}
-	public void setDelRequestPollYesCount(String delRequestPollYesCount) {
+	public void setDelRequestPollYesCount(String delRequestPollYesCount)
+	{
 		this.delRequestPollYesCount = delRequestPollYesCount;
 	}
-	public String getDelRequestPollNoCount() {
+	public String getDelRequestPollNoCount()
+	{
 		return delRequestPollNoCount;
 	}
-	public void setDelRequestPollNoCount(String delRequestPollNoCount) {
+	public void setDelRequestPollNoCount(String delRequestPollNoCount)
+	{
 		this.delRequestPollNoCount = delRequestPollNoCount;
 	}
-	public String getDelAdminCode() {
+	public String getDelAdminCode()
+	{
 		return delAdminCode;
 	}
-	public void setDelAdminCode(String delAdminCode) {
+	public void setDelAdminCode(String delAdminCode)
+	{
 		this.delAdminCode = delAdminCode;
 	}
-	public String getAdminDelDate() {
+	public String getAdminDelDate()
+	{
 		return adminDelDate;
 	}
-	public void setAdminDelDate(String adminDelDate) {
+	public void setAdminDelDate(String adminDelDate)
+	{
 		this.adminDelDate = adminDelDate;
 	}
-	public String getCourtStatus() {
+	public String getCourtStatus()
+	{
 		return courtStatus;
 	}
-	public void setCourtStatus(String courtStatus) {
+	public void setCourtStatus(String courtStatus)
+	{
 		this.courtStatus = courtStatus;
 	}
-	public ArrayList<CourtReviewDTO> getCourtReviewList() {
+	public ArrayList<CourtReviewDTO> getCourtReviewList()
+	{
 		return courtReviewList;
 	}
-	public void setCourtReviewList(ArrayList<CourtReviewDTO> courtReviewList) {
+	public void setCourtReviewList(ArrayList<CourtReviewDTO> courtReviewList)
+	{
 		this.courtReviewList = courtReviewList;
 	}
-	public ArrayList<CourtReviewDTO> getCourtNameList() {
+	public ArrayList<CourtReviewDTO> getCourtNameList()
+	{
 		return courtNameList;
 	}
-	public void setCourtNameList(ArrayList<CourtReviewDTO> courtNameList) {
+	public void setCourtNameList(ArrayList<CourtReviewDTO> courtNameList)
+	{
 		this.courtNameList = courtNameList;
 	}
-	public String isReturnValue() {
+	public String getBlindStatus()
+	{
+		return blindStatus;
+	}
+	public void setBlindStatus(String blindStatus)
+	{
+		this.blindStatus = blindStatus;
+	}
+	public String getReturnValue()
+	{
 		return returnValue;
 	}
-	public void setReturnValue(String returnValue) {
+	public void setReturnValue(String returnValue)
+	{
 		this.returnValue = returnValue;
 	}
+	
 }

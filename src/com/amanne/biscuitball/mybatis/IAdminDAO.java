@@ -1,7 +1,7 @@
 /*============================================
  	IAdminDAO.java
  	생성일: 2020.07.20
- 	최근수정일: 2020.07.20
+ 	최근수정일: 2020.07.22
 =============================================*/
 
 package com.amanne.biscuitball.mybatis;
@@ -231,4 +231,6 @@ public interface IAdminDAO
 	public int countAdmins(@Param("searchKey") String searchKey, @Param("searchValue") String searchValue); // 전체 관리자 수
 	
 	public AdminDTO getAdmin(String adminCode);
+	
+	public void loginAsAdmin(AdminDTO dto);
 }

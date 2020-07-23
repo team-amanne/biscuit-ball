@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface ICrewDAO
 {
-	public int registerCrew(CrewDTO crew); // 크루개설
+	public void registerCrew(CrewDTO crew); // 크루개설
 
 	public int updateCrew(CrewDTO crew); // 크루정보갱신
 

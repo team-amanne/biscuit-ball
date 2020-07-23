@@ -748,7 +748,7 @@
 			, #{penaltyReasonCode}
 			, #{reportContentCode}
 			, #{adminCode}
-			, #{returnValue}
+			, #{returnValue, mode=OUT, jdbcType=VARCHAR}
 			)
 		}
 	</select>
@@ -763,7 +763,7 @@
 			, #{penaltyReasonCode}
 			, #{reportContentCode}
 			, #{adminCode}
-			, #{returnValue}
+			, #{returnValue, mode=OUT, jdbcType=VARCHAR}
 			)
 		}
 	</select>
@@ -777,7 +777,7 @@
 			, #{penaltyReasonCode}
 			, #{reportContentCode}
 			, #{adminCode}
-			, #{returnValue}
+			, #{returnValue, mode=OUT, jdbcType=VARCHAR}
 			)
 		}
 	</select>
@@ -791,7 +791,7 @@
 			, #{penaltyReasonCode}
 			, #{reportContentCode}
 			, #{adminCode}
-			, #{returnValue}
+			, #{returnValue, mode=OUT, jdbcType=VARCHAR}
 			)
 		}
 	</select>
@@ -805,7 +805,7 @@
 			, #{penaltyReasonCode}
 			, #{reportContentCode}
 			, #{adminCode}
-			, #{returnValue}
+			, #{returnValue, mode=OUT, jdbcType=VARCHAR}
 			)
 		}
 	</select>
@@ -819,7 +819,7 @@
 			, #{penaltyReasonCode}
 			, #{reportContentCode}
 			, #{adminCode}
-			, #{returnValue}
+			, #{returnValue, mode=OUT, jdbcType=VARCHAR}
 			)
 		}
 	</select>
@@ -833,7 +833,7 @@
 			, #{penaltyReasonCode}
 			, #{reportContentCode}
 			, #{adminCode}
-			, #{returnValue}
+			, #{returnValue, mode=OUT, jdbcType=VARCHAR}
 			)
 		}
 	</select>
@@ -847,7 +847,7 @@
 			, #{penaltyReasonCode}
 			, #{reportContentCode}
 			, #{adminCode}
-			, #{returnValue}
+			, #{returnValue, mode=OUT, jdbcType=VARCHAR}
 			)
 		}
 	</select>
@@ -925,7 +925,7 @@
 		FROM TBL_NOTICE N
 		LEFT JOIN TBL_ADMIN A
 		ON N.REG_ADMIN_CODE = A.ADMIN_CODE
-		WHERE NOTICE_CODE = ${noticeCode}
+		WHERE NOTICE_CODE = #{noticeCode}
 	]]>
 	</select>
 	
@@ -1422,4 +1422,19 @@
 		LEFT JOIN TBL_YES_NO YN
 		ON A.CHIEF_ADMIN_CODE = YN.YES_NO_CODE
 	</select>
+	
+	<!-- public void loginAsAdmin(AdminDTO dto); -->
+	<select id="loginAsAdmin"
+	 statementType="CALLABLE"
+	 parameterType="com.amanne.biscuitball.mybatis.AdminDTO" >
+		{ call PRC_ADMIN_LOGIN
+			(
+				#{adminEmail},
+			    #{adminPassword},
+			    #{ipAddress},
+			    #{returnValue ,mode=OUT, jdbcType=VARCHAR}
+			)
+		}
+	</select>
+	
 </mapper>
