@@ -29,6 +29,8 @@ public class CrewDTO
 	private String crewJoinAbilityLimitCode; 		// 최소가입실력조건코드
 	private String crewJoinMinTierCode; 			// 최소가입티어조건
 	private String crewJoinMaxTierCode; 			// 최대가입티어조건
+	private String crewJoinMinTierGrade; 			// 최소가입티어조건
+	private String crewJoinMaxTierGrade; 			// 최대가입티어조건
 	private int crewJoinMinAbilityScore; 			// 최소가입실력점수조건
 	private int crewJoinMaxAbilityScore; 			// 최대가입실력점수조건
 	private double crewFairplayScore; 				// 평균fps
@@ -41,6 +43,9 @@ public class CrewDTO
 	private String crewPenaltyStatus; 				// 제재상태
 	private ArrayList<RegionDTO> crewBaseAreaList; 	// 크루거점지역목록
 	private String crewProfileImg; 					// 크루프로필사진
+	private int crewScore;
+	private int battleCount;
+	private int crewGrade;
 	private String returnValue;
 
 	public String getCrewCode()
@@ -213,24 +218,24 @@ public class CrewDTO
 		this.crewJoinAbilityLimitCode = crewJoinAbilityLimitCode;
 	}
 
-	public String getCrewJoinMinTierCode()
+	public String getCrewJoinMinTierGrade()
 	{
-		return crewJoinMinTierCode;
+		return crewJoinMinTierGrade;
 	}
 
-	public void setCrewJoinMinTierCode(String crewJoinMinTierCode)
+	public void setCrewJoinMinTierGrade(String crewJoinMinTierGrade)
 	{
-		this.crewJoinMinTierCode = crewJoinMinTierCode;
+		this.crewJoinMinTierGrade = crewJoinMinTierGrade;
 	}
 
-	public String getCrewJoinMaxTierCode()
+	public String getCrewJoinMaxTierGrade()
 	{
-		return crewJoinMaxTierCode;
+		return crewJoinMaxTierGrade;
 	}
 
-	public void setCrewJoinMaxTierCode(String crewJoinMaxTierCode)
+	public void setCrewJoinMaxTierGrade(String crewJoinMaxTierGrade)
 	{
-		this.crewJoinMaxTierCode = crewJoinMaxTierCode;
+		this.crewJoinMaxTierGrade = crewJoinMaxTierGrade;
 	}
 
 	public int getCrewJoinMinAbilityScore()
@@ -343,7 +348,7 @@ public class CrewDTO
 		this.crewProfileImg = crewProfileImg;
 	}
 
-	public String isReturnValue() {
+	public String getReturnValue() {
 		return returnValue;
 	}
 
@@ -357,6 +362,56 @@ public class CrewDTO
 
 	public ArrayList<CrewMemberDTO> getCrewMemberList() {
 		return crewMemberList;
+	}
+
+	public String getCrewJoinMinTierCode()
+	{
+		return crewJoinMinTierCode;
+	}
+
+	public void setCrewJoinMinTierCode(String crewJoinMinTierCode)
+	{
+		this.crewJoinMinTierCode = crewJoinMinTierCode;
+	}
+
+	public String getCrewJoinMaxTierCode()
+	{
+		return crewJoinMaxTierCode;
+	}
+
+	public void setCrewJoinMaxTierCode(String crewJoinMaxTierCode)
+	{
+		this.crewJoinMaxTierCode = crewJoinMaxTierCode;
+	}
+
+	public int getCrewScore()
+	{
+		return crewScore;
+	}
+
+	public void setCrewScore(int crewScore)
+	{
+		this.crewScore = crewScore;
+	}
+
+	public int getBattleCount()
+	{
+		return battleCount;
+	}
+
+	public void setBattleCount(int battleCount)
+	{
+		this.battleCount = battleCount;
+	}
+
+	public int getCrewGrade()
+	{
+		return crewGrade;
+	}
+
+	public void setCrewGrade(int crewGrade)
+	{
+		this.crewGrade = crewGrade;
 	}
 
 }

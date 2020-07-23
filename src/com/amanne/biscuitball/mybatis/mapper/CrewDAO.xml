@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.amanne.biscuitball.mybatis.ICrewDAO">
+
+	<!-- public void registerCrew(CrewDTO crew); // 크루개설 -->
+	<select id="registerCrew"
+	 statementType="CALLABLE"
+	 parameterType="com.amanne.biscuitball.mybatis.CrewDTO">
+		{ call PRC_CREW_CREATE
+			( #{crewName}
+		    , #{crewBattleRefuse}
+		    , #{crewJoinMinBirthyear}
+		    , #{crewJoinMaxBirthyear}
+		    , #{crewJoinMinFairplayScore}
+		    , #{crewJoinAbilityLimitCode}
+		    , #{leaderAccountCode}
+		    , #{returnValue, mode=OUT, jdbcType=VARCHAR}
+			)
+		}
+	</select>
+	
+	<!-- public int updateCrew(CrewDTO crew); // 크루정보갱신 -->
+	<update id="updateCrew" parameterType="com.amanne.biscuitball.mybatis.CrewDTO">
+		UPDATE TBL_CREW
+		SET CREW_TITLE_ACHV_CODE=#{titleAchievementGetCode}
+		  , CREW_COURT_CODE=#{crewCourtCode} 
+		  , CREW_FAV_BTL_MODE_CODE=#{crewFavoriteBattleModeCode} 
+		  , CREW_BTL_REFUSE_CODE=#{crewBattleRefuseCode}
+		  , CREW_JOIN_MIN_BIRTHYEAR=#{crewJoinMinBirthyear}
+		  , CREW_JOIN_MAX_BIRTHYEAR=#{crewJoinMaxBirthyear}
+		  , CREW_JOIN_MIN_FPS=#{crewJoinMinFairplayScore}
+		  , CREW_JOIN_ABL_LIMIT_CODE=#{crewJoinAbilityLimitCode}
+		WHERE CREW_CODE = #{crewCode};
+	</update>
+	
+	<!-- public void reqeustCrewBreak(CrewDTO crew); // 크루해체요청 -->
+	<select id="reqeustCrewBreak"
+	 statementType="CALLABLE"
+	 parameterType="com.amanne.biscuitball.mybatis.CrewDTO">
+		{ call PRC_CREW_BREAK_REQ
+			( #{crewCode}
+		    , #{returnValue, mode=OUT, jdbcType=VARCHAR}
+			)
+		}
+	</select>
+
+	<!-- public void cancelRequestCrewBreak(CrewDTO crew); // 크루해체요청취소 -->	
+	<select id="cancelRequestCrewBreak"
+	 statementType="CALLABLE"
+	 parameterType="com.amanne.biscuitball.mybatis.CrewDTO">
+		{ call PRC_CREW_BREAK_REQ_CANCEL
+			( #{crewCode}
+		    , #{returnValue, mode=OUT, jdbcType=VARCHAR}
+			)
+		}
+	</select>
+	
+	<!-- public void requestCrewJoin(CrewMemberDTO dto); // 크루가입신청 -->
+	<select id="requestCrewJoin"
+	 statementType="CALLABLE"
+	 parameterType="com.amanne.biscuitball.mybatis.CrewMemberDTO">
+		{ call PRC_CREW_JOIN_REQ
+			( #{crewCode}
+			, #{memberAcctCode}
+		    , #{returnValue, mode=OUT, jdbcType=VARCHAR}
+			)
+		}
+	</select>
+	
+	<!-- public void acceptCrewJoinRequest(CrewMemberDTO dto); // 크루가입수락 -->
+	<select id="acceptCrewJoinRequest"
+	 statementType="CALLABLE"
+	 parameterType="com.amanne.biscuitball.mybatis.CrewMemberDTO">
+		{ call PRC_CREW_JOIN_REQ_YES
+			( #{crewJoinRequestCode}
+		    , #{returnValue, mode=OUT, jdbcType=VARCHAR}
+			)
+		}
+	</select>
+	
+	<!-- public void denyCrewJoinRequest(CrewMemberDTO dto); // 크루가입거절 -->
+	<select id="denyCrewJoinRequest"
+	 statementType="CALLABLE"
+	 parameterType="com.amanne.biscuitball.mybatis.CrewMemberDTO">
+		{ call PRC_CREW_JOIN_REQ_NO
+			( #{crewJoinRequestCode}
+		    , #{returnValue, mode=OUT, jdbcType=VARCHAR}
+			)
+		}
+	</select>
+	
+	<!-- public void inviteToCrew(CrewMemberDTO dto); // 크루초대 -->
+	<select id="inviteToCrew"
+	 statementType="CALLABLE"
+	 parameterType="com.amanne.biscuitball.mybatis.CrewMemberDTO">
+		{ call PRC_CREW_INVITATION
+			( #{crewCode}
+			, #{memberAcctCode}
+		    , #{returnValue, mode=OUT, jdbcType=VARCHAR}
+			)
+		}
+	</select>
+	
+	<!-- public void acceptCrewInvitation(CrewMemberDTO dto); // 크루초대수락 -->
+	<select id="acceptCrewInvitation"
+	 statementType="CALLABLE"
+	 parameterType="com.amanne.biscuitball.mybatis.CrewMemberDTO">
+		{ call PRC_CREW_INV_YES
+			( #{crewInvitationCode}
+		    , #{returnValue, mode=OUT, jdbcType=VARCHAR}
+			)
+		}
+	</select>
+	
+	<!-- public int denyCrewInvitation(CrewMemberDTO dto); // 크루초대거절 -->
+	<update id="denyCrewInvitation" parameterType="com.amanne.biscuitball.mybatis.CrewMemberDTO">
+		UPDATE TBL_CREW_INVITATION
+		SET CREW_INV_RES_CODE='ZU02', CREW_INV_RSLV_DATE=SYSDATE
+		WHERE CREW_INV_CODE = #{crewInvitationCode}
+	</update>
+	
+	<!-- public void getCrewAchievement(CrewAchievementDTO crewAchievementDTO); // 크루업적획득 -->
+	<select id="getCrewAchievement"
+	 statementType="CALLABLE"
+	 parameterType="com.amanne.biscuitball.mybatis.CrewAchievementDTO">
+		{ call PRC_CREW_ACHV_GET
+			( #{getterCrewCode}
+			, #{crewAchievementCode}
+		    , #{returnValue, mode=OUT, jdbcType=VARCHAR}
+			)
+		}
+	</select>
+	
+	<!-- public void withdrawCrewMember(CrewMemberDTO dto); // 크루탈퇴 -->
+	<select id="withdrawCrewMember"
+	 statementType="CALLABLE"
+	 parameterType="com.amanne.biscuitball.mybatis.CrewMemberDTO">
+		{ call PRC_CREW_MEMBER_DROP
+			( #{crewMemberCode}
+		    , #{returnValue, mode=OUT, jdbcType=VARCHAR}
+			)
+		}
+	</select>
+	
+	<!-- public int addCrewPost(CrewPostDTO crewPostDTO); // 크루게시글등록 -->
+	<insert id="addCrewPost" parameterType="com.amanne.biscuitball.mybatis.CrewPostDTO">
+		INSERT INTO TBL_CREW_POSTS(CREW_POST_CODE, CREW_POST_SUBJECT, CREW_POST_CONTENT, CREW_MEMBER_CODE)
+		VALUES(FN_CREATE_CODE('TBL_CREW_POSTS', SEQ_CREW_POSTS.NEXTVAL), #{crewPostSubject}, #{crewPostContent}
+		    , #{authorMemberCode}
+		)
+	</insert>
+	
+	<!-- public int increaseHitcount(String crewPostCode); // 크루 조회수 증가 -->
+	<insert id="increaseHitcount">
+		UPDATE TBL_CREW_POSTS
+		SET CREW_POST_HITCOUNT=CREW_POST_HITCOUNT+1
+		WHERE CREW_POST_CODE=#{crewPostCode}
+	</insert>
+	
+	<!-- public int updateCrewPost(CrewPostDTO crewPostDTO); // 크루게시글수정 -->
+	<update id="updateCrewPost" parameterType="com.amanne.biscuitball.mybatis.CrewPostDTO">
+		UPDATE TBL_CREW_POSTS
+		SET CREW_POST_SUBJECT=#{crewPostSubject}, CREW_POST_CONTENT=#{crewPostContent}, CREW_POST_UPDATE_DATE=SYSDATE
+		WHERE CREW_POST_CODE=#{crewPostCode}
+	</update>
+	
+	<!-- public int removeCrewPost(String crewPostCode); // 크루게시글삭제 -->
+	<update id="removeCrewPost">
+		UPDATE TBL_CREW_POSTS
+		SET CREW_POST_DEL_DATE = SYSDATE
+		WHERE CREW_POST_CODE=#{crewPostCode}
+	</update>
+	
+	<!-- public void addCrewComment(CrewCommentDTO crewCommentDTO); // 크루댓글등록 -->
+	<select id="addCrewComment"
+	 statementType="CALLABLE"
+	 parameterType="com.amanne.biscuitball.mybatis.CrewCommentDTO">
+		{ call PRC_CREW_COMMENT_INSERT
+			( #{authorAccountCode}
+    		, #{crewCommentContent}
+    		, #{crewPostCode}
+		    , #{parentCommentCode, mode=IN, jdbcType=VARCHAR}
+		    , #{returnValue, mode=OUT, jdbcType=VARCHAR}
+			)
+		}
+	</select>
+	
+	<!-- public int updateCrewComment(CrewCommentDTO crewCommentDTO); // 크루댓글수정 -->
+	<update id="updateCrewComment" parameterType="com.amanne.biscuitball.mybatis.CrewCommentDTO">
+		UPDATE TBL_CREW_COMMENTS
+		SET CREW_CMNT_CONTENT=#{crewCommentContent}, CREW_CMNT_UPDATE_DATE=SYSDATE
+		WHERE CREW_CMNT_CODE = #{crewCommentCode}
+	</update>
+	
+	<!-- public int removeCrewComment(String crewCommentCode); // 크루댓글삭제 -->
+	<update id="removeCrewComment" parameterType="java.lang.String">
+		UPDATE TBL_CREW_COMMENTS
+		SET CREW_CMNT_DEL_DATE=SYSDATE
+		WHERE CREW_CMNT_CODE = #{crewCommentCode}
+	</update>
+	
+	<!-- public int appointCrewLeader(String crewMemberCode); // 크루리더위임 -->
+	<insert id="appointCrewLeader" parameterType="java.lang.String">
+		INSERT INTO TBL_CREW_LEADER(CREW_LEADER_CODE, CREW_MEMBER_CODE)
+		VALUES(FN_CREATE_CODE('TBL_CREW_LEADER', SEQ_CREW_LEADER.NEXTVAL), #{crewMemberCode})
+	</insert>
+
+	<!-- public int addBaseArea(String crewCode, String regionCode); // 거점지역추가 -->
+	<insert id="addBaseArea">
+		INSERT INTO TBL_CREW_BASE_AREA(CREW_BASE_AREA_CODE, CREW_CODE, REGION_CODE)
+		VALUES(FN_CREATE_CODE('TBL_CREW_BASE_AREA', SEQ_CREW_BASE_AREA.NEXTVAL), #{crewCode}, #{regionCode})
+	</insert>
+	
+	<!-- public CrewDTO getCrew(String crewCode); // 특정크루조회 -->
+	<select id="getCrew"
+	 parameterType="java.lang.String"
+	 resultType="com.amanne.biscuitball.mybatis.CrewDTO">
+		SELECT VC.CREW_CODE AS crewCode
+		     , VC.CREW_NAME AS crewName
+		     , VC.CREW_OP_DATE AS crewOpenDate
+		     , VC.TITLE_ACHV_GET_CODE AS titleAchievementGetCode
+		     , VC.TITLE_ACHV_CODE AS titleAchievementCode
+		     , VC.TITLE_ACHV_NAME AS titleAchievementName
+		     , VC.CREW_COURT_CODE AS crewCourtCode
+		     , VC.CREW_FAV_BTL_MODE_CODE AS crewFavoriteBattleModeCode
+		     , VC.CREW_FAV_BTL_MODE AS crewFavoriteBattleMode
+		     , VC.CREW_BTL_REFUSE_CODE AS crewBattleRefuseCode
+		     , VC.CREW_BTL_REFUSE AS crewBattleRefuse
+		     , VC.CREW_JOIN_MIN_BIRTHYEAR AS crewJoinMinBirthyear
+		     , VC.CREW_JOIN_MAX_BIRTHYEAR AS crewJoinMaxBirthyear
+		     , VC.CREW_JOIN_MIN_FPS AS crewJoinMinFairplayScore
+		     , VC.CREW_JOIN_ABL_LIMIT_CODE AS crewJoinAbilityLimitCode
+		     , VC.CREW_JOIN_MIN_TIER_CODE AS crewJoinMinTierCode
+		     , VC.CREW_JOIN_MAX_TIER_CODE AS crewJoinMaxTierCode
+		     , VC.CREW_JOIN_MIN_TIER AS crewJoinMinTierGrade
+		     , VC.CREW_JOIN_MAX_TIER AS crewJoinMaxTierGrade
+		     , VC.CREW_JOIN_MIN_ABL_SCORE AS crewJoinMinAbilityScore
+		     , VC.CREW_JOIN_MAX_ABL_SCORE AS crewJoinMaxAbilityScore
+		     , VC.LEADER_MEMBER_CODE AS leaderMemberCode
+		     , VC.LEADER_ACCT_CODE AS leaderAccountCode
+		     , VC.LEADER_NICKNAME AS leaderNickname
+		     , VC.CREW_STATUS AS crewStatus
+		     , VC.FPS AS crewFairplayScore
+		     , VP.CREW_STATUS AS crewPenaltyStatus
+		     , VP.PENALTY_COUNT AS penaltyCount
+		     , VC.CREW_PROFILE_IMG AS crewProfileImg
+		     , VC.BATTLE_COUNT AS battleCount
+		     , VC.SCORE AS battleCount
+		     , VC.CREW_GRADE AS crewGrade
+		FROM VIEW_CREW VC
+		LEFT JOIN VIEW_CREW_PENALTY_SUMMARY VP
+		ON VC.CREW_CODE = CP.CREW_CODE
+		WHERE VC.CREW_CODE=#{crewCode}
+	</select>
+	
+	<!-- public List<CrewDTO> getCrewListByName(String keyword, int start, int end); // 크루명으로 검색 -->
+	<select id="getCrewListByName" resultType="com.amanne.biscuitball.mybatis.CrewDTO">
+	<![CDATA[
+		SELECT VC.CREW_CODE AS crewCode
+		     , VC.CREW_NAME AS crewName
+		     , VC.CREW_OP_DATE AS crewOpenDate
+		     , VC.TITLE_ACHV_GET_CODE AS titleAchievementGetCode
+		     , VC.TITLE_ACHV_CODE AS titleAchievementCode
+		     , VC.TITLE_ACHV_NAME AS titleAchievementName
+		     , VC.CREW_COURT_CODE AS crewCourtCode
+		     , VC.CREW_FAV_BTL_MODE_CODE AS crewFavoriteBattleModeCode
+		     , VC.CREW_FAV_BTL_MODE AS crewFavoriteBattleMode
+		     , VC.CREW_BTL_REFUSE_CODE AS crewBattleRefuseCode
+		     , VC.CREW_BTL_REFUSE AS crewBattleRefuse
+		     , VC.CREW_JOIN_MIN_BIRTHYEAR AS crewJoinMinBirthyear
+		     , VC.CREW_JOIN_MAX_BIRTHYEAR AS crewJoinMaxBirthyear
+		     , VC.CREW_JOIN_MIN_FPS AS crewJoinMinFairplayScore
+		     , VC.CREW_JOIN_ABL_LIMIT_CODE AS crewJoinAbilityLimitCode
+		     , VC.CREW_JOIN_MIN_TIER_CODE AS crewJoinMinTierCode
+		     , VC.CREW_JOIN_MAX_TIER_CODE AS crewJoinMaxTierCode
+		     , VC.CREW_JOIN_MIN_TIER AS crewJoinMinTierGrade
+		     , VC.CREW_JOIN_MAX_TIER AS crewJoinMaxTierGrade
+		     , VC.CREW_JOIN_MIN_ABL_SCORE AS crewJoinMinAbilityScore
+		     , VC.CREW_JOIN_MAX_ABL_SCORE AS crewJoinMaxAbilityScore
+		     , VC.LEADER_MEMBER_CODE AS leaderMemberCode
+		     , VC.LEADER_ACCT_CODE AS leaderAccountCode
+		     , VC.LEADER_NICKNAME AS leaderNickname
+		     , VC.CREW_STATUS AS crewStatus
+		     , VC.FPS AS crewFairplayScore
+		     , VP.CREW_STATUS AS crewPenaltyStatus
+		     , VP.PENALTY_COUNT AS penaltyCount
+		     , VC.CREW_PROFILE_IMG AS crewProfileImg
+		     , VC.BATTLE_COUNT AS battleCount
+		     , VC.SCORE AS battleCount
+		     , VC.CREW_GRADE AS crewGrade
+		FROM
+		(
+			SELECT ROWNUM AS RNUM, V.* 
+			FROM VIEW_CREW V
+	]]>
+	<if test="keyword !=null">
+			WHERE V.CREW_NAME LIKE '%${keyword}%'
+	</if>
+	<![CDATA[
+			ORDER BY V.SCORE DESC, V.BATTLE_COUNT DESC
+		) VC
+		LEFT JOIN VIEW_CREW_PENALTY_SUMMARY VP
+		ON VC.CREW_CODE = CP.CREW_CODE
+		WHERE VC.RNUM >= #{start} AND VC.RNUM <= #{end}
+	]]>
+	</select>
+	
+	<!-- public int countCrewsByName(String keyword); // 크루명으로 검색 전체 수 -->
+	
+	<select id="countCrewsByName" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM VIEW_CREW
+	<if test="keyword !=null">
+		WHERE CREW_NAME LIKE '%${keyword}%'
+	</if>
+		ORDER BY SCORE DESC, BATTLE_COUNT DESC
+	</select>
+	
+	<!-- public List<CrewAchievementDTO> getCrewAchievementList(String crewCode, int start, int end); // 특정크루 업적현황조회 -->
+	<!-- public int countCrewAchievements(String crewCode); // 특정크루 업적현황 전체 수 -->
+	<!-- public List<CrewMemberDTO> getCrewInvitationList(String crewCode, int start, int end); // 특정크루 미처리된 초대 조회 -->
+	<!-- public int countCrewInvitations(String crewCode); // 특정크루 미처리된 초대 수 -->
+	<!-- public List<CrewMemberDTO> getCrewJoinRequestList(String crewCode, int start, int end); // 특정크루 미처리된 가입신청 수 -->
+	<!-- public int countCrewJoinRequests(String crewCode); // 특정크루 미처리된 가입신청 조회 -->
+	<!-- public List<CrewPostDTO> getCrewPostList(String crewCode, String searchKey, String searchValue, int start, int end); // 특정크루 크루게시글 조회 -->
+	<!-- public int countCrewPosts(String crewCode, String searchKey, String searchValue); // 특정크루 크루게시글 수 -->
+	<!-- public CrewPostDTO getCrewPost(String crewPostCode); // 특정크루게시글 조회 -->
+	<!-- public List<CrewMemberDTO> getCrewMemberList(String crewCode); // 특정크루 크루멤버 조회 -->
+	
+</mapper>
