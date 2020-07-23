@@ -357,7 +357,7 @@
 	</select> 
 	
 	<!-- 	public ArrayList<MessageDTO> getSentMessageList(@Param("userAccountCode") String userAccountCode, @Param("start") int start, @Param("end") int end)	 // 특정유저 발신메시지 조회	 -->
-	<select id="countUsersByNickname" 
+	<select id="getSentMessageList" 
 	 resultType="com.amanne.biscuitball.mybatis.MessageDTO">
 	 	SELECT CREATE_MSG_CODE AS "messageCode", SENDER_ACCT_CODE AS "senderAccountCode", RECEIVER_ACCT_CODE AS "receiverAccountCode"
                  , MSG_SUBJECT AS "messageSubject", MSG_CONTENT AS "messageContent", SEND_DATE AS "sendDate", RECEIVER_READ_DATE AS "receiverReadDate"
