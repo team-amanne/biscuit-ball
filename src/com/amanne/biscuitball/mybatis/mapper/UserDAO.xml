@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.amanne.biscuitball.mybatis.IUserDAO">	
+
+	<!-- 	public void registerUser(UserDTO user);	 // 회원가입 -->
+	<select id="registerUser" 
+	 parameterType="com.amanne.biscuitball.mybatis.UserDTO"
+	 statementType="CALLABLE">
+		{ call PRC_USER_REGISTER
+			(
+			    #{userEmail},
+			    #{userPassword},
+			    #{userName},
+			    #{userNickname},
+			    #{userBirthday},
+			    #{userGenderCode},
+			    #{userHeight},
+			    #{selfEvaluationType},
+			    #{userCity},
+			    #{userTel},
+			    #{userPositionCode},
+			    #{smsReceive}
+			    #{returnValue ,mode=OUT, jdbcType=VARCHAR}
+			)
+		}
+	</select>
+	
+	<!-- 	public int checkUserNickname(String userNickname) // 닉네임 중복체크-->
+	<select id="checkUserNickname"
+	 parameterType="java.lang.String"
+	 resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM TBL_USER_ACCOUNT
+		WHERE USER_NICKNAME = #{userNickname}	
+	</select>
+	
+	<!-- 	public int checkTelephone(String telphone) // 전화번호 중복체크-->
+	<select id="checkTelephone"
+	 parameterType="java.lang.String"
+	 resultType="java.lang.Integer">	
+
+		SELECT COUNT(*)
+		FROM
+		(
+		    SELECT USER_TEL
+		    FROM TBL_USER
+		    
+		    UNION
+		    
+		    SELECT USER_TEL
+		    FROM TBL_USER_DROP
+		    WHERE USER_DROP_REQ_DATE <![CDATA[<]]> SYSDATE-30
+		)
+		WHERE USER_TEL = #{telphone}
+
+	</select>
+	
+	<!-- 	public int checkEmail(String email) // 이메일 중복체크-->
+	<select id="checkEmail"
+	 parameterType="java.lang.String"
+	 resultType="java.lang.Integer">	
+
+		SELECT COUNT(*)
+		FROM
+		(
+		    SELECT USER_EMAIL
+		    FROM TBL_USER
+		    
+		    UNION
+		    
+		    SELECT USER_EMAIL
+		    FROM TBL_USER_DROP
+		)
+		WHERE USER_EMAIL = #{email}
+
+	</select>
+	
+	<!-- 	public void requestRemoveUser(String userAccountCode) // 회원탈퇴요청-->
+	<delete id="requestRemoveUser"
+	 parameterType="java.lang.String">	
+
+		DELETE 
+		FROM TBL_USER 
+		WHERE USER_ACCT_CODE = #{userAccountCode}
+
+	</delete>
+	
+	<!-- 	public int cancelRequestRemoveUser(String useruserAccountCode) // 회원탈퇴요청취소-->
+	<delete id="cancelRequestRemoveUser"
+	 parameterType="java.lang.String">	
+
+		DELETE
+		FROM TBL_USER_DROP
+		WHERE USER_ACCT_CODE = #{useruserAccountCode}
+
+	</delete>
+
+	<!-- 	public int updateUser(UserDTO user) // 회원정보변경-->
+	<update id="updateUser"
+	 parameterType="com.amanne.biscuitball.mybatis.UserDTO"
+	 statementType="CALLABLE">	
+		UPDATE TBL_USER
+		SET USER_PWD= #{userPassword}
+		  , USER_TEL= #{userTel}
+		  , USER_HEIGHT= #{userHeight}
+		  , USER_CITY_CODE= #{userCityCode}
+		WHERE USER_ACCT_CODE = #{userAccountCode}
+		
+	</update>
+	
+	<!-- 	public int updateUserProfile(UserDTO user) // 회원프로필변경-->
+	<update id="updateUserProfile"
+	 parameterType="com.amanne.biscuitball.mybatis.UserDTO"
+	 statementType="CALLABLE">	
+		UPDATE TBL_USER_PROFILE_INFO
+		SET USER_PROFILE_IMG= #{userProfileImg}
+		  , USER_PROFILE_TXT= #{userProfileTxt}
+		  , USER_COURT_CODE= #{userCourtCode}
+		  , USER_POSITION_CODE= #{userPositionCode}
+		  , USER_TITLE_ACHV= #{titleAchievementImg}
+		  , SMS_RECEIVE_CODE= #{smsReceive}
+		  , USER_CITY_OP_CODE= #{cityOpen}
+		  , USER_ACHV_OP_CODE= #{achvOpen}
+		  , USER_GENDER_OP_CODE= #{genderOpen}
+		  , USER_COURT_OP_CODE= #{courtOpen}
+		  , USER_PL_OP_CODE= #{playlogOpen}
+		  , MSG_BLOCK_TYPE_CODE= #{msgBlockCode}
+		WHERE USER_ACCT_CODE = #{userAccountCode}		
+	</update>
+
+	<!-- public int addSnsSync(String userCode, String snsKey) // SNS연동-->
+	<insert id="addSnsSync"
+	 parameterType="java.lang.String">	
+	 
+		INSERT INTO TBL_SNS_SYNC(SNS_SYNC_CODE, USER_CODE, SNS_KEY)
+		VALUES(FN_CREATE_CODE('TBL_SNS_SYNC', SEQ_SNS_SYNC.NEXTVAL)
+		, #{userCode}, #{snsKey})		
+	</insert>
+	
+	<!-- public int removeSnsSync(String userCode) // SNS연동 삭제-->
+	<delete id="removeSnsSync"
+	 parameterType="java.lang.String">	
+	 
+		DELETE FROM TBL_SNS_SYNC WHERE USER_CODE = #{userCode}
+				
+	</delete>
+	
+	<!-- 	public void sendMessage(MessageDTO msgDTO) // 메시지발신-->
+	<select id="sendMessage" 
+	 parameterType="com.amanne.biscuitball.mybatis.MessageDTO"
+	 statementType="CALLABLE">
+		{ call PRC_SEND_MESSAGE
+			(
+			    #{senderAccountCode},
+			    #{receiverAccountCode},
+			    #{messageSubject},
+			    #{messageContent},
+			    #{returnValue ,mode=OUT, jdbcType=VARCHAR}
+			)
+		}
+	</select>
+	
+	<!-- 	public int readMessage(String msgCode)	 // 메시지 열람-->
+	<update id="readMessage"
+	 parameterType="java.lang.String">	
+		UPDATE TBL_RECEIVE_MESSAGE
+		SET READ_DATE = SYSDATE
+		WHERE CREATE_MSG_CODE = #{msgCode}
+	</update>
+
+	
+	<!-- 	public int removeSentMessage(String msgCode)	 // 발신메시지삭제-->
+	<update id="removeSentMessage"
+	 parameterType="java.lang.String">	
+		UPDATE TBL_RECEIVE_MESSAGE
+		SET DEL_DATE=SYSDATE
+		WHERE CREATE_MSG_CODE = #{msgCode}	
+	</update>
+
+	<!-- 	public int removeReceivedMessage(String msgCode)	 // 수신메시지삭제-->
+	<update id="removeReceivedMessage"
+	 parameterType="java.lang.String">	
+		UPDATE TBL_SEND_MESSAGE
+		SET DEL_DATE=SYSDATE
+		WHERE CREATE_MSG_CODE = #{msgCode}	
+	</update>	
+	
+	<!-- 	public void getAchievement(PersonalAchievementDTO personalAchievementDTO) // 개인업적획득-->
+	<select id="getAchievement" 
+	 parameterType="com.amanne.biscuitball.mybatis.PersonalAchievementDTO"
+	 statementType="CALLABLE">
+		{ call PRC_PERS_ACHV_GET
+			(
+			    #{getterAccountCode},
+			    #{personalAchievementCode},
+			    #{returnValue ,mode=OUT, jdbcType=VARCHAR}
+			)
+		}
+	</select>
+	
+	
+	<!-- 	public void issuePasswordResetCode(String userCode) // 비번재설정코드발급-->
+	<select id="issuePasswordResetCode" 
+	 parameterType="java.lang.String"
+	 statementType="CALLABLE">
+		{ call PRC_PWD_RESET_CODE
+			(
+			    #{userCode},
+			    #{returnValue ,mode=OUT, jdbcType=VARCHAR}
+			)
+		}
+	</select>
+	
+	<!-- 	public void resetPassword(String userCode, String issueCode) // 비밀번호재설정 -->
+	<select id="resetPassword" 
+	 parameterType="java.lang.String"
+	 statementType="CALLABLE">
+	 	{ call PRC_PWD_RESET
+			(
+			    #{issueCode},
+			    #{userCode},
+			    #{returnValue ,mode=OUT, jdbcType=VARCHAR}
+			)
+		}
+	</select>
+	
+	<!-- 	public int blockUser(String blockingAccountCode, String blockedAccountCode)	 // 회원차단 -->
+	<insert id="blockUser" 
+	 parameterType="java.lang.String">	 
+		 INSERT INTO TBL_USER_BLOCK(USER_BLOCK_CODE, BLOCKING_ACCT_CODE, BLOCKED_ACCT_CODE)
+		 VALUES(
+		     FN_CREATE_CODE('TBL_USER_BLOCK', SEQ_USER_BLOCK.NEXTVAL)
+		     , #{blockingAccountCode}
+		     , #{blockedAccountCode}
+		 )	 	
+	</insert>
+	
+	<!-- 	public void loginAsUser(String email, String password, String ip)	 // 로그인 -->
+	<select id="loginAsUser" 
+	 parameterType="java.lang.String"
+	 statementType="CALLABLE">	 
+		 { call PRC_LOGIN
+			(
+			    #{email},
+			    #{password},
+			    #{ip},
+			    #{returnValue ,mode=OUT, jdbcType=VARCHAR}
+			)
+		}	 	
+	</select>	
+	
+	<!-- 	public void makeFriendRequest(FriendRequestDTO dto)	 // 친구신청 -->
+	<select id="makeFriendRequest" 
+	 parameterType="com.amanne.biscuitball.mybatis.FriendRequestDTO"
+	 statementType="CALLABLE">	 
+		 { call PRC_FRIEND_REQUEST
+			(
+			    #{senderAccountCode},
+			    #{receiverAccountCode},
+			    #{returnValue ,mode=OUT, jdbcType=VARCHAR}
+			)
+		}	 	
+	</select>	
+	
+	<!-- 	public void acceptFriendRequest(FriendRequestDTO dto)	 // 친구신청수락 -->
+	<select id="acceptFriendRequest" 
+	 parameterType="com.amanne.biscuitball.mybatis.FriendRequestDTO"
+	 statementType="CALLABLE">	 
+		 { call PRC_FRIEND_REQ_YES
+			(
+			    #{friendRequestCode}
+			    #{returnValue ,mode=OUT, jdbcType=VARCHAR}
+			)
+		}	 	
+	</select>		
+	
+	
+	<!-- 	public void denyFreindRequest(FriendRequestDTO dto)	 // 친구신청거절 -->
+	<select id="denyFreindRequest" 
+	 parameterType="com.amanne.biscuitball.mybatis.FriendRequestDTO"
+	 statementType="CALLABLE">	 
+		 { call PRC_FRIEND_REQ_NO
+			(
+			    #{friendRequestCode}
+			    #{returnValue ,mode=OUT, jdbcType=VARCHAR}
+			)
+		}	 	
+	</select>
+	
+	<!-- 	public int readNotification(String notificationCode)	 // 알림 열람 -->
+	<delete id="readNotification" 
+	 parameterType="java.lang.String">	 
+		UPDATE TBL_NOTIFICATION
+		SET READ_DATE=SYSDATE
+		WHERE NOTIF_CODE= #{notificationCode}		
+	</delete>	
+	
+	<!-- 	public int removeNotification(String notificationCode)	 // 알림 삭제 -->
+	<update id="removeNotification"> 
+		DELETE
+		FROM TBL_NOTIFICATION
+		WHERE NOTIF_CODE= #{notificationCode}
+	</update>
+	
+	<!-- 	public int cancelFriendRequest(String friendRequestCode)	 // 친구 신청 취소  -->
+	<delete id="cancelFriendRequest" 
+	 parameterType="java.lang.String">	 
+		DELETE 
+		FROM TBL_FRIEND_REQUEST
+		WHERE FRIEND_REQ_CODE = #{friendRequestCode}	
+	</delete>
+	
+	<!-- 	public ArrayList<UserDTO> getUserListByNickname(@Param("keyword") String keyword, @Param("start") int start, @Param("end") int end) // 닉네임 유사한 유저 검색 -->
+	<select id="getUserListByNickname"
+	 resultType="com.amanne.biscuitball.mybatis.UserDTO">
+		SELECT USER_ACCT_CODE AS "userAccountCode", USER_NICKNAME AS "userNickname", USER_PROFILE_IMG AS "userProfileImg"
+		FROM    
+		(
+		    SELECT V1.USER_ACCT_CODE, V1.USER_NICKNAME, T1.USER_PROFILE_IMG
+		         , ROW_NUMBER() OVER(ORDER BY V1.USER_NICKNAME)  AS "RNUM"
+		    FROM VIEW_USER V1, TBL_USER_PROFILE_INFO T1
+		    WHERE V1.USER_ACCT_CODE = T1.USER_ACCT_CODE
+		    AND  USER_NICKNAME LIKE #{keyword} || '%'
+		)
+		WHERE RNUM <![CDATA[>]]>= #{start} AND RNUM <![CDATA[<]]>= #{end}
+	</select>
+	
+	<!-- 	public int countUsersByNickname(String keyword)	 // 닉네임 유사한 유저 전체 수 -->
+	<select id="countUsersByNickname" 
+	 parameterType="java.lang.String">
+	 	SELECT COUNT(*)
+		FROM VIEW_USER
+		WHERE USER_NICKNAME LIKE #{keyword} || '%'
+	</select>
+	
+	<!-- public MessageDTO getMessage(String messageCode); // 메시지 조회 -->
+	<select id="getMessage"
+	 resultType="com.amanne.biscuitball.mybatis.MessageDTO">
+		SELECT V1.CREATE_MSG_CODE AS "messageCode", V1.SENDER_ACCT_CODE AS "senderAccountCode", V1.RECEIVER_ACCT_CODE AS "receiverAccountCode"
+		     , V1.MSG_SUBJECT AS "messageSubject", V1.MSG_CONTENT AS "messageContent", V1.SEND_DATE AS "sendDate"
+		     , V1.RECEIVER_READ_DATE AS "receiverReadDate", V1.SENDER_DEL_DATE AS "senderDelDate", V1.RECEIVER_DEL_DATE AS "receiverDelDate"
+		     , (
+		            SELECT USER_NICKNAME
+		            FROM TBL_USER_ACCOUNT
+		            WHERE USER_ACCT_CODE = V1.SENDER_ACCT_CODE
+		       ) AS "senderNickname"
+		     , (
+		            SELECT USER_NICKNAME
+		            FROM TBL_USER_ACCOUNT
+		            WHERE USER_ACCT_CODE = V1.RECEIVER_ACCT_CODE
+		       ) AS "receiverNickname"
+		FROM VIEW_MESSAGE V1
+		WHERE CREATE_MSG_CODE = #{messageCode}	 	
+	</select> 
+	
+	<!-- 	public ArrayList<MessageDTO> getSentMessageList(@Param("userAccountCode") String userAccountCode, @Param("start") int start, @Param("end") int end)	 // 특정유저 발신메시지 조회	 -->
+	<select id="countUsersByNickname" 
+	 resultType="com.amanne.biscuitball.mybatis.MessageDTO">
+	 	SELECT CREATE_MSG_CODE AS "messageCode", SENDER_ACCT_CODE AS "senderAccountCode", RECEIVER_ACCT_CODE AS "receiverAccountCode"
+                 , MSG_SUBJECT AS "messageSubject", MSG_CONTENT AS "messageContent", SEND_DATE AS "sendDate", RECEIVER_READ_DATE AS "receiverReadDate"
+                 , SENDER_DEL_DATE AS "senderDelDate", RECEIVER_DEL_DATE AS "receiverDelDate", SENDER_NICKNAME AS "senderNickname", RECEIVER_NICKNAME AS "receiverNickname"
+	    FROM 
+	    (
+	        SELECT CREATE_MSG_CODE, SENDER_ACCT_CODE, RECEIVER_ACCT_CODE
+	                 , MSG_SUBJECT, MSG_CONTENT, SEND_DATE, RECEIVER_READ_DATE
+	                 , SENDER_DEL_DATE, RECEIVER_DEL_DATE, SENDER_NICKNAME , RECEIVER_NICKNAME
+	                 , ROW_NUMBER() OVER(ORDER BY SEND_DATE DESC) AS "RNUM"
+	        FROM 
+	        (
+	            SELECT V1.*
+	                 , (
+	                        SELECT  USER_NICKNAME
+	                        FROM    TBL_USER_ACCOUNT
+	                        WHERE   USER_ACCT_CODE = V1.SENDER_ACCT_CODE
+	                   ) AS "SENDER_NICKNAME"
+	                 , (
+	                        SELECT  USER_NICKNAME
+	                        FROM    TBL_USER_ACCOUNT
+	                        WHERE   USER_ACCT_CODE = V1.RECEIVER_ACCT_CODE
+	                   ) AS "RECEIVER_NICKNAME"
+	            FROM VIEW_MESSAGE V1
+	        )
+	        WHERE SENDER_ACCT_CODE = #{userAccountCode}
+	        AND   SENDER_DEL_DATE IS NULL
+	        ORDER BY RNUM DESC
+	    ) 
+	    WHERE RNUM <![CDATA[>]]>= #{start} AND RNUM <![CDATA[<]]>= #{end}
+	</select>
+	
+	
+	
+	<!-- 	public ArrayList<MessageDTO> getReceivedMessageList(@Param("userAccountCode") String userAccountCode, @Param("start") int start, @Param("end") int end)	 // 특정유저 수신메시지 조회	 -->
+	<select id="getReceivedMessageList" 
+	 resultType="com.amanne.biscuitball.mybatis.MessageDTO">
+	 	SELECT CREATE_MSG_CODE AS "messageCode", SENDER_ACCT_CODE AS "senderAccountCode", RECEIVER_ACCT_CODE AS "receiverAccountCode"
+                 , MSG_SUBJECT AS "messageSubject", MSG_CONTENT AS "messageContent", SEND_DATE AS "sendDate", RECEIVER_READ_DATE AS "receiverReadDate"
+                 , SENDER_DEL_DATE AS "senderDelDate", RECEIVER_DEL_DATE AS "receiverDelDate", SENDER_NICKNAME AS "senderNickname", RECEIVER_NICKNAME AS "receiverNickname"
+	    FROM 
+	    (
+	        SELECT CREATE_MSG_CODE, SENDER_ACCT_CODE, RECEIVER_ACCT_CODE
+	                 , MSG_SUBJECT, MSG_CONTENT, SEND_DATE, RECEIVER_READ_DATE
+	                 , SENDER_DEL_DATE, RECEIVER_DEL_DATE, SENDER_NICKNAME , RECEIVER_NICKNAME
+	                 , ROW_NUMBER() OVER(ORDER BY SEND_DATE DESC) AS "RNUM"
+	        FROM 
+	        (
+	            SELECT V1.*
+	                 , (
+	                        SELECT  USER_NICKNAME
+	                        FROM    TBL_USER_ACCOUNT
+	                        WHERE   USER_ACCT_CODE = V1.SENDER_ACCT_CODE
+	                   ) AS "SENDER_NICKNAME"
+	                 , (
+	                        SELECT  USER_NICKNAME
+	                        FROM    TBL_USER_ACCOUNT
+	                        WHERE   USER_ACCT_CODE = V1.RECEIVER_ACCT_CODE
+	                   ) AS "RECEIVER_NICKNAME"
+	            FROM VIEW_MESSAGE V1
+	        )
+	        WHERE RECEIVER_ACCT_CODE = #{userAccountCode}
+	        AND   RECEIVER_DEL_DATE IS NULL
+	        ORDER BY RNUM DESC
+	    ) 
+	    WHERE RNUM <![CDATA[>]]>= #{start} AND RNUM <![CDATA[<]]>= #{end}
+	</select>
+
+	
+	<!-- 	public int countSentMessageList(String userAccountCode)	 특정유저 발신메시지 전체 수 -->
+	<select id="countSentMessageList">	 	
+		SELECT COUNT(*)
+		FROM  VIEW_MESSAGE 
+		WHERE SENDER_ACCT_CODE = #{userAccountCode}
+		AND   SENDER_DEL_DATE IS NULL
+	</select>
+	
+	<!-- 	public int countReceivedMessageList(String userAccountCode) 특정유저 수신메시지 전체 수 -->
+	<select id="countReceivedMessageList">	 	
+		SELECT COUNT(*)
+		FROM  VIEW_MESSAGE 
+		WHERE RECEIVER_ACCT_CODE = #{userAccountCode}
+		AND   RECEIVER_DEL_DATE IS NULL
+	</select>
+	
+																			
+	
+	<!-- public ArrayList<FriendRequestDTO> getReceivedFriendRequestList(@Param("userAccountCode") String userAccountCode, @Param("start") int start, @Param("end") int end)	받은 친구신청 조회	 -->
+	<select id="getReceivedFriendRequestList"
+	 resultType="com.amanne.biscuitball.mybatis.FriendRequestDTO">	 	
+		 SELECT FRIEND_REQ_CODE AS "friendRequestCode", RECEIVER_ACCT_CODE AS "receiverAccountCode", RECEIVER_NICKNAME AS "receiverNickname"
+	     , FRIEND_REQ_DATE AS "requestDate", USER_PROFILE_IMG AS "receiverProfileImg"
+		FROM
+		(
+			SELECT V1.FRIEND_REQ_CODE, V1.RECEIVER_ACCT_CODE, V1.RECEIVER_NICKNAME
+					     , V1.FRIEND_REQ_DATE, T1.USER_PROFILE_IMG
+			             , ROW_NUMBER() OVER(ORDER BY  V1.FRIEND_REQ_DATE DESC) AS "RNUM"
+					FROM VIEW_FRIEND_REQUEST V1, TBL_USER_PROFILE_INFO T1
+					WHERE T1.USER_ACCT_CODE = V1.RECEIVER_ACCT_CODE
+					AND   V1.FRIEND_ANS_DATE IS NULL
+					AND   V1.SENDER_ACCT_CODE = 'AF000055'
+					ORDER BY FRIEND_REQ_DATE
+		)
+		WHERE RNUM <![CDATA[>]]>= #{start} AND RNUM <![CDATA[<]]>= #{end}
+		ORDER BY FRIEND_REQ_DATE DESC
+	</select>
+	
+	<!-- public ArrayList<FriendRequestDTO> getSentFriendRequestList(@Param("userAccountCode") String userAccountCode, @Param("start") int start, @Param("end") int end) 보낸 친구신청 조회-->
+	<select id="getSentFriendRequestList"
+	resultType="com.amanne.biscuitball.mybatis.FriendRequestDTO">	 	
+		SELECT FRIEND_REQ_CODE AS "friendRequestCode", SENDER_ACCT_CODE AS "senderAccountCode", SENDER_NICKNAME AS "senderNickname"
+	     , FRIEND_REQ_DATE AS "requestDate", USER_PROFILE_IMG AS "senderProfileImg"
+		FROM
+		(
+			SELECT V1.FRIEND_REQ_CODE, V1.SENDER_ACCT_CODE, V1.SENDER_NICKNAME
+					     , V1.FRIEND_REQ_DATE, T1.USER_PROFILE_IMG
+			             , ROW_NUMBER() OVER(ORDER BY  V1.FRIEND_REQ_DATE DESC) AS "RNUM"
+					FROM VIEW_FRIEND_REQUEST V1, TBL_USER_PROFILE_INFO T1
+					WHERE T1.USER_ACCT_CODE = V1.SENDER_ACCT_CODE
+					AND   V1.FRIEND_ANS_DATE IS NULL
+					AND   V1.RECEIVER_ACCT_CODE = #{userAccountCode}
+					ORDER BY FRIEND_REQ_DATE
+		)
+		WHERE RNUM <![CDATA[>]]>= #{start} AND RNUM <![CDATA[<]]>= #{end}
+		ORDER BY FRIEND_REQ_DATE DESC
+	</select>
+	
+	 <!--특정유저조회 -->
+   <!--public UserDTO getUser(String userAccountCode) -->
+   <select id="getUser" parameterType="java.lang.String"
+      resultType="com.amanne.biscuitball.mybatis.UserDTO">
+
+      SELECT USER_ACCT_CODE as userAccountCode, USER_NICKNAME as userNickname,
+      SNS_SYNC as snsSync
+      , USER_NAME as userName, USER_EMAIL as userEmail, USER_TEL as userTel
+      , USER_BIRTHDAY as userBirthday, USER_HEIGHT as userHeight,
+      USER_REG_DATE as userRegisteredDate
+      , USER_GENDER as userGender , SELF_EVAL_TYPE as selfEvaluationType
+      , GRADE as tierName, FPS as fairplayScore, USER_CITY as userCity,
+      USER_PROFILE_IMG as userProfileImg
+      , USER_PROFILE_TXT as userProfileTxt, USER_COURT_CODE as userCourtCode
+      , USER_POSITION as userPosition, USER_POSITION_ABBR as
+      userPositionAbbr, TITLE_ACHV_NAME as userPositionCode
+      , SMS_RECEIVE as smsReceive
+      , CITY_OPEN as cityOpen, ACHV_OPEN as achvOpen, GENDER_OPEN as
+      genderOpen
+      , COURT_OPEN as courtOpen, PL_OPEN as playlogOpen, MSG_BLOCK_TYPE as
+      msgBlockCode
+      FROM VIEW_USER
+      WHERE USER_ACCT_CODE = #{userAccountCode}
+   </select>
+
+
+   <!--특정유저알람조회 -->
+   <!--public ArrayList<NotificationDTO> getNotificationArrayList(@Param("userAccountCode")String 
+      userAccountCode, @Param("start") int start, @Param("end") int end); // 특정 
+      유저 알림 조회 -->
+   <select id="getNotificationArrayList"
+      parameterType="java.lang.String"
+      resultType="com.amanne.biscuitball.mybatis.UserDTO">
+
+      SELECT NOTIF_CODE as notificationCode, USER_ACCT_CODE as
+      userAccountcode, NOTIF_TYPE_CODE as notificationTypeCode
+      , CREATE_DATE as createDate, READ_DATE as readDate, URL as url,
+      NOTIF_CONTENT as notificationContent
+      FROM
+      (
+      SELECT NOTIF_CODE, USER_ACCT_CODE, NOTIF_TYPE_CODE, CREATE_DATE, READ_DATE,
+      URL, NOTIF_CONTENT,ROWNUM AS RNUM
+      FROM TBL_NOTIFICATION
+      WHERE USER_ACCT_CODE = #{userAccountCode}
+      )
+      WHERE RNUM <![CDATA[>]]>= #{start}  AND  RNUM  <![CDATA[<]]>= #{end}
+   </select>
+
+   <!-- 특정유저알림 전체수 -->
+   <!-- public int countNotifications(String userAccountCode); -->
+   <select id="countNotifications" parameterType="java.lang.String">
+      SELECT COUNT(*)
+      FROM TBL_NOTIFICATION
+      WHERE USER_ACCT_CODE = #{userAccountCode}
+   </select>
+
+   <!-- 특정유저 획득업적조회 -->
+   <!-- public ArrayList<PersonalAchievementDTO> getPersonalAchievementList(@Param("userAccountCode")String 
+      userAccountCode, @Param("start") int start, @Param("end") int end) -->
+   <select id="getPersonalAchievementList"
+      resultType="com.amanne.biscuitball.mybatis.PersonalAchievementDTO">
+      SELECT
+      (
+      SELECT USER_ACCT_CODE
+      FROM TBL_USER_ACCOUNT
+      WHERE USER_ACCT_CODE = #{userAccountCode}
+      ) as getterAccountCode
+      , (
+      SELECT USER_NICKNAME
+      FROM TBL_USER_ACCOUNT
+      WHERE USER_ACCT_CODE = #{userAccountCode}
+      ) as getterNickname
+      , V1.PERS_ACHV_CODE as personalAchievementCode, V1.PERS_ACHV_NAME as
+      personalAchievementName
+      , V1.PERS_ACHV_IMG as personalAchievementImg,
+      V1.PERS_ACHV_CONDITION as personalAchievementCondition
+      ,
+      V2.PERS_ACHV_GET_CODE personalAchievementGetCode,V2.PERS_ACHV_GET_DATE
+      as getAchievementStatus
+      , CASE WHEN V2.PERS_ACHV_CODE IS NOT NULL THEN
+      '획득'
+      ELSE '획득못함'
+      END as getAchievementStatus
+      , CASE WHEN
+      (
+      SELECT TITLE_ACHV_CODE
+      FROM VIEW_USER
+      WHERE USER_CODE= #{userAccountCode}
+      ) = V2.PERS_ACHV_CODE THEN '대표업적'
+      ELSE '대표업적아님'
+      END as
+      titleAchievementStatus
+      FROM TBL_PERSONAL_ACHIEVEMENTS V1 LEFT JOIN
+      (
+      SELECT
+      PERS_ACHV_GET_CODE,PERS_ACHV_GET_DATE,GETTER_ACCT_CODE,GETTER_NICKNAME,PERS_ACHV_CODE,PERS_ACHV_NAME,PERS_ACHV_IMG,PERS_ACHV_CONDITION
+      FROM VIEW_PERSONAL_ACHIEVEMENT_GET
+      WHERE GETTER_ACCT_CODE =
+      #{userAccountCode}
+      )V2
+      ON V1.PERS_ACHV_CODE = V2.PERS_ACHV_CODE
+      WHERE RNUM <![CDATA[>]]>= #{start}  AND  RNUM  <![CDATA[<]]>= #{end}
+   </select>
+
+
+   <!-- 특정 유저 획득 업적 전체 수 -->
+   <!-- public int countPersonalAchievements(String userAccountCode) -->
+   <select id="countPersonalAchievements"
+      parameterType="java.lang.String">
+      SELECT COUNT(*)
+      FROM VIEW_PERSONAL_ACHIEVEMENT_GET
+      WHERE GETTER_ACCT_CODE = #{userAccountCode}
+   </select>
+
+   <!-- 특정 유저 친구 조회 -->
+   <!-- public ArrayList<FriendRequestDTO> getFriendList(@Param("userAccountCode")String 
+      userAccountCode, @Param("start") int start, @Param("end") int end) -->
+   <select id="getFriendList"
+      resultType="com.amanne.biscuitball.mybatis.FriendRequestDTO">
+      SELECT FRIEND_REQ_CODE as friendRequestCode, SENDER_ACCT_CODE as
+      senderAccountCode, SENDER_NICKNAME as senderNickname
+      ,
+      RECEIVER_ACCT_CODE as receiverAccountCode,
+      (
+      SELECT USER_PROFILE_IMG
+      FROM
+      TBL_USER_PROFILE_INFO
+      WHERE USER_ACCT_CODE = RECEIVER_ACCT_CODE
+      ) as
+      receiverProfileImg
+      , RECEIVER_NICKNAME as receiverNickname
+      ,
+      FRIEND_REQ_DATE as requestDate, FRIEND_ANS_DATE as answerDate
+      FROM
+      (
+      SELECT FRIEND_REQ_CODE, SENDER_ACCT_CODE, SENDER_NICKNAME,
+      RECEIVER_ACCT_CODE, RECEIVER_NICKNAME, FRIEND_REQ_DATE,
+      FRIEND_ANS_DATE
+      FROM VIEW_FRIEND_REQUEST
+      WHERE SENDER_ACCT_CODE = #{userAccountCode} AND
+      FRIEND_REQ_STATUS = '수락'
+      )
+      WHERE RNUM <![CDATA[>]]>= #{start}  AND  RNUM  <![CDATA[<]]>= #{end}
+   </select>
+
+   <!-- 특정 유저 차단 조회 -->
+   <!--public ArrayList<UserDTO> getBlockUserList(@Param("userAccountCode")String 
+      userAccountCode, @Param("start") int start, @Param("end") int end); -->
+   <select id="getBlockUserList"
+      resultType="com.amanne.biscuitball.mybatis.UserBlockDTO">
+      SELECT USER_BLOCK_CODE as userBlockCode, BLOCKING_ACCT_CODE as
+      blockingAccountCode, BLOCKING_NICKNAME as blockingNickname,
+      BLOCKED_ACCT_CODE as blockedAccountCode,
+      (
+      SELECT USER_PROFILE_IMG
+      FROM TBL_USER_PROFILE_INFO
+      WHERE USER_ACCT_CODE = BLOCKED_ACCT_CODE
+      ) as blockingProfileImg
+      , BLOCKED_NICKNAME as blockedNickname
+      FROM
+      (
+      SELECT USER_BLOCK_CODE, BLOCKING_ACCT_CODE, BLOCKING_NICKNAME,
+      BLOCKED_ACCT_CODE, BLOCKED_NICKNAME
+      FROM VIEW_USER_BLOCK
+      WHERE BLOCKING_ACCT_CODE = #{userAccountCode}
+      )
+      WHERE RNUM <![CDATA[>]]>= #{start}  AND  RNUM  <![CDATA[<]]>= #{end}
+      
+   </select>
+</mapper>
+

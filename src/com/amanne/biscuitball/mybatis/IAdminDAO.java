@@ -231,6 +231,4 @@ public interface IAdminDAO
 	public int countAdmins(@Param("searchKey") String searchKey, @Param("searchValue") String searchValue); // 전체 관리자 수
 	
 	public AdminDTO getAdmin(String adminCode);
-	
-	public void loginAsAdmin(AdminDTO dto);
 }

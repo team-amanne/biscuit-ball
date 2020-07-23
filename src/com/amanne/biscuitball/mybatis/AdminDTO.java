@@ -13,7 +13,6 @@ public class AdminDTO
 	private String adminEmail; 		// 이메일
 	private String adminPassword; 	// 비밀번호
 	private String chiefAdmin; 	// 최고관리자여부
-	private String ipAddress;
 	private String returnValue;
 	
 	public String getAdminCode() {
@@ -40,19 +39,13 @@ public class AdminDTO
 	public void setAdminPassword(String adminPassword) {
 		this.adminPassword = adminPassword;
 	}
-	public String getChiefAdmin() {
+	public String isChiefAdmin() {
 		return chiefAdmin;
 	}
 	public void setChiefAdmin(String chiefAdmin) {
 		this.chiefAdmin = chiefAdmin;
 	}
-	public String getIpAddress() {
-		return ipAddress;
-	}
-	public void setIpAddress(String ipAddress) {
-		this.ipAddress = ipAddress;
-	}
-	public String getReturnValue() {
+	public String isReturnValue() {
 		return returnValue;
 	}
 	public void setReturnValue(String returnValue) {

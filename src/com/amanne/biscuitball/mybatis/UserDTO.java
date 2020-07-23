@@ -28,13 +28,15 @@ public class UserDTO
 	private String	tierCode;					//	실력코드
 	private String	tierName;					//	실력등급	
 	private double	fairplayScore;				//	fps	
-	private String	userCity;					//	거점지역명	
+	private String	userCityCode;				//	거점지역코드
+	private String	userCity;					//	거점지역명		
 	private String	userProfileImg;				//	프로필사진경로	
 	private String	userProfileTxt;				//	자기소개글	
 	private String	userCourtCode;				//	내코트코드	
 	private String	userCourtName;				//	내코트명	
 	private String	userPosition;				//	선호포지션명	
-	private String	userPositionAbbr;			//	선호포지션약어	
+	private String	userPositionAbbr;			//	선호포지션약어
+	private String  userPositionCode; 			//  유저포지션코드
 	private String	titleAchievementGetCode;	//	업적획득코드	
 	private String	titleAchievementCode;		//	획득업적코드	
 	private String	titleAchievementName;		//	획득업적명	

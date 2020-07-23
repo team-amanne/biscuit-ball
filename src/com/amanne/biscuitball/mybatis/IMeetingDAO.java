@@ -2,11 +2,9 @@ package com.amanne.biscuitball.mybatis;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 public interface IMeetingDAO
 {
-	public int registerMeeting(@Param("meetingDTO") MeetingDTO meetingDTO, @Param("meetingMemberDTO") MeetingMemberDTO meetingMemberDTO); // 모임개설
+	public int registerMeeting(MeetingDTO meetingDTO, MeetingMemberDTO meetingMemberDTO); // 모임개설
 
 	public int joinMeeting(MeetingMemberDTO meetingMemberDTO); // 모임참가
 
@@ -30,9 +28,9 @@ public interface IMeetingDAO
 
 	
 	
-	public List<MeetingDTO> getMeetingByMapPosition(@Param("posX") String posX, @Param("posY") String posY); // 코트중심 예정 모임 조회
+	public List<MeetingDTO> getMeetingByMapPosition(String posX, String posY); // 코트중심 예정 모임 조회
 
-	public int countMeetingByMapPosition(@Param("posX") String posX, @Param("posY") String posY); // 코트중심 예정 모임 전체 수
+	public int countMeetingByMapPosition(String posX, String posY); // 코트중심 예정 모임 전체 수
 
 	
 	
@@ -44,7 +42,7 @@ public interface IMeetingDAO
 	
 	public List<MeetingDTO> getPastMeetingList(String userAccountCode); // 참여했던 모임 조회
 
-	public int countMeetList(String userAccountCode); // 참여했던 모임 전체 수
+	public int countMetList(String userAccountCode); // 참여했던 모임 전체 수
 
 	
 	

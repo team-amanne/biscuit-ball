@@ -1,10 +1,12 @@
 package com.amanne.biscuitball.mybatis;
 
-import java.util.List;
+import java.util.ArrayList;
+
+import org.apache.ibatis.annotations.Param;
 
 public interface IUserDAO
 {
-	public int registerUser(UserDTO user); // 회원가입
+	public void registerUser(UserDTO user); // 회원가입
 
 	public int checkUserNickname(String userNickname); // 닉네임 중복체크
 
@@ -16,13 +18,15 @@ public interface IUserDAO
 
 	public int cancelRequestRemoveUser(String useruserAccountCode); // 회원탈퇴요청취소
 
-	public int updateUser(UserDTO user); // 회원정보변경, 회원프로필변경
+	public int updateUser(UserDTO user); // 회원정보변경
+	
+	public int updateUserProfile(UserDTO user); // 회원프로필변경
 
 	public int addSnsSync(String userCode, String snsKey); // SNS연동
 
 	public int removeSnsSync(String userCode); // SNS연동 삭제
 
-	public int sendMessage(MessageDTO msgDTO); // 메시지발신
+	public void sendMessage(MessageDTO msgDTO); // 메시지발신
 
 	public int readMessage(String msgCode); // 메시지열람
 
@@ -30,11 +34,11 @@ public interface IUserDAO
 
 	public int removeReceivedMessage(String msgCode); // 수신메시지삭제
 
-	public int getAchievement(PersonalAchievementDTO personalAchievementDTO); // 개인업적획득
+	public void getAchievement(PersonalAchievementDTO personalAchievementDTO); // 개인업적획득
 
-	public String issuePasswordResetCode(String userCode); // 비번재설정코드발급
+	public void issuePasswordResetCode(String userCode); // 비번재설정코드발급
 
-	public int resetPassword(String userCode, String issueCode); // 비밀번호재설정
+	public void resetPassword(String userCode, String issueCode); // 비밀번호재설정
 
 	public int blockUser(String blockingAccountCode, String blockedAccountCode); // 회원차단
 
@@ -45,40 +49,45 @@ public interface IUserDAO
 	public int acceptFriendRequest(FriendRequestDTO dto); // 친구신청수락
 
 	public int denyFreindRequest(FriendRequestDTO dto); // 친구신청거절
+	
+	public int cancelFriendRequest(String friendRequestCode); // 친구 신청 취소
 
 	public int readNotification(String notificationCode); // 알림 열람
 
 	public int removeNotification(String notificationCode); // 알림 삭제
 
 	public int cancelFriendRequest(FriendRequestDTO dto); // 친구신청 취소
-
-	public List<UserDTO> getUserListByNickname(String keyword, int start, int end); // 닉네임 유사한 유저 검색
+	
+	public ArrayList<UserDTO> getUserListByNickname(@Param("keyword") String keyword, @Param("start") int start, @Param("end") int end); // 닉네임 유사한 유저 검색
 
 	public int countUsersByNickname(String keyword); // 닉네임 유사한 유저 전체 수
 
-	public List<MessageDTO> getSentMessageList(String userAccountCode, int start, int end); // 특정유저 발신메시지 조회
-
-	public List<MessageDTO> getReceivedMessageList(String userAccountCode, int start, int end); // 특정유저 수신메시지 조회
+	public MessageDTO getMessage(String messageCode); // 메시지 조회
+	
+	public ArrayList<MessageDTO> getSentMessageList(@Param("userAccountCode") String userAccountCode, @Param("start") int start, @Param("end") int end); // 특정유저 발신메시지 조회
+	
+	public ArrayList<MessageDTO> getReceivedMessageList(@Param("userAccountCode") String userAccountCode, @Param("start") int start, @Param("end") int end); // 특정유저 수신메시지 조회
 
 	public int countSentMessageList(String userAccountCode); // 특정유저 발신메시지 전체 수
 
 	public int countReceivedMessageList(String userAccountCode); // 특정유저 수신메시지 전체 수
 
-	public List<FriendRequestDTO> getReceivedFriendRequestList(String userAccountCode); // 받은 친구신청 조회
+	public ArrayList<FriendRequestDTO> getReceivedFriendRequestList(@Param("userAccountCode") String userAccountCode, @Param("start") int start, @Param("end") int end);	// 받은 친구신청 조회 
 
-	public List<FriendRequestDTO> getSentFriendRequestList(String userAccountCode); // 보낸 친구신청 조회
+	public ArrayList<FriendRequestDTO> getSentFriendRequestList(@Param("userAccountCode") String userAccountCode, @Param("start") int start, @Param("end") int end); // 보낸 친구신청 조회
 
 	public UserDTO getUser(String userAccountCode); // 특정 유저 조회
 
-	public List<NotificationDTO> getNotificationList(String userAccountCode, int start, int end); // 특정 유저 알림 조회
+	public ArrayList<NotificationDTO> getNotificationArrayList(@Param("userAccountCode")String userAccountCode, @Param("start") int start, @Param("end") int end); // 특정 유저 알림 조회
 
 	public int countNotifications(String userAccountCode); // 특정 유저 알림 전체 수
 
-	public List<PersonalAchievementDTO> getPersonalAchievementList(String userAccountCode, int start, int end); // 특정 유저 획득 업적 조회
+	public ArrayList<PersonalAchievementDTO> getPersonalAchievementList(@Param("userAccountCode")String userAccountCode, @Param("start") int start, @Param("end") int end); // 특정 유저 획득 업적 조회
 
 	public int countPersonalAchievements(String userAccountCode); // 특정 유저 획득 업적 전체 수
 
-	public List<UserDTO> getFriendList(String userAccountCode); // 특정 유저 친구 조회
+	public ArrayList<UserDTO> getFriendList(@Param("userAccountCode")String userAccountCode, @Param("start") int start, @Param("end") int end); // 특정 유저 친구 조회
 
-	public List<UserDTO> getBlockUserList(String userAccountCode); // 특정 유저 블락유저 조회
+	public ArrayList<UserDTO> getBlockUserList(@Param("userAccountCode")String userAccountCode, @Param("start") int start, @Param("end") int end); // 특정 유저 블락유저 조회
+
 }
