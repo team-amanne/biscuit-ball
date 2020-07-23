@@ -238,9 +238,9 @@
 		 )	 	
 	</insert>
 	
-	<!-- 	public void loginAsUser(String email, String password, String ip)	 // 로그인 -->
+	<!-- 	public void loginAsUser(LoginDTO loginDTO)	 // 로그인 -->
 	<select id="loginAsUser" 
-	 parameterType="java.lang.String"
+	 parameterType="com.amanne.biscuitball.mybatis.LoginDTO"
 	 statementType="CALLABLE">	 
 		 { call PRC_LOGIN
 			(
