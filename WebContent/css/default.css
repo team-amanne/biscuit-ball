@@ -13,6 +13,11 @@
 	font-weight: bold;
 }
 
+.section-title                  /* section-title top 패딩  */
+{
+	margin-top: 2%;
+}
+
 
 /* 버튼 설정 */
 /* 버튼은 기본 부트스트랩 class= "btn btn-default" 이후 커스텀 클래스 적용 */
