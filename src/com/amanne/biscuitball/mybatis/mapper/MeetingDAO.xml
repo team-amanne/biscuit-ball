@@ -127,17 +127,21 @@
 
 		<select id="getMeetingListByCourt" resultType="com.amanne.biscuitball.mybatis.MeetingDTO">
 		<![CDATA[
-			SELECT MEET_CODE
-				 , MEET_SUBJECT
-				 , MEET_PEOPLE_NUMBER
-				 , MEET_OP_DATE
-				 , MEET_DATE
-				 , MEET_END_DATE
-				 , MEET_CLOSE_DATE
-				 , MEET_NOTICE
-				 , MEET_ABL_LIMIT_CODE
-				 , MEET_TYPE_CODE
-				 , MEET_QUICK_PLAY_CODE
+			SELECT MEET_CODE as meetingCode
+            , MEET_SUBJECT as meetingSubject
+            , MEET_PEOPLE_NUMBER as meetingPeopleNumber
+            , MEET_OP_DATE as meetingOpenDate
+            , MEET_DATE as meetingDate
+            , MEET_END_DATE as meetingEndDate
+            , MEET_CLOSE_DATE as meetingCloseDate
+            , MEET_NOTICE as meetingNotice
+            , MEET_TYPE_CODE as meetingTypeCode
+            , MEET_TYPE_NAME as meetingTypeName
+            , QUICK_PLAY as quickPlayOrNot
+            , COURT_REG_CODE as courtRegistrationCode
+            , MIN_TIER as minTierCode
+            , MAX_TIER as maxTierCode
+            , CONFIRM_OR_NOT as confirmOrNot
 			FROM TBL_MEETING
 			WHERE MEET_COURT_REG_CODE = #{courtCode}
             AND MEET_DATE > SYSDATE
@@ -159,14 +163,21 @@
 
 		<select id="getPastMeetingList" resultType="com.amanne.biscuitball.mybatis.MeetingDTO">
 		<![CDATA[
-			SELECT MEET_CODE
-				 , MEET_SUBJECT
-				 , MEET_PEOPLE_NUMBER
-				 , MEET_TYPE_CODE
-				 , MEET_JOIN_DATE
-				 , JOIN_ACCT_CODE
-				 , USER_NICKNAME
-				 , CAPTAIN_OR_NOT
+			SELECT MEET_CODE as meetingCode
+            , MEET_SUBJECT as meetingSubject
+            , MEET_PEOPLE_NUMBER as meetingPeopleNumber
+            , MEET_OP_DATE as meetingOpenDate
+            , MEET_DATE as meetingDate
+            , MEET_END_DATE as meetingEndDate
+            , MEET_CLOSE_DATE as meetingCloseDate
+            , MEET_NOTICE as meetingNotice
+            , MEET_TYPE_CODE as meetingTypeCode
+            , MEET_TYPE_NAME as meetingTypeName
+            , QUICK_PLAY as quickPlayOrNot
+            , COURT_REG_CODE as courtRegistrationCode
+            , MIN_TIER as minTierCode
+            , MAX_TIER as maxTierCode
+            , CONFIRM_OR_NOT as confirmOrNot
 			FROM VIEW_MEETING_JOIN
 			WHERE JOIN_ACCT_CODE = #{userAccountCode}
 			AND MEET_JOIN_CANCEL_CODE IS NULL
@@ -190,19 +201,29 @@
 
 		<select id="getMeetingListNotInputPlaylog" resultType="com.amanne.biscuitball.mybatis.MeetingDTO">
 		<![CDATA[
-			SELECT MJ.MEET_CODE
-				 , MJ.MEET_SUBJECT
-				 , MJ.MEET_PEOPLE_NUMBER
-				 , MJ.MEET_JOIN_DATE
-				 , MJ.JOIN_ACCT_CODE
-				 , MJ.USER_NICKNAME
-			FROM VIEW_EETING_JOIN MJ
-			LEFT JOIN TBL_PLAYLOG
-			ON MJ.MEET_JOIN_CODE = PL.EVALUATOR_MEET_JOIN_CODE
+			SELECT MT.MEET_CODE as meetingCode
+	            , MT.MEET_SUBJECT as meetingSubject
+	            , MT.MEET_PEOPLE_NUMBER as meetingPeopleNumber
+	            , MT.MEET_OP_DATE as meetingOpenDate
+	            , MT.MEET_DATE as meetingDate
+	            , MT.MEET_END_DATE as meetingEndDate
+	            , MT.MEET_CLOSE_DATE as meetingCloseDate
+	            , MT.MEET_NOTICE as meetingNotice
+	            , MT.MEET_TYPE_CODE as meetingTypeCode
+	            , MT.MEET_TYPE_NAME as meetingTypeName
+	            , MT.QUICK_PLAY as quickPlayOrNot
+	            , MT.COURT_REG_CODE as courtRegistrationCode
+	            , MT.MIN_TIER as minTierCode
+	            , MT.MAX_TIER as maxTierCode
+	            , MT.CONFIRM_OR_NOT as confirmOrNot
+			FROM VIEW_MEETING_JOIN MJ
+			LEFT JOIN VIEW_MEETING MT
+			ON MJ.MEET_CODE = MT.MEET_CODE
+			LEFT JOIN VIEW_PLAYLOG PL
+			ON MJ.MEET_JOIN_CODE = PL.MEET_JOIN_CODE
 			WHERE PL.PL_CODE IS NULL
-			AND MJ.MEET_JOIN_CANCEL_CODE IS NULL
 			AND MJ.JOIN_ACCT_CODE = #{userAccountCode}
-			AND MEET_END_DATE < SYSDATE
+			
 		]]>
 		</select>
 
@@ -225,29 +246,23 @@
 		<select id="getJoinMeetingList" resultType="com.amanne.biscuitball.mybatis.MeetingDTO">
 		<![CDATA[
 			SELECT MJ.MEET_JOIN_CODE
-            , MT.MEET_CODE
-            , MT.MEET_SUBJECT
-            , MT.MEET_PEOPLE_NUMBER
-            , MT.MEET_DATE
-            , MT.MEET_END_DATE
-            , MT.MEET_TYPE_CODE
-            , MT.MEET_TYPE_NAME
-            , MJ.MEET_JOIN_DATE
-            , MJ.JOIN_ACCT_CODE
-            , MJ.USER_NICKNAME
-            , MJ.CAPTAIN_OR_NOT
-            , MJ.BALL_EXIST_OR_NOT
-            , MT.QUICK_PLAY
-            , MT.COURT_REG_CODE
-            , MT.MIN_TIER
-            , MT.MAX_TIER
-            , MT.CONFIRM_OR_NOT
+            , MT.MEET_CODE as meetingCode
+            , MT.MEET_SUBJECT as meetingSubject
+            , MT.MEET_PEOPLE_NUMBER as meetingPeopleNumber
+            , MT.MEET_OP_DATE as meetingOpenDate
+            , MT.MEET_DATE as meetingDate
+            , MT.MEET_END_DATE as meetingEndDate
+            , MT.MEET_CLOSE_DATE as meetingCloseDate
+            , MT.MEET_NOTICE as meetingNotice
+            , MT.MEET_TYPE_CODE as meetingTypeCode
+            , MT.MEET_TYPE_NAME as meetingTypeName
 			FROM VIEW_MEETING_JOIN MJ
 			LEFT JOIN VIEW_MEETING MT
 			ON MJ.MEET_CODE = MT.MEET_CODE
 			WHERE MJ.JOIN_ACCT_CODE = #{userAccountCode}
 			AND MT.MEET_DATE > SYSDATE
 			AND MJ.MEET_JOIN_CANCEL_CODE IS NULL
+			ORDER BY MT.MEET_DATE
 		]]>
 		</select>
 
@@ -255,7 +270,7 @@
 
 		<select id="countJoinMeeting" resultType="java.lang.Integer">
 		<![CDATA[
-			SELECT COUNT(*) AS COUNT
+			SELECT COUNT(*) AS COUNT 
 			FROM VIEW_MEETING_JOIN MJ
 			LEFT JOIN VIEW_MEETING MT
 			ON MJ.MEET_CODE = MT.MEET_CODE
@@ -269,22 +284,24 @@
 
 		<select id="getMeeting" resultType="com.amanne.biscuitball.mybatis.MeetingDTO">
 		<![CDATA[
-			SELECT MEET_CODE
-            , MEET_SUBJECT
-            , MEET_PEOPLE_NUMBER
-            , MEET_DATE
-            , MEET_END_DATE
-            , MEET_CLOSE_DATE
-            , MEET_NOTICE
-            , MEET_TYPE_CODE
-            , MEET_TYPE_NAME
-            , QUICK_PLAY
-            , COURT_REG_CODE
-            , MIN_TIER
-            , MAX_TIER
-            , CONFIRM_OR_NOT
+			SELECT MEET_CODE as meetingCode
+            , MEET_SUBJECT as meetingSubject
+            , MEET_PEOPLE_NUMBER as meetingPeopleNumber
+            , MEET_OP_DATE as meetingOpenDate
+            , MEET_DATE as meetingDate
+            , MEET_END_DATE as meetingEndDate
+            , MEET_CLOSE_DATE as meetingCloseDate
+            , MEET_NOTICE as meetingNotice
+            , MEET_TYPE_CODE as meetingTypeCode
+            , MEET_TYPE_NAME as meetingTypeName
+            , QUICK_PLAY as quickPlayOrNot
+            , COURT_REG_CODE as courtRegistrationCode
+            , MIN_TIER as minTierCode
+            , MAX_TIER as maxTierCode
+            , CONFIRM_OR_NOT as confirmOrNot
 			FROM VIEW_MEETING
 			WHERE MEET_CODE = #{meetingCode}
+			ORDER BY MEET_OP_DATE DESC
 		]]>
 		</select>
 
@@ -292,15 +309,16 @@
 	
 		<select id="getMeetingMemberList" resultType="com.amanne.biscuitball.mybatis.MeetingMemberDTO">
 		<![CDATA[
-			SELECT MEET_JOIN_CODE
-            , MEET_CODE
-            , MEET_JOIN_DATE
-            , JOIN_ACCT_CODE
-            , USER_NICKNAME
-            , CATAIN_OR_NOT
-            , BALL_EXIST_OR_NOT
+			SELECT MEET_JOIN_CODE as meetJoinCode
+            , MEET_CODE as meetCode
+            , MEET_JOIN_DATE as meetJoinDate
+            , JOIN_ACCT_CODE as joinAccountCode
+            , USER_NICKNAME as userNickname
+            , CATAIN_OR_NOT as captainOrNot
+            , BALL_EXIST_OR_NOT as ballExistOrNot
 			FROM VIEW_MEETING_JOIN
 			WHERE MEET_CODE = #{meetingCode}
+			ORDER BY MEET_JOIN_CODE
 		]]>
 		</select>
 

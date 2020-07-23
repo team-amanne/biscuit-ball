@@ -46,7 +46,7 @@
                <li class="dropdown box text-right">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                      <span class="glyphicon glyphicon-user left"></span>
-                     <span class="box-content left">당근당근</span>
+                     <span class="box-content left">${sessionScope.userInfo.userNickname }</span>
                      <span class="caret"></span>
                   </a>
                   <ul class="dropdown-menu" role="menu">

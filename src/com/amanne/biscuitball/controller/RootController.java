@@ -124,6 +124,8 @@ public class RootController
 	@RequestMapping("/")
 	public String main()
 	{
+		
+		
 		return "/base/Main";
 	}
 
