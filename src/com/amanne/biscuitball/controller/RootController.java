@@ -40,6 +40,7 @@ public class RootController
 		return "/login/Login";
 	}
 
+	// login Action 로그인 액션
 	@RequestMapping("/login.do")
 	public String loginAction(Model model, LoginDTO dto)
 	{
@@ -117,6 +118,13 @@ public class RootController
 	public String passwordReset()
 	{
 		return "/login/User_PasswordReset";
+	}
+	
+	// 메인 페이지 띄우기
+	@RequestMapping("/")
+	public String main()
+	{
+		return "/base/Main";
 	}
 
 }

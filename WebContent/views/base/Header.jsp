@@ -4,8 +4,10 @@
    request.setCharacterEncoding("utf-8");
    String cp = request.getContextPath();
 %>
+
 <!-- 공통 헤더 -->
 <link rel="stylesheet" href="<%=cp %>/css/header.css" />
+
 
 <div class="header">
    <nav class="navbar navbar-default">
@@ -33,7 +35,41 @@
             
             <c:choose>
                <%-- 로그인 되었을 때 --%>
-               <c:when test="${1==0 }">
+               <c:when test="${sessionScope.userInfo != null }">
+               
+               <li class="border-left">
+                  <a href="#">
+                     <span id="alarm" class="glyphicon glyphicon-bell" aria-hidden="true"></span>
+                     <span class="badge">5</span>
+                  </a>
+               </li>
+               <li class="dropdown box text-right">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                     <span class="glyphicon glyphicon-user left"></span>
+                     <span class="box-content left">당근당근</span>
+                     <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu" role="menu">
+                     <li><a href="#">모임관리</a></li>
+                     <li class="divider"></li>
+                     <li><a href="#">내 코트 가기</a></li>
+                     <li><a href="#">내 크루 가기</a></li>
+                     <li class="divider"></li>
+                     <li><span>마이페이지</span></li>
+                     <li><a href="#">내 프로필</a></li>
+                     <li><a href="#">회원정보 수정</a></li>
+                     <li><a href="#">메시지함</a></li>
+                     <li><a href="#">업적관리</a></li>
+                     <li><a href="#">친구관리</a></li>
+                     <li><a href="#">차단관리</a></li>
+                     <li class="divider"></li>
+                     <li><a href="#">로그아웃</a></li>
+                  </ul>
+               </li>
+               
+               </c:when>
+               
+                <c:when test="${sessionScope.adminInfo != null }">
                
                <li class="border-left">
                   <a href="#">
@@ -97,7 +133,20 @@
             
             <c:choose>
             <%-- 로그인되었을 때 --%>
-            <c:when test="${1==0 }">
+            <c:when test="${sessionScope.userInfo != null }">
+            <li>
+               <a href="">
+                  <span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
+               </a>
+            </li>
+            <li class="collapsed" data-toggle="collapse" data-target="#display-sm-collapse-user">
+               <span class="glyphicon glyphicon-user"></span>
+            </li>
+            
+            </c:when>
+            
+            <%-- 로그인되었을 때 --%>
+            <c:when test="${sessionScope.adminInfo != null }">
             <li>
                <a href="">
                   <span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
