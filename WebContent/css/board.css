@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+.board-header {
+   color: white;
+   background-color: orange;
+}
+
+.board-body {
+   text-align: center;
+}
+
+.board-body .row {
+   display: flex;
+   align-items: center;
+}
+.paging 
+{
+   text-align: center;
+}
+.right-btn {
+   text-align: right;
+}
