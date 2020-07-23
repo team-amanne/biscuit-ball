@@ -92,7 +92,7 @@ hr
 <c:import url="../base/Header.jsp"></c:import>
 
 <!-- 서브 -->
-<c:import url="../base/Submenu.jsp"></c:import>
+<c:import url="../base/CrewSubmenu.jsp"></c:import>
 		
 <form action="" method="post" onclick="">
 		<div class="main container-fluid">

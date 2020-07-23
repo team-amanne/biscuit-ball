@@ -141,7 +141,7 @@
 <!-- 헤더 -->
 <c:import url="../base/Header.jsp"></c:import>
 <!-- 서브 -->
-<c:import url="../base/Submenu.jsp"></c:import>
+<c:import url="../base/CrewSubmenu.jsp"></c:import>
 
 <div class="container-fluid">
       <div class="section-title container">
