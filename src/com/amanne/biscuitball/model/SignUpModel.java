@@ -20,8 +20,6 @@ public class SignUpModel
 	public String signUpUser(UserDTO user)
 	{
 		IUserDAO dao = sqlSession.getMapper(IUserDAO.class);
-
-		System.out.println(user.getUserName());
 		
 		dao.registerUser(user);	// 회원가입
 		
