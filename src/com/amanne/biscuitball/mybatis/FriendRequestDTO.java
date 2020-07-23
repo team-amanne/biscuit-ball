@@ -91,6 +91,14 @@ public class FriendRequestDTO
 	{
 		this.returnValue = returnValue;
 	}
+	public String getAnswerDate()
+	{
+		return answerDate;
+	}
+	public void setAnswerDate(String answerDate)
+	{
+		this.answerDate = answerDate;
+	}
 	
 
 }

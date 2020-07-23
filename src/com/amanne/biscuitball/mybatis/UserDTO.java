@@ -307,5 +307,21 @@ public class UserDTO
 	}
 	public void setReturnValue(String returnValue) {
 		this.returnValue = returnValue;
+	}
+	public String getUserCityCode()
+	{
+		return userCityCode;
+	}
+	public void setUserCityCode(String userCityCode)
+	{
+		this.userCityCode = userCityCode;
+	}
+	public String getUserPositionCode()
+	{
+		return userPositionCode;
+	}
+	public void setUserPositionCode(String userPositionCode)
+	{
+		this.userPositionCode = userPositionCode;
 	}	
 }

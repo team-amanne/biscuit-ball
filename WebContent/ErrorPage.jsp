@@ -35,9 +35,9 @@
 <body>
 
 <!-- 헤더 -->
-<c:import url="../base/Header.jsp"></c:import>
+<c:import url="views/base/Header.jsp"></c:import>
 <!-- 서브 -->
-<c:import url="../base/Submenu.jsp"></c:import>
+<c:import url="views/base/Submenu.jsp"></c:import>
 
 <div class="container-fluid">
       <div class="section-title container">
@@ -87,7 +87,7 @@
 	</div>
 </div>
 
-<c:import url="../base/Footer.jsp"></c:import>
+<c:import url="views/base/Footer.jsp"></c:import>
 
 </body>
 </html>
