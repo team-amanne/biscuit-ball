@@ -116,7 +116,6 @@
 <body>
 
 	<c:import url="../base/Header.jsp"></c:import>
-<c:import url="../base/Submenu.jsp"></c:import>
 
 <div class="container-fluid">
       <div class="section-title container">
