@@ -74,7 +74,7 @@
 	width: 306px;
 }
 
-#sign
+.btn-submit
 {
 	width: 357px;
 	height: 55px;
@@ -88,12 +88,30 @@
 }
 
 </style>
+
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/default.css">
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/board.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<!-- 스크립트단 -->
+<script type="text/javascript">
+	$(document).ready(function()
+	{
+		$("#login").click(function()
+		{
+			if ( $("#email").val() != null && $("#password").val() !=null)
+			{
+				$("#loginForm").submit();
+			}
+			
+		});
+	});
+
+</script>
+
 </head>
 <body>
 
@@ -126,22 +144,23 @@
 		<div class="col-md-3">
 		</div>
 		<div class="col-md-6 login_display">
+		<form action="login.do" method="post" id="loginForm">
 			<div class="input-group input-group-lg login_email">
 		 		<span class="input-group-addon" id="sizing-addon1">
 		 			<span class="glyphicon glyphicon-user"></span>
 		 		</span>
-		  		<input type="text" id="email" class="form-control" placeholder="Email" aria-describedby="sizing-addon1">
+		  		<input type="text" id="email" name="email" class="form-control" placeholder="Email" aria-describedby="sizing-addon1">
 			</div>
 			
 			<div class="input-group input-group-lg login_pw">
 		 		<span class="input-group-addon" id="sizing-addon1">
 		 			<span class="glyphicon glyphicon-wrench"></span>
 		 		</span>
-		  		<input type="password" id="password" class="form-control" placeholder="Password" aria-describedby="sizing-addon1">
+		  		<input type="password" id="password" name="password" class="form-control" placeholder="Password" aria-describedby="sizing-addon1">
 			</div>
 		
 			<div class="login_button">
-				<button type="button" class="btn btn-default btn-lg" id="sign">로그인</button>
+				<button type="button" class="btn btn-default btn-lg btn-submit" id="login">로그인</button>
 				<button type="button" id="kakaosign"><img src="<%=cp %>/views/img/kakao.png" style="max-width: 100%; height: auto;"></button>
 			</div>
 			
@@ -149,7 +168,7 @@
 				<span class="glyphicon glyphicon-plus" id="sign_up"><a href="">회원가입</a></span>
 				<span class="glyphicon glyphicon-exclamation-sign" id="reset_password"><a href="">비밀번호재설정</a></span>
 			</div>
-			
+		</form>
 		</div>
 		<div class="col-md-3">
 		</div>

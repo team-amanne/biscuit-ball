@@ -490,24 +490,39 @@
    <select id="getUser" parameterType="java.lang.String"
       resultType="com.amanne.biscuitball.mybatis.UserDTO">
 
-      SELECT USER_ACCT_CODE as userAccountCode, USER_NICKNAME as userNickname,
-      SNS_SYNC as snsSync
-      , USER_NAME as userName, USER_EMAIL as userEmail, USER_TEL as userTel
-      , USER_BIRTHDAY as userBirthday, USER_HEIGHT as userHeight,
-      USER_REG_DATE as userRegisteredDate
-      , USER_GENDER as userGender , SELF_EVAL_TYPE as selfEvaluationType
-      , GRADE as tierName, FPS as fairplayScore, USER_CITY as userCity,
-      USER_PROFILE_IMG as userProfileImg
-      , USER_PROFILE_TXT as userProfileTxt, USER_COURT_CODE as userCourtCode
-      , USER_POSITION as userPosition, USER_POSITION_ABBR as
-      userPositionAbbr, TITLE_ACHV_NAME as userPositionCode
-      , SMS_RECEIVE as smsReceive
-      , CITY_OPEN as cityOpen, ACHV_OPEN as achvOpen, GENDER_OPEN as
-      genderOpen
-      , COURT_OPEN as courtOpen, PL_OPEN as playlogOpen, MSG_BLOCK_TYPE as
-      msgBlockCode
-      FROM VIEW_USER
-      WHERE USER_ACCT_CODE = #{userAccountCode}
+	      SELECT U.USER_ACCT_CODE as userAccountCode
+	     , U.USER_NICKNAME as userNickname
+	     , U.SNS_SYNC as snsSync
+	     , U.USER_NAME as userName
+	     , U.USER_EMAIL as userEmail
+	     , U.USER_TEL as userTel
+	     , U.USER_BIRTHDAY as userBirthday
+	     , U.USER_HEIGHT as userHeight
+	     , U.USER_REG_DATE as userRegisteredDate
+	     , U.USER_GENDER as userGender
+	     , U.SELF_EVAL_TYPE as selfEvaluationType
+	     , U.GRADE as tierName
+	     , U.FPS as fairplayScore
+	     , U.USER_CITY as userCity
+	     , U.USER_PROFILE_IMG as userProfileImg
+	     , U.USER_PROFILE_TXT as userProfileTxt
+	     , U.USER_COURT_CODE as userCourtCode
+	     , U.USER_POSITION as userPosition
+	     , U.USER_POSITION_ABBR as userPositionAbbr
+	     , U.TITLE_ACHV_NAME as userPositionCode
+	     , U.SMS_RECEIVE as smsReceive
+	     , U.CITY_OPEN as cityOpen
+	     , U.ACHV_OPEN as achvOpen
+	     , U.GENDER_OPEN as genderOpen
+	     , U.COURT_OPEN as courtOpen
+	     , U.PL_OPEN as playlogOpen
+	     , U.MSG_BLOCK_TYPE as msgBlockCode
+	     , NVL(UP.USER_STATUS,'정상') AS userStatus
+	     , UP.PENALTY_COUNT as penaltyCount
+	FROM VIEW_USER U
+	LEFT JOIN VIEW_USER_PENALTY_SUMMARY UP
+	ON U.USER_ACCT_CODE = UP.USER_ACCT_CODE
+	WHERE U.USER_ACCT_CODE = #{userAccountCode}
    </select>
 
 

@@ -42,7 +42,7 @@ public interface IUserDAO
 
 	public int blockUser(String blockingAccountCode, String blockedAccountCode); // 회원차단
 
-	public int loginAsUser(LoginDTO loginDTO); // 로그인
+	public void loginAsUser(LoginDTO loginDTO); // 로그인
 
 	public int makeFriendRequest(FriendRequestDTO dto); // 친구신청
 

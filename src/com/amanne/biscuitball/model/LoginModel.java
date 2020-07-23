@@ -2,6 +2,7 @@ package com.amanne.biscuitball.model;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.amanne.biscuitball.mybatis.AdminDTO;
 import com.amanne.biscuitball.mybatis.IAdminDAO;
@@ -9,20 +10,17 @@ import com.amanne.biscuitball.mybatis.IUserDAO;
 import com.amanne.biscuitball.mybatis.LoginDTO;
 import com.amanne.biscuitball.mybatis.UserDTO;
 
+@Service
 public class LoginModel
 {
 	@Autowired
 	private SqlSession sqlSession;
 	
 	// 관리자 로그인 메소드
-	public UserInfo adminlogin(String email, String pwd, String ip)
+	public UserInfo adminlogin(LoginDTO loginDto)
 	{
 		UserInfo userInfo = new UserInfo();
-		LoginDTO loginDto = new LoginDTO();
 		
-		loginDto.setEmail(email);
-		loginDto.setPassword(pwd);
-		loginDto.setIp(ip);
 		
 		IAdminDAO adminDao = sqlSession.getMapper(IAdminDAO.class);
 		adminDao.loginAsAdmin(loginDto);
@@ -43,14 +41,10 @@ public class LoginModel
 	}
 	
 	// 유저 로그인 메소드
-	public UserInfo userlogin(String email, String pwd, String ip)
+	public UserInfo userlogin(LoginDTO loginDto)
     {
        UserInfo userInfo = new UserInfo();
-       LoginDTO loginDto = new LoginDTO();
        
-       loginDto.setEmail(email);
-       loginDto.setPassword(pwd);
-       loginDto.setIp(ip);
        
        IUserDAO userDao = sqlSession.getMapper(IUserDAO.class);
        

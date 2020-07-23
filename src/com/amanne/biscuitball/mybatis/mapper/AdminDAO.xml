@@ -1430,9 +1430,9 @@
 	 parameterType="com.amanne.biscuitball.mybatis.LoginDTO" >
 		{ call PRC_ADMIN_LOGIN
 			(
-				#{adminEmail},
-			    #{adminPassword},
-			    #{ipAddress},
+				#{email},
+			    #{password},
+			    #{ip},
 			    #{returnValue ,mode=OUT, jdbcType=VARCHAR}
 			)
 		}
