@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.amanne.biscuitball.model.LoginModel;
+import com.amanne.biscuitball.model.SignUpModel;
 import com.amanne.biscuitball.model.UserInfo;
 import com.amanne.biscuitball.mybatis.LoginDTO;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,13 +26,13 @@ public class RootController
 {
 
 	@Autowired
-	private LoginModel login;
+	private SignUpModel signUp;
 
+	@Autowired
+	private LoginModel login;
+	
 	@Autowired
 	private HttpServletRequest request;
-
-	@Autowired
-	private SqlSession sqlSession;
 
 	// login Form 불러옴
 	@RequestMapping("/login/**")
@@ -79,13 +80,10 @@ public class RootController
 	}
 
 	// 회원가입 Form 불러옴
-	@RequestMapping({"/signup/**", "/signup/"})
+	@RequestMapping("/signup/**")
 	public String signUpForm(Model model)
 	{
-
-		IRegionDAO dao = sqlSession.getMapper(IRegionDAO.class);
-
-		model.addAttribute("regionList", dao.getRegionList());
+		model.addAttribute("regionList", signUp.signUpUserForm());
 
 		return "/signup/User_Signup";
 	}
@@ -94,23 +92,8 @@ public class RootController
 	@RequestMapping(value = "/signup.do", method = RequestMethod.POST)
 	public String signUp(UserDTO user)
 	{
-		System.out.println("-------------------------");
-		System.out.println("-------------------------");
-
-		IUserDAO dao = sqlSession.getMapper(IUserDAO.class);
-
-		System.out.println("-------------------------");
-		System.out.println("-------------------------");
-		System.out.println(user.getUserName());
-
-		dao.registerUser(user); // 회원가입
-
-		String result = user.getUserRegisteredDate(); // 처리 결과
-
-		if (result.equals("1")) // 회원가입성공
-			return "/signup/User_SignupComplete";
-
-		return "/signup/User_SignupComplete";
+		System.out.println(user.getTierName() + "aaaaaaaaaaaaaaaaaaaaaaa");
+		return signUp.signUpUser(user);
 	}
 
 	// 비밀번호 재설정 Form 불러옴
