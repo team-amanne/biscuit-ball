@@ -14,14 +14,14 @@ String cp = request.getContextPath();
 	<link rel="stylesheet" type="text/css" href="<%=cp %>/css/default.css">
 <style type="text/css">
 
-	.col-party 
-	{
-		text-align: center;
-		border-radius: 30px;
-		height: 300px;
-		padding-top: 60px;
-		margin: 100px auto auto auto;
-	}
+.col-party 
+{
+	text-align: center;
+	border-radius: 30px;
+	height: 300px;
+	padding-top: 60px;
+	margin: 100px auto auto auto;
+}
 </style>
 </head>
 <body>
@@ -42,19 +42,23 @@ String cp = request.getContextPath();
 			<div class="col-md-2"></div>
 				<div class="col-md-8">
 					<div class="col-md-6">
-						<div class="panel panel-default col-party" style="opacity: 0.6; background-size: cover; background-image: url('../img/hamNong.jpg');">
+						<div class="panel panel-default col-party">
 							<div class="panel-body">
-								<h2 style="color:white; font-weight: bold;">빠른농구</h2>
-								<p style="color:white; font-weight: bold;">지금 당장 농구하고 싶다면?</p>
+								<h2>빠른농구</h2>
+								<p>지금 당장 농구하고 싶다면?</p>
 								<button class="btn btn-warning">PLAY</button>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-6">
+<<<<<<< HEAD
 						<div class="panel panel-default col-party" style="opacity: 0.6; background-size: cover; background-image: url('<%=cp%>/img/baNong.jpg');">
+=======
+						<div class="panel panel-default col-party">
+>>>>>>> branch 'play' of https://github.com/team-amanne/biscuit-ball.git
 							<div class="panel-body">
-								<h2 style="color:white; font-weight: bold;">함께농구</h2>
-								<p style="color:white; font-weight: bold;">나에게 꼭 맞는 모임은?</p>
+								<h2>함께농구</h2>
+								<p>나에게 꼭 맞는 모임은?</p>
 								<button class="btn btn-warning">PLAY</button>
 							</div>
 						</div>
