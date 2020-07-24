@@ -40,7 +40,7 @@ public class RootController
 	}
 
 	// login Action 로그인 액션
-	@RequestMapping("/login.do")
+	@RequestMapping("/logindo")
 	public String loginAction(Model model, LoginDTO dto)
 	{
 		dto.setIp(request.getRemoteAddr());
