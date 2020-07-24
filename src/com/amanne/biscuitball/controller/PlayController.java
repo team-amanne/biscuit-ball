@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.amanne.biscuitball.mybatis.IRegionDAO;
+
 
 @Controller
 @RequestMapping("/play")
@@ -17,17 +19,19 @@ public class PlayController
    @Autowired
    private HttpServletRequest request;
    
+   @Autowired
+   private 
+   
    
    // 파티 선택으로 이동
-   @RequestMapping(value="/party/**", method=RequestMethod.GET)
+   @RequestMapping(value="/party")
    public String playHome()
    {
-      
       return "/play/PlayParty";
    }
    
    // 파티 선택 -> 빠농/함농 선택으로 이동
-   @RequestMapping("/mode/**")
+   @RequestMapping("/mode")
    public String playMode()
    {
       return "/play/PlaySelect";
@@ -42,8 +46,9 @@ public class PlayController
    
    // 함께농구로 이동
    @RequestMapping("/mode/together/**")
-   public String togetherPlay()
+   public String togetherPlay(Model model)
    {
+	   
       return "/play/PlayTogetherSelect";
    }
    
