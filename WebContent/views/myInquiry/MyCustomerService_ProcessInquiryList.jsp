@@ -29,32 +29,22 @@
 	text-align: center;
 }
 
-.category /* 카테고리 버튼 */
+/* 검색 소속 flex */
+.search
 {
-	margin-bottom: 4px;
-}
-
-#s_category /* 검색창 카테고리  */
-{
-	width: 110px;
-}
-
-.search_category /* 검색창 카테고리 */
-{
-	width: 300px;
 	display: flex;
-	margin: auto;
 }
 
-#search_text /* 검색내용 입력 */
+/* 검색 카테고리 */
+.search_value
 {
 	width: 220px;
-	margin-right: 5px;
 }
 
-.search	/* 검색버튼 */
+/* 검색입력 */
+.search_content
 {
-	margin-left: auto;
+	width: 200px;
 }
 
 .page /* 페이징 */
@@ -70,15 +60,29 @@
 	width: 30%;
 }
 
-.category_button /* 카테고리 버튼 */
+/* 숫자 도형 색깔 */
+.badge
 {
-	display: flex;
-	margin-bottom: 20px;
+	background-color: orange !important;
 }
 
-#button1,#button2,#button3,#button4	/* 문의 작성, 문의 내역, 신고 내역 버튼 정렬 */
+/* 현황판 크기조절 */
+.bar
 {
-	margin: auto;
+	display: flex;
+	margin-left: auto;
+	width: 65%;
+}
+
+/* 현황판 간격 */
+.bar1, .bar2, .bar3
+{
+	margin-right: 10px;
+}
+
+.button_right
+{
+	margin-left: 141%;
 }
 
 
@@ -189,7 +193,7 @@
 							<span>2020.07.10</span>
 						</div>
 						<div class="col-md-2">
-							<span class="board-header">[ <span style="color: blue; font-weight: bold;">처리중</span> ]</span>
+							<span>[ <span style="color: blue; font-weight: bold;">처리중</span> ]</span>
 						</div>
 					</li>
 					<li class="list-group-item post_board">
@@ -212,7 +216,7 @@
 							<span>2020.07.10</span>
 						</div>
 						<div class="col-md-2">
-							<span class="board-header">[ <span style="color: blue; font-weight: bold;">처리중</span> ]</span>
+							<span>[ <span style="color: blue; font-weight: bold;">처리중</span> ]</span>
 						</div>
 					</li>
 					<li class="list-group-item post_board">
@@ -235,7 +239,7 @@
 							<span>2020.07.10</span>
 						</div>
 						<div class="col-md-2">
-							<span class="board-header">[ <span style="color: blue; font-weight: bold;">처리중</span> ]</span>
+							<span>[ <span style="color: blue; font-weight: bold;">처리중</span> ]</span>
 						</div>
 					</li>
 					<li class="list-group-item post_board">
@@ -258,7 +262,7 @@
 							<span>2020.07.10</span>
 						</div>
 						<div class="col-md-2">
-							<span class="board-header">[ <span style="color: blue; font-weight: bold;">처리중</span> ]</span>
+							<span>[ <span style="color: blue; font-weight: bold;">처리중</span> ]</span>
 						</div>
 					</li>
 					<li class="list-group-item post_board">
@@ -281,7 +285,7 @@
 							<span>2020.07.10</span>
 						</div>
 						<div class="col-md-2">
-							<span class="board-header">[ <span style="color: blue; font-weight: bold;">처리중</span> ]</span>
+							<span>[ <span style="color: blue; font-weight: bold;">처리중</span> ]</span>
 						</div>
 					</li>
 					<li class="list-group-item post_board">
@@ -304,7 +308,7 @@
 							<span>2020.07.10</span>
 						</div>
 						<div class="col-md-2">
-							<span class="board-header">[ <span style="color: blue; font-weight: bold;">처리중</span> ]</span>
+							<span>[ <span style="color: blue; font-weight: bold;">처리중</span> ]</span>
 						</div>
 					</li>
 					<li class="list-group-item post_board">
@@ -327,7 +331,7 @@
 							<span>2020.07.10</span>
 						</div>
 						<div class="col-md-2">
-							<span class="board-header">[ <span style="color: blue; font-weight: bold;">처리중</span> ]</span>
+							<span>[ <span style="color: blue; font-weight: bold;">처리중</span> ]</span>
 						</div>
 					</li>
 					<li class="list-group-item post_board">
@@ -350,7 +354,7 @@
 							<span>2020.07.10</span>
 						</div>
 						<div class="col-md-2">
-							<span class="board-header">[ <span style="color: blue; font-weight: bold;">처리중</span> ]</span>
+							<span>[ <span style="color: blue; font-weight: bold;">처리중</span> ]</span>
 						</div>
 					</li>
 					<li class="list-group-item post_board">
@@ -373,7 +377,7 @@
 							<span>2020.07.10</span>
 						</div>
 						<div class="col-md-2">
-							<span class="board-header">[ <span style="color: blue; font-weight: bold;">처리중</span> ]</span>
+							<span>[ <span style="color: blue; font-weight: bold;">처리중</span> ]</span>
 						</div>
 					</li>
 					<li class="list-group-item post_board">
@@ -396,7 +400,7 @@
 							<span>2020.07.10</span>
 						</div>
 						<div class="col-md-2">
-							<span class="board-header">[ <span style="color: blue; font-weight: bold;">처리중</span> ]</span>
+							<span>[ <span style="color: blue; font-weight: bold;">처리중</span> ]</span>
 						</div>
 					</li>
 					
@@ -422,24 +426,22 @@
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-8">
+			<div class="search">
 				<div class="search_category">
-					<div>
-						<select class="form-control" id="s_category">
-					 		<option>제목</option>
-					  		<option>내용</option>
-					  		<option>작성자</option>
-					  		<option>카테고리</option>
-						</select>
-					</div>
-					
-					<div class="search_text">
-						<input type='text' class="form-control" id="search_text">
-					</div>
-					
-					<div class="search">
-						<button type="button" class="btn btn-warning">검색</button> 
-					</div>
-				</div>		
+					<select class="form-control" id="search_category">
+				 		<option>제목</option>
+				  		<option>내용</option>
+				  		<option>작성자</option>
+				  		<option>카테고리</option>
+					</select>
+				</div>
+				<div class="search_value">
+					<input type='text' class="form-control" id="search_content">
+				</div>
+				<div class="search_button">
+					<button type="button" class="btn btn-warning btn-submit button_small">검색</button>
+				</div>	
+			</div>
 		</div>
 		<div class="col-md-2">		
 		</div>
@@ -474,19 +476,6 @@
 					</li>
 				</ul>
 			</nav>
-		</div>
-		<div class="col-md-2">
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-4">
-		</div>
-		<div class="col-md-2">
 		</div>
 		<div class="col-md-2">
 		</div>

@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>내담당 문의/신고 - 전체문의목록.jsp</title>
+<title>내담당 문의 - 전체문의목록.jsp</title>
 <style type="text/css">
 
 .title_board_bar /* 게시판 번호,카테고리,제목,작성자,작성일 바  */
@@ -29,32 +29,22 @@
 	text-align: center;
 }
 
-.category /* 카테고리 버튼 */
+/* 검색 소속 flex */
+.search
 {
-	margin-bottom: 4px;
-}
-
-#s_category /* 검색창 카테고리  */
-{
-	width: 110px;
-}
-
-.search_category /* 검색창 카테고리 */
-{
-	width: 300px;
 	display: flex;
-	margin: auto;
 }
 
-#search_text /* 검색내용 입력 */
+/* 검색 카테고리 */
+.search_value
 {
 	width: 220px;
-	margin-right: 5px;
 }
 
-.search	/* 검색버튼 */
+/* 검색입력 */
+.search_content
 {
-	margin-left: auto;
+	width: 200px;
 }
 
 .page /* 페이징 */
@@ -63,39 +53,11 @@
 	margin: auto;
 }
 
-.submit_delete
-{
-	width: 160px;
-	display: flex;
-	margin-left: auto;
-}
-
-#submit
-{
-	margin-right: 2px;
-}
-
-#delete
-{
-	margin-right: auto;
-}
-
 #check
 {
 	height: 20px;
 	margin: 0px;
 	width: 30%;
-}
-
-.category_button /* 카테고리 버튼 */
-{
-	display: flex;
-	margin-bottom: 20px;
-}
-
-#button1,#button2,#button3,#button4	/* 문의 작성, 문의 내역, 신고 내역 버튼 정렬 */
-{
-	margin: auto;
 }
 
 /* 숫자 도형 색깔 */
@@ -109,7 +71,7 @@
 {
 	display: flex;
 	margin-left: auto;
-	width: 70%;
+	width: 65%;
 }
 
 /* 현황판 간격 */
@@ -118,20 +80,21 @@
 	margin-right: 10px;
 }
 
+.button_right
+{
+	margin-left: 141%;
+}
 
 </style>
 <link rel="stylesheet"
-   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet"
-   href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
-<link rel="stylesheet" type="text/css" href="<%=cp%>/css/default.css">
-<link rel="stylesheet" href="<%=cp%>/css/board.css" />
+	href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
+<link rel="stylesheet" type="text/css" href="<%=cp%>/css/board.css">
 </head>
 <body>
 
-<!-- 헤더 -->
-<c:import url="../base/Header.jsp"></c:import>
-<!-- 서브 -->
+	<c:import url="../base/Header.jsp"></c:import>
 <c:import url="../base/Submenu.jsp"></c:import>
 
 <div class="container-fluid">
@@ -166,35 +129,30 @@
 		</div>
 		<div class="col-md-2">
 		</div>
+		
 	</div>
 	<div class="row">
 		<div class="col-md-2">
 		</div>
-		<div class="col-sm-8 category">
-			<button type="button" class="btn btn-warning">
-				전체
-			</button> 
-			<button type="button" class="btn btn-outline-secondary">
-				농구하기
-			</button> 
-			<button type="button" class="btn btn-outline-secondary">
-				크루
-			</button> 
-			<button type="button" class="btn btn-outline-secondary">
-				대전
-			</button> 
-			<button type="button" class="btn btn-outline-secondary">
-				마이페이지
-			</button>
-			<button type="button" class="btn btn-outline-secondary">
-				코트페이지
-			</button>
-			<button type="button" class="btn btn-outline-secondary">
-				친구·차단
-			</button>
-			<button type="button" class="btn btn-outline-secondary">
-				기타
-			</button>
+		<div class="col-sm-8">
+				<ul class="nav nav-tabs" role="tablist">
+					<li role="presentation" class="active"><a href="#home"
+						aria-controls="home" role="tab" data-toggle="tab">전체</a></li>
+					<li role="presentation"><a href="#profile"
+						aria-controls="profile" role="tab" data-toggle="tab">농구하기</a></li>
+					<li role="presentation"><a href="#profile"
+						aria-controls="profile" role="tab" data-toggle="tab2">크루</a></li>
+					<li role="presentation"><a href="#profile"
+						aria-controls="profile" role="tab" data-toggle="tab2">대전</a></li>
+					<li role="presentation"><a href="#profile"
+						aria-controls="profile" role="tab" data-toggle="tab2">마이페이지</a></li>
+					<li role="presentation"><a href="#profile"
+						aria-controls="profile" role="tab" data-toggle="tab2">코트페이지</a></li>
+					<li role="presentation"><a href="#profile"
+						aria-controls="profile" role="tab" data-toggle="tab2">친구·차단</a></li>
+					<li role="presentation"><a href="#profile"
+						aria-controls="profile" role="tab" data-toggle="tab2">기타</a></li>
+				</ul>
 		</div>
 		<div class="col-md-2">
 		</div>
@@ -247,7 +205,7 @@
 							<span>2020.07.10</span>
 						</div>
 						<div class="col-md-2">
-							<span>[ <span style="color: green; font-weight: bold;">접수완료</span> ]</span>
+							<span class="">[ <span style="color: green; font-weight: bold;">접수완료</span> ]</span>
 						</div>
 					</li>
 					<li class="list-group-item post_board">
@@ -270,7 +228,7 @@
 							<span>2020.07.10</span>
 						</div>
 						<div class="col-md-2">
-							<span>[ <span style="color: green; font-weight: bold;">접수완료</span> ]</span>
+							<span class="">[ <span style="color: green; font-weight: bold;">접수완료</span> ]</span>
 						</div>
 					</li>
 					<li class="list-group-item post_board">
@@ -293,7 +251,7 @@
 							<span>2020.07.10</span>
 						</div>
 						<div class="col-md-2">
-							<span>[ <span style="color: green; font-weight: bold;">접수완료</span> ]</span>
+							<span class="">[ <span style="color: green; font-weight: bold;">접수완료</span> ]</span>
 						</div>
 					</li>
 					<li class="list-group-item post_board">
@@ -316,7 +274,7 @@
 							<span>2020.07.10</span>
 						</div>
 						<div class="col-md-2">
-							<span>[ <span style="color: blue; font-weight: bold;">처리중</span> ]</span>
+							<span class="">[ <span style="color: blue; font-weight: bold;">처리중</span> ]</span>
 						</div>
 					</li>
 					<li class="list-group-item post_board">
@@ -339,7 +297,7 @@
 							<span>2020.07.10</span>
 						</div>
 						<div class="col-md-2">
-							<span>[ <span style="color: blue; font-weight: bold;">처리중</span> ]</span>
+							<span class="">[ <span style="color: blue; font-weight: bold;">처리중</span> ]</span>
 						</div>
 					</li>
 					<li class="list-group-item post_board">
@@ -362,7 +320,7 @@
 							<span>2020.07.10</span>
 						</div>
 						<div class="col-md-2">
-							<span>[ <span style="color: blue; font-weight: bold;">처리중</span> ]</span>
+							<span class="">[ <span style="color: blue; font-weight: bold;">처리중</span> ]</span>
 						</div>
 					</li>
 					<li class="list-group-item post_board">
@@ -385,7 +343,7 @@
 							<span>2020.07.10</span>
 						</div>
 						<div class="col-md-2">
-							<span>[ <span style="color: blue; font-weight: bold;">처리중</span> ]</span>
+							<span class="">[ <span style="color: blue; font-weight: bold;">처리중</span> ]</span>
 						</div>
 					</li>
 					<li class="list-group-item post_board">
@@ -408,7 +366,7 @@
 							<span>2020.07.10</span>
 						</div>
 						<div class="col-md-2">
-							<span>[ <span style="color: red; font-weight: bold;">처리완료</span> ]</span>
+							<span class="">[ <span style="color: red; font-weight: bold;">처리완료</span> ]</span>
 						</div>
 					</li>
 					<li class="list-group-item post_board">
@@ -431,7 +389,7 @@
 							<span>2020.07.10</span>
 						</div>
 						<div class="col-md-2">
-							<span>[ <span style="color: red; font-weight: bold;">처리완료</span> ]</span>
+							<span class="">[ <span style="color: red; font-weight: bold;">처리완료</span> ]</span>
 						</div>
 					</li>
 					<li class="list-group-item post_board">
@@ -454,9 +412,11 @@
 							<span>2020.07.10</span>
 						</div>
 						<div class="col-md-2">
-							<span>[ <span style="color: red; font-weight: bold;">처리완료</span> ]</span>
+							<span class="">[ <span style="color: red; font-weight: bold;">처리완료</span> ]</span>
 						</div>
 					</li>
+					
+
 				</ul>		
 			</div>
 		<div class="col-md-2"></div>
@@ -464,29 +424,34 @@
 		<div class="col-md-2">
 		</div>
 	</div>
+
 		
 	<div class="row">
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-8">
+			<div class="search">
 				<div class="search_category">
-					<div>
-						<select class="form-control" id="s_category">
-					 		<option>제목</option>
-					  		<option>내용</option>
-					  		<option>작성자</option>
-					  		<option>카테고리</option>
-						</select>
+					<select class="form-control" id="search_category">
+				 		<option>제목</option>
+				  		<option>내용</option>
+				  		<option>작성자</option>
+				  		<option>카테고리</option>
+					</select>
+				</div>
+				<div class="search_value">
+					<input type='text' class="form-control" id="search_content">
+				</div>
+				<div class="search_button">
+					<button type="button" class="btn btn-warning btn-submit button_small">검색</button>
+				</div>
+					<div class="row"> 
+						<div class="col-md-12 button_right">
+							<button class="btn btn-warning button_middle" type="submit">작성하기</button>
+							<button class="btn btn-warning button_middle" type="submit">삭제하기</button>
+						</div>	
 					</div>
-					
-					<div class="search_text">
-						<input type='text' class="form-control" id="search_text">
-					</div>
-					
-					<div class="search">
-						<button type="button" class="btn btn-warning">검색</button> 
-					</div>
-				</div>		
+			</div>	
 		</div>
 		<div class="col-md-2">		
 		</div>

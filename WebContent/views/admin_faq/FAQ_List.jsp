@@ -8,6 +8,31 @@
 <html>
 <head>
 <title>FAQ 목록</title>
+<style type="text/css">
+/* 검색 소속 flex */
+.search
+{
+	display: flex;
+}
+
+/* 검색 카테고리 */
+.search_value
+{
+	width: 220px;
+}
+
+/* 검색입력 */
+.search_content
+{
+	width: 200px;
+}
+
+.button_right
+{
+	margin-left: 141%;
+}
+
+</style>
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -30,24 +55,18 @@
 					<div class="col-md-8">
 						<div class="row top">
 							<div class="col-md-12">
-								<p>고객센터 > FAQ 목록</p>
-								<hr>
-								
-								<button type="button" class="btn btn-warning">
-									전체
-								</button> 
-								<button type="button" class="btn btn-default">
-									계정
-								</button> 
-								<button type="button" class="btn btn-default">
-									크루
-								</button> 
-								<button type="button" class="btn btn-default">
-									신고
-								</button> 
-								<button type="button" class="btn btn-default">
-									기타
-								</button>
+								<ul class="nav nav-tabs" role="tablist">
+									<li role="presentation" class="active"><a href="#home"
+										aria-controls="home" role="tab" data-toggle="tab">전체</a></li>
+									<li role="presentation"><a href="#profile"
+										aria-controls="profile" role="tab" data-toggle="tab">계정</a></li>
+									<li role="presentation"><a href="#profile"
+										aria-controls="profile" role="tab" data-toggle="tab2">크루</a></li>
+									<li role="presentation"><a href="#profile"
+										aria-controls="profile" role="tab" data-toggle="tab2">신고</a></li>
+									<li role="presentation"><a href="#profile"
+										aria-controls="profile" role="tab" data-toggle="tab2">기타</a></li>
+								</ul>
 							</div>
 						</div>
 						<ul class="list-group">
@@ -261,13 +280,31 @@
 								</div>
 							</li>	
 						</ul>
-						<div class="row"> 
-							<div class="col-md-12 right-btn">
-		
-									<button class="btn btn-default btn-submit" type="submit">작성하기</button>
-									<button class="btn btn-default" type="submit">삭제하기</button>
+						<div class="search">
+							<div class="search_category">
+								<select class="form-control" id="search_category">
+							 		<option>제목</option>
+							  		<option>내용</option>
+							  		<option>작성자</option>
+							  		<option>카테고리</option>
+								</select>
+							</div>
+							<div class="search_value">
+								<input type='text' class="form-control" id="search_content">
+							</div>
+							<div class="search_button">
+								<button type="button" class="btn btn-warning btn-submit button_small">검색</button>
+							</div>
+							
+													<div class="row"> 
+							<div class="col-md-12 button_right">
+								<button class="btn btn-default btn-submit button_middle" type="submit">작성하기</button>
+								<button class="btn btn-default button_middle" type="submit">삭제하기</button>
 							</div>	
 						</div>
+							
+						</div>
+
 					</div>
 						
 						<div class="row">

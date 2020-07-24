@@ -9,11 +9,6 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입.jsp</title>
-
-<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-
-<script type="text/javascript" src="<%=cp%>/js/jquery-ui.js"></script>
-
 <style type="text/css">
 
 /* flex 용 */
@@ -21,63 +16,63 @@
 {
 	display: flex;
 	margin-left: auto;
-	width: 80%;
+	width: 80% !important;
 }
 
 /* 이메일 */
-#email
+.email
 {
 	margin-left: 90px;
 	margin-bottom: 10px;
-	width: 279px;
+	width: 279px !important;
 }
 
 /* 이메일 인증 */
-#email_certify
+.email_certify
 {
 	margin-left: 10px;
-	width: 98px;
-	height: 34px;
+	width: 98px !important;
+	height: 34px !important;
 }
 
 /* 비밀번호1 */
-#password1
+.password1
 {
 	margin-left: 70px;
 	margin-bottom: 10px;
-	width: 279px;
+	width: 279px !important;
 }
 
 /* 비밀번호2 */
-#password2
+.password2
 {
 	margin-left: 25px;
 	margin-bottom: 10px;
-	width: 279px;
+	width: 279px !important;
 }
 
 /* 이름 */
-#name
+.name
 {
 	margin-left: 109px;
 	margin-bottom: 10px;
-	width: 279px;
+	width: 279px !important;
 }
 
 /* 닉네임 */
-#nickname
+.nickname
 {
 	margin-left: 88px;
 	margin-bottom: 10px;
-	width: 279px;
+	width: 279px !important;
 }
 
 /* 닉네임 중복확인 */
-#nickname_check
+.nickname_check
 {
 	margin-left: 10px;
-	width: 98px;
-	height: 34px;
+	width: 98px !important;
+	height: 34px !important;
 }
 
 /* 라벨명 */
@@ -89,34 +84,34 @@
 }
 
 /* 생년월일 */
-#birtday
+.birtday
 {
 	margin-left: 24px;
 	margin-bottom: 10px;
-	width: 279px;
+	width: 279px !important;
 }
 
 /* 달력 이미지 */
-#calenda_image
+.calenda_image
 {
-	width: 200px;
+	width: 200px !important;
     margin-left: 47px;
     margin-top: 3px;
     font-size: 22pt;
 }
 
 /* 성별 라디오버튼 */
-#jender
+.jender
 {
 	margin-right: 5px;
-	width: 220px;
+	width: 220px !important;
 }
 
 /* 여자, 남자 */
-#female, #male
+.female, .male
 {
-	height: 20px;
-    width: 20px;
+	height: 20px !important;
+    width: 20px !important;
 }
 
 /* 라디오버튼 크기 */
@@ -126,96 +121,96 @@
 }
 
 /* 신장 */
-#key_height
+.key_height
 {
 	margin-left: 107px;
 	margin-bottom: 10px;
-	width: 279px;
+	width: 279px !important;
 }
 
 /* 자기평가실력 */
-#self
+.self
 {
 	margin-left: 27px;
 	margin-bottom: 10px;
-	width: 129px;
+	width: 129px !important;
 }
 
 /* 지역선택 */
-#country
+.country
 {
 	margin-left: 66px;
 	margin-bottom: 10px;
-	width: 130px;
+	width: 130px !important;
 }
 
 /* 지역구(시 군 구) */
-#region
+.region
 {
 	margin-left: 10px;
 	margin-bottom: 10px;
-	width: 140px;
+	width: 140px !important;
 }
 
 /* 전화번호 1번째 3번째 입력칸 */
-#tel1
+.tel1
 {
 	margin-left: 66px;
 	margin-bottom: 10px;
-	width: 80px;
+	width: 80px !important;
 }
 
 /* 전화번호 2번째 입력칸 */
-#tel2
+.tel2
 {
-	width: 80px;
+	width: 80px !important;
 	margin-left: 7px;
 	margin-right: 7px;
 	margin-bottom: 10px;
 }
 
 /* 전화번호 3번째 입력칸 */
-#tel3
+.tel3
 {
-	width: 80px;
+	width: 80px !important;
 	margin-bottom: 10px;
 }
 
 /* 전화번호 인증번호 입력칸 */
-#tel4
+.tel4
 {
 	margin-left: 66px;
 	margin-bottom: 10px;
-	width: 279px;
+	width: 279px !important;
 }
 
 /* 전화번호 인증 */
-#tel_certify
+.tel_certify
 {
 	margin-left: 10px;
-	width: 98px;
-	height: 34px;
+	width: 98px !important;
+	height: 34px !important;
 }
 
-#tel_certify_send
+.tel_certify_send
 {
 	margin-left: 10px;
-	width: 110px;
-	height: 34px;
+	width: 110px !important;
+	height: 34px !important;
 }
 
 /* 포지션 선택 */
-#position
+.position
 {
 	margin-left: 46px;
-	width: 279px;
+	width: 279px !important;
 }
 
 /* 포지션 추천버튼 */
-#position_recommend
+.position_recommend
 {
 	margin-left: 10px;
-	width: 98px;
+	width: 98px !important;
 	height: 34px;
 }
 
@@ -223,53 +218,41 @@
 .last_button
 {
 	margin-left: auto;
-    width: 480px;
+    width: 480px !important;
     margin-top: 50px;
 }
 
 /* 회원가입 완료버튼 */
-#sign_up
+.sign_up
 {
 	margin-left: 10px;
-	width: 98px;
+	width: 98px !important;
 	height: 34px;
 }
 
 /* 돌아가기 버튼 */
-#back
+.back
 {
 	margin-left: 10px;
-	width: 98px;
+	width: 98px !important;
 	height: 34px;
 }
 
 /* 하이폰용 */
-#space1
+.space1
 {
 	margin-left: 6px;
 	font-size: 15pt;
 }
 
 /* 하이폰용 */
-#space2
+.space2
 {	
 	margin-right: 6px;
 	font-size: 15pt;
 }
 
 </style>
-
-<script type="text/javascript">
-
-$(function() 
-{
-	$("#sign_up").click(function() 
-	{
-		$("#member").submit();
-	});
-}); 
-
-</script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -290,60 +273,58 @@ $(function()
          <h5>메인 홈 > 회원가입</h5>
          <hr />
       </div>
-   <form action="signup.do" id="member" method="post">
 	<div class="row">
 		<div class="col-md-3">
 		</div>
 		<div class="col-md-6 input_content">
-		
 			<div class="flex">
 				<label class="f_size">이메일*</label>
-				<span><input type="email" class="form-control" id="email" placeholder="email"></span>
+				<span><input type="email" class="form-control email" id="email" placeholder="email"></span>
 				
-				<button class="btn btn-warning" id="email_certify">중복확인</button>
+				<button class="btn btn-warning email_certify" id="email_certify">중복확인</button>
 			</div>
 			<div class="flex">
 				<label class="f_size">비밀번호*</label>
-				<input type="password" class="form-control" id="password1" placeholder="*********">
+				<input type="password" class="form-control password1" id="password1" placeholder="*********">
 			</div>
 			<div class="flex">
 				<label class="f_size">비밀번호 확인*</label>
-				<input type="password" class="form-control" id="password2" placeholder="영문,소문자,숫자,특수문자 8~15자">
+				<input type="password" class="form-control password2" id="password2" placeholder="영문,소문자,숫자,특수문자 8~15자">
 			</div>
 			<div class="flex">
 				<label class="f_size">이름*</label>
-				<input type="text" class="form-control" id="userName" name="userName" placeholder="홍길동규">
+				<input type="text" class="form-control name" id="userName" name="userName" placeholder="홍길동규">
 			</div>
 			<div class="flex">
 				<label class="f_size">닉네임*</label>
-				<input type="text" class="form-control" id="nickname" placeholder="동규의칠갑산">
+				<input type="text" class="form-control nickname" id="nickname" placeholder="동규의칠갑산">
 				
-				<button class="btn btn-warning" id="nickname_check">중복확인</button>
+				<button class="btn btn-warning nickname_check" id="nickname_check">중복확인</button>
 			</div>
 			<div class="flex">
 				<label class="f_size" style="width: 150px;">생년월일*</label>
-				<input type="text" class="form-control" id="birtday" placeholder="2020-07-15">
+				<input type="text" class="form-control birtday" id="birtday" placeholder="2020-07-15">
 				
 				<div>
-					<a href=""><span class="glyphicon glyphicon-calendar" id="calenda_image"></span></a>
+					<a href=""><span class="glyphicon glyphicon-calendar calenda_image" id="calenda_image"></span></a>
 				</div>
 			</div>
 			<div class="flex">
-				<label class="f_size" id="jender">성별*</label>
+				<label class="f_size jender" id="jender">성별*</label>
 					<label class="radio-inline radio_button">
-					  	<input type="radio" name="inlineRadioOptions" id="female" value="female">여자
+					  	<input type="radio" name="inlineRadioOptions" id="female" value="female" class="female">여자
 					</label>
 					<label class="radio-inline radio_button">
-					  	<input type="radio" name="inlineRadioOptions" id="male" value="male">남자
+					  	<input type="radio" name="inlineRadioOptions" id="male" value="male" class="male">남자
 					</label>
 			</div>
 			<div class="flex">
 				<label class="f_size">신장*</label>
-				<input type="text" class="form-control" id="key_height" placeholder="100~250(cm) 입력">
+				<input type="text" class="form-control key_height" id="key_height" placeholder="100~250(cm) 입력">
 			</div>
 			<div class="flex">
 				<label class="f_size">자기실력평가*</label>
-				<select class="form-control" id="self">
+				<select class="form-control self" id="self">
 					<option selected="selected">실력선택</option>
 					<option>하</option>
 					<option>중</option>
@@ -353,7 +334,7 @@ $(function()
 			</div>
 			<div class="flex">
 				<label class="f_size">거점지역*</label>
-				<select class="form-control" id="country">
+				<select class="form-control country" id="country">
 					<option selected="selected">지역선택</option>
 					<option>서울</option>
 					<option>인천</option>
@@ -362,7 +343,7 @@ $(function()
 					<option>대구</option>
 					<option>광주</option>
 				</select>
-				<select class="form-control" id="region">
+				<select class="form-control region" id="region">
 					<option selected="selected">시군구선택</option>
 					<option>마포구</option>
 					<option>강남구</option>
@@ -371,7 +352,7 @@ $(function()
 			</div>
 			<div class="flex">
 				<label class="f_size">전화번호*</label>
-				<select class="form-control" id="userTel">
+				<select class="form-control userTel" id="userTel">
 					<option selected="selected">선택</option>
 					<option>010</option>
 					<option>011</option>
@@ -380,25 +361,25 @@ $(function()
 					<option>018</option>
 					<option>019</option>
 				</select>
-				<div id="space1"> - </div>
-				<input type="tel" class="form-control" id="tel2">
-				<div id="space2"> - </div>
-				<input type="tel" class="form-control" id="tel3">
+				<div id="space1" class="space1"> - </div>
+				<input type="tel" class="form-control tel2" id="tel2">
+				<div id="space2" class="space2"> - </div>
+				<input type="tel" class="form-control tel3" id="tel3">
 				
-				<button class="btn btn-warning" id="tel_certify">인증</button>
+				<button class="btn btn-warning tel_certify" id="tel_certify">인증</button>
 			</div>
 			
 			<div class="flex">
 				<label class="f_size">인증번호*</label>
-				<input type="tel" class="form-control" id="tel4" placeholder="인증번호를 입력해주세요">
+				<input type="tel" class="form-control tel4" id="tel4" placeholder="인증번호를 입력해주세요">
 				
-				<button class="btn btn-warning" id="tel_certify_send">인증번호 발송</button>
+				<button class="btn btn-warning tel_certify_send" id="tel_certify_send">인증번호 발송</button>
 				
 			</div>
 			
 			<div class="flex">
 				<label class="f_size">선호포지션*</label>
-				<select class="form-control" id="position">
+				<select class="form-control position" id="position">
 					<option selected="selected">포지션선택</option>
 					<option>포인트가드</option>
 					<option>센터</option>
@@ -407,7 +388,7 @@ $(function()
 					<option>파워 포워드</option>
 				</select>
 				
-				<button class="btn btn-warning" id="position_recommend">포지션 추천</button>
+				<button class="btn btn-warning position_recommend" id="position_recommend">포지션 추천</button>
 			</div>		
 		</div>
 		<div class="col-md-3">
@@ -415,11 +396,11 @@ $(function()
 	</div>
 	<div class="row">
 		<div class="col-md-3">
-		</div> 
+		</div>
 		<div class="col-md-6 flex">
 			<div class="last_button">
-				<button class="btn btn-warning" id="sign_up">회원가입</button>
-				<button class="btn btn-warning" id="back">돌아가기</button>
+				<button class="btn btn-warning sign_up" id="sign_up">회원가입</button>
+				<button class="btn btn-warning back" id="back">돌아가기</button>
 			</div>
 		</div>
 		<div class="col-md-3">
@@ -427,7 +408,6 @@ $(function()
 	</div>
 	</form>
 </div>
-
 
 <c:import url="../base/Footer.jsp"></c:import>
 

@@ -63,6 +63,9 @@
 									<div class="col-sm-12 col-xs-12">
 										<span>문 의 내 역</span>
 									</div>
+									<div class="col-sm-1 col-xs-1">
+									<a href="">+더보기</a>
+									</div>
 								</div>
 							</li>
 							<li class="list-group-item board-body">
@@ -152,8 +155,12 @@
 								<div class="row">															
 									<div class="col-sm-12 col-xs-12">
 										<span>신 고 내 역</span>
+									</div>								
+									<div class="col-sm-1 col-xs-1">
+										<a href="">+더보기</a>
 									</div>
 								</div>
+
 							</li>
 							<li class="list-group-item board-body">
 								<div class="row">															
@@ -239,11 +246,6 @@
 						<div class="row"> 
 						</div>
 					</div>
-						
-						<div class="row">
-							<div class="col-md-4"></div>
-							<div class="col-md-4"></div>
-						</div>
 						<div class="row">
 							<div class="col-md-12"></div>
 						</div>

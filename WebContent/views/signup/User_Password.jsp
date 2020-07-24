@@ -20,19 +20,19 @@
 }
 
 /* 이메일 입력 */
-#email
+.email
 {
 	margin-left: 70px;
 	margin-bottom: 10px;
-	width: 279px;
+	width: 279px !important;
 }
 
 /* 이메일로 코드발송버튼 */
-#email_code
+.email_code
 {
 	margin-left: 10px;
-	width: 130px;
-	height: 34px;
+	width: 130px !important;
+	height: 34px !important;
 }
 
 .f_size
@@ -70,42 +70,10 @@
 		<div class="col-md-6 input_content">
 			<div class="flex">
 				<label class="f_size">이메일*</label>
-				<input type="password" class="form-control" id="email" placeholder="shinseongchul@naver.com">
+				<input type="password" class="form-control email" id="email" placeholder="shinseongchul@naver.com">
 				
-				<button class="btn btn-warning" id="email_code">코드 발송</button>
+				<button class="btn btn-warning email_code" id="email_code">코드 발송</button>
 			</div>
-		</div>
-		<div class="col-md-3">
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-3">
-		</div>
-		<div class="col-md-6 flex">
-		</div>
-		<div class="col-md-3">
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-3">
-		</div>
-		<div class="col-md-6">			
-		</div>
-		<div class="col-md-3">
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-3">
-		</div>
-		<div class="col-md-6">
-		</div>
-		<div class="col-md-3">
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-3">
-		</div>
-		<div class="col-md-6">
 		</div>
 		<div class="col-md-3">
 		</div>

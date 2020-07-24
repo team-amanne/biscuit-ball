@@ -33,31 +33,22 @@
 	text-align: center;
 }
 
-/* 검색창 카테고리  */
-#s_category 
+/* 검색 소속 flex */
+.search
 {
-	width: 110px;
-}
-
-/* 검색창 카테고리 */
-.search_category 
-{
-	width: 300px;
 	display: flex;
-	margin: auto;
 }
 
-/* 검색내용 입력 */
-#search_text 
+/* 검색 카테고리 */
+.search_value
 {
 	width: 220px;
-	margin-right: 5px;
 }
 
-/* 검색버튼 */
-.search	
+/* 검색입력 */
+.search_content
 {
-	margin-left: auto;
+	width: 200px;
 }
 
  /* 페이징 */
@@ -117,18 +108,15 @@
 	<div class="row">
 		<div class="col-md-2">
 		</div>
-		<div class="col-sm-8 category">
-			<button type="button" class="btn btn-outline-secondary">
-				전체
-			</button> 
-			<button type="button" class="btn btn-warning">
-				경고 회원 목록
-				
-			</button> 
-			<button type="button" class="btn btn-outline-secondary">
-				정지 회원 목록
-			</button> 
-
+		<div class="col-sm-8">
+			<ul class="nav nav-tabs" role="tablist">
+				<li role="presentation"><a href="#home"
+					aria-controls="home" role="tab" data-toggle="tab">전체</a></li>
+				<li role="presentation" class="active"><a href="#profile"
+					aria-controls="profile" role="tab" data-toggle="tab">경고회원 목록</a></li>
+				<li role="presentation" ><a href="#profile"
+					aria-controls="profile" role="tab" data-toggle="tab2">정지회원 목록</a></li>
+			</ul> 
 		</div>
 		<div class="col-md-2">
 		</div>
@@ -412,24 +400,22 @@
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-8">
+			<div class="search">
 				<div class="search_category">
-					<div>
-						<select class="form-control" id="s_category">
-					 		<option>제목</option>
-					  		<option>내용</option>
-					  		<option>작성자</option>
-					  		<option>카테고리</option>
-						</select>
-					</div>
-					
-					<div class="search_text">
-						<input type='text' class="form-control" id="search_text">
-					</div>
-					
-					<div class="search">
-						<button type="button" class="btn btn-warning">검색</button> 
-					</div>
+					<select class="form-control" id="search_category">
+				 		<option>제목</option>
+				  		<option>내용</option>
+				  		<option>작성자</option>
+				  		<option>카테고리</option>
+					</select>
 				</div>
+				<div class="search_value">
+					<input type='text' class="form-control" id="search_content">
+				</div>
+				<div class="search_button">
+					<button type="button" class="btn btn-warning btn-submit button_small">검색</button>
+				</div>
+			</div>
 			
 		</div>
 		<div class="col-md-2">		

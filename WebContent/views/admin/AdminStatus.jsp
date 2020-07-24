@@ -17,11 +17,6 @@
 	width: 562px;
 }
 
-.flex
-{
-	display: flex;
-}
-
 .align_left
 {
 	text-align: left;
@@ -107,7 +102,7 @@
 												<span>현재 내가 처리중인 문의</span>
 											</div>
 											<div class="col-sm-4 col-xs-4 align_right">
-												<button class="btn btn-warning btn-submit">더보기</button>
+												<button class="btn btn-warning btn-submit ">더보기</button>
 											</div>
 										</div>
 									</li>
@@ -538,12 +533,6 @@
 							</div>
 						</div>
 						
-						<div class="row">
-							<div class="col-md-4"></div>
-							<div class="col-md-4">
-							</div>
-							<div class="col-md-4"></div>
-						</div>
 						<div class="row">
 							<div class="col-md-12"></div>
 						</div>

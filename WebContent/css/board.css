@@ -20,3 +20,112 @@
 .right-btn {
    text-align: right;
 }
+
+
+
+.flex
+{
+	display: flex;
+}
+
+.button_right
+{
+	text-align: right;
+}
+
+.align_center
+{
+	text-align: center;
+}
+
+.button_small
+{
+	width: 90px;
+}
+
+.button_middle
+{
+	width: 130px;
+}
+
+.button_large
+{
+	width: 185px;
+}
+
+.border_white
+{
+	border: 0px;
+	border-color: white;
+	box-shadow: none;
+}
+
+/* ------------------------------------------- */
+/* 카테고리명, 작성자명, 제목명 */
+.category_name, .username_name, .title_name
+{
+	width: 120px !important;
+	margin-bottom: 5px !important;
+	text-align: center;
+	background-color: orange;
+	color: white;
+}
+/* 카테고리값, 작성자값 */
+.category_value, .username_value
+{
+	width: 200px;
+	text-align: center;
+	background-color: white !important;
+	cursor: auto !important;
+}
+/* 제목값 */
+.title_value
+{
+	width: 87.5%;
+	background-color: white !important;
+	cursor: auto !important;
+}
+/* 내용(textarea) */
+.content_value
+{
+	background-color: white !important ;
+	cursor: auto !important;
+	resize: none;
+}
+/* 조회수,댓글수 */
+.view
+{
+	margin-left: auto;
+}
+/* 최하단 버튼 */
+.bottom_clickbutton
+{
+	margin-top: 10px;
+}
+/* ------------------------------------------- */
+/*담당배정일시 명, 담당자 명, 처리완료일시 명, 진행상태, 문의일 명, 신고정보 명, 신고일 명*/
+.manager_date_name, .manager_name, .complete_date_name, .state_name, .inquiry_date_name, .report_info_name
+, .target_name, .report_date_name
+{
+	width: 120px;
+	margin-bottom: 5px;
+	text-align: center;
+	background-color: orange;
+	color: white;
+}
+/* 담당배정일시 값, 담당자 값, 처리완료일시 값, 진행상태 값, 문의일 값, 신고정보 값, 신고일 값 */
+.manager_date_value, .manager_value, .complete_date_value, .state_value, .report_info_value
+, .target_value, .report_date_value
+{
+	width: 200px;
+	text-align: center;
+	background-color: white !important;
+	cursor: auto !important;
+}
+
+/* 신고정보 값 */
+.report_info_value
+{
+	width: 520px;
+}
+

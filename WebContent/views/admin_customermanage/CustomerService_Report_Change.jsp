@@ -11,50 +11,26 @@
 <title>문의/신고 - 문의를 신고로 변경.jsp</title>
 <style type="text/css">
 
-/* 내용 틀*/
-#content
+.content_title_value
 {
-	height: 300px;
+	background-color: orange !important;
 }
 
-/* 내용 */
 .content
 {
-	cursor: auto;
-	background-color: white;
-}
-
-/* 게시물변경 팝업명  */
-#content_title
-{
-	background-color: orange;
-	cursor: auto;
-	font-size: 18pt;
-	font-weight: bold;
-}
-
-/* 확인, 취소 버튼 */
-#confirm, #cancel
-{
-	font-size: 28pt;
-	font-weight: bold;
-	width: 200px;
-	height: 60px;
-	margin-left: 10px;
-}
-
-.text
-{
-	margin-top: 50px;
-	font-size: 28pt;
-	text-align: center;
-	font-weight: bold;
+	height: 210px !important;
+	font-size: 24pt !important;
+	font-weight: bold !important;
 }
 
 .button
 {
-	margin-top: 10px;
-	text-align: center;
+	margin-left: 32%;
+}
+
+.confirm
+{
+	margin-right: 10px;
 }
 
 </style>
@@ -79,58 +55,25 @@
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-8">	
-			
-			<div class="frame">
-				<input type="text" class="form-control" id="content_title" value="게시물 변경" readonly="readonly">
+			<div class="content_title">
+				<input type="text" class="form-control content_title_value" id="content_title_value" value="게시물 변경" readonly="readonly">
 			</div>
 			
-			<div class="form-control" id="content">
-				<div class="content">
-					<div class="text">
-							정말 이 게시물을 신고로 이동시키겠습니까?
+			<div class="form-control content">
+				<div class="content_value align_center">
+				<br>
+						정말 이 게시물을 신고로 이동시키겠습니까?
+				</div>
+				<div class="button flex">
+					<div class="confirm">
+						<input type="button" class="btn btn-warning button_large" value="확인" id="confirm">
 					</div>
-					<div class="button">
-						<input type="button" class="btn btn-warning" value="확인" id="confirm">
-						<input type="button" class="btn btn-warning" value="취소" id="cancel">
+					<div class="cancel">
+						<input type="button" class="btn btn-warning button_large" value="취소" id="cancel">
 					</div>
 				</div>
 			</div>
 		</div>
-		
-		<div class="col-md-2">
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8">		
-		</div>
-		<div class="col-md-2">
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8">
-		</div>
-		<div class="col-md-2">
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8">		
-		</div>
-		<div class="col-md-2">
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-			<div class="col-md-8">			
-			</div>
 		<div class="col-md-2">
 		</div>
 	</div>

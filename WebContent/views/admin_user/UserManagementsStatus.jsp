@@ -20,20 +20,6 @@
 	margin-left: auto;
 }
 
-
-/* 회원신고목록 버튼 양옆으로 늘리기용 */
-#button2
-{
-	margin-left: 5px;
-	margin-right: 5px;
-}
-
-/* 전체회원수, 유령회원 버튼 수 옆으로 늘리기용 */
-#button5, #button7
-{
-	margin-left: 17px;
-}
-
 /* 숫자 도형 색깔 */
 .badge
 {
@@ -72,15 +58,6 @@
          <h5>회원관리 > 메인</h5>
          <hr />
       </div>
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8">
-		</div>
-		<div class="col-md-2">
-		</div>
-		
-	</div>
 	<div class="row">
 		<div class="col-md-2">
 		</div>
@@ -126,56 +103,6 @@
 	</div>
 		<div class="col-md-2">
 		</div>
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8">
-		</div>
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-2">
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8">
-		</div>
-		<div class="col-md-2">
-		</div>
-	</div>
-		
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8">		
-		</div>
-		<div class="col-md-2">		
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8">
-		</div>
-		<div class="col-md-2">
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-4">
-		</div>
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-2">
-		</div>
-	</div>
 </div>
 
 <c:import url="../base/Footer.jsp"></c:import>

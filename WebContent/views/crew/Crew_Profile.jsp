@@ -12,86 +12,63 @@
 <title>크루프로필.jsp</title>
 <style type="text/css">
 
-
-/* 캘린더 넣을공간 */
-#content
-{
-	resize: none;
-	cursor: auto;
-	background-color: white;
-	margin-bottom: 10px;
-	height: 350px;
-	text-align: center;
-}
-
-/* 지도 넣을공간 */
-#content2
-{
-	resize: none;
-	cursor: auto;
-	background-color: white;
-	margin-bottom: 10px;
-	height: 350px;
-	text-align: center;
-}
-
 /* 크루 소개, 크루 조건 */
-#crew_introduce, #crew_condition
+.crew_introduce, .crew_condition
 {
-	width: 100%;
-	height: 180px;
-	text-align: center;
-	margin-bottom: 10px;
+	width: 100% !important;
+	height: 180px !important;
+	text-align: center !important;
+	margin-bottom: 10px !important;
 }
 
 /* 크루 거점지역, 홈코트 */
-#crew_region, #crew_homecourt
+.crew_region, .crew_homecourt
 {
-	width: 100%;
-	text-align: center;
-	background-color: orange;
-	color: white;
+	width: 100% !important;
+	text-align: center !important;
+	background-color: orange !important;
+	color: white !important;
 }
 
 /* 크루 프로필사진, 크루 업적 */
-#profile_photo, #profile_achievement
+.profile_photo, .profile_achievement
 {
-	width: 250px;
-	height: 200px;
-	text-align: center;
+	width: 250px !important;
+	height: 200px !important;
+	text-align: center !important;
 }
 
 /* 크루명, 크루상태, 크루등급, 크루활동지수, 크루성별, 크루페어플레이점수 */
-#profile_name, #profile_situation, #profile_grade, #profile_activity, #profile_jender, #profile_fairplay_score
+.profile_name, .profile_situation, .profile_grade, .profile_activity, .profile_jender, .profile_fairplay_score
 {
-	width: 200px;
-	height: 50px;
-	margin-left: 10px;
-	text-align: center;
-	margin-bottom: 10px;
+	width: 200px !important;
+	height: 50px !important;
+	margin-left: 10px !important;
+	text-align: center !important;
+	margin-bottom: 10px !important;
 }
 
 /* 크루 승률 */
-#profile_winningrate
+.profile_winningrate
 {
-	margin-top: 10px;
+	margin-top: 10px !important;
 	margin-bottom: 10px;
-	width: 492px;
+	width: 492px !important;
 }
 
 /* 크루선호경기방식, 크루대전거부설정 여부 */
-#profile_favorite_mode, #profile_battle_refusal
+.profile_favorite_mode, .profile_battle_refusal
 {
 	margin-top: 10px;
 	margin-bottom: 10px;
 	margin-left: 10px;
-	width: 200px;
+	width: 200px !important;
 	text-align: center;
 }
 
 .region, .homecourt
 {
-	width: 560px;
+	width: 546px;
 	text-align: center;
 	margin-right: 2px;
 }
@@ -127,70 +104,70 @@
 								<p>메인 > 크루 > 크루 프로필</p>
 								<hr>
 								
-								<div style="display: flex;">
-									<div class="form-control" id="profile_photo">
+								<div class="crew_content flex">
+									<div class="form-control profile_photo" id="profile_photo">
 										<span>프로필 사진</span>
 									</div>
-									<div class="form-control" id="profile_achievement">
+									<div class="form-control profile_achievement" id="profile_achievement">
 										<span>크루 업적</span>
 									</div>
 									<div>
-										<div class="form-control" id="profile_name">
+										<div class="form-control profile_name" id="profile_name">
 											<span>크루명</span>
 										</div>
-										<div class="form-control" id="profile_situation">
+										<div class="form-control profile_situation" id="profile_situation">
 											<span>크루상태</span>
 										</div>
 									</div>
 									<div>
-										<div class="form-control" id="profile_grade">
+										<div class="form-control profile_grade" id="profile_grade">
 											<span>크루 등급</span>
 										</div>
-										<div class="form-control" id="profile_activity">
+										<div class="form-control profile_activity" id="profile_activity">
 											<span>크루 활동지수</span>
 										</div>
 									</div>
 									<div>
-										<div class="form-control" id="profile_jender">
+										<div class="form-control profile_jender" id="profile_jender">
 											<span>크루 성별</span>
 										</div>
-										<div class="form-control" id="profile_fairplay_score">
+										<div class="form-control profile_fairplay_score" id="profile_fairplay_score">
 											<span>크루 페어플레이 점수</span>
 										</div>
 									</div>
 								</div>
 								<div>
-									<div style="display: flex;">
-										<div class="form-control" id="profile_winningrate">
+									<div class="flex">
+										<div class="form-control profile_winningrate" id="profile_winningrate">
 											<div class="progress">
 											  <div class="progress-bar progress-bar-warning progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 90%">
 											    승률 (60%)
 											  </div>
 											</div>
 										</div>
-										<div class="form-control" id="profile_favorite_mode">
+										<div class="form-control profile_favorite_mode" id="profile_favorite_mode">
 											<span>선호경기방식</span>
 										</div>
-										<div class="form-control" id="profile_battle_refusal">
+										<div class="form-control profile_battle_refusal" id="profile_battle_refusal">
 											<span>대전 거부 설정여부</span>
 										</div>
 									</div>
 								</div>
 								
-									<div style="display: flex;">
-										<div class="form-control" id="crew_introduce">	
+									<div class="flex">
+										<div class="form-control crew_introduce" id="crew_introduce">	
 											<p>서울 살고 30대 이상이신분들만 모이는 크루이구요</p>
 											<p>가족처럼 지내실분들 모집합니다.</p>
 											<p>해당하시는 분만 크루가입 신청해주시면 됩니다 ^^</p>
 										</div>				
-										<div class="form-control" id="crew_condition">
+										<div class="form-control crew_condition" id="crew_condition">
 											<p>서울특별시 거주자</p>
 											<p>연령 30대 이상</p>
 											<p>가족같은 사람들</p>
 										</div>
 									</div>
 									
-									<div style="display: flex;">
+									<div class="flex">
 										<div class="panel-group">
 										    <div class="panel panel-default region">
 										      <div class="panel-heading">현재 거점지역</div>

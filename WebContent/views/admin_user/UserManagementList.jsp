@@ -88,17 +88,6 @@
 	margin-right: 5px;
 }
 
-/* 돌아가기 버튼 */
-#back
-{
-	margin-right: auto;
-}
-
-/* flex 용 */
-.flex
-{
-	display: flex;
-}
 
 </style>
 <link rel="stylesheet"

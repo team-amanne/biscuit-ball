@@ -11,45 +11,29 @@
 <title>관리자 계정 생성.jsp</title>
 <style type="text/css">
 
-/* flex 용 */
-.flex
+.email_value, .nickname_value
 {
-	display: flex;
-	margin-left: auto;
-	width: 80%;
+	margin-left: 12.5%;
+	width: 280px;
 }
 
-/* 이메일1 */
-#email, #nickname
+.email_certify, .nickname_check
 {
-	margin-left: 82px;
-	margin-bottom: 10px;
-	width: 279px;
-}
-
-#password1
-{
-	margin-left: 62px;
-	margin-bottom: 10px;
-	width: 279px;
-}
-
-#password2
-{
-	width: 279px;
-	margin-bottom: 10px;
-	margin-left: 16px;
-}
-
-
-/* 이메일 인증버튼 */
-#email_certify, #nickname_check
-{
-	margin-left: 10px;
 	width: 130px;
-	height: 34px;
+	margin-left: 10px;
 }
 
+.password_value1
+{
+	width: 280px;
+	margin-left: 9.9%
+}
+
+.password_value2
+{
+	width: 280px;
+	margin-left: 4.2%;
+}
 
 /* 이름 정렬용 */
 .f_size
@@ -60,18 +44,20 @@
 }
 
 /* 계정생성, 취소 버튼 포함클래스 */
-.last_button
+.button
 {
-	margin-left: auto;
-    width: 480px;
-    margin-top: 50px;
+	margin-top: 20px;
+	margin-left: 43%;
 }
 
-#sign_up, #back
+.center
 {
-	margin-left: 10px;
-	width: 98px;
-	height: 34px;
+	margin-left: 8%;
+}
+
+.cancel
+{
+	margin-left: 20px;
 }
 
 </style>
@@ -92,26 +78,35 @@
 	<div class="row">
 		<div class="col-md-3">
 		</div>
-		<div class="col-md-6 input_content">
-			<div class="flex">
+		<div class="col-md-6 center">
+			<div class="email flex">
 				<label class="f_size">이메일*</label>
-				<input type="email" class="form-control" id="email" placeholder="email">
-				
-				<button class="btn btn-warning" id="email_certify">중복확인</button>
-			</div>
-			<div class="flex">
-				<label class="f_size">닉네임*</label>
-				<input type="text" class="form-control" id="nickname" placeholder="인증번호를 입력해주세요">
-				
-				<button class="btn btn-warning" id="nickname_check">중복확인</button>
-			</div>
-			<div class="pw">
-				<div class="flex">
-					<label class="f_size">비밀번호*</label>
-					<input type="password" class="form-control" id="password1" placeholder="*********">
+				<div class="email_value">
+					<input type="email" class="form-control" id="email" placeholder="email">
 				</div>
-				<div class="flex">
-					<label class="f_size">비밀번호 확인*</label>
+				<div class="email_certify">
+					<button class="btn btn-warning button_middle" id="email_certify">중복확인</button>
+				</div>
+			</div>
+			
+			<div class="nickname flex">
+				<label class="f_size">닉네임*</label>
+				<div class="nickname_value">
+					<input type="text" class="form-control" id="nickname" placeholder="길동규킹왕짱">
+				</div>
+				<div class="nickname_check">
+					<button class="btn btn-warning button_middle" id="nickname_check">중복확인</button>
+				</div>
+			</div>
+			<div class="password flex">
+				<label class="f_size">비밀번호*</label>
+				<div class="password_value1">
+					<input type="password" class="form-control" id="password1" placeholder="영문,소문자,숫자,특수문자 8~15자">
+				</div>
+			</div>
+			<div class="password2 flex">
+				<label class="f_size">비밀번호 확인*</label>
+				<div class="password_value2">
 					<input type="password" class="form-control" id="password2" placeholder="영문,소문자,숫자,특수문자 8~15자">
 				</div>
 			</div>
@@ -122,35 +117,13 @@
 	<div class="row">
 		<div class="col-md-3">
 		</div>
-		<div class="col-md-6 flex">
-			<div class="last_button">
-				<button class="btn btn-warning" id="sign_up">관리자 생성</button>
-				<button class="btn btn-warning" id="back">취소</button>
+		<div class="col-md-6 button flex">
+			<div class="create">
+				<button class="btn btn-warning button_middle" id="create">관리자 생성</button>
 			</div>
-		</div>
-		<div class="col-md-3">
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-3">
-		</div>
-		<div class="col-md-6">			
-		</div>
-		<div class="col-md-3">
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-3">
-		</div>
-		<div class="col-md-6">
-		</div>
-		<div class="col-md-3">
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-3">
-		</div>
-		<div class="col-md-6">
+			<div class="cancel">
+				<button class="btn btn-warning button_middle" id="cancel">취소</button>
+			</div>
 		</div>
 		<div class="col-md-3">
 		</div>

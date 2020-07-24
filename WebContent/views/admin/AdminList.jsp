@@ -11,19 +11,6 @@
 
 <style type="text/css">
 
-
-.a-link
-{
-	border: 0px;
-	background-color: white;
-}
-
-/* 수정 삭제 버튼 */
-#modify, #delete
-{
-	width: 97px;
-}
-
 /* 검색 소속 flex */
 .search
 {
@@ -31,13 +18,13 @@
 }
 
 /* 검색 카테고리 */
-#search_category
+.search_value
 {
-	width: 120px;
+	width: 220px;
 }
 
 /* 검색입력 */
-#search_content
+.search_content
 {
 	width: 200px;
 }
@@ -97,10 +84,10 @@
 										<span><a href="">GM승주</a></span>
 									</div>
 									<div class="col-sm-2 col-xs-2">
-										<button id="modify" class="btn btn-default btn-submit">수정</button>
+										<button id="modify" class="btn btn-default btn-submit button_small">수정</button>
 									</div>
 									<div class="col-sm-2 col-xs-2">
-										<button id="delete" class="btn btn-default btn-submit">삭제</button>
+										<button id="delete" class="btn btn-default btn-submit button_small">삭제</button>
 									</div>
 								</div>
 							</li>
@@ -116,10 +103,10 @@
 										<span><a href="">GM동규</a></span>
 									</div>
 									<div class="col-sm-2 col-xs-2">
-										<button id="modify" class="btn btn-default btn-submit">수정</button>
+										<button id="modify" class="btn btn-default btn-submit button_small">수정</button>
 									</div>
 									<div class="col-sm-2 col-xs-2">
-										<button id="delete" class="btn btn-default btn-submit">삭제</button>
+										<button id="delete" class="btn btn-default btn-submit button_small">삭제</button>
 									</div>
 								</div>
 							</li>
@@ -135,10 +122,10 @@
 										<span><a href="">GM한별</a></span>
 									</div>
 									<div class="col-sm-2 col-xs-2">
-										<button id="modify" class="btn btn-default btn-submit">수정</button>
+										<button id="modify" class="btn btn-default btn-submit button_small">수정</button>
 									</div>
 									<div class="col-sm-2 col-xs-2">
-										<button id="delete" class="btn btn-default btn-submit">삭제</button>
+										<button id="delete" class="btn btn-default btn-submit button_small">삭제</button>
 									</div>
 								</div>
 							</li>
@@ -154,10 +141,10 @@
 										<span><a href="">GM진녕</a></span>
 									</div>
 									<div class="col-sm-2 col-xs-2">
-										<button id="modify" class="btn btn-default btn-submit">수정</button>
+										<button id="modify" class="btn btn-default btn-submit button_small">수정</button>
 									</div>
 									<div class="col-sm-2 col-xs-2">
-										<button id="delete" class="btn btn-default btn-submit">삭제</button>
+										<button id="delete" class="btn btn-default btn-submit button_small">삭제</button>
 									</div>
 								</div>
 							</li>
@@ -173,10 +160,10 @@
 										<span><a href="">GM성철</a></span>
 									</div>
 									<div class="col-sm-2 col-xs-2">
-										<button id="modify" class="btn btn-default btn-submit">수정</button>
+										<button id="modify" class="btn btn-default btn-submit button_small">수정</button>
 									</div>
 									<div class="col-sm-2 col-xs-2">
-										<button id="delete" class="btn btn-default btn-submit">삭제</button>
+										<button id="delete" class="btn btn-default btn-submit button_small">삭제</button>
 									</div>
 								</div>
 							</li>
@@ -184,14 +171,18 @@
 						<div class="row"> 
 							<div class="col-md-12">
 								<div class="search">
-									<select class="form-control" id="search_category">
-								 		<option>닉네임</option>
-								  		<option>이메일</option>
-									</select>
-									
-									<input type='text' class="form-control" id="search_content">
-									
-									<button type="button" class="btn btn-default btn-submit">검색</button>
+									<div class="search_category">
+										<select class="form-control" id="search_category">
+									 		<option>닉네임</option>
+									  		<option>이메일</option>
+										</select>
+									</div>
+									<div class="search_value">
+										<input type='text' class="form-control" id="search_content">
+									</div>
+									<div class="search_button">
+										<button type="button" class="btn btn-default btn-submit button_small">검색</button>
+									</div>
 								</div>	
 							
 							</div>	

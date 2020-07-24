@@ -18,7 +18,7 @@
 }
 
 /* 홈으로 버튼 */
-#home
+.home
 {
 	margin-left: 10px;
 	width: 98px;
@@ -26,7 +26,7 @@
 }
 
 /* 로그인 버튼 */
-#login
+.login
 {
 	margin-left: 10px;
 	width: 98px;
@@ -103,25 +103,9 @@
 		</div>
 		<div class="col-md-6 flex">		
 			<div class="last_button">
-				<button class="btn btn-warning" id="home">홈으로</button>
-				<button class="btn btn-warning" id="login">로그인</button>
+				<button class="btn btn-warning" id="home" class="home">홈으로</button>
+				<button class="btn btn-warning" id="login" class="login">로그인</button>
 			</div>
-		</div>
-		<div class="col-md-3">
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-3">
-		</div>
-		<div class="col-md-6">
-		</div>
-		<div class="col-md-3">
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-3">
-		</div>
-		<div class="col-md-6">
 		</div>
 		<div class="col-md-3">
 		</div>

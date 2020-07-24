@@ -11,65 +11,39 @@
 <title>문의/신고 - 신고 담당자변경.jsp</title>
 <style type="text/css">
 
-#content
+.content_title_value
 {
-	height: 500px;
-	cursor: auto;
-	background-color: white;
-}
-
-#content_title
-{
-	background-color: orange;
-	cursor: auto;
-	font-size: 18px;
-	font-weight: bold;
-	
+	background-color: orange !important;
 }
 
 .content
 {
-	text-align: center;
-	width: 700px;
-	margin: auto;
-	
+	height: 300px !important;
+	font-size: 16pt !important;
+	font-weight: bold !important;
+}
+
+.button
+{
+	margin-left: 32%;
+}
+
+.confirm
+{
+	margin-right: 10px;
 }
 
 .change
 {
-	display: flex;
-	margin-top: 20px;
-	font-weight: bold;
-	
+	margin-left: 43%;
+	margin-bottom: 10px;
 }
 
-#admin_name
+.button_small
 {
-	font-size: 30px;
-	font-weight: bold;
-	width: 500px;
-	height: 50px;
-	color: green;
-	
-	
+	margin-left: 20px;
+	margin-bottom: 10px;
 }
-
-#select
-{
-	font-size: 28px;
-	font-weight: bold;
-	width: 200px;
-	height: 50px;
-	margin-left: 5px;
-}
-
-.cancel
-{
-	margin-top: 5px;
-}
-
-
-#report_target, #report_info, 
 
 </style>
 <link rel="stylesheet"
@@ -93,114 +67,58 @@
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-8">		
-			<div class="frame">
-				<input type="text" class="form-control" id="content_title" value="담당자 변경" readonly="readonly">
+			<div class="content_title">
+				<input type="text" class="form-control content_title_value" id="content_title_value" value="담당자 변경" readonly="readonly">
 			</div>
-			<div class="form-control" id="content">
-				<div class="content">
-					<div class="change">
-						<div class="admin">
-							<div class="form-control" id="admin_name">
-								GM동규
+			
+			<div class="form-control content">
+				<div class="content_value align_center">
+				<br>
+					<div class="list">
+						<div class="change flex">
+							<div class="admin">
+								<span>GM동규</span>
+							</div>
+							<div class="select">
+								<input type="button" class="btn btn-warning button_small" value="선택">
 							</div>
 						</div>
-						<div class="select">
-							<div>
-								<input type="button" class="btn btn-warning" value="선택하기" id="select">
+						<div class="change flex">
+							<div class="admin">
+								<span>GM승주</span>
+							</div>
+							<div class="select">
+								<input type="button" class="btn btn-warning button_small" value="선택">
 							</div>
 						</div>
-					</div>
-					<div class="change">
-						<div class="admin">
-							<div class="form-control" id="admin_name">
-								GM성철
+						<div class="change flex">
+							<div class="admin">
+								<span>GM진녕</span>
+							</div>
+							<div class="select">
+								<input type="button" class="btn btn-warning button_small" value="선택">
 							</div>
 						</div>
-						<div class="select">
-							<div>
-								<input type="button" class="btn btn-warning" value="선택하기" id="select">
+						<div class="change flex">
+							<div class="admin">
+								<span>GM한별</span>
+							</div>
+							<div class="select">
+								<input type="button" class="btn btn-warning button_small" value="선택">
 							</div>
 						</div>
-					</div>
-					<div class="change">
-						<div class="admin">
-							<div class="form-control" id="admin_name">
-								GM진녕
+						<div class="change flex">
+							<div class="admin">
+								<span>GM성철</span>
 							</div>
-						</div>
-						<div class="select">
-							<div>
-								<input type="button" class="btn btn-warning" value="선택하기" id="select">
-							</div>
-						</div>
-					</div>
-					<div class="change">
-						<div class="admin">
-							<div class="form-control" id="admin_name">
-								GM승주
-							</div>
-						</div>
-						<div class="select">
-							<div>
-								<input type="button" class="btn btn-warning" value="선택하기" id="select">
-							</div>
-						</div>
-					</div>
-					<div class="change">
-						<div class="admin">
-							<div class="form-control" id="admin_name">
-								GM한별
-							</div>
-						</div>
-						<div class="select">
-							<div>
-								<input type="button" class="btn btn-warning" value="선택하기" id="select">
+							<div class="select">
+								<input type="button" class="btn btn-warning button_small" value="선택">
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		
-		<div class="col-md-2">
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8">
-		
-				<div class="cancel" align="right">
-					<button type="submit" class="btn btn-warning" id="cancel">돌아가기</button>
-				</div>
-		
-		</div>
-		<div class="col-md-2">
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8">
-		</div>
-		<div class="col-md-2">
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8">		
-		</div>
-		<div class="col-md-2">
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-			<div class="col-md-8">			
-			</div>
 		<div class="col-md-2">
 		</div>
 	</div>

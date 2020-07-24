@@ -33,31 +33,22 @@
 	text-align: center;
 }
 
-/* 검색창 카테고리  */
-#s_category 
+/* 검색 소속 flex */
+.search
 {
-	width: 110px;
-}
-
-/* 검색창 카테고리 */
-.search_category 
-{
-	width: 300px;
 	display: flex;
-	margin: auto;
 }
 
-/* 검색내용 입력 */
-#search_text 
+/* 검색 카테고리 */
+.search_value
 {
 	width: 220px;
-	margin-right: 5px;
 }
 
-/* 검색버튼 */
-.search	
+/* 검색입력 */
+.search_content
 {
-	margin-left: auto;
+	width: 200px;
 }
 
  /* 페이징 */
@@ -117,18 +108,15 @@
 	<div class="row">
 		<div class="col-md-2">
 		</div>
-		<div class="col-sm-8 category">
-			<button type="button" class="btn btn-outline-secondary">
-				전체
-			</button> 
-			<button type="button" class="btn btn-outline-secondary">
-				경고 회원 목록
-				
-			</button> 
-			<button type="button" class="btn btn-warning">
-				정지 회원 목록
-			</button> 
-
+		<div class="col-sm-8">
+			<ul class="nav nav-tabs" role="tablist">
+				<li role="presentation"><a href="#home"
+					aria-controls="home" role="tab" data-toggle="tab">전체</a></li>
+				<li role="presentation"><a href="#profile"
+					aria-controls="profile" role="tab" data-toggle="tab">경고회원 목록</a></li>
+				<li role="presentation" class="active"><a href="#profile"
+					aria-controls="profile" role="tab" data-toggle="tab2">정지회원 목록</a></li>
+			</ul>
 		</div>
 		<div class="col-md-2">
 		</div>
@@ -151,10 +139,10 @@
 						<div class="col-md-2">
 							<span>이메일</span>
 						</div>
-						<div class="col-md-3">
+						<div class="col-md-2">
 							<span>정지사유</span>
 						</div>
-						<div class="col-md-2">
+						<div class="col-md-3">
 							<span>정지기간</span>
 						</div>
 					</li>
@@ -171,10 +159,10 @@
 						<div class="col-md-2">
 							<span>jee@kakaotalk.com</span>
 						</div>
-						<div class="col-md-3">
+						<div class="col-md-2">
 							<span>불법광고</span>
 						</div>
-						<div class="col-md-2">
+						<div class="col-md-3">
 							<span>2020.06.25 ~ 2060.04.12</span>
 						</div>
 					</li>
@@ -191,10 +179,10 @@
 						<div class="col-md-2">
 							<span>prodo@kakaotalk.com</span>
 						</div>
-						<div class="col-md-3">
-							<span>도배/댓글반복 으로 경고누적초과</span>
-						</div>
 						<div class="col-md-2">
+							<span>도배/댓글반복</span>
+						</div>
+						<div class="col-md-3">
 							<span>2020.06.25 ~ 2021.01.12</span>
 						</div>
 					</li>
@@ -211,10 +199,10 @@
 						<div class="col-md-2">
 							<span>apech@kakaotalk.com</span>
 						</div>
-						<div class="col-md-3">
+						<div class="col-md-2">
 							<span>욕설/인신공격</span>
 						</div>
-						<div class="col-md-2">
+						<div class="col-md-3">
 							<span>2020.06.25 ~ 2040.01.12</span>
 						</div>
 					</li>
@@ -231,10 +219,10 @@
 						<div class="col-md-2">
 							<span>danmooji@kakaotalk.com</span>
 						</div>
-						<div class="col-md-3">
-							<span>불법광고 도배로 경고누적초과</span>
-						</div>
 						<div class="col-md-2">
+							<span>불법광고 도배</span>
+						</div>
+						<div class="col-md-3">
 							<span>2020.06.25 ~ 2030.07.22</span>
 						</div>
 					</li>
@@ -251,10 +239,10 @@
 						<div class="col-md-2">
 							<span>conn@kakaotalk.com</span>
 						</div>
-						<div class="col-md-3">
-							<span>영리목적 게시물로 경고누적초과</span>
-						</div>
 						<div class="col-md-2">
+							<span>영리목적 게시물</span>
+						</div>
+						<div class="col-md-3">
 							<span>2020.06.29 ~ 2020.12.25</span>
 						</div>
 					</li>
@@ -271,10 +259,10 @@
 						<div class="col-md-2">
 							<span>lion@kakaotalk.com</span>
 						</div>
-						<div class="col-md-3">
+						<div class="col-md-2">
 							<span>지속적 개인정보노출</span>
 						</div>
-						<div class="col-md-2">
+						<div class="col-md-3">
 							<span>2020.07.05 ~ 2020.11.01</span>
 						</div>
 					</li>
@@ -291,10 +279,10 @@
 						<div class="col-md-2">
 							<span>neo@kakaotalk.com</span>
 						</div>
-						<div class="col-md-3">
-							<span>음란성/선정성 게시물작성</span>
-						</div>
 						<div class="col-md-2">
+							<span>음란성/선정성 게시물</span>
+						</div>
+						<div class="col-md-3">
 							<span>2020.07.15 ~ 2090.12.31</span>
 						</div>
 					</li>					
@@ -305,38 +293,27 @@
 		<div class="col-md-2">
 		</div>
 	</div>
-	
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8">
-		</div>
-		<div class="col-md-2">
-		</div>
-	</div>
 		
 	<div class="row">
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-8">
+			<div class="search">
 				<div class="search_category">
-					<div>
-						<select class="form-control" id="s_category">
-					 		<option>제목</option>
-					  		<option>내용</option>
-					  		<option>작성자</option>
-					  		<option>카테고리</option>
-						</select>
-					</div>
-					
-					<div class="search_text">
-						<input type='text' class="form-control" id="search_text">
-					</div>
-					
-					<div class="search">
-						<button type="button" class="btn btn-warning">검색</button> 
-					</div>
+					<select class="form-control" id="search_category">
+				 		<option>제목</option>
+				  		<option>내용</option>
+				  		<option>작성자</option>
+				  		<option>카테고리</option>
+					</select>
 				</div>
+				<div class="search_value">
+					<input type='text' class="form-control" id="search_content">
+				</div>
+				<div class="search_button">
+					<button type="button" class="btn btn-warning btn-submit button_small">검색</button>
+				</div>
+			</div>
 			
 		</div>
 		<div class="col-md-2">		

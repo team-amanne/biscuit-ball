@@ -33,34 +33,34 @@
 }
 
 /* 대표업적, 프로필사진 변경하기 버튼 */
-#achievements_modify, #profile_modify
+.achievements_modify, #profile_modify
 {
 	width: 50%;
 	margin-top: 10px;
 }
 
 /* 소개글 내용 */
-#introduce_content
+.introduce_content
 {
 	
     resize: none;
 }
 
 /* 소개글 수정버튼 */
-#introduce_modify
+.introduce_modify
 {
 	width: 25%;
     margin-left: 10px;
 }
 
 /* 거점지역 삭제, 거점지역 추가, 홈코트 수정완료 버튼 */
-#region_delete, #region_add, #homecourt_modify
+.region_delete, #region_add, #homecourt_modify
 {	
     margin-left: 20px;
 }
 
 /* 거점지역 추가 입력 */
-#rigion_search
+.rigion_search
 {
 	width: 40%;
 	display: inline-block;
@@ -100,7 +100,7 @@
 										    <div class="panel panel-default achievements">
 										      <div class="panel-heading">대표업적 설정</div>
 										      <div class="panel-body achievements_content">현재 대표업적 : <span style="color: blue; font-weight: bold;">놓지마..정신줄!!!</span>
-										      	<button class="btn btn-warning btn-submit" id="achievements_modify" type="submit">대표업적 변경</button>
+										      	<button class="btn btn-warning btn-submit achievements_modify" id="achievements_modify" type="submit">대표업적 변경</button>
 										      </div>
 										    </div>
 										</div>
@@ -108,7 +108,7 @@
 										    <div class="panel panel-default profile">
 										      <div class="panel-heading">프로필사진 설정</div>
 										      <div class="panel-body profile_content">현재 프로필사진 : <span style="color: blue; font-weight: bold;">동규의40년전 졸업사진.jpg</span> (423.21kb)
-										      	<button class="btn btn-warning btn-submit" id="profile_modify" type="submit" onclick="document.all.file.click();">프로필 사진 변경</button>
+										      	<button class="btn btn-warning btn-submit profile_modify" id="profile_modify" type="submit" onclick="document.all.file.click();">프로필 사진 변경</button>
 										      	<input type="file" name="file" id="file" style="display: none;"/>
 										      </div>
 										    </div>
@@ -118,9 +118,9 @@
 									    <div class="panel panel-default">
 									      <div class="panel-heading introduce">크루 소개글 변경</div>
 									      <div class="panel-body introduce_content" >현재 크루소개글
-									      	<button class="btn btn-warning btn-submit" id="introduce_modify" type="submit">크루 소개글 설정완료</button>
+									      	<button class="btn btn-warning btn-submit introduce_modify" id="introduce_modify" type="submit">크루 소개글 설정완료</button>
 									      </div>
-									      <textarea class="form-control" rows="10" cols="10" id="introduce_content">
+									      <textarea class="form-control introduce_content" rows="10" cols="10" id="introduce_content">
 											똑바로 해 넌 정말 Bad boy
 											사랑보단 호기심뿐
 											
@@ -136,43 +136,36 @@
 									    <div class="panel panel-default">
 									      <div class="panel-heading region">거점지역 설정</div>
 									      <div class="panel-body region_content">현재 거점지역 : <span style="color: blue; font-weight: bold;">서울특별시 중구 을지로1가</span>
-									      	<button class="btn btn-warning btn-submit" id="region_delete" type="submit">삭제</button>
+									      	<button class="btn btn-warning btn-submit region_delete" id="region_delete" type="submit">삭제</button>
 									      </div>
-									      <div class="panel-body region_content">
-									      	새로운 거점지역 추가 : <input type="text" class="form-control" id="rigion_search" placeholder="서울특별시 마포구 서교동">
-									      	<button class="btn btn-warning btn-submit" id="region_add" type="submit">추가</button>
+									      <div class="panel-body region_content flex">
+									      	새로운 거점지역 추가 : <input type="text" class="form-control rigion_search" id="rigion_search" placeholder="서울특별시 마포구 서교동">
+									      	<button class="btn btn-warning btn-submit region_add" id="region_add" type="submit">추가</button>
 									      </div>
 									    </div>
 									</div>
 								<div>							
-									<input type="text" class="form-control" id="content" value="지도API" readonly="readonly">
+									<input type="text" class="form-control content" id="content" value="지도API" readonly="readonly">
 								</div>
 								<div class="panel-group">
 								    <div class="panel panel-default">
 								      <div class="panel-heading homecourt">홈코트 설정 (지도 선택)</div>
 								      <div class="panel-body homecourt_content">현재 홈코트 : <span style="color: blue; font-weight: bold;">뜨거운 코트를 가르며 농구를 불태우는 승주네 농구장</span>
-								      	<button class="btn btn-warning btn-submit" id="homecourt_modify" type="submit">홈코트 설정 완료</button>
+								      	<button class="btn btn-warning btn-submit homecourt_modify" id="homecourt_modify" type="submit">홈코트 설정 완료</button>
 								      </div>
 								    </div>
 								</div>
-								
-								
 							</div>
 						</div>
 												
 						<div class="row"> 
 							<div class="col-md-12  right-btn">
-
-								
 								<div>			
 									<button class="btn btn-warning btn-submit" type="submit">수정완료</button>
 									<button class="btn btn-warning btn-submit" type="submit">돌아가기</button>
 								</div>			
 							</div>	
 						</div>
-						
-
-							
 						</div>
 						
 						<div class="row">

@@ -16,28 +16,22 @@
 {
    font-size: 14px;
     margin-left: auto;
-    width: 900px;
+    width: 900px !important;
 }
 
 /* 내용 */
 .position_board
 {
-	width: 700px;
+	width: 700px !important;
 	height: 40px;
 	border: 0px !important;
 }
 
-/* flex 용 */
-.flex
-{
-	display: flex;
-}
-
 /* 보통 라디오버튼 간격정렬 */
-#normal
+.normal
 {
-	margin-left: 40px;
-	margin-right: 40px;
+	margin-left: 40px !important;
+	margin-right: 40px !important;
 }
 
 /* 그렇다, 보통, 아니다 정렬 */
@@ -46,23 +40,23 @@
 	display: flex;
 	font-weight: bold;
 	margin-left: auto;
-	width: 390px;
+	width: 390px !important;
 }
 
 /* 상단의 보통 이름을 간격정렬 */
-#normal_name
+.normal_name
 {
-	margin-left: 25px;
-	margin-right: 25px;
+	margin-left: 25px !important;
+	margin-right: 25px !important;
 }
 
 /* 결과확인 버튼 */
-#result
+.result
 {
-	width: 200px;
-	margin-left: 480px;
-    margin-top: 20px;
-    background-color: orange;
+	width: 200px !important;
+	margin-left: 480px !important;
+    margin-top: 20px !important;
+    background-color: orange !important;
 }
 
 </style>
@@ -90,9 +84,9 @@
 		</div>
 		<div class="col-md-8">
 			<div class="check_names">
-				<span id="yes_name">그렇다</span>
-				<span id="normal_name">보통</span>
-				<span id="no_name">아니다</span>
+				<span id="yes_name" class="yes_name">그렇다</span>
+				<span id="normal_name" class="normal_name">보통</span>
+				<span id="no_name" class="no_name">아니다</span>
 			</div>
 
 			<ul class="list-group position">
@@ -104,7 +98,7 @@
 						<div class="flex">
 								<div class="radio_check">
 									<label class="radio_button1"><input type='radio' id="yes"   name='click' value='1'></label>
-										<label class="radio_button2"><input type='radio' id="normal"  name='click' value='2'></label>
+										<label class="radio_button2"><input type='radio' id="normal" class="normal" name='click' value='2'></label>
 									<label class="radio_button3"><input type='radio' id="no"    name='click' value='3'></label>
 								</div>
 						</div>
@@ -118,7 +112,7 @@
 						<div class="flex">
 								<div class="radio_check">
 									<label class="radio_button1"><input type='radio' id="yes"   name='click' value='1'></label>
-									<label class="radio_button2"><input type='radio' id="normal"  name='click' value='2'></label>
+									<label class="radio_button2"><input type='radio' id="normal" class="normal" name='click' value='2'></label>
 									<label class="radio_button3"><input type='radio' id="no"    name='click' value='3'></label>
 								</div>
 						</div>
@@ -132,7 +126,7 @@
 						<div class="flex">
 								<div class="radio_check">
 									<label class="radio_button1"><input type='radio' id="yes"   name='click' value='1'></label>
-									<label class="radio_button2"><input type='radio' id="normal"  name='click' value='2'></label>
+									<label class="radio_button2"><input type='radio' id="normal" class="normal" name='click' value='2'></label>
 									<label class="radio_button3"><input type='radio' id="no"    name='click' value='3'></label>
 								</div>
 						</div>
@@ -146,7 +140,7 @@
 						<div class="flex">
 								<div class="radio_check">
 									<label class="radio_button1"><input type='radio' id="yes"   name='click' value='1'></label>
-									<label class="radio_button2"><input type='radio' id="normal"  name='click' value='2'></label>
+									<label class="radio_button2"><input type='radio' id="normal" class="normal" name='click' value='2'></label>
 									<label class="radio_button3"><input type='radio' id="no"    name='click' value='3'></label>
 								</div>
 						</div>
@@ -160,7 +154,7 @@
 						<div class="flex">
 								<div class="radio_check">
 									<label class="radio_button1"><input type='radio' id="yes"   name='click' value='1'></label>
-									<label class="radio_button2"><input type='radio' id="normal"  name='click' value='2'></label>
+									<label class="radio_button2"><input type='radio' id="normal" class="normal" name='click' value='2'></label>
 									<label class="radio_button3"><input type='radio' id="no"    name='click' value='3'></label>
 								</div>
 						</div>
@@ -174,7 +168,7 @@
 						<div class="flex">
 								<div class="radio_check">
 									<label class="radio_button1"><input type='radio' id="yes"   name='click' value='1'></label>
-									<label class="radio_button2"><input type='radio' id="normal"  name='click' value='2'></label>
+									<label class="radio_button2"><input type='radio' id="normal" class="normal" name='click' value='2'></label>
 									<label class="radio_button3"><input type='radio' id="no"    name='click' value='3'></label>
 								</div>
 						</div>
@@ -188,7 +182,7 @@
 						<div class="flex">
 								<div class="radio_check">
 									<label class="radio_button1"><input type='radio' id="yes"   name='click' value='1'></label>
-									<label class="radio_button2"><input type='radio' id="normal"  name='click' value='2'></label>
+									<label class="radio_button2"><input type='radio' id="normal" class="normal" name='click' value='2'></label>
 									<label class="radio_button3"><input type='radio' id="no"    name='click' value='3'></label>
 								</div>
 						</div>
@@ -202,7 +196,7 @@
 						<div class="flex">
 								<div class="radio_check">
 									<label class="radio_button1"><input type='radio' id="yes"   name='click' value='1'></label>
-									<label class="radio_button2"><input type='radio' id="normal"  name='click' value='2'></label>
+									<label class="radio_button2"><input type='radio' id="normal" class="normal" name='click' value='2'></label>
 									<label class="radio_button3"><input type='radio' id="no"    name='click' value='3'></label>
 								</div>
 						</div>
@@ -216,7 +210,7 @@
 						<div class="flex">
 								<div class="radio_check">
 									<label class="radio_button1"><input type='radio' id="yes"   name='click' value='1'></label>
-									<label class="radio_button2"><input type='radio' id="normal"  name='click' value='2'></label>
+									<label class="radio_button2"><input type='radio' id="normal" class="normal" name='click' value='2'></label>
 									<label class="radio_button3"><input type='radio' id="no"    name='click' value='3'></label>
 								</div>
 						</div>
@@ -230,7 +224,7 @@
 						<div class="flex">
 								<div class="radio_check">
 									<label class="radio_button1"><input type='radio' id="yes"   name='click' value='1'></label>
-									<label class="radio_button2"><input type='radio' id="normal"  name='click' value='2'></label>
+									<label class="radio_button2"><input type='radio' id="normal" class="normal" name='click' value='2'></label>
 									<label class="radio_button3"><input type='radio' id="no"    name='click' value='3'></label>
 								</div>
 						</div>
@@ -239,7 +233,7 @@
 			</ul>	
 			
 				<div>
-					<button class="form-control" id="result">결과 확인하기</button>
+					<button class="form-control result" id="result">결과 확인하기</button>
 				</div>
 			
 			

@@ -33,31 +33,22 @@
 	text-align: center;
 }
 
-/* 검색창 카테고리  */
-#s_category 
+/* 검색 소속 flex */
+.search
 {
-	width: 110px;
-}
-
-/* 검색창 카테고리 */
-.search_category 
-{
-	width: 300px;
 	display: flex;
-	margin: auto;
 }
 
-/* 검색내용 입력 */
-#search_text 
+/* 검색 카테고리 */
+.search_value
 {
 	width: 220px;
-	margin-right: 5px;
 }
 
-/* 검색버튼 */
-.search	
+/* 검색입력 */
+.search_content
 {
-	margin-left: auto;
+	width: 200px;
 }
 
  /* 페이징 */
@@ -68,7 +59,7 @@
 }
 
 /* 체크박스 */
-#check
+.check
 {
 	height: 20px;
 	margin: 0px;
@@ -331,7 +322,7 @@
 					</li>
 					<li class="list-group-item post_board">
 						<div class="col-md-1">
-							<span><input type="checkbox" class="form-control" id="check"></span>
+							<span><input type="checkbox" class="form-control check" id="check"></span>
 						</div>
 						<div class="col-md-1">
 							<span>2</span>
@@ -396,28 +387,25 @@
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-8">
-				<div class="search_category">
-					<div>
-						<select class="form-control" id="s_category">
+				<div class="search">
+					<div class="search_category">
+						<select class="form-control" id="search_category">
 					 		<option>제목</option>
 					  		<option>내용</option>
 					  		<option>작성자</option>
 					  		<option>카테고리</option>
 						</select>
 					</div>
-					
-					<div class="search_text">
-						<input type='text' class="form-control" id="search_text">
+					<div class="search_value">
+						<input type='text' class="form-control" id="search_content">
 					</div>
-					
-					<div class="search">
-						<button type="button" class="btn btn-warning">검색</button> 
+					<div class="search_button">
+						<button type="button" class="btn btn-warning btn-submit button_small">검색</button>
+					</div>
+					<div class="withdrawal">
+						<button type="submit" class="btn btn-warning" id="withdrawal">탈퇴처리</button> 
 					</div>
 				</div>
-				<div class="withdrawal">
-					<button type="submit" class="btn btn-warning" id="withdrawal">탈퇴처리</button> 
-				</div>
-			
 		</div>
 		<div class="col-md-2">		
 		</div>
@@ -452,19 +440,6 @@
 					</li>
 				</ul>
 			</nav>
-		</div>
-		<div class="col-md-2">
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-4">
-		</div>
-		<div class="col-md-2">
 		</div>
 		<div class="col-md-2">
 		</div>

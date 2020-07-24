@@ -8,118 +8,76 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>크루 탈퇴.jsp</title>
+<title>크루탈퇴.jsp</title>
 <style type="text/css">
 
-/* 내용 틀*/
-#content
+.content_title_value
 {
-	height: 250px;
+	background-color: orange !important;
 }
 
-/* 내용 */
 .content
 {
-	cursor: auto;
-	background-color: white;
-}
-
-/* 게시물변경 팝업명  */
-#content_title
-{
-	background-color: orange;
-	cursor: auto;
-	font-size: 14pt;
-	font-weight: bold;
-}
-
-/* 확인, 취소 버튼 */
-#confirm, #cancel
-{
-	font-size: 20pt;
-	font-weight: bold;
-	width: 200px;
-	height: 50px;
-	margin-left: 10px;
-}
-
-.text
-{
-	margin-top: 50px;
-	font-size: 24pt;
-	text-align: center;
-	font-weight: bold;
+	height: 210px !important;
+	font-size: 24pt !important;
+	font-weight: bold !important;
 }
 
 .button
 {
-	margin-top: 10px;
-	text-align: center;
+	margin-left: 32%;
+}
+
+.confirm
+{
+	margin-right: 10px;
 }
 
 </style>
 <link rel="stylesheet"
-   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet"
-   href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
+	href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/default.css">
-<link rel="stylesheet" href="<%=cp%>/css/board.css" />
-
-<script type="text/javascript">
-
-	$(function()
-	{
-		$("#confirm").click(function()
-		{
-			 alert("탈퇴 처리 되었습니다.");
-			 location.href='Crew_Main.jsp';
-		});
-	});
-	
-</script>
-
+<link rel="stylesheet" type="text/css" href="<%=cp%>/css/board.css">
 </head>
 <body>
 
-<!-- 헤더 -->
-<c:import url="../base/Header.jsp"></c:import>
-
-<!-- 서브 -->
+	<c:import url="../base/Header.jsp"></c:import>
 <c:import url="../base/Submenu.jsp"></c:import>
-	
-<form action="" method="post" onclick="">
-	<div class="main container-fluid">
-	      <div class="section-title container">
-	         <h5>크루탈퇴</h5>
-	         <hr />
-	      </div>
-		<div class="row">
-			<div class="col-md-2">
+
+<div class="container-fluid">
+      <div class="section-title container">
+         <p>크루 > 크루프로필 > 크루탈퇴</p>
+         <hr />
+      </div>
+	<div class="row">
+		<div class="col-md-2">
+		</div>
+		<div class="col-md-8">	
+			<div class="content_title">
+				<input type="text" class="form-control content_title_value" id="content_title_value" value="크루탈퇴" readonly="readonly">
 			</div>
-			<div class="col-md-8">	
-				
-				<div class="frame">
-					<input type="text" class="form-control" id="content_title" value="알림" readonly="readonly">
+			
+			<div class="form-control content">
+				<div class="content_value align_center">
+				<br>
+						정말 크루를 탈퇴하시겠습니까?
 				</div>
-				
-				<div class="form-control" id="content">
-					<div class="content">
-						<div class="text">
-								크루를 정말 탈퇴 하시겠습니까?
-						</div>
-						<div class="button">
-							<input type="text" class="btn btn-default btn-submit" value="확인" id="confirm">
-							<input type="button" class="btn btn-default btn-cancel" value="취소" id="cancel">
-						</div>
+				<div class="button flex">
+					<div class="confirm">
+						<input type="button" class="btn btn-warning button_large" value="확인" id="confirm">
+					</div>
+					<div class="cancel">
+						<input type="button" class="btn btn-warning button_large" value="취소" id="cancel">
 					</div>
 				</div>
 			</div>
-			
-			<div class="col-md-2">
-			</div>
+		</div>
+		<div class="col-md-2">
 		</div>
 	</div>
-</form>
+</div>
 
 <c:import url="../base/Footer.jsp"></c:import>
 

@@ -8,55 +8,29 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원관리 - 탈퇴처리.jsp</title>
+<title>탈퇴처리.jsp</title>
 <style type="text/css">
 
-/* 내용 틀*/
-#content
+.content_title_value
 {
-	height: 300px;
+	background-color: orange !important;
 }
 
-/* 내용 */
 .content
 {
-	cursor: auto;
-	background-color: white;
+	height: 210px !important;
+	font-size: 24pt !important;
+	font-weight: bold !important;
 }
 
-/* 게시물변경 팝업명  */
-#content_title
-{
-	background-color: orange;
-	cursor: auto;
-	font-size: 18pt;
-	font-weight: bold;
-}
-
-/* 내용물 작성 */
-.text
-{
-	margin-top: 6px;
-	font-size: 18pt;
-	text-align: center;
-	font-weight: bold;
-}
-
-/* 확인, 취소 버튼 */
-#confirm, #cancel
-{
-	font-size: 28pt;
-	font-weight: bold;
-	width: 200px;
-	height: 60px;
-	margin-left: 10px;
-}
-
-/* 확인, 취소 버튼 크기 위치정렬 */
 .button
 {
-	margin-top: 10px;
-	text-align: center;
+	margin-left: 32%;
+}
+
+.confirm
+{
+	margin-right: 10px;
 }
 
 </style>
@@ -67,91 +41,39 @@
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/default.css">
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/board.css">
 </head>
-
-<script type="text/javascript">
-
-	$(function()
-	{
-		$("#confirm").click(function()
-		{
-			 alert("탈퇴 처리되었습니다.");
-			 location.href='UserManagement_Alluser.jsp';
-		});
-	});
-	
-</script>
-
 <body>
 
-		<c:import url="../base/Header.jsp"></c:import>
+	<c:import url="../base/Header.jsp"></c:import>
 <c:import url="../base/Submenu.jsp"></c:import>
 
 <div class="container-fluid">
       <div class="section-title container">
-         <h5>회원관리 > 특정회원관리 > 회원탈퇴처리</h5>
+         <p>회원관리 > 특정회원관리 > 회원탈퇴처리</p>
          <hr />
       </div>
 	<div class="row">
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-8">	
-			
-			<div class="frame">
-				<input type="text" class="form-control" id="content_title" value="회원탈퇴처리" readonly="readonly">
+			<div class="content_title">
+				<input type="text" class="form-control content_title_value" id="content_title_value" value="회원탈퇴" readonly="readonly">
 			</div>
 			
-			<div class="form-control" id="content">
-				<div class="content">
-					<div class="text">
-							회원번호 : 5678<br>
-							이름 : 오진녕<br>
-							닉네임 : 갓진녕<br>
-							생년월일 : 1993-02-17<br>
-							<br>
-							<span style="color: red;">정말 [갓진녕] 회원을 탈퇴처리 하시겠습니까?</span>
+			<div class="form-control content">
+				<div class="content_value align_center">
+				<br>
+						정말 <span style="color: red;">[규쿤]</span> 회원을 탈퇴시키겠습니까?
+				</div>
+				<div class="button flex">
+					<div class="confirm">
+						<input type="button" class="btn btn-warning button_large" value="확인" id="confirm">
 					</div>
-					<div class="button">
-						<input type="button" class="btn btn-warning" value="확인" id="confirm">
-						<input type="button" class="btn btn-warning" value="취소" id="cancel">
+					<div class="cancel">
+						<input type="button" class="btn btn-warning button_large" value="취소" id="cancel">
 					</div>
 				</div>
 			</div>
 		</div>
-		
-		<div class="col-md-2">
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8">		
-		</div>
-		<div class="col-md-2">
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8">
-		</div>
-		<div class="col-md-2">
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8">		
-		</div>
-		<div class="col-md-2">
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-			<div class="col-md-8">			
-			</div>
 		<div class="col-md-2">
 		</div>
 	</div>

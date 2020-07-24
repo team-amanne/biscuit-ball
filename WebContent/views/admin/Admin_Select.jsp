@@ -10,62 +10,37 @@
 <title>관리자 > 특정 관리자.jsp</title>
 <style type="text/css">
 
-.a-link
+.admin_number_name, .admin_email_name, .admin_nickname_name
 {
-	border: 0px;
-	background-color: white;
-}
-
-#modify, #delete
-{
-	width: 97px;
-}
-
-.admin_number
-{
-	display: flex;
-}
-
-.admin_email
-{
-	display: flex;
-}
-
-.admin_nickname
-{
-	display: flex;
-	margin-bottom: 30px;
-}
-
-
-#admin_number, #admin_email, #admin_nickname, #admin_grade
-{
-	width: 200px;
-	text-align: center;
+	width: 150px;
 	font-weight: bold;
-}
-
-#admin_number_value, #admin_email_value, #admin_nickname_value
-{
-	width: 250px;
-}
-
-.admin_grade
-{
-	display: flex;
-	margin-left: 20px;
-}
-
-#admin_grade_value
-{
-	width: 300px;
 	
 }
 
-#admin_modify, #admin_delete
+.admin_grade_name
 {
-	margin-left: 20px;
-	width: 238px;
+	width: 150px;
+	margin-left: 11%;
+}
+
+.admin_number_value, .admin_nickname_value, .admin_email_value
+{
+	width: 280px;
+}
+
+.admin_grade_value
+{
+	width: 230px;
+}
+
+.admin_modify_delete
+{
+	margin-left: 11%;
+}
+
+.admin_modify
+{
+	margin-right: 10px;
 }
 
 .badge
@@ -80,10 +55,7 @@
 	width: 77%;
 }
 
-.bar1, .bar2, .bar3
-{
-	margin-right: 10px;
-}
+
 
 </style>
 
@@ -98,8 +70,6 @@
 	<c:import url="../base/Header.jsp"></c:import>
 	<c:import url="../base/Submenu.jsp"></c:import>
 	
-	
-	
 	<!-- 메인 -->
 	<div class="main container-fluid">
 		<div class="row">
@@ -111,91 +81,85 @@
 							<div class="col-md-12">
 								<p>관리자 > 특정 관리자</p>
 								<hr>
+								
 								<div>
-									<div>
-										<div class="admin_number">
-											<div class="form-control" id="admin_number">
-												<span>관리자 번호</span>
+									<div class="form-control" style="height: 116px;">
+										<div class="flex">
+											<div class="admin_number_name align_center">
+												<div class="form-control border_white" id="admin_number_name">
+													<span>관리자 번호</span>
+												</div>
 											</div>
-											<div class="form-control" id="admin_number_value">
-												<span>12345678</span>
+											<div class="admin_number_value align_center">
+												<div class="form-control" id="admin_number_value">
+													<span>12345678</span>
+												</div>
 											</div>
-												<div class="admin_grade">
-													<div class="form-control" id="admin_grade">
+											
+												<div class="admin_grade_name align_center">
+													<div class="form-control" id="admin_grade_name">
 														<span>관리자 등급</span>
 													</div>
+												</div>
+												<div class="admin_grade_value align_center">
 													<div class="form-control" id="admin_grade_value">
 														<span>최고 관리자</span>
 													</div>
 												</div>
 										</div>
-										<div class="admin_email">
-											<div class="form-control" id="admin_email">
-												<span>관리자 이메일</span>
-											</div>
-											<div class="form-control" id="admin_email_value">
-												<span>babo123@naver.com</span>
-											</div>
-										</div>
-										<div class="admin_nickname">
-											<div class="form-control" id="admin_nickname">
-												<span>관리자 닉네임</span>
-											</div>
-											<div class="form-control" id="admin_nickname_value">
-												<span>당근맨</span>
-											</div>
-												<div class="admin_modify_delete">
-													<div>
-														<button class="btn btn-warning btn-submit" id="admin_modify">계정 정보수정</button>
-														<button class="btn btn-warning btn-submit" id="admin_delete">계정 삭제</button>
-													</div>
+										
+										<div class="flex">
+											<div class="admin_email_name align_center">
+												<div class="form-control border_white" id="admin_email_name">
+													<span>관리자 이메일</span>
 												</div>
+											</div>
+											<div class="admin_email_value align_center">
+												<div class="form-control" id="admin_email_value">
+													<span>babo123@naver.com</span>
+												</div>
+											</div>
+										</div>
+										
+										<div class="flex">
+											<div class="admin_nickname_name align_center">
+												<div class="form-control border_white" id="admin_nickname_name">
+													<span>관리자 닉네임</span>
+												</div>
+											</div>
+											<div class="admin_nickname_value align_center">
+												<div class="form-control" id="admin_nickname_value">
+													<span>당근맨</span>
+												</div>
+											</div>
+											
+											<div class="admin_modify_delete flex">
+												<div class="admin_modify">
+													<button class="btn btn-warning btn-submit button_large" id="admin_modify">계정 정보수정</button>
+												</div>
+												<div class="admin_delete">
+													<button class="btn btn-warning btn-submit button_large" id="admin_delete">계정 삭제</button>
+												</div>
+											</div>
 										</div>
 									</div>
+									
+									<br>
+									<br>
+									
 									<div>
-										<div class="bar">
-											<ul class="list-group bar1">
-											  <li class="list-group-item">
-											    <span class="badge">11</span>
-											    처리 중인 문의
-											  </li>
-											</ul>
-											<ul class="list-group bar2">
-											  <li class="list-group-item">
-											    <span class="badge">6</span>
-											    처리 중인 신고
-											  </li>
-											</ul>
-											<ul class="list-group bar3">
-											  <li class="list-group-item">
-											    <span class="badge">9</span>
-											  	전체 담당 문의
-											  </li>
-											</ul>
-											<ul class="list-group bar4">
-											  <li class="list-group-item">
-											    <span class="badge">22</span>
-											    전체 담당 신고
-											  </li>
-											</ul>
-										</div>
-									</div>
-									<div>
-										<button type="button" class="btn btn-warning">
-											전체
-										</button> 
-										<button type="button" class="btn btn-default">
-											처리중인 문의
-										</button> 
-										<button type="button" class="btn btn-default">
-											처리중인 신고
-										</button> 
-										<button type="button" class="btn btn-default">
-											전체 담당 문의
-										</button> 
-										<button type="button" class="btn btn-default">
-											전체 담당 신고
-										</button>
+										<ul class="nav nav-tabs" role="tablist">
+											<li role="presentation" class="active"><a href="#home"
+												aria-controls="home" role="tab" data-toggle="tab">전체</a></li>
+											<li role="presentation"><a href="#profile"
+												aria-controls="profile" role="tab" data-toggle="tab">처리중인 문의</a></li>
+											<li role="presentation"><a href="#profile"
+												aria-controls="profile" role="tab" data-toggle="tab">처리중인 신고</a></li>
+											<li role="presentation"><a href="#profile"
+												aria-controls="profile" role="tab" data-toggle="tab2">전체 담당 문의</a></li>
+											<li role="presentation"><a href="#profile"
+												aria-controls="profile" role="tab" data-toggle="tab2">전체 담당 신고</a></li>
+										</ul>
 									</div>
 								</div>
 							</div>

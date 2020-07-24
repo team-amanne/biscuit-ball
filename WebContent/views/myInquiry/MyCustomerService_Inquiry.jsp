@@ -11,112 +11,24 @@
 <title>내담당 문의/신고 - 특정문의조회.jsp</title>
 <style type="text/css">
 
-/* flex용  */
-.flex
+.inquiry_date_value
 {
-	display: flex;
-}
-
-/* 문의대상입력, 문의정보입력  */
-#inquiry_target_value, #inquiry_info_value 
-{
-	width: 480px;
-	cursor: auto;
-	background-color: white;
-}
-
-/* 문의내용, 문의카테고리, 문의일, 문의대상, 문의정보, 문의자, 담당자, 처리완료일시, 진행상태, 담당배정일시 */
-#inquiry_content_name, #inquiry_category_name, #inquiry_date_name, #inquiry_target_name, #inquiry_info_name
-,#inquiry_reporter_name, #inquiry_manager_name, #inquiry_complete_date_name, #inquiry_progress_name			
-{
-	width: 120px;
+	background-color: white !important;
+	cursor: auto !important;
 	text-align: center;
-	margin-bottom: 5px;
-	background-color: orange;
-	font-weight: bold;
 }
 
-/* 담당배정 */
-#inquiry_manager_date_name
-{
-	width: 120px;
-	margin-left: 15.9cm;
-	margin-bottom: 5px;
-	background-color: orange;
-	font-weight: bold;
-}
-
-/* 문의카테고리입력, 문의자입력, 문의일입력, 담당자입력 */
-#inquiry_category_value, #inquiry_reporter_value, #inquiry_date_value, #inquiry_manager_value
-{
-	width: 180px;
-	margin-bottom: 5px;
-	cursor: auto;
-	background-color: white;
-}
-
-/* 문의내용 입력 */
-#inquiry_content_value 
-{
-	width: 796px;
-	text-align: center;
-	cursor: auto;
-	background-color: white;
-}
-
-/* 담당배정일, 처리완료일, 진행상태 */
-#inquiry_manager_date_value, #inquiry_complete_date_value, #inquiry_progress_value
-{
-	width: 196px;
-	cursor: auto;
-	background-color: white;
-}
-
-.buttons
-{
-	display: flex;
-	margin-left: auto;
-	margin-top: 5px;
-}
-
-.sub_button
-{
-	margin-left: 5px;
-}
-
-/* 큰 내용(답변)입력 */
-#inquiry_answer 
-{
-	resize: none;
-	margin-bottom: 7px;
-	cursor: auto;
-	background-color: white;
-}
-
-/* 진행상태입력, 담당자 입력 */
-#inquiry_progress_value
-{
-	color: blue;
-	font-weight: bold;
-}
-
-#inquiry_manager_value
-{
-	color: red;
-	font-weight: bold;
-}
 </style>
-<link rel="stylesheet" type="text/css" href="<%=cp %>/css/default.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
+<link rel="stylesheet" type="text/css" href="<%=cp%>/css/default.css">
+<link rel="stylesheet" type="text/css" href="<%=cp%>/css/board.css">
 </head>
 <body>
 
-<!-- 헤더 -->
-<c:import url="../base/Header.jsp"></c:import>
-<!-- 서브 -->
+	<c:import url="../base/Header.jsp"></c:import>
 <c:import url="../base/Submenu.jsp"></c:import>
 
 <div class="container-fluid">
@@ -128,19 +40,15 @@
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-8">
-
-			<div class="flex">				
-				<div class="form-control" id="inquiry_manager_date_name">
+			<div class="manager_date flex">				
+				<div class="form-control manager_date_name">
 					담당배정일시
 				</div>
-				
-				<div>
-					<input type="text" class="form-control" id="inquiry_manager_date_value" value="2020.07.05" readonly="readonly">
+				<div class="manager_date_value">
+					<input type="text" class="form-control manager_date_value" id="inquiry_manager_date_value" value="2020.07.05" readonly="readonly">
 				</div>
 			</div>
-		
 		</div>
-		
 		<div class="col-md-2">
 		</div>
 	</div>
@@ -149,31 +57,28 @@
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-8 flex">
-				<div class="form-control" id="inquiry_category_name">
+			<div class="category flex">
+				<div class="form-control category_name">
 					카테고리
 				</div>
-				
-				<div>
-					<input type="text" class="form-control" id="inquiry_category_value" value="농구하기" readonly="readonly">
-				</div>
-				
-			<div class="flex">
-				<div class="form-control" id="inquiry_manager_name">
-					담당자
-				</div>
-				
-				<div>
-					<input type="text" class="form-control" id="inquiry_manager_value" value="GM한별" readonly="readonly">
+				<div class="category_value">
+					<input type="text" class="form-control category_value" id="inquiry_category_value" value="농구하기" readonly="readonly">
 				</div>
 			</div>
-			
-			<div class="flex">
-				<div class="form-control" id="inquiry_complete_date_name">
+			<div class="manager flex">
+				<div class="form-control manager_name">
+					담당자
+				</div>
+				<div class="manager_value">
+					<input type="text" class="form-control manager_value" id="inquiry_manager_value" value="GM한별" readonly="readonly">
+				</div>
+			</div>
+			<div class="complete_date flex">
+				<div class="form-control complete_date_name">
 					처리완료일시
 				</div>
-				
-				<div>
-					<input type="text" class="form-control" id="inquiry_complete_date_value" value="2020.07.06" readonly="readonly">
+				<div class="complete_date_value">
+					<input type="text" class="form-control complete_date_value" id="inquiry_complete_date_value" value="2020.07.06" readonly="readonly">
 				</div>
 			</div>
 		</div>
@@ -185,34 +90,29 @@
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-8 flex">
-		
-			<div class="flex">
-				<div class="form-control" id="inquiry_reporter_name">
+			<div class="username flex">
+				<div class="form-control username_name">
 					문의자
 				</div>
-				
-				<div>
-					<input type="text" class="form-control" id="inquiry_reporter_value" value="일진승주" readonly="readonly">
+				<div class="username_value">
+					<input type="text" class="form-control username_value" id="inquiry_username_value" value="일진승주" readonly="readonly">
 				</div>
 			</div>
-			
-			<div class="flex">
-				<div class="form-control" id="inquiry_date_name">
+			<div class="inquiry_date flex">
+				<div class="form-control inquiry_date_name">
 					문의일
 				</div>
-				
-				<div>
-					<input type="text" class="form-control" id="inquiry_date_value" value="2020.07.04" readonly="readonly">
+				<div class="inquiry_date_value">
+					<input type="text" class="form-control inquiry_date_value" id="inquiry_date_value" value="2020.07.04" readonly="readonly">
 				</div>
 			</div>
 			
-			<div class="flex">
-				<div class="form-control" id="inquiry_progress_name">
+			<div class="state flex">
+				<div class="form-control state_name">
 					진행상태
 				</div>
-				
-				<div>
-					<input type="text" class="form-control" id="inquiry_progress_value" value="처리중" readonly="readonly">
+				<div class="progress_value">
+					<input type="text" class="form-control state_value" id="inquiry_state_value" value="처리완료" readonly="readonly">
 				</div>
 			</div>
 			
@@ -224,22 +124,20 @@
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-8">
-		
-			<div class="flex">
-				<div class="form-control" id="inquiry_content_name">
+			<div class="title flex">
+				<div class="form-control title_name">
 					문의제목
 				</div>
-				
-				<div>
-					<input type="text" class="form-control" id="inquiry_content_value" value="빠른농구가 다른지역만 잡힙니다. 미치겠어요" readonly="readonly">
+				<div class="title_value">
+					<input type="text" class="form-control title_value" id="inquiry_title_value" value="빠른농구가 다른지역만 잡힙니다. 미치겠어요" readonly="readonly">
 				</div>
 			</div>
-		
-			<div>
-				<textarea rows="25" cols="80" id="inquiry_answer" class="form-control" readonly="readonly">
+			<div class="content">
+				<textarea rows="25" cols="" id="inquiry_content_value" class="form-control content_value" readonly="readonly">
 빠른농구를 시작하면 다른지역만 잡힙니다 
 
 무슨 문제가 있는걸까요?
+
 --------------------------------------------------------------------------------
 
 				</textarea>
@@ -251,19 +149,12 @@
 	<div class="row">
 		<div class="col-md-2">
 		</div>
-			<div class="col-md-8 buttons">	
-				<div class="buttons">
-					<div class="sub_button">
-						<button type="button" class="btn btn-warning" >담당자변경</button> 
-					</div>
-					<div class="sub_button">
-						<button type="button" class="btn btn-warning" >게시물 이동</button> 
-					</div>
-					<div class="sub_button">
-						<button type="button" class="btn btn-warning" >처리완료</button> 
-					</div>
-					<div class="sub_button">
-						<button type="button" class="btn btn-warning" >돌아가기</button> 
+			<div class="col-md-8">	
+				<div class="bottom_clickbutton">
+					<div class="row"> 
+						<div class="col-md-12 button_right">
+							<button class="btn btn-warning button_middle" type="submit">돌아가기</button>
+						</div>	
 					</div>
 				</div>						
 			</div>

@@ -11,68 +11,6 @@
 <title>공지사항 - 작성.jsp</title>
 <style type="text/css">
 
-/* 카테고리 타이틀, 셀렉트 / 제목 타이틀, 입력창 */
-.category_name, .category_title
-{
-	display: flex;
-}
-
-/* 카테고리, 제목 카테고리 명 */
-#category_name, #title_name
-{
-	width: 120px;
-	margin-bottom: 5px;
-	text-align: center;
-}
-
-/* 카테고리 타이틀, 셀렉트 크기와 정렬  */
-#c_category1, #category_value
-{
-	width: 180px;
-	text-align: center;
-}
-
-
-
-/* 제목 입력 */
-#title_value
-{
-	width: 550px;
-}
-
-/* 등록 버튼 크기조절 */
-#submit
-{
-	width: 120px;
-}
-
-/* 파일업로드 크기조절 */
-#file_upload
-{
-	margin-top: 5px;
-	width: 500px;
-}
-
-/* 등록, 취소 버튼 묶음 */
-.button
-{
-	display: flex;
-	margin-left: auto;
-}
-
-/* 취소버튼 */
-#cancel
-{
-	width: 110px;
-	margin-left: 5px;
-}
-
-/* 내용 입력 */
-#content 
-{
-	resize: none;
-	margin-bottom: 7px;
-}
 
 </style>
 <link rel="stylesheet"
@@ -97,13 +35,12 @@
 			<div class="row">
 				<div class="col-md-2">
 				</div>
-				<div class="col-md-8 category_name">
-						<div class="btn btn-default btn-submit" id="category_name">
+				<div class="col-md-8 category flex">
+						<div class="form-control category_name" id="category_name">
 							카테고리
 						</div>
-						
-						<div>
-							<select class="form-control" id="category_value">
+						<div class="category_value">
+							<select class="form-control category_value" id="category_value">
 								<option>안내</option>
 								<option>점검</option>
 								<option>게시물</option>
@@ -118,21 +55,13 @@
 				<div class="col-md-2">
 				</div>
 				<div class="col-md-8">
-				</div>
-				<div class="col-md-2">
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-2">
-				</div>
-				<div class="col-md-8">
-					<div class="category_title">
-						<div class="btn btn-default btn-submit" id="title_name">
+					<div class="title flex">
+						<div class="form-control title_name" id="title_name">
 							제목
 						</div>
 						
-						<div>
-							<input type="text" class="form-control" id="title_value">
+						<div class="title_value">
+							<input type="text" class="form-control title_value" id="title_value">
 						</div>
 					</div>
 				</div>
@@ -143,8 +72,8 @@
 				<div class="col-md-2">
 				</div>
 				<div class="col-md-8">
-					<div>
-						<textarea rows="25" cols="80" id="content" class="form-control"></textarea>
+					<div class="content">
+						<textarea rows="25" cols="80" id="content" class="form-control content_value"></textarea>
 					</div>
 				</div>
 				<div class="col-md-2">
@@ -153,17 +82,15 @@
 			<div class="row">
 				<div class="col-md-2">
 				</div>
-					<div class="col-md-8 button">
-							
-						<div class="button">
-							<div class="submit">
-								<button type="submit" class="btn btn-default btn-submit" id="submit">등록</button> 
-							</div>
-							
-							<div class="cancel">
-								<button type="button" class="btn btn-default btn-cancel" id="cancel">취소</button> 
-							</div>
-						</div>				
+					<div class="col-md-8">
+				<div class="bottom_clickbutton">
+					<div class="row"> 
+						<div class="col-md-12 button_right">
+							<button class="btn btn-warning button_middle" type="submit">등록하기</button>
+							<button class="btn btn-warning button_middle" type="submit">취소하기</button>
+						</div>	
+					</div>
+				</div>			
 					</div>
 				<div class="col-md-2">
 				</div>

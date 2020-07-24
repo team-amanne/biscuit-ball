@@ -31,15 +31,15 @@
 }
 
 /* 검색 카테고리 */
-#search_category
+.search_value
 {
-	width: 120px;
+	width: 220px;
 }
 
 /* 검색입력 */
-#search_content
+.search_content
 {
-	width: 400px;
+	width: 200px;
 }
 
 /* 삭제버튼 */
@@ -114,32 +114,24 @@
 									  </li>
 									</ul>
 								</div>
-								<div class="category_button">
-									<button type="button" class="btn btn-warning">
-										전체
-									</button> 
-									<button type="button" class="btn btn-outline-secondary">
-										농구하기
-									</button> 
-									<button type="button" class="btn btn-outline-secondary">
-										크루
-									</button> 
-									<button type="button" class="btn btn-outline-secondary">
-										대전
-									</button> 
-									<button type="button" class="btn btn-outline-secondary">
-										마이페이지
-									</button>
-									<button type="button" class="btn btn-outline-secondary">
-										코트페이지
-									</button>
-									<button type="button" class="btn btn-outline-secondary">
-										친구·차단
-									</button>
-									<button type="button" class="btn btn-outline-secondary">
-										기타
-									</button>
-								</div>
+										<ul class="nav nav-tabs" role="tablist">
+											<li role="presentation" class="active"><a href="#home"
+												aria-controls="home" role="tab" data-toggle="tab">전체</a></li>
+											<li role="presentation"><a href="#profile"
+												aria-controls="profile" role="tab" data-toggle="tab">농구하기</a></li>
+											<li role="presentation"><a href="#profile"
+												aria-controls="profile" role="tab" data-toggle="tab2">크루</a></li>
+											<li role="presentation"><a href="#profile"
+												aria-controls="profile" role="tab" data-toggle="tab2">대전</a></li>
+											<li role="presentation"><a href="#profile"
+												aria-controls="profile" role="tab" data-toggle="tab2">마이페이지</a></li>
+											<li role="presentation"><a href="#profile"
+												aria-controls="profile" role="tab" data-toggle="tab2">코트페이지</a></li>
+											<li role="presentation"><a href="#profile"
+												aria-controls="profile" role="tab" data-toggle="tab2">친구·차단</a></li>
+											<li role="presentation"><a href="#profile"
+												aria-controls="profile" role="tab" data-toggle="tab2">기타</a></li>
+										</ul>
 							</div>
 						</div>
 						<ul class="list-group">
@@ -306,7 +298,7 @@
 										<span>[기타]</span>
 									</div>
 									<div class="col-md-3 col-xs-3">
-										<span><a href="">비스킷볼 관리자 채용에 대해서 질문이요</a></span>
+										<span><a href="">비스킷볼 관리자 채용에 대해서 질문</a></span>
 									</div>
 									<div class="col-md-2 col-xs-2">
 										<span><a href="">GM한별</a></span>
@@ -389,18 +381,22 @@
 						<div class="row"> 
 							<div class="col-md-12 right-btn">
 								<div class="search">
+									<div class="search_category">
 									<select class="form-control" id="search_category">
 								 		<option>제목</option>
 								  		<option>내용</option>
 								  		<option>작성자</option>
 								  		<option>카테고리</option>
 									</select>
-									
-									<input type='text' class="form-control" id="search_content">
-									
-									<button type="button" class="btn btn-warning">검색</button>
+									</div>
+									<div class="search_value">
+										<input type='text' class="form-control" id="search_content">
+									</div>
+									<div class="search_button">
+										<button type="button" class="btn btn-warning">검색</button>
+									</div>
 									<div class="delete">
-										<button class="btn btn-default" type="submit">삭제하기</button>
+										<button class="btn btn-warning" type="submit">삭제하기</button>
 									</div>
 								</div>			
 							</div>	

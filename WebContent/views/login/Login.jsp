@@ -47,13 +47,13 @@
 }
 
 
-#sign_up
+.sign_up
 {
 	font-size: 13pt;
 	font-weight: bold;
 }
 
-#reset_password
+.reset_password
 {	
 	font-size: 13pt;
 	margin-left: 25px;
@@ -61,34 +61,33 @@
 }
 
 
-#kakaosign
+.kakaosign
 {
-	width: 357px;
+	width: 357px !important;
 	border: 0px;
 	background-color: white;
 	padding: 0px;
 }
 
-#email, #password
+.email, .password
 {
-	width: 306px;
+	width: 306px !important;
 }
 
-.btn-submit
+.sign
 {
-	width: 357px;
-	height: 55px;
+	width: 357px !important;
+	height: 55px !important;
 	margin-bottom: 15px;
 }
 
-#frame
+.frame
 {
 	border: 0px;
 	text-align: center;
 }
 
 </style>
-
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -116,6 +115,7 @@
 <body>
 
 	<c:import url="../base/Header.jsp"></c:import>
+<c:import url="../base/Submenu.jsp"></c:import>
 
 <div class="container-fluid">
       <div class="section-title container">
@@ -125,65 +125,32 @@
 	<div class="row">
 		<div class="col-md-3">
 		</div>
-		<div class="col-md-6 ">
-		</div>
-		<div class="col-md-3">
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-3">
-		</div>
-		<div class="col-md-6">
-
-		</div>
-		<div class="col-md-3">
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-3">
-		</div>
 		<div class="col-md-6 login_display">
-		<form action="login.do" method="post" id="loginForm">
+		<form action="logindo" method="post" id="loginForm">
 			<div class="input-group input-group-lg login_email">
 		 		<span class="input-group-addon" id="sizing-addon1">
 		 			<span class="glyphicon glyphicon-user"></span>
 		 		</span>
-		  		<input type="text" id="email" name="email" class="form-control" placeholder="Email" aria-describedby="sizing-addon1">
+		  		<input type="text" id="email" class="form-control email" name="email" placeholder="Email" aria-describedby="sizing-addon1">
 			</div>
 			
 			<div class="input-group input-group-lg login_pw">
 		 		<span class="input-group-addon" id="sizing-addon1">
 		 			<span class="glyphicon glyphicon-wrench"></span>
 		 		</span>
-		  		<input type="password" id="password" name="password" class="form-control" placeholder="Password" aria-describedby="sizing-addon1">
+		  		<input type="password" id="password" class="form-control password" name="password" placeholder="Password" aria-describedby="sizing-addon1">
 			</div>
 		
 			<div class="login_button">
-				<button type="button" class="btn btn-default btn-lg btn-submit" id="login">로그인</button>
-				<button type="button" id="kakaosign"><img src="<%=cp %>/views/img/kakao.png" style="max-width: 100%; height: auto;"></button>
+				<button type="button" class="btn btn-default btn-lg sign" id="sign">로그인</button>
+				<button type="button" class="kakaosign" id="kakaosign"><img src="<%=cp %>/views/img/kakao.png" style="max-width: 100%; height: auto;"></button>
 			</div>
 			
-			<div id="frame">
-				<span class="glyphicon glyphicon-plus" id="sign_up"><a href="">회원가입</a></span>
-				<span class="glyphicon glyphicon-exclamation-sign" id="reset_password"><a href="">비밀번호재설정</a></span>
+			<div class="frame">
+				<span class="glyphicon glyphicon-plus sign_up" id="sign_up"><a href="">회원가입</a></span>
+				<span class="glyphicon glyphicon-exclamation-sign reset_password" id="reset_password"><a href="">비밀번호재설정</a></span>
 			</div>
 		</form>
-		</div>
-		<div class="col-md-3">
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-3">
-		</div>
-		<div class="col-md-6">
-		</div>
-		<div class="col-md-3">
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-3">
-		</div>
-		<div class="col-md-6">
 		</div>
 		<div class="col-md-3">
 		</div>

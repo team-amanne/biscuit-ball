@@ -34,27 +34,22 @@
 	margin-bottom: 4px;
 }
 
-#s_category /* 검색창 카테고리  */
+/* 검색 소속 flex */
+.search
 {
-	width: 110px;
-}
-
-.search_category /* 검색창 카테고리 */
-{
-	width: 300px;
 	display: flex;
-	margin: auto;
 }
 
-#search_text /* 검색내용 입력 */
+/* 검색 카테고리 */
+.search_value
 {
 	width: 220px;
-	margin-right: 5px;
 }
 
-.search	/* 검색버튼 */
+/* 검색입력 */
+.search_content
 {
-	margin-left: auto;
+	width: 200px;
 }
 
 .page /* 페이징 */
@@ -63,6 +58,12 @@
 	margin: auto;
 }
 
+.submit_delete
+{
+	width: 160px;
+	display: flex;
+	margin-left: 45.5%;
+}
 
 #check
 {
@@ -77,9 +78,24 @@
 	margin-bottom: 20px;
 }
 
-#button1,#button2,#button3,#button4	/* 문의 작성, 문의 내역, 신고 내역 버튼 정렬 */
+/* 숫자 도형 색깔 */
+.badge
 {
-	margin: auto;
+	background-color: orange !important;
+}
+
+/* 현황판 크기조절 */
+.bar
+{
+	display: flex;
+	margin-left: auto;
+	width: 65%;
+}
+
+/* 현황판 간격 */
+.bar1, .bar2, .bar3
+{
+	margin-right: 10px;
 }
 
 
@@ -114,31 +130,25 @@
 	<div class="row">
 		<div class="col-md-2">
 		</div>
-		<div class="col-sm-8 category">
-			<button type="button" class="btn btn-warning">
-				전체
-			</button> 
-			<button type="button" class="btn btn-outline-secondary">
-				욕설/인신공격
-			</button> 
-			<button type="button" class="btn btn-outline-secondary">
-				음란성/선정성
-			</button> 
-			<button type="button" class="btn btn-outline-secondary">
-				악성코드/스파이웨어
-			</button> 
-			<button type="button" class="btn btn-outline-secondary">
-				불법광고
-			</button>
-			<button type="button" class="btn btn-outline-secondary">
-				도배/댓글반복
-			</button>
-			<button type="button" class="btn btn-outline-secondary">
-				영리목적
-			</button>
-			<button type="button" class="btn btn-outline-secondary">
-				기타
-			</button>
+		<div class="col-sm-8">
+			<ul class="nav nav-tabs" role="tablist">
+				<li role="presentation" class="active"><a href="#home"
+					aria-controls="home" role="tab" data-toggle="tab">전체</a></li>
+				<li role="presentation"><a href="#profile"
+					aria-controls="profile" role="tab" data-toggle="tab">욕설/인신공격</a></li>
+				<li role="presentation"><a href="#profile"
+					aria-controls="profile" role="tab" data-toggle="tab2">음란성/선정성</a></li>
+				<li role="presentation"><a href="#profile"
+					aria-controls="profile" role="tab" data-toggle="tab2">악성코드/스파이웨어</a></li>
+				<li role="presentation"><a href="#profile"
+					aria-controls="profile" role="tab" data-toggle="tab2">불법광고</a></li>
+				<li role="presentation"><a href="#profile"
+					aria-controls="profile" role="tab" data-toggle="tab2">도배/댓글반복</a></li>
+				<li role="presentation"><a href="#profile"
+					aria-controls="profile" role="tab" data-toggle="tab2">영리목적</a></li>
+				<li role="presentation"><a href="#profile"
+					aria-controls="profile" role="tab" data-toggle="tab2">기타</a></li>
+			</ul>
 		</div>
 		<div class="col-md-2">
 		</div>
@@ -422,24 +432,21 @@
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-8">
+			<div class="search">
 				<div class="search_category">
-					<div>
-						<select class="form-control" id="s_category">
-					 		<option>제목</option>
-					  		<option>내용</option>
-					  		<option>작성자</option>
-					  		<option>카테고리</option>
-						</select>
-					</div>
-					
-					<div class="search_text">
-						<input type='text' class="form-control" id="search_text">
-					</div>
-					
-					<div class="search">
-						<button type="button" class="btn btn-warning">검색</button> 
-					</div>
-				</div>		
+					<select class="form-control" id="search_category">
+				 		<option>제목</option>
+				  		<option>내용</option>
+				  		<option>작성자</option>
+				  		<option>카테고리</option>
+					</select>
+				</div>
+				<div class="search_value">
+					<input type='text' class="form-control" id="search_content">
+				</div>
+				<div class="search_button">
+					<button type="button" class="btn btn-warning btn-submit button_small">검색</button>
+				</div>	
 		</div>
 		<div class="col-md-2">		
 		</div>
@@ -479,18 +486,6 @@
 		</div>
 	</div>
 	
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-4">
-		</div>
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-2">
-		</div>
-	</div>
 </div>
 
 <c:import url="../base/Footer.jsp"></c:import>

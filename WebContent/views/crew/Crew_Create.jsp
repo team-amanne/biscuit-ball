@@ -11,122 +11,72 @@
 <title>크루생성.jsp</title>
 <style type="text/css">
 
-/* flex 용 */
-.flex
+.crew_value
 {
-	display: flex;
-}
-
-.crew_name
-{
-	display: flex;
+	width: 300px;
 	margin-bottom: 10px;
 }
 
-.crew_value
+.name
 {
-	display: flex;
-	width: 300px;
-    margin-left: 10%;
+	width: 200px !important;
+	border-color: white !important;
+    box-shadow: none !important;
+    font-size: 16pt !important;
+    font-weight: bold;
+    margin-bottom: 10px;
+    
 }
 
+.region, .region2
+{
+	width: 150px;
+}
 
-/* 크루명 중복확인 */
-#crew_certify
+.crew_certify, .add
 {
 	margin-left: 10px;
-	width: 98px;
-	height: 34px;
 }
 
-/* 라벨명 */
-.f_size
-{
-	font-size: 15pt;
-	font-weight: bold;
-	margin-top: 5px;
-}
-
-
-/* 거점지역 */
-#region
-{
-    margin-left: 7.5%;
-    margin-bottom: 10px;
-    width: 150px;
-}
-
-/* 시군구  */
-#region2
-{
-	width: 150px;
-    margin-left: 10px;
-}
-
-/* 연령대 */
-#age
-{
-	width: 150px;
-    margin-left: 4.2%;
-}
-
-/* 연령대2 */
-#age2
-{
-	width: 150px;
-    margin-left: 1.5%;
-}
-
-/* 지역추가 */
 .select_region
 {
 	margin-left: auto;
-    width: 75%;
+    width: 70%;
+    
 }
 
-/* 실력제한 */
-#ability
+/* 연령대 */
+.age, .ability
 {
-	width: 150px;
-    margin-left: 7.1%;
+	width: 184px !important;
+
 }
 
-/* 실력제한2 */
-#ability2
+/* 연령대2 */
+.age2, .ability2, .fairplay2
 {
-	width: 150px;
+	width: 184px !important;
     margin-left: 1.5%;
 }
 
-/* 페어플레이점수 */
-#fairplay
+.fairplay
 {
-	width: 240px;
-    margin-left: 3%;
-}
-
-/* 페어플레이점수2 */
-#fairplay2
-{
-	width: 240px;
-    margin-left: 1.5%;
+	width: 184px !important;
+	margin-left: 0px !important;
 }
 
 /* 크루생성, 취소 버튼 포함클래스 */
-.last_button
+.bottom_clickbutton
 {
-    margin-left: auto;
-    width: 60%;
+    margin-left: 42.5%;
     margin-top: 50px;
 }
 
-/* 크루생성 버튼 */
-#create, #cancel, #add
+.cancel
 {
 	margin-left: 10px;
-	width: 98px;
-	height: 34px;
 }
+
 
 </style>
 <link rel="stylesheet"
@@ -152,34 +102,41 @@
 		<div class="col-md-3">
 		</div>
 		<div class="col-md-6">
-			<div class="crew_name">
-				<label class="f_size">크루명*</label>
+			<div class="crew flex">
+				<span class="form-control name">크루명*</span>
 				<div class="crew_value">
-					<input type="email" class="form-control" id="crew_name" placeholder="크루명">
-				
-					<button class="btn btn-warning" id="crew_certify">중복확인</button>
+					<input type="text" class="form-control crew_value" id="crew_name" placeholder="크루명">
+				</div>
+				<div class="crew_certify">
+					<button class="btn btn-warning button_small" id="crew_certify">중복확인</button>
 				</div>
 			</div>
-			
 			<div class="flex">
-				<label class="f_size">거점지역*</label>
-					<select class="form-control" id="region">
-						<option selected="selected">지역선택</option>
-						<option>서울</option>
-						<option>인천</option>
-						<option>대전</option>
-						<option>부산</option>
-						<option>대구</option>
-						<option>광주</option>
-					</select>
-					<select class="form-control" id="region2">
-						<option selected="selected">시군구선택</option>
-						<option>마포구</option>
-						<option>강남구</option>
-						<option>서초구</option>
-						<option>은평구</option>
-					</select>
-				<button class="btn btn-warning" id="add">추가</button>
+				<span class="form-control name">거점지역*</span>
+					<div class="region">
+						<select class="form-control region" id="region">
+							<option selected="selected">지역선택</option>
+							<option>서울</option>
+							<option>인천</option>
+							<option>대전</option>
+							<option>부산</option>
+							<option>대구</option>
+							<option>광주</option>
+						</select>
+					</div>
+					
+					<div class="region2">
+						<select class="form-control region2" id="region2">
+							<option selected="selected">시군구선택</option>
+							<option>마포구</option>
+							<option>강남구</option>
+							<option>서초구</option>
+							<option>은평구</option>
+						</select>
+					</div>
+					<div class="add">
+						<button class="btn btn-warning button_small" id="add">추가</button>
+					</div>
 			</div>
 			<div class="select_region">
 				<p style="font-weight: bold;">[ 서울특별시 마포구 ]</p>
@@ -188,8 +145,8 @@
 			</div>
 			
 			<div class="flex">
-				<label class="f_size">연령대 제한*</label>
-					<select class="form-control" id="age">
+				<span class="form-control name">연령제한*</span>
+					<select class="form-control age" id="age">
 						<option selected="selected">최소 연령선택</option>
 						<option>10대</option>
 						<option>20대</option>
@@ -200,7 +157,7 @@
 						<option>연령제한 없음</option>
 					</select>
 					<span style="font-size: 18pt; margin-left: 10px;"> ~ </span>
-					<select class="form-control" id="age2">
+					<select class="form-control age2" id="age2">
 						<option selected="selected">최대 연령선택</option>
 						<option>10대</option>
 						<option>20대</option>
@@ -212,8 +169,8 @@
 					</select>
 			</div>
 			<div class="flex">
-				<label class="f_size">실력 제한*</label>
-					<select class="form-control" id="ability">
+				<span class="form-control name">실력제한*</span>
+					<select class="form-control ability" id="ability">
 						<option selected="selected">최소 실력선택</option>
 						<option>하</option>
 						<option>중</option>
@@ -221,7 +178,7 @@
 						<option>실력제한 없음</option>
 					</select>
 					<span style="font-size: 18pt; margin-left: 10px;"> ~ </span>
-					<select class="form-control" id="ability2">
+					<select class="form-control ability2" id="ability2">
 						<option selected="selected">최대 실력선택</option>
 						<option>하</option>
 						<option>중</option>
@@ -230,8 +187,8 @@
 					</select>
 			</div>
 			<div class="flex">
-				<label class="f_size">페어플레이점수 제한*</label>				
-					<select class="form-control" id="fairplay">
+				<span class="form-control name">페어플레이제한*</span>				
+					<select class="form-control fairplay" id="fairplay">
 						<option selected="selected">최소 페어플레이 점수 제한</option>
 						<option>1점대</option>
 						<option>2점대</option>
@@ -241,7 +198,7 @@
 						<option>점수제한 없음</option>
 					</select>
 					<span style="font-size: 18pt; margin-left: 10px;"> ~ </span>
-					<select class="form-control" id="fairplay2">
+					<select class="form-control fairplay2" id="fairplay2">
 						<option selected="selected">최대 페어플레이 점수 제한</option>
 						<option>1점대</option>
 						<option>2점대</option>
@@ -259,9 +216,9 @@
 		<div class="col-md-3">
 		</div>
 		<div class="col-md-6 flex">
-			<div class="last_button">
-				<button class="btn btn-warning" id="create">크루개설</button>
-				<button class="btn btn-warning" id="cancel">취소</button>
+			<div class="bottom_clickbutton">
+				<button class="btn btn-warning button_middle" id="create">크루개설</button>
+				<button class="btn btn-warning button_middle cancel" id="cancel">취소</button>
 			</div>
 		</div>
 		<div class="col-md-3">

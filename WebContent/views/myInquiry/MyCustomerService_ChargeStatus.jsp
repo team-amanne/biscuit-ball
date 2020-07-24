@@ -49,23 +49,6 @@
 	width: 70%;
 }
 
-/* 공백용 */
-#button3
-{
-	margin-right: 40px;
-}
-
-#button4
-{
-	margin-left: 10px;
-}
-
-/* 공백용 */
-#button2
-{
-	margin-left: 50px;
-}
-
 /* 숫자 도형 색깔 */
 .badge
 {
@@ -104,15 +87,6 @@
          <h5>내담당 문의/신고 > 메인</h5>
          <hr />
       </div>
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8">
-		</div>
-		<div class="col-md-2">
-		</div>
-		
-	</div>
 	<div class="row">
 		<div class="col-md-2">
 		</div>
