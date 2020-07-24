@@ -25,7 +25,7 @@ String cp = request.getContextPath();
 		
 		$("#btn-together").click(function()
 		{
-			window.open("mode");
+			window.open("<%=cp%>/play/party/create", 'new','scrollbars=yes,resizable=no width=600px height=400px, left=0,top=0');
 		});
 	});
 
@@ -69,7 +69,7 @@ String cp = request.getContextPath();
 							<div class="panel-body">
 								<p class="title-text">파티</p>
 								<p>친구들과 함께</p>
-								<button class="btn btn-default btn-link" id="btn-together">PLAY</button>
+								<button class="btn btn-default btn-link" id="btn-together" value="party">PLAY</button>
 							</div>
 						</div>
 					</div>

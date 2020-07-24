@@ -51,7 +51,7 @@ String cp = request.getContextPath();
 						</div>
 					</div>
 					<div class="col-md-6">
-						<div class="panel panel-default col-party" style="opacity: 0.6; background-size: cover; background-image: url('../img/baNong.jpg');">
+						<div class="panel panel-default col-party" style="opacity: 0.6; background-size: cover; background-image: url('<%=cp%>/img/baNong.jpg');">
 							<div class="panel-body">
 								<h2 style="color:white; font-weight: bold;">함께농구</h2>
 								<p style="color:white; font-weight: bold;">나에게 꼭 맞는 모임은?</p>
