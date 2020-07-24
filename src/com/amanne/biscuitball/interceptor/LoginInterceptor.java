@@ -28,7 +28,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception
 	{
-		String uri = request.getRequestURI().split("?")[0];
+		String uri = request.getRequestURI();
 		String cp = request.getContextPath();
 		
 		// 로그인 없이 접근 가능한 페이지는 여기에 추가

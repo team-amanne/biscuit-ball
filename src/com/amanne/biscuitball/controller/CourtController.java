@@ -1,3 +1,9 @@
+/*============================================
+ 	CourtController.java
+ 	생성일: 2020.07.24
+ 	최근수정일: 2020.07.24
+=============================================*/
+
 package com.amanne.biscuitball.controller;
 
 import javax.servlet.http.HttpSession;
