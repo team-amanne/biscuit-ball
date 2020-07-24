@@ -9,10 +9,8 @@
 <head>
 <meta charset="UTF-8">
 <title>코트 > 코트 등록</title>
-<link rel="stylesheet"
-   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet"
-   href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/default.css">
 <link rel="stylesheet" href="<%=cp%>/css/board.css" />
 <style type="text/css">
@@ -72,7 +70,7 @@
                                     &nbsp;&nbsp;&nbsp;&nbsp;|</span>
                               </div>
                               <div class="col-md-2 col-xs-2">
-                                 <select class="form-control" name="regionCode" id="">
+                                 <select class="form-control" name="regionCode" id="region">
                                     <option value="">광역시·도</option>
                                     <c:forEach var="region" items="${regions }">
                                     <option value="${region.regionCode }">${region.regionName }</option>
@@ -80,7 +78,7 @@
                                  </select>
                               </div>
                               <div class="col-md-2 col-xs-2">
-                                 <select class="form-control" name="" id="">
+                                 <select class="form-control" name="cityCode" id="city">
                                     <option value="">시·군·구</option>
                                  </select>
                               </div>
@@ -98,7 +96,7 @@
                         </div>
 
                         <div class="col-md-12 col-xs12">
-                           <div class="col-md-8  col-xs-8 select-map" id="map">지도 영역</div>
+                           <div class="col-md-8  col-xs-8 select-map" id="map"></div>
                            <div class="col-md-4  col-xs-4 court-address">
                               <div class="panel panel-default">
                                  <div class="panel-body">
@@ -225,13 +223,41 @@
    <br style="clear: both;" />
    <c:import url="../base/Footer.jsp"></c:import>
 
+<script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=71d2a00bcbaa2c09a70387dda258c248&libraries=services,clusterer,drawing"></script>
 <script type="text/javascript">
-
-	function init()
+	
+	$(function()
 	{
-		// 서울시청 좌표 받아와서 지도 표시하기
-	}
+		map = new kakao.maps.Map(document.getElementById("map"), {
+			center: new kakao.maps.LatLng(37.5668260054796, 126.978656785931),
+			level: 3
+		});
+		
+		
+		$("#region").on("change", function()
+		{
+			$.ajax({
+				type: "get",
+				dataType: "json",
+				url: "<%=cp %>/ajax/citylist",
+				data: {regionCode: $(this).val()},
+				success: function(data) {
+					var result = "<option value=''>시·군·구</option>\n";
+					for(var i=0; i<data.length; i++)
+						result += "<option value='" + data[i].cityCode +"'>" + data[i].cityName + "</option>\n";
+					
+					$("#city").html(result);
+				},
+				error: function(e){
+					alert(e.responseText);
+				}
+			});
+			
+			
+			
+		});
+	});
 </script>
 </body>
 </html>

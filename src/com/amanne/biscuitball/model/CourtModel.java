@@ -38,6 +38,4 @@ public class CourtModel
 		return dao.getRegionList();
 	}
 	
-	
-	
 }
