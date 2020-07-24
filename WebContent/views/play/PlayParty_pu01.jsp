@@ -44,14 +44,12 @@ String cp = request.getContextPath();
 </style>
 
 </head>
-<body>
-
 <!-- playBasketball_party 팝업창  -->
 
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-3"></div>
-			<div class="col-sm-12 col-md-6">
+			<div class="col-xs-12 col-md-6">
 				<div class="row">
 					<div class="col-sm-5 col-md-5">
 						<div class="panel panel-default">
@@ -116,7 +114,4 @@ String cp = request.getContextPath();
 			<div class="col-md-3"></div>
 		</div>
 	</div>
-
-
-</body>
 </html>

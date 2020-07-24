@@ -15,19 +15,19 @@ public class PlayController
 	@Autowired
 	private HttpServletRequest request;
 	
+	
+	// 파티 선택으로 이동
 	@RequestMapping("/party/**")
 	public String playHome()
 	{
-		HttpSession session = request.getSession();
-				
-		if (session != null)
-		{
-			System.out.println(session +"당근을 흔들어주세요");
-			return "/play/PlayParty";
-		}
-		else 
-		{
-			return "/login";
-		}
+		return "/play/PlayParty";
 	}
+	
+	// 파티 선택 -> 빠농/함농 선택으로 이동
+	@RequestMapping("/mode/**")
+	public String playMode()
+	{
+		return "/play/PlaySelect";
+	}
+	
 }
