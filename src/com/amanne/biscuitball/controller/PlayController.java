@@ -31,7 +31,7 @@ public class PlayController
 		return "/play/PlaySelect";
 	}
 	
-	
+	// 파티 만들기 팝업
 	@RequestMapping("party/create")
 	public String playPartyCreate()
 	{

@@ -25,7 +25,7 @@ String cp = request.getContextPath();
 		
 		$("#btn-together").click(function()
 		{
-			window.open("<%=cp%>/play/party/create", 'new','scrollbars=yes,resizable=no width=600px height=400px, left=0,top=0');
+			window.open("<%=cp%>/play/party/create", 'new','scrollbars=yes,resizable=no width=600px height=600px, left=0,top=0');
 		});
 	});
 

@@ -51,11 +51,8 @@ String cp = request.getContextPath();
 						</div>
 					</div>
 					<div class="col-md-6">
-<<<<<<< HEAD
-						<div class="panel panel-default col-party" style="opacity: 0.6; background-size: cover; background-image: url('<%=cp%>/img/baNong.jpg');">
-=======
+
 						<div class="panel panel-default col-party">
->>>>>>> branch 'play' of https://github.com/team-amanne/biscuit-ball.git
 							<div class="panel-body">
 								<h2>함께농구</h2>
 								<p>나에게 꼭 맞는 모임은?</p>
