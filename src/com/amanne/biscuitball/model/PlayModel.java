@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.amanne.biscuitball.mybatis.IRegionDAO;
+import com.amanne.biscuitball.mybatis.IUserDAO;
 import com.amanne.biscuitball.mybatis.RegionDTO;
+import com.amanne.biscuitball.mybatis.UserDTO;
 
 @Service
 public class PlayModel
@@ -24,6 +26,16 @@ public class PlayModel
 		regionList=regionDao.getRegionList();
 		
 		return regionList;
+	}
+	
+	// 특정 유저 홈코트
+	public UserDTO userHomeCourt(String userAccountCode)
+	{
+		UserDTO userDto = new UserDTO();
+		IUserDAO userDao = sqlSession.getMapper(IUserDAO.class);
+		userDao.getUser(userAccountCode);
+		
+		return userDto;
 	}
 
 }

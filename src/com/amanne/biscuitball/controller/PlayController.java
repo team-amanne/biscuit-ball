@@ -1,14 +1,19 @@
 package com.amanne.biscuitball.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.amanne.biscuitball.mybatis.IRegionDAO;
+import com.amanne.biscuitball.model.PlayModel;
+import com.amanne.biscuitball.model.UserInfo;
+import com.amanne.biscuitball.mybatis.RegionDTO;
+import com.amanne.biscuitball.mybatis.UserDTO;
 
 
 @Controller
@@ -17,10 +22,10 @@ public class PlayController
 {
 
    @Autowired
-   private HttpServletRequest request;
+   private PlayModel playModel;
    
    @Autowired
-   private 
+	private HttpServletRequest request;
    
    
    // 파티 선택으로 이동
@@ -48,8 +53,20 @@ public class PlayController
    @RequestMapping("/mode/together/**")
    public String togetherPlay(Model model)
    {
-	   
+	  // 광역시도 정보 랜더링
+	  ArrayList<RegionDTO> regionList= playModel.regionPrint();
+	  model.addAttribute("regionList", regionList);
+	  
+	  // 유저 홈코트 정보 불러오기
+	  HttpSession session = request.getSession();
+	  UserInfo userInfo = (UserInfo)session.getAttribute("userInfo");
+	  
+	  UserDTO userDto =  playModel.userHomeCourt(userInfo.getUserAcctCode());
+	  model.addAttribute("userDto", userDto);
+	  
+	  
       return "/play/PlayTogetherSelect";
+      
    }
    
 }
