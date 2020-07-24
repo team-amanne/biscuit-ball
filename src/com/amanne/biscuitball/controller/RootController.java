@@ -39,10 +39,6 @@ public class RootController
 	}
 
 	// login Action 로그인 액션
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/heads/master
 	@RequestMapping("/logindo")
 	public String loginAction(Model model, LoginDTO dto)
 	{
