@@ -183,7 +183,7 @@
 	<!-- public ArrayList<CourtDTO> getCourtListByMapPosition(String posX, String posY, double distance); // 특정좌표 근처 코트 조회 -->
 	<select id="getCourtListByMapPosition" resultType="com.amanne.biscuitball.mybatis.CourtDTO">
 	<![CDATA[
-		SELECT COURT_CODE AS courtCode
+		SELECT COURT_REG_CODE AS courtCode
 		     , TO_CHAR(COURT_REG_DATE, 'YYYY-MM-DD HH24:MI') AS courtRegisteredDate
 		     , COURT_MAP_POSITION AS mapPosition
 		     , POSX AS mapPositionX
@@ -424,5 +424,103 @@
 	SELECT COUNT(*)
 	FROM TBL_COURT_NAME
 	WHERE COURT_NAME = #{courtName} AND COURT_REG_CODE = #{courtCode}
+	</select>
+	
+	<!-- public ArrayList<CourtDTO> getCourtListByCity(@Param("cityCode") String cityCode);	// 특정 시군구 안의 코트 조회 -->
+	<select id="getCourtListByCity" resultType="com.amanne.biscuitball.mybatis.CourtDTO">
+	<![CDATA[
+		SELECT C.COURT_REG_CODE AS courtCode
+		     , TO_CHAR(C.COURT_REG_DATE, 'YYYY-MM-DD HH24:MI') AS courtRegisteredDate
+		     , C.COURT_MAP_POSITION AS mapPosition
+		     , C.REGISTRANT_ACCT_CODE AS registrantAccountCode
+		     , C.USER_NICKNAME AS registrantNickname
+		     , NVL(C.MY_COURT_COUNT,0) AS myCourtCount
+		     , C.COURT_IMG1 AS courtImg1
+		     , C.COURT_IMG2 AS courtImg2
+		     , C.COURT_IMG3 AS courtImg3
+		     , C.COURT_NAME_CODE AS courtNameCode
+		     , C.COURT_NAME AS courtName
+		     , C.COURT_NAME_TOTAL_PERCENT AS courtNamePollRate
+		     , C.AVG_COURT_MNG_SCORE AS avgCourtManageScore
+		     , C.AVG_COURT_SATISFACTION AS avgCourtSatisfaction
+		     , C.COURT_RATING AS courtRating
+		     , C.MIN_COURT_CAPACITY AS minCourtCapacity
+		     , C.MAX_COURT_CAPACITY AS maxCourtCapacity
+		     , C.WASHROOM AS toilet
+		     , C.CONFIDENCE_WASHROOM AS toiletConfidence
+		     , C.SHWER_ROMM AS shower
+		     , C.CONFIDENCE_SHWER_ROMM AS showerConfidence
+		     , C.PARKING_LOT AS parkinglot
+		     , C.CONFIDENCE_PARKING_LOT AS parkinglotConfidence
+		     , C.ENROLLMENT_YES_COUNT AS enrollYesCount
+		     , C.ENROLLMENT_NO_COUNT AS enrollNoCount
+		     , C.COURT_DELREQ_CODE AS delRequestCode
+		     , TO_CHAR(C.COURT_DELREQ_DATE, 'YYYY-MM-DD HH24:MI') AS delRequestDate
+		     , TO_CHAR(C.APPROVE_DATE, 'YYYY-MM-DD HH24:MI') AS delApproveDate
+		     , C.COURT_DELETE_POLL_YES AS delRequestPollYesCount
+		     , C.COURT_DELETE_POLL_NO AS delRequestPollNoCount
+		     , C.DEL_ADMIN_CODE AS delAdminCode
+		     , TO_CHAR(C.ADMIN_COURT_DEL_DATE, 'YYYY-MM-DD HH24:MI') AS adminDelDate
+		     , C.COURT_STATUS AS courtStatus
+		     , C.BLIND_STATUS AS blindStatus
+		     , TC.CITY_CODE AS cityCode
+		     , VC.CITY_NAME AS cityName
+		FROM VIEW_COURT C
+		LEFT JOIN TBL_COURT_REGISTRATION TC
+		ON C.COURT_REG_CODE = TC.COURT_REG_CODE
+		LEFT JOIN VIEW_CITY VC
+		ON TC.CITY_CODE = VC.CITY_CODE
+		WHERE TC.CITY_CODE = #{cityCode}
+	]]>
+	</select>
+	
+	<!-- public ArrayList<CourtDTO> getCourtListByRegion(@Param("regionCode") String regionCode);	// 특정 시군구 안의 코트 조회 -->
+	<select id="getCourtListByRegion" resultType="com.amanne.biscuitball.mybatis.CourtDTO">
+	<![CDATA[
+		SELECT C.COURT_REG_CODE AS courtCode
+		     , TO_CHAR(C.COURT_REG_DATE, 'YYYY-MM-DD HH24:MI') AS courtRegisteredDate
+		     , C.COURT_MAP_POSITION AS mapPosition
+		     , C.REGISTRANT_ACCT_CODE AS registrantAccountCode
+		     , C.USER_NICKNAME AS registrantNickname
+		     , NVL(C.MY_COURT_COUNT,0) AS myCourtCount
+		     , C.COURT_IMG1 AS courtImg1
+		     , C.COURT_IMG2 AS courtImg2
+		     , C.COURT_IMG3 AS courtImg3
+		     , C.COURT_NAME_CODE AS courtNameCode
+		     , C.COURT_NAME AS courtName
+		     , C.COURT_NAME_TOTAL_PERCENT AS courtNamePollRate
+		     , C.AVG_COURT_MNG_SCORE AS avgCourtManageScore
+		     , C.AVG_COURT_SATISFACTION AS avgCourtSatisfaction
+		     , C.COURT_RATING AS courtRating
+		     , C.MIN_COURT_CAPACITY AS minCourtCapacity
+		     , C.MAX_COURT_CAPACITY AS maxCourtCapacity
+		     , C.WASHROOM AS toilet
+		     , C.CONFIDENCE_WASHROOM AS toiletConfidence
+		     , C.SHWER_ROMM AS shower
+		     , C.CONFIDENCE_SHWER_ROMM AS showerConfidence
+		     , C.PARKING_LOT AS parkinglot
+		     , C.CONFIDENCE_PARKING_LOT AS parkinglotConfidence
+		     , C.ENROLLMENT_YES_COUNT AS enrollYesCount
+		     , C.ENROLLMENT_NO_COUNT AS enrollNoCount
+		     , C.COURT_DELREQ_CODE AS delRequestCode
+		     , TO_CHAR(C.COURT_DELREQ_DATE, 'YYYY-MM-DD HH24:MI') AS delRequestDate
+		     , TO_CHAR(C.APPROVE_DATE, 'YYYY-MM-DD HH24:MI') AS delApproveDate
+		     , C.COURT_DELETE_POLL_YES AS delRequestPollYesCount
+		     , C.COURT_DELETE_POLL_NO AS delRequestPollNoCount
+		     , C.DEL_ADMIN_CODE AS delAdminCode
+		     , TO_CHAR(C.ADMIN_COURT_DEL_DATE, 'YYYY-MM-DD HH24:MI') AS adminDelDate
+		     , C.COURT_STATUS AS courtStatus
+		     , C.BLIND_STATUS AS blindStatus
+		     , TC.CITY_CODE AS cityCode
+		     , R.REGION_NAME || ' ' || VC.CITY_NAME AS cityName
+		FROM VIEW_COURT C
+		LEFT JOIN TBL_COURT_REGISTRATION TC
+		ON C.COURT_REG_CODE = TC.COURT_REG_CODE
+		LEFT JOIN TBL_CITY VC
+		ON TC.CITY_CODE = VC.CITY_CODE
+		LEFT JOIN TBL_REGION R
+		ON VC.REGION_CODE = R.REGION_CODE
+		WHERE R.REGION_CODE = #{regionCode}
+	]]>
 	</select>
 </mapper>

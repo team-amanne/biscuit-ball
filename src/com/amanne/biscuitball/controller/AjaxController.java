@@ -20,9 +20,9 @@ public class AjaxController
 	{
 		String view = null;
 		
-		model.addAttribute("cityList", ajax.getCityList(regionCode));
+		model.addAttribute("result", ajax.getCityList(regionCode));
 		
-		view = "/ajax/CityList";
+		view = "/ajax/Check";
 		return view;
 	}
 	
@@ -76,6 +76,20 @@ public class AjaxController
 		String view = null;
 		
 		model.addAttribute("result", ajax.checkCourtName(courtCode, courtName));
+		
+		view = "/ajax/Check";
+		return view;
+	}
+	
+	@RequestMapping("/courtlist")
+	public String courtList(Model model, @RequestParam(required=false) String cityCode, @RequestParam(required=false) String regionCode)
+	{
+		String view = null;
+		
+		if(cityCode != null)
+			model.addAttribute("result", ajax.getCourtListByCity(cityCode));
+		else if(regionCode != null)
+			model.addAttribute("result", ajax.getCourtListByRegion(regionCode));
 		
 		view = "/ajax/Check";
 		return view;
