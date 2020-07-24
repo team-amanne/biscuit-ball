@@ -87,7 +87,9 @@ public interface IUserDAO
 	public int countPersonalAchievements(String userAccountCode); // 특정 유저 획득 업적 전체 수
 
 	public ArrayList<UserDTO> getFriendList(@Param("userAccountCode")String userAccountCode, @Param("start") int start, @Param("end") int end); // 특정 유저 친구 조회
-
+	
+	public int countFriendList(String userAccountCode); // 특정 유저 친구 수
+	
 	public ArrayList<UserDTO> getBlockUserList(@Param("userAccountCode")String userAccountCode, @Param("start") int start, @Param("end") int end); // 특정 유저 블락유저 조회
 
 }

@@ -646,6 +646,18 @@
       )
       WHERE RNUM <![CDATA[>]]>= #{start}  AND  RNUM  <![CDATA[<]]>= #{end}
    </select>
+   
+   <!-- public int countFriendList(String userAccountCode); // 특정 유저 친구 수 -->
+    SELECT COUNT(*)
+      FROM
+      (
+      SELECT FRIEND_REQ_CODE, SENDER_ACCT_CODE, SENDER_NICKNAME,
+      RECEIVER_ACCT_CODE, RECEIVER_NICKNAME, FRIEND_REQ_DATE,
+      FRIEND_ANS_DATE
+      FROM VIEW_FRIEND_REQUEST
+      WHERE SENDER_ACCT_CODE = #{userAccountCode} AND
+      FRIEND_REQ_STATUS = '수락'
+      )
 
    <!-- 특정 유저 차단 조회 -->
    <!--public ArrayList<UserDTO> getBlockUserList(@Param("userAccountCode")String 

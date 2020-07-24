@@ -1,12 +1,12 @@
 package com.amanne.biscuitball.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.amanne.biscuitball.model.LoginModel;
@@ -19,7 +19,6 @@ import com.amanne.biscuitball.mybatis.UserDTO;
 
 @Controller
 @RequestMapping("/")
-@SessionAttributes({ "userInfo", "adminInfo" })
 public class RootController
 {
 
@@ -44,6 +43,9 @@ public class RootController
 	@RequestMapping("/logindo")
 	public String loginAction(Model model, LoginDTO dto)
 	{
+		
+		HttpSession session = request.getSession();
+		
 		dto.setIp(request.getRemoteAddr());
 
 		UserInfo adminInfo = login.adminlogin(dto);
@@ -51,6 +53,7 @@ public class RootController
 		if (adminInfo != null)
 		{
 			model.addAttribute("adminInfo", adminInfo);
+			session.setAttribute("adminInfo", adminInfo);
 
 			return "redirect:/";
 		} else
@@ -67,6 +70,7 @@ public class RootController
 				} else
 				{
 					model.addAttribute("userInfo", userInfo);
+					session.setAttribute("userInfo", userInfo);
 
 					return "redirect:/";
 				}
@@ -80,9 +84,13 @@ public class RootController
 	
 	// 로그아웃
 	@RequestMapping("/logout")
-	public String logout(SessionStatus sessionStatus)
+	public String logout()
 	{
-		sessionStatus.setComplete();
+		HttpSession session = request.getSession();
+		
+		session.removeAttribute("userInfo");
+		session.removeAttribute("adminInfo");
+		session.invalidate();
 		
 		return "redirect:/";
 	}
