@@ -11,7 +11,6 @@ String cp = request.getContextPath();
 <title>농구하기</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<<<<<<< HEAD
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/default.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <!-- 스크립트 단 -->
@@ -33,10 +32,6 @@ String cp = request.getContextPath();
 	
 
 </script>
-=======
-<link rel="stylesheet" type="text/css" href="<%=cp%>/css/default.css">
-<link rel="stylesheet" type="text/css" href="<%=cp%>/css/board.css">
->>>>>>> refs/heads/master
 <!-- 공통 헤더 -->
 <style type="text/css">
 
