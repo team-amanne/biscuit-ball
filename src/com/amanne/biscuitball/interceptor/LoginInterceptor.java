@@ -28,11 +28,13 @@ public class LoginInterceptor extends HandlerInterceptorAdapter
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception
 	{
-		String[] urls = request.getRequestURI().toString().split("/");
+		String uri = request.getRequestURI();
+		String cp = request.getContextPath();
 		
-		if(urls.length == 2 
-			|| urls[2].matches("signup") || urls[2].matches("signupdo")  || urls[2].matches("signupcomplete") 
-			|| urls[2].matches("login") || urls[2].matches("logindo")
+		if(uri.equals(cp) 
+			|| uri.matches(cp + "/signup") || uri.matches(cp + "/signupdo") 
+			|| uri.matches(cp + "/login") || uri.matches(cp + "/logindo")
+
 		)
 			return true;
 		

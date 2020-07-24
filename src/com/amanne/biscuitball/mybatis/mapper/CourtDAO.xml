@@ -307,38 +307,39 @@
 		     , TOILET AS toilet
 		     , SHOWER AS shower
 		     , PARK AS parkinglot
-		     , CASE WHEN E.VOTER_ACCT_CODE IS NOT NULL THEN 'YES'
+		     , CASE WHEN VOTER_ACCT_CODE IS NOT NULL THEN 'YES'
 		            ELSE 'NO'
 		       END AS pollOrNot
-		     , CASE WHEN E.COURT_REVIEW_LIKE_CODE IS NULL THEN NULL
-		            WHEN E.COURT_REVIEW_LIKE_CODE = 'ZU01' THEN 'LIKE'
+		     , CASE WHEN COURT_REVIEW_LIKE_CODE IS NULL THEN NULL
+		            WHEN COURT_REVIEW_LIKE_CODE = 'ZU01' THEN 'LIKE'
 		            ELSE 'DISLIKE'
 		       END AS pollLikeOrDislike
 		FROM
 		(
-			SELECT ROWNUM AS RNUM, V.*
-			FROM VIEW_COURT_REVIEW V
-			LEFT JOIN
-			(
-			    SELECT *
-			    FROM TBL_CORUT_REV_POLL
-	]]>
-	<if test="userAccountCode != null">	  
-			    WHERE VOTER_ACCT_CODE=#{userAccountCode}
-	</if>
-	<![CDATA[
-			) E
-			ON V.COURT_REVIEW_CODE = E.COURT_REVIEW_CODE
-			WHERE COURT_REVIEW_STATUS NOT LIKE '삭제'
-			  AND COURT_REVIEW_STATUS NOT LIKE '제재'
+			SELECT T.*, ROWNUM AS RNUM
+            FROM
+            (
+				SELECT V.*, E.VOTER_ACCT_CODE, E.COURT_REVIEW_LIKE_CODE
+				FROM VIEW_COURT_REVIEW V
+				LEFT JOIN
+				(
+				    SELECT *
+				    FROM TBL_COURT_REVIEW_EVAL
+				    WHERE VOTER_ACCT_CODE=#{userAccountCode, jdbcType=VARCHAR}
+				) E
+				ON V.COURT_REVIEW_CODE = E.COURT_REVIEW_CODE
+				WHERE V.COURT_REG_CODE = #{courtCode}
+				  AND V.COURT_REVIEW_STATUS NOT LIKE '삭제'
+				  AND V.COURT_REVIEW_STATUS NOT LIKE '제재'
 	]]>
 	<if test='order == null or order.equals("LIKE")'>	
-			ORDER BY (LIKES-DISLIKES) DESC, COURT_REVIEW_REG_DATE DESC
+				ORDER BY (V.LIKES-V.DISLIKES) DESC, V.COURT_REVIEW_REG_DATE DESC
 	</if>
-	<if test='order != null and order.eqauls("DATE")'>
-			ORDER BY COURT_REVIEW_REG_DATE DESC, (LIKES-DISLIKES) DESC 
+	<if test='order != null and order.equals("DATE")'>
+				ORDER BY V.COURT_REVIEW_REG_DATE DESC, (V.LIKES-V.DISLIKES) DESC 
 	</if>
 	<![CDATA[
+			) T
 		)
 		WHERE RNUM >= #{start} AND RNUM <= #{end}
 	]]>

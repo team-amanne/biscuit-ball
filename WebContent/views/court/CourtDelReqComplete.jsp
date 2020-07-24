@@ -31,7 +31,7 @@
 
 
 
-<title>코트 삭제 요청</title>
+<title>코트 > 코트 정보 > 삭제 요청</title>
 
 <!-- 부트스트랩/제이쿼리 -->
 <!-- 부가적인 테마 -->
@@ -48,12 +48,12 @@
 
 	<!-- 서브메뉴 -->
 	<!-- 서브메뉴는 기능별(농구하기/코트검색/크루/...)로 복사해서 만들어두고 import 할 것 -->
-	<c:import url="../base/Submenu.jsp"></c:import>
+	<c:import url="../base/CourtSubmenu.jsp"></c:import>
 
 	<!-- 메인 -->
 	<div class="main container-fluid">
 		<div class="section-title container">
-			<span>코트 정보 페이지> 코트 삭제요청 완료 </span>
+			<span>코트 > 코트 삭제요청 </span>
 			<hr />
 		</div>
 	<div class="row">
