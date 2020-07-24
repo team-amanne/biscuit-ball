@@ -11,6 +11,7 @@ String cp = request.getContextPath();
 <title>농구하기</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<<<<<<< HEAD
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/default.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <!-- 스크립트 단 -->
@@ -32,16 +33,16 @@ String cp = request.getContextPath();
 	
 
 </script>
+=======
+<link rel="stylesheet" type="text/css" href="<%=cp%>/css/default.css">
+<link rel="stylesheet" type="text/css" href="<%=cp%>/css/board.css">
+>>>>>>> refs/heads/master
 <!-- 공통 헤더 -->
 <style type="text/css">
 
-	.col-party 
+	.title-header
 	{
-		text-align: center;
-		border-radius: 30px;
-		height: 300px;
-		padding-top: 60px;
-		margin: 80px auto auto auto;
+		font-size: 12pt;
 	}
 	.title-text
 	{
@@ -61,32 +62,54 @@ String cp = request.getContextPath();
 			<hr />
 		</div>
 		<div class="row">
-			<div class="col-md-3"></div>
+			<div class="col-md-2"></div>
 			<div class="col-md-8">
+<<<<<<< HEAD
 			<form action="" method="get"></form>
 					<div class="col-md-4">
 						<div class="panel panel-default col-party">
+=======
+					<div class="col-md-6">
+						<div class="panel panel-default">
+						<div class="panel-heading">
+						<p class="title-header">파 티</p>
+						</div>
+>>>>>>> refs/heads/master
 							<div class="panel-body">
+<<<<<<< HEAD
 								<p class="title-text">파티</p>
+=======
+								
+>>>>>>> refs/heads/master
 								<p>친구들과 함께</p>
+<<<<<<< HEAD
 								<button class="btn btn-default btn-link" id="btn-together" value="party">PLAY</button>
+=======
+								<button class="btn btn-default btn-link">PLAY</button>
+>>>>>>> refs/heads/master
 							</div>
 						</div>
 					</div>
-					<div class="col-md-4">
-						<div class="panel panel-default col-party">
+					<div class="col-md-6">
+						<div class="panel panel-default">
+						<div class="panel-heading">
+						<p class="title-header">개 인</p>
+						</div>
 							<div class="panel-body">
+<<<<<<< HEAD
 								<p class="title-text">개인</p>
 								<p>혼자서 재밌게</p>
 								<button class="btn btn-default btn-link" id="btn-solo">PLAY</button>
+=======
+								
+								<p>혼자서도 즐겁게</p>
+								<button class="btn btn-default btn-link">PLAY</button>
+>>>>>>> refs/heads/master
 							</div>
 						</div>
 					</div>
-		
-			
-
 			</div>
-			<div class="col-md-4"></div>
+			<div class="col-md-2"></div>
 		</div>
 	</div>
 	

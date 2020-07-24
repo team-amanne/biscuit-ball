@@ -32,6 +32,7 @@ public class PlayController
 		
 		return "/play/PlayParty";
 	}
+<<<<<<< HEAD
 	
 	// 파티 선택 -> 빠농/함농 선택으로 이동
 	@RequestMapping("/mode/**")
@@ -52,4 +53,18 @@ public class PlayController
 	}
 	
 	
+=======
+
+	// 파티 만들기 팝업
+	@RequestMapping("party/create")
+	public String playPartyCreate(Model model, UserDTO userDto)
+	{
+		HttpSession session = request.getSession();
+		UserInfo userInfo = (UserInfo)session.getAttribute("userInfo");
+	
+		model.addAttribute("userDto", userDto);
+		return "/play/PlayParty_pu01";
+	}
+
+>>>>>>> refs/heads/master
 }

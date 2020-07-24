@@ -39,6 +39,10 @@ public class RootController
 	}
 
 	// login Action 로그인 액션
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/heads/master
 	@RequestMapping("/logindo")
 	public String loginAction(Model model, LoginDTO dto)
 	{
@@ -95,20 +99,25 @@ public class RootController
 	}
 
 	// 회원가입 Form 불러옴
-	@RequestMapping("/signup/**")
+	@RequestMapping("/signup")
 	public String signUpForm(Model model)
 	{
 		model.addAttribute("regionList", signUp.signUpUserForm());
-
 		return "/signup/User_Signup";
 	}
 
-	// 회원가입 액션
-	@RequestMapping(value = "/signup.do", method = RequestMethod.POST)
+	// 회원가입 액션 
+	@RequestMapping(value="/signupdo", method = {RequestMethod.GET, RequestMethod.POST})
 	public String signUp(UserDTO user)
-	{
-		System.out.println(user.getTierName() + "aaaaaaaaaaaaaaaaaaaaaaa");
+	{	
 		return signUp.signUpUser(user);
+	}
+	
+	// 회원가입 완료
+	@RequestMapping(value="/signupcomplete", method = {RequestMethod.GET, RequestMethod.POST})
+	public String signUpComplete()
+	{	
+		return "/signup/User_SignupComplete";
 	}
 
 	// 비밀번호 재설정 Form 불러옴

@@ -8,6 +8,7 @@
 	<select id="getRegionList" resultType="com.amanne.biscuitball.mybatis.RegionDTO">
 		SELECT REGION_CODE AS "regionCode", REGION_NAME AS "regionName"
 		FROM TBL_REGION
+		ORDER BY REGION_CODE
 	</select>	
 	
 	<!-- 	public ArrayList<CityDTO> getCityList(String regionCode); // 시군구 조회 -->
@@ -17,6 +18,7 @@
 		SELECT CITY_CODE  AS "cityCode", CITY_NAME AS "cityName", REGION_CODE AS "regionCode"
 		FROM TBL_CITY
 		WHERE REGION_CODE = #{regionCode}
+		ORDER BY CITY_CODE
 	</select>
 	
 	
