@@ -329,5 +329,11 @@
 	<!-- public int countCrewPosts(String crewCode, String searchKey, String searchValue); // 특정크루 크루게시글 수 -->
 	<!-- public CrewPostDTO getCrewPost(String crewPostCode); // 특정크루게시글 조회 -->
 	<!-- public List<CrewMemberDTO> getCrewMemberList(String crewCode); // 특정크루 크루멤버 조회 -->
+	<!-- public int checkCrewName(String crewName);	// 크루 이름 중복 조회 -->
+	<select id="checkCrewName" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM TBL_CREW
+		WHERE CREW_NAME = #{crewName}
+	</select>
 	
 </mapper>

@@ -28,23 +28,31 @@ public class LoginInterceptor extends HandlerInterceptorAdapter
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception
 	{
-		String uri = request.getRequestURI();
+		String uri = request.getRequestURI().split("?")[0];
 		String cp = request.getContextPath();
 		
-		if(uri.equals(cp) 
-			|| uri.matches(cp + "/signup") || uri.matches(cp + "/signupdo") 
-			|| uri.matches(cp + "/login") || uri.matches(cp + "/logindo")
-
-		)
+		// 로그인 없이 접근 가능한 페이지는 여기에 추가
+		String[] excludes = {"/", "/signup", "/signupdo", "/login", "/logindo"};
+		
+		if(uri.equals(cp))
 			return true;
+		
+		for(String ex : excludes)
+		{
+			if(uri.equals(cp + ex))
+				return true;
+		}
 		
 		HttpSession session = request.getSession();
 		
+		// 개발 시에는 주석처리 상태에서 작업 → 로그인 없이 확인 가능
+		/*
 		if(session.getAttribute("adminInfo") == null && session.getAttribute("userInfo") == null)
 		{
-			response.sendRedirect("/BiscuitBall/login");
+			response.sendRedirect(cp + "/login");
 			return false;
 		}
+		*/
 		
 		return true;
 	}

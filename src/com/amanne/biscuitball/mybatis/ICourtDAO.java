@@ -41,4 +41,6 @@ public interface ICourtDAO
 	public CourtDTO getCourt(String courtCode); // 특정코트 조회
 
 	public CourtReviewDTO getCourtReviewByAuthor(@Param("courtCode") String courtCode, @Param("userAccountCode") String userAccountCode); // 특정코트 코트리뷰 등록 여부
+	
+	public int checkCourtName(@Param("courtCode") String courtCode, @Param("courtName") String courtName);	// 특정 코트의 코트 이름 중복 조회
 }

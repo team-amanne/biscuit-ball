@@ -419,4 +419,10 @@
 		  AND REGISTRANT_ACCT_CODE=#{userAccountCode}
 	</select>
 
+	<!-- public int checkCourtName(String courtCode, String courtName);// 특정 코트의 코트 이름 중복 여부 조회 -->
+	<select id="checkCourtName" resultType="java.lang.Integer">
+	SELECT COUNT(*)
+	FROM TBL_COURT_NAME
+	WHERE COURT_NAME = #{courtName} AND COURT_REG_CODE = #{courtCode}
+	</select>
 </mapper>
