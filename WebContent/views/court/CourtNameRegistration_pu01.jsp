@@ -10,7 +10,7 @@
 
 
 
-<title>코트이름등록</title>
+<title>코트 > 코트 정보 > 코트 이름 등록</title>
 
 <!-- 부트스트랩/제이쿼리 -->
 <link rel="stylesheet"

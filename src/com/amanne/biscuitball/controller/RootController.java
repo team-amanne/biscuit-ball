@@ -33,7 +33,7 @@ public class RootController
 	private HttpServletRequest request;
 
 	// login Form 불러옴
-	@RequestMapping("/login/**")
+	@RequestMapping("/login")
 	public String login()
 	{
 		return "/login/Login";

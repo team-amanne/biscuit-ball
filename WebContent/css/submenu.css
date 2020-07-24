@@ -12,7 +12,7 @@
    position: sticky;
    top: 0;
    min-height: 40px;
-   z-index: 9999;
+   z-index: 999;
 }
 
 .navbar.nav-tablist .nav-tablist-tabs {
