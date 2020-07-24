@@ -19,12 +19,14 @@
 			    #{userGenderCode},
 			    #{userHeight},
 			    #{selfEvaluationType},
-			    #{userCity},
+			    #{userCityCode},
 			    #{userTel},
 			    #{userPositionCode},
-			    #{smsReceive}
+			    #{snsSync},
 			    #{returnValue ,mode=OUT, jdbcType=VARCHAR}
+
 			)
+
 		}
 	</select>
 	

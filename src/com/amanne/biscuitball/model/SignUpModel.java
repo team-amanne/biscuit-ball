@@ -21,15 +21,13 @@ public class SignUpModel
 	{
 		IUserDAO dao = sqlSession.getMapper(IUserDAO.class);
 
-		System.out.println(user.getUserName());
-		
 		dao.registerUser(user);	// 회원가입
 		
-		String result = user.getUserRegisteredDate();	// 처리 결과
-		
-		if(result.equals("1"))  // 회원가입성공
-			return "redirect:/signup/User_SignupComplete";
+		String result = user.getReturnValue();	// 처리 결과
 
+		if(result.equals("1"))  // 회원가입성공
+			return "redirect:/signupcomplete";
+		
 		return "redirect:/";
 
 	}
