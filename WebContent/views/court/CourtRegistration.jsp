@@ -342,7 +342,9 @@ String cp = request.getContextPath();
 		
 		/* 파일 설정 */
 		$(".filebox input[type=file]").on("change", function() {
-			$("#" + $(this).attr("id") + "-uploadname").text($(this).val());
+			var fullName = $(this).val().split("\\");
+			var fileName = fullName[fullName.length-1];
+			$("#" + $(this).attr("id") + "-uploadname").text(fileName);
 		});
 		
 		/* 버튼 설정 */
