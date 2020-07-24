@@ -14,14 +14,30 @@ String cp = request.getContextPath();
 	<link rel="stylesheet" type="text/css" href="<%=cp %>/css/default.css">
 <style type="text/css">
 
-	.col-party 
-	{
-		text-align: center;
-		border-radius: 30px;
-		height: 300px;
-		padding-top: 60px;
-		margin: 100px auto auto auto;
-	}
+.col-party 
+{
+	text-align: center;
+	border-radius: 30px;
+	height: 300px;
+	padding-top: 60px;
+	margin: 100px auto auto auto;
+}
+
+.nong1
+{
+	opacity: 0.6;
+	background-size: cover;
+	background-image: url('../img/hamNong.jpg');
+}
+
+.nong2
+{
+	opacity: 0.6;
+	background-size: cover;
+	background-image: url('../img/baNong.jpg');
+}
+
+
 </style>
 </head>
 <body>
@@ -42,7 +58,7 @@ String cp = request.getContextPath();
 			<div class="col-md-2"></div>
 				<div class="col-md-8">
 					<div class="col-md-6">
-						<div class="panel panel-default col-party" style="opacity: 0.6; background-size: cover; background-image: url('../img/hamNong.jpg');">
+						<div class="panel panel-default col-party nong1">
 							<div class="panel-body">
 								<h2 style="color:white; font-weight: bold;">빠른농구</h2>
 								<p style="color:white; font-weight: bold;">지금 당장 농구하고 싶다면?</p>
@@ -51,7 +67,7 @@ String cp = request.getContextPath();
 						</div>
 					</div>
 					<div class="col-md-6">
-						<div class="panel panel-default col-party" style="opacity: 0.6; background-size: cover; background-image: url('../img/baNong.jpg');">
+						<div class="panel panel-default col-party nong2">
 							<div class="panel-body">
 								<h2 style="color:white; font-weight: bold;">함께농구</h2>
 								<p style="color:white; font-weight: bold;">나에게 꼭 맞는 모임은?</p>
