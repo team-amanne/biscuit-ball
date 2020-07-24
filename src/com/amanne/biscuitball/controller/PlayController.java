@@ -40,4 +40,11 @@ public class PlayController
 		return "/play/PlayParty_pu01";
 	}
 	
+	// 함께농구로 이동
+	@RequestMapping("/mode/together/**")
+	public String togetherPlay()
+	{
+		return "/play/PlayTogether";
+	}
+	
 }

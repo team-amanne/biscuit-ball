@@ -12,6 +12,23 @@ String cp = request.getContextPath();
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="<%=cp %>/css/default.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript">
+
+	$(document).ready(function()
+	{
+		$("#btn-together").click(function()
+		{
+			$(location).attr("href", "<%=cp%>/play/mode/speed")
+		});
+		
+		$("#btn-together").click(function()
+		{
+			$(location).attr("href", "<%=cp%>/play/mode/together")
+		});
+	});
+
+</script>
 <style type="text/css">
 
 .col-party 
@@ -46,7 +63,7 @@ String cp = request.getContextPath();
 							<div class="panel-body">
 								<h2>빠른농구</h2>
 								<p>지금 당장 농구하고 싶다면?</p>
-								<button class="btn btn-warning">PLAY</button>
+								<button class="btn btn-link" id="btn-speed">PLAY</button>
 							</div>
 						</div>
 					</div>
@@ -56,7 +73,7 @@ String cp = request.getContextPath();
 							<div class="panel-body">
 								<h2>함께농구</h2>
 								<p>나에게 꼭 맞는 모임은?</p>
-								<button class="btn btn-warning">PLAY</button>
+								<button class="btn btn-link" id="btn-together">PLAY</button>
 							</div>
 						</div>
 					</div>
