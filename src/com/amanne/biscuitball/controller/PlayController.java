@@ -44,7 +44,7 @@ public class PlayController
    @RequestMapping("/mode/together/**")
    public String togetherPlay()
    {
-      return "/play/PlayTogether";
+      return "/play/PlayTogetherSelect";
    }
    
 }
