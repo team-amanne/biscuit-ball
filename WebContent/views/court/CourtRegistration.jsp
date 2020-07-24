@@ -35,6 +35,15 @@ String cp = request.getContextPath();
 .court-address {
 	margin-top: 2%;
 }
+
+.filebox input[type=file] {
+	position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
 </style>
 </head>
 <body>
@@ -57,7 +66,7 @@ String cp = request.getContextPath();
 		<div class="col-md-12 col-xs-12">
 			<p class="subtitle-text">기본 코트 정보 입력</p>
 		</div>
-		<form action="" method="post" enctype="multipart/form-data" class="col-md-12 col-xs-12">
+		<form id="courtRegisterForm" method="post" enctype="multipart/form-data" class="col-md-12 col-xs-12">
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<p class="courtinfo-title">지역 정보</p>
@@ -100,7 +109,7 @@ String cp = request.getContextPath();
 											<div class="col-md-12 col-xs-12">
 												<span class="text-orange">주소 </span>
 											</div>
-											<div class="col-md-12 col-xs-12">
+											<div class="col-md-12 col-xs-12" style="height: 34px;">
 												<input type="hidden" name="mapPositionX" id="positionX" value="" />
 												<input type="hidden" name="mapPositionY" id="positionY" value="" />
 												<span id="address"></span>
@@ -114,7 +123,7 @@ String cp = request.getContextPath();
 												<span class="text-orange">코트 이름 </span>
 											</div>
 											<div class="col-md-12 col-xs-12">
-												<input type="text" class="form-control">
+												<input type="text" class="form-control" name="courtName" id="courtName">
 											</div>
 										</div>
 									</div>
@@ -125,7 +134,7 @@ String cp = request.getContextPath();
 												<span class="text-orange">적정 인원수 </span>
 											</div>
 											<div class="col-md-12 col-xs-12">
-												<select class="form-control" name="" id="">
+												<select class="form-control" name="courtCapacityCode" id="courtCapacity">
 													<option value="">적정 인원수</option>
 													<option value="ZH01">1~4</option>
 													<option value="ZH02">5~7</option>
@@ -150,6 +159,7 @@ String cp = request.getContextPath();
 							</div>
 
 							<!-- 사진 -->
+<!-- 
 							<div class="col-md-6 col-xs-6">
 
 								<div class="col-md-4">
@@ -162,35 +172,46 @@ String cp = request.getContextPath();
 									<img src="" alt="사진3" />
 								</div>
 							</div>
-							<div class="col-md-6 col-xs-6">
+ -->
+							<!-- <div class="col-md-6 col-xs-6"> -->
+							<div class="col-md-12 col-xs-12">
 								<ul class="list-group">
 									<li class="list-group-item board-body">
-										<div class="row">
-											<div class="col-sm-6 col-xs-6">
-												<span>사진 1</span>
+										<div class="row filebox">
+											<input type="file" name="courtImg1" id="file1" />
+											<!-- <div class="col-sm-6 col-xs-6"> -->
+											<div class="col-sm-8 col-xs-8">
+												<span id="file1-uploadname"></span>
 											</div>
-											<div class="col-md-6 col-xs-6">
-												<button class="btn btn-default btn-link btn-block btn-sm">사진 첨부</button>
-											</div>
-										</div>
-									</li>
-									<li class="list-group-item board-body">
-										<div class="row">
-											<div class="col-sm-6 col-xs-6">
-												<span>사진 2</span>
-											</div>
-											<div class="col-md-6 col-xs-6">
-												<button class="btn btn-default btn-link btn-block btn-sm">사진 첨부</button>
+											<!-- <div class="col-md-6 col-xs-6"> -->
+											<div class="col-md-4 col-xs-4">
+												<label for="file1" class="btn btn-default btn-link btn-block btn-sm">사진 첨부</label>
 											</div>
 										</div>
 									</li>
 									<li class="list-group-item board-body">
-										<div class="row">
-											<div class="col-sm-6 col-xs-6">
-												<span>사진 3</span>
+										<div class="row filebox">
+											<input type="file" name="courtImg2" id="file2" />
+											<!-- <div class="col-sm-6 col-xs-6"> -->
+											<div class="col-sm-8 col-xs-8">
+												<span id="file2-uploadname"></span>
 											</div>
-											<div class="col-md-6 col-xs-6">
-												<button class="btn btn-default btn-link btn-block btn-sm">사진 첨부</button>
+											<!-- <div class="col-md-6 col-xs-6"> -->
+											<div class="col-md-4 col-xs-4">
+												<label for="file2" class="btn btn-default btn-link btn-block btn-sm">사진 첨부</label>
+											</div>
+										</div>
+									</li>
+									<li class="list-group-item board-body">
+										<div class="row filebox">
+											<input type="file" name="courtImg3" id="file3" />
+											<!-- <div class="col-sm-6 col-xs-6"> -->
+											<div class="col-sm-8 col-xs-8">
+												<span id="file3-uploadname"></span>
+											</div>
+											<!-- <div class="col-md-6 col-xs-6"> -->
+											<div class="col-md-4 col-xs-4">
+												<label for="file3" class="btn btn-default btn-link btn-block btn-sm">사진 첨부</label>
 											</div>
 										</div>
 									</li>
@@ -202,10 +223,10 @@ String cp = request.getContextPath();
 
 					<div class="col-md-3 col-xs-3"></div>
 					<div class="col-md-3 col-xs-3">
-						<button class="btn btn-submit btn-block btn-default">코트 등록</button>
+						<button type="button" class="btn btn-submit btn-block btn-default" id="btnSubmit">코트 등록</button>
 					</div>
 					<div class="col-md-3 col-xs-3">
-						<button class="btn btn-block btn-default">취 소</button>
+						<button type="button" class="btn btn-block btn-default" id="btnCancel">취 소</button>
 					</div>
 					<div class="col-md-3 col-xs-3"></div>
 
@@ -224,8 +245,9 @@ String cp = request.getContextPath();
 	
 	$(function()
 	{
+		/* 지도 설정 */
 		map = new kakao.maps.Map(document.getElementById("map"), {
-			center: new kakao.maps.LatLng(37.5668260054796, 126.978656785931),
+			center: new kakao.maps.LatLng(37.556552, 126.919516),
 			level: 3
 		});
 		
@@ -317,6 +339,55 @@ String cp = request.getContextPath();
 		    });
 		    
 		});
+		
+		/* 파일 설정 */
+		$(".filebox input[type=file]").on("change", function() {
+			$("#" + $(this).attr("id") + "-uploadname").text($(this).val());
+		});
+		
+		/* 버튼 설정 */
+		$("#btnSubmit").click(function() {
+			if(!$("#citySelect").val()) {
+				alert("지역을 선택하세요.");
+				return;
+			}
+			
+			if(!$("#courtName").val()) {
+				alert("코트 이름을 입력하세요.");
+				return;
+			}
+			
+			if(!$("#courtCapacity").val()) {
+				alert("적정 코트 사용 인원수를 선택하세요.");
+				return;
+			}
+			
+			if(!$("#file1").val() || !$("#file2").val() || !$("#file3").val()) {
+				alert("코트 사진을 등록하세요.");
+				return;
+			}
+			
+			if(!/.(png|gif|jpg|jpeg)$/.test($("#file1").val()) 
+					|| !/.(png|gif|jpg|jpeg)$/.test($("#file2").val()) 
+					|| !/.(png|gif|jpg|jpeg)$/.test($("#file3").val())) {
+				alert("이미지 파일만 등록할 수 있습니다.");
+				return;
+			}
+			
+			if($("#file1").val() == $("#file2").val() || $("#file1").val() == $("#file3").val() || $("#file2").val() == $("#file3").val()) {
+				alert("같은 코트 사진을 등록할 수 없습니다.")
+				return;
+			}
+			
+			$("#courtRegisterForm").attr("action", "<%=cp %>/court/registerdo");
+			$("#courtRegisterForm").submit();
+		});
+		
+		$("#btnCancel").click(function() {
+			history.back();
+		});
+		
+		
 	});
 </script>
 </body>
