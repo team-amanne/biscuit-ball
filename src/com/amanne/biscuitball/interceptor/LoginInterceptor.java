@@ -31,7 +31,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter
 		String[] urls = request.getRequestURI().toString().split("/");
 		
 		if(urls.length == 2 
-			|| urls[2].matches("signup") || urls[2].matches("signupdo") 
+			|| urls[2].matches("signup") || urls[2].matches("signupdo")  || urls[2].matches("signupcomplete") 
 			|| urls[2].matches("login") || urls[2].matches("logindo")
 		)
 			return true;
