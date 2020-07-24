@@ -80,7 +80,7 @@ public class RootController
 	}
 
 	// 회원가입 Form 불러옴
-	@RequestMapping("/signup/**")
+	@RequestMapping("/signup")
 	public String signUpForm(Model model)
 	{
 		model.addAttribute("regionList", signUp.signUpUserForm());
@@ -91,20 +91,7 @@ public class RootController
 	// 회원가입 액션 
 	@RequestMapping(value="/signupDo", method = {RequestMethod.GET, RequestMethod.POST})
 	public String signUp(UserDTO user)
-	{
-		System.out.println("1 : " + user.getUserEmail());
-		System.out.println("2 : " + user.getUserPassword());
-		System.out.println("3 : " + user.getUserName());
-		System.out.println("4 : " + user.getUserNickname());
-		System.out.println("5 : " + user.getUserBirthday());
-		System.out.println("6 : " + user.getUserGenderCode());
-		System.out.println("7 : " + user.getUserHeight());
-		System.out.println("8 : " + user.getSelfEvaluationType());
-		System.out.println("9 : " + user.getUserCityCode());
-		System.out.println("10 : " + user.getUserTel());
-		System.out.println("11 : " + user.getUserPositionCode());
-		System.out.println("12 : " + user.getSnsSync());
-		
+	{	
 		return signUp.signUpUser(user);
 	}
 

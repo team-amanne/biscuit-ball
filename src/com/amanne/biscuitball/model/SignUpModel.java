@@ -20,15 +20,10 @@ public class SignUpModel
 	public String signUpUser(UserDTO user)
 	{
 		IUserDAO dao = sqlSession.getMapper(IUserDAO.class);
-		
-		System.out.println("ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ");
-		
+
 		dao.registerUser(user);	// 회원가입
 		
-		System.out.println("ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ");
-		
-		String result = user.getUserRegisteredDate();	// 처리 결과
-		
+		String result = user.getReturnValue();	// 처리 결과
 		if(result.equals("1"))  // 회원가입성공
 			return "redirect:/signup/User_SignupComplete";
 		
