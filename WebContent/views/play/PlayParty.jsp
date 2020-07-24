@@ -11,9 +11,23 @@ String cp = request.getContextPath();
 <title>농구하기</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="<%=cp %>/css/default.css">
+
+<link rel="stylesheet" type="text/css" href="<%=cp%>/css/default.css">
+<link rel="stylesheet" type="text/css" href="<%=cp%>/css/board.css">
+<style type="text/css">
+
+.col-party 
+{
+	text-align: center;
+	border-radius: 30px;
+	height: 300px;
+	padding-top: 60px;
+	margin: 100px auto auto auto;
+}
+
+</style>
+
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-<!-- 스크립트 단 -->
 <script type="text/javascript">
 
 	$(document).ready(function()
@@ -23,93 +37,59 @@ String cp = request.getContextPath();
 			$(location).attr("href", "<%=cp%>/play/mode");
 		});
 		
-		$("#btn-together").click(function()
+		$("#btn-party").click(function()
 		{
-			window.open("<%=cp%>/play/party/create", 'new','scrollbars=yes,resizable=no width=600px height=600px, left=0,top=0');
+			
 		});
 	});
 
-	
-
 </script>
-<!-- 공통 헤더 -->
-<style type="text/css">
-
-	.title-header
-	{
-		font-size: 12pt;
-	}
-	.title-text
-	{
-		font-weight: bold;
-	}
-</style>
-</head>
+<!-- 스크립트 단 -->
 <body>
 
 	<!-- 헤더 -->
 		<c:import url="../base/Header.jsp"></c:import>
 <c:import url="../base/PlaySubmenu.jsp"></c:import>
 
-	<div class="container-fluid main">
-		<div class="section-title container">
-			<h5>농구하기 > 사용자선택</h5>
-			<hr />
-		</div>
-		<div class="row">
+	<div class="main container-fluid">
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
-<<<<<<< HEAD
-			<form action="" method="get"></form>
-					<div class="col-md-4">
+				<div class="section-title">
+					<h5>농구하기 > 사용자선택</h5>
+					<hr />
+				</div>
+				
+		<div class="row">
+			<div class="col-md-2"></div>
+				<div class="col-md-8">
+					<div class="col-md-6">
 						<div class="panel panel-default col-party">
-=======
-					<div class="col-md-6">
-						<div class="panel panel-default">
-						<div class="panel-heading">
-						<p class="title-header">파 티</p>
-						</div>
->>>>>>> refs/heads/master
 							<div class="panel-body">
-<<<<<<< HEAD
-								<p class="title-text">파티</p>
-=======
-								
->>>>>>> refs/heads/master
-								<p>친구들과 함께</p>
-<<<<<<< HEAD
-								<button class="btn btn-default btn-link" id="btn-together" value="party">PLAY</button>
-=======
-								<button class="btn btn-default btn-link">PLAY</button>
->>>>>>> refs/heads/master
+								<h2>파 티</h2>
+								<p>친구와 함께</p>
+								<button class="btn btn-ling" id="btn-party">PLAY</button>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-6">
-						<div class="panel panel-default">
-						<div class="panel-heading">
-						<p class="title-header">개 인</p>
-						</div>
+
+						<div class="panel panel-default col-party">
 							<div class="panel-body">
-<<<<<<< HEAD
-								<p class="title-text">개인</p>
-								<p>혼자서 재밌게</p>
-								<button class="btn btn-default btn-link" id="btn-solo">PLAY</button>
-=======
-								
+								<h2>개 인</h2>
 								<p>혼자서도 즐겁게</p>
-								<button class="btn btn-default btn-link">PLAY</button>
->>>>>>> refs/heads/master
+								<button class="btn btn-submit" id="btn-solo">PLAY</button>
 							</div>
 						</div>
 					</div>
-			</div>
+				</div>
 			<div class="col-md-2"></div>
 		</div>
+				
+			</div>
+			<div class="col-md-2"></div>
 	</div>
 	
-	<c:import url="../base/Footer.jsp"></c:import>
+<c:import url="../base/Footer.jsp"></c:import>
 	
-
 </body>
 </html>
