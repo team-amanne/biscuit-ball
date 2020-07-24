@@ -42,7 +42,7 @@ public class RootController
 	}
 
 	// login Action 로그인 액션
-	@RequestMapping("/login.do")
+	@RequestMapping("/loginDo")
 	public String loginAction(Model model, LoginDTO dto)
 	{
 		dto.setIp(request.getRemoteAddr());
@@ -88,8 +88,8 @@ public class RootController
 		return "/signup/User_Signup";
 	}
 
-	// 회원가입 액션
-	@RequestMapping(value = "/signup.do", method = RequestMethod.POST)
+	// 회원가입 액션 
+	@RequestMapping(value="/signupDo", method = {RequestMethod.GET, RequestMethod.POST})
 	public String signUp(UserDTO user)
 	{
 		System.out.println("1 : " + user.getUserEmail());
@@ -103,7 +103,7 @@ public class RootController
 		System.out.println("9 : " + user.getUserCityCode());
 		System.out.println("10 : " + user.getUserTel());
 		System.out.println("11 : " + user.getUserPositionCode());
-		System.out.println("12 : " + user.getSmsReceive());
+		System.out.println("12 : " + user.getSnsSync());
 		
 		return signUp.signUpUser(user);
 	}

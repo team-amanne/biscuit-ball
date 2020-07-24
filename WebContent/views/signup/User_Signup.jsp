@@ -367,7 +367,7 @@ $(document).ready(function()
    <c:import url="../base/Header.jsp"></c:import>
    <!-- 서브 -->
    <c:import url="../base/Submenu.jsp"></c:import>
-<form action="signup.do" id="signUp_submit" method="post">
+<form action="signupDo" id="signUp_submit" method="post">
    <div class="container-fluid">
       <div class="section-title container">
       
@@ -416,10 +416,11 @@ $(document).ready(function()
                <label class="f_size" id="userGenderCode" >성별*</label> 
                <label
                   class="radio-inline radio_button"> <input type="radio"
-                  name="userGenderCode" id="female" value="female" checked="checked">여자
-               </label> <label class="radio-inline radio_button"> 
+                  name="userGenderCode" id="female" value="ZK02" checked="checked">여자
+               </label> 
+               <label class="radio-inline radio_button"> 
                <input
-                  type="radio" name="userGenderCode" id="male" value="male">남자
+                  type="radio" name="userGenderCode" id="male" value="ZK01">남자
                </label>
             </div>
             <div class="flex">
@@ -431,16 +432,16 @@ $(document).ready(function()
                 <select class="form-control"
                   id=" selfEvaluationType" name="selfEvaluationType">
                   <option selected="selected">실력선택</option>
-                  <option>하</option>
-                  <option>중</option>
-                  <option>상</option>
+                  <option value="ZR01">하</option>
+                  <option value="ZR02">중</option>
+                  <option value="ZR03">상</option>
                </select>
 
             </div>
             <div class="flex">
                <label class="f_size">거점지역*</label> 
                <select class="form-control"
-                  id="country" name="userPositionCode">
+                  id="country" name="">
                   <option selected="selected">지역선택</option>
                   <option>서울</option>
                   <option>인천</option>
@@ -448,7 +449,7 @@ $(document).ready(function()
                   <option>부산</option>
                   <option>대구</option>
                   <option>광주</option>
-               </select> <select class="form-control" id="userCityCode">
+               </select> <select class="form-control" id="userCityCode" name="userCityCode">
                   <option selected="selected">시군구선택</option>
                   <option value="ZG000014">마포구</option>
                   <option>강남구</option>
@@ -486,14 +487,17 @@ $(document).ready(function()
 
             <div class="flex">
                <label class="f_size">선호포지션*</label> <select class="form-control"
-                  id="userPositionCode">
+                  id="userPositionCode" name="userPositionCode">
                   <option selected="selected">포지션선택</option>
-                  <option>포인트가드</option>
-                  <option>센터</option>
-                  <option>슈팅가드</option>
-                  <option>스몰 포워드</option>
-                  <option>파워 포워드</option>
+                  <option value="ZP01">포인트가드</option>
+                  <option value="ZP02">센터</option>
+                  <option value="ZP03">슈팅가드</option>
+                  <option value="ZP04">스몰 포워드</option>
+                  <option value="ZP05">파워 포워드</option>
                </select>
+
+
+
 
                <button class="btn btn-warning" id="position_recommend">포지션
                   추천</button>
@@ -515,15 +519,20 @@ $(document).ready(function()
       </div>
       
       <div class="flex">
-               <label class="f_size" id="userGenderCode" >sms수신여부*</label> 
-               <label
-                  class="radio-inline radio_button"> <input type="radio"
-                  name="snsSync" value="ZU02" checked="checked">NO
-               </label> <label class="radio-inline radio_button"> 
-               <input
-                  type="radio" name="snsSync"  value="ZU01">YES
+               <label class="f_size" id="" >sms수신여부*</label> 
+               <label class="radio-inline radio_button"> 
+                  	<input type="radio" name="snsSync" value="ZU02" checked="checked">NO
+               </label> 
+               <label class="radio-inline radio_button"> 
+               		<input type="radio" name="snsSync" value="ZU01">YES
                </label>
       </div>
+      
+ 
+           
+      
+      
+      
       
 
       <div class="row">

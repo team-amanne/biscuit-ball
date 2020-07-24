@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 public class UserDTO 
 {
-
 	private String	userCode;					//	회원코드	
 	private String	userAccountCode;			//	회원계정코드	
 	private String	userNickname;				//	닉네임	
@@ -55,6 +54,8 @@ public class UserDTO
 	private String	userStatus;					//	제재상태	
 	private String	userDeleteRequestedDate;	//	탈퇴요청일	
 	private String returnValue;
+
+	
 	public String getUserCode()
 	{
 		return userCode;
@@ -407,6 +408,8 @@ public class UserDTO
 	{
 		this.returnValue = returnValue;
 	}
+	
+	
 	
 	
 }
