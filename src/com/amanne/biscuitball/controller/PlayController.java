@@ -1,33 +1,72 @@
 package com.amanne.biscuitball.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.amanne.biscuitball.model.PlayModel;
+import com.amanne.biscuitball.model.UserInfo;
+import com.amanne.biscuitball.mybatis.RegionDTO;
+import com.amanne.biscuitball.mybatis.UserDTO;
+
 
 @Controller
 @RequestMapping("/play")
 public class PlayController
 {
-	
-	@Autowired
+
+   @Autowired
+   private PlayModel playModel;
+   
+   @Autowired
 	private HttpServletRequest request;
-	
-	@RequestMapping("/party/**")
-	public String playHome()
-	{
-		HttpSession session = request.getSession();
-				
-		if (session != null)
-		{
-			System.out.println(session +"당근을 흔들어주세요");
-			return "/play/PlayParty";
-		}
-		else 
-		{
-			return "/login";
-		}
-	}
+   
+   
+   // 파티 선택으로 이동
+   @RequestMapping(value="/party")
+   public String playHome()
+   {
+      return "/play/PlayParty";
+   }
+   
+   // 파티 선택 -> 빠농/함농 선택으로 이동
+   @RequestMapping("/mode")
+   public String playMode()
+   {
+      return "/play/PlaySelect";
+   }
+   
+   // 파티 만들기 팝업(경로만 이어놨습니다....)
+   @RequestMapping("party/create")
+   public String playPartyCreate(Model model)
+   {
+      return "/play/PlayParty_pu01";
+   }
+   
+   // 함께농구로 이동
+   @RequestMapping("/mode/together/**")
+   public String togetherPlay(Model model)
+   {
+	  // 광역시도 정보 랜더링
+	  ArrayList<RegionDTO> regionList= playModel.regionPrint();
+	  model.addAttribute("regionList", regionList);
+	  
+	  // 유저 홈코트 정보 불러오기
+	  HttpSession session = request.getSession();
+	  UserInfo userInfo = (UserInfo)session.getAttribute("userInfo");
+	  
+	  UserDTO userDto =  playModel.userHomeCourt(userInfo.getUserAcctCode());
+	  model.addAttribute("userDto", userDto);
+	  
+	  
+      return "/play/PlayTogetherSelect";
+      
+   }
+   
 }

@@ -47,7 +47,6 @@ public interface ICrewDAO
 	public int appointCrewLeader(String crewMemberCode); // 크루리더위임
 
 	public int addBaseArea(@Param("crewCode") String crewCode, @Param("regionCode") String regionCode); // 거점지역추가
-
 	
 	public CrewDTO getCrew(String crewCode); // 특정크루조회
 
@@ -74,4 +73,6 @@ public interface ICrewDAO
 	public CrewPostDTO getCrewPost(String crewPostCode); // 특정크루게시글 조회
 
 	public List<CrewMemberDTO> getCrewMemberList(String crewCode); // 특정크루 크루멤버 조회
+	
+	public int checkCrewName(String crewName);	// 크루 이름 중복 조회
 }

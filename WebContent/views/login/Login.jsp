@@ -142,7 +142,7 @@
 			</div>
 		
 			<div class="login_button">
-				<button type="button" class="btn btn-default btn-lg sign" id="sign">로그인</button>
+				<button type="button" class="btn btn-default btn-lg sign" id="login">로그인</button>
 				<button type="button" class="kakaosign" id="kakaosign"><img src="<%=cp %>/views/img/kakao.png" style="max-width: 100%; height: auto;"></button>
 			</div>
 			

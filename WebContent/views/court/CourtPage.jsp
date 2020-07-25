@@ -2,16 +2,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	request.setCharacterEncoding("utf-8");
-String cp = request.getContextPath();
+	String cp = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-
+<title>코트 > 코트 정보</title>
+<!-- 부트스트랩/제이쿼리 -->
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
+<link rel="stylesheet" type="text/css" href="<%=cp%>/css/default.css">
+<link rel="stylesheet" href="<%=cp%>/css/board.css" />
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
 
@@ -66,19 +71,6 @@ $(document).ready(function(){
 	display:none;
 }
 </style>
-
-
-
-<title>코트 등록</title>
-
-<!-- 부트스트랩/제이쿼리 -->
-<!-- 부가적인 테마 -->
-<link rel="stylesheet"
-   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet"
-   href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
-<link rel="stylesheet" type="text/css" href="<%=cp%>/css/default.css">
-<link rel="stylesheet" href="<%=cp%>/css/board.css" />
 </head>
 <body>
 	<!-- 헤더 -->
@@ -86,12 +78,12 @@ $(document).ready(function(){
 	
 	<!-- 서브메뉴 -->
 	<!-- 서브메뉴는 기능별(농구하기/코트검색/크루/...)로 복사해서 만들어두고 import 할 것 -->
-	<c:import url="../base/Submenu.jsp"></c:import>
+	<c:import url="../base/CourtSubmenu.jsp"></c:import>
 
 	<!-- 메인 -->
 	<div class="main container-fluid">
 		<div class="section-title container">
-			<span>코트 정보</span>
+			<h5>코트 > 코트 정보</h5>
 			<hr />
 		</div>
 		<div class="row">
@@ -127,8 +119,6 @@ $(document).ready(function(){
 										</a>
 										<a href="CourtDelReqComplete.jsp">
 											<button type="button" class="btn btn-default btn-submit" id="delReq" name="delReq">코트 삭제 요청</button>
-										</a> <a href="#">
-											<button type="button" class="btn btn-default btn-danger" id="dec" name="dec">신고</button>
 										</a>
 									</div>
 								</div>
@@ -142,21 +132,20 @@ $(document).ready(function(){
 										<div class="row">
 											<div class="panel panel-heading">
 												<p>
-													<a href="#"> <img src="<%=cp%>/views/img/court-1.jpg"
+													<a href="#"> <img src="<%=cp%>${court.courtImg1}"
 														height="150px;" width="250px;" />
 													</a>
 												</p>
 											</div>
 											<div class="row panel-body">
 												<div class="col-sm-6 col-xs-6">
-													<a href="#"> <span><img
-															src="<%=cp%>/views/img/court-1.jpg" height="50px;"
-															width="100px;" /></span>
+													<a href="#">
+														<img src="<%=cp%>${court.courtImg2}" height="50px;" width="100px;" />
 													</a>
 												</div>
 												<div class="col-sm-6 col-xs-6">
-													<a href="#"> <img src="<%=cp%>/views/img/court-1.jpg"
-														height="50px;" width="100px;" />
+													<a href="#">
+														<img src="<%=cp%>${court.courtImg3}" height="50px;" width="100px;" />
 													</a>
 												</div>
 											</div>											
@@ -169,9 +158,9 @@ $(document).ready(function(){
 											<p></p>
 											<div class="col-sm-1 col-xs-1"></div>
 											<div class="col-sm-8 col-xs-8  panel panel-default">
-												<span class="subtitle-text">길동이네 코트</span>
+												<span class="subtitle-text">${court.courtName }</span>
 												<label style="display: none;">(가등록)</label>
-												<label>(정식등록)</label>
+												<label>(${court.courtStatus })</label>
 												<label style="display: none;">(삭제요청)</label>
 											</div>
 											<div class="col-sm-1 col-xs-1">
@@ -207,7 +196,7 @@ $(document).ready(function(){
 																<label>등급</label>
 															</div>
 															<div class="col-sm-8 col-xs-12">
-																<span>C</span>
+																<span>${court.courtRating }</span>
 															</div>
 														</div>
 														<div class="row">
@@ -215,7 +204,7 @@ $(document).ready(function(){
 																<label>인원수</label>
 															</div>
 															<div class="col-sm-8 col-xs-12">
-																<span>2~4명(신뢰도65%)</span>
+																<span>${court.minCourtCapacity }~${court.maxCourtCapacity }명(신뢰도65%)</span>
 															</div>
 														</div>
 														<div class="row">
@@ -223,7 +212,7 @@ $(document).ready(function(){
 																<label>내코트 등록수</label>
 															</div>
 															<div class="col-sm-8 col-xs-12">
-																<span>30명</span>
+																<span>${court.myCourtCount }명</span>
 															</div>
 														</div>
 														<div class="row">
@@ -231,7 +220,7 @@ $(document).ready(function(){
 																<label>화장실</label>
 															</div>
 															<div class="col-sm-8 col-xs-12">
-																<span>유(신뢰도65%)</span>
+																<span>${court.toilet == null ? "" : court.toilet }(신뢰도${court.toiletConfidence }%)</span>
 															</div>
 														</div>
 														<div class="row">
@@ -239,7 +228,7 @@ $(document).ready(function(){
 																<label>샤워실</label>
 															</div>
 															<div class="col-sm-8 col-xs-12">
-																<span>유(신뢰도65%)</span>
+																<span>${court.shower == null ? "" : court.shower }(신뢰도${court.showerConfidence }%)</span>
 															</div>
 														</div>
 														<div class="row">
@@ -247,7 +236,7 @@ $(document).ready(function(){
 																<label>주차장</label>
 															</div>
 															<div class="col-sm-8 col-xs-12">
-																<span>무(신뢰도65%)</span>
+																<span>${court.parkinglot == null ? "" : court.parkinglot }(신뢰도${court.parkinglotConfidence }%)</span>
 															</div>
 														</div>
 													</div>
@@ -412,8 +401,69 @@ $(document).ready(function(){
 
 									<div class="row">
 										<div class="panel panel-default">
-
-
+											<c:forEach var="review" items="${court.courtReviewList }">
+											<div class="panel panel-default col-sm-12 col-xs-12">
+												<div class="panel-body">
+													<div class="row">
+														<div class="col-sm-2 col-xs-2">
+															<a href="#"><span>${review.registrantNickname }</span></a>
+														</div>
+														<div class="col-sm-4 col-xs-2"></div>
+														<div class="col-sm-2 col-xs-4">
+															<span>일시 [${review.courtReviewRegisteredDate.split("\\s")[0] }]</span>
+														</div>
+														<div class="col-sm-1 col-xs-2">
+														</div>
+														<div class="col-sm-1 col-xs-2">
+															<button type="button" class="btn btn-default btn">
+																<span class="far fa-thumbs-up" style="font-size:18px;"></span> 
+																<span>${review.likes }</span>
+															</button>
+														</div>
+														<div class="col-sm-1 col-xs-2">
+															<button type="button" class="btn btn-default btn">
+																<span class="far fa-thumbs-down" style="font-size:18px;"></span> 
+																<span>${review.dislikes }</span>
+															</button>
+														</div>
+														<div class="col-sm-1 col-xs-2">
+															<button type="button" class="btn btn-default btn-danger">신고</button>
+														</div>
+													</div>
+													<div class="row">
+														<div class="col-sm-3 col-xs-5">
+															<span>만족도</span>
+															<c:forEach var="star" begin="1" end="${review.courtReviewSatisfaction.intValue() }">
+															<i class="fas fa-star"></i>
+															</c:forEach>
+															<c:if test="${review.courtReviewSatisfaction.intValue() != review.courtReviewSatisfaction.doubleValue()}">
+															<i class="fas fa-star-half"></i>
+															</c:if>
+														</div>
+														<div class="col-sm-3 col-xs-5">
+															<span>시설평점</span>
+															<c:forEach var="star" begin="1" end="${review.courtReviewManageScore.intValue() }">
+															<i class="fas fa-star"></i>
+															</c:forEach>
+															<c:if test="${review.courtReviewManageScore.intValue() != review.courtReviewManageScore.doubleValue()}">
+															<i class="fas fa-star-half"></i>
+															</c:if>
+														</div>
+														<div class="col-sm-6 sol-xs-2">
+															<i class="fas fa-trash-alt" style="font-size: 20px;"></i>
+											
+														</div>
+													</div>
+												</div>
+												<div class="panel panel-default rev-cont">
+													<div class="panel-body">
+														<span> ${review.courtReviewContent } </span>
+													</div>
+												</div>
+											</div>
+											</c:forEach>
+											
+											<!-- 
 											<div class="panel panel-default col-sm-12 col-xs-12">
 												<div class="panel-body">
 													<div class="row">
@@ -642,7 +692,8 @@ $(document).ready(function(){
 													</div>
 												</div>
 											</div>
-
+											 -->
+											
 											<div class="row">
 												<div class="col-md-3"></div>
 												<div class="col-md-6 paging">

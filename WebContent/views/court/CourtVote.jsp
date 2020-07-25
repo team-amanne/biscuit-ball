@@ -8,7 +8,7 @@ String cp = request.getContextPath();
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>코트 > 코트 정보 > 코트 투표</title>
 
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery.min.js"></script>
@@ -19,9 +19,6 @@ String cp = request.getContextPath();
 
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
-
-
-<title>코트 투표</title>
 
 <!-- 부트스트랩/제이쿼리 -->
 <!-- 부가적인 테마 -->

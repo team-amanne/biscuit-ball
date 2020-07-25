@@ -12,12 +12,14 @@ public class CourtDTO
 {
 	private String courtCode; 							// 코트등록코드
 	private String courtRegisteredDate; 				// 등록일시
+	private String cityCode;							// 시군구 코드
+	private String cityName;
 	private String mapPosition; 						// 좌표
 	private String mapPositionX; 						// x좌표
 	private String mapPositionY; 						// y좌표
 	private String registrantAccountCode; 				// 등록자계정코드
 	private String registrantNickname; 					// 등록자닉네임
-	private int myCourtCount; 							// 내코트등록수
+	private String myCourtCount; 							// 내코트등록수
 	private String courtImg1; 							// 코트이미지1
 	private String courtImg2; 							// 코트이미지2
 	private String courtImg3; 							// 코트이미지3
@@ -28,8 +30,8 @@ public class CourtDTO
 	private double avgCourtSatisfaction; 				// 코트만족도
 	private String courtRating; 						// 코트등급
 	private String courtCapacityCode; 					// 코트적정인원수코드
-	private int minCourtCapacity; 						// 최소코트인원수
-	private int maxCourtCapacity; 						// 최대코트인원수
+	private String minCourtCapacity; 						// 최소코트인원수
+	private String maxCourtCapacity; 						// 최대코트인원수
 	private String toilet; 							// 화장실유무
 	private double toiletConfidence; 					// 신뢰도
 	private String shower; 							// 샤워장유무
@@ -107,11 +109,11 @@ public class CourtDTO
 	{
 		this.registrantNickname = registrantNickname;
 	}
-	public int getMyCourtCount()
+	public String getMyCourtCount()
 	{
 		return myCourtCount;
 	}
-	public void setMyCourtCount(int myCourtCount)
+	public void setMyCourtCount(String myCourtCount)
 	{
 		this.myCourtCount = myCourtCount;
 	}
@@ -195,19 +197,19 @@ public class CourtDTO
 	{
 		this.courtCapacityCode = courtCapacityCode;
 	}
-	public int getMinCourtCapacity()
+	public String getMinCourtCapacity()
 	{
 		return minCourtCapacity;
 	}
-	public void setMinCourtCapacity(int minCourtCapacity)
+	public void setMinCourtCapacity(String minCourtCapacity)
 	{
 		this.minCourtCapacity = minCourtCapacity;
 	}
-	public int getMaxCourtCapacity()
+	public String getMaxCourtCapacity()
 	{
 		return maxCourtCapacity;
 	}
-	public void setMaxCourtCapacity(int maxCourtCapacity)
+	public void setMaxCourtCapacity(String maxCourtCapacity)
 	{
 		this.maxCourtCapacity = maxCourtCapacity;
 	}
@@ -370,6 +372,18 @@ public class CourtDTO
 	public void setReturnValue(String returnValue)
 	{
 		this.returnValue = returnValue;
+	}
+	public String getCityCode() {
+		return cityCode;
+	}
+	public void setCityCode(String cityCode) {
+		this.cityCode = cityCode;
+	}
+	public String getCityName() {
+		return cityName;
+	}
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
 	}
 	
 }
