@@ -94,4 +94,15 @@ public class AjaxController
 		view = "/ajax/Check";
 		return view;
 	}
+	
+	@RequestMapping("/court")
+	public String getCourt(Model model, @RequestParam(required=false) String mapPositionX, @RequestParam(required=false) String mapPositionY)
+	{
+		String view = null;
+		
+		model.addAttribute("result", ajax.getCourtCodeByPosition(mapPositionX, mapPositionY)); 
+		
+		view = "/ajax/Check";
+		return view;
+	}
 }

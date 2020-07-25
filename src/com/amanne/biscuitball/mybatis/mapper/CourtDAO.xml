@@ -530,7 +530,7 @@
 	<select id="getCourtByMapPosition" resultType="java.lang.String">
 		SELECT COURT_REG_CODE
 		FROM TBL_COURT_REGISTRATION
-		WHERE COURT_MAP_POSITION = #{posx} || ',' || #{posy}
+		WHERE #{posx} || ',' || #{posy} LIKE COURT_MAP_POSITION || '%'
 	</select>
 	
 	<!-- public int removeCourtReview(String courtReviewCode);	// 코트 리뷰 삭제 처리 -->
