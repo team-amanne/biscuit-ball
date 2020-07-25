@@ -2,12 +2,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	request.setCharacterEncoding("utf-8");
-String cp = request.getContextPath();
+	String cp = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
 <head>
 
+<title>코트 > 코트 정보 > 코트 리뷰 등록</title>
+<!-- 부트스트랩/제이쿼리 -->
+<!-- 부가적인 테마 -->
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="<%=cp%>/css/default.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>
+<link rel="stylesheet" href="<%=cp%>/css/board.css" />
 <style type="text/css">
 .left-btn {
 	text-align: left;
@@ -28,201 +37,252 @@ String cp = request.getContextPath();
 .btn-bot {
 	padding-bottom: 30px;
 }
+
 .court-name {
 	text-align: center;
 }
+
 .title-text {
 	font-weight: bold;
 }
+
 .review {
 	padding: 50px;
 }
-
 </style>
-<title>코트 > 코트 정보 > 코트 리뷰 등록</title>
-<!-- 부트스트랩/제이쿼리 -->
-<!-- 부가적인 테마 -->
-<link rel="stylesheet" href="<%=cp%>/css/board.css" />
-
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="<%=cp %>/css/default.css">
-
 </head>
 <body>
-	<!-- 헤더 -->
-	<c:import url="../base/Header.jsp"></c:import>
 
-	<!-- 서브메뉴 -->
-	<!-- 서브메뉴는 기능별(농구하기/코트검색/크루/...)로 복사해서 만들어두고 import 할 것 -->
-	<c:import url="../base/CourtSubmenu.jsp"></c:import>
+<!-- 헤더 -->
+<c:import url="../base/Header.jsp"></c:import>
 
-	<!-- 메인 -->
-	<div class="main container-fluid">
-		<div class="section-title container">
-			<h5>코트 > 코트 정보 > 코트 리뷰 등록</h5>
-			<hr />
-		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<div class="row">
-					<div class="col-md-2"></div>
-					<div class="col-md-8">
-						<div class="row">
-							<p class="title-text">코트리뷰</p>
-						</div>
-						<div class="panel panel-default">
-							<form class="form-horizontal">
-								<div class="row panel-body">
-									<div class="col-sm-2"></div>
-									<div class="col-sm-8 panel panel-default">
-										<div class="row court-name panel-body">									
-											<p class="title-text">홍대농구장</p>																													
-										</div>
+<!-- 서브메뉴 -->
+<!-- 서브메뉴는 기능별(농구하기/코트검색/크루/...)로 복사해서 만들어두고 import 할 것 -->
+<c:import url="../base/CourtSubmenu.jsp"></c:import>
+
+<!-- 메인 -->
+<div class="main container-fluid">
+	<div class="section-title container">
+		<h5>코트 > 코트 정보 > 코트 리뷰 등록</h5>
+		<hr />
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-2"></div>
+				<div class="col-md-8">
+					<div class="row">
+						<p class="title-text">코트리뷰</p>
+					</div>
+
+					<div class="panel panel-default">
+						<form class="form-horizontal" method="post" name="courtReviewRegisterForm" id="courtReviewRegisterForm">
+							<div class="row panel-body">
+								<div class="col-sm-2"></div>
+								<div class="col-sm-8 panel panel-default">
+									<div class="row court-name panel-body">
+										<input type="hidden" name="courtCode" value="${court.courtCode }" />
+										<p class="title-text">${court.courtName }</p>
 									</div>
-									<div class="col-sm-2"></div>
 								</div>
-								<div class="row">	
-									<div class="col-sm-1"></div>														
-								<div class=" col-sm-10 panel panel-default">									
-										<div class="row review">
-											<div class="col-sm-3 col-xs-3">
-												<label for="inputContent" class="control-label"> 
-													내용
-												</label>
-											</div>
-											<div class="col-sm-8 col-xs-8"><textarea class="form-control" rows="10"></textarea></div>
-											<div class="col-sm-1 col-xs-1">
+								<div class="col-sm-2"></div>
+							</div>
+							<div class="row">
+								<div class="col-sm-1"></div>
+								<div class=" col-sm-10 panel panel-default">
+									<div class="row review">
+										<div class="col-sm-3 col-xs-3">
+											<label for="courtReviewContent" class="control-label"> 내용 * </label>
+										</div>
+										<div class="col-sm-8 col-xs-8">
+											<textarea class="form-control" rows="10" id="courtReviewContent" name="courtReviewContent"></textarea>
+										</div>
+										<div class="col-sm-1 col-xs-1"></div>
+									</div>
+
+									<div class="row review form-group">
+										<div class="col-sm-3 col-xs-3">
+											<label for="avgCourtSatisfaction-rating" class="control-label"> 만족도 평가 * </label>
+										</div>
+
+										<div id="avgCourtSatisfaction-rating">
+											<div class="rating-group">
+												<label aria-label="0 stars" class="rating__label" for="avgCourtSatisfaction-0">&nbsp;</label> 
+												<input class="rating__input rating__input--none" name="avgCourtSatisfaction" id="avgCourtSatisfaction-0" value="0" type="radio" checked> 
+												
+												<label aria-label="0.5 stars" class="rating__label rating__label--half" for="avgCourtSatisfaction-05">
+													<i class="rating__icon rating__icon--star fa fa-star-half"></i>
+												</label> 
+												<input class="rating__input" name="avgCourtSatisfaction" id="avgCourtSatisfaction-05_1" value="0.5" type="radio"> 
+												
+												<label aria-label="1 star" class="rating__label" for="avgCourtSatisfaction-10_1">
+													<i class="rating__icon rating__icon--star fa fa-star"></i>
+												</label> 
+												<input class="rating__input" name="avgCourtSatisfaction" id="avgCourtSatisfaction-10_1" value="1" type="radio"> 
+												
+												<label aria-label="1.5 stars" class="rating__label rating__label--half" for="avgCourtSatisfaction-15_1">
+													<i class="rating__icon rating__icon--star fa fa-star-half"></i>
+												</label> 
+												<input class="rating__input" name="avgCourtSatisfaction" id="avgCourtSatisfaction-15_1" value="1.5" type="radio"> 
+												
+												<label aria-label="2 stars" class="rating__label" for="avgCourtSatisfaction-20_1">
+													<i class="rating__icon rating__icon--star fa fa-star"></i>
+												</label> 
+												<input class="rating__input" name="avgCourtSatisfaction" id="avgCourtSatisfaction-20_1" value="2" type="radio">
+												
+												<label aria-label="2.5 stars" class="rating__label rating__label--half" for="avgCourtSatisfaction-25_1">
+													<i class="rating__icon rating__icon--star fa fa-star-half"></i>
+												</label> 
+												<input class="rating__input" name="avgCourtSatisfaction" id="avgCourtSatisfaction-25_1" value="2.5" type="radio"> 
+												
+												<label aria-label="3 stars" class="rating__label" for="avgCourtSatisfaction-30_1">
+													<i class="rating__icon rating__icon--star fa fa-star"></i>
+												</label> 
+												<input class="rating__input" name="avgCourtSatisfaction" id="avgCourtSatisfaction-30_1" value="3" type="radio"> 
+												
+												<label aria-label="3.5 stars" class="rating__label rating__label--half" for="avgCourtSatisfaction-35_1">
+													<i class="rating__icon rating__icon--star fa fa-star-half"></i>
+												</label> 
+												<input class="rating__input" name="avgCourtSatisfaction" id="avgCourtSatisfaction-35_1" value="3.5" type="radio"> 
+												
+												<label aria-label="4 stars" class="rating__label" for="avgCourtSatisfaction-40_1">
+													<i class="rating__icon rating__icon--star fa fa-star"></i>
+												</label> 
+												<input class="rating__input" name="avgCourtSatisfaction" id="avgCourtSatisfaction-40_1" value="4" type="radio"> 
+												
+												<label aria-label="4.5 stars" class="rating__label rating__label--half" for="avgCourtSatisfaction-45_1">
+													<i class="rating__icon rating__icon--star fa fa-star-half"></i>
+												</label> 
+												<input class="rating__input" name="avgCourtSatisfaction" id="avgCourtSatisfaction-45_1" value="4.5" type="radio"> 
+												
+												<label aria-label="5 stars" class="rating__label" for="avgCourtSatisfaction-50_1">
+													<i class="rating__icon rating__icon--star fa fa-star"></i>
+												</label> 
+												<input class="rating__input" name="avgCourtSatisfaction" id="avgCourtSatisfaction-50_1" value="5" type="radio">
 											</div>
 										</div>
-									
-										<div class="row review form-group">
-											<div class="col-sm-3 col-xs-3">
-												<label for="inputContent" class="control-label"> 
-													만족도 평가
-												</label>
-											</div>
-
-<div id="half-stars-example">
-    <div class="rating-group">
-        <input class="rating__input rating__input--none" checked name="rating2" id="rating2-0" value="0" type="radio">
-        <label aria-label="0 stars" class="rating__label" for="rating2-0">&nbsp;</label>
-        <label aria-label="0.5 stars" class="rating__label rating__label--half" for="rating2-05"><i class="rating__icon rating__icon--star fa fa-star-half"></i></label>
-        <input class="rating__input" name="rating2_1" id="rating2-05_1" value="0.5" type="radio">
-        <label aria-label="1 star" class="rating__label" for="rating2-10_1"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-        <input class="rating__input" name="rating2_1" id="rating2-10_1" value="1" type="radio">
-        <label aria-label="1.5 stars" class="rating__label rating__label--half" for="rating2-15_1"><i class="rating__icon rating__icon--star fa fa-star-half"></i></label>
-        <input class="rating__input" name="rating2_1" id="rating2-15_1" value="1.5" type="radio">
-        <label aria-label="2 stars" class="rating__label" for="rating2-20_1"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-        <input class="rating__input" name="rating2_1" id="rating2-20_1" value="2" type="radio">
-        <label aria-label="2.5 stars" class="rating__label rating__label--half" for="rating2-25_1"><i class="rating__icon rating__icon--star fa fa-star-half"></i></label>
-        <input class="rating__input" name="rating2_1" id="rating2-25_1" value="2.5" type="radio" checked>
-        <label aria-label="3 stars" class="rating__label" for="rating2-30_1"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-        <input class="rating__input" name="rating2_1" id="rating2-30_1" value="3" type="radio">
-        <label aria-label="3.5 stars" class="rating__label rating__label--half" for="rating2-35_1"><i class="rating__icon rating__icon--star fa fa-star-half"></i></label>
-        <input class="rating__input" name="rating2_1" id="rating2-35_1" value="3.5" type="radio">
-        <label aria-label="4 stars" class="rating__label" for="rating2-40_1"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-        <input class="rating__input" name="rating2_1" id="rating2-40_1" value="4" type="radio">
-        <label aria-label="4.5 stars" class="rating__label rating__label--half" for="rating2-45_1"><i class="rating__icon rating__icon--star fa fa-star-half"></i></label>
-        <input class="rating__input" name="rating2_1" id="rating2-45_1" value="4.5" type="radio">
-        <label aria-label="5 stars" class="rating__label" for="rating2-50_1"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-        <input class="rating__input" name="rating2_1" id="rating2-50_1" value="5" type="radio">
-    </div>
-</div>
 
 
 
+									</div>
+
+									<div class="row review form-group">
+										<div class="col-sm-3 col-xs-3">
+											<label for="avgCourtManageScore-rating" class="control-label"> 시설 평가 * </label>
 										</div>
-									
-										<div class="row review form-group">
-											<div class="col-sm-3 col-xs-3">
-												<label for="inputContent" class="control-label"> 
-													시설 평가
-												</label>
+										<div id="avgCourtManageScore-rating">
+											<div class="rating-group">
+												<label aria-label="0 stars" class="rating__label" for="avgCourtManageScore-0">&nbsp;</label> 
+												<input class="rating__input rating__input--none" name="avgCourtManageScore" id="avgCourtManageScore-0" value="0" type="radio" checked>
+												
+												<label aria-label="0.5 stars" class="rating__label rating__label--half" for="avgCourtManageScore-05">
+													<i class="rating__icon rating__icon--star fa fa-star-half"></i>
+												</label> 
+												<input class="rating__input" name="avgCourtManageScore" id="avgCourtManageScore-05" value="0.5" type="radio"> 
+												
+												<label aria-label="1 star" class="rating__label" for="avgCourtManageScore-10">
+													<i class="rating__icon rating__icon--star fa fa-star"></i>
+												</label> 
+												<input class="rating__input" name="avgCourtManageScore" id="avgCourtManageScore-10" value="1" type="radio"> 
+												
+												<label aria-label="1.5 stars" class="rating__label rating__label--half" for="avgCourtManageScore-15">
+													<i class="rating__icon rating__icon--star fa fa-star-half"></i>
+												</label> 
+												<input class="rating__input" name="avgCourtManageScore" id="avgCourtManageScore-15" value="1.5" type="radio"> 
+												
+												<label aria-label="2 stars" class="rating__label" for="avgCourtManageScore-20">
+													<i class="rating__icon rating__icon--star fa fa-star"></i>
+												</label> 
+												<input class="rating__input" name="avgCourtManageScore" id="avgCourtManageScore-20" value="2" type="radio"> 
+												
+												<label aria-label="2.5 stars" class="rating__label rating__label--half" for="avgCourtManageScore-25">
+													<i class="rating__icon rating__icon--star fa fa-star-half"></i>
+												</label> 
+												<input class="rating__input" name="avgCourtManageScore" id="avgCourtManageScore-25" value="2.5" type="radio"> 
+												
+												<label aria-label="3 stars" class="rating__label" for="avgCourtManageScore-30">
+													<i class="rating__icon rating__icon--star fa fa-star"></i>
+												</label> 
+												<input class="rating__input" name="avgCourtManageScore" id="avgCourtManageScore-30" value="3" type="radio"> 
+												
+												<label aria-label="3.5 stars" class="rating__label rating__label--half" for="avgCourtManageScore-35">
+													<i class="rating__icon rating__icon--star fa fa-star-half"></i>
+												</label> 
+												<input class="rating__input" name="avgCourtManageScore" id="avgCourtManageScore-35" value="3.5" type="radio"> 
+												
+												<label aria-label="4 stars" class="rating__label" for="avgCourtManageScore-40">
+													<i class="rating__icon rating__icon--star fa fa-star"></i>
+												</label> 
+												<input class="rating__input" name="avgCourtManageScore" id="avgCourtManageScore-40" value="4" type="radio"> 
+												
+												<label aria-label="4.5 stars" class="rating__label rating__label--half" for="avgCourtManageScore-45">
+													<i class="rating__icon rating__icon--star fa fa-star-half"></i>
+												</label> 
+												<input class="rating__input" name="avgCourtManageScore" id="avgCourtManageScore-45" value="4.5" type="radio"> 
+												
+												<label aria-label="5 stars" class="rating__label" for="avgCourtManageScore-50">
+													<i class="rating__icon rating__icon--star fa fa-star"></i>
+												</label> 
+												<input class="rating__input" name="avgCourtManageScore" id="avgCourtManageScore-50" value="5" type="radio">
 											</div>
-<div id="half-stars-example">
-    <div class="rating-group">
-        <input class="rating__input rating__input--none" checked name="rating2" id="rating2-0" value="0" type="radio">
-        <label aria-label="0 stars" class="rating__label" for="rating2-0">&nbsp;</label>
-        <label aria-label="0.5 stars" class="rating__label rating__label--half" for="rating2-05"><i class="rating__icon rating__icon--star fa fa-star-half"></i></label>
-        <input class="rating__input" name="rating2" id="rating2-05" value="0.5" type="radio">
-        <label aria-label="1 star" class="rating__label" for="rating2-10"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-        <input class="rating__input" name="rating2" id="rating2-10" value="1" type="radio">
-        <label aria-label="1.5 stars" class="rating__label rating__label--half" for="rating2-15"><i class="rating__icon rating__icon--star fa fa-star-half"></i></label>
-        <input class="rating__input" name="rating2" id="rating2-15" value="1.5" type="radio">
-        <label aria-label="2 stars" class="rating__label" for="rating2-20"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-        <input class="rating__input" name="rating2" id="rating2-20" value="2" type="radio">
-        <label aria-label="2.5 stars" class="rating__label rating__label--half" for="rating2-25"><i class="rating__icon rating__icon--star fa fa-star-half"></i></label>
-        <input class="rating__input" name="rating2" id="rating2-25" value="2.5" type="radio" checked>
-        <label aria-label="3 stars" class="rating__label" for="rating2-30"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-        <input class="rating__input" name="rating2" id="rating2-30" value="3" type="radio">
-        <label aria-label="3.5 stars" class="rating__label rating__label--half" for="rating2-35"><i class="rating__icon rating__icon--star fa fa-star-half"></i></label>
-        <input class="rating__input" name="rating2" id="rating2-35" value="3.5" type="radio">
-        <label aria-label="4 stars" class="rating__label" for="rating2-40"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-        <input class="rating__input" name="rating2" id="rating2-40" value="4" type="radio">
-        <label aria-label="4.5 stars" class="rating__label rating__label--half" for="rating2-45"><i class="rating__icon rating__icon--star fa fa-star-half"></i></label>
-        <input class="rating__input" name="rating2" id="rating2-45" value="4.5" type="radio">
-        <label aria-label="5 stars" class="rating__label" for="rating2-50"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-        <input class="rating__input" name="rating2" id="rating2-50" value="5" type="radio">
-    </div>
-</div>
-
 										</div>
-									
-									
+
+									</div>
+
+
 									<div class="row review">
 										<div class="col-md-3 col-xs-3">
-											<label for="inputPassword" class="control-label"> 
-												시설정보 
-											</label>
+											<label class="control-label"> 시설정보 </label>
 										</div>
 										<div class="col-sm-3 col-xs-3">
-											<span> 화장실 </span>
-											<label class="radio-inline"> <input type="radio"
-												name="inlineRadio1" id="inlineRadio1" value="option1">
+											<span> 화장실 </span> 
+											<label class="radio-inline"> 
+												<input type="radio" name="toilet" id="inlineRadio1" value="ZU01"> 
 												유
-											</label> <label class="radio-inline"> <input type="radio"
-												name="inlineRadio1" id="inlineRadio2" value="option2">
+											</label> 
+											<label class="radio-inline"> 
+												<input type="radio" name="toilet" id="inlineRadio2" value="ZU02"> 
 												무
 											</label>
 										</div>
-	
+
 										<div class="col-sm-3 col-xs-3">
-											<span> 주차장 </span>
-											<label class="radio-inline"> <input type="radio"
-												name="inlineRadio2" id="inlineRadio1" value="option1">
+											<span> 주차장 </span> 
+											<label class="radio-inline"> 
+												<input type="radio" name="parkinglot" id="inlineRadio1" value="ZU01"> 
 												유
-											</label> <label class="radio-inline"> <input type="radio"
-												name="inlineRadio2" id="inlineRadio2" value="option2">
+											</label> 
+											<label class="radio-inline"> 
+												<input type="radio" name="parkinglot" id="inlineRadio2" value="ZU02"> 
 												무
 											</label>
 										</div>
-	
+
 										<div class="col-sm-3 col-xs-3 cen">
-											<span> 샤워실 </span>
-											<label class="radio-inline"> <input type="radio"
-												name="inlineRadio3" id="inlineRadio1" value="option1">
+											<span> 샤워실 </span> 
+											<label class="radio-inline"> 
+												<input type="radio" name="shower" id="inlineRadio1" value="ZU01"> 
 												유
-											</label> <label class="radio-inline"> <input type="radio"
-												name="inlineRadio3" id="inlineRadio2" value="option2">
+											</label> 
+											<label class="radio-inline"> 
+												<input type="radio" name="shower" id="inlineRadio2" value="ZU02"> 
 												무
 											</label>
 										</div>
-										
+
 										<div class="col-sm-1"></div>
-										
+
 									</div>
 									<div class="row review">
-										<div class="col-sm-2 col-xs-4">
-											<label for="inputPassword" class="control-label">
-												수용인원수 </label>
+										<div class="col-sm-3 col-xs-3">
+											<label for="courtCapacity" class="control-label"> 적정수용인원수 * </label>
 										</div>
 										<div class="col-sm-4 col-xs-4">
-											<select class="form-control">
-												<option>8~10</option>
-												<option>5~7</option>
-												<option>1~4</option>
+											<select name="courtCapacityCode" class="form-control" id="courtCapacity">
+												<option value="">선택</option>
+												<option value="ZH01">1 ~ 4 명</option>
+												<option value="ZH02">5 ~ 7 명</option>
+												<option value="ZH03">8 명 이상</option>
 											</select>
 										</div>
 										<div class="col-sm-6 col-xs-4"></div>
@@ -230,23 +290,53 @@ String cp = request.getContextPath();
 									<div class="row">
 										<div class="col-md-3"></div>
 										<div class="col-md-6  btn-bot">
-											<button type="submit"
-												class="btn btn-default btn-submit btn-block">등록하기</button>
+											<button type="button" id="btnSubmit" class="btn btn-default btn-submit btn-block">등록하기</button>
 										</div>
 									</div>
-										<div class="col-md-3"></div>
-									</div>
-									<div class="col-md-1"></div>
+									<div class="col-md-3"></div>
 								</div>
+								<div class="col-md-1"></div>
+							</div>
 
-							</form>
-						</div>
+						</form>
 					</div>
 				</div>
-				<div class="col-md-2"></div>
 			</div>
+			<div class="col-md-2"></div>
 		</div>
 	</div>
-	<c:import url="../base/Footer.jsp"></c:import>
+</div>
+<c:import url="../base/Footer.jsp"></c:import>
+	
+<script type="text/javascript">
+
+	$(function() {
+		$("#btnSubmit").click(function() {
+			if(!$("#courtReviewContent").val()) {
+				alert("리뷰 내용을 입력해주세요.");
+				return;
+			}
+			
+			if(!document.courtReviewRegisterForm.avgCourtSatisfaction.value || document.courtReviewRegisterForm.avgCourtSatisfaction.value == "0") {
+				alert("만족도 평가를 선택해주세요.");
+				return;
+			}
+
+			if(!document.courtReviewRegisterForm.avgCourtManageScore.value || document.courtReviewRegisterForm.avgCourtManageScore.value == "0") {
+				alert("시설 평가를 선택해주세요.");
+				return;
+			}
+			
+			if(!$("#courtCapacity").val()) {
+				alert("코트 적정 수용 인원수를 선택해주세요.");
+				return;
+			}
+			
+			$("#courtReviewRegisterForm").attr("action", "<%=cp %>/court/${court.courtCode}/review/registerdo");	
+			$("#courtReviewRegisterForm").submit();
+		});
+	});
+
+</script>
 </body>
 </html>

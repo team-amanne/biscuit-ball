@@ -25,9 +25,12 @@ public class CourtModel
 		ICourtDAO courtDao = sqlSession.getMapper(ICourtDAO.class);
 		ArrayList<CourtReviewDTO> list = null;
 		
-		result = courtDao.getCourt(courtCode);
-		list = courtDao.getCourtReviewList(courtCode, info != null ? info.getUserAcctCode() : null, 1, 5, "LIKE");
-		result.setCourtReviewList(list);
+		if(courtCode != null)
+		{			
+			result = courtDao.getCourt(courtCode);
+			list = courtDao.getCourtReviewList(courtCode, info != null ? info.getUserAcctCode() : null, 1, 5, "LIKE");
+			result.setCourtReviewList(list);
+		}
 		
 		return result;
 	}
@@ -36,6 +39,26 @@ public class CourtModel
 	{
 		IRegionDAO dao = sqlSession.getMapper(IRegionDAO.class);
 		return dao.getRegionList();
+	}
+	
+	public String registerCourt(CourtDTO dto)
+	{
+		ICourtDAO courtDao = sqlSession.getMapper(ICourtDAO.class);
+		int result = courtDao.registerCourt(dto);
+		
+		if(result > 0)
+			return courtDao.getCourtByMapPosition(dto.getMapPositionX(), dto.getMapPositionY());
+		else 
+			return null;
+		
+	}
+	
+	public int registerCourtReview(CourtReviewDTO dto)
+	{
+		ICourtDAO courtDao = sqlSession.getMapper(ICourtDAO.class);
+		courtDao.addCourtReview(dto);
+		return Integer.parseInt(dto.getReturnValue());
+		
 	}
 	
 }

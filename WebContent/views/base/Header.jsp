@@ -56,7 +56,7 @@
                      <li><a href="#">내 크루 가기</a></li>
                      <li class="divider"></li>
                      <li><span>마이페이지</span></li>
-                     <li><a href="http://localhost:8090/SIST_Final/mypage">내 프로필</a></li>
+                     <li><a href="<%=cp %>/mypage">내 프로필</a></li>
                      <li><a href="#">회원정보 수정</a></li>
                      <li><a href="#">메시지함</a></li>
                      <li><a href="#">업적관리</a></li>

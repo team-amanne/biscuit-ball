@@ -150,7 +150,7 @@ public class CourtReviewDTO
 	public void setPollLikeOrDislike(String pollLikeOrDislike) {
 		this.pollLikeOrDislike = pollLikeOrDislike;
 	}
-	public String isReturnValue() {
+	public String getReturnValue() {
 		return returnValue;
 	}
 	public void setReturnValue(String returnValue) {

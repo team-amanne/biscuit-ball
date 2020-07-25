@@ -65,8 +65,10 @@ public class LoginModel
            userInfo.setUserCode(userDto.getUserCode());
            userInfo.setUserAcctCode(userDto.getUserAccountCode());
            userInfo.setUserNickname(userDto.getUserNickname());
+           userInfo.setCrewMemberCode(userDto.getUserCrewMemberCode());           
+           userInfo.setCrewCode(userDto.getUserCrewCode());
            userInfo.setUserStatus(userDto.getUserStatus());
-           
+
            return userInfo;
            
        }

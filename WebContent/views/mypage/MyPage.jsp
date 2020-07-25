@@ -123,13 +123,13 @@
 										<span>닉네임</span>
 									</div>
 									<div class="col-sm-4 col-xs-4 panel-body">
-										<span>아맞네</span>
+										<span>${user.userName}</span>
 									</div>
 									<div class="col-sm-2 col-xs-2 panel-heading">
-										<span>성별</span>
+										<span>성별</span>							
 									</div>
 									<div class="col-sm-4 col-xs-4 panel-body">
-										<span>남</span>
+										<span>${user.userGender}</span>
 									</div>
 								</div>
 							</div>
@@ -145,7 +145,7 @@
 										<span>거점지역</span>
 									</div>
 									<div class="col-sm-4 col-xs-4 panel-body">
-										<span>서울</span>
+										<span>${user.userCity}</span>
 									</div>
 								</div>
 							</div>
@@ -155,13 +155,13 @@
 										<span>키</span>
 									</div>
 									<div class="col-sm-4 col-xs-4 panel-body">
-										<span>180cm</span>
+										<span>${user.userHeight}cm</span>
 									</div>
 									<div class="col-sm-2 col-xs-2 panel-heading">
 										<span>내코트</span>
 									</div>
 									<div class="col-sm-4 col-xs-4 panel-body">
-										<span><a href="#"><i class="fas fa-map-marked-alt"></i></a> 동규네 코트</span>
+										<span><a href="#"><i class="fas fa-map-marked-alt"></i></a>${user.userCourtName}</span>
 									</div>
 								</div>
 							</div>
@@ -171,13 +171,13 @@
 										<span>포지션</span>
 									</div>
 									<div class="col-sm-4 col-xs-4 panel-body">
-										<span>CENTER</span>
+										<span>${user.userPosition}</span>
 									</div>
 									<div class="col-sm-2 col-xs-2 panel-heading">
-										<span>내크루</span>
+										<span>내 크루</span>
 									</div>
 									<div class="col-sm-4 col-xs-4 panel-body">
-										<span><a href="#"><i class="fas fa-users"></i></a> 길동이네 크루</span>
+										<span><a href="#"><i class="fas fa-users"></i></a>서울</span>
 									</div>
 								</div>
 							</div>
