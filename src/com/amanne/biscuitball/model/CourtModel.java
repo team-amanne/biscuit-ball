@@ -7,17 +7,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.amanne.biscuitball.mybatis.CourtDTO;
+import com.amanne.biscuitball.mybatis.CourtNameDTO;
 import com.amanne.biscuitball.mybatis.CourtReviewDTO;
 import com.amanne.biscuitball.mybatis.ICourtDAO;
 import com.amanne.biscuitball.mybatis.IRegionDAO;
 import com.amanne.biscuitball.mybatis.RegionDTO;
+import com.amanne.biscuitball.util.MyUtil;
 
 @Service
 public class CourtModel
 {
 	@Autowired
 	private SqlSession sqlSession;
-	
+	@Autowired
+	private MyUtil util;
 	
 	public CourtDTO getCourt(String courtCode, UserInfo info)
 	{
@@ -66,5 +69,26 @@ public class CourtModel
 	{
 		ICourtDAO courtDao = sqlSession.getMapper(ICourtDAO.class);
 		return courtDao.removeCourtReview(reviewCode);
+	}
+	
+	public int registerCourtName(CourtNameDTO dto)
+	{
+		ICourtDAO courtDao = sqlSession.getMapper(ICourtDAO.class);
+		return courtDao.addCourtName(dto);
+	}
+	
+	public String getCourtNameIndex(String courtCode, String url, int currentPage)
+	{
+		ICourtDAO courtDao = sqlSession.getMapper(ICourtDAO.class);
+		
+		int dataCount = courtDao.countCourtNames(courtCode);
+		int pageCount = util.getPageCount(5, dataCount);
+		return util.getBootstrapIndexList(currentPage, pageCount, url);
+	}
+	
+	public ArrayList<CourtNameDTO> getCourtNameList(String courtCode, String userAccountCode, int currentPage, String order)
+	{
+		ICourtDAO courtDao = sqlSession.getMapper(ICourtDAO.class);
+		return courtDao.getCourtNameList(courtCode, userAccountCode, currentPage * 5 - 4, currentPage * 5, order);
 	}
 }

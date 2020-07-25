@@ -138,13 +138,13 @@ public class CourtReviewDTO
 	public void setParkinglot(String parkinglot) {
 		this.parkinglot = parkinglot;
 	}
-	public String isPollOrNot() {
+	public String getPollOrNot() {
 		return pollOrNot;
 	}
 	public void setPollOrNot(String pollOrNot) {
 		this.pollOrNot = pollOrNot;
 	}
-	public String isPollLikeOrDislike() {
+	public String getPollLikeOrDislike() {
 		return pollLikeOrDislike;
 	}
 	public void setPollLikeOrDislike(String pollLikeOrDislike) {

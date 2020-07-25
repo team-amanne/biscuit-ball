@@ -370,8 +370,9 @@
 										</c:if>
 									</div>	
 									<div class="col-sm-2 col-xs-2">
-										<button type="button"
-											class="btn btn-default btn-submit btn-block">리뷰등록</button>
+										<a href="<%=cp %>/court/${court.courtCode}/review/register">
+											<button type="button" class="btn btn-default btn-submit btn-block">리뷰등록</button>
+										</a>
 									</div>
 								</div>
 								<div class="row">
@@ -383,7 +384,7 @@
 								</div>
 
 								<div class="row">
-									<div class="panel panel-default">
+									<div class="panel panel-default" id="reviewList">
 										<c:forEach var="review" items="${court.courtReviewList }">
 										<div class="panel panel-default col-sm-12 col-xs-12">
 											<div class="panel-body">
@@ -451,7 +452,7 @@
 										</div>
 										</c:forEach>
 										
-										<!-- 
+										<%-- 
 										<div class="panel panel-default col-sm-12 col-xs-12">
 											<div class="panel-body">
 												<div class="row">
@@ -497,11 +498,12 @@
 												</div>
 											</div>
 										</div>
-										 -->
+										 --%>
 										
 										<div class="row">
 											<div class="col-md-3"></div>
-											<div class="col-md-6 paging">
+											<div class="col-md-6 paging" id="pagination">
+												<%--
 												<ul class="pagination">
 													<!-- li태그의 클래스에 disabled를 넣으면 마우스를 위에 올렸을 때 클릭 금지 마크가 나오고 클릭도 되지 않는다.-->
 													<!-- disabled의 의미는 앞의 페이지가 존재하지 않다는 뜻이다. -->
@@ -517,6 +519,7 @@
 													<li><a href="#"> <span>»</span>
 													</a></li>
 												</ul>
+												 --%>
 											</div>
 											<div class="col-md-3"></div>
 										</div>
@@ -564,6 +567,21 @@
 	    	}
 	    });
 		
+		$.ajax({
+			type: "get",
+			dataType: "text",
+			url: "<%=cp %>/ajax/court/${court.courtCode }/reviewindex",
+			data: {page: 1},
+			success: function(data) {
+				$("#pagination").html(data);
+				$("li[data-page]").click(renderNewPage);
+			},
+			error: function(e) {
+				alert(e.responseText);
+				console.log(e);
+			}
+		});
+		
 		$('#btn-delreq').click(function() { 
 			var result = confirm('정말로 해당코트를 삭제요청하시겠습니까?'); 
 			if(result) { location.replace('CourtDeleteRequestCompleted.jsp'); } 
@@ -577,10 +595,123 @@
 		});
 		
 		$("#btnName").click(function () {
-			window.open("<%=cp %>/court/${court.courtCode }/name", "코트 > 코트 이름 목록"
-					, "top=10, left=10, width=760, height=600, status=no, menubar=no, toolbar=no, resizable=yes");
+			window.open("<%=cp %>/court/${court.courtCode }/name", "코트 > 코트 정도 > 코트 이름"
+					, "top=10, left=10, width=500, height=600, status=no, menubar=no, toolbar=no, resizable=no");
 		});
 	});
+	
+	function renderNewPage() {
+		var page = $(this).attr("data-page");
+		
+		$.ajax({
+			type: "get",
+			dataType: "json",
+			url: "<%=cp %>/ajax/court/${court.courtCode }/reviewlist",
+			data: {page: page},
+			success: function(data) {
+				var result = "";
+				for(var i=0; i<data.length; i++) {
+
+					result += '<div class="panel panel-default col-sm-12 col-xs-12">\n';
+					result += '	<div class="panel-body">\n';
+					result += '		<div class="row">\n';
+					result += '			<div class="col-sm-2 col-xs-2">\n';
+					result += '				<a href="#"><span>' + data[i].registrantNickname + '</span></a>\n';
+					result += '			</div>\n';
+					result += '			<div class="col-sm-4 col-xs-2"></div>\n';
+					result += '			<div class="col-sm-3 col-xs-6">\n';
+					result += '				<span>일시 [' + data[i].courtReviewRegisteredDate + ']</span>\n';
+					result += '			</div>\n';
+					
+					result += '			<div class="col-sm-1 col-xs-2">\n';
+					result += '				<button type="button" class="btn btn-default btn">\n';
+					result += '					<span class="far fa-thumbs-up" style="font-size:18px;"></span>\n'; 
+					result += '					<span>' + data[i].likes + '</span>\n';
+					result += '				</button>\n';
+					result += '			</div>\n';
+					result += '			<div class="col-sm-1 col-xs-2">\n';
+					result += '				<button type="button" class="btn btn-default btn">\n';
+					result += '					<span class="far fa-thumbs-down" style="font-size:18px;"></span>\n'; 
+					result += '					<span>' + data[i].dislikes + '</span>\n';
+					result += '				</button>\n';
+					result += '			</div>\n';
+					result += '			<div class="col-sm-1 col-xs-2">\n';
+					
+					if("${sessionScope.userInfo.userAcctCode }" != data[i].registrantAccountCode)
+						result += '			<button type="button" class="btn btn-default btn-danger">신고</button>\n';
+					
+					result += '			</div>\n';
+					result += '		</div>\n';
+					result += '		<div class="row">\n';
+					result += '			<div class="col-sm-3 col-xs-5">\n';
+					result += '				<span>만족도</span>\n';
+					
+					for(var j=1; j<=data[i].courtReviewSatisfaction; j++)
+						result += '			<i class="fas fa-star"></i>\n';
+					if(data[i].courtReviewSatisfaction != parseInt(data[i].courtReviewSatisfaction))
+						result += '				<i class="fas fa-star-half"></i>\n';
+					
+					result += '			</div>\n';
+					result += '			<div class="col-sm-3 col-xs-5">\n';
+					result += '				<span>시설평점</span>\n';
+					
+					for(var j=1; j<=data[i].courtReviewManageScore; j++)
+						result += '			<i class="fas fa-star"></i>\n';
+					if(data[i].courtReviewManageScore != parseInt(data[i].courtReviewManageScore))
+						result += '				<i class="fas fa-star-half"></i>\n';
+					
+					result += '			</div>\n';
+					result += '			<div class="col-sm-6 sol-xs-2">\n';
+					
+					if("${sessionScope.userInfo.userAcctCode }" == data[i].registrantAccountCode) {						
+						result += '				<span id="btnReviewDelete" role="button" data-reviewcode="';
+						result += data[i].courtReviewCode;
+						result += '">\n';
+						result += '					<i class="fas fa-trash-alt" style="font-size: 20px;"></i>\n';
+						result += '				</span>\n';
+					}
+					
+					result += '			</div>\n';
+					result += '		</div>\n';
+					result += '	</div>\n';
+					result += '	<div class="panel panel-default rev-cont">\n';
+					result += '		<div class="panel-body">\n';
+					result += '			<span>' + data[i].courtReviewContent + '</span>\n';
+					result += '		</div>\n';
+					result += '	</div>\n';
+					result += '</div>\n';
+				}
+				
+				
+				result += '<div class="row">\n';
+				result += '<div class="col-md-3"></div>\n';
+				result += '<div class="col-md-6 paging" id="pagination"></div>\n';
+				result += '<div class="col-md-3"></div>\n';
+				result += '</div>\n';
+				
+				$("#reviewList").html(result);
+				
+				$.ajax({
+					type: "get",
+					dataType: "text",
+					url: "<%=cp %>/ajax/court/${court.courtCode }/reviewindex",
+					data: {page: page},
+					success: function(data) {
+						$("#pagination").html(data);
+						$("li[data-page]").click(renderNewPage);
+					},
+					error: function(e) {
+						alert(e.responseText);
+						console.log(e);
+					}
+				});
+			},
+			error: function(e) {
+				alert(e.responseText);
+				console.log(e);
+			}
+		});
+	}
 </script>
 </body>
 </html>
