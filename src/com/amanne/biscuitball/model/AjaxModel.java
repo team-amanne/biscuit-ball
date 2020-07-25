@@ -184,4 +184,58 @@ public class AjaxModel
 		
 		return arr.toString();
 	}
+	
+	public String getCourtCodeByPosition(String posx, String posy)
+	{
+		ICourtDAO dao = sqlSession.getMapper(ICourtDAO.class);
+		
+		String courtCode = dao.getCourtByMapPosition(posx, posy);
+		CourtDTO dto = dao.getCourt(courtCode);
+		
+		JSONObject obj = null;
+		
+		obj = new JSONObject();
+		
+		obj.put("courtCode", dto.getCourtCode());
+		obj.put("courtRegisteredDate", dto.getCourtRegisteredDate());
+		obj.put("cityCode", dto.getCityCode());
+		obj.put("cityName", dto.getCityName());
+		obj.put("mapPosition", dto.getMapPosition());
+		obj.put("mapPositionX", dto.getMapPositionX());
+		obj.put("mapPositionY", dto.getMapPositionY());
+		obj.put("registrantAccountCode", dto.getRegistrantAccountCode());
+		obj.put("registrantNickname", dto.getRegistrantNickname());
+		obj.put("myCourtCount", dto.getMyCourtCount());
+		obj.put("courtImg1", dto.getCourtImg1());
+		obj.put("courtImg2", dto.getCourtImg2());
+		obj.put("courtImg3", dto.getCourtImg3());
+		obj.put("courtNameCode", dto.getCourtNameCode());
+		obj.put("courtName", dto.getCourtName());
+		obj.put("courtNamePollRate", dto.getCourtNamePollRate());
+		obj.put("avgCourtManageScore", dto.getAvgCourtManageScore());
+		obj.put("avgCourtSatisfaction", dto.getAvgCourtSatisfaction());
+		obj.put("courtRating", dto.getCourtRating());
+		obj.put("courtCapacityCode", dto.getCourtCapacityCode());
+		obj.put("minCourtCapacity", dto.getMinCourtCapacity());
+		obj.put("maxCourtCapacity", dto.getMaxCourtCapacity());
+		obj.put("toilet", dto.getToilet());
+		obj.put("toiletConfidence", dto.getToiletConfidence());
+		obj.put("shower", dto.getShower());
+		obj.put("showerConfidence", dto.getShowerConfidence());
+		obj.put("parkinglot", dto.getParkinglot());
+		obj.put("parkinglotConfidence", dto.getParkinglotConfidence());
+		obj.put("enrollYesCount", dto.getEnrollYesCount());
+		obj.put("enrollNoCount", dto.getEnrollNoCount());
+		obj.put("delRequestCode", dto.getDelRequestCode());
+		obj.put("delRequestDate", dto.getDelRequestDate());
+		obj.put("delApproveDate", dto.getDelApproveDate());
+		obj.put("delRequestPollYesCount", dto.getDelRequestPollYesCount());
+		obj.put("delRequestPollNoCount", dto.getDelRequestPollNoCount());
+		obj.put("delAdminCode", dto.getDelAdminCode());
+		obj.put("adminDelDate", dto.getAdminDelDate());
+		obj.put("courtStatus", dto.getCourtStatus());
+		obj.put("blindStatus", dto.getBlindStatus());
+		
+		return obj.toString();
+	}
 }

@@ -275,31 +275,34 @@ String cp = request.getContextPath();
 									<div class="panel-heading panel-head">지도 선택</div>
 									<div class="panel-body">
 										<div class="col-md-8 map-container" id="map"></div>
-										<div class="col-md-4">
+										
+										<!-- 마커 클릭 시 등장하는 코트 정보  -->
+										<div class="col-md-4" id="courtInfo">
 											<h4>코트 정보</h4>
 											<ul class="list-group">
 												<li class="list-group-item">
 													<div class="col-md-7 courtInfo">
 														<span class="">코트이름</span>
 													</div>
-													<p>아맞네</p>
+													<p id="courtName"></p>
 												</li>
 												<li class="list-group-item">
 													<div class="col-md-7 courtInfo">
 														<span class="">적정인원</span>
 													</div>
-													<p>4~8</p>
+													<span id="minCourtCapacity">4</span>~<span id="maxCourtCapacity">8</span>
 												</li>
 												<li class="list-group-item">
 													<div class="col-md-7 courtInfo">
 														<span class="">코트등급</span>
 													</div>
-													<p>B</p>
+													<p id="courtRating">B</p>
 												</li>
 												<li class="list-group-item satisfy">
 													<div class="col-md-12 courtInfo">
 														<span class="">만족도</span>
-													</div> <span class="star-score">★★★☆☆</span>
+													</div> <span class="star-score" id="avgCourtSatisfaction">
+													</span>
 												</li>
 											</ul>
 											<h4>코트 시설</h4>
@@ -307,17 +310,23 @@ String cp = request.getContextPath();
 												<li class="list-group-item">
 													<div class="col-md-7 courtInfo">
 														<span class="">화장실</span>
-													</div> <span class="glyphicon glyphicon-ok-sign"></span>
+													</div> 
+														<span class="" id="toilet"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+														<span class="" id="toiletConfidence"></span>
 												</li>
 												<li class="list-group-item">
 													<div class="col-md-7 courtInfo">
 														<span class="">샤워실</span>
-													</div> <span class="glyphicon glyphicon-remove-sign"></span>
+													</div>
+													<span class="" id="shower"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+														<span class="" id="showerConfidence"></span>
 												</li>
 												<li class="list-group-item">
 													<div class="col-md-7 courtInfo">
-														<span class="">주차장</span>
-													</div> <span class="glyphicon glyphicon-remove-sign"></span>
+														<span class="">주차장</span>&nbsp;&nbsp;&nbsp;&nbsp;
+													</div> 
+													<span class="" id="parkinglot"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+														<span class="" id="parkinglotConfidence"></span>
 												</li>
 											</ul>
 
@@ -643,6 +652,8 @@ String cp = request.getContextPath();
 
 $(function()
 {
+	markers = [];
+	
 	// 카카오 맵 사용
 	map = new kakao.maps.Map(document.getElementById("map"), {
 		center: new kakao.maps.LatLng(37.5668260054796, 126.978656785931),
@@ -654,6 +665,7 @@ $(function()
 	
 	$("#mapSearch").on("click", function() 
 	{
+		// 시군구 주소 좌표로 변환해 주는 에이젝스
 		$.ajax({
 	    	type:"get",
 	    	dataType: "json",
@@ -669,6 +681,7 @@ $(function()
 	    		map.setCenter(new kakao.maps.LatLng(lat, lng));
 	    		/* marker.setPosition(map.getCenter()); */
 	    	
+	    		// 특정 시군구 코트 리스트 불러오기 + 마커 찍는 에이젝스
 	    		$.ajax({
 		            type: "get",
 		            dataType: "json",
@@ -697,6 +710,8 @@ $(function()
 	            		        map: map, // 마커를 표시할 지도
 	            		        position: positions[i].latlng // 마커의 위치
 	            		    });
+	            		    
+	            		    markers.push(marker);
 
 	            		    // 마커에 표시할 인포윈도우를 생성합니다 
 	            		    var infowindow = new kakao.maps.InfoWindow({
@@ -709,6 +724,59 @@ $(function()
 	            		    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
 	            		    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
 	            		}
+	            		
+	            		// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+	            		function makeOverListener(map, marker, infowindow) 
+	            		{
+	            		    return function() {
+	            		        infowindow.open(map, marker);
+	            		    };
+	            		}
+
+	            		// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+	            		function makeOutListener(infowindow) 
+	            		{
+	            		    return function() 
+	            		    {
+	            		        infowindow.close();
+	            		    };
+	            		}
+	            		
+	            		// 마커에 클릭이벤트를 등록합니다
+	            		kakao.maps.event.addListener(marker, 'click', function() 
+	            		{
+	            		      var courtPositionX = this.getPosition().getLng();
+	            		      var courtPositionY = this.getPosition().getLat();
+	            		      
+	            		      $.ajax
+	            		      ({
+	          		            type: "get",
+	          		            dataType: "json",
+	          		            url: "<%=cp%>/ajax/court",
+	          		            data: {mapPositionX: courtPositionX, mapPositionY: courtPositionY},
+	          		            success: function(data)
+	          		            {
+	          		            	
+	          		            	courtInfo = new Array();
+	          		            	
+	          		            	/* 코트 정보 */
+	          		            	/* 코트이름 */
+	          		            	$("#courtName").text(data.courtName);
+	          		            	/* 적정인원 최소 */
+	          		            	$("#minCourtCapacity").text(data.courtName);
+	          		            	/* 적정인원 최대 */
+	          		            	$("#maxCourtCapacity").text(data.courtName);
+	          		            	/* 코트 관리 등급 */
+	          		            	$("#courtRating").text(data.courtName);
+	          		            	/* 만족도 */
+	          		            	$("#star-score").text(data.courtName);
+	          		            	$("#courtName").text(data.courtName);
+	          		            	$("#courtName").text(data.courtName);
+	          		            	
+	          		            }
+	            		      });
+	            		      
+	            		});
 
 	            		
 		            },
@@ -726,22 +794,8 @@ $(function()
 		
 	});
 	
-	// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
-	function makeOverListener(map, marker, infowindow) 
-	{
-	    return function() {
-	        infowindow.open(map, marker);
-	    };
-	}
-
-	// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
-	function makeOutListener(infowindow) 
-	{
-	    return function() 
-	    {
-	        infowindow.close();
-	    };
-	}
+	courtInfo = [];
+	
 });
 
 
