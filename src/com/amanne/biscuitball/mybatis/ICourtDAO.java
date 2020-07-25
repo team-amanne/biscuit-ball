@@ -47,4 +47,6 @@ public interface ICourtDAO
 	public ArrayList<CourtDTO> getCourtListByCity(@Param("cityCode") String cityCode);	// 특정 시군구 안의 코트 조회
 	
 	public ArrayList<CourtDTO> getCourtListByRegion(@Param("regionCode") String regionCode);	// 특정 광역시도 안의 코트 조회
+	
+	public String getCourtByMapPosition(@Param("posx") String posx, @Param("posy") String posy);	// 좌표로 코드 찾기
 }

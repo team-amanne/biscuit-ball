@@ -523,4 +523,11 @@
 		WHERE R.REGION_CODE = #{regionCode}
 	]]>
 	</select>
+	
+	<!-- public String getCourtByMapPosition(@Param("posx") String posx, @Param("posy") String posy);	// 좌표로 코드 찾기 -->
+	<select id="getCourtByMapPosition" resultType="java.lang.String">
+		SELECT COURT_REG_CODE
+		FROM TBL_COURT_REGISTRATION
+		WHERE COURT_MAP_POSITION = #{posx} || ',' || #{posy}
+	</select>
 </mapper>
