@@ -332,68 +332,80 @@
 		
 		
 		
-<!-- public List<MeetingDTO> getMeetingListByCityDate(String cityCode, String date);	// 날짜, 지역에 따른 모임 리스트 조회 -->
+<!-- public List<MeetingDTO> getMeetingListByCityDate(String cityCode, String date
+	, @Param("start") int start, @Param("end") int end);	// 날짜, 지역에 따른 모임 리스트 조회 -->
 
 		<select id="getMeetingListByCityDate" resultType="com.amanne.biscuitball.mybatis.MeetingDTO">
 		<![CDATA[
 			SELECT MT.MEET_CODE as meetingCode
             , MT.MEET_SUBJECT as meetingSubject
             , MT.MEET_PEOPLE_NUMBER as meetingPeopleNumber
+            ,  (
+            	SELECT COUNT(*)
+            	FROM TBL_MEETING_JOIN
+            	WHERE MEET_CODE = MT.MEET_CODE
+              ) as nowPeopleNumber
             , MT.MEET_OP_DATE as meetingOpenDate
             , MT.MEET_DATE as meetingDate
             , MT.MEET_END_DATE as meetingEndDate
             , MT.MEET_CLOSE_DATE as meetingCloseDate
             , MT.MEET_NOTICE as meetingNotice
             , MT.MEET_TYPE_CODE as meetingTypeCode
-            , MT.MEET_TYPE_NAME as meetingTypeName
+            , MT.MEET_QUICK_PLAY_CODE as
             , MT.QUICK_PLAY as quickPlayOrNot
+            , MT.COURT_REG_CODE as courtRegistrationCode
             , MT.MIN_TIER as minTierCode
             , MT.MAX_TIER as maxTierCode
-            , CONFIRM_OR_NOT as confirmOrNot
-            , (
-            	SELECT COUNT(*)
-            	FROM TBL_MEETING_JOIN
-            	WHERE MEET_CODE = MT.MEET_CODE
-              ) as nowPeopleNumber
-            , (
-            	SELECT COURT_REG_CODE
-				FROM VIEW_COURT_CITYCODE
-				WHERE CITY_CODE = #{cityCode}
-              ) as courtRegistrationCode
-			FROM TBL_MEETING MT
-			WHERE MEET_DATE > SYSDATE
-            AND confirmOrNot IS 'NO'
-        ]]>
+            , MT.CONFIRM_OR_NOT as
+            ,(
+            	SELECT USER_NICKNAME
+				FROM VIEW_MEETING_JOIN
+				WHERE CAPTAIN_OR_NOT = 'YES'
+				AND MEET_CODE = MT.MEET_CODE
+             ) as captainName
+			FROM VIEW_MEETING MT
+			]]>
         <if test="date != null">
         <![CDATA[
-            AND MEET_DATE = ${date}
+            WHERE MEET_DATE > TO_DATE(${meetingDate}, 'YYYY-MM-DD HH24:MM')
         ]]>
         </if>
-        WHERE RNUM <![CDATA[>]]>= #{start}  AND  RNUM  <![CDATA[<]]>= #{end}
+            AND confirmOrNot IS 'NO'
+            AND courtRegistrationCode = #{courtRegistrationCode}
+        <if test="meetingType != null">
+        <![CDATA[
+            AND MEET_TYPE_CODE = #{meetingTypeCode}
+        ]]>
+        </if>
+        	AND RNUM <![CDATA[>]]>= #{start}  AND  RNUM  <![CDATA[<]]>= #{end}
         <![CDATA[
             ORDER BY (meetingPeopleNumber - nowPeopleNumber), meetingDate
-  
 		]]>
+		
 		</select>
 		
 <!-- public List<MeetingDTO> countMeetingListByCityDate(String cityCode, String date);	// 날짜, 지역에 따른 모임 리스트 카운트 -->
 
 	<select id="countMeetingListByCityDate" resultType="java.lang.Integer">
-		<![CDATA[
+	<![CDATA[
 			SELECT COUNT(*)
-			FROM TBL_MEETING MT
-			WHERE MEET_DATE > SYSDATE
-            AND confirmOrNot IS 'NO'
-        ]]>
+			FROM VIEW_MEETING MT
+			]]>
         <if test="date != null">
         <![CDATA[
-            AND MEET_DATE = ${date}
+            WHERE MEET_DATE > TO_DATE(${meetingDate}, 'YYYY-MM-DD HH24:MM')
         ]]>
         </if>
-        WHERE RNUM <![CDATA[>]]>= #{start}  AND  RNUM  <![CDATA[<]]>= #{end}
+            AND confirmOrNot IS 'NO'
+            AND courtRegistrationCode = #{courtRegistrationCode}
+        <if test="meetingType != null">
+        <![CDATA[
+            AND MEET_TYPE_CODE = #{meetingTypeCode}
+        ]]>
+        </if>
+        	AND RNUM <![CDATA[>]]>= #{start}  AND  RNUM  <![CDATA[<]]>= #{end}
         <![CDATA[
             ORDER BY (meetingPeopleNumber - nowPeopleNumber), meetingDate
-  
 		]]>
 		</select>
 

@@ -1,7 +1,6 @@
 package com.amanne.biscuitball.controller;
 
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -127,5 +126,16 @@ public class AjaxController
 	{
 		model.addAttribute("result", ajax.getCourtReviewIndex(courtCode, page != null ? Integer.parseInt(page) : 1));
 		return "/ajax/Check";
+	}
+
+	@RequestMapping("/togethermeetinglist")
+	public String togetherMeetingList(Model model, String courtRegistrationCode, String meetingDate, @RequestParam("meetingTypeCode") String meetingTypeCode, @RequestParam("start") int start, @RequestParam("end") int end)
+	{
+		String view = null;
+		
+		model.addAttribute("result", ajax.getMeetingListByTogetherPlay(courtRegistrationCode, meetingDate, meetingTypeCode, start, end));
+		
+		view = "/ajax/Check";
+		return view;
 	}
 }
