@@ -5,14 +5,16 @@
 	request.setCharacterEncoding("UTF-8");
 String cp = request.getContextPath();
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="css/main.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="<%=cp %>/css/default.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>
 <style type="text/css">
 .form-head {
 	font-weight: bold;
@@ -67,9 +69,12 @@ select
 	padding-top: 5px;	
 }
 
-
-
 </style>
+<script type="text/javascript">
+
+
+
+</script>
 </head>
 <body>
 
@@ -112,7 +117,8 @@ select
 										<div class="panel-body">
 											<div class="col-md-4">
 												<select name="" id="" class="form-control">
-													<option value="">광역시·도</option>
+													<option value=""> ${param.city_select }</option>
+													
 												</select>
 											</div>
 											<div class="col-md-4">

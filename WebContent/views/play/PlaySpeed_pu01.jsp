@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 String cp = request.getContextPath();
@@ -11,6 +12,7 @@ String cp = request.getContextPath();
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/default.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>
 <style type="text/css">
 .form-head {
 	font-weight: bold;
