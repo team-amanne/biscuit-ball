@@ -29,8 +29,6 @@ public class MypageModel
 		// 작업준비
 		UserDTO user = dao.getUser(userInfo.getUserAcctCode());
 
-	
-<<<<<<< HEAD
 		System.out.println(user.getUserEmail());
 		System.out.println(user.getUserPassword());
 		System.out.println(user.getUserName());
@@ -43,10 +41,7 @@ public class MypageModel
 		System.out.println(user.getUserTel());
 		System.out.println(user.getUserPosition());
 		System.out.println(user.getSnsSync());
-	
-		
-=======
->>>>>>> branch 'master' of https://github.com/team-amanne/biscuit-ball.git
+
 		modelAndView.addObject("user", user);
 		modelAndView.setViewName("redirect:/mypage/mypage");		
 	
