@@ -1,6 +1,9 @@
 package com.amanne.biscuitball.mybatis;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
 
 public interface IMeetingDAO
 {
@@ -63,8 +66,8 @@ public interface IMeetingDAO
 	public List<MeetingMemberDTO> getMeetingMemberList(String meetingCode); // 특정모임 참가자 조회
 	
 	
-	public List<MeetingDTO> getMeetingListByCityDate(String cityCode, String date);	// 날짜, 지역에 따른 모임 리스트 조회
+	public ArrayList<MeetingDTO> getMeetingListByCityDate(String courtRegistrationCode, String meetingDate, @Param("meetingTypeCode") String meetingTypeCode, @Param("start") int start, @Param("end") int end);	// 날짜, 지역, 모임 타입에 따른 모임 리스트 조회
 	
-	public List<MeetingDTO> countMeetingListByCityDate(String cityCode, String date);	// 날짜, 지역에 따른 모임 리스트 카운트
+	public int countMeetingListByCityDate(String courtRegistrationCode, String meetingDate, @Param("meetingTypeCode") String meetingTypeCode, @Param("start") int start, @Param("end") int end);	// 날짜, 지역에 따른 모임 리스트 카운트
 	
 }

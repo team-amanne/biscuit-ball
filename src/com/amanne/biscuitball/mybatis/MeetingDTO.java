@@ -25,11 +25,19 @@ public class MeetingDTO
 	private String confirmOrNot; 			// 모임확정여부
 	private String blindOrNot; 				// 블라인드여부
 	private String nowPeopleNumber;			// 현재 참가자 수
+	private String captainName;				// 주장 닉네임
 	private String returnValue;
 	
 	
 	
-	
+	public String getCaptainName()
+	{
+		return captainName;
+	}
+	public void setCaptainName(String captainName)
+	{
+		this.captainName = captainName;
+	}
 	public String getNowPeopleNumber()
 	{
 		return nowPeopleNumber;

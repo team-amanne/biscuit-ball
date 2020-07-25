@@ -10,8 +10,10 @@ import com.amanne.biscuitball.mybatis.CityDTO;
 import com.amanne.biscuitball.mybatis.CourtDTO;
 import com.amanne.biscuitball.mybatis.ICourtDAO;
 import com.amanne.biscuitball.mybatis.ICrewDAO;
+import com.amanne.biscuitball.mybatis.IMeetingDAO;
 import com.amanne.biscuitball.mybatis.IRegionDAO;
 import com.amanne.biscuitball.mybatis.IUserDAO;
+import com.amanne.biscuitball.mybatis.MeetingDTO;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -185,6 +187,7 @@ public class AjaxModel
 		return arr.toString();
 	}
 	
+	// 좌표로 코트 코드 가져오는 메소드
 	public String getCourtCodeByPosition(String posx, String posy)
 	{
 		ICourtDAO dao = sqlSession.getMapper(ICourtDAO.class);
@@ -192,7 +195,6 @@ public class AjaxModel
 		
 		String courtCode = dao.getCourtByMapPosition(posx, posy);
 		
-		System.out.println(courtCode);
 		CourtDTO dto = dao.getCourt(courtCode);
 		
 		JSONObject obj = null;
@@ -240,5 +242,43 @@ public class AjaxModel
 		obj.put("blindStatus", dto.getBlindStatus());
 		
 		return obj.toString();
+	}
+	
+	// 함께농구 모임 리스트 반환(모임 일시, 모임 타입, 코트)
+	public String getMeetingListByTogetherPlay( String courtRegistrationCode, String meetingDate, String meetingTypeCode,  int start,  int end)
+	{
+		IMeetingDAO dao = sqlSession.getMapper(IMeetingDAO.class);
+		ArrayList<MeetingDTO> list = dao.getMeetingListByCityDate(courtRegistrationCode, meetingDate, meetingTypeCode, start, end);
+		JSONArray arr = new JSONArray();
+		JSONObject obj = null;
+		
+		for(MeetingDTO dto : list)
+		{
+			obj = new JSONObject();
+			
+			obj.put("meetingCode",dto.getMeetingCode() );
+			obj.put("meetingSubject", dto.getMeetingSubject() );
+			obj.put("meetingPeopleNumber", dto.getMeetingPeopleNumber() );
+			obj.put("meetingOpenDate", dto.getMeetingOpenDate() );
+			obj.put("meetingDate", dto.getMeetingDate() );
+			obj.put("meetingCloseDate", dto.getMeetingCloseDate() );
+			obj.put("meetingEndDate", dto.getMeetingEndDate() );
+			obj.put("meetingNotice", dto.getMeetingNotice() );
+			obj.put("meetingTypeCode",dto.getMeetingTypeCode() );
+			obj.put("meetingTypeName", dto.getMeetingTypeName() );
+			obj.put("quickPlayOrNot", dto.getQuickPlayOrNot() );
+			obj.put("courtRegistrationCode",dto.getCourtRegistrationCode() );
+			obj.put("minTierCode", dto.getMinTierCode() );
+			obj.put("maxTierCode", dto.getMaxTierCode() );
+			obj.put("confirmOrNot",dto.getConfirmOrNot() );
+			obj.put("blindOrNot", dto.getBlindOrNot());
+			obj.put("nowPeopleNumber",dto.getNowPeopleNumber() );
+			obj.put("captainName",dto.getCaptainName() );
+			obj.put("returnValue",dto.getReturnValue() );
+			
+			arr.add(obj);
+		}
+		
+		return arr.toString();
 	}
 }

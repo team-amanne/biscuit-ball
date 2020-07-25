@@ -1,5 +1,6 @@
 package com.amanne.biscuitball.controller;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -103,6 +104,17 @@ public class AjaxController
 		model.addAttribute("result", ajax.getCourtCodeByPosition(mapPositionX, mapPositionY)); 
 		
 		view = "/ajax/Check";
+		return view;
+	}
+	
+	@RequestMapping("/togethermeetinglist")
+	public String togetherMeetingList(Model model, String courtRegistrationCode, String meetingDate, @Param("meetingTypeCode") String meetingTypeCode, @Param("start") int start, @Param("end") int end)
+	{
+		String view = null;
+		
+		model.addAttribute("result", ajax.getMeetingListByTogetherPlay(courtRegistrationCode, meetingDate, meetingTypeCode, start, end));
+		
+		view = "ajax/Check";
 		return view;
 	}
 }
