@@ -36,7 +36,9 @@ public class CourtController
 	private HttpSession session;
 	
 	@RequestMapping("/{courtCode}")
-	public String court(Model model, @PathVariable("courtCode") String courtCode, @RequestParam(required=false) String registerResult)
+	public String court(Model model, @PathVariable("courtCode") String courtCode
+						, @RequestParam(required=false) String registerResult
+						, @RequestParam(required=false) String removeResult)
 	{
 		String view = null;
 		
@@ -44,74 +46,30 @@ public class CourtController
 		
 		court = courtModel.getCourt(courtCode, (UserInfo)session.getAttribute("userInfo"));
 		
+		if(court.getBlindStatus().equals("YES"))
+		{
+			view = "/court/CourtDelComplete";
+			return view;
+		}
+		
 		model.addAttribute("court", court);
-		if(registerResult != null) {
+		
+		if(registerResult != null) 
+		{
 			if(registerResult.equals("success"))
 				model.addAttribute("alert", "리뷰를 등록하였습니다.");
 			else if(registerResult.equals("fail"))
 				model.addAttribute("alert", "리뷰 등록에 실패하였습니다.");
 		}
+		else if(removeResult != null)
+		{
+			if(removeResult.equals("success"))
+				model.addAttribute("alert", "리뷰를 삭제하였습니다.");
+			else if(removeResult.equals("fail"))
+				model.addAttribute("alert", "리뷰 삭제에 실패하였습니다.");
+		}
 		
 		view = "/court/CourtPage";
-		return view;
-	}
-
-	@RequestMapping("/{courtCode}/delete")
-	public String courtDelete(Model model, @PathVariable("courtCode") String courtCode )
-	{
-		String view = null;
-		
-		
-		return view;
-	}
-	
-	@RequestMapping("/{courtCode}/deleteok")
-	public String courtDeleteOk(Model model, @PathVariable("courtCode") String courtCode )
-	{
-		String view = null;
-		
-		
-		return view;
-	}
-	
-	@RequestMapping("/{courtCode}/name")
-	public String courtName(Model model, @PathVariable("courtCode") String courtCode )
-	{
-		String view = null;
-		
-		
-		return view;
-	}
-	
-	@RequestMapping("/{courtCode}/review/register")
-	public String courtReviewRegisterForm(Model model, @PathVariable("courtCode") String courtCode )
-	{
-		String view = null;
-		
-		CourtDTO court = null;
-		
-		court = courtModel.getCourt(courtCode, (UserInfo)session.getAttribute("userInfo"));
-		
-		model.addAttribute("court", court);
-		
-		view = "/court/CourtReviewRegistration";
-		
-		return view;
-	}
-	
-	@RequestMapping("/{courtCode}/review/registerdo")
-	public String courtReviewRegister(Model model, @PathVariable("courtCode") String courtCode , CourtReviewDTO dto)
-	{
-		String view = "redirect:/court/" + courtCode;
-		UserInfo info = (UserInfo)session.getAttribute("userInfo");
-		CourtDTO court = null;
-		
-		dto.setRegistrantAccountCode(info.getUserAcctCode());
-		if (courtModel.registerCourtReview(dto) > 0)
-			view += "?registerResult=success";
-		else
-			view += "?registerResult=fail";
-		
 		return view;
 	}
 	
@@ -178,8 +136,6 @@ public class CourtController
 		
 		return view;
 	}
-	
-	
 
 	@RequestMapping("/registerok")
 	public String courtRegisterSuccess(Model model, @RequestParam(required=false) String courtCode)
@@ -190,6 +146,50 @@ public class CourtController
 		model.addAttribute("court", courtModel.getCourt(courtCode, info));
 		
 		view = "/court/CourtRegistrationComplete";
+		
+		return view;
+	}
+	
+	@RequestMapping("/{courtCode}/review/register")
+	public String courtReviewRegisterForm(Model model, @PathVariable("courtCode") String courtCode )
+	{
+		String view = null;
+		
+		CourtDTO court = null;
+		
+		court = courtModel.getCourt(courtCode, (UserInfo)session.getAttribute("userInfo"));
+		
+		model.addAttribute("court", court);
+		
+		view = "/court/CourtReviewRegistration";
+		
+		return view;
+	}
+	
+	@RequestMapping("/{courtCode}/review/registerdo")
+	public String courtReviewRegister(Model model, @PathVariable("courtCode") String courtCode , CourtReviewDTO dto)
+	{
+		String view = "redirect:/court/" + courtCode;
+		UserInfo info = (UserInfo)session.getAttribute("userInfo");
+		
+		dto.setRegistrantAccountCode(info.getUserAcctCode());
+		if (courtModel.registerCourtReview(dto) > 0)
+			view += "?registerResult=success";
+		else
+			view += "?registerResult=fail";
+		
+		return view;
+	}
+	
+	@RequestMapping("/{courtCode}/review/{reviewCode}/delete")
+	public String courtReviewDelete(Model model,@PathVariable("courtCode") String courtCode, @PathVariable("reviewCode") String reviewCode)
+	{
+		String view = "redirect:/court/" + courtCode;
+		
+		if(courtModel.removeCourtReview(reviewCode) > 0)
+			view += "?removeResult=success";
+		else
+			view += "?removeResult=fail";
 		
 		return view;
 	}

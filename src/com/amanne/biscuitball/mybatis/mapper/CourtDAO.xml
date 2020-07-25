@@ -532,4 +532,21 @@
 		FROM TBL_COURT_REGISTRATION
 		WHERE COURT_MAP_POSITION = #{posx} || ',' || #{posy}
 	</select>
+	
+	<!-- public int removeCourtReview(String courtReviewCode);	// 코트 리뷰 삭제 처리 -->
+	<update id="removeCourtReview">
+		UPDATE TBL_COURT_REVIEW
+		SET COURT_REVIEW_DEL_DATE=SYSDATE
+		WHERE COURT_REVIEW_CODE = #{courtReviewCode}
+	</update>
+	
+	<!-- public int checkCourtReviewWritten(String courtCode, String userAccountCode);	// 해당 코트에 코트 리뷰를 작성한 적 있는지 확인 -->
+	<select id="checkCourtReviewWritten" resultType="java.lang.Integer">
+		SELECT COUNT(*) 
+		FROM TBL_COURT_REVIEW
+		WHERE COURT_REG_CODE = #{courtCode} 
+		  AND REGISTRANT_ACCT_CODE = #{userAccountCode}
+		  AND COURT_REVIEW_DEL_DATE IS NULL
+	</select>
+	
 </mapper>
