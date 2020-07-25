@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	request.setCharacterEncoding("utf-8");
-String cp = request.getContextPath();
+	String cp = request.getContextPath();
 %>
 
 <!-- 공통 헤더 -->
@@ -26,16 +26,40 @@ String cp = request.getContextPath();
 				</form>
 				<ul class="nav navbar-nav navbar-center">
 					<li ${param.active == "play" ? "class='active'" : "" }>
-						<a ${ param.active == "play" ? "" : "href='<%=cp %>/play/party'" }>농구하기</a>
+						<a
+						<c:if test='${param.active != "play" }'>
+						href = <c:url value="/play/party"></c:url>
+						</c:if>
+						>
+						농구하기
+						</a>
 					</li>
 					<li ${param.active == "court" ? "class='active'" : "" }>
-						<a ${ param.active == "court" ? "" : "href='#'" }>코트정보</a>
+						<a
+						<c:if test='${param.active != "court" }'>
+						href = <c:url value=""></c:url>
+						</c:if>
+						>
+						코트 정보
+						</a>
 					</li>
 					<li ${param.active == "crew" ? "class='active'" : "" }>
-						<a ${ param.active == "crew" ? "" : "href='#'" }>크루</a>
+						<a
+						<c:if test='${param.active != "crew" }'>
+						href = <c:url value=""></c:url>
+						</c:if>
+						>
+						크루
+						</a>
 					</li>
 					<li ${param.active == "battle" ? "class='active'" : "" }>
-						<a ${ param.active == "battle" ? "" : "href='#'" }>대전</a>
+						<a
+						<c:if test='${param.active != "battle" }'>
+						href = <c:url value=""></c:url>
+						</c:if>
+						>
+						대전
+						</a>
 					</li>
 				</ul>
 
