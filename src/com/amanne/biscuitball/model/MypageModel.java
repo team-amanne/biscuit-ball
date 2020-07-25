@@ -25,22 +25,14 @@ public class MypageModel
 		
 		// 작업객체생성
 		IUserDAO dao = sqlSession.getMapper(IUserDAO.class);
-	
-		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-		System.out.println(userInfo.getUserAcctCode() + "ㅁㅁ");
-		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		
 		// 작업준비
 		UserDTO user = dao.getUser(userInfo.getUserAcctCode());
 
-		if(user.getReturnValue().equals("1"))	// 요청이 정상처리되었을 때
-		{
-			modelAndView.addObject("user", user);
-			modelAndView.setViewName("redirect:/mypage/mypage");		
-		}	 
-		
-		modelAndView.setViewName("에러페이지로 가게 설정");
-		return;
+	
+		modelAndView.addObject("user", user);
+		modelAndView.setViewName("redirect:/mypage/mypage");		
+	
 
 	}
 }
