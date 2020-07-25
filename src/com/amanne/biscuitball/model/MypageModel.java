@@ -43,7 +43,7 @@ public class MypageModel
 		System.out.println(user.getSnsSync());
 
 		modelAndView.addObject("user", user);
-		modelAndView.setViewName("redirect:/mypage/mypage");		
+		modelAndView.setViewName("/mypage/MyPage");		
 	
 
 	}
