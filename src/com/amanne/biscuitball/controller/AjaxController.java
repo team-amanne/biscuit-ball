@@ -96,7 +96,7 @@ public class AjaxController
 	}
 	
 	@RequestMapping("/court")
-	public String getCourt(Model model, String mapPositionX, String mapPositionY)
+	public String getCourt(Model model, @RequestParam(required=false) String mapPositionX, @RequestParam(required=false) String mapPositionY)
 	{
 		String view = null;
 		

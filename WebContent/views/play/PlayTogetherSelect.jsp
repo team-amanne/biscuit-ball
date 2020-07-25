@@ -290,18 +290,19 @@ String cp = request.getContextPath();
 													<div class="col-md-7 courtInfo">
 														<span class="">적정인원</span>
 													</div>
-													<span id="minCourtCapacity">4</span>~<span id="maxCourtCapacity">8</span>
+													<span id="minCourtCapacity"></span>~<span id="maxCourtCapacity"></span>
 												</li>
 												<li class="list-group-item">
 													<div class="col-md-7 courtInfo">
 														<span class="">코트등급</span>
 													</div>
-													<p id="courtRating">B</p>
+													<p id="courtRating"></p>
 												</li>
-												<li class="list-group-item satisfy">
-													<div class="col-md-12 courtInfo">
+												<li class="list-group-item">
+													<div class="col-md-7 courtInfo">
 														<span class="">만족도</span>
-													</div> <span class="star-score" id="avgCourtSatisfaction">
+													</div> 
+													<span class="star-score" id="avgCourtSatisfaction">
 													</span>
 												</li>
 											</ul>
@@ -655,7 +656,8 @@ $(function()
 	markers = [];
 	
 	// 카카오 맵 사용
-	map = new kakao.maps.Map(document.getElementById("map"), {
+	map = new kakao.maps.Map(document.getElementById("map"), 
+			{
 		center: new kakao.maps.LatLng(37.5668260054796, 126.978656785931),
 		level: 3
 	});
@@ -675,7 +677,6 @@ $(function()
 	    		xhr.setRequestHeader("Authorization", "KakaoAK f910b6b7f9f4a0828f745a3a4014bb1d");
 	    	},
 	    	success: function(data) {
-	    		console.log(data);
 	    		var lng = data.documents[0].x;
 	    		var lat = data.documents[0].y;
 	    		map.setCenter(new kakao.maps.LatLng(lat, lng));
@@ -693,7 +694,6 @@ $(function()
 		            	
 		            	for(var i=0; i<data.length; i++)
 		            	{
-		            		console.log(data[i])
 		            		var tmp = data[i].mapPosition.split(",");
 		            		positions[i] = 
 		            	    {
@@ -723,6 +723,51 @@ $(function()
 	            		    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
 	            		    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
 	            		    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+	            		    
+	            		    
+	            		 // 마커에 클릭이벤트를 등록 → 코트 정보 html에 표시
+		            		kakao.maps.event.addListener(marker, 'click', function() 
+		            		{
+		            		      var courtPositionX = this.getPosition().getLng();
+		            		      var courtPositionY = this.getPosition().getLat();
+		            		      
+		            		      $.ajax
+		            		      ({
+		          		            type: "get",
+		          		            dataType: "json",
+		          		            url: "<%=cp%>/ajax/court",
+		          		            data: {mapPositionX: courtPositionX, mapPositionY: courtPositionY},
+		          		            success: function(data)
+		          		            {
+		          		            	/* 코트 정보 */
+		          		            	/* 코트이름 */
+		          		            	$("#courtName").text(data.courtName);
+		          		            	/* 적정인원 최소 */
+		          		            	$("#minCourtCapacity").text(data.minCourtCapacity);
+		          		            	/* 적정인원 최대 */
+		          		            	$("#maxCourtCapacity").text(data.maxCourtCapacity);
+		          		            	/* 코트 관리 등급 */
+		          		            	$("#courtRating").text(data.courtRating);
+		          		            	/* 만족도 */
+		          		            	$("#avgCourtSatisfaction").text(data.avgCourtSatisfaction);
+		          		            	/* 화장실  */
+		          		            	$("#toilet").text(data.toilet);
+		          		            	$("#toiletConfidence").text(data.toiletConfidence);
+		          		            	/* 샤워실 */
+		          		            	$("#shower").text(data.shower);
+		          		            	$("#showerConfidence").text(data.showerConfidence);
+		          		            	/* 주차장 */
+		          		            	$("#parkinglot").text(data.parkinglot);
+		          		            	$("#parkinglotConfidence").text(data.parkinglotConfidence);
+		          		            	
+		            		      },
+		            		    	error: function(e) {
+		            		    		alert(e.responseText);
+		            		    	}
+		            		    });
+		            		      
+		            		});
+	            		    
 	            		}
 	            		
 	            		// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
@@ -742,41 +787,7 @@ $(function()
 	            		    };
 	            		}
 	            		
-	            		// 마커에 클릭이벤트를 등록합니다
-	            		kakao.maps.event.addListener(marker, 'click', function() 
-	            		{
-	            		      var courtPositionX = this.getPosition().getLng();
-	            		      var courtPositionY = this.getPosition().getLat();
-	            		      
-	            		      $.ajax
-	            		      ({
-	          		            type: "get",
-	          		            dataType: "json",
-	          		            url: "<%=cp%>/ajax/court",
-	          		            data: {mapPositionX: courtPositionX, mapPositionY: courtPositionY},
-	          		            success: function(data)
-	          		            {
-	          		            	
-	          		            	courtInfo = new Array();
-	          		            	
-	          		            	/* 코트 정보 */
-	          		            	/* 코트이름 */
-	          		            	$("#courtName").text(data.courtName);
-	          		            	/* 적정인원 최소 */
-	          		            	$("#minCourtCapacity").text(data.courtName);
-	          		            	/* 적정인원 최대 */
-	          		            	$("#maxCourtCapacity").text(data.courtName);
-	          		            	/* 코트 관리 등급 */
-	          		            	$("#courtRating").text(data.courtName);
-	          		            	/* 만족도 */
-	          		            	$("#star-score").text(data.courtName);
-	          		            	$("#courtName").text(data.courtName);
-	          		            	$("#courtName").text(data.courtName);
-	          		            	
-	          		            }
-	            		      });
-	            		      
-	            		});
+	            		
 
 	            		
 		            },
@@ -794,7 +805,6 @@ $(function()
 		
 	});
 	
-	courtInfo = [];
 	
 });
 

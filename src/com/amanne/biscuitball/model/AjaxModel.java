@@ -188,8 +188,11 @@ public class AjaxModel
 	public String getCourtCodeByPosition(String posx, String posy)
 	{
 		ICourtDAO dao = sqlSession.getMapper(ICourtDAO.class);
+		System.out.println(posx+","+posy);
 		
 		String courtCode = dao.getCourtByMapPosition(posx, posy);
+		
+		System.out.println(courtCode);
 		CourtDTO dto = dao.getCourt(courtCode);
 		
 		JSONObject obj = null;
