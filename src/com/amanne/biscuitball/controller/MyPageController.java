@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.amanne.biscuitball.model.MypageModel;
@@ -21,11 +22,18 @@ public class MyPageController
 	private MypageModel mypage;
 	
 	// 마이페이지 조회
-	@RequestMapping("/{mypage}")
-	public ModelAndView playPartyCreate(ModelAndView modelAndView, HttpServletRequest request)
-	{
+	@RequestMapping("/mypage")
+	public ModelAndView createMyPage(ModelAndView modelAndView, HttpServletRequest request)
+	{	
 		mypage.myPage(modelAndView, request);
 		return modelAndView;			
 	}
+	
+	@RequestMapping(value="/mypage/mypage", method = {RequestMethod.GET, RequestMethod.POST})
+	public String showMyPage()
+	{	
+		return "/mypage/MyPage";		
+	}
+	
 
 }
