@@ -11,12 +11,12 @@
 <title>코트 > 코트 정보 > 코트 리뷰 등록</title>
 <!-- 부트스트랩/제이쿼리 -->
 <!-- 부가적인 테마 -->
-<link rel="stylesheet" href="<%=cp%>/css/board.css" />
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/default.css">
-
+<script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>
+<link rel="stylesheet" href="<%=cp%>/css/board.css" />
 <style type="text/css">
 .left-btn {
 	text-align: left;
@@ -76,11 +76,12 @@
 					</div>
 
 					<div class="panel panel-default">
-						<form class="form-horizontal">
+						<form class="form-horizontal" method="post" name="courtReviewRegisterForm" id="courtReviewRegisterForm">
 							<div class="row panel-body">
 								<div class="col-sm-2"></div>
 								<div class="col-sm-8 panel panel-default">
 									<div class="row court-name panel-body">
+										<input type="hidden" name="courtCode" value="${court.courtCode }" />
 										<p class="title-text">${court.courtName }</p>
 									</div>
 								</div>
@@ -101,10 +102,10 @@
 
 									<div class="row review form-group">
 										<div class="col-sm-3 col-xs-3">
-											<label for="avgCourtSatisfaction" class="control-label"> 만족도 평가 * </label>
+											<label for="avgCourtSatisfaction-rating" class="control-label"> 만족도 평가 * </label>
 										</div>
 
-										<div id="avgCourtSatisfaction">
+										<div id="avgCourtSatisfaction-rating">
 											<div class="rating-group">
 												<label aria-label="0 stars" class="rating__label" for="avgCourtSatisfaction-0">&nbsp;</label> 
 												<input class="rating__input rating__input--none" name="avgCourtSatisfaction" id="avgCourtSatisfaction-0" value="0" type="radio" checked> 
@@ -167,9 +168,9 @@
 
 									<div class="row review form-group">
 										<div class="col-sm-3 col-xs-3">
-											<label for="avgCourtManageScore" class="control-label"> 시설 평가 * </label>
+											<label for="avgCourtManageScore-rating" class="control-label"> 시설 평가 * </label>
 										</div>
-										<div id="avgCourtManageScore">
+										<div id="avgCourtManageScore-rating">
 											<div class="rating-group">
 												<label aria-label="0 stars" class="rating__label" for="avgCourtManageScore-0">&nbsp;</label> 
 												<input class="rating__input rating__input--none" name="avgCourtManageScore" id="avgCourtManageScore-0" value="0" type="radio" checked>
@@ -311,7 +312,28 @@
 
 	$(function() {
 		$("#btnSubmit").click(function() {
+			if(!$("#courtReviewContent").val()) {
+				alert("리뷰 내용을 입력해주세요.");
+				return;
+			}
 			
+			if(!document.courtReviewRegisterForm.avgCourtSatisfaction.value || document.courtReviewRegisterForm.avgCourtSatisfaction.value == "0") {
+				alert("만족도 평가를 선택해주세요.");
+				return;
+			}
+
+			if(!document.courtReviewRegisterForm.avgCourtManageScore.value || document.courtReviewRegisterForm.avgCourtManageScore.value == "0") {
+				alert("시설 평가를 선택해주세요.");
+				return;
+			}
+			
+			if(!$("#courtCapacity").val()) {
+				alert("코트 적정 수용 인원수를 선택해주세요.");
+				return;
+			}
+			
+			$("#courtReviewRegisterForm").attr("action", "<%=cp %>/court/${court.courtCode}/review/registerdo");	
+			$("#courtReviewRegisterForm").submit();
 		});
 	});
 

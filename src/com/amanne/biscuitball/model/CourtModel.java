@@ -53,4 +53,12 @@ public class CourtModel
 		
 	}
 	
+	public int registerCourtReview(CourtReviewDTO dto)
+	{
+		ICourtDAO courtDao = sqlSession.getMapper(ICourtDAO.class);
+		courtDao.addCourtReview(dto);
+		return Integer.parseInt(dto.getReturnValue());
+		
+	}
+	
 }

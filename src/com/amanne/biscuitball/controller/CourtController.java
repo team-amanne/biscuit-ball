@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.amanne.biscuitball.model.CourtModel;
 import com.amanne.biscuitball.model.UserInfo;
 import com.amanne.biscuitball.mybatis.CourtDTO;
+import com.amanne.biscuitball.mybatis.CourtReviewDTO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -35,7 +36,7 @@ public class CourtController
 	private HttpSession session;
 	
 	@RequestMapping("/{courtCode}")
-	public String court(Model model, @PathVariable("courtCode") String courtCode )
+	public String court(Model model, @PathVariable("courtCode") String courtCode, @RequestParam(required=false) String registerResult)
 	{
 		String view = null;
 		
@@ -44,6 +45,12 @@ public class CourtController
 		court = courtModel.getCourt(courtCode, (UserInfo)session.getAttribute("userInfo"));
 		
 		model.addAttribute("court", court);
+		if(registerResult != null) {
+			if(registerResult.equals("success"))
+				model.addAttribute("alert", "리뷰를 등록하였습니다.");
+			else if(registerResult.equals("fail"))
+				model.addAttribute("alert", "리뷰 등록에 실패하였습니다.");
+		}
 		
 		view = "/court/CourtPage";
 		return view;
@@ -77,7 +84,7 @@ public class CourtController
 	}
 	
 	@RequestMapping("/{courtCode}/review/register")
-	public String courtReview(Model model, @PathVariable("courtCode") String courtCode )
+	public String courtReviewRegisterForm(Model model, @PathVariable("courtCode") String courtCode )
 	{
 		String view = null;
 		
@@ -88,6 +95,22 @@ public class CourtController
 		model.addAttribute("court", court);
 		
 		view = "/court/CourtReviewRegistration";
+		
+		return view;
+	}
+	
+	@RequestMapping("/{courtCode}/review/registerdo")
+	public String courtReviewRegister(Model model, @PathVariable("courtCode") String courtCode , CourtReviewDTO dto)
+	{
+		String view = "redirect:/court/" + courtCode;
+		UserInfo info = (UserInfo)session.getAttribute("userInfo");
+		CourtDTO court = null;
+		
+		dto.setRegistrantAccountCode(info.getUserAcctCode());
+		if (courtModel.registerCourtReview(dto) > 0)
+			view += "?registerResult=success";
+		else
+			view += "?registerResult=fail";
 		
 		return view;
 	}
@@ -131,6 +154,7 @@ public class CourtController
 			
 			CourtDTO dto = new CourtDTO();
 			
+			dto.setCityCode(req.getParameter("cityCode"));
 			dto.setMapPositionX(req.getParameter("mapPositionX"));
 			dto.setMapPositionY(req.getParameter("mapPositionY"));
 			dto.setMapPosition(req.getParameter("mapPositionX") + "," + req.getParameter("mapPositionY"));

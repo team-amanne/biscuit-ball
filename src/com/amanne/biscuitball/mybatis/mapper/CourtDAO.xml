@@ -17,6 +17,7 @@
 		    , COURT_IMG3
 		    , REGISTRANT_ACCT_CODE
 		    , COURT_REG_CAPACITY
+		    , CITY_CODE
 		)
 		VALUES(
 		    FN_CREATE_CODE('TBL_COURT_REGISTRATION', SEQ_COURT_REGISTRATION.NEXTVAL)
@@ -28,6 +29,7 @@
 		    , #{courtImg3}
 		    , #{registrantAccountCode}
 		    , #{courtCapacityCode}
+		    , #{cityCode}
 		)
 	</insert>
 	
