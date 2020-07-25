@@ -128,6 +128,34 @@ String cp = request.getContextPath();
 	    	  dateFormat: "yy-mm-dd"
 	      });
 	      
+	      // 내 코트 체크 시 지도 검색 비활성화
+	      
+	      $("#myCourt").change(function()
+		{
+	    	  
+			  if($("#myCourt").is(":checked"))
+			  {
+				    $("#regionSelect").attr("disabled", true);
+					$("#citySelect").attr("disabled", true);
+					$("#mapSearch").attr("disabled", true);
+					
+					$("#myCourt").val($("myCourtCheckedVal").val());
+					
+		      }
+			  else
+		      {
+				  $("#regionSelect").attr("disabled", false);
+					$("#citySelect").attr("disabled", false);
+					$("#mapSearch").attr("disabled", false);
+					
+					$("#myCourt").val("");
+		      }
+		});
+	      
+	      
+	     
+	    
+	      
 	      // ajax() 사용해 시군구 불러오기
 	      $("#regionSelect").on("change", function()
       	 {
@@ -213,30 +241,7 @@ String cp = request.getContextPath();
 									</div>
 								</div>
 
-								<div class="panel panel-default">
-									<div class="panel-heading panel-head">모집 종료 시간</div>
-									<div class="panel-body">
-										<div class="input-group">
-											<input type="text" class="form-control" placeholder=""
-												id="dateselect2"> <select class="form-control">
-												<c:forEach var="i" begin="0" end="24">
-													<option value="${i}">
-														<c:choose>
-															<c:when test="${i <10}">
-                                 	0${i }:00
-                                 </c:when>
-															<c:otherwise>
-                                 	${i }:00
-                                 	</c:otherwise>
-														</c:choose>
-													</option>
-												</c:forEach>
-											</select>
-
-										</div>
-
-									</div>
-								</div>
+								
 							</div>
 							<div class="col-md-9">
 								<div class="panel panel-default">
@@ -263,8 +268,9 @@ String cp = request.getContextPath();
 										<div class="col-md-2">
 											<label class="checkbox-inline radio"> <input
 												type="checkbox" name="inlineCheckOptions" id="myCourt"
-												value="${userDto.userCourtCode }"> 내 코트
+												value=""> 내 코트
 											</label>
+											<input type="hidden" value="${userDto.userCourtCode }" id="myCourtCheckedVal">
 										</div>
 									</div>
 								</div>

@@ -37,5 +37,7 @@ public class PlayModel
 		
 		return userDto;
 	}
+	
+	// 유저 선택 조건 모임 가져오기
 
 }

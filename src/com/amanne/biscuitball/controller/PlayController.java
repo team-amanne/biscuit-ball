@@ -49,6 +49,34 @@ public class PlayController
       return "/play/PlayParty_pu01";
    }
    
+   
+   // 빠른농구 
+   @RequestMapping("mode/speed")
+   public String playspeed(Model model)
+   {
+      // 빠른농구 도시
+      ArrayList<RegionDTO> regionList = playModel.regionPrint();
+      model.addAttribute("regionList", regionList);
+      
+      return "/play/PlaySpeed";
+   }
+   
+   // 빠른농구 개설
+   @RequestMapping("meeting/create")
+   public String playCreateMeeting()
+   {
+      return "/play/PlayCreateMeeting";
+   }
+   
+   
+   // 빠른농구 참여
+   @RequestMapping("meeting/**")
+   public String playSpeedJoin()
+   {
+      return "/play/PlaySpeed_pu01";
+   }
+   
+   
    // 함께농구로 이동
    @RequestMapping("/mode/together/**")
    public String togetherPlay(Model model)
@@ -61,10 +89,16 @@ public class PlayController
 	  HttpSession session = request.getSession();
 	  UserInfo userInfo = (UserInfo)session.getAttribute("userInfo");
 	  
-	  UserDTO userDto =  playModel.userHomeCourt(userInfo.getUserAcctCode());
-	  model.addAttribute("userDto", userDto);
-	  
-	  
+	  if (userInfo != null)
+	  {
+		  UserDTO userDto =  playModel.userHomeCourt(userInfo.getUserAcctCode());
+		  model.addAttribute("userDto", userDto);
+	  }
+	  else
+	  {
+		  return "/login";
+	  }
+	 
       return "/play/PlayTogetherSelect";
       
    }
