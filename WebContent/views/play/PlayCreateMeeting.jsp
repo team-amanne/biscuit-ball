@@ -1,3 +1,4 @@
+<%@page import="java.util.Calendar"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -71,15 +72,14 @@ select
 
 </style>
 <script type="text/javascript">
-
-
-
+	var
 </script>
+
 </head>
 <body>
 
 	<!-- 헤더 -->
-			<c:import url="../base/Header.jsp"></c:import>
+<c:import url="../base/Header.jsp"></c:import>
 <c:import url="../base/PlaySubmenu.jsp"></c:import>
 
 <!------------------------------------------ 바디 ------------------------------------------------>
@@ -109,6 +109,7 @@ select
 							</div>
 							<!----------------------------모임 설정 패널 ------------------------->
 							<h4>모임 정보 입력</h4>
+							${user.userCode }
 							<div class="row">
 								<div class="col-md-8">
 									<div class="panel panel-default">
@@ -117,13 +118,15 @@ select
 										<div class="panel-body">
 											<div class="col-md-4">
 												<select name="" id="" class="form-control">
-													<option value=""> ${param.city_select }</option>
+													<option value=""> 
+													<%=request.getParameter("citydata") %>
+													</option>
 													
 												</select>
 											</div>
 											<div class="col-md-4">
 												<select name="" id="" class="form-control">
-													<option value="">시·군·구</option>
+													<option value=""><%=request.getParameter("regiondata") %></option>
 												</select>
 											</div>
 											<div class="col-md-4">
@@ -197,10 +200,12 @@ select
 
 													<div class="col-md-4">
 														<div class="input-group">
-														<input type="text" id="datePicker" class="form-control" placeholder="2020-07-06">
-														<span class="input-group-btn">
-															<button class="btn btn-default">달력 선택</button>
-														</span>
+														<%
+															Calendar cal = Calendar.getInstance();
+														%>
+
+														<input type="text" id="datePicker" class="form-control" 
+														placeholder="<%= cal.get(Calendar.YEAR) %>">
 														</div>
 													</div>
 													<div class="col-md-3">
