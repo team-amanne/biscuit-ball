@@ -13,35 +13,35 @@ import com.amanne.biscuitball.mybatis.UserDTO;
 @Service
 public class LoginModel
 {
-	@Autowired
-	private SqlSession sqlSession;
-	
-	// 관리자 로그인 메소드
-	public UserInfo adminlogin(LoginDTO loginDto)
-	{
-		UserInfo userInfo = new UserInfo();
-		
-		
-		IAdminDAO adminDao = sqlSession.getMapper(IAdminDAO.class);
-		adminDao.loginAsAdmin(loginDto);
-		String returnValue = loginDto.getReturnValue();
-		
-		if (returnValue.equals("0"))
-		{
-			return null;
-		}
-		else
-		{
-			AdminDTO adminDto = adminDao.getAdmin(returnValue);
-			userInfo.setUserCode(adminDto.getAdminCode());
-			userInfo.setUserNickname(adminDto.getAdminNickname());
-			
-			return userInfo;
-		}
-	}
-	
-	// 유저 로그인 메소드
-	public UserInfo userlogin(LoginDTO loginDto)
+   @Autowired
+   private SqlSession sqlSession;
+   
+   // 관리자 로그인 메소드
+   public UserInfo adminlogin(LoginDTO loginDto)
+   {
+      UserInfo userInfo = new UserInfo();
+      
+      
+      IAdminDAO adminDao = sqlSession.getMapper(IAdminDAO.class);
+      adminDao.loginAsAdmin(loginDto);
+      String returnValue = loginDto.getReturnValue();
+      
+      if (returnValue.equals("0"))
+      {
+         return null;
+      }
+      else
+      {
+         AdminDTO adminDto = adminDao.getAdmin(returnValue);
+         userInfo.setUserCode(adminDto.getAdminCode());
+         userInfo.setUserNickname(adminDto.getAdminNickname());
+         
+         return userInfo;
+      }
+   }
+   
+   // 유저 로그인 메소드
+   public UserInfo userlogin(LoginDTO loginDto)
     {
        UserInfo userInfo = new UserInfo();
        
@@ -73,6 +73,6 @@ public class LoginModel
            
        }
     }
-	
-	
+   
+   
 }

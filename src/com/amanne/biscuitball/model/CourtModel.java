@@ -29,6 +29,8 @@ public class CourtModel
 		{			
 			result = courtDao.getCourt(courtCode);
 			list = courtDao.getCourtReviewList(courtCode, info != null ? info.getUserAcctCode() : null, 1, 5, "LIKE");
+			for(CourtReviewDTO dto : list)
+				dto.setCourtReviewContent(dto.getCourtReviewContent().replaceAll("\\n", "<br>"));
 			result.setCourtReviewList(list);
 		}
 		
@@ -58,7 +60,11 @@ public class CourtModel
 		ICourtDAO courtDao = sqlSession.getMapper(ICourtDAO.class);
 		courtDao.addCourtReview(dto);
 		return Integer.parseInt(dto.getReturnValue());
-		
 	}
 	
+	public int removeCourtReview(String reviewCode)
+	{
+		ICourtDAO courtDao = sqlSession.getMapper(ICourtDAO.class);
+		return courtDao.removeCourtReview(reviewCode);
+	}
 }

@@ -20,6 +20,7 @@ public class MyPageController
 
 	@Autowired
 	private MypageModel mypage;
+<<<<<<< HEAD
 
 	// 마이페이지 조회
 	@RequestMapping("")
@@ -28,7 +29,17 @@ public class MyPageController
 
 		return "redirect:/mypage/myprofile";
 
+=======
+	
+	// 마이페이지 조회
+	@RequestMapping("/mypage")
+	public ModelAndView createMyPage(ModelAndView modelAndView, HttpServletRequest request)
+	{	
+		mypage.myPage(modelAndView, request);
+		return modelAndView;			
+>>>>>>> branch 'master' of https://github.com/team-amanne/biscuit-ball.git
 	}
+<<<<<<< HEAD
 
 	@RequestMapping(value = "/myprofile", method =
 	{ RequestMethod.GET, RequestMethod.POST })
@@ -62,6 +73,13 @@ public class MyPageController
 	public String userblock()
 	{
 		return "/mypage/Userblock";
+=======
+	
+	@RequestMapping(value="/mypage/mypage", method = {RequestMethod.GET, RequestMethod.POST})
+	public String showMyPage()
+	{	
+		return "/mypage/MyPage";		
+>>>>>>> branch 'master' of https://github.com/team-amanne/biscuit-ball.git
 	}
 	
 	

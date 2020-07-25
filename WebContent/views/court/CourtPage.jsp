@@ -18,18 +18,6 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-<script type="text/javascript">
-
-$(document).ready(function(){ 
-	$('#btn-delreq').click(function() { 
-		var result = confirm('정말로 해당코트를 삭제요청하시겠습니까?'); 
-		if(result) { location.replace('CourtDeleteRequestCompleted.jsp'); } 
-		else { //no 
-		}  
-	}); 
-});
-
-</script>
 
 <style type="text/css">
 .left-btn {
@@ -69,6 +57,10 @@ $(document).ready(function(){
 }
 #adminCourtDel {
 	display:none;
+}
+#btnReviewDelete:hover {
+	cursor: pointer;
+	color: orange;
 }
 </style>
 </head>
@@ -180,7 +172,7 @@ $(document).ready(function(){
 																<label>주소</label>
 															</div>
 															<div class="col-sm-8 col-xs-12">
-																<span>서울 특별시 마포구</span>
+																<span id="address"></span>
 															</div>
 														</div>
 														<div class="row">
@@ -409,11 +401,10 @@ $(document).ready(function(){
 															<a href="#"><span>${review.registrantNickname }</span></a>
 														</div>
 														<div class="col-sm-4 col-xs-2"></div>
-														<div class="col-sm-2 col-xs-4">
+														<div class="col-sm-3 col-xs-6">
 															<span>일시 [${review.courtReviewRegisteredDate.split("\\s")[0] }]</span>
 														</div>
-														<div class="col-sm-1 col-xs-2">
-														</div>
+														
 														<div class="col-sm-1 col-xs-2">
 															<button type="button" class="btn btn-default btn">
 																<span class="far fa-thumbs-up" style="font-size:18px;"></span> 
@@ -427,7 +418,9 @@ $(document).ready(function(){
 															</button>
 														</div>
 														<div class="col-sm-1 col-xs-2">
+															<c:if test="${review.registrantAccountCode != sessionScope.userInfo.userAcctCode }">
 															<button type="button" class="btn btn-default btn-danger">신고</button>
+															</c:if>
 														</div>
 													</div>
 													<div class="row">
@@ -437,7 +430,7 @@ $(document).ready(function(){
 															<i class="fas fa-star"></i>
 															</c:forEach>
 															<c:if test="${review.courtReviewSatisfaction.intValue() != review.courtReviewSatisfaction.doubleValue()}">
-															<i class="fas fa-star-half"></i>
+																<i class="fas fa-star-half"></i>
 															</c:if>
 														</div>
 														<div class="col-sm-3 col-xs-5">
@@ -450,7 +443,11 @@ $(document).ready(function(){
 															</c:if>
 														</div>
 														<div class="col-sm-6 sol-xs-2">
-															<i class="fas fa-trash-alt" style="font-size: 20px;"></i>
+															<c:if test="${review.registrantAccountCode == sessionScope.userInfo.userAcctCode }">
+															<span id="btnReviewDelete" role="button" data-reviewcode="${review.courtReviewCode }">
+																<i class="fas fa-trash-alt" style="font-size: 20px;"></i>
+															</span>
+															</c:if>
 											
 														</div>
 													</div>
@@ -732,6 +729,46 @@ $(document).ready(function(){
 		</div>
 	</div>
 	<c:import url="../base/Footer.jsp"></c:import>
+	
+	<script type="text/javascript">
+		$(function() {
+			
+			var alertMsg = "${alert}";
+			
+			if(alertMsg)
+				alert(alertMsg);
+			
+			var position = "${court.mapPosition}".split(",");
+			
+			$.ajax({
+		    	type:"get",
+		    	dataType: "json",
+		    	url: "https://dapi.kakao.com/v2/local/geo/coord2address.json",
+		    	data: {x: position[0], y:position[1]},
+		    	beforeSend: function(xhr) {
+		    		xhr.setRequestHeader("Authorization", "KakaoAK e6e5dc704ed2b833d6f7a164f12f28b3");
+		    	},
+		    	success: function(data) {
+		    		$("#address").text(data.documents[0].address.address_name);
+		    	},
+		    	error: function(e) {
+		    		alert(e.responseText);
+		    	}
+		    });
+			
+			$('#btn-delreq').click(function() { 
+				var result = confirm('정말로 해당코트를 삭제요청하시겠습니까?'); 
+				if(result) { location.replace('CourtDeleteRequestCompleted.jsp'); } 
+				else { //no 
+				}  
+			}); 
+			
+			$("#btnReviewDelete").click(function () {
+				if(confirm("정말로 삭제하시겠습니까?"))
+					$(location).attr("href", "<%=cp %>/court/${court.courtCode }/review/" + $(this).attr("data-reviewcode") + "/delete");
+			});
+		});
+	</script>
 </body>
 </html>
 
