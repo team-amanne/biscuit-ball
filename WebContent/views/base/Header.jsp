@@ -106,7 +106,7 @@
                <c:otherwise>
                
                <li><a href="<%=cp %>/login">로그인</a></li>
-               <li><a href="#" class="btn-register">회원가입</a></li>
+               <li><a href="<%=cp %>/signup" class="btn-register">회원가입</a></li>
                
                </c:otherwise>
                

@@ -233,24 +233,16 @@ String cp = request.getContextPath();
 .hasDatepicker {
    cursor: pointer;
 }
+
+.sign .row {
+	height: 50px;
+}
 </style>
 
 
 <script type="text/javascript">
       $(function() {       
-         
-    	  
-    	  
-    	  $("#sign_up").click(function() 
-          {
-           	
-           	var str = $("#tel1").val() + "-" + $("#tel2").val() + "-" + $("#tel3").val();
-           	
-           	$("#userTel").val(str);
-           	
-           	$("#signUp_submit").submit();
-		 });
-   	            
+          
     	  
          // 이메일 유효성검사
          $("#email_certify").click( function() {
@@ -282,17 +274,21 @@ String cp = request.getContextPath();
                         $("#id_check").css("color", "red");
                         $('#userEmail').val('');
                         $('#userEmail').focus();
+                       
+                        
                      } 
                  else 
                      {
                          $("#id_check").text("사용가능한 이메일입니다");
                          $("#id_check").css("color", "green");
+                         
                      }
                      },
                      error : function() {
                      console.log("실패");
                      }
-                  });                                       
+                  }); 
+                 return false;
               }
         });
 
@@ -345,24 +341,28 @@ String cp = request.getContextPath();
                           $("#nick_check").css("color", "red");
                           $('#userNickname').val('');
                           $('#userNickname').focus();
+                          return false;
                        } 
                   else 
                        {
                            $("#nick_check").text("사용가능한 닉네임입니다");
                            $("#nick_check").css("color", "green");
+                           
                        }
                        },
                        error : function() {
                        console.log("실패");
                        }
                });
+               return false;
+              
             }
+           
           });
           
          // 전화번호 인증버튼확인
-         $("#tel_certify").click(function() {
-             
-           var tel = $('#tel1').val() +"-"+ $('#tel2').val() + "-" + $('#tel3').val();
+         $("#tel_certify").click(function() {        	 
+           	var tel = $('#tel1').val() +"-"+ $('#tel2').val() + "-" + $('#tel3').val();
             if($("#tel1 option:selected").val() == "선택" || $("#tel2").val() == "" || $("#tel3").val() == "")
             {
                  $("#tel_check").text("입력 항목이 누락되었습니다.");
@@ -387,19 +387,21 @@ String cp = request.getContextPath();
                        $('#tel2').val('');
                        $('#tel3').val('');
                        $('#tel1').focus();
+  
                     } 
                else 
                     {
                         $("#tel_check").text("사용가능한 전화번호입니다");
                         $("#tel_check").css("color", "green");
                         $("#certification").css("display","inline");
-                        return false; 
+
                     }
                     },
                     error : function() {
                     console.log("실패");
                     }
-            });             
+            });
+                return false;
             } 
           });
          
@@ -416,18 +418,40 @@ String cp = request.getContextPath();
              }
              else
              {
-                $("#tel-certify-check").text("");    
+                $("#tel-certify-check").text("");  
+                return false;
              }
                
           });
          
          
-         
+         // 거점지역 띄우기
+          // ajax() 사용해 시군구 불러오기
+	      $("#regionSelect").on("change", function()
+      	 {
+         $.ajax({
+            type: "get",
+            dataType: "json",
+            url: "<%=cp%>/ajax/citylist",
+            data: {regionCode: $(this).val()},
+            success: function(data) {
+               var result = "<option value=''>시·군·구</option>\n";
+               for(var i=0; i<data.length; i++)
+                  result += "<option value='" + data[i].cityCode +"'>" + data[i].cityName + "</option>\n";
+               $("#citySelect").html(result);
+            },
+            error: function(e){
+               alert(e.responseText);
+            }
+         });
+      	});
          
          // submit시 발생 
          $("#sign_up").click(function() {
-         
-            
+        	 var str = $("#tel1").val() + "-" + $("#tel2").val() + "-" + $("#tel3").val();  
+        	 
+        	$("#userTel").val(str);
+               	    
             // 이메일 입력없음
             if($("#userEmail").val() == "")
                {
@@ -440,17 +464,6 @@ String cp = request.getContextPath();
                else
                   $("#id_check").text("");
             
-            // 비밀번호 입력없음
-            if( $("#userPassword").val() == "" || $("#password2").val() == "")
-               {
-                  $("#pwd_check").text("입력 항목이 누락되었습니다.");
-                  $("#pwd_check").css("color", "red");
-                  $("#userPassword").focus();
-                  
-                  return false;  
-               }
-               else
-                  $("#pwd_check").text("");
             
             // 비밀번호 입력 없음
             if( $("#userPassword").val() == "" || $("#password2").val() == "")
@@ -462,15 +475,8 @@ String cp = request.getContextPath();
                   return false;  
                }
                else
-               {
                   $("#pwd_check").text("");
-               /* if($($("#userPassword").val() != $("#password2").val() == "")
-                  {
-                        $("#Password2").focus();                 
-                       return false;  
-                     }  */
-               }
-            
+                  
             // 이름 입력없음
             if( $("#userName").val() == "")
                {
@@ -503,6 +509,16 @@ String cp = request.getContextPath();
                }
                else
                   $("#height_check").text("");
+            // 거점지역 입력없음
+            if( $("#citySelect option:selected").val() == "")
+            {
+               $("#city_check").text("입력 항목이 누락되었습니다.");
+               $("#city_check").css("color", "red");
+               $("#regionSelect").focus();           
+               return false;  
+            }
+            else
+               $("#city_check").text("");
             
             // 자기 실력 평가입력없음
             if( $("#selfEvaluationType option:selected").val() == "실력선택")
@@ -548,10 +564,13 @@ String cp = request.getContextPath();
                   return false;  
                }
                else
+            	{
                   $("#position_check").text("");
+            	}
             
-            
-                                  
+
+            	$("#signUp_submit").submit();
+                       
       });
                
                
@@ -602,65 +621,6 @@ String cp = request.getContextPath();
 
 </script>
 
-<!-- 달력(datepicker) -->
-
-<script type="text/javascript">
-   //아이디 유효성 검사(1 = 중복 / 0 != 중복)
-   $(function() {
-      
-        
-        
-        
-        
-        
-        
-         
-         
-         
-         
-          
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        <%-- $("#tel_certify").click( function() {
-           var tel = $('#tel1').val() +"-"+ $('#tel2').val() + "-" + $('#tel3').val();
-            $.ajax({
-               url : '<%=cp%>/ajax/check/tel?tel='+ tel,
-                    type : 'get',
-                    success : function(data) {
-                    console.log("1 = 중복o / 0 = 중복x : " + data);
-               if (data == 1) 
-                    {
-                       // 1 : 전화번호가 중복되는 문구
-                       $("#tel_check").text("이미 등록된 전화번호입니다");
-                       $("#tel_check").css("color", "red");
-                       $('#tel2').focus();
-                    } 
-               else 
-                    {
-                        $("#tel_check").text("사용가능한 전화번호입니다");
-                        $("#tel_check").css("color", "green");
-                    }
-                    },
-                    error : function() {
-                    console.log("실패");
-                    }
-            });
-          }); --%>
-        
-        
-        
-        
-   });
-</script>
 </head>
 
 <body>
@@ -677,7 +637,7 @@ String cp = request.getContextPath();
       </div>
       <div class="row">
          <div class="col-md-3"></div>
-         <div class="col-md-9 input_content">
+         <div class="col-md-9 input_content sign">
             <div class="row">
                <div class="col-sm-3 col-xs-3">
                   <label class="f_size">이메일*</label>
@@ -790,27 +750,22 @@ String cp = request.getContextPath();
 
             </div>
             <div class=" flex row">
-               <div class="col-sm-3 col-xs-3">
+               <div class="col-sm-4 col-xs-4">
                   <label class="f_size">거점지역*</label>
                </div>
                <div class="col-sm-3 col-xs-3">
-                  <select class="form-control country" id="country" name="">
-                     <option selected="selected">지역선택</option>
-                     <option>서울</option>
-                     <option>인천</option>
-                     <option>대전</option>
-                     <option>부산</option>
-                     <option>대구</option>
-                     <option>광주</option>
-                  </select>
+                  <select name="" class="form-control" id="regionSelect">
+						<option value="">광역시·도</option>
+						<c:forEach var="regionDto" items="${regionList }">
+						<option value="${regionDto.regionCode }">${regionDto.regionName }</option>
+						</c:forEach>
+				</select>
                </div>
                <div class="col-sm-3 col-xs-3">
-                  <select class="form-control " id="userCityCode"
-                     name="userCityCode">
-                     <option selected="selected">시군구선택</option>
-                     <option value="ZG000014">마포구</option>
-                  </select>
-               </div>
+					<select name="" class="form-control" id="citySelect">
+											
+					</select>
+			</div>
                <div class="col-sm-2 col-xs-2 city_check"></div>
             </div>
             <div class="flex row">
@@ -830,8 +785,8 @@ String cp = request.getContextPath();
                <div id="space1">-</div>
                <input type="tel" class="form-control tel2" id="tel2">
                <div id="space2">-</div>
-               <input type="tel" class="form-control tel3" id="tel3"> <input
-                  type="hidden" name="userTel" id="userTel">
+               <input type="tel" class="form-control tel3" id="tel3"> 
+               <input type="hidden" name="userTel" id="userTel">
 
                <button class="btn btn-warning" id="tel_certify">인증</button>
                <div class="col-sm-2 col-xs-2" id="tel_check"></div>
@@ -854,7 +809,7 @@ String cp = request.getContextPath();
             </div>
 
             <div class="flex row">
-               <div class="col-sm-3 col-xs-3">
+               <div class="col-sm-4 col-xs-4">
                   <label class="f_size">선호포지션*</label>
                </div>
                <div class="col-sm-4 col-xs-4">
@@ -868,24 +823,17 @@ String cp = request.getContextPath();
                      <option value="ZP05">파워 포워드</option>
                   </select>
                </div>
-               <div class="col-sm-2 col-xs-2" id="position_check"></div>
-
-
-
-
-               <button class="btn btn-warning position_recommend"
-                  id="position_recommend">포지션 추천</button>
-            </div>
+               <div class="col-sm-2 col-xs-2">
+	               <button class="btn btn-warning position_recommend"
+	                  id="position_recommend">포지션 추천</button>
+            	</div>
+            	<div class="col-sm-2 col-xs-2" id="position_check"></div>
          </div>
-         <div class="col-md-3"></div>
-      </div>
-
-
-      <div class="flex">
-         <div class="col-sm-3 col-xs-3">
+         <div class="flex row">
+         <div class="col-sm-4 col-xs-4">
             <label class="f_size" id="">sms수신여부*</label>
          </div>
-         <div class="col-sm-4 col-xs-4">
+         <div class="col-sm-5 col-xs-5">
             <label class="radio-inline radio_button"> <input
                type="radio" name="snsSync" value="ZU02" checked="checked">NO
             </label> <label class="radio-inline radio_button"> <input
@@ -893,6 +841,11 @@ String cp = request.getContextPath();
             </label>
          </div>
       </div>
+         <div class="col-md-3"></div>
+      </div>
+
+
+      
 
       <div class="row">
          <div class="col-md-3"></div>
