@@ -506,7 +506,8 @@
 	        , VUP.GRADE as tierName
 	        , VUP.FPS as fairplayScore
 	        , VUP.USER_CITY as userCity
-	        , VUP.USER_CITY_CODE as userCourtCode
+	        , VUP.USER_CITY_CODE as userCityCode
+	        , VUP.COURT_NAME as userCourtName
 	        , VUP.USER_PROFILE_IMG as userProfileImg
 	        , VUP.USER_PROFILE_TXT as userProfileTxt
 	        , VUP.USER_COURT_CODE as userCourtCode

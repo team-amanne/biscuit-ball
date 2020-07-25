@@ -37,6 +37,7 @@ public class MypageModel
 		System.out.println(user.getUserGender());
 		System.out.println(user.getUserHeight());
 		System.out.println(user.getSelfEvaluationType());
+		System.out.println(user.getUserCity());
 		System.out.println(user.getUserCityCode());
 		System.out.println(user.getUserTel());
 		System.out.println(user.getUserPosition());
