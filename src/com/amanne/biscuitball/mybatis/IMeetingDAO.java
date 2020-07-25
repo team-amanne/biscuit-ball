@@ -56,9 +56,15 @@ public interface IMeetingDAO
 
 	public int countJoinMeeting(String userAccountCode); // 참여신청한 모임 전체 수(예정)
 
-	
+
 	
 	public MeetingDTO getMeeting(String meetingCode); // 특정모임 조회
 
 	public List<MeetingMemberDTO> getMeetingMemberList(String meetingCode); // 특정모임 참가자 조회
+	
+	
+	public List<MeetingDTO> getMeetingListByCityDate(String cityCode, String date);	// 날짜, 지역에 따른 모임 리스트 조회
+	
+	public List<MeetingDTO> countMeetingListByCityDate(String cityCode, String date);	// 날짜, 지역에 따른 모임 리스트 카운트
+	
 }

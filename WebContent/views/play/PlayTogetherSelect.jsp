@@ -153,8 +153,6 @@ String cp = request.getContextPath();
 		});
 	      
 	      
-	     
-	    
 	      
 	      // ajax() 사용해 시군구 불러오기
 	      $("#regionSelect").on("change", function()
@@ -175,9 +173,7 @@ String cp = request.getContextPath();
             }
          });
       	});
-
 	      
-
 	});
 	
 
@@ -639,23 +635,25 @@ String cp = request.getContextPath();
 
 
 	<c:import url="../base/Footer.jsp"></c:import>
-	
+
+<!-- 카카오 맵  -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ab23ff0014eee816a3de71fa0333dc78&libraries=services,clusterer,drawing"></script>
 <script type="text/javascript">
 
 
 $(function()
 {
-	
+	// 카카오 맵 사용
 	map = new kakao.maps.Map(document.getElementById("map"), {
 		center: new kakao.maps.LatLng(37.5668260054796, 126.978656785931),
 		level: 3
 	});
 	
-	marker = new kakao.maps.Marker({ center: map.getCenter() });
-	marker.setMap(map);
+	/* marker = new kakao.maps.Marker({ center: map.getCenter() });
+	marker.setMap(map); */
 	
-	$("#mapSearch").on("click", function() {
+	$("#mapSearch").on("click", function() 
+	{
 		$.ajax({
 	    	type:"get",
 	    	dataType: "json",
@@ -669,13 +667,81 @@ $(function()
 	    		var lng = data.documents[0].x;
 	    		var lat = data.documents[0].y;
 	    		map.setCenter(new kakao.maps.LatLng(lat, lng));
-	    		marker.setPosition(map.getCenter());
+	    		/* marker.setPosition(map.getCenter()); */
+	    	
+	    		$.ajax({
+		            type: "get",
+		            dataType: "json",
+		            url: "<%=cp%>/ajax/courtlist",
+		            data: {cityCode: $("#citySelect").val()},
+		            success: function(data) 
+		            {
+		            	var positions = new Array(data.length);
+		            	
+		            	for(var i=0; i<data.length; i++)
+		            	{
+		            		console.log(data[i])
+		            		var tmp = data[i].mapPosition.split(",");
+		            		positions[i] = 
+		            	    {
+		            	        content: '<div>'+ data[i].courtName+'</div>', 
+		            	        latlng: new kakao.maps.LatLng(tmp[1], tmp[0])
+		            	    };
+		            	}
+		            	
+		            		
+	            		for (var i = 0; i < positions.length; i ++) 
+	            		{
+	            		    // 마커를 생성합니다
+	            		    var marker = new kakao.maps.Marker({
+	            		        map: map, // 마커를 표시할 지도
+	            		        position: positions[i].latlng // 마커의 위치
+	            		    });
+
+	            		    // 마커에 표시할 인포윈도우를 생성합니다 
+	            		    var infowindow = new kakao.maps.InfoWindow({
+	            		        content: positions[i].content // 인포윈도우에 표시할 내용
+	            		    });
+
+	            		    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+	            		    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
+	            		    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+	            		    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+	            		    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+	            		}
+
+	            		
+		            },
+		            error: function(e){
+		               alert(e.responseText);
+		            }
+		         });
 	    	},
 	    	error: function(e) {
 	    		alert(e.responseText);
 	    	}
 	    });
+		
+	
+		
 	});
+	
+	// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+	function makeOverListener(map, marker, infowindow) 
+	{
+	    return function() {
+	        infowindow.open(map, marker);
+	    };
+	}
+
+	// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+	function makeOutListener(infowindow) 
+	{
+	    return function() 
+	    {
+	        infowindow.close();
+	    };
+	}
 });
 
 

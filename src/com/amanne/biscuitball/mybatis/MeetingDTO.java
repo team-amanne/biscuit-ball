@@ -24,8 +24,24 @@ public class MeetingDTO
 	private int maxTierCode; 				// 최대티어
 	private String confirmOrNot; 			// 모임확정여부
 	private String blindOrNot; 				// 블라인드여부
+	private String nowPeopleNumber;			// 현재 참가자 수
 	private String returnValue;
 	
+	
+	
+	
+	public String getNowPeopleNumber()
+	{
+		return nowPeopleNumber;
+	}
+	public void setNowPeopleNumber(String nowPeopleNumber)
+	{
+		this.nowPeopleNumber = nowPeopleNumber;
+	}
+	public String getReturnValue()
+	{
+		return returnValue;
+	}
 	public String getMeetingCode() {
 		return meetingCode;
 	}
