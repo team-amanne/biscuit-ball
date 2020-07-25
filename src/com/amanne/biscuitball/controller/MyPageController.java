@@ -21,18 +21,37 @@ public class MyPageController
 	@Autowired
 	private MypageModel mypage;
 	
+	/*
 	// 마이페이지 조회
-	@RequestMapping("/mypage")
+	@RequestMapping("")
 	public ModelAndView createMyPage(ModelAndView modelAndView, HttpServletRequest request)
 	{	
+		
+		
 		mypage.myPage(modelAndView, request);
-		return modelAndView;			
+		return modelAndView;	
+		
+		
+	}
+	*/
+	// 마이페이지 조회
+	@RequestMapping("")
+	public String createMyPage()
+	{	
+
+		return "redirect:/mypage/myprofile";	
+		
+		
 	}
 	
-	@RequestMapping(value="/mypage/mypage", method = {RequestMethod.GET, RequestMethod.POST})
-	public String showMyPage()
+	@RequestMapping(value="/myprofile", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView showMyPage(ModelAndView modelAndView, HttpServletRequest request)
 	{	
-		return "/mypage/MyPage";		
+		
+		mypage.myPage(modelAndView, request);
+		return 	modelAndView;
+
+		
 	}
 	
 
