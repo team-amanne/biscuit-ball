@@ -54,7 +54,7 @@
 <body>
 
 <!-- 헤더 -->
-<c:import url="../base/Header.jsp"></c:import>
+<c:import url="../base/Header.jsp?active=court"></c:import>
 
 <!-- 서브메뉴 -->
 <!-- 서브메뉴는 기능별(농구하기/코트검색/크루/...)로 복사해서 만들어두고 import 할 것 -->

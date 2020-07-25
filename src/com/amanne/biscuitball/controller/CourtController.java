@@ -85,7 +85,7 @@ public class CourtController
 	}
 	
 	@RequestMapping("/registerdo")
-	public String courtRegister(Model model, HttpServletRequest request)
+	public String courtRegister(HttpServletRequest request)
 	{
 		String view = "redirect:/court/registerok";
 		UserInfo info = (UserInfo)session.getAttribute("userInfo");
@@ -167,7 +167,7 @@ public class CourtController
 	}
 	
 	@RequestMapping("/{courtCode}/review/registerdo")
-	public String courtReviewRegister(Model model, @PathVariable("courtCode") String courtCode , CourtReviewDTO dto)
+	public String courtReviewRegister(@PathVariable("courtCode") String courtCode , CourtReviewDTO dto)
 	{
 		String view = "redirect:/court/" + courtCode;
 		UserInfo info = (UserInfo)session.getAttribute("userInfo");
@@ -182,7 +182,7 @@ public class CourtController
 	}
 	
 	@RequestMapping("/{courtCode}/review/{reviewCode}/delete")
-	public String courtReviewDelete(Model model,@PathVariable("courtCode") String courtCode, @PathVariable("reviewCode") String reviewCode)
+	public String courtReviewDelete(@PathVariable("courtCode") String courtCode, @PathVariable("reviewCode") String reviewCode)
 	{
 		String view = "redirect:/court/" + courtCode;
 		
@@ -193,6 +193,28 @@ public class CourtController
 		
 		return view;
 	}
+	
+	@RequestMapping("/{courtCode}/name")
+	public String courtNameList(Model model, @PathVariable("courtCode") String courtCode)
+	{
+		String view = "/court/CourtNameList_pu";
+		
+		model.addAttribute("courtCode", courtCode);
+		
+		return view;
+	}
+	
+	@RequestMapping("/{courtCode}/name/register")
+	public String courtNameRegisterForm(Model model, @PathVariable("courtCode") String courtCode)
+	{
+		String view = "/court/CourtNameRegistration_pu01";
+		
+		model.addAttribute("courtCode", courtCode);
+		
+		return view;
+	}
+	
+	//@RequestMapping("/{courtCode}/name/registerdo")
 	
 }
 
