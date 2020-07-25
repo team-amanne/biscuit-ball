@@ -17,23 +17,74 @@ import com.amanne.biscuitball.mybatis.UserDTO;
 @RequestMapping("/mypage")
 public class MyPageController
 {
-	
+
 	@Autowired
 	private MypageModel mypage;
-	
-	// 마이페이지 조회
-	@RequestMapping("/mypage")
-	public ModelAndView createMyPage(ModelAndView modelAndView, HttpServletRequest request)
-	{	
-		mypage.myPage(modelAndView, request);
-		return modelAndView;			
-	}
-	
-	@RequestMapping(value="/mypage/mypage", method = {RequestMethod.GET, RequestMethod.POST})
-	public String showMyPage()
-	{	
-		return "/mypage/MyPage";		
-	}
-	
 
+
+	// 마이페이지 조회
+	@RequestMapping("")
+	public String createMyPage()
+	{
+
+		return "redirect:/mypage/myprofile";
+
+	}
+
+
+	@RequestMapping(value = "/myprofile", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView showMyPage(ModelAndView modelAndView, HttpServletRequest request)
+	{
+
+		mypage.myPage(modelAndView, request);
+		return modelAndView;
+
+	}
+
+	@RequestMapping("/account")
+	public String myInfo()
+	{
+		return "/mypage/MyInfo";
+	}
+
+	@RequestMapping("/achievement")
+	public String achievementList()
+	{
+		return "/mypage/Achievement";
+	}
+
+	@RequestMapping("/friend")
+	public String friend()
+	{
+		return "/mypage/Friend";
+	}
+
+	@RequestMapping("/userblock")
+	public String userblock()
+	{
+		return "/mypage/Userblock";
+	}
+	
+	
+	
+	/*
+	 * 심판정보 버튼 미완성 
+	 * 심판정보 버튼 미완성 
+	 * 심판정보 버튼 미완성 
+	 * 심판정보 버튼 미완성 
+	 * 심판정보 버튼 미완성 
+	 * 심판정보 버튼 미완성 
+	 * 심판정보 버튼 미완성 
+	 * 심판정보 버튼 미완성 
+	 * 심판정보 버튼 미완성 
+	 * 심판정보 버튼 미완성 
+	 * 심판정보 버튼 미완성 
+	 * 심판정보 버튼 미완성 
+	 *  */
+	@RequestMapping("/referee")
+	public String referee()
+	{
+		return "";
+	}
 }
