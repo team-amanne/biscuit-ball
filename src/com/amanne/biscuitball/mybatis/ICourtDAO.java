@@ -49,4 +49,8 @@ public interface ICourtDAO
 	public ArrayList<CourtDTO> getCourtListByRegion(@Param("regionCode") String regionCode);	// 특정 광역시도 안의 코트 조회
 	
 	public String getCourtByMapPosition(@Param("posx") String posx, @Param("posy") String posy);	// 좌표로 코드 찾기
+	
+	public int removeCourtReview(String courtReviewCode);	// 코트 리뷰 삭제 처리
+	
+	public int checkCourtReviewWritten(@Param("courtCode") String courtCode, @Param("userAccountCode") String userAccountCode);	// 해당 코트에 코트 리뷰를 작성한 적 있는지 확인
 }

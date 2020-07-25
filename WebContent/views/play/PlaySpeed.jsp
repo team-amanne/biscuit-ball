@@ -47,6 +47,8 @@ $(document).ready(function()
 		$("#frm").attr("action","<%=cp%>/play/meeting").submit();
 	});
 	
+	
+
 	/* 도시, 시군구 선택 */
 	$("#city_select").on("change", function()
      {
@@ -68,6 +70,15 @@ $(document).ready(function()
         });
         
      });
+	
+	$("#region_select").change(function() {
+		/* alert("확인"); */
+	 	$("#citydata").val($("#city_select option:selected").text());
+	 	$("#ragiondata").val($("#region_select option:selected").text());
+	 	alert($("#region_select option:selected").text());
+	});
+	
+	
 	
 });
 
@@ -146,7 +157,8 @@ $(document).ready(function()
 												<c:forEach var="city" items="${regionList }">
 													<option value="${city.regionCode}" />${city.regionName }</option>
 												</c:forEach>
-												</select>
+												</select>												
+												<input type="hidden" name="citydata" id="citydata" value="">
 											</div>
 											<div class="col-md-3 sel-region">
 												<h5 class="region">시·군·구</h5>
@@ -155,6 +167,7 @@ $(document).ready(function()
 												<select class="form-control" id="region_select">
 													<option selected="selected">시·군·구 선택</option>
 												</select>
+												<input type="hidden" name="regiondata" id="ragiondata" value="">
 											</div>
 										</div>
 									</div>

@@ -102,63 +102,63 @@
 
 									<div class="row review form-group">
 										<div class="col-sm-3 col-xs-3">
-											<label for="avgCourtSatisfaction-rating" class="control-label"> 만족도 평가 * </label>
+											<label for="courtReviewSatisfaction-rating" class="control-label"> 만족도 평가 * </label>
 										</div>
 
-										<div id="avgCourtSatisfaction-rating">
+										<div id="courtReviewSatisfaction-rating">
 											<div class="rating-group">
-												<label aria-label="0 stars" class="rating__label" for="avgCourtSatisfaction-0">&nbsp;</label> 
-												<input class="rating__input rating__input--none" name="avgCourtSatisfaction" id="avgCourtSatisfaction-0" value="0" type="radio" checked> 
+												<label aria-label="0 stars" class="rating__label" for="courtReviewSatisfaction-0">&nbsp;</label> 
+												<input class="rating__input rating__input--none" name="courtReviewSatisfaction" id="courtReviewSatisfaction-0" value="0" type="radio" checked> 
 												
-												<label aria-label="0.5 stars" class="rating__label rating__label--half" for="avgCourtSatisfaction-05">
+												<label aria-label="0.5 stars" class="rating__label rating__label--half" for="courtReviewSatisfaction-05">
 													<i class="rating__icon rating__icon--star fa fa-star-half"></i>
 												</label> 
-												<input class="rating__input" name="avgCourtSatisfaction" id="avgCourtSatisfaction-05_1" value="0.5" type="radio"> 
+												<input class="rating__input" name="courtReviewSatisfaction" id="courtReviewSatisfaction-05_1" value="0.5" type="radio"> 
 												
-												<label aria-label="1 star" class="rating__label" for="avgCourtSatisfaction-10_1">
+												<label aria-label="1 star" class="rating__label" for="courtReviewSatisfaction-10_1">
 													<i class="rating__icon rating__icon--star fa fa-star"></i>
 												</label> 
-												<input class="rating__input" name="avgCourtSatisfaction" id="avgCourtSatisfaction-10_1" value="1" type="radio"> 
+												<input class="rating__input" name="courtReviewSatisfaction" id="courtReviewSatisfaction-10_1" value="1" type="radio"> 
 												
-												<label aria-label="1.5 stars" class="rating__label rating__label--half" for="avgCourtSatisfaction-15_1">
+												<label aria-label="1.5 stars" class="rating__label rating__label--half" for="courtReviewSatisfaction-15_1">
 													<i class="rating__icon rating__icon--star fa fa-star-half"></i>
 												</label> 
-												<input class="rating__input" name="avgCourtSatisfaction" id="avgCourtSatisfaction-15_1" value="1.5" type="radio"> 
+												<input class="rating__input" name="courtReviewSatisfaction" id="courtReviewSatisfaction-15_1" value="1.5" type="radio"> 
 												
-												<label aria-label="2 stars" class="rating__label" for="avgCourtSatisfaction-20_1">
+												<label aria-label="2 stars" class="rating__label" for="courtReviewSatisfaction-20_1">
 													<i class="rating__icon rating__icon--star fa fa-star"></i>
 												</label> 
-												<input class="rating__input" name="avgCourtSatisfaction" id="avgCourtSatisfaction-20_1" value="2" type="radio">
+												<input class="rating__input" name="courtReviewSatisfaction" id="courtReviewSatisfaction-20_1" value="2" type="radio">
 												
-												<label aria-label="2.5 stars" class="rating__label rating__label--half" for="avgCourtSatisfaction-25_1">
+												<label aria-label="2.5 stars" class="rating__label rating__label--half" for="courtReviewSatisfaction-25_1">
 													<i class="rating__icon rating__icon--star fa fa-star-half"></i>
 												</label> 
-												<input class="rating__input" name="avgCourtSatisfaction" id="avgCourtSatisfaction-25_1" value="2.5" type="radio"> 
+												<input class="rating__input" name="courtReviewSatisfaction" id="courtReviewSatisfaction-25_1" value="2.5" type="radio"> 
 												
-												<label aria-label="3 stars" class="rating__label" for="avgCourtSatisfaction-30_1">
+												<label aria-label="3 stars" class="rating__label" for="courtReviewSatisfaction-30_1">
 													<i class="rating__icon rating__icon--star fa fa-star"></i>
 												</label> 
-												<input class="rating__input" name="avgCourtSatisfaction" id="avgCourtSatisfaction-30_1" value="3" type="radio"> 
+												<input class="rating__input" name="courtReviewSatisfaction" id="courtReviewSatisfaction-30_1" value="3" type="radio"> 
 												
-												<label aria-label="3.5 stars" class="rating__label rating__label--half" for="avgCourtSatisfaction-35_1">
+												<label aria-label="3.5 stars" class="rating__label rating__label--half" for="courtReviewSatisfaction-35_1">
 													<i class="rating__icon rating__icon--star fa fa-star-half"></i>
 												</label> 
-												<input class="rating__input" name="avgCourtSatisfaction" id="avgCourtSatisfaction-35_1" value="3.5" type="radio"> 
+												<input class="rating__input" name="courtReviewSatisfaction" id="courtReviewSatisfaction-35_1" value="3.5" type="radio"> 
 												
-												<label aria-label="4 stars" class="rating__label" for="avgCourtSatisfaction-40_1">
+												<label aria-label="4 stars" class="rating__label" for="courtReviewSatisfaction-40_1">
 													<i class="rating__icon rating__icon--star fa fa-star"></i>
 												</label> 
-												<input class="rating__input" name="avgCourtSatisfaction" id="avgCourtSatisfaction-40_1" value="4" type="radio"> 
+												<input class="rating__input" name="courtReviewSatisfaction" id="courtReviewSatisfaction-40_1" value="4" type="radio"> 
 												
-												<label aria-label="4.5 stars" class="rating__label rating__label--half" for="avgCourtSatisfaction-45_1">
+												<label aria-label="4.5 stars" class="rating__label rating__label--half" for="courtReviewSatisfaction-45_1">
 													<i class="rating__icon rating__icon--star fa fa-star-half"></i>
 												</label> 
-												<input class="rating__input" name="avgCourtSatisfaction" id="avgCourtSatisfaction-45_1" value="4.5" type="radio"> 
+												<input class="rating__input" name="courtReviewSatisfaction" id="courtReviewSatisfaction-45_1" value="4.5" type="radio"> 
 												
-												<label aria-label="5 stars" class="rating__label" for="avgCourtSatisfaction-50_1">
+												<label aria-label="5 stars" class="rating__label" for="courtReviewSatisfaction-50_1">
 													<i class="rating__icon rating__icon--star fa fa-star"></i>
 												</label> 
-												<input class="rating__input" name="avgCourtSatisfaction" id="avgCourtSatisfaction-50_1" value="5" type="radio">
+												<input class="rating__input" name="courtReviewSatisfaction" id="courtReviewSatisfaction-50_1" value="5" type="radio">
 											</div>
 										</div>
 
@@ -168,62 +168,62 @@
 
 									<div class="row review form-group">
 										<div class="col-sm-3 col-xs-3">
-											<label for="avgCourtManageScore-rating" class="control-label"> 시설 평가 * </label>
+											<label for="courtReviewManageScore-rating" class="control-label"> 시설 평가 * </label>
 										</div>
-										<div id="avgCourtManageScore-rating">
+										<div id="courtReviewManageScore-rating">
 											<div class="rating-group">
-												<label aria-label="0 stars" class="rating__label" for="avgCourtManageScore-0">&nbsp;</label> 
-												<input class="rating__input rating__input--none" name="avgCourtManageScore" id="avgCourtManageScore-0" value="0" type="radio" checked>
+												<label aria-label="0 stars" class="rating__label" for="courtReviewManageScore-0">&nbsp;</label> 
+												<input class="rating__input rating__input--none" name="courtReviewManageScore" id="courtReviewManageScore-0" value="0" type="radio" checked>
 												
-												<label aria-label="0.5 stars" class="rating__label rating__label--half" for="avgCourtManageScore-05">
+												<label aria-label="0.5 stars" class="rating__label rating__label--half" for="courtReviewManageScore-05">
 													<i class="rating__icon rating__icon--star fa fa-star-half"></i>
 												</label> 
-												<input class="rating__input" name="avgCourtManageScore" id="avgCourtManageScore-05" value="0.5" type="radio"> 
+												<input class="rating__input" name="courtReviewManageScore" id="courtReviewManageScore-05" value="0.5" type="radio"> 
 												
-												<label aria-label="1 star" class="rating__label" for="avgCourtManageScore-10">
+												<label aria-label="1 star" class="rating__label" for="courtReviewManageScore-10">
 													<i class="rating__icon rating__icon--star fa fa-star"></i>
 												</label> 
-												<input class="rating__input" name="avgCourtManageScore" id="avgCourtManageScore-10" value="1" type="radio"> 
+												<input class="rating__input" name="courtReviewManageScore" id="courtReviewManageScore-10" value="1" type="radio"> 
 												
-												<label aria-label="1.5 stars" class="rating__label rating__label--half" for="avgCourtManageScore-15">
+												<label aria-label="1.5 stars" class="rating__label rating__label--half" for="courtReviewManageScore-15">
 													<i class="rating__icon rating__icon--star fa fa-star-half"></i>
 												</label> 
-												<input class="rating__input" name="avgCourtManageScore" id="avgCourtManageScore-15" value="1.5" type="radio"> 
+												<input class="rating__input" name="courtReviewManageScore" id="courtReviewManageScore-15" value="1.5" type="radio"> 
 												
-												<label aria-label="2 stars" class="rating__label" for="avgCourtManageScore-20">
+												<label aria-label="2 stars" class="rating__label" for="courtReviewManageScore-20">
 													<i class="rating__icon rating__icon--star fa fa-star"></i>
 												</label> 
-												<input class="rating__input" name="avgCourtManageScore" id="avgCourtManageScore-20" value="2" type="radio"> 
+												<input class="rating__input" name="courtReviewManageScore" id="courtReviewManageScore-20" value="2" type="radio"> 
 												
-												<label aria-label="2.5 stars" class="rating__label rating__label--half" for="avgCourtManageScore-25">
+												<label aria-label="2.5 stars" class="rating__label rating__label--half" for="courtReviewManageScore-25">
 													<i class="rating__icon rating__icon--star fa fa-star-half"></i>
 												</label> 
-												<input class="rating__input" name="avgCourtManageScore" id="avgCourtManageScore-25" value="2.5" type="radio"> 
+												<input class="rating__input" name="courtReviewManageScore" id="courtReviewManageScore-25" value="2.5" type="radio"> 
 												
-												<label aria-label="3 stars" class="rating__label" for="avgCourtManageScore-30">
+												<label aria-label="3 stars" class="rating__label" for="courtReviewManageScore-30">
 													<i class="rating__icon rating__icon--star fa fa-star"></i>
 												</label> 
-												<input class="rating__input" name="avgCourtManageScore" id="avgCourtManageScore-30" value="3" type="radio"> 
+												<input class="rating__input" name="courtReviewManageScore" id="courtReviewManageScore-30" value="3" type="radio"> 
 												
-												<label aria-label="3.5 stars" class="rating__label rating__label--half" for="avgCourtManageScore-35">
+												<label aria-label="3.5 stars" class="rating__label rating__label--half" for="courtReviewManageScore-35">
 													<i class="rating__icon rating__icon--star fa fa-star-half"></i>
 												</label> 
-												<input class="rating__input" name="avgCourtManageScore" id="avgCourtManageScore-35" value="3.5" type="radio"> 
+												<input class="rating__input" name="courtReviewManageScore" id="courtReviewManageScore-35" value="3.5" type="radio"> 
 												
-												<label aria-label="4 stars" class="rating__label" for="avgCourtManageScore-40">
+												<label aria-label="4 stars" class="rating__label" for="courtReviewManageScore-40">
 													<i class="rating__icon rating__icon--star fa fa-star"></i>
 												</label> 
-												<input class="rating__input" name="avgCourtManageScore" id="avgCourtManageScore-40" value="4" type="radio"> 
+												<input class="rating__input" name="courtReviewManageScore" id="courtReviewManageScore-40" value="4" type="radio"> 
 												
-												<label aria-label="4.5 stars" class="rating__label rating__label--half" for="avgCourtManageScore-45">
+												<label aria-label="4.5 stars" class="rating__label rating__label--half" for="courtReviewManageScore-45">
 													<i class="rating__icon rating__icon--star fa fa-star-half"></i>
 												</label> 
-												<input class="rating__input" name="avgCourtManageScore" id="avgCourtManageScore-45" value="4.5" type="radio"> 
+												<input class="rating__input" name="courtReviewManageScore" id="courtReviewManageScore-45" value="4.5" type="radio"> 
 												
-												<label aria-label="5 stars" class="rating__label" for="avgCourtManageScore-50">
+												<label aria-label="5 stars" class="rating__label" for="courtReviewManageScore-50">
 													<i class="rating__icon rating__icon--star fa fa-star"></i>
 												</label> 
-												<input class="rating__input" name="avgCourtManageScore" id="avgCourtManageScore-50" value="5" type="radio">
+												<input class="rating__input" name="courtReviewManageScore" id="courtReviewManageScore-50" value="5" type="radio">
 											</div>
 										</div>
 
@@ -317,12 +317,12 @@
 				return;
 			}
 			
-			if(!document.courtReviewRegisterForm.avgCourtSatisfaction.value || document.courtReviewRegisterForm.avgCourtSatisfaction.value == "0") {
+			if(!document.courtReviewRegisterForm.courtReviewSatisfaction.value || document.courtReviewRegisterForm.courtReviewSatisfaction.value == "0") {
 				alert("만족도 평가를 선택해주세요.");
 				return;
 			}
 
-			if(!document.courtReviewRegisterForm.avgCourtManageScore.value || document.courtReviewRegisterForm.avgCourtManageScore.value == "0") {
+			if(!document.courtReviewRegisterForm.courtReviewManageScore.value || document.courtReviewRegisterForm.courtReviewManageScore.value == "0") {
 				alert("시설 평가를 선택해주세요.");
 				return;
 			}

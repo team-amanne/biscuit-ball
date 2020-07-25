@@ -112,6 +112,7 @@ String cp = request.getContextPath();
 											<span class="game-endTime">17:00</span>
 										</h5>
 									</div>
+
 								</div>
 							</div>
 						</div>
@@ -193,7 +194,5 @@ String cp = request.getContextPath();
 					</div>
 				</div>
 			</div>
-			
-			
 
 </html>

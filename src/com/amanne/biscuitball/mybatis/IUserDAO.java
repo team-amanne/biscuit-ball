@@ -91,5 +91,5 @@ public interface IUserDAO
 	public int countFriendList(String userAccountCode); // 특정 유저 친구 수
 	
 	public ArrayList<UserDTO> getBlockUserList(@Param("userAccountCode")String userAccountCode, @Param("start") int start, @Param("end") int end); // 특정 유저 블락유저 조회
-
+	
 }

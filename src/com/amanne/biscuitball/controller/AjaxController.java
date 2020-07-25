@@ -49,7 +49,7 @@ public class AjaxController
 	}
 	
 	@RequestMapping("/check/nickname")
-	public String checkCrewname(Model model, @RequestParam("nickname") String nickname)
+	public String checkNickname(Model model, @RequestParam("nickname") String nickname)
 	{
 		String view = null;
 		
