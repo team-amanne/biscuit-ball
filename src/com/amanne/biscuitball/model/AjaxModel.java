@@ -191,7 +191,6 @@ public class AjaxModel
 	public String getCourtCodeByPosition(String posx, String posy)
 	{
 		ICourtDAO dao = sqlSession.getMapper(ICourtDAO.class);
-		System.out.println(posx+","+posy);
 		
 		String courtCode = dao.getCourtByMapPosition(posx, posy);
 		
@@ -245,17 +244,19 @@ public class AjaxModel
 	}
 	
 	// 함께농구 모임 리스트 반환(모임 일시, 모임 타입, 코트)
-	public String getMeetingListByTogetherPlay( String courtRegistrationCode, String meetingDate, String meetingTypeCode,  int start,  int end)
+	public String getMeetingListByTogetherPlay( String courtRegistrationCode, String meetingDate, String meetingTypeCode, int start, int end)
 	{
 		IMeetingDAO dao = sqlSession.getMapper(IMeetingDAO.class);
+		System.out.println(courtRegistrationCode+" "+meetingDate+" "+meetingTypeCode+" "+start+" "+end);
 		ArrayList<MeetingDTO> list = dao.getMeetingListByCityDate(courtRegistrationCode, meetingDate, meetingTypeCode, start, end);
 		JSONArray arr = new JSONArray();
 		JSONObject obj = null;
 		
+		
 		for(MeetingDTO dto : list)
 		{
 			obj = new JSONObject();
-			
+			System.out.println(dto.getMeetingDate());
 			obj.put("meetingCode",dto.getMeetingCode() );
 			obj.put("meetingSubject", dto.getMeetingSubject() );
 			obj.put("meetingPeopleNumber", dto.getMeetingPeopleNumber() );
