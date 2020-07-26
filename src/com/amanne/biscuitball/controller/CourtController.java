@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.amanne.biscuitball.model.CourtModel;
 import com.amanne.biscuitball.model.UserInfo;
-import com.amanne.biscuitball.mybatis.AdminDTO;
 import com.amanne.biscuitball.mybatis.CourtDTO;
 import com.amanne.biscuitball.mybatis.CourtDeleteRequestDTO;
 import com.amanne.biscuitball.mybatis.CourtNameDTO;
@@ -185,9 +184,9 @@ public class CourtController
 	public String deleteCourt(Model model, @PathVariable("courtCode") String courtCode)
 	{
 		String view = "redirect:/court/" + courtCode;
-		AdminDTO info = (AdminDTO)session.getAttribute("adminInfo");
-		
-		if( courtModel.deleteCourtAdmin(info.getAdminCode(), courtCode) != 1)
+		UserInfo info = (UserInfo)session.getAttribute("adminInfo");
+
+		if( courtModel.deleteCourtAdmin(info.getUserCode(), courtCode) != 1)
 			view += "?requestResult=fail";
 		
 		return view;

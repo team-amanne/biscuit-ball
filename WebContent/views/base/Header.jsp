@@ -99,20 +99,9 @@
 							<li class="dropdown box text-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-user left"></span> <span class="box-content left">${sessionScope.adminInfo.userNickname }</span> <span class="caret"></span>
 							</a>
 								<ul class="dropdown-menu" role="menu">
-									<li><a href="#">모임관리</a></li>
+									<li><a href="#">계정정보 수정</a></li>
 									<li class="divider"></li>
-									<li><a href="#">내 코트 가기</a></li>
-									<li><a href="#">내 크루 가기</a></li>
-									<li class="divider"></li>
-									<li><span>마이페이지</span></li>
-									<li><a href="#">내 프로필</a></li>
-									<li><a href="#">회원정보 수정</a></li>
-									<li><a href="#">메시지함</a></li>
-									<li><a href="#">업적관리</a></li>
-									<li><a href="#">친구관리</a></li>
-									<li><a href="#">차단관리</a></li>
-									<li class="divider"></li>
-									<li><a href="#" id="adminLogout">로그아웃</a></li>
+									<li><a href="<%=cp %>/logout">로그아웃</a></li>
 								</ul></li>
 
 						</c:when>
@@ -160,8 +149,8 @@
 
 					<c:otherwise>
 
-						<li><a href="#" class="btn btn-default">로그인</a></li>
-						<li><a href="#" class="btn btn-register">회원가입</a></li>
+						<li><a href="<%=cp %>/login" class="btn btn-default">로그인</a></li>
+						<li><a href="<%=cp %>/signup" class="btn btn-register">회원가입</a></li>
 
 					</c:otherwise>
 
@@ -195,7 +184,7 @@
 				</ul>
 			</div>
 
-			<c:if test="${1==0 }">
+			<c:if test="${sessionScope.userInfo != null }">
 
 				<!-- 모바일 유저 아이콘 클릭했을 때 확장되는 화면 -->
 				<div class="collapse navbar-collapse" id="display-sm-collapse-user">
@@ -212,10 +201,22 @@
 						<li><a href="#">친구관리</a></li>
 						<li><a href="#">차단관리</a></li>
 						<li class="divider"></li>
-						<li><a href="#" id="MobileUserLogout">로그아웃</a></li>
+						<li><a href="<%=cp %>/logout">로그아웃</a></li>
 					</ul>
 				</div>
 
+			</c:if>
+
+			<c:if test="${sessionScope.adminInfo != null }">
+
+				<!-- 모바일 유저 아이콘 클릭했을 때 확장되는 화면 -->
+				<div class="collapse navbar-collapse" id="display-sm-collapse-user">
+					<ul class="nav navbar-nav">
+						<li><a href="#">계정정보 수정</a></li>
+						<li class="divider"></li>
+						<li><a href="<%=cp %>/logout">로그아웃</a></li>
+					</ul>
+				</div>
 
 			</c:if>
 

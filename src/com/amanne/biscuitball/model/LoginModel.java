@@ -21,7 +21,6 @@ public class LoginModel
    {
       UserInfo userInfo = new UserInfo();
       
-      
       IAdminDAO adminDao = sqlSession.getMapper(IAdminDAO.class);
       adminDao.loginAsAdmin(loginDto);
       String returnValue = loginDto.getReturnValue();
@@ -32,7 +31,6 @@ public class LoginModel
       }
       else
       {
-    	  System.out.println(returnValue);
          AdminDTO adminDto = adminDao.getAdmin(returnValue);
          userInfo.setUserCode(adminDto.getAdminCode());
          userInfo.setUserNickname(adminDto.getAdminNickname());
