@@ -250,7 +250,7 @@ $(document).ready(function()
                               <span>내 코트</span>
                            </div>
                            <div class="col-sm-4 col-xs-4 panel-body">
-                              <a href="#" class="icon_connect"><i class="fas fa-map-marked-alt"></i></a>
+                              <a href="<%=cp %>/court/${user.userCourtCode}" class="icon_connect"><i class="fas fa-map-marked-alt"></i></a>
                               <span class="user_item">${user.userCourtName}</span>
                            </div>
                         </div>
