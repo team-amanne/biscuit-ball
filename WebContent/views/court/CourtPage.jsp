@@ -586,7 +586,7 @@
 		
 		$("#btnMyCourt").click(function () {
 			if(confirm("내 코트로 등록하시겠습니까?"))
-				$(location).attr("href", "<%=cp %>/mypage/updateusercourt?userCourtCode=${court.courtCode }");
+				$(location).attr("href", "<%=cp %>/mypage/updateuser?userCourtCode=${court.courtCode }");
 		});
 		
 		$("#btnDelReq").click(function () {

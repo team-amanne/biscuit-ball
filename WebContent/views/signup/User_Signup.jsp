@@ -244,6 +244,8 @@ String cp = request.getContextPath();
       $(function() {       
           
     	  
+    	  
+    	  
          // 이메일 유효성검사
          $("#email_certify").click( function() {
              var email = $('#userEmail').val();
@@ -448,6 +450,9 @@ String cp = request.getContextPath();
          
          // submit시 발생 
          $("#sign_up").click(function() {
+        	 
+        	
+        	 
         	 var str = $("#tel1").val() + "-" + $("#tel2").val() + "-" + $("#tel3").val();  
         	 
         	$("#userTel").val(str);
@@ -567,7 +572,6 @@ String cp = request.getContextPath();
             	{
                   $("#position_check").text("");
             	}
-            
 
             	$("#signUp_submit").submit();
                        
@@ -756,13 +760,13 @@ String cp = request.getContextPath();
                <div class="col-sm-3 col-xs-3">
                   <select name="" class="form-control" id="regionSelect">
 						<option value="">광역시·도</option>
-						<c:forEach var="regionDto" items="${regionList }">
-						<option value="${regionDto.regionCode }">${regionDto.regionName }</option>
+						<c:forEach var="regionDto"  items="${regionList }">
+						<option value="${regionDto.regionCode }">${regionDto.regionName } </option>
 						</c:forEach>
 				</select>
                </div>
                <div class="col-sm-3 col-xs-3">
-					<select name="" class="form-control" id="citySelect">
+					<select class="form-control" name='userCityCode' id="citySelect">
 											
 					</select>
 			</div>

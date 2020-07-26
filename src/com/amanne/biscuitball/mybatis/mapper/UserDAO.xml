@@ -15,7 +15,7 @@
 			    #{userPassword},
 			    #{userName},
 			    #{userNickname},
-			    #{userBirtday},
+			    #{userBirthday},
 			    #{userGenderCode},
 			    #{userHeight},
 			    #{selfEvaluationType},
