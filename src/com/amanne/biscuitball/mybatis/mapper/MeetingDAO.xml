@@ -352,6 +352,7 @@
 		, MIN_TIER as minTierCode
 		, MAX_TIER as maxTierCode
 		, CONFIRM_OR_NOT as confirmOrNot
+		, CAPTAINCODE as captainAcctCode
 		, CAPTAINNAME as captainName
 		FROM 
 		(
@@ -374,6 +375,13 @@
 		                WHERE CAPTAIN_OR_NOT = 'YES'
 		                AND MEET_CODE = MT.MEET_CODE
 		            ) as CAPTAINNAME
+		            ,
+		            (
+		                SELECT JOIN_ACCT_CODE
+		                FROM VIEW_MEETING_JOIN
+		                WHERE CAPTAIN_OR_NOT = 'YES'
+		                AND MEET_CODE = MT.MEET_CODE
+		            ) as CAPTAINCODE
 		            FROM VIEW_MEETING MT
 		            WHERE MT.CONFIRM_OR_NOT = 'N0'
 		              AND MT.COURT_REG_CODE = #{courtRegistrationCode}

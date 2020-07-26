@@ -153,6 +153,9 @@ String cp = request.getContextPath();
 		      }
 		});
 	      
+	      $('#meetingSubject').attr("href", "<%=cp%>/play/meeting/")
+	      
+	      
 	      
 	      
 	      // ajax() 사용해 시군구 불러오기
@@ -592,11 +595,13 @@ $(function()
 				for (var i=0; i<data.length; i++)
 				{
 					listPrint += "<li class='list-group-item board-body'><div class='row'><div class='col-md-4 col-xs-4'>";
-					listPrint += "<span>"+ data[i].meetingSubject+ "</span>";
+					listPrint += "<span id='meetingSubject'>"+ data[i].meetingSubject+ "</span>";
+					$('#meetingSubject').attr("href", "<%=cp%>/play/meeting/"+ data[i].meetingCode);
 					listPrint += "</div><div class='col-md-2 col-xs-2'>";
-					listPrint += "<span>"+ data[i].captainName+ "</span>";
+					listPrint += "<span id='captainName'>"+ data[i].captainName+ "</span>";
 					listPrint += "</div><div class='col-md-3 col-xs-3'>";
-					listPrint += "<span>"+ $("#courtName").text()+ "</span>";
+					listPrint += "<span id='courtName'>"+ $("#courtName").text()+ "</span>";
+					$('#courtName').attr("href", "<%=cp%>/play/meeting/"+ data[i].courtRegistrationCode);
 					listPrint += "</div><div class='col-md-2 col-xs-2'>";
 					listPrint += "<span>"+ data[i].meetingDate+ "</span>";
 					listPrint += "</div><div class='col-md-1 col-xs-1'>";
