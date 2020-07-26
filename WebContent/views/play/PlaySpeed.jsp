@@ -35,11 +35,7 @@ String cp = request.getContextPath();
 
 $(document).ready(function()
 {
-	$("#Speed_create").click(function()
-	{
-		
-		$("#frm").submit();
-	});
+
 	
 	$("#Speed_join").click(function()
 	{	
@@ -50,7 +46,7 @@ $(document).ready(function()
 	
 
 	/* 도시, 시군구 선택 */
-	$("#city_select").on("change", function()
+	$("#region_select").on("change", function()
      {
         $.ajax({
            type: "get",
@@ -62,24 +58,43 @@ $(document).ready(function()
               for(var i=0; i<data.length; i++)
                  result += "<option value='" + data[i].cityCode +"'>" + data[i].cityName + "</option>\n";
               
-              $("#region_select").html(result);
+              $("#city_select").html(result);
            },
            error: function(e){
               alert(e.responseText);
            }
         });
+        return false;
         
      });
 	
-	$("#region_select").change(function() {
-		/* alert("확인"); */
+	$("#city_select").change(function() {	 	
+	 	$("#regiondata").val($("#region_select option:selected").text());
+	 	alert($("#city_select option:selected").val())
 	 	$("#citydata").val($("#city_select option:selected").text());
-	 	$("#ragiondata").val($("#region_select option:selected").text());
-	 	alert($("#region_select option:selected").text());
 	});
+
+	
+	$("#Speed_create").on("click", function() {
+		
+		if($(':radio[name="game_type"]:checked').length < 1 || $(':radio[name="ball"]:checked').length < 1){
+		    alert('카테고리를 선택해주세요');
+		    return false;
+		   
+		}
+		if( $("#city_select").val() == "" ||  $("#city_select").val() == "시·군·구 선택" ) 
+	    {
+	       alert('지역을 선택해주세요');
+	       $("#city_select").focus();
+	       return false;
+	    }
+		
+		
+		$("#frm").submit();		
+	});	
 	
 	
-	
+
 });
 
 </script>
@@ -117,10 +132,10 @@ $(document).ready(function()
 										</div>
 										<div class="panel-body game_type_align">
 											<label for="rank" class="radio-inline">
-												<input type="radio" name="game_type" id="rank" value="rank" /> 경기
+												<input type="radio" name="game_type" id="rank" value="rank" value="1"/> 경기
 											</label>
 											<label for="normal" class="radio-inline">
-												<input type="radio" name="game_type" id="normal" value="normal"  /> 일반
+												<input type="radio" name="game_type" id="normal" value="normal" value="0" /> 일반
 											</label>
 										</div>
 									</div>									
@@ -152,22 +167,22 @@ $(document).ready(function()
 												<h5 class="region">광역시·도</h5>
 											</div>
 											<div class="col-md-3">
-												<select class="form-control" id="city_select" name="city_select">
+												<select class="form-control" id="region_select" name="region_select">
 													<option selected="selected">광역시·도 선택</option>
 												<c:forEach var="city" items="${regionList }">
-													<option value="${city.regionCode}" />${city.regionName }</option>
+													<option value="${city.regionCode}">${city.regionName }</option>
 												</c:forEach>
 												</select>												
-												<input type="hidden" name="citydata" id="citydata" value="">
+												<input type="hidden" name="regiondata" id="regiondata" value="">
 											</div>
 											<div class="col-md-3 sel-region">
 												<h5 class="region">시·군·구</h5>
 											</div>
 											<div class="col-md-3">
-												<select class="form-control" id="region_select">
+												<select class="form-control" id="city_select" name="city_select">
 													<option selected="selected">시·군·구 선택</option>
 												</select>
-												<input type="hidden" name="regiondata" id="ragiondata" value="">
+												<input type="hidden" name="citydata" id="citydata" value="">
 											</div>
 										</div>
 									</div>

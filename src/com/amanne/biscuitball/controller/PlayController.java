@@ -70,6 +70,13 @@ public class PlayController
 	   playModel.courtFounder(modelAndView, request);
 	   return  modelAndView;
    }
+    
+   @RequestMapping(value="/meeting/create/select", method = {RequestMethod.GET, RequestMethod.POST})
+   public String playCourtSearch()
+   {
+	   
+	   return  "/play/PlaySpeed_pu02";
+   }
    
    
    // 빠른농구 참여

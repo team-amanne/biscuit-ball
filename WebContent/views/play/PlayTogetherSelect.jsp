@@ -202,13 +202,12 @@ String cp = request.getContextPath();
 								<div class="panel panel-default">
 									<div class="panel-heading panel-head">경기/일반 선택</div>
 									<div class="panel-body">
-										<label class="radio-inline radio"> 
-										<input type="radio"
-											name="meetingType" id="inlineRadio1" value="ZL01">
-											시합
+										<label class="radio-inline radio"> <input type="radio"
+											name="inlineRadioOptions" id="inlineRadio1" value="option1">
+											경기
 										</label> <label class="radio-inline radio"> <input
 											type="radio" name="inlineRadioOptions" id="inlineRadio2"
-											value="ZL02"> 일반
+											value="option2"> 일반
 										</label>
 									</div>
 								</div>
@@ -217,7 +216,7 @@ String cp = request.getContextPath();
 									<div class="panel-body">
 										<div class="input-group">
 											<input type="text" class="form-control" placeholder=""
-												id="dateselect1"> <select class="form-control" id="timeselect">
+												id="dateselect1"> <select class="form-control">
 												<c:forEach var="i" begin="0" end="24">
 													<option value="${i}">
 														<c:choose>
@@ -333,7 +332,7 @@ String cp = request.getContextPath();
 											</ul>
 
 											<div class="col-md-12 btn-serach">
-												<button class="btn btn-default btn-block btn-lg" id="playSearch">
+												<button class="btn btn-default btn-block btn-lg">
 													함께농구 검색</button>
 												<button class="btn btn-default btn-block btn-lg">
 													함께농구 개설</button>
@@ -363,8 +362,249 @@ String cp = request.getContextPath();
 								<hr>
 							</div>
 						</div>
-						<ul class="list-group" id="meetingList">
-							<!-- 게시판 출력 영역 -->
+						<ul class="list-group">
+							<li class="list-group-item board-body board-header">
+								<div class="row">
+									<div class="col-sm-1 col-xs-1">
+										<span>번호</span>
+									</div>
+									<div class="col-md-3 col-xs-3">
+										<span>제목</span>
+									</div>
+									<div class="col-md-2 col-xs-2">
+										<span>주장</span>
+									</div>
+									<div class="col-md-3 col-xs-3">
+										<span>장소</span>
+									</div>
+									<div class="col-md-2 col-xs-2">
+										<span>일시</span>
+									</div>
+									<div class="col-md-1 col-xs-1">
+										<span>인원</span>
+									</div>
+								</div>
+							</li>
+							<li class="list-group-item board-body">
+								<div class="row">
+									<div class="col-sm-1 col-xs-1">
+										<span>1</span>
+									</div>
+									<div class="col-md-3 col-xs-3">
+										<span>안녕하십니까 한판합시다</span>
+									</div>
+									<div class="col-md-2 col-xs-2">
+										<span>아맞네짱</span>
+									</div>
+									<div class="col-md-3 col-xs-3">
+										<span>서울 마포구 쌍용코트</span>
+									</div>
+									<div class="col-md-2 col-xs-2">
+										<span>2020-07-17 12:00</span>
+									</div>
+									<div class="col-md-1 col-xs-1">
+										<span>3/4</span>
+									</div>
+								</div>
+							</li>
+							<li class="list-group-item board-body">
+								<div class="row">
+									<div class="col-sm-1 col-xs-1">
+										<span>1</span>
+									</div>
+									<div class="col-md-3 col-xs-3">
+										<span>안녕하십니까 한판합시다</span>
+									</div>
+									<div class="col-md-2 col-xs-2">
+										<span>아맞네짱</span>
+									</div>
+									<div class="col-md-3 col-xs-3">
+										<span>서울 마포구 쌍용코트</span>
+									</div>
+									<div class="col-md-2 col-xs-2">
+										<span>2020-07-17 12:00</span>
+									</div>
+									<div class="col-md-1 col-xs-1">
+										<span>3/4</span>
+									</div>
+								</div>
+							</li>
+							<li class="list-group-item board-body">
+								<div class="row">
+									<div class="col-sm-1 col-xs-1">
+										<span>1</span>
+									</div>
+									<div class="col-md-3 col-xs-3">
+										<span>안녕하십니까 한판합시다</span>
+									</div>
+									<div class="col-md-2 col-xs-2">
+										<span>아맞네짱</span>
+									</div>
+									<div class="col-md-3 col-xs-3">
+										<span>서울 마포구 쌍용코트</span>
+									</div>
+									<div class="col-md-2 col-xs-2">
+										<span>2020-07-17 12:00</span>
+									</div>
+									<div class="col-md-1 col-xs-1">
+										<span>3/4</span>
+									</div>
+								</div>
+							</li>
+							<li class="list-group-item board-body">
+								<div class="row">
+									<div class="col-sm-1 col-xs-1">
+										<span>1</span>
+									</div>
+									<div class="col-md-3 col-xs-3">
+										<span>안녕하십니까 한판합시다</span>
+									</div>
+									<div class="col-md-2 col-xs-2">
+										<span>아맞네짱</span>
+									</div>
+									<div class="col-md-3 col-xs-3">
+										<span>서울 마포구 쌍용코트</span>
+									</div>
+									<div class="col-md-2 col-xs-2">
+										<span>2020-07-17 12:00</span>
+									</div>
+									<div class="col-md-1 col-xs-1">
+										<span>3/4</span>
+									</div>
+								</div>
+							</li>
+							<li class="list-group-item board-body">
+								<div class="row">
+									<div class="col-sm-1 col-xs-1">
+										<span>1</span>
+									</div>
+									<div class="col-md-3 col-xs-3">
+										<span>안녕하십니까 한판합시다</span>
+									</div>
+									<div class="col-md-2 col-xs-2">
+										<span>아맞네짱</span>
+									</div>
+									<div class="col-md-3 col-xs-3">
+										<span>서울 마포구 쌍용코트</span>
+									</div>
+									<div class="col-md-2 col-xs-2">
+										<span>2020-07-17 12:00</span>
+									</div>
+									<div class="col-md-1 col-xs-1">
+										<span>3/4</span>
+									</div>
+								</div>
+							</li>
+							<li class="list-group-item board-body">
+								<div class="row">
+									<div class="col-sm-1 col-xs-1">
+										<span>1</span>
+									</div>
+									<div class="col-md-3 col-xs-3">
+										<span>안녕하십니까 한판합시다</span>
+									</div>
+									<div class="col-md-2 col-xs-2">
+										<span>아맞네짱</span>
+									</div>
+									<div class="col-md-3 col-xs-3">
+										<span>서울 마포구 쌍용코트</span>
+									</div>
+									<div class="col-md-2 col-xs-2">
+										<span>2020-07-17 12:00</span>
+									</div>
+									<div class="col-md-1 col-xs-1">
+										<span>3/4</span>
+									</div>
+								</div>
+							</li>
+							<li class="list-group-item board-body">
+								<div class="row">
+									<div class="col-sm-1 col-xs-1">
+										<span>1</span>
+									</div>
+									<div class="col-md-3 col-xs-3">
+										<span>안녕하십니까 한판합시다</span>
+									</div>
+									<div class="col-md-2 col-xs-2">
+										<span>아맞네짱</span>
+									</div>
+									<div class="col-md-3 col-xs-3">
+										<span>서울 마포구 쌍용코트</span>
+									</div>
+									<div class="col-md-2 col-xs-2">
+										<span>2020-07-17 12:00</span>
+									</div>
+									<div class="col-md-1 col-xs-1">
+										<span>3/4</span>
+									</div>
+								</div>
+							</li>
+							<li class="list-group-item board-body">
+								<div class="row">
+									<div class="col-sm-1 col-xs-1">
+										<span>1</span>
+									</div>
+									<div class="col-md-3 col-xs-3">
+										<span>안녕하십니까 한판합시다</span>
+									</div>
+									<div class="col-md-2 col-xs-2">
+										<span>아맞네짱</span>
+									</div>
+									<div class="col-md-3 col-xs-3">
+										<span>서울 마포구 쌍용코트</span>
+									</div>
+									<div class="col-md-2 col-xs-2">
+										<span>2020-07-17 12:00</span>
+									</div>
+									<div class="col-md-1 col-xs-1">
+										<span>3/4</span>
+									</div>
+								</div>
+							</li>
+							<li class="list-group-item board-body">
+								<div class="row">
+									<div class="col-sm-1 col-xs-1">
+										<span>1</span>
+									</div>
+									<div class="col-md-3 col-xs-3">
+										<span>안녕하십니까 한판합시다</span>
+									</div>
+									<div class="col-md-2 col-xs-2">
+										<span>아맞네짱</span>
+									</div>
+									<div class="col-md-3 col-xs-3">
+										<span>서울 마포구 쌍용코트</span>
+									</div>
+									<div class="col-md-2 col-xs-2">
+										<span>2020-07-17 12:00</span>
+									</div>
+									<div class="col-md-1 col-xs-1">
+										<span>3/4</span>
+									</div>
+								</div>
+							</li>
+							<li class="list-group-item board-body">
+								<div class="row">
+									<div class="col-sm-1 col-xs-1">
+										<span>1</span>
+									</div>
+									<div class="col-md-3 col-xs-3">
+										<span>안녕하십니까 한판합시다</span>
+									</div>
+									<div class="col-md-2 col-xs-2">
+										<span>아맞네짱</span>
+									</div>
+									<div class="col-md-3 col-xs-3">
+										<span>서울 마포구 쌍용코트</span>
+									</div>
+									<div class="col-md-2 col-xs-2">
+										<span>2020-07-17 12:00</span>
+									</div>
+									<div class="col-md-1 col-xs-1">
+										<span>3/4</span>
+									</div>
+								</div>
+							</li>
 						</ul>
 
 						<div class="row">
@@ -398,9 +638,7 @@ String cp = request.getContextPath();
 						<div class="col-md-12"></div>
 					</div>
 				</div>
-				<div class="col-md-2">
-				<input type="hidden" id="courtCode">
-				</div>
+				<div class="col-md-2"></div>
 			</div>
 		</div>
 	</div>
@@ -411,6 +649,7 @@ String cp = request.getContextPath();
 <!-- 카카오 맵  -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ab23ff0014eee816a3de71fa0333dc78&libraries=services,clusterer,drawing"></script>
 <script type="text/javascript">
+
 
 $(function()
 {
@@ -502,7 +741,6 @@ $(function()
 		          		            {
 		          		            	/* 코트 정보 */
 		          		            	/* 코트이름 */
-		          		            	$("#courtCode").val(data.courtCode);
 		          		            	$("#courtName").text(data.courtName);
 		          		            	/* 적정인원 최소 */
 		          		            	$("#minCourtCapacity").text(data.minCourtCapacity);
@@ -563,72 +801,8 @@ $(function()
 	    	}
 	    });
 		
-	});
 	
-	meetingList = [];
-	
-	
-	// 모임 검색
-	$("#playSearch").click(function()
-	{
-		$.ajax
-		({
-			type: "get",
-            dataType: "json",
-            url: "<%=cp%>/ajax/togethermeetinglist",
-            data: {courtRegistrationCode: $("#courtCode").val(), meetingDate: $("#dateselect1 option:selected").val()+" "+$("#timeselect option:selected").val() , meetingTypeCode: $('input[name="meetingType"]:checked').val(), start:1, end:3},
-            success: function(data)
-            {
-            	meetingList = new ArrayList();
-            	
-            	var listPrint = 
-            		"<li class='list-group-item board-body board-header'><div class='row'>"+
-					"<div class='col-md-4 col-xs-4'><span>제목</span></div><div class='col-md-2 col-xs-2'><span>주장</span>"+
-					"</div><div class='col-md-3 col-xs-3'><span>장소</span></div><div class='col-md-2 col-xs-2'>"+
-					"<span>일시</span></div><div class='col-md-1 col-xs-1'><span>인원</span></div></div></li>";
-            	
-            	for (var i = 0; i < data.length; i++)
-				{
-            		listPrint+= "<li class='list-group-item board-body'><div class='row'><div class='col-md-4 col-xs-4'>";
-            		listPrint+= "<span>"+data[i].meetingSubject+"</span>";
-            		listPrint+= "</div><div class='col-md-2 col-xs-2'>";
-            		listPrint+= "<span>"+data[i].captainName+"</span>";
-            		listPrint+= "</div><div class='col-md-3 col-xs-3'>";
-            		listPrint+= "<span>"+$("#courtName").text()+"</span>";
-            		listPrint+= "</div><div class='col-md-2 col-xs-2'>";
-            		listPrint+= "<span>"+data[i].meetingDate+"</span>";
-            		listPrint+= "</div><div class='col-md-1 col-xs-1'>";
-            		listPrint+= "<span>"+data[i].nowPeopleNumber+"/"+data[i].meetingPeopleNumber +"</span>";
-            		listPrint+= "</div></div></li>"
-					
-					/* <li class="list-group-item board-body">
-					<div class="row">
-						<div class="col-md-4 col-xs-4">
-							<span>안녕하십니까 한판합시다</span>
-						</div>
-						<div class="col-md-2 col-xs-2">
-							<span>아맞네짱</span>
-						</div>
-						<div class="col-md-3 col-xs-3">
-							<span>서울 마포구 쌍용코트</span>
-						</div>
-						<div class="col-md-2 col-xs-2">
-							<span>2020-07-17 12:00</span>
-						</div>
-						<div class="col-md-1 col-xs-1">
-							<span>3/4</span>
-						</div>
-					</div>
-				</li> */
-					
-				}
-            	
-            	$("#meetingList").html(listPrint);
-            },
-            error: function(e){
-	               alert(e.responseText);
-	            }
-		});
+		
 	});
 	
 	

@@ -1,10 +1,16 @@
 <%@page import="java.util.Calendar"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%
+	Date nowTime = new Date();
+	SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+%>
 
 <%
 	request.setCharacterEncoding("UTF-8");
-String cp = request.getContextPath();
+	String cp = request.getContextPath();
 %>
 
 <!DOCTYPE html>
@@ -16,6 +22,7 @@ String cp = request.getContextPath();
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/default.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>
+
 <style type="text/css">
 .form-head {
 	font-weight: bold;
@@ -69,14 +76,61 @@ select
 	padding-right: 5px;
 	padding-top: 5px;	
 }
-
 </style>
+<script type="text/javascript">
+$(function() {
+	
+	var tier = "${user.tierName}";
+	var now = new Date();
+    var year = now.getFullYear();
+    var month = now.getMonth() + 1;
+    var date = now.getDate();
+	var userBirthday = "${user.userBirthday}".substring(0,4);
+	var age = year - parseInt(userBirthday)+1;
+	
+	
+	for(var i=parseInt(tier); i<=5; i=i+1) {        
+        var html;
+        html += "<option value="+userBirthday+">LV."+i+"</option>"
+    }
+    $("#tier-check").append(html);
+    
+    
+    for(var i=0; i<=Math.floor(age/10)*10; i=i+10) {        
+        var minage;
+        minage += "<option value="+i+">"+i+"대</option>"
+    }
+    $("#minage-check").append(minage);
 
+    for(var i=Math.floor(age/10)*10; i<=100; i=i+10) {        
+        var maxage;
+        maxage += "<option value="+i+">"+i+"대</option>"
+    }
+    $("#maxage-check").append(maxage);
+
+    
+    $("#mapSearch").click(function() {
+
+    	var regionSelect = $("#regionSelect option:selected").text();
+    	var citySelect = $("#citySelect option:selected").text();
+    	var cityCode = $("#citySelect option:selected").val();
+    	
+    	window.open('<%=cp%>/play/meeting/create/select?regionSelect=' + regionSelect + 
+    			'&citySelect=' + citySelect + '&cityCode=' + cityCode
+    			, "map", "width = 500, height = 500, top = 100, left = 200, location = no");
+   	});
+    
+});
+
+
+
+</script>
 
 
 </head>
 <body>
 
+<!-- ?email='+ email" -->
 	<!-- 헤더 -->
 <c:import url="../base/Header.jsp"></c:import>
 <c:import url="../base/PlaySubmenu.jsp"></c:import>
@@ -108,7 +162,8 @@ select
 							</div>
 							<!----------------------------모임 설정 패널 ------------------------->
 							<h4>모임 정보 입력</h4>
-							${user.userCode }
+							<c:out value="${today}"/>
+
 							<div class="row">
 								<div class="col-md-8">
 									<div class="panel panel-default">
@@ -116,20 +171,22 @@ select
 										<div class="panel-heading">모임 지역 선택</div>
 										<div class="panel-body">
 											<div class="col-md-4">
-												<select name="" id="" class="form-control">
-													<option value=""> 
-													<%=request.getParameter("citydata") %>
+												<select name="region" id="regionSelect" class="form-control">
+													<option value="<%=request.getParameter("region_select") %>"> 
+													<%=request.getParameter("regiondata") %>
 													</option>
 													
 												</select>
 											</div>
 											<div class="col-md-4">
-												<select name="" id="" class="form-control">
-													<option value=""><%=request.getParameter("regiondata") %></option>
+												<select name="city" id="citySelect" class="form-control">
+													<option value="<%=request.getParameter("city_select") %>">
+													<%=request.getParameter("citydata") %>
+													</option>
 												</select>
 											</div>
 											<div class="col-md-4">
-												<button class="btn btn-default btn-md btn-block">
+												<button class="btn btn-default btn-md btn-block" id="mapSearch">
 													지도검색</button>
 											</div>
 										</div>
@@ -165,18 +222,15 @@ select
 												
 													<div class="col-md-4">
 														<div class="input-group">
-														<input type="text" id="datePicker" class="form-control" placeholder="2020-07-06">
-														<span class="input-group-btn">
-															<button class="btn btn-default">달력 선택</button>
-														</span>
+														<input type="text" id="datePicker" class="form-control" placeholder="<%= sf.format(nowTime) %>">
 														</div>
 													</div>
 													
 													<div class="col-md-4">
 														<div class="input-group">
 														<span class="input-group-addon">시작 시간</span>
-														<select name="" id="" class="form-control">
-															<option value="">12:00</option>
+														<select name="start-time" id="start-time7" class="form-control">
+															<option value="">시간선택</option>
 														</select>
 														</div>
 													</div>
@@ -184,8 +238,8 @@ select
 													<div class="col-md-4">
 														<div class="input-group">
 														<span class="input-group-addon">끝 시간</span>
-														<select name="" id="" class="form-control">
-															<option value="">14:00</option>
+														<select name="end-time" id="end-time" class="form-control">
+															<option value="">시간선택</option>
 														</select>
 														</div>
 													</div>
@@ -204,12 +258,23 @@ select
 														%>
 
 														<input type="text" id="datePicker" class="form-control" 
-														placeholder="<%= cal.get(Calendar.YEAR) %>">
+														placeholder="<%= sf.format(nowTime) %>">
 														</div>
 													</div>
 													<div class="col-md-3">
 														<select name="" id="" class="form-control">
-															<option value="">14:00</option>
+															<c:forEach var="i" begin="0" end="24">
+													<option value="${i}">
+														<c:choose>
+															<c:when test="${i <10}">
+							                                 	0${i }:00
+							                                 </c:when>
+															<c:otherwise>
+						                                 		${i }:00
+						                                 	</c:otherwise>
+														</c:choose>
+													</option>
+												</c:forEach>
 														</select>
 													</div>
 													<div class="col-md-5">
@@ -227,7 +292,7 @@ select
 												<div class="panel-heading">성별 조건</div>
 												<div class="panel-body">
 													<label class="radio-inline radio" > 
-													<input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+													<input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="">
 														나와 같은 성별
 													</label> 
 													<label class="radio-inline radio"> 
@@ -241,7 +306,7 @@ select
 											<div class="panel panel-default">
 												<div class="panel-heading">최소 실력</div>
 												<div class="panel-body">
-													<select name="" id="" class="form-control">
+													<select name="tier-check" id="tier-check" class="form-control">
 														<option value="">실력 등급 선택</option>
 													</select>
 												</div>
@@ -252,21 +317,21 @@ select
 												<div class="panel-heading">나이 제한</div>
 												<div class="panel-body">
 													<div class="col-md-3 age">
-													<select name="" id="" class="form-control">
-														<option value="">20대</option>
+													<select name="minage-check" id="minage-check" class="form-control">
+														<option value="">최소나이</option>
 													</select>
 													</div>
 													<div class="col-md-1">
 													<p class="middle">~</p>
 													</div>
 													<div class="col-md-3 age">
-													<select name="" id="" class="form-control">
-														<option value="">30대</option>
+													<select name="maxage-check" id="maxage-check" class="form-control">
+														<option value="">최대나이</option>
 													</select>
 													</div>
 													<div class="col-md-4">
 													<label class="radio-inline radio"> 
-													<input type="radio" name="inlineRadioOptions" id="inlineRadio2" checked="checked" value="option2">
+													<input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
 														누구나
 													</label>
 													</div>
