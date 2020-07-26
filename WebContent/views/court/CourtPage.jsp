@@ -143,7 +143,6 @@
 											</div>											
 										</div>
 									</div>
-
 									<div class="col-sm-1 col-xs-1"></div>
 									<div class="col-sm-7 col-xs-7 panel panel-default">
 										<div class="row">
