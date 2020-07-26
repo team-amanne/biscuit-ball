@@ -38,6 +38,7 @@ public class CourtModel
 				dto.setCourtReviewContent(dto.getCourtReviewContent().replaceAll("\\n", "<br>"));
 			result.setCourtReviewList(list);
 			
+			result.setTotalReviewCount(courtDao.countCourtReviews(courtCode));
 		}
 		
 		return result;

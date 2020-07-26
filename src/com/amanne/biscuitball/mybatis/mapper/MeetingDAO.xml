@@ -150,7 +150,7 @@
 			FROM TBL_MEETING MT
 			WHERE MEET_COURT_REG_CODE = #{courtCode}
             AND MEET_DATE > SYSDATE
-            AND confirmOrNot IS 'NO'
+            AND confirmOrNot = 'NO'
             ORDER BY (meetingPeopleNumber - nowPeopleNumber), meetingDate
   
 		]]>

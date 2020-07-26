@@ -422,6 +422,7 @@
 								<div class="row">
 									<div class="col-sm-6 col-xs-6">
 										<span class="title-text">코트리뷰</span>
+										<span>( 전체 ${court.totalReviewCount } 개 )</span>
 									</div>	
 									
 									<div class="col-sm-4 col-xs-4">

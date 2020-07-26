@@ -50,6 +50,7 @@ public class CourtDTO
 	private String delAdminCode; 						// 삭제관리자코드
 	private String adminDelDate; 						// 관리자삭제일시
 	private String courtStatus; 						// 코트상태
+	private int totalReviewCount;					// 전체 코트 리뷰 수
 	private ArrayList<CourtReviewDTO> courtReviewList; 	// 코트리뷰리스트
 	private ArrayList<CourtReviewDTO> courtNameList; 	// 코트이름리스트
 	private String blindStatus;							// 블라인드 상태
@@ -489,6 +490,14 @@ public class CourtDTO
 
 	public void setCourtCapacityComfidence(String courtCapacityComfidence) {
 		this.courtCapacityComfidence = courtCapacityComfidence;
+	}
+
+	public int getTotalReviewCount() {
+		return totalReviewCount;
+	}
+
+	public void setTotalReviewCount(int totalReviewCount) {
+		this.totalReviewCount = totalReviewCount;
 	}
 	
 }
