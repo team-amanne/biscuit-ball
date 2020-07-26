@@ -136,6 +136,7 @@
 										<div class="panel panel-heading">
 											<div style="height: 190px; display: table-cell; vertical-align: middle;">
 												<img src="<%=cp%>${court.courtImg1}" class="court-img-heading" width="300px;" />
+
 											</div>
 										</div>
 										<div class="row panel-body" style="height: 80px;">

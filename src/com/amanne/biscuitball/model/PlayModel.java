@@ -54,20 +54,6 @@ public class PlayModel
 	      
 	      // 작업준비
 	      UserDTO user = dao.getUser(userInfo.getUserAcctCode());
-
-	   
-	      System.out.println(user.getUserEmail());
-	      System.out.println(user.getUserPassword());
-	      System.out.println(user.getUserName());
-	      System.out.println(user.getUserBirthday());
-	      System.out.println(user.getUserGender());
-	      System.out.println(user.getUserHeight());
-	      System.out.println(user.getSelfEvaluationType());
-	      System.out.println(user.getUserCityCode());
-	      System.out.println(user.getUserTel());
-	      System.out.println(user.getUserPosition());
-	      System.out.println(user.getSnsSync());
-
 	      modelAndView.addObject("user", user);
 	      modelAndView.setViewName("/play/PlayCreateMeeting");      		
 	}

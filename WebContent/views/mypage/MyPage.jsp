@@ -21,12 +21,36 @@
 
 
 <style type="text/css">
+.user_item 
+{
+    padding-top: 8px;
+    padding-left: 5px;
+    display: block;
+}
+
+.icon_connect 
+{
+    padding-top: 6px;
+    padding-right: 5px;
+}
+
+.icon_Achievement
+{	
+	width: 30px;
+	height: 30px;
+}
+
 .left-btn {
    text-align: left;
 }
 
 .right-btn {
    text-align: right;
+}
+
+.panel-body {
+    padding: 5px;
+    display: flex;
 }
 
 </style>
@@ -61,6 +85,9 @@ $(document).ready(function()
    
    $("#introduce").click(function()
    {
+	   $("#frm").attr("action", "updateUser");
+	   $("#userProfileTxt").val($("#userProfileTxtView").val());	   
+
        $("#frm").submit();
    });
 
@@ -155,7 +182,8 @@ $(document).ready(function()
                <div class="row form-group">
                   <div class="col-sm-4 col-xs-3">
                   </div>
-                  <div class="col-sm-4 col-xs-6" style="text-align: center"><textarea class="form-control" rows="" style="resize: none; width: 400px; height: 100px;">${user.userProfileTxt}</textarea></div>
+                  <div class="col-sm-4 col-xs-6" style="text-align: center"><textarea class="form-control" name="userProfileTxtView" id="userProfileTxtView" rows="" style="resize: none; width: 400px; height: 100px;" >${user.userProfileTxt}</textarea></div>
+                  <input type="hidden" name="userProfileTxt" id="userProfileTxt">
                   <div class="col-sm-4 col-xs-3">
                   </div>
                </div>
@@ -182,13 +210,13 @@ $(document).ready(function()
                               <span>닉네임</span>
                            </div>
                            <div class="col-sm-4 col-xs-4 panel-body">
-                              <span>${user.userNickname}</span>
+                              <span class="user_item">${user.userNickname}</span>
                            </div>
                            <div class="col-sm-2 col-xs-2 panel-heading">
                               <span>성별</span>
                            </div>
                            <div class="col-sm-4 col-xs-4 panel-body">
-                              <span>${user.userGender}</span>
+                              <span  class="user_item">${user.userGender}</span>
                            </div>
                         </div>
                      </div>
@@ -197,14 +225,16 @@ $(document).ready(function()
                            <div class="col-sm-2 col-xs-2 panel-heading">
                               <span>대표업적</span>
                            </div>
-                           <div class="col-sm-4 col-xs-4 panel-body">                              
-                              <span><i class="fas fa-star"></i>${user.titleAchievementName}</span>
+                           <div class="col-sm-4 col-xs-4 panel-body">     
+                           	  <img alt="개인업적" src="<%=cp %>${user.titleAchievementImg}" class="icon_Achievement"
+                           	   >                         
+                              <span  class="user_item"> ${user.titleAchievementName}</span>
                            </div>
                            <div class="col-sm-2 col-xs-2 panel-heading">
                               <span>거점지역</span>
                            </div>
                            <div class="col-sm-4 col-xs-4 panel-body">
-                              <span>${user.userCity}</span>
+                              <span  class="user_item">${user.userCity}</span>
                            </div>
                         </div>
                      </div>
@@ -214,13 +244,14 @@ $(document).ready(function()
                               <span>키</span>
                            </div>
                            <div class="col-sm-4 col-xs-4 panel-body">
-                              <span>${user.userHeight}cm</span>
+                              <span  class="user_item">${user.userHeight}cm</span>
                            </div>
                            <div class="col-sm-2 col-xs-2 panel-heading">
-                              <span>내코트</span>
+                              <span>내 코트</span>
                            </div>
                            <div class="col-sm-4 col-xs-4 panel-body">
-                              <span><a href="#"><i class="fas fa-map-marked-alt"></i></a>${user.userCourtName}</span>
+                              <a href="#" class="icon_connect"><i class="fas fa-map-marked-alt"></i></a>
+                              <span class="user_item">${user.userCourtName}</span>
                            </div>
                         </div>
                      </div>
@@ -230,13 +261,14 @@ $(document).ready(function()
                               <span>포지션</span>
                            </div>
                            <div class="col-sm-4 col-xs-4 panel-body">
-                              <span>${user.userPosition}</span>
+                              <span class="user_item">${user.userPosition}</span>
                            </div>
                            <div class="col-sm-2 col-xs-2 panel-heading">
-                              <span>내크루</span>
+                              <span>내 크루</span>
                            </div>
                            <div class="col-sm-4 col-xs-4 panel-body">
-                              <span><a href="#"><i class="fas fa-users"></i></a>${user.userCrewName}</span>
+                              <a href="#" class="icon_connect"><i class="fas fa-users"></i></a>
+                              <span class="user_item">${user.userCrewName}</span>
                            </div>
                         </div>
                      </div>
@@ -246,13 +278,13 @@ $(document).ready(function()
                               <span>티어</span>
                            </div>
                            <div class="col-sm-4 col-xs-4 panel-body">
-                              <span>${user.tierName}</span>
+                              <span class="user_item">${user.tierName}</span>
                            </div>
                            <div class="col-sm-2 col-xs-2 panel-heading">
                               <span>페어플레이 점수</span>
                            </div>
                            <div class="col-sm-4 col-xs-4 panel-body">
-                              <span>${user.fairplayScore}</span>
+                              <span class="user_item">${user.fairplayScore}</span>
                            </div>
                         </div>
                      </div>

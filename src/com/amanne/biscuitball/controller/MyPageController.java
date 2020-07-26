@@ -66,6 +66,13 @@ public class MyPageController
 		return "/mypage/Userblock";
 	}
 	
+	@RequestMapping("/updateuser")
+	public ModelAndView updateUserProfileTxt(ModelAndView modelAndView, HttpServletRequest request)
+	{
+		mypage.updateUser(modelAndView, request);
+		return modelAndView;
+
+	}
 	
 	
 	/*
