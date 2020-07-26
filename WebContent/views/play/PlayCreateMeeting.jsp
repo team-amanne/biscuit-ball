@@ -80,12 +80,12 @@ select
 <script type="text/javascript">
 $(function() {
 	
-	var tier = "${user.tierName}";
+	var tier = "${userDto.tierName}";
 	var now = new Date();
     var year = now.getFullYear();
     var month = now.getMonth() + 1;
     var date = now.getDate();
-	var userBirthday = "${user.userBirthday}".substring(0,4);
+	var userBirthday = "${userDto.userBirthday}".substring(0,4);
 	var age = year - parseInt(userBirthday)+1;
 	
 	
@@ -112,9 +112,9 @@ $(function() {
     $("#mapSearch").click(function() {
 
     	var regionSelect = $("#regionSelect").val();
-    	var citySelect = $("#citySelect option:selected").text();
-    	var cityCode = $("#citySelect option:selected").val();
-    	alert(regionSelect);
+    	var citySelect = $("#citySelect").val();
+    	var cityCode = $("#city-code").val();
+    	alert(cityCode);
     	window.open('<%=cp%>/play/meeting/create/select?regionSelect=' + regionSelect + 
     			'&citySelect=' + citySelect + '&cityCode=' + cityCode
     			, "map", "width = 500, height = 500, top = 100, left = 200, location = no");
@@ -142,7 +142,7 @@ $(function() {
 			<h5>농구하기 > 사용자선택 > 모임개설</h5>
 			<hr />
 		</div>
-
+		
 		<!------------------------------------------ 컨텐츠 영역 --------------------------------->
 		<div class="row">
 			<div class="col-md-3"></div>
@@ -172,14 +172,12 @@ $(function() {
 										<div class="panel-body">
 											<div class="col-sm-4">
 												<input type="text" name="regionSelect" id="regionSelect" class="form-control" value="<%=request.getParameter("regiondata") %>">
-												<input type="hidden" name="region-code" value="<%=request.getParameter("region_select") %>">													
+												<input type="hidden" name="region-code" id="region-code" value="<%=request.getParameter("region_select") %>">													
 											</div>
-											<div class="col-sm-4">									
-												<select name="city" id="citySelect" class="form-control">
-													<option value="<%=request.getParameter("city_select") %>">
-													<%=request.getParameter("citydata") %>
-													</option>
-												</select>
+											<div class="col-sm-4">	
+												<input type="text" name="citySelect" id="citySelect" class="form-control" value="<%=request.getParameter("citydata") %>">
+												<input type="hidden" name="city-code" id="city-code" value="<%=request.getParameter("city_select") %>">									
+												
 											</div>
 											<div class="col-sm-3">
 												<button class="btn btn-default btn-submit btn-block" id="mapSearch">
@@ -311,7 +309,7 @@ $(function() {
 												<div class="panel-heading">최소 실력</div>
 												<div class="panel-body">
 													<select name="tier-check" id="tier-check" class="form-control">
-														<option value="">실력 등급 선택</option>
+														<option value="">누구나</option>
 													</select>
 												</div>
 											</div>
@@ -322,7 +320,7 @@ $(function() {
 												<div class="panel-body">
 													<div class="col-md-3 age">
 													<select name="minage-check" id="minage-check" class="form-control">
-														<option value="">최소나이</option>
+														<option value="ZY01">최소나이</option>
 													</select>
 													</div>
 													<div class="col-md-1">
@@ -362,11 +360,11 @@ $(function() {
 											<div class="col-md-4"></div>
 											<div class="col-md-4">
 												<div class="col-md-6">
-													<button class="btn btn-default btn-lg btn-block">
+													<button type="button" class="btn btn-default btn-lg btn-block">
 														개설</button>
 												</div>
 												<div class="col-md-6">
-													<button class="btn btn-default btn-lg btn-block">
+													<button type="button" class="btn btn-default btn-lg btn-block">
 														취소</button>
 												</div>
 											</div>

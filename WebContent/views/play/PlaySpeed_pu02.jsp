@@ -29,18 +29,12 @@ String cp = request.getContextPath();
 <!-- playBasketball_speed 팝업창  -->
 <div class="col-md-6 content">
 	<div class="row">
-		<!-- 제목(헤더) 영역 -->
-		<div class="col-md-3">
-			<h4 class="form-head">코트 검색</h4>
-		</div>
 		<div class="col-md-6 subject-parti">
-			<h4>코트 개설 검색</h4>
-		</div>	
-	</div>
-	<h4 class="form-head">코트 정보</h4>
-	<%=request.getParameter("") %>
+			<h4 class="form-head">코트 정보</h4>
 	<%=request.getParameter("regionSelect") %>
-	<%=request.getParameter("citySelect") %>
+	<%=request.getParameter("citySelect") %>		</div>	
+	</div>
+	
 	<div class="row panel panel-default">
 		<div class="col-md-12 panel-body">
 			<div class="row">
@@ -96,6 +90,8 @@ String cp = request.getContextPath();
 						<li>
 							<button type="button" id="btnCourt">선택완료</button>
 							<input type="hidden" id="region-name" name="region-name" value="<%=request.getParameter("regionSelect") %>">
+							<input type="hidden" id="city-name" name="city-name" value="<%=request.getParameter("citySelect") %>">
+							<input type="hidden" id="city-code" name="city-code" value="<%=request.getParameter("cityCode") %>">
 						</li>
 					</ul>
 				</div>
@@ -134,7 +130,7 @@ $(function() {
 			    		var lat = data.documents[0].y;
 			    		map.setCenter(new kakao.maps.LatLng(lat, lng));
 			    		/* marker.setPosition(map.getCenter()); */
-			    	
+			    		alert(<%=request.getParameter("cityCode") %>);
 			    		// 특정 시군구 코트 리스트 불러오기 + 마커 찍는 에이젝스
 			    		$.ajax({
 				            type: "get",
@@ -253,10 +249,10 @@ $(function() {
 			
 			
 			$("#btnCourt").click(function() {
-				alert($("#courtName").text())
-				alert($("#region-name").val());
-				$("#regionSelect", parent.opener.document).val(regionSelect);
+				$("#regionSelect", parent.opener.document).val($("#region-name").val());
+				$("#citySelect", parent.opener.document).val($("#city-name").val());
 				$("#courtSelect", parent.opener.document).val($('#courtName').text()); 
+				window.self.close();
 				
 			});
 		});
