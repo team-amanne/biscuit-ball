@@ -3,6 +3,7 @@ package com.amanne.biscuitball.model;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Case;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -64,24 +65,64 @@ public class MypageModel
 	{
 		// 요청 데이터 수신
 		HttpSession session = request.getSession();
-		UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");	
-		String userProfileTxt = (String)request.getParameter("userProfileTxt");
-
+		UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+		
 		// 작업객체생성
 		IUserDAO dao = sqlSession.getMapper(IUserDAO.class);
 		
 		// 작업준비
 		UserDTO user = dao.getUser(userInfo.getUserAcctCode());
-		user.setUserProfileTxt(userProfileTxt);
+		
+
+		// 요청이 들어온 url 가져오기
+		String oldUrl = request.getHeader("referer");
+		for(int n=0; n<4; n++)
+			oldUrl = oldUrl.substring(oldUrl.indexOf("/")+1, oldUrl.length());
+		if(oldUrl.indexOf("court")!=-1)
+			oldUrl = "court";
+		
+		System.out.println(oldUrl + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+		
+
+		switch (oldUrl)
+		{
+			case "mypage/myprofile":
+			case "mypage/updateuser":
+				// 유저 프로필  → 유저 자기소개수정
+				String userProfileTxt = (String)request.getParameter("userProfileTxt");
+								
+				user.setUserProfileTxt(userProfileTxt);
+				userDTOCodeChange(user);
+				dao.updateUserProfile(user);
+				
+				user = dao.getUser(userInfo.getUserAcctCode());
+	
+				modelAndView.addObject("user", user);
+				modelAndView.setViewName("/mypage/MyPage");	
+			
+				break;
+				
+			case "court":
+				// 코트  → 내 코트 변경
+				String updateUserCourtCode = (String)request.getParameter("courtCode");
+				user.setUserCourtCode(updateUserCourtCode);
+				userDTOCodeChange(user);
+				dao.updateUserProfile(user);
+				
+				user = dao.getUser(userInfo.getUserAcctCode());
+
+				modelAndView.setViewName("redirect:/court/" + user.getUserCourtCode());	
+			
+				break;
+	
+			default:
+				break;
+		}
 
 		
-		userDTOCodeChange(user);
-		dao.updateUserProfile(user);
-		
-		user = dao.getUser(userInfo.getUserAcctCode());
 
-		modelAndView.addObject("user", user);
-		modelAndView.setViewName("/mypage/MyPage");		
+		
+			
 	
 		
 	}

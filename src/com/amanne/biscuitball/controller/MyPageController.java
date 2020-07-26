@@ -67,7 +67,7 @@ public class MyPageController
 	}
 	
 	@RequestMapping("/updateuser")
-	public ModelAndView updateUserProfileTxt(ModelAndView modelAndView, HttpServletRequest request)
+	public ModelAndView updateUser(ModelAndView modelAndView, HttpServletRequest request)
 	{
 		mypage.updateUser(modelAndView, request);
 		return modelAndView;

@@ -85,7 +85,7 @@ $(document).ready(function()
    
    $("#introduce").click(function()
    {
-	   $("#frm").attr("action", "updateUser");
+	   $("#frm").attr("action", "updateuser");
 	   $("#userProfileTxt").val($("#userProfileTxtView").val());	   
 
        $("#frm").submit();
