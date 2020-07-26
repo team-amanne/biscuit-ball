@@ -330,7 +330,7 @@ String cp = request.getContextPath();
 											<div class="col-md-12 btn-serach">
 												<button class="btn btn-default btn-block btn-lg"
 													id="playSearch">함께농구 검색</button>
-												<button class="btn btn-default btn-block btn-lg">
+												<button class="btn btn-default btn-block btn-lg" id="createMeeting">
 													함께농구 개설</button>
 											</div>
 
@@ -545,9 +545,6 @@ $(function()
 	            		    };
 	            		}
 	            		
-	            		
-
-	            		
 		            },
 		            error: function(e){
 		               alert(e.responseText);
@@ -647,6 +644,11 @@ $(function()
 				alert(e.responseText);
 			}
 					});
+		});
+	
+		$("#createMeeting").click(function()
+		{
+			$(location).attr("href","<%=cp%>/play/meeting/createfull");
 		});
 
 		});

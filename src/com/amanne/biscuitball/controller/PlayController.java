@@ -67,7 +67,7 @@ public class PlayController
    @RequestMapping(value="/meeting/create", method = {RequestMethod.GET, RequestMethod.POST})
    public ModelAndView playCreateMeeting(ModelAndView modelAndView, HttpServletRequest request)
    {
-	   playModel.courtFounder(modelAndView, request);
+	   playModel.playUserInfo(modelAndView, request);
 	   return  modelAndView;
    }
     
@@ -111,6 +111,17 @@ public class PlayController
 	 
       return "/play/PlayTogetherSelect";
       
+   }
+   
+   // 함께농구 개설
+   @RequestMapping("/meeting/createfull")
+   public String playCreateMeetingFull(Model model)
+   {
+	   	  // 광역시도 정보 랜더링
+		  ArrayList<RegionDTO> regionList= playModel.regionPrint();
+		  model.addAttribute("regionList", regionList);
+		  
+		  return "/play/PlayCreateMeetingTogether";
    }
    
 }
