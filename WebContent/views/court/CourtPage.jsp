@@ -92,21 +92,34 @@
 						<div class="col-md-10">
 							<div class="row">
 								<div class="col-sm-6 col-xs-6 left-btn">
+									<button type="button" class="btn btn-default btn-submit" id="myCourt" name="myCourt">내코트등록</button>
+									<c:if test="1==0">
 									<a href="#">
-										<button type="button" class="btn btn-default btn-submit" id="myCourt" name="myCourt">내코트등록</button>
-									</a> <a href="#">
 										<button type="button" class="btn btn-default btn-submit" id="homeCourt" name="homeCourt">홈코트등록</button>
 									</a>
-									<a href="#">
-										<button type="button" class="btn btn-default btn">
-											<span class="fas fa-vote-yea" style="font-size:18px;"></span>
-											<span>등록/삭제투표</span> 
-										</button>
-									</a>
+									</c:if>
+
+									<c:if test='${court.courtStatus == "가등록 코트" }'>
+									<button type="button" class="btn btn-default btn" id="btnVoteRegister">
+										<span class="fas fa-vote-yea" style="font-size:18px;"></span>
+										<span>등록투표</span> 
+									</button>
+									</c:if>
+
+									<c:if test='${court.courtStatus == "삭제 투표중" }'>									
+									<button type="button" class="btn btn-default btn" id="btnVoteDelete">
+										<span class="fas fa-vote-yea" style="font-size:18px;"></span>
+										<span>삭제투표</span> 
+									</button>
+									</c:if>
 								</div>
 								<div class="col-sm-6 col-xs-6 right-btn">
-									<button type="button" class="btn btn-default btn-submit" id="adminCourtDel" name="adminCourtDel" style="display: inline;">관리자 코트 삭제</button>
-									<button type="button" class="btn btn-default btn-submit" id="delReq" name="delReq">코트 삭제 요청</button>
+									<c:if test="${adminInfo != null }">
+										<button type="button" class="btn btn-default btn-submit" id="adminCourtDel" name="adminCourtDel" style="display: inline;">관리자 코트 삭제</button>
+									</c:if>
+									<c:if test='${court.courtStatus == "가등록 코트" or court.courtStatus == "정식등록 코트" }'>									
+										<button type="button" class="btn btn-default btn-submit" id="delReq" name="delReq">코트 삭제 요청</button>
+									</c:if>
 								</div>
 							</div>
 							<div class="row">
@@ -123,8 +136,19 @@
 												</a>
 											</p>
 										</div>
-										<div class="row panel-body">
-											<div class="col-sm-6 col-xs-6">
+									</div>
+									<div class="col-sm-1 col-xs-1"></div>
+									<div class="col-sm-7 col-xs-7 panel panel-default">
+										<div class="row">
+											<p></p>
+											<div class="col-sm-1 col-xs-1"></div>
+											<div class="col-sm-8 col-xs-8  panel panel-default">
+												<span class="subtitle-text">${court.courtName }</span>
+												<label style="display: none;">(가등록)</label>
+												<label>(${court.courtStatus })</label>
+												<label style="display: none;">(삭제요청)</label>
+											</div>
+											<div class="col-sm-1 col-xs-1">
 												<a href="#">
 													<img src="<%=cp%>${court.courtImg2}" height="50px;" width="100px;" />
 												</a>
@@ -170,7 +194,7 @@
 															<label>전화번호</label>
 														</div>
 														<div class="col-sm-8 col-xs-12">
-															<span>010-1234-5678</span>
+															<span>${court.courtTelephone != null ? court.courtTelephone : "정보없음" }</span>
 														</div>
 													</div>
 													<div class="row">
@@ -183,10 +207,17 @@
 													</div>
 													<div class="row">
 														<div class="col-sm-4 col-xs-12">
-															<label>인원수</label>
+															<label>적정인원수</label>
 														</div>
 														<div class="col-sm-8 col-xs-12">
-															<span>${court.minCourtCapacity }~${court.maxCourtCapacity }명(신뢰도65%)</span>
+															<span>${court.minCourtCapacity }~${court.maxCourtCapacity } 명 (
+															<c:if test="${!empty court.courtCapacityComfidence  }">
+															신뢰도 ${court.courtCapacityComfidence } %
+															</c:if>
+															<c:if test="${empty court.courtCapacityComfidence }">
+															신뢰도 낮음
+															</c:if>
+															)</span>
 														</div>
 													</div>
 													<div class="row">
@@ -202,7 +233,16 @@
 															<label>화장실</label>
 														</div>
 														<div class="col-sm-8 col-xs-12">
-															<span>${court.toilet == null ? "" : court.toilet }(신뢰도${court.toiletConfidence }%)</span>
+															<span>
+															<c:choose>
+															<c:when test="${court.toilet == null || court.toilet == '판별불가' }">
+																정보없음
+															</c:when>
+															<c:otherwise>
+																${court.toilet } (신뢰도 ${court.toiletConfidence } %)
+															</c:otherwise>
+															</c:choose>
+															</span>
 														</div>
 													</div>
 													<div class="row">
@@ -210,7 +250,16 @@
 															<label>샤워실</label>
 														</div>
 														<div class="col-sm-8 col-xs-12">
-															<span>${court.shower == null ? "" : court.shower }(신뢰도${court.showerConfidence }%)</span>
+															<span>
+															<c:choose>
+															<c:when test="${court.shower == null || court.shower == '판별불가' }">
+																정보없음
+															</c:when>
+															<c:otherwise>
+																${court.shower } (신뢰도 ${court.showerConfidence } %)
+															</c:otherwise>
+															</c:choose>
+															</span>
 														</div>
 													</div>
 													<div class="row">
@@ -218,7 +267,16 @@
 															<label>주차장</label>
 														</div>
 														<div class="col-sm-8 col-xs-12">
-															<span>${court.parkinglot == null ? "" : court.parkinglot }(신뢰도${court.parkinglotConfidence }%)</span>
+															<span>
+															<c:choose>
+															<c:when test="${court.parkinglot == null || court.parkinglot == '판별불가' }">
+																정보없음
+															</c:when>
+															<c:otherwise>
+																${court.parkinglot } (신뢰도 ${court.parkinglotConfidence } %)
+															</c:otherwise>
+															</c:choose>
+															</span>
 														</div>
 													</div>
 												</div>
@@ -370,8 +428,9 @@
 										</c:if>
 									</div>	
 									<div class="col-sm-2 col-xs-2">
-										<button type="button"
-											class="btn btn-default btn-submit btn-block">리뷰등록</button>
+										<a href="<%=cp %>/court/${court.courtCode}/review/register">
+											<button type="button" class="btn btn-default btn-submit btn-block">리뷰등록</button>
+										</a>
 									</div>
 								</div>
 								<div class="row">
@@ -383,7 +442,7 @@
 								</div>
 
 								<div class="row">
-									<div class="panel panel-default">
+									<div class="panel panel-default" id="reviewList">
 										<c:forEach var="review" items="${court.courtReviewList }">
 										<div class="panel panel-default col-sm-12 col-xs-12">
 											<div class="panel-body">
@@ -451,7 +510,7 @@
 										</div>
 										</c:forEach>
 										
-										<!-- 
+										<%-- 
 										<div class="panel panel-default col-sm-12 col-xs-12">
 											<div class="panel-body">
 												<div class="row">
@@ -497,11 +556,12 @@
 												</div>
 											</div>
 										</div>
-										 -->
+										 --%>
 										
 										<div class="row">
 											<div class="col-md-3"></div>
-											<div class="col-md-6 paging">
+											<div class="col-md-6 paging" id="pagination">
+												<%--
 												<ul class="pagination">
 													<!-- li태그의 클래스에 disabled를 넣으면 마우스를 위에 올렸을 때 클릭 금지 마크가 나오고 클릭도 되지 않는다.-->
 													<!-- disabled의 의미는 앞의 페이지가 존재하지 않다는 뜻이다. -->
@@ -517,6 +577,7 @@
 													<li><a href="#"> <span>»</span>
 													</a></li>
 												</ul>
+												 --%>
 											</div>
 											<div class="col-md-3"></div>
 										</div>
@@ -564,6 +625,21 @@
 	    	}
 	    });
 		
+		$.ajax({
+			type: "get",
+			dataType: "text",
+			url: "<%=cp %>/ajax/court/${court.courtCode }/reviewindex",
+			data: {page: 1},
+			success: function(data) {
+				$("#pagination").html(data);
+				$("li[data-page]").click(renderNewPage);
+			},
+			error: function(e) {
+				alert(e.responseText);
+				console.log(e);
+			}
+		});
+		
 		$('#btn-delreq').click(function() { 
 			var result = confirm('정말로 해당코트를 삭제요청하시겠습니까?'); 
 			if(result) { location.replace('CourtDeleteRequestCompleted.jsp'); } 
@@ -577,10 +653,123 @@
 		});
 		
 		$("#btnName").click(function () {
-			window.open("<%=cp %>/court/${court.courtCode }/name", "코트 > 코트 이름 목록"
-					, "top=10, left=10, width=760, height=600, status=no, menubar=no, toolbar=no, resizable=yes");
+			window.open("<%=cp %>/court/${court.courtCode }/name", "코트 > 코트 정도 > 코트 이름"
+					, "top=10, left=10, width=500, height=600, status=no, menubar=no, toolbar=no, resizable=no");
 		});
 	});
+	
+	function renderNewPage() {
+		var page = $(this).attr("data-page");
+		
+		$.ajax({
+			type: "get",
+			dataType: "json",
+			url: "<%=cp %>/ajax/court/${court.courtCode }/reviewlist",
+			data: {page: page},
+			success: function(data) {
+				var result = "";
+				for(var i=0; i<data.length; i++) {
+
+					result += '<div class="panel panel-default col-sm-12 col-xs-12">\n';
+					result += '	<div class="panel-body">\n';
+					result += '		<div class="row">\n';
+					result += '			<div class="col-sm-2 col-xs-2">\n';
+					result += '				<a href="#"><span>' + data[i].registrantNickname + '</span></a>\n';
+					result += '			</div>\n';
+					result += '			<div class="col-sm-4 col-xs-2"></div>\n';
+					result += '			<div class="col-sm-3 col-xs-6">\n';
+					result += '				<span>일시 [' + data[i].courtReviewRegisteredDate + ']</span>\n';
+					result += '			</div>\n';
+					
+					result += '			<div class="col-sm-1 col-xs-2">\n';
+					result += '				<button type="button" class="btn btn-default btn">\n';
+					result += '					<span class="far fa-thumbs-up" style="font-size:18px;"></span>\n'; 
+					result += '					<span>' + data[i].likes + '</span>\n';
+					result += '				</button>\n';
+					result += '			</div>\n';
+					result += '			<div class="col-sm-1 col-xs-2">\n';
+					result += '				<button type="button" class="btn btn-default btn">\n';
+					result += '					<span class="far fa-thumbs-down" style="font-size:18px;"></span>\n'; 
+					result += '					<span>' + data[i].dislikes + '</span>\n';
+					result += '				</button>\n';
+					result += '			</div>\n';
+					result += '			<div class="col-sm-1 col-xs-2">\n';
+					
+					if("${sessionScope.userInfo.userAcctCode }" != data[i].registrantAccountCode)
+						result += '			<button type="button" class="btn btn-default btn-danger">신고</button>\n';
+					
+					result += '			</div>\n';
+					result += '		</div>\n';
+					result += '		<div class="row">\n';
+					result += '			<div class="col-sm-3 col-xs-5">\n';
+					result += '				<span>만족도</span>\n';
+					
+					for(var j=1; j<=data[i].courtReviewSatisfaction; j++)
+						result += '			<i class="fas fa-star"></i>\n';
+					if(data[i].courtReviewSatisfaction != parseInt(data[i].courtReviewSatisfaction))
+						result += '				<i class="fas fa-star-half"></i>\n';
+					
+					result += '			</div>\n';
+					result += '			<div class="col-sm-3 col-xs-5">\n';
+					result += '				<span>시설평점</span>\n';
+					
+					for(var j=1; j<=data[i].courtReviewManageScore; j++)
+						result += '			<i class="fas fa-star"></i>\n';
+					if(data[i].courtReviewManageScore != parseInt(data[i].courtReviewManageScore))
+						result += '				<i class="fas fa-star-half"></i>\n';
+					
+					result += '			</div>\n';
+					result += '			<div class="col-sm-6 sol-xs-2">\n';
+					
+					if("${sessionScope.userInfo.userAcctCode }" == data[i].registrantAccountCode) {						
+						result += '				<span id="btnReviewDelete" role="button" data-reviewcode="';
+						result += data[i].courtReviewCode;
+						result += '">\n';
+						result += '					<i class="fas fa-trash-alt" style="font-size: 20px;"></i>\n';
+						result += '				</span>\n';
+					}
+					
+					result += '			</div>\n';
+					result += '		</div>\n';
+					result += '	</div>\n';
+					result += '	<div class="panel panel-default rev-cont">\n';
+					result += '		<div class="panel-body">\n';
+					result += '			<span>' + data[i].courtReviewContent + '</span>\n';
+					result += '		</div>\n';
+					result += '	</div>\n';
+					result += '</div>\n';
+				}
+				
+				
+				result += '<div class="row">\n';
+				result += '<div class="col-md-3"></div>\n';
+				result += '<div class="col-md-6 paging" id="pagination"></div>\n';
+				result += '<div class="col-md-3"></div>\n';
+				result += '</div>\n';
+				
+				$("#reviewList").html(result);
+				
+				$.ajax({
+					type: "get",
+					dataType: "text",
+					url: "<%=cp %>/ajax/court/${court.courtCode }/reviewindex",
+					data: {page: page},
+					success: function(data) {
+						$("#pagination").html(data);
+						$("li[data-page]").click(renderNewPage);
+					},
+					error: function(e) {
+						alert(e.responseText);
+						console.log(e);
+					}
+				});
+			},
+			error: function(e) {
+				alert(e.responseText);
+				console.log(e);
+			}
+		});
+	}
 </script>
 </body>
 </html>

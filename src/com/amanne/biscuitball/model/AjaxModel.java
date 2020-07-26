@@ -8,11 +8,13 @@ import org.springframework.stereotype.Service;
 
 import com.amanne.biscuitball.mybatis.CityDTO;
 import com.amanne.biscuitball.mybatis.CourtDTO;
+import com.amanne.biscuitball.mybatis.CourtReviewDTO;
 import com.amanne.biscuitball.mybatis.ICourtDAO;
 import com.amanne.biscuitball.mybatis.ICrewDAO;
 import com.amanne.biscuitball.mybatis.IMeetingDAO;
 import com.amanne.biscuitball.mybatis.IRegionDAO;
 import com.amanne.biscuitball.mybatis.IUserDAO;
+import com.amanne.biscuitball.util.MyUtil;
 import com.amanne.biscuitball.mybatis.MeetingDTO;
 
 import net.sf.json.JSONArray;
@@ -23,6 +25,8 @@ public class AjaxModel
 {
 	@Autowired
 	private SqlSession sqlSession;
+	@Autowired
+	private MyUtil util;
 	
 	public String getCityList(String regionCode)
 	{
@@ -243,6 +247,44 @@ public class AjaxModel
 		return obj.toString();
 	}
 	
+	public String getCourtReviewList(String courtCode, String userAccountCode, int currentPage, String order)
+	{
+		ICourtDAO dao = sqlSession.getMapper(ICourtDAO.class);
+		ArrayList<CourtReviewDTO> list = dao.getCourtReviewList(courtCode, userAccountCode, (currentPage-1) * 5 + 1, currentPage * 5, order);
+		JSONArray arr = new JSONArray();
+		JSONObject obj = null;
+		
+		for(CourtReviewDTO dto : list)
+		{
+			obj = new JSONObject();
+			obj.put("courtReviewCode", dto.getCourtReviewCode());
+			obj.put("courtReviewContent", dto.getCourtReviewContent());
+			obj.put("courtReviewManageScore", dto.getCourtReviewManageScore());
+			obj.put("courtReviewRegisteredDate", dto.getCourtReviewRegisteredDate().split("\\s")[0]);
+			obj.put("courtReviewSatisfaction", dto.getCourtReviewSatisfaction());
+			obj.put("courtCode", dto.getCourtCode());
+			obj.put("registrantAccountCode", dto.getRegistrantAccountCode());
+			obj.put("registrantNickname", dto.getRegistrantNickname());
+			obj.put("courtReviewStatus", dto.getCourtReviewStatus());
+			obj.put("likes", dto.getLikes());
+			obj.put("dislikes", dto.getDislikes());
+			obj.put("pollOrNot", dto.getPollOrNot());
+			obj.put("pollLikeOrDislike", dto.getPollLikeOrDislike());
+			
+			arr.add(obj);
+		}
+		
+		return arr.toString();
+	}
+	
+	public String getCourtReviewIndex(String courtCode, int page)
+	{
+		ICourtDAO courtDao = sqlSession.getMapper(ICourtDAO.class);
+		int dataCount = courtDao.countCourtReviews(courtCode);
+		int pageCount = util.getPageCount(5, dataCount);
+		return util.getAjaxIndexList(page, pageCount);
+	}
+		
 	// 함께농구 모임 리스트 반환(모임 일시, 모임 타입, 코트)
 	public String getMeetingListByTogetherPlay( String courtRegistrationCode, String meetingDate, String meetingTypeCode, int start, int end)
 	{

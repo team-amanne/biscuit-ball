@@ -188,8 +188,8 @@
 		SELECT COURT_REG_CODE AS courtCode
 		     , TO_CHAR(COURT_REG_DATE, 'YYYY-MM-DD HH24:MI') AS courtRegisteredDate
 		     , COURT_MAP_POSITION AS mapPosition
-		     , POSX AS mapPositionX
-		     , POSY AS mapPositionY
+		     , COURT_MAP_POSITION_X AS mapPositionX
+		     , COURT_MAP_POSITION_Y AS mapPositionY
 		     , REGISTRANT_ACCT_CODE AS registrantAccountCode
 		     , USER_NICKNAME AS registrantNickname
 		     , NVL(MY_COURT_COUNT,0) AS myCourtCount
@@ -221,14 +221,17 @@
 		     , TO_CHAR(ADMIN_COURT_DEL_DATE, 'YYYY-MM-DD HH24:MI') AS adminDelDate
 		     , COURT_STATUS AS courtStatus
 		     , BLIND_STATUS AS blindStatus
-		FROM
-		(
-		    SELECT TO_NUMBER(SUBSTR(COURT_MAP_POSITION, 1, INSTR(COURT_MAP_POSITION, ',', 1, 1) - 1)) AS POSX
-		         , TO_NUMBER(SUBSTR(COURT_MAP_POSITION, INSTR(COURT_MAP_POSITION, ',', 1, 1) + 1)) AS POSY
-		         , C.*
-		    FROM VIEW_COURT C
-		) A
-		WHERE POWER(POSX-#{posX},2) + POWER(POSY-#{posY},2) <= POWER(#{distance},2)
+		     , CITY_CODE AS cityCode
+		     , CITY_NAME AS cityName
+		     , REGION_CODE AS regionCode
+		     , COURT_TEL_CODE AS courtTelephoneRegCode
+		     , COURT_TEL AS courtTelephone
+		     , TO_CHAR(COURT_TEL_REG_DATE, 'YYYY-MM-DD HH24:MI') AS courtTelRegisteredDate
+		     , COURT_TEL_REG_ACCT_CODE AS courtTelRegAccountCode
+		     , COURT_TEL_REG_NICKNAME AS courtTelRegNickname
+		     , COURT_CAPACITY_COMFIDENCE AS courtCapacityComfidence
+		FROM VIEW_COURT C
+		WHERE POWER(COURT_MAP_POSITION_X-#{posX},2) + POWER(COURT_MAP_POSITION_Y-#{posY},2) <= POWER(#{distance},2)
 	]]>
 	</select>
 	
@@ -246,12 +249,12 @@
 		     , POLL_RATE AS pollRate
 		     , COURT_NAME_STATUS AS courtNameStatus
 		     , RANK AS rank
-		     , CASE WHEN P.VOTER_ACCT_CODE IS NOT NULL THEN 'YES'
+		     , CASE WHEN VOTER_ACCT_CODE IS NOT NULL THEN 'YES'
 		            ELSE 'NO'
 		       END AS pollOrNot
 		FROM
 		(
-			SELECT ROWNUM AS RNUM, V.*
+			SELECT ROWNUM AS RNUM, V.*, P.VOTER_ACCT_CODE
 			FROM VIEW_COURT_NAME V
 			LEFT JOIN
 			(
@@ -263,15 +266,15 @@
 	</if>
 	<![CDATA[
 			) P
-			ON B.COURT_NAME_CODE = P.COURT_NAME_CODE
-			WHERE COURT_NAME_STATUS NOT LIKE '제재'
-			  AND COURT_REG_CODE = #{courtCode}
+			ON V.COURT_NAME_CODE = P.COURT_NAME_CODE
+			WHERE V.COURT_NAME_STATUS NOT LIKE '제재'
+			  AND V.COURT_REG_CODE = #{courtCode}
 	]]>
-	<if test='order != null and order.eqauls("DATE")'>
-			ORDER BY COURT_NAME_REG_DATE DESC, RANK ASC
+	<if test='order != null and (order eq "DATE")'>
+			ORDER BY V.COURT_NAME_REG_DATE DESC, V.RANK ASC
 	</if>
-	<if test='order == null or order.equals("RANK")'>
-			ORDER BY RANK ASC, COURT_NAME_REG_DATE DESC
+	<if test='order == null or (order eq "RANK")'>
+			ORDER BY V.RANK ASC, V.COURT_NAME_REG_DATE DESC
 	</if>
 	<![CDATA[
 		)
@@ -362,6 +365,8 @@
 		SELECT COURT_REG_CODE AS courtCode
 		     , TO_CHAR(COURT_REG_DATE, 'YYYY-MM-DD HH24:MI') AS courtRegisteredDate
 		     , COURT_MAP_POSITION AS mapPosition
+		     , COURT_MAP_POSITION_X AS mapPositionX
+		     , COURT_MAP_POSITION_Y AS mapPositionY		     
 		     , REGISTRANT_ACCT_CODE AS registrantAccountCode
 		     , USER_NICKNAME AS registrantNickname
 		     , NVL(MY_COURT_COUNT,0) AS myCourtCount
@@ -393,6 +398,15 @@
 		     , TO_CHAR(ADMIN_COURT_DEL_DATE, 'YYYY-MM-DD HH24:MI') AS adminDelDate
 		     , COURT_STATUS AS courtStatus
 		     , BLIND_STATUS AS blindStatus
+		     , CITY_CODE AS cityCode
+		     , CITY_NAME AS cityName
+		     , REGION_CODE AS regionCode
+		     , COURT_TEL_CODE AS courtTelephoneRegCode
+		     , COURT_TEL AS courtTelephone
+		     , TO_CHAR(COURT_TEL_REG_DATE, 'YYYY-MM-DD HH24:MI') AS courtTelRegisteredDate
+		     , COURT_TEL_REG_ACCT_CODE AS courtTelRegAccountCode
+		     , COURT_TEL_REG_NICKNAME AS courtTelRegNickname
+		     , COURT_CAPACITY_COMFIDENCE AS courtCapacityComfidence
 		FROM VIEW_COURT
 		WHERE COURT_REG_CODE = #{courtCode}
 	</select>
@@ -434,6 +448,8 @@
 		SELECT C.COURT_REG_CODE AS courtCode
 		     , TO_CHAR(C.COURT_REG_DATE, 'YYYY-MM-DD HH24:MI') AS courtRegisteredDate
 		     , C.COURT_MAP_POSITION AS mapPosition
+		     , C.COURT_MAP_POSITION_X AS mapPositionX
+		     , C.COURT_MAP_POSITION_Y AS mapPositionY
 		     , C.REGISTRANT_ACCT_CODE AS registrantAccountCode
 		     , C.USER_NICKNAME AS registrantNickname
 		     , NVL(C.MY_COURT_COUNT,0) AS myCourtCount
@@ -465,14 +481,17 @@
 		     , TO_CHAR(C.ADMIN_COURT_DEL_DATE, 'YYYY-MM-DD HH24:MI') AS adminDelDate
 		     , C.COURT_STATUS AS courtStatus
 		     , C.BLIND_STATUS AS blindStatus
-		     , TC.CITY_CODE AS cityCode
-		     , VC.CITY_NAME AS cityName
+		     , CITY_CODE AS cityCode
+		     , CITY_NAME AS cityName
+		     , REGION_CODE AS regionCode
+		     , COURT_TEL_CODE AS courtTelephoneRegCode
+		     , COURT_TEL AS courtTelephone
+		     , TO_CHAR(COURT_TEL_REG_DATE, 'YYYY-MM-DD HH24:MI') AS courtTelRegisteredDate
+		     , COURT_TEL_REG_ACCT_CODE AS courtTelRegAccountCode
+		     , COURT_TEL_REG_NICKNAME AS courtTelRegNickname
+		     , COURT_CAPACITY_COMFIDENCE AS courtCapacityComfidence
 		FROM VIEW_COURT C
-		LEFT JOIN TBL_COURT_REGISTRATION TC
-		ON C.COURT_REG_CODE = TC.COURT_REG_CODE
-		LEFT JOIN VIEW_CITY VC
-		ON TC.CITY_CODE = VC.CITY_CODE
-		WHERE TC.CITY_CODE = #{cityCode}
+		WHERE C.CITY_CODE = #{cityCode}
 	]]>
 	</select>
 	
@@ -482,6 +501,8 @@
 		SELECT C.COURT_REG_CODE AS courtCode
 		     , TO_CHAR(C.COURT_REG_DATE, 'YYYY-MM-DD HH24:MI') AS courtRegisteredDate
 		     , C.COURT_MAP_POSITION AS mapPosition
+		     , C.COURT_MAP_POSITION_X AS mapPositionX
+		     , C.COURT_MAP_POSITION_Y AS mapPositionY
 		     , C.REGISTRANT_ACCT_CODE AS registrantAccountCode
 		     , C.USER_NICKNAME AS registrantNickname
 		     , NVL(C.MY_COURT_COUNT,0) AS myCourtCount
@@ -513,16 +534,17 @@
 		     , TO_CHAR(C.ADMIN_COURT_DEL_DATE, 'YYYY-MM-DD HH24:MI') AS adminDelDate
 		     , C.COURT_STATUS AS courtStatus
 		     , C.BLIND_STATUS AS blindStatus
-		     , TC.CITY_CODE AS cityCode
-		     , R.REGION_NAME || ' ' || VC.CITY_NAME AS cityName
+		     , CITY_CODE AS cityCode
+		     , CITY_NAME AS cityName
+		     , REGION_CODE AS regionCode
+		     , COURT_TEL_CODE AS courtTelephoneRegCode
+		     , COURT_TEL AS courtTelephone
+		     , TO_CHAR(COURT_TEL_REG_DATE, 'YYYY-MM-DD HH24:MI') AS courtTelRegisteredDate
+		     , COURT_TEL_REG_ACCT_CODE AS courtTelRegAccountCode
+		     , COURT_TEL_REG_NICKNAME AS courtTelRegNickname
+		     , COURT_CAPACITY_COMFIDENCE AS courtCapacityComfidence
 		FROM VIEW_COURT C
-		LEFT JOIN TBL_COURT_REGISTRATION TC
-		ON C.COURT_REG_CODE = TC.COURT_REG_CODE
-		LEFT JOIN TBL_CITY VC
-		ON TC.CITY_CODE = VC.CITY_CODE
-		LEFT JOIN TBL_REGION R
-		ON VC.REGION_CODE = R.REGION_CODE
-		WHERE R.REGION_CODE = #{regionCode}
+		WHERE C.REGION_CODE = #{regionCode}
 	]]>
 	</select>
 	

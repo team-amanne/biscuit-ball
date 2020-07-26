@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.amanne.biscuitball.model.CourtModel;
 import com.amanne.biscuitball.model.UserInfo;
 import com.amanne.biscuitball.mybatis.CourtDTO;
+import com.amanne.biscuitball.mybatis.CourtNameDTO;
 import com.amanne.biscuitball.mybatis.CourtReviewDTO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -195,11 +196,16 @@ public class CourtController
 	}
 	
 	@RequestMapping("/{courtCode}/name")
-	public String courtNameList(Model model, @PathVariable("courtCode") String courtCode)
+	public String courtNameList(Model model, @PathVariable("courtCode") String courtCode, @RequestParam(required=false) String page)
 	{
 		String view = "/court/CourtNameList_pu";
+		UserInfo info = (UserInfo)session.getAttribute("userInfo");
 		
 		model.addAttribute("courtCode", courtCode);
+		model.addAttribute("indexList", courtModel.getCourtNameIndex(
+				courtCode, String.format("/court/%s/name", courtCode), page != null ? Integer.parseInt(page) : 1));
+		model.addAttribute("courtNameList", courtModel.getCourtNameList(courtCode, info.getUserAcctCode()
+				, page != null ? Integer.parseInt(page) : 1, "RANK"));
 		
 		return view;
 	}
@@ -214,7 +220,21 @@ public class CourtController
 		return view;
 	}
 	
-	//@RequestMapping("/{courtCode}/name/registerdo")
+	@RequestMapping("/{courtCode}/name/registerdo")
+	public String courtNameRegister(Model model, @PathVariable("courtCode") String courtCode, @RequestParam String courtName)
+	{
+		String view = "redirect:/court/" + courtCode + "/name";
+		UserInfo info = (UserInfo)session.getAttribute("userInfo");
+		CourtNameDTO dto = new CourtNameDTO();
+		
+		dto.setCourtName(courtName);
+		dto.setCourtCode(courtCode);
+		dto.setRegistrantAccountCode(info.getUserAcctCode());
+		
+		courtModel.registerCourtName(dto);
+		
+		return view;
+	}
 	
 }
 

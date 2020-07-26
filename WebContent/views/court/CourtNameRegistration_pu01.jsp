@@ -19,6 +19,10 @@ String cp = request.getContextPath();
 <link rel="stylesheet" href="<%=cp%>/css/board.css" />
 <script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>
 <style type="text/css">
+.main {
+	padding-top: 20px;
+}
+
 .paging {
 	text-align: center;
 }
@@ -36,7 +40,7 @@ String cp = request.getContextPath();
 </head>
 <body>
 
-<div class="main container-fluid">
+<div class="main container-fluid" style="overflow: hidden;">
 	<div class="row">
 		<div class="col-md-4">
 			<div class="row">
@@ -84,36 +88,16 @@ String cp = request.getContextPath();
 </div>
 
 <script type="text/javascript">
+	var name = "";
+	var checked = false;
 
 	$(function () {
 		
-		var strWidth;
-		var strHeight;
-		
-		//innerWidth / innerHeight / outerWidth / outerHeight 지원 브라우저 
-		if ( window.innerWidth && window.innerHeight && window.outerWidth && window.outerHeight ) {
-		    strWidth = $('.main').outerWidth() + (window.outerWidth - window.innerWidth);
-		    strHeight = $('.main').outerHeight() + (window.outerHeight - window.innerHeight);
-		}
-		else {
-		    var strDocumentWidth = $(document).outerWidth();
-		    var strDocumentHeight = $(document).outerHeight();
-		
-		    window.resizeTo ( strDocumentWidth, strDocumentHeight );
-		
-		    var strMenuWidth = strDocumentWidth - $(window).width();
-		    var strMenuHeight = strDocumentHeight - $(window).height();
-		
-		    strWidth = $('.main').outerWidth() + strMenuWidth;
-		    strHeight = $('.main').outerHeight() + strMenuHeight;
-		}
-		
-		//resize 
-		window.resizeTo( strWidth, strHeight );
+		window.resizeTo( 500, 380 );
 		
 		
 		/* 이벤트 핸들러 처리 */
-		status = { name: "", checked: false };
+		
 		
 		$("#btnSubmit").click(function() {
 			$("#msg").css("display", "none");
@@ -123,13 +107,13 @@ String cp = request.getContextPath();
 				$("#msg").css("display", "inline");
 				return;
 			}
-			
-			if(!status.name || $("#courtName").val() != status.name || !checked) {
+
+			if($("#courtName").val() != name || !checked) {
 				$("#msg").text("중복인지 확인해주세요.");
 				$("#msg").css("display", "inline");
 				return;
 			}
-			
+				
 			$("#courtNameRegisterForm").attr("action", "<%=cp %>/court/${courtCode }/name/registerdo");
 			$("#courtNameRegisterForm").submit();
 			
@@ -144,8 +128,8 @@ String cp = request.getContextPath();
 				return;
 			}
 			
-			if($("#courtName").val() == status.name) {
-				if(status.checked)
+			if($("#courtName").val() == name) {
+				if(checked)
 					$("#msg").text("등록 가능한 이름입니다.");
 				else
 					$("#msg").text("이미 등록된 이름입니다.")
@@ -159,12 +143,12 @@ String cp = request.getContextPath();
 				data: { courtCode: "${courtCode }", courtName: $("#courtName").val().trim() },
 				dataType: "text",
 				success: function (data) {
-					status.name = $("#courtName").val();
+					name = $("#courtName").val();
 					if(data.trim() == "0") {
-						status.checked = true;
+						checked = true;
 						$("#msg").text("등록 가능한 이름입니다.");
 					} else {
-						status.checked = false;
+						checked = false;
 						$("#msg").text("이미 등록된 이름입니다.");						
 					}
 					$("#msg").css("display", "inline");
