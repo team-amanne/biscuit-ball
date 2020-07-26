@@ -62,6 +62,10 @@
 	cursor: pointer;
 	color: orange;
 }
+
+.court-img:hover {
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -92,10 +96,10 @@
 						<div class="col-md-10">
 							<div class="row">
 								<div class="col-sm-6 col-xs-6 left-btn">
-									<button type="button" class="btn btn-default btn-submit" id="myCourt" name="myCourt">내코트등록</button>
+									<button type="button" class="btn btn-default btn-submit" id="btnMyCourt"">내코트등록</button>
 									<c:if test="1==0">
 									<a href="#">
-										<button type="button" class="btn btn-default btn-submit" id="homeCourt" name="homeCourt">홈코트등록</button>
+										<button type="button" class="btn btn-default btn-submit" id="btnHomeCourt">홈코트등록</button>
 									</a>
 									</c:if>
 
@@ -114,11 +118,11 @@
 									</c:if>
 								</div>
 								<div class="col-sm-6 col-xs-6 right-btn">
-									<c:if test="${adminInfo != null }">
-										<button type="button" class="btn btn-default btn-submit" id="adminCourtDel" name="adminCourtDel" style="display: inline;">관리자 코트 삭제</button>
+									<c:if test="${sessionScope.adminInfo != null }">
+										<button type="button" class="btn btn-default btn-submit" id="btnAdminCourtDel" style="display: inline;">관리자 코트 삭제</button>
 									</c:if>
-									<c:if test='${court.courtStatus == "가등록 코트" or court.courtStatus == "정식등록 코트" }'>									
-										<button type="button" class="btn btn-default btn-submit" id="delReq" name="delReq">코트 삭제 요청</button>
+									<c:if test='${court.courtStatus == "가등록 코트" or court.courtStatus == "정식등록 코트" }'>
+										<button type="button" class="btn btn-default btn-submit" id="btnDelReq">코트 삭제 요청</button>
 									</c:if>
 								</div>
 							</div>
@@ -130,22 +134,19 @@
 									style="text-align: center;">
 									<div class="row">
 										<div class="panel panel-heading">
-											<p>
-												<a href="#"> <img src="<%=cp%>${court.courtImg1}"
-													height="150px;" width="250px;" />
-												</a>
-											</p>
-										</div>
-										<div class="row panel-body">
-											<div class="col-sm-6 col-xs-6">
-												<a href="#">
-													<img src="<%=cp%>${court.courtImg2}" height="50px;" width="100px;" />
-												</a>
+											<div style="height: 190px; display: table-cell; vertical-align: middle;">
+												<img src="<%=cp%>${court.courtImg1}" class="court-img-heading" width="300px;" />
 											</div>
-											<div class="col-sm-6 col-xs-6">
-												<a href="#">
-													<img src="<%=cp%>${court.courtImg3}" height="50px;" width="100px;" />
-												</a>
+										</div>
+										<div class="row panel-body" style="height: 80px;">
+											<div class="col-sm-4 col-xs-4">
+												<img src="<%=cp%>${court.courtImg1}" class="court-img" width="80px;" />
+											</div>
+											<div class="col-sm-4 col-xs-4">
+												<img src="<%=cp%>${court.courtImg2}" class="court-img" width="80px;" />
+											</div>
+											<div class="col-sm-4 col-xs-4">
+												<img src="<%=cp%>${court.courtImg3}" class="court-img" width="80px;" />
 											</div>
 										</div>											
 									</div>
@@ -157,9 +158,9 @@
 										<div class="col-sm-1 col-xs-1"></div>
 										<div class="col-sm-8 col-xs-8  panel panel-default">
 											<span class="subtitle-text">${court.courtName }</span>
-											<label style="display: none;">(가등록)</label>
-											<%-- <label>(${court.courtStatus })</label> --%>
-											<label style="display: none;">(삭제요청)</label>
+											<%-- <label style="display: none;">(가등록)</label>
+											<label>(${court.courtStatus })</label> 
+											<label style="display: none;">(삭제요청)</label> --%>
 										</div>
 										<div class="col-sm-1 col-xs-1">
 											<button type="button" class="btn btn-default btn-submit" id="btnName">더보기</button>
@@ -274,9 +275,10 @@
 									</div>
 								</div>
 							</div>
+							
 							<div class="row">
 								<ul class="nav nav-tabs">
-									<li role="presentation" class="active"><a href="#">모임관리</a></li>
+									<li role="presentation" class="active"><a>모임관리</a></li>
 									<li role="presentation"><a href="#">대전관리</a></li>
 								</ul>
 								<div class="row" style="padding-bottom: 3px;">
@@ -408,7 +410,7 @@
 									</div>	
 									
 									<div class="col-sm-4 col-xs-4">
-										<span class="subtitle-text">코트 만족도    </span>
+										<span class="subtitle-text">코트 만족도</span>
 										<c:forEach var="star" begin="1" end="${court.avgCourtSatisfaction.intValue() }">
 										<i class="fas fa-star"></i>
 										</c:forEach>
@@ -432,6 +434,9 @@
 
 								<div class="row">
 									<div class="panel panel-default" id="reviewList">
+										<c:if test="${court.courtReviewList.size() == 0 }">
+										<div class="col-sm-12 col-xs-12" style="text-align: center; padding-top: 20px;">등록된 리뷰가 없습니다.</div>
+										</c:if>
 										<c:forEach var="review" items="${court.courtReviewList }">
 										<div class="panel panel-default col-sm-12 col-xs-12">
 											<div class="panel-body">
@@ -499,75 +504,9 @@
 										</div>
 										</c:forEach>
 										
-										<%-- 
-										<div class="panel panel-default col-sm-12 col-xs-12">
-											<div class="panel-body">
-												<div class="row">
-													<div class="col-sm-2 col-xs-2">
-														<a href="#"><span>닉네임</span></a>
-													</div>
-													<div class="col-sm-4 col-xs-2"></div>
-													<div class="col-sm-2 col-xs-4">
-														<span>일시 [20-07-01]</span>
-													</div>
-													<div class="col-sm-2 col-xs-4">
-													</div>
-													<div class="col-sm-1 col-xs-2">
-														<button type="button" class="btn btn-default btn">
-															<span class="far fa-thumbs-up" style="font-size:18px;"></span> 
-															<span>30</span>
-														</button>
-													</div>
-													<div class="col-sm-1 col-xs-2">
-														<button type="button" class="btn btn-default btn-danger">신고</button>
-													</div>
-												</div>
-												<div class="row">
-													<div class="col-sm-3 col-xs-5">
-														<span>만족도</span> <i class="fas fa-star"></i> <i
-															class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-															class="fas fa-star"></i> <i class="fas fa-star"></i>
-													</div>
-													<div class="col-sm-3 col-xs-5">
-														<span>시설평점</span> <i class="fas fa-star"></i> <i
-															class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-															class="fas fa-star"></i> <i class="fas fa-star"></i>
-													</div>
-													<div class="col-sm-6 sol-xs-2">
-														<i class="fas fa-trash-alt" style="font-size: 20px;"></i>
-														
-													</div>
-												</div>
-											</div>
-											<div class="panel panel-default rev-cont">
-												<div class="panel-body">
-													<span> 코트가 완전좋아요!! </span>
-												</div>
-											</div>
-										</div>
-										 --%>
-										
 										<div class="row">
 											<div class="col-md-3"></div>
-											<div class="col-md-6 paging" id="pagination">
-												<%--
-												<ul class="pagination">
-													<!-- li태그의 클래스에 disabled를 넣으면 마우스를 위에 올렸을 때 클릭 금지 마크가 나오고 클릭도 되지 않는다.-->
-													<!-- disabled의 의미는 앞의 페이지가 존재하지 않다는 뜻이다. -->
-													<li class="disabled"><a href="#"> <span>«</span>
-													</a></li>
-													<!-- li태그의 클래스에 active를 넣으면 색이 반전되고 클릭도 되지 않는다. -->
-													<!-- active의 의미는 현재 페이지의 의미이다. -->
-													<li class="active"><a href="#">1</a></li>
-													<li><a href="#">2</a></li>
-													<li><a href="#">3</a></li>
-													<li><a href="#">4</a></li>
-													<li><a href="#">5</a></li>
-													<li><a href="#"> <span>»</span>
-													</a></li>
-												</ul>
-												 --%>
-											</div>
+											<div class="col-md-6 paging" id="pagination"></div>
 											<div class="col-md-3"></div>
 										</div>
 
@@ -629,12 +568,6 @@
 			}
 		});
 		
-		$('#btn-delreq').click(function() { 
-			var result = confirm('정말로 해당코트를 삭제요청하시겠습니까?'); 
-			if(result) { location.replace('CourtDeleteRequestCompleted.jsp'); } 
-			else { //no 
-			}  
-		}); 
 		
 		$("#btnReviewDelete").click(function () {
 			if(confirm("정말로 삭제하시겠습니까?"))
@@ -644,6 +577,25 @@
 		$("#btnName").click(function () {
 			window.open("<%=cp %>/court/${court.courtCode }/name", "코트 > 코트 정도 > 코트 이름"
 					, "top=10, left=10, width=500, height=600, status=no, menubar=no, toolbar=no, resizable=no");
+		});
+		
+		$(".court-img").hover(function() {
+			$(".court-img-heading").attr("src", $(this).attr("src"));
+		})
+		
+		$("#btnMyCourt").click(function () {
+			if(confirm("내 코트로 등록하시겠습니까?"))
+				$(location).attr("href", "<%=cp %>/mypage/updateusercourt?userCourtCode=${court.courtCode }");
+		});
+		
+		$("#btnDelReq").click(function () {
+			if(confirm("코트 삭제를 요청하시겠습니까?"))
+				$(location).attr("href", "<%=cp %>/court/${court.courtCode}/deleterequest");
+		});
+		
+		$("#btnAdminCourtDel").click(function () {
+			if(confirm("정말로 해당 코트를 삭제하시겠습니까?"))
+				$(location).attr("href", "<%=cp %>/court/${court.courtCode}/delete");
 		});
 	});
 	

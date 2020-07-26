@@ -1422,6 +1422,7 @@
 		FROM TBL_ADMIN A
 		LEFT JOIN TBL_YES_NO YN
 		ON A.CHIEF_ADMIN_CODE = YN.YES_NO_CODE
+		WHERE ADMIN_CODE = #{adminCode}
 	</select>
 	
 	<!-- public void loginAsAdmin(LoginDTO dto); -->

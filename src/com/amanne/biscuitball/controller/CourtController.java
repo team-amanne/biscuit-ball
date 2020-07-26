@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.amanne.biscuitball.model.CourtModel;
 import com.amanne.biscuitball.model.UserInfo;
+import com.amanne.biscuitball.mybatis.AdminDTO;
 import com.amanne.biscuitball.mybatis.CourtDTO;
+import com.amanne.biscuitball.mybatis.CourtDeleteRequestDTO;
 import com.amanne.biscuitball.mybatis.CourtNameDTO;
 import com.amanne.biscuitball.mybatis.CourtReviewDTO;
 import com.oreilly.servlet.MultipartRequest;
@@ -39,7 +41,8 @@ public class CourtController
 	@RequestMapping("/{courtCode}")
 	public String court(Model model, @PathVariable("courtCode") String courtCode
 						, @RequestParam(required=false) String registerResult
-						, @RequestParam(required=false) String removeResult)
+						, @RequestParam(required=false) String removeResult
+						, @RequestParam(required=false) String requestResult)
 	{
 		String view = null;
 		
@@ -68,6 +71,13 @@ public class CourtController
 				model.addAttribute("alert", "리뷰를 삭제하였습니다.");
 			else if(removeResult.equals("fail"))
 				model.addAttribute("alert", "리뷰 삭제에 실패하였습니다.");
+		}
+		else if(requestResult != null)
+		{
+			if(requestResult.equals("success"))
+				model.addAttribute("alert", "코트 삭제 요청이 완료되었습니다.");
+			else if(requestResult.equals("success"))
+				model.addAttribute("alert", "코트 삭제 요청을 실패하였습니다.");
 		}
 		
 		view = "/court/CourtPage";
@@ -117,7 +127,8 @@ public class CourtController
 			dto.setMapPositionX(req.getParameter("mapPositionX"));
 			dto.setMapPositionY(req.getParameter("mapPositionY"));
 			dto.setMapPosition(req.getParameter("mapPositionX") + "," + req.getParameter("mapPositionY"));
-			dto.setRegistrantAccountCode(info.getUserAcctCode());
+			if(info != null)
+				dto.setRegistrantAccountCode(info.getUserAcctCode());
 			dto.setCourtCapacityCode(req.getParameter("courtCapacityCode"));
 			dto.setCourtName(req.getParameter("courtName"));
 			dto.setCourtImg1(savePath + File.separator + saveFileName1);
@@ -147,6 +158,37 @@ public class CourtController
 		model.addAttribute("court", courtModel.getCourt(courtCode, info));
 		
 		view = "/court/CourtRegistrationComplete";
+		
+		return view;
+	}
+	
+	@RequestMapping("/{courtCode}/deleterequest")
+	public String requestDelete(Model model, @PathVariable("courtCode") String courtCode)
+	{
+		String view = "redirect:/court/" + courtCode;
+		CourtDeleteRequestDTO dto = new CourtDeleteRequestDTO();
+		UserInfo info = (UserInfo)session.getAttribute("userInfo");
+		
+		dto.setCourtCode(courtCode);
+		if(info != null)
+			dto.setApplicantAccountCode(info.getUserAcctCode());
+		
+		if( courtModel.requestCourtDelete(dto) > 0)
+			view += "?requestResult=success";
+		else
+			view += "?requestResult=fail";
+		
+		return view;
+	}	
+	
+	@RequestMapping("/{courtCode}/delete")
+	public String deleteCourt(Model model, @PathVariable("courtCode") String courtCode)
+	{
+		String view = "redirect:/court/" + courtCode;
+		AdminDTO info = (AdminDTO)session.getAttribute("adminInfo");
+		
+		if( courtModel.deleteCourtAdmin(info.getAdminCode(), courtCode) != 1)
+			view += "?requestResult=fail";
 		
 		return view;
 	}
@@ -204,7 +246,7 @@ public class CourtController
 		model.addAttribute("courtCode", courtCode);
 		model.addAttribute("indexList", courtModel.getCourtNameIndex(
 				courtCode, String.format("/court/%s/name", courtCode), page != null ? Integer.parseInt(page) : 1));
-		model.addAttribute("courtNameList", courtModel.getCourtNameList(courtCode, info.getUserAcctCode()
+		model.addAttribute("courtNameList", courtModel.getCourtNameList(courtCode, info != null ? info.getUserAcctCode() : null
 				, page != null ? Integer.parseInt(page) : 1, "RANK"));
 		
 		return view;
@@ -229,7 +271,8 @@ public class CourtController
 		
 		dto.setCourtName(courtName);
 		dto.setCourtCode(courtCode);
-		dto.setRegistrantAccountCode(info.getUserAcctCode());
+		if(info != null)
+			dto.setRegistrantAccountCode(info.getUserAcctCode());
 		
 		courtModel.registerCourtName(dto);
 		

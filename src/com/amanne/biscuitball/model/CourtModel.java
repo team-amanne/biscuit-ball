@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.amanne.biscuitball.mybatis.CourtDTO;
+import com.amanne.biscuitball.mybatis.CourtDeleteRequestDTO;
 import com.amanne.biscuitball.mybatis.CourtNameDTO;
 import com.amanne.biscuitball.mybatis.CourtReviewDTO;
 import com.amanne.biscuitball.mybatis.ICourtDAO;
@@ -91,5 +92,18 @@ public class CourtModel
 	{
 		ICourtDAO courtDao = sqlSession.getMapper(ICourtDAO.class);
 		return courtDao.getCourtNameList(courtCode, userAccountCode, currentPage * 5 - 4, currentPage * 5, order);
+	}
+	
+	public int requestCourtDelete(CourtDeleteRequestDTO dto)
+	{
+		ICourtDAO courtDao = sqlSession.getMapper(ICourtDAO.class);
+		courtDao.makeCourtDeleteRequest(dto);
+		return Integer.parseInt(dto.getReturnValue());
+	}
+	
+	public int deleteCourtAdmin(String adminCode, String courtCode)
+	{
+		ICourtDAO courtDao = sqlSession.getMapper(ICourtDAO.class);
+		return courtDao.removeCourtAdmin(courtCode, adminCode);
 	}
 }

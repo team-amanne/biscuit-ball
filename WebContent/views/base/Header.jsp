@@ -96,7 +96,7 @@
 
 							<li class="border-left"><a href="#"> <span id="alarm" class="glyphicon glyphicon-bell" aria-hidden="true"></span> <span class="badge">5</span>
 							</a></li>
-							<li class="dropdown box text-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-user left"></span> <span class="box-content left">${sessionScope.adminInfo.adminNickname }</span> <span class="caret"></span>
+							<li class="dropdown box text-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-user left"></span> <span class="box-content left">${sessionScope.adminInfo.userNickname }</span> <span class="caret"></span>
 							</a>
 								<ul class="dropdown-menu" role="menu">
 									<li><a href="#">모임관리</a></li>
@@ -224,7 +224,7 @@
 		<!-- /.container-fluid -->
 	</nav>
 
-	<div class="btn-top">
+	<div class="btn-top" onclick="javascript:window.scrollTo(0,0);">
 		<span class="glyphicon glyphicon-chevron-up"></span>
 	</div>
 

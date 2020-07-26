@@ -571,4 +571,10 @@
 		  AND COURT_REVIEW_DEL_DATE IS NULL
 	</select>
 	
+	<!-- public int removeCourtAdmin(String courtCode, String adminCode); // 관리자 코트 삭제 -->
+	<insert id="removeCourtAdmin">
+		INSERT INTO TBL_ADMIN_COURT_DELETE(ADMIN_COURT_DEL_CODE,ADMIN_COURT_DEL_DATE,ADMIN_CODE,COURT_REG_CODE)
+		VALUES(FN_CREATE_CODE('TBL_ADMIN_COURT_DELETE', SEQ_ADMIN_COURT_DELETE.NEXTVAL), SYSDATE, #{adminCode}, #{courtCode})
+	</insert>
+	
 </mapper>

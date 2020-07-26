@@ -97,6 +97,10 @@
 	padding: 5px 10px;
 }
 
+.btn-top:hover {
+	cursor: pointer;
+}
+
 .btn-top > span.glyphicon {
 	font-size: 32px;
 	color: white;
@@ -118,11 +122,17 @@
 }
 
 
-
-
-
 .main {
 	padding-top: 40px;
+}
+
+
+.header .navbar-nav > .active > a
+, .header .navbar-nav > .active > a:hover
+, .header .navbar-nav > .active > a:focus {
+	background-color: var(--nav-point);
+	color: white;
+	font-weight: bold;
 }
 
 

@@ -32,6 +32,7 @@ public class LoginModel
       }
       else
       {
+    	  System.out.println(returnValue);
          AdminDTO adminDto = adminDao.getAdmin(returnValue);
          userInfo.setUserCode(adminDto.getAdminCode());
          userInfo.setUserNickname(adminDto.getAdminNickname());

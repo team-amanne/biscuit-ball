@@ -53,4 +53,6 @@ public interface ICourtDAO
 	public int removeCourtReview(String courtReviewCode);	// 코트 리뷰 삭제 처리
 	
 	public int checkCourtReviewWritten(@Param("courtCode") String courtCode, @Param("userAccountCode") String userAccountCode);	// 해당 코트에 코트 리뷰를 작성한 적 있는지 확인
+	
+	public int removeCourtAdmin(@Param("courtCode") String courtCode, @Param("adminCode") String adminCode); // 관리자 코트 삭제
 }
