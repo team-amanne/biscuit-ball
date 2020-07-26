@@ -69,7 +69,7 @@ public class MypageModel
 		
 		// 작업객체생성
 		IUserDAO dao = sqlSession.getMapper(IUserDAO.class);
-		
+
 		// 작업준비
 		UserDTO user = dao.getUser(userInfo.getUserAcctCode());
 		
@@ -80,9 +80,6 @@ public class MypageModel
 			oldUrl = oldUrl.substring(oldUrl.indexOf("/")+1, oldUrl.length());
 		if(oldUrl.indexOf("court")!=-1)
 			oldUrl = "court";
-		
-		System.out.println(oldUrl + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-		
 
 		switch (oldUrl)
 		{
@@ -104,7 +101,7 @@ public class MypageModel
 				
 			case "court":
 				// 코트  → 내 코트 변경
-				String updateUserCourtCode = (String)request.getParameter("courtCode");
+				String updateUserCourtCode = (String)request.getParameter("userCourtCode");
 				user.setUserCourtCode(updateUserCourtCode);
 				userDTOCodeChange(user);
 				dao.updateUserProfile(user);
