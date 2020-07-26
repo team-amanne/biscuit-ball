@@ -53,10 +53,11 @@ select
 	font-size: 10pt;
 }
 
-#err
+.err
 {
 	color: red;
 	font-size: 10pt;
+	display: none;
 }
 
 .age
@@ -121,6 +122,32 @@ $(function()
   	  dateFormat: "yy-mm-dd"
     });
     
+    // 실력 조건, 나이 조건 자바스크립트
+    
+    var tier = "${userDto.tierName}";
+	var userBirthday = "${userDto.userBirthday}".substring(0,4);
+	var age = year - parseInt(userBirthday)+1;
+	
+	
+	for(var i=parseInt(tier); i<=5; i=i+1) {        
+        var html;
+        html += "<option value="+userBirthday+">LV."+i+"</option>"
+    }
+    $("#tier-check").append(html);
+    
+    
+    for(var i=0; i<=Math.floor(age/10)*10; i=i+10) {        
+        var minage;
+        minage += "<option value="+i+">"+i+"대</option>"
+    }
+    $("#minage-check").append(minage);
+
+    for(var i=Math.floor(age/10)*10; i<=100; i=i+10) {        
+        var maxage;
+        maxage += "<option value="+i+">"+i+"대</option>"
+    }
+    $("#maxage-check").append(maxage);
+    
 	
 	// ajax() 사용해 시군구 불러오기
     $("#regionSelect").on("change", function()
@@ -143,6 +170,9 @@ $(function()
 	   
 	});
 });
+
+		// 입력값 check
+		
 
 </script>
 
@@ -176,10 +206,10 @@ $(function()
 						<div class="panel-body">
 								<div class="input-group input-group-lg subject">
 								<span class="input-group-addon">모임 제목</span>
-								<input type="text" class="form-control">
+								<input type="text" class="form-control" id="meetingSubject">
+								<span class="err">*모임 제목을 입력해주세요</span>
 							</div>
 							<h4>모임 정보 입력</h4>
-							${user.userCode }
 							<div class="row">
 								<div class="col-md-8">
 									<div class="panel panel-default">
@@ -206,6 +236,7 @@ $(function()
 												<button type="button" class="btn btn-default btn-md btn-block" id="mapSearch">
 													지도검색</button>
 											</div>
+										<span class="err">*지역을 선택해주세요.</span>
 										</div>
 									</div>
 								</div>
@@ -390,11 +421,11 @@ $(function()
 												<div class="panel-heading">성별 조건</div>
 												<div class="panel-body">
 													<label class="radio-inline radio" > 
-													<input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+													<input type="radio" name="gender" id="userGender" value="${userDto.userGenderCode }">
 														나와 같은 성별
 													</label> 
 													<label class="radio-inline radio"> 
-													<input type="radio" name="inlineRadioOptions" id="inlineRadio2" checked="checked" value="option2">
+													<input type="radio" name="gender" id="allGenter" checked="checked" value="0">
 														상관 없음
 													</label>
 												</div>
@@ -404,8 +435,8 @@ $(function()
 											<div class="panel panel-default">
 												<div class="panel-heading">최소 실력</div>
 												<div class="panel-body">
-													<select name="" id="" class="form-control">
-														<option value="">실력 등급 선택</option>
+													<select name="" id="tier-check" name="tier-check" class="form-control">
+														<option value="ZY01">누구나</option>
 													</select>
 												</div>
 											</div>
@@ -415,21 +446,21 @@ $(function()
 												<div class="panel-heading">나이 제한</div>
 												<div class="panel-body">
 													<div class="col-md-3 age">
-													<select name="" id="" class="form-control">
-														<option value="">20대</option>
+													<select name="minage-check" id="minage-check" class="form-control">
+													
 													</select>
 													</div>
 													<div class="col-md-1">
 													<p class="middle">~</p>
 													</div>
 													<div class="col-md-3 age">
-													<select name="" id="" class="form-control">
-														<option value="">30대</option>
+													<select name="maxage-check" id="maxage-check" class="form-control">
+													
 													</select>
 													</div>
 													<div class="col-md-4">
 													<label class="radio-inline radio"> 
-													<input type="radio" name="inlineRadioOptions" id="inlineRadio2" checked="checked" value="option2">
+													<input type="radio" name="allAge" id="inlineRadio2" value="0">
 														누구나
 													</label>
 													</div>
@@ -444,7 +475,7 @@ $(function()
 											<h4>공지사항</h4>
 											<div class="panel panel-default">
 												<div class="panel-body">
-													<textarea class="form-control"></textarea>
+													<textarea class="form-control" id="notice"></textarea>
 												</div>
 											</div>
 										</div>
