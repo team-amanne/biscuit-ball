@@ -121,7 +121,7 @@
 									<c:if test="${sessionScope.adminInfo != null }">
 										<button type="button" class="btn btn-default btn-submit" id="btnAdminCourtDel" style="display: inline;">관리자 코트 삭제</button>
 									</c:if>
-									<c:if test='${court.courtStatus == "가등록 코트" or court.courtStatus == "정식등록 코트" }'>
+									<c:if test='${court.courtStatus == "정식등록 코트" }'>
 										<button type="button" class="btn btn-default btn-submit" id="btnDelReq">코트 삭제 요청</button>
 									</c:if>
 								</div>
@@ -159,9 +159,12 @@
 										<div class="col-sm-1 col-xs-1"></div>
 										<div class="col-sm-8 col-xs-8  panel panel-default">
 											<span class="subtitle-text">${court.courtName }</span>
-											<%-- <label style="display: none;">(가등록)</label>
-											<label>(${court.courtStatus })</label> 
-											<label style="display: none;">(삭제요청)</label> --%>
+											<c:if test="${court.courtStatus == '가등록 코트' }">
+												<label>(가등록)</label>
+											</c:if>											
+											<c:if test="${court.courtStatus == '삭제 투표중' }">
+												<label>(삭제요청)</label>
+											</c:if>
 										</div>
 										<div class="col-sm-1 col-xs-1">
 											<button type="button" class="btn btn-default btn-submit" id="btnName">더보기</button>
@@ -201,14 +204,25 @@
 															<label>적정인원수</label>
 														</div>
 														<div class="col-sm-8 col-xs-12">
-															<span>${court.minCourtCapacity }~${court.maxCourtCapacity } 명 (
-															<c:if test="${!empty court.courtCapacityComfidence  }">
-															신뢰도 ${court.courtCapacityComfidence } %
-															</c:if>
-															<c:if test="${empty court.courtCapacityComfidence }">
-															신뢰도 낮음
-															</c:if>
-															)</span>
+															<span>
+																${court.minCourtCapacity }
+																<c:choose>
+																	<c:when test="${court.maxCourtCapacity < 99 }">
+																	~ ${court.maxCourtCapacity } 명
+																	</c:when>
+																	<c:otherwise>
+																	명 이상
+																	</c:otherwise>
+																</c:choose>
+																(
+																<c:if test="${!empty court.courtCapacityComfidence  }">
+																신뢰도 ${court.courtCapacityComfidence } %
+																</c:if>
+																<c:if test="${empty court.courtCapacityComfidence }">
+																신뢰도 낮음
+																</c:if>
+																)
+															</span>
 														</div>
 													</div>
 													<div class="row">
@@ -451,13 +465,13 @@
 													</div>
 													
 													<div class="col-sm-1 col-xs-2">
-														<button type="button" class="btn btn-default btn">
+														<button type="button" class="btn btn-default btn btnLike" data-reviewcode="${review.courtReviewCode }">
 															<span class="far fa-thumbs-up" style="font-size:18px;"></span> 
 															<span>${review.likes }</span>
 														</button>
 													</div>
 													<div class="col-sm-1 col-xs-2">
-														<button type="button" class="btn btn-default btn">
+														<button type="button" class="btn btn-default btn btnDislike" data-reviewcode="${review.courtReviewCode }" >
 															<span class="far fa-thumbs-down" style="font-size:18px;"></span> 
 															<span>${review.dislikes }</span>
 														</button>
@@ -510,7 +524,6 @@
 											<div class="col-md-6 paging" id="pagination"></div>
 											<div class="col-md-3"></div>
 										</div>
-
 
 
 									</div>
@@ -576,9 +589,21 @@
 		});
 		
 		$("#btnName").click(function () {
-			window.open("<%=cp %>/court/${court.courtCode }/name", "코트 > 코트 정도 > 코트 이름"
+			window.open("<%=cp %>/court/${court.courtCode }/name", "코트 > 코트 정보 > 코트 이름"
 					, "top=10, left=10, width=500, height=600, status=no, menubar=no, toolbar=no, resizable=no");
 		});
+		
+		$("#btnVoteRegister").click(function () {
+			window.open("<%=cp %>/court/${court.courtCode }/registerpoll", "코트 > 코트 정보 > 코트 등록 투표"
+					, "top=10, left=10, width=300, height=400, status=no, menubar=no, toolbar=no, resizable=no");
+		});
+		
+		$("#btnVoteDelete").click(function () {
+			window.open("<%=cp %>/court/${court.courtCode }/deletepoll", "코트 > 코트 정보 > 코트 삭제 투표"
+					, "top=10, left=10, width=300, height=400, status=no, menubar=no, toolbar=no, resizable=no");
+		});
+		
+		
 		
 		$(".court-img").hover(function() {
 			$(".court-img-heading").attr("src", $(this).attr("src"));
@@ -598,7 +623,53 @@
 			if(confirm("정말로 해당 코트를 삭제하시겠습니까?"))
 				$(location).attr("href", "<%=cp %>/court/${court.courtCode}/delete");
 		});
+		
+		$(".btnLike[data-reviewcode]").click(pollReviewLike);
+		$(".btnDislike[data-reviewcode]").click(pollReviewDislike);
+		
 	});
+	
+	function pollReviewDislike() {
+		var reviewCode = $(this).attr("data-reviewcode");
+		
+		if($(this).is(".active"))
+			return;
+		
+		$.ajax({
+			type: "get",
+			url: "<%=cp %>/court/${court.courtCode}/review/" + reviewCode + "/poll/like",
+			dataType: "text",
+			success: function (data) {
+				$(this).addClass("active");
+				$(".btnLike[data-reviewcode='" + reviewCode + "']").removeClass("active");
+			}, 
+			error: function(e) {
+				console.log(e);
+				alert(e.responseText);
+			}
+		});
+	}
+	
+	function pollReviewLike() {
+		var reviewCode = $(this).attr("data-reviewcode");
+
+		if($(this).is(".active"))
+			return;
+		
+		$.ajax({
+			type: "get",
+			url: "<%=cp %>/court/${court.courtCode}/review/" + reviewCode + "/poll/dislike",
+			dataType: "text",
+			success: function (data) {
+				$(this).addClass("active");
+				$(".btnDislike[data-reviewcode='" + reviewCode + "']").removeClass("active");
+			}, 
+			error: function(e) {
+				console.log(e);
+				alert(e.responseText);
+			}
+		});
+	}
 	
 	function renderNewPage() {
 		var page = $(this).attr("data-page");
@@ -624,13 +695,19 @@
 					result += '			</div>\n';
 					
 					result += '			<div class="col-sm-1 col-xs-2">\n';
-					result += '				<button type="button" class="btn btn-default btn">\n';
+					result += '				<button type="button" class="btn btn-default btn btnLike';
+					if(data[i].pollLikeOrDislike == "YES")
+						result += " active ";
+					result += '" data-reviewcode="' + data[i].courtReviewCode + '">\n';
 					result += '					<span class="far fa-thumbs-up" style="font-size:18px;"></span>\n'; 
 					result += '					<span>' + data[i].likes + '</span>\n';
 					result += '				</button>\n';
 					result += '			</div>\n';
 					result += '			<div class="col-sm-1 col-xs-2">\n';
-					result += '				<button type="button" class="btn btn-default btn">\n';
+					result += '				<button type="button" class="btn btn-default btn btnDislike';
+					if(data[i].pollLikeOrDislike == "NO")
+						result += " active ";
+					result += '" data-reviewcode="' + data[i].courtReviewCode + '">\n';
 					result += '					<span class="far fa-thumbs-down" style="font-size:18px;"></span>\n'; 
 					result += '					<span>' + data[i].dislikes + '</span>\n';
 					result += '				</button>\n';
@@ -690,6 +767,9 @@
 				result += '</div>\n';
 				
 				$("#reviewList").html(result);
+				
+				$(".btnLike[data-reviewcode]").click(pollReviewLike);
+				$(".btnDisike[data-reviewcode]").click(pollReviewDislike);
 				
 				$.ajax({
 					type: "get",

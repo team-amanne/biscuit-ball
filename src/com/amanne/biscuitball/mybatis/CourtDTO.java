@@ -60,6 +60,43 @@ public class CourtDTO
 	private String courtTelRegAccountCode;
 	private String courtTelRegNickname;
 	
+	private String delRequestPollOrNot;
+	private String delRequestYesOrNo;
+	private String enrollPollOrNot;
+	private String enrollYesOrNo;
+	
+	public String getDelRequestPollOrNot() {
+		return delRequestPollOrNot;
+	}
+
+	public void setDelRequestPollOrNot(String delRequestPollOrNot) {
+		this.delRequestPollOrNot = delRequestPollOrNot;
+	}
+
+	public String getDelRequestYesOrNo() {
+		return delRequestYesOrNo;
+	}
+
+	public void setDelRequestYesOrNo(String delRequestYesOrNo) {
+		this.delRequestYesOrNo = delRequestYesOrNo;
+	}
+
+	public String getEnrollPollOrNot() {
+		return enrollPollOrNot;
+	}
+
+	public void setEnrollPollOrNot(String enrollPollOrNot) {
+		this.enrollPollOrNot = enrollPollOrNot;
+	}
+
+	public String getEnrollYesOrNo() {
+		return enrollYesOrNo;
+	}
+
+	public void setEnrollYesOrNo(String enrollYesOrNo) {
+		this.enrollYesOrNo = enrollYesOrNo;
+	}
+
 	private String returnValue;
 
 	public String getCourtCode() {

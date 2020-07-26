@@ -55,4 +55,10 @@ public interface ICourtDAO
 	public int checkCourtReviewWritten(@Param("courtCode") String courtCode, @Param("userAccountCode") String userAccountCode);	// 해당 코트에 코트 리뷰를 작성한 적 있는지 확인
 	
 	public int removeCourtAdmin(@Param("courtCode") String courtCode, @Param("adminCode") String adminCode); // 관리자 코트 삭제
+	
+	public String checkCourtRegPoll(@Param("courtCode") String courtCode, @Param("userAccountCode") String userAccountCode);	// 코트 등록 투표 여부 확인
+	public String checkCourtDelPoll(@Param("courtCode") String courtCode, @Param("userAccountCode") String userAccountCode);	// 코트 등록 투표 여부 확인
+	
+	public int pollCourtReview(PollDTO dto);	// 코트리뷰 투표
+	public int updatePollCourtReview(PollDTO dto);	// 코트리뷰 투표 갱신
 }
