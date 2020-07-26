@@ -578,7 +578,7 @@ $(function()
 				meetingDate : $("#dateselect1").val()+" "+$("#timeselect option:selected").val(),
 				meetingTypeCode : $('input[name="meetingType"]:checked').val(),
 				start : 1,
-				end : 3
+				end : 10
 			},
 			success : function(data)
 			{
@@ -588,32 +588,20 @@ $(function()
 						+ "</div><div class='col-md-3 col-xs-3'><span>장소</span></div><div class='col-md-2 col-xs-2'>"
 						+ "<span>일시</span></div><div class='col-md-1 col-xs-1'><span>인원</span></div></div></li>";
 
-				for (var i = 0; i < data.length; i++)
+				console.log(data);
+				for (var i=0; i<data.length; i++)
 				{
 					listPrint += "<li class='list-group-item board-body'><div class='row'><div class='col-md-4 col-xs-4'>";
-					listPrint += "<span>"
-							+ data[i].meetingSubject
-							+ "</span>";
+					listPrint += "<span>"+ data[i].meetingSubject+ "</span>";
 					listPrint += "</div><div class='col-md-2 col-xs-2'>";
-					listPrint += "<span>"
-							+ data[i].captainName
-							+ "</span>";
+					listPrint += "<span>"+ data[i].captainName+ "</span>";
 					listPrint += "</div><div class='col-md-3 col-xs-3'>";
-					listPrint += "<span>"
-							+ $("#courtName")
-									.text()
-							+ "</span>";
+					listPrint += "<span>"+ $("#courtName").text()+ "</span>";
 					listPrint += "</div><div class='col-md-2 col-xs-2'>";
-					listPrint += "<span>"
-							+ data[i].meetingDate
-							+ "</span>";
+					listPrint += "<span>"+ data[i].meetingDate+ "</span>";
 					listPrint += "</div><div class='col-md-1 col-xs-1'>";
-					listPrint += "<span>"
-							+ data[i].nowPeopleNumber
-							+ "/"
-							+ data[i].meetingPeopleNumber
-							+ "</span>";
-					listPrint += "</div></div></li>"
+					listPrint += "<span>"+ data[i].nowPeopleNumber+ "/"+ data[i].meetingPeopleNumber+ "</span>";
+					listPrint += "</div></div></li>";
 
 					/* <li class="list-group-item board-body">
 					<div class="row">
@@ -638,6 +626,8 @@ $(function()
 						
 				}
 				$("#meetingList").html(listPrint);
+				
+				alert(listPrint);
 			},
 			error : function(e)
 			{

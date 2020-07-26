@@ -299,6 +299,7 @@ public class AjaxModel
 		{
 			obj = new JSONObject();
 			System.out.println(dto.getMeetingDate());
+			
 			obj.put("meetingCode",dto.getMeetingCode() );
 			obj.put("meetingSubject", dto.getMeetingSubject() );
 			obj.put("meetingPeopleNumber", dto.getMeetingPeopleNumber() );
