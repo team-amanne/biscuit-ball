@@ -118,18 +118,18 @@
 	 parameterType="com.amanne.biscuitball.mybatis.UserDTO"
 	 statementType="CALLABLE">	
 		UPDATE TBL_USER_PROFILE_INFO
-		SET USER_PROFILE_IMG= #{userProfileImg}
-		  , USER_PROFILE_TXT= #{userProfileTxt}
-		  , USER_COURT_CODE= #{userCourtCode}
-		  , USER_POSITION_CODE= #{userPositionCode}
-		  , USER_TITLE_ACHV= #{titleAchievementImg}
-		  , SMS_RECEIVE_CODE= #{smsReceive}
-		  , USER_CITY_OP_CODE= #{cityOpen}
-		  , USER_ACHV_OP_CODE= #{achvOpen}
-		  , USER_GENDER_OP_CODE= #{genderOpen}
-		  , USER_COURT_OP_CODE= #{courtOpen}
-		  , USER_PL_OP_CODE= #{playlogOpen}
-		  , MSG_BLOCK_TYPE_CODE= #{msgBlockCode}
+		SET USER_PROFILE_IMG= #{userProfileImg, jdbcType=VARCHAR}
+		  , USER_PROFILE_TXT= #{userProfileTxt, jdbcType=VARCHAR}
+		  , USER_COURT_CODE= #{userCourtCode, jdbcType=VARCHAR}
+		  , USER_POSITION_CODE= #{userPositionCode, jdbcType=VARCHAR}
+		  , USER_TITLE_ACHV= #{titleAchievementCode, jdbcType=VARCHAR}
+		  , SMS_RECEIVE_CODE= #{smsReceive, jdbcType=VARCHAR}
+		  , USER_CITY_OP_CODE= #{cityOpen, jdbcType=VARCHAR}
+		  , USER_ACHV_OP_CODE= #{achvOpen, jdbcType=VARCHAR}
+		  , USER_GENDER_OP_CODE= #{genderOpen, jdbcType=VARCHAR}
+		  , USER_COURT_OP_CODE= #{courtOpen, jdbcType=VARCHAR}
+		  , USER_PL_OP_CODE= #{playlogOpen, jdbcType=VARCHAR}
+		  , MSG_BLOCK_TYPE_CODE= #{msgBlockCode, jdbcType=VARCHAR}
 		WHERE USER_ACCT_CODE = #{userAccountCode}		
 	</update>
 
@@ -492,44 +492,55 @@
    <select id="getUser" parameterType="java.lang.String"
       resultType="com.amanne.biscuitball.mybatis.UserDTO">   
 	SELECT   VUP.USER_CODE as userCode
-			,VUP.USER_ACCT_CODE as userAccountCode
-	        , VUP.USER_NICKNAME as userNickname
-	        , VUP.SNS_SYNC as snsSync
-	        , VUP.USER_NAME as userName
-	        , VUP.USER_EMAIL as userEmail
-	        , VUP.USER_TEL as userTel
-	        , VUP.USER_BIRTHDAY as userBirthday
-	        , VUP.USER_HEIGHT as userHeight
-	        , VUP.USER_REG_DATE as userRegisteredDate
-	        , VUP.USER_GENDER as userGender
-	        , VUP.SELF_EVAL_TYPE as selfEvaluationType
-	        , VUP.GRADE as tierName
-	        , VUP.FPS as fairplayScore
-	        , VUP.USER_CITY as userCity
-	        , VUP.USER_CITY_CODE as userCityCode
-	        , VUP.COURT_NAME as userCourtName
-	        , VUP.USER_PROFILE_IMG as userProfileImg
-	        , VUP.USER_PROFILE_TXT as userProfileTxt
-	        , VUP.USER_COURT_CODE as userCourtCode
-	        , VUP.USER_POSITION as userPosition
-	        , VUP.USER_POSITION_ABBR as userPositionAbbr
-	        , VUP.TITLE_ACHV_NAME as userPositionCode
-	        , VUP.SMS_RECEIVE as smsReceive
-	        , VUP.CITY_OPEN as cityOpen
-	        , VUP.ACHV_OPEN as achvOpen
-	        , VUP.GENDER_OPEN as genderOpen
-	        , VUP.COURT_OPEN as courtOpen
-	        , VUP.PL_OPEN as playlogOpen
-	        , VUP.MSG_BLOCK_TYPE as msgBlockCode
-	        , VUP.CREW_CODE as userCrewCode
-	        , VUP.CREW_MEMBER_CODE as  userCrewMemberCode
-	        , VUP.CREW_NAME as userCrewName
-	        , NVL(UP.USER_STATUS,'정상') AS userStatus
-		    , UP.PENALTY_COUNT as penaltyCount
-	FROM VIEW_USER_PROFILE VUP
-	LEFT JOIN VIEW_USER_PENALTY_SUMMARY UP
-	ON VUP.USER_ACCT_CODE = UP.USER_ACCT_CODE
-	WHERE VUP.USER_ACCT_CODE = #{userAccountCode}
+				,VUP.USER_ACCT_CODE as userAccountCode
+		        , VUP.USER_NICKNAME as userNickname
+		        , VUP.SNS_SYNC as snsSync
+		        , VUP.USER_NAME as userName
+		        , VUP.USER_EMAIL as userEmail
+		        , VUP.USER_TEL as userTel
+		        , VUP.USER_BIRTHDAY as userBirthday
+		        , VUP.USER_HEIGHT as userHeight
+		        , VUP.USER_REG_DATE as userRegisteredDate
+		        , VUP.USER_GENDER as userGender
+		        , VUP.SELF_EVAL_TYPE as selfEvaluationType
+		        , VUP.GRADE as tierName
+		        , VUP.FPS as fairplayScore
+		        , VUP.USER_CITY as userCity
+		        , VUP.USER_CITY_CODE as userCityCode
+		        , VUP.COURT_NAME as userCourtName
+		        , VUP.USER_PROFILE_IMG as userProfileImg
+		        , VUP.USER_PROFILE_TXT as userProfileTxt
+		        , VUP.USER_COURT_CODE as userCourtCode
+		        , VUP.USER_POSITION as userPosition
+		        , VUP.USER_POSITION_ABBR as userPositionAbbr
+		        , VUP.SMS_RECEIVE as smsReceive
+		        , VUP.CITY_OPEN as cityOpen
+		        , VUP.ACHV_OPEN as achvOpen
+		        , VUP.GENDER_OPEN as genderOpen
+		        , VUP.COURT_OPEN as courtOpen
+		        , VUP.PL_OPEN as playlogOpen
+		        , VUP.MSG_BLOCK_TYPE as msgBlockType
+		        , VUP.CREW_CODE as userCrewCode
+		        , VUP.CREW_MEMBER_CODE as  userCrewMemberCode
+		        , VUP.CREW_NAME as userCrewName
+		        , NVL(UP.USER_STATUS,'정상') AS userStatus
+			    , UP.PENALTY_COUNT as penaltyCount
+	            , TUPI.USER_TITLE_ACHV AS titleAchievementCode
+	            , TPA.PERS_ACHV_NAME AS titleAchievementName
+	            , TPA.PERS_ACHV_IMG AS titleAchievementImg
+	            , TUPI.MSG_BLOCK_TYPE_CODE AS msgBlockCode
+	            , VUP.USER_POSITION_CODE as userPositionCode
+	
+		FROM VIEW_USER_PROFILE VUP
+		LEFT JOIN VIEW_USER_PENALTY_SUMMARY UP
+		ON VUP.USER_ACCT_CODE = UP.USER_ACCT_CODE
+	    LEFT JOIN TBL_USER_PROFILE_INFO TUPI
+		ON VUP.USER_ACCT_CODE = TUPI.USER_ACCT_CODE
+	    LEFT JOIN TBL_PERSONAL_ACHIEVEMENT_GET TPAG
+		ON TUPI.USER_TITLE_ACHV = TPAG.PERS_ACHV_GET_CODE
+	    LEFT JOIN TBL_PERSONAL_ACHIEVEMENTS TPA
+		ON TPAG.PERS_ACHV_CODE = TPA.PERS_ACHV_CODE    
+	    WHERE VUP.USER_ACCT_CODE = #{userAccountCode}
    </select>
 
 

@@ -1,6 +1,7 @@
 package com.amanne.biscuitball.controller;
 
 import javax.servlet.http.HttpSession;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -129,9 +130,11 @@ public class AjaxController
 	}
 
 	@RequestMapping("/togethermeetinglist")
-	public String togetherMeetingList(Model model, String courtRegistrationCode, String meetingDate, @RequestParam("meetingTypeCode") String meetingTypeCode, @RequestParam("start") int start, @RequestParam("end") int end)
+	public String togetherMeetingList(Model model, @RequestParam("courtRegistrationCode") String courtRegistrationCode, @RequestParam("meetingDate") String meetingDate, @RequestParam("meetingTypeCode") String meetingTypeCode, @RequestParam("start") int start, @RequestParam("end") int end)
 	{
 		String view = null;
+		
+		meetingDate=meetingDate.replace("+", " ");
 		
 		model.addAttribute("result", ajax.getMeetingListByTogetherPlay(courtRegistrationCode, meetingDate, meetingTypeCode, start, end));
 		

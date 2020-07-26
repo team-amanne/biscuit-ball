@@ -35,6 +35,7 @@ public class CourtModel
 			for(CourtReviewDTO dto : list)
 				dto.setCourtReviewContent(dto.getCourtReviewContent().replaceAll("\\n", "<br>"));
 			result.setCourtReviewList(list);
+			
 		}
 		
 		return result;
