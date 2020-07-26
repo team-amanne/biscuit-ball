@@ -88,7 +88,7 @@ public class CourtNameDTO
 	public void setRank(int rank) {
 		this.rank = rank;
 	}
-	public String isPollOrNot() {
+	public String getPollOrNot() {
 		return pollOrNot;
 	}
 	public void setPollOrNot(String pollOrNot) {

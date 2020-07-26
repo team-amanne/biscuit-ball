@@ -1,12 +1,15 @@
 package com.amanne.biscuitball.controller;
 
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.amanne.biscuitball.model.AjaxModel;
+import com.amanne.biscuitball.model.UserInfo;
 
 @Controller
 @RequestMapping("/ajax")
@@ -14,6 +17,8 @@ public class AjaxController
 {
 	@Autowired
 	private AjaxModel ajax;
+	@Autowired
+	private HttpSession session;
 	
 	@RequestMapping("/citylist")
 	public String cityList(Model model, @RequestParam("regionCode") String regionCode)
@@ -90,6 +95,45 @@ public class AjaxController
 			model.addAttribute("result", ajax.getCourtListByCity(cityCode));
 		else if(regionCode != null)
 			model.addAttribute("result", ajax.getCourtListByRegion(regionCode));
+		
+		view = "/ajax/Check";
+		return view;
+	}
+	
+	@RequestMapping("/court")
+	public String getCourt(Model model, @RequestParam(required=false) String mapPositionX, @RequestParam(required=false) String mapPositionY)
+	{
+		String view = null;
+		
+		model.addAttribute("result", ajax.getCourtCodeByPosition(mapPositionX, mapPositionY)); 
+		
+		view = "/ajax/Check";
+		return view;
+	}
+	
+	@RequestMapping("/court/{courtCode}/reviewlist")
+	public String courtReviewList(Model model, @RequestParam(required=false) String page, @PathVariable String courtCode)
+	{
+		UserInfo info = (UserInfo)session.getAttribute("userInfo");
+		model.addAttribute("result", ajax.getCourtReviewList(courtCode, info.getUserAcctCode()
+				, page != null ? Integer.parseInt(page) : 1, "LIKE"));
+		
+		return "/ajax/Check";
+	}
+	
+	@RequestMapping("/court/{courtCode}/reviewindex")
+	public String courtReviewIndex(Model model, @RequestParam(required=false) String page, @PathVariable String courtCode)
+	{
+		model.addAttribute("result", ajax.getCourtReviewIndex(courtCode, page != null ? Integer.parseInt(page) : 1));
+		return "/ajax/Check";
+	}
+
+	@RequestMapping("/togethermeetinglist")
+	public String togetherMeetingList(Model model, String courtRegistrationCode, String meetingDate, @RequestParam("meetingTypeCode") String meetingTypeCode, @RequestParam("start") int start, @RequestParam("end") int end)
+	{
+		String view = null;
+		
+		model.addAttribute("result", ajax.getMeetingListByTogetherPlay(courtRegistrationCode, meetingDate, meetingTypeCode, start, end));
 		
 		view = "/ajax/Check";
 		return view;

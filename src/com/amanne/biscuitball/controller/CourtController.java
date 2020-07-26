@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.amanne.biscuitball.model.CourtModel;
 import com.amanne.biscuitball.model.UserInfo;
 import com.amanne.biscuitball.mybatis.CourtDTO;
+import com.amanne.biscuitball.mybatis.CourtNameDTO;
 import com.amanne.biscuitball.mybatis.CourtReviewDTO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -85,7 +86,7 @@ public class CourtController
 	}
 	
 	@RequestMapping("/registerdo")
-	public String courtRegister(Model model, HttpServletRequest request)
+	public String courtRegister(HttpServletRequest request)
 	{
 		String view = "redirect:/court/registerok";
 		UserInfo info = (UserInfo)session.getAttribute("userInfo");
@@ -167,7 +168,7 @@ public class CourtController
 	}
 	
 	@RequestMapping("/{courtCode}/review/registerdo")
-	public String courtReviewRegister(Model model, @PathVariable("courtCode") String courtCode , CourtReviewDTO dto)
+	public String courtReviewRegister(@PathVariable("courtCode") String courtCode , CourtReviewDTO dto)
 	{
 		String view = "redirect:/court/" + courtCode;
 		UserInfo info = (UserInfo)session.getAttribute("userInfo");
@@ -182,7 +183,7 @@ public class CourtController
 	}
 	
 	@RequestMapping("/{courtCode}/review/{reviewCode}/delete")
-	public String courtReviewDelete(Model model,@PathVariable("courtCode") String courtCode, @PathVariable("reviewCode") String reviewCode)
+	public String courtReviewDelete(@PathVariable("courtCode") String courtCode, @PathVariable("reviewCode") String reviewCode)
 	{
 		String view = "redirect:/court/" + courtCode;
 		
@@ -190,6 +191,47 @@ public class CourtController
 			view += "?removeResult=success";
 		else
 			view += "?removeResult=fail";
+		
+		return view;
+	}
+	
+	@RequestMapping("/{courtCode}/name")
+	public String courtNameList(Model model, @PathVariable("courtCode") String courtCode, @RequestParam(required=false) String page)
+	{
+		String view = "/court/CourtNameList_pu";
+		UserInfo info = (UserInfo)session.getAttribute("userInfo");
+		
+		model.addAttribute("courtCode", courtCode);
+		model.addAttribute("indexList", courtModel.getCourtNameIndex(
+				courtCode, String.format("/court/%s/name", courtCode), page != null ? Integer.parseInt(page) : 1));
+		model.addAttribute("courtNameList", courtModel.getCourtNameList(courtCode, info.getUserAcctCode()
+				, page != null ? Integer.parseInt(page) : 1, "RANK"));
+		
+		return view;
+	}
+	
+	@RequestMapping("/{courtCode}/name/register")
+	public String courtNameRegisterForm(Model model, @PathVariable("courtCode") String courtCode)
+	{
+		String view = "/court/CourtNameRegistration_pu01";
+		
+		model.addAttribute("courtCode", courtCode);
+		
+		return view;
+	}
+	
+	@RequestMapping("/{courtCode}/name/registerdo")
+	public String courtNameRegister(Model model, @PathVariable("courtCode") String courtCode, @RequestParam String courtName)
+	{
+		String view = "redirect:/court/" + courtCode + "/name";
+		UserInfo info = (UserInfo)session.getAttribute("userInfo");
+		CourtNameDTO dto = new CourtNameDTO();
+		
+		dto.setCourtName(courtName);
+		dto.setCourtCode(courtCode);
+		dto.setRegistrantAccountCode(info.getUserAcctCode());
+		
+		courtModel.registerCourtName(dto);
 		
 		return view;
 	}

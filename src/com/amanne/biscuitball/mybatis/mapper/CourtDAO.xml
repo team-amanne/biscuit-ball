@@ -246,12 +246,12 @@
 		     , POLL_RATE AS pollRate
 		     , COURT_NAME_STATUS AS courtNameStatus
 		     , RANK AS rank
-		     , CASE WHEN P.VOTER_ACCT_CODE IS NOT NULL THEN 'YES'
+		     , CASE WHEN VOTER_ACCT_CODE IS NOT NULL THEN 'YES'
 		            ELSE 'NO'
 		       END AS pollOrNot
 		FROM
 		(
-			SELECT ROWNUM AS RNUM, V.*
+			SELECT ROWNUM AS RNUM, V.*, P.VOTER_ACCT_CODE
 			FROM VIEW_COURT_NAME V
 			LEFT JOIN
 			(
@@ -263,15 +263,15 @@
 	</if>
 	<![CDATA[
 			) P
-			ON B.COURT_NAME_CODE = P.COURT_NAME_CODE
-			WHERE COURT_NAME_STATUS NOT LIKE '제재'
-			  AND COURT_REG_CODE = #{courtCode}
+			ON V.COURT_NAME_CODE = P.COURT_NAME_CODE
+			WHERE V.COURT_NAME_STATUS NOT LIKE '제재'
+			  AND V.COURT_REG_CODE = #{courtCode}
 	]]>
-	<if test='order != null and order.eqauls("DATE")'>
-			ORDER BY COURT_NAME_REG_DATE DESC, RANK ASC
+	<if test='order != null and (order eq "DATE")'>
+			ORDER BY V.COURT_NAME_REG_DATE DESC, V.RANK ASC
 	</if>
-	<if test='order == null or order.equals("RANK")'>
-			ORDER BY RANK ASC, COURT_NAME_REG_DATE DESC
+	<if test='order == null or (order eq "RANK")'>
+			ORDER BY V.RANK ASC, V.COURT_NAME_REG_DATE DESC
 	</if>
 	<![CDATA[
 		)
@@ -530,7 +530,7 @@
 	<select id="getCourtByMapPosition" resultType="java.lang.String">
 		SELECT COURT_REG_CODE
 		FROM TBL_COURT_REGISTRATION
-		WHERE COURT_MAP_POSITION = #{posx} || ',' || #{posy}
+		WHERE #{posx} || ',' || #{posy} LIKE COURT_MAP_POSITION || '%'
 	</select>
 	
 	<!-- public int removeCourtReview(String courtReviewCode);	// 코트 리뷰 삭제 처리 -->
