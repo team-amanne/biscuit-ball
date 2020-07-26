@@ -1,13 +1,17 @@
 package com.amanne.biscuitball.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.amanne.biscuitball.model.AjaxModel;
+import com.amanne.biscuitball.model.UserInfo;
 
 @Controller
 @RequestMapping("/ajax")
@@ -15,6 +19,8 @@ public class AjaxController
 {
 	@Autowired
 	private AjaxModel ajax;
+	@Autowired
+	private HttpSession session;
 	
 	@RequestMapping("/citylist")
 	public String cityList(Model model, @RequestParam("regionCode") String regionCode)
