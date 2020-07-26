@@ -92,21 +92,34 @@
 						<div class="col-md-10">
 							<div class="row">
 								<div class="col-sm-6 col-xs-6 left-btn">
+									<button type="button" class="btn btn-default btn-submit" id="myCourt" name="myCourt">내코트등록</button>
+									<c:if test="1==0">
 									<a href="#">
-										<button type="button" class="btn btn-default btn-submit" id="myCourt" name="myCourt">내코트등록</button>
-									</a> <a href="#">
 										<button type="button" class="btn btn-default btn-submit" id="homeCourt" name="homeCourt">홈코트등록</button>
 									</a>
-									<a href="#">
-										<button type="button" class="btn btn-default btn">
-											<span class="fas fa-vote-yea" style="font-size:18px;"></span>
-											<span>등록/삭제투표</span> 
-										</button>
-									</a>
+									</c:if>
+
+									<c:if test='${court.courtStatus == "가등록 코트" }'>
+									<button type="button" class="btn btn-default btn" id="btnVoteRegister">
+										<span class="fas fa-vote-yea" style="font-size:18px;"></span>
+										<span>등록투표</span> 
+									</button>
+									</c:if>
+
+									<c:if test='${court.courtStatus == "삭제 투표중" }'>									
+									<button type="button" class="btn btn-default btn" id="btnVoteDelete">
+										<span class="fas fa-vote-yea" style="font-size:18px;"></span>
+										<span>삭제투표</span> 
+									</button>
+									</c:if>
 								</div>
 								<div class="col-sm-6 col-xs-6 right-btn">
-									<button type="button" class="btn btn-default btn-submit" id="adminCourtDel" name="adminCourtDel" style="display: inline;">관리자 코트 삭제</button>
-									<button type="button" class="btn btn-default btn-submit" id="delReq" name="delReq">코트 삭제 요청</button>
+									<c:if test="${adminInfo != null }">
+										<button type="button" class="btn btn-default btn-submit" id="adminCourtDel" name="adminCourtDel" style="display: inline;">관리자 코트 삭제</button>
+									</c:if>
+									<c:if test='${court.courtStatus == "가등록 코트" or court.courtStatus == "정식등록 코트" }'>									
+										<button type="button" class="btn btn-default btn-submit" id="delReq" name="delReq">코트 삭제 요청</button>
+									</c:if>
 								</div>
 							</div>
 							<div class="row">
@@ -170,7 +183,7 @@
 															<label>전화번호</label>
 														</div>
 														<div class="col-sm-8 col-xs-12">
-															<span>010-1234-5678</span>
+															<span>${court.courtTelephone != null ? court.courtTelephone : "정보없음" }</span>
 														</div>
 													</div>
 													<div class="row">
@@ -183,10 +196,17 @@
 													</div>
 													<div class="row">
 														<div class="col-sm-4 col-xs-12">
-															<label>인원수</label>
+															<label>적정인원수</label>
 														</div>
 														<div class="col-sm-8 col-xs-12">
-															<span>${court.minCourtCapacity }~${court.maxCourtCapacity }명(신뢰도65%)</span>
+															<span>${court.minCourtCapacity }~${court.maxCourtCapacity } 명 (
+															<c:if test="${!empty court.courtCapacityComfidence  }">
+															신뢰도 ${court.courtCapacityComfidence } %
+															</c:if>
+															<c:if test="${empty court.courtCapacityComfidence }">
+															신뢰도 낮음
+															</c:if>
+															)</span>
 														</div>
 													</div>
 													<div class="row">
@@ -202,7 +222,16 @@
 															<label>화장실</label>
 														</div>
 														<div class="col-sm-8 col-xs-12">
-															<span>${court.toilet == null ? "" : court.toilet }(신뢰도${court.toiletConfidence }%)</span>
+															<span>
+															<c:choose>
+															<c:when test="${court.toilet == null || court.toilet == '판별불가' }">
+																정보없음
+															</c:when>
+															<c:otherwise>
+																${court.toilet } (신뢰도 ${court.toiletConfidence } %)
+															</c:otherwise>
+															</c:choose>
+															</span>
 														</div>
 													</div>
 													<div class="row">
@@ -210,7 +239,16 @@
 															<label>샤워실</label>
 														</div>
 														<div class="col-sm-8 col-xs-12">
-															<span>${court.shower == null ? "" : court.shower }(신뢰도${court.showerConfidence }%)</span>
+															<span>
+															<c:choose>
+															<c:when test="${court.shower == null || court.shower == '판별불가' }">
+																정보없음
+															</c:when>
+															<c:otherwise>
+																${court.shower } (신뢰도 ${court.showerConfidence } %)
+															</c:otherwise>
+															</c:choose>
+															</span>
 														</div>
 													</div>
 													<div class="row">
@@ -218,7 +256,16 @@
 															<label>주차장</label>
 														</div>
 														<div class="col-sm-8 col-xs-12">
-															<span>${court.parkinglot == null ? "" : court.parkinglot }(신뢰도${court.parkinglotConfidence }%)</span>
+															<span>
+															<c:choose>
+															<c:when test="${court.parkinglot == null || court.parkinglot == '판별불가' }">
+																정보없음
+															</c:when>
+															<c:otherwise>
+																${court.parkinglot } (신뢰도 ${court.parkinglotConfidence } %)
+															</c:otherwise>
+															</c:choose>
+															</span>
 														</div>
 													</div>
 												</div>
