@@ -73,8 +73,7 @@ public class PlayController
     
    @RequestMapping(value="/meeting/create/select", method = {RequestMethod.GET, RequestMethod.POST})
    public String playCourtSearch()
-   {
-	   
+   {	   
 	   return  "/play/PlaySpeed_pu02";
    }
    

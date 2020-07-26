@@ -170,15 +170,11 @@ $(function() {
 									
 										<div class="panel-heading">모임 지역 선택</div>
 										<div class="panel-body">
-											<div class="col-md-4">
-												<select name="region" id="regionSelect" class="form-control">
-													<option value="<%=request.getParameter("region_select") %>"> 
-													<%=request.getParameter("regiondata") %>
-													</option>
-													
-												</select>
+											<div class="col-md-3">
+												<input type="text" name="regionSelect" id="regionSelect" class="form-control" value="<%=request.getParameter("regiondata") %>">
+												<input type="hidden" name="region-code" value="<%=request.getParameter("region_select") %>">													
 											</div>
-											<div class="col-md-4">
+											<div class="col-md-3">											
 												<select name="city" id="citySelect" class="form-control">
 													<option value="<%=request.getParameter("city_select") %>">
 													<%=request.getParameter("citydata") %>
@@ -186,8 +182,10 @@ $(function() {
 												</select>
 											</div>
 											<div class="col-md-4">
+											<input type="text" name="courtSelect" id="courtSelect" class="form-control" value="코트이름" disabled="disabled">
+											<div class="col-md-2">
 												<button class="btn btn-default btn-md btn-block" id="mapSearch">
-													지도검색</button>
+													검색</button>
 											</div>
 										</div>
 									</div>

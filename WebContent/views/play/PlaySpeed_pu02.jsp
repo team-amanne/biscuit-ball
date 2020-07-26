@@ -154,7 +154,6 @@ $(function() {
 				            	        latlng: new kakao.maps.LatLng(tmp[1], tmp[0])
 				            	    };
 				            	}
-				            	
 				            		
 			            		for (var i = 0; i < positions.length; i ++) 
 			            		{
@@ -239,9 +238,6 @@ $(function() {
 			            		        infowindow.close();
 			            		    };
 			            		}
-			            		
-			            		
-
 			            		
 				            },
 				            error: function(e){
