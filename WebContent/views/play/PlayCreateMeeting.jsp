@@ -111,10 +111,10 @@ $(function() {
     
     $("#mapSearch").click(function() {
 
-    	var regionSelect = $("#regionSelect option:selected").text();
+    	var regionSelect = $("#regionSelect").val();
     	var citySelect = $("#citySelect option:selected").text();
     	var cityCode = $("#citySelect option:selected").val();
-    	
+    	alert(regionSelect);
     	window.open('<%=cp%>/play/meeting/create/select?regionSelect=' + regionSelect + 
     			'&citySelect=' + citySelect + '&cityCode=' + cityCode
     			, "map", "width = 500, height = 500, top = 100, left = 200, location = no");
@@ -170,23 +170,29 @@ $(function() {
 									
 										<div class="panel-heading">모임 지역 선택</div>
 										<div class="panel-body">
-											<div class="col-md-3">
+											<div class="col-sm-4">
 												<input type="text" name="regionSelect" id="regionSelect" class="form-control" value="<%=request.getParameter("regiondata") %>">
 												<input type="hidden" name="region-code" value="<%=request.getParameter("region_select") %>">													
 											</div>
-											<div class="col-md-3">											
+											<div class="col-sm-4">									
 												<select name="city" id="citySelect" class="form-control">
 													<option value="<%=request.getParameter("city_select") %>">
 													<%=request.getParameter("citydata") %>
 													</option>
 												</select>
 											</div>
-											<div class="col-md-4">
-											<input type="text" name="courtSelect" id="courtSelect" class="form-control" value="코트이름" disabled="disabled">
-											<div class="col-md-2">
-												<button class="btn btn-default btn-md btn-block" id="mapSearch">
+											<div class="col-sm-3">
+												<button class="btn btn-default btn-submit btn-block" id="mapSearch">
 													검색</button>
 											</div>
+											<hr>
+										<div class="row">
+											<div class="col-sm-2">
+											</div>
+											<div class="col-sm-6">
+												<input type="text" name="courtSelect" id="courtSelect" class="form-control" value="코트이름" disabled="disabled">
+											</div>
+										</div>
 										</div>
 									</div>
 								</div>

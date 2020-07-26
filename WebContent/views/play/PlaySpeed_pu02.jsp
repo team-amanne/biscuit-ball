@@ -95,6 +95,7 @@ String cp = request.getContextPath();
 						</li>
 						<li>
 							<button type="button" id="btnCourt">선택완료</button>
+							<input type="hidden" id="region-name" name="region-name" value="<%=request.getParameter("regionSelect") %>">
 						</li>
 					</ul>
 				</div>
@@ -118,7 +119,6 @@ $(function() {
 			
 			/* marker = new kakao.maps.Marker({ center: map.getCenter() });
 			marker.setMap(map); */
-			
 			
 				// 시군구 주소 좌표로 변환해 주는 에이젝스
 				$.ajax({
@@ -177,7 +177,7 @@ $(function() {
 			            		    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
 			            		    
 			            		    
-			            		 // 마커에 클릭이벤트를 등록 → 코트 정보 html에 표시
+			            		 	// 마커에 클릭이벤트를 등록 → 코트 정보 html에 표시
 				            		kakao.maps.event.addListener(marker, 'click', function() 
 				            		{
 				            		      var courtPositionX = this.getPosition().getLng();
@@ -254,14 +254,11 @@ $(function() {
 			
 			$("#btnCourt").click(function() {
 				alert($("#courtName").text())
-				$("#regionSelect", parent.opener.document).val("$('#courtName').text()"); 
+				alert($("#region-name").val());
+				$("#regionSelect", parent.opener.document).val(regionSelect);
+				$("#courtSelect", parent.opener.document).val($('#courtName').text()); 
 				
 			});
-				
-			
-			
-			
-
 		});
 
 
