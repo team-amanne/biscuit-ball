@@ -18,6 +18,7 @@ import com.amanne.biscuitball.model.PlayModel;
 import com.amanne.biscuitball.model.UserInfo;
 import com.amanne.biscuitball.mybatis.CourtDTO;
 import com.amanne.biscuitball.mybatis.MeetingDTO;
+import com.amanne.biscuitball.mybatis.MeetingMemberDTO;
 import com.amanne.biscuitball.mybatis.RegionDTO;
 import com.amanne.biscuitball.mybatis.UserDTO;
 import com.oreilly.servlet.MultipartRequest;
@@ -150,35 +151,20 @@ public class PlayController
 		  
 		  return "/play/PlayCreateMeetingTogether";
    }
-   /*
+   
    @RequestMapping(value="/meeting/**", method = {RequestMethod.GET, RequestMethod.POST})
-   public String createMeeting(Model model, @RequestParam(required=false) MeetingDTO meetingDTO)
+   public String createMeeting(Model model, MeetingDTO meetingDTO, String ballExistOrNot)
    {
-	   	String view = null;
 	   	
 	    HttpSession session = request.getSession();
 		UserInfo info = (UserInfo)session.getAttribute("userInfo");
-		MeetingMemberDTo dto = 
-		model.addAttribute("meetingDTO", playModel.createMeeting(meetingDTO, meetingMemberDTO);
 		
-		view = "/court/CourtRegistrationComplete";
-
+		MeetingMemberDTO meetingMemberDTO = new MeetingMemberDTO();
+		meetingMemberDTO.setBallExistOrNot(ballExistOrNot);
+		
+		model.addAttribute("meetingDTO", playModel.createMeeting(meetingDTO, meetingMemberDTO));
 	   
 	   return "/play/MeetingTogetherArticle";
 
    }
-   /*
-   @RequestMapping("/{courtCode}/delete")
-	public String deleteCourt(Model model, @PathVariable("courtCode") String courtCode)
-	{
-		String view = "redirect:/court/" + courtCode;
-		HttpSession session = request.getSession();
-		UserInfo info = (UserInfo)session.getAttribute("adminInfo");
-
-		if(courtModel.deleteCourtAdmin(info.getUserCode(), courtCode) != 1)
-			view += "?requestResult=fail";
-		
-		return view;
-	}
-   */
 }

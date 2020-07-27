@@ -82,8 +82,7 @@ public class PlayModel
 		{
 			IMeetingDAO dao = sqlSession.getMapper(IMeetingDAO.class);
 			
-			int result = dao.registerMeeting(meetingDTO, meetingMemberDTO);		
-						
+			int result = dao.registerMeeting(meetingDTO, meetingMemberDTO);				
 			if(result > 0)
 			{				
 				return dao.getMeeting(meetingDTO.getMeetingCode());
