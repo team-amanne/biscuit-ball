@@ -302,7 +302,7 @@ public class CourtController
 		return view;
 	}
 	/*
-	@RequestMapping("/{courtCode}/review/{reviewCode}/poll/like")
+	@RequestMapping("/{courtCode}/review/{reviewCode}/poll/up")
 	public String likeCourtReview(Model model, @PathVariable("courtCode") String courtCode, @PathVariable("reviewCode") String reviewCode)
 	{
 		UserInfo info = (UserInfo)session.getAttribute("userInfo");
@@ -310,7 +310,7 @@ public class CourtController
 		return "/ajax/Check";
 	}
 	
-	@RequestMapping("/{courtCode}/review/{reviewCode}/poll/dislike")
+	@RequestMapping("/{courtCode}/review/{reviewCode}/poll/down")
 	public String dislikeCourtReview(Model model, @PathVariable("courtCode") String courtCode, @PathVariable("reviewCode") String reviewCode) 
 	{
 		UserInfo info = (UserInfo)session.getAttribute("userInfo");

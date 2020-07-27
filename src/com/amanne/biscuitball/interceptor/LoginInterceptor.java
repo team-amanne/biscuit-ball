@@ -46,13 +46,11 @@ public class LoginInterceptor extends HandlerInterceptorAdapter
 		HttpSession session = request.getSession();
 		
 		// 개발 시에는 주석처리 상태에서 작업 → 로그인 없이 확인 가능
-		/*
 		if(session.getAttribute("adminInfo") == null && session.getAttribute("userInfo") == null)
 		{
 			response.sendRedirect(cp + "/login");
 			return false;
 		}
-		*/
 		
 		return true;
 	}

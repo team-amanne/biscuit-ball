@@ -302,24 +302,8 @@
 								<div class="row">
 									<div class="col-md-12">
 										<ul class="list-group playview">
-											<li class="list-group-item board-body">
-												<div class="col-sm-1 col-xs-1 cal-left">06/30</div>
-												<div class="col-sm-2 col-xs-2">07/01</div>
-												<div class="col-sm-2 col-xs-2">07/02</div>
-												<div class="col-sm-2 col-xs-2">07/03</div>
-												<div class="col-sm-2 col-xs-2">07/04</div>
-												<div class="col-sm-2 col-xs-2">07/05</div>
-												<div class="col-sm-1 col-xs-1 cal-right">07/06</div>
-											</li>
-											<li class="list-group-item board-body">
-												<div class="col-sm-1 col-xs-1 cal-left">5</div>
-												<div class="col-sm-2 col-xs-2">7</div>
-												<div class="col-sm-2 col-xs-2">6</div>
-												<div class="col-sm-2 col-xs-2">0</div>
-												<div class="col-sm-2 col-xs-2">5</div>
-												<div class="col-sm-2 col-xs-2">4</div>
-												<div class="col-sm-1 col-xs-1 cal-right">1</div>
-											</li>
+										<div id="dateView"></div>
+										<%--
 											<li class="list-group-item board-body">
 												<div class="col-sm-1 col-xs-1 cal-left">07/07</div>
 												<div class="col-sm-2 col-xs-2">07/08</div>
@@ -338,6 +322,7 @@
 												<div class="col-sm-2 col-xs-2">4</div>
 												<div class="col-sm-1 col-xs-1 cal-right">1</div>
 											</li>
+										 --%>
 											<li class="list-group-item board-header board-body">
 												<div class="col-sm-3 col-xs-3">
 													<span>시간</span>
@@ -349,6 +334,8 @@
 													<span>인원수</span>
 												</div>
 											</li>
+											<div id="meetingView"></div>
+											<%-- 
 											<li class="list-group-item board-body">
 												<div class="col-sm-3 col-xs-3">
 													<span>07:00</span>
@@ -360,50 +347,8 @@
 													<span>5/8</span>
 												</div>
 											</li>
-											<li class="list-group-item board-body">
-												<div class="col-sm-3 col-xs-3">
-													<span>07:00</span>
-												</div>
-												<div class="col-sm-6 col-xs-6">
-													<span>다들모여라 농구하자</span>
-												</div>
-												<div class="col-sm-3 col-xs-3">
-													<span>5/8</span>
-												</div>
-											</li>
-											<li class="list-group-item board-body">
-												<div class="col-sm-3 col-xs-3">
-													<span>07:00</span>
-												</div>
-												<div class="col-sm-6 col-xs-6">
-													<span>다들모여라 농구하자</span>
-												</div>
-												<div class="col-sm-3 col-xs-3">
-													<span>5/8</span>
-												</div>
-											</li>
-											<li class="list-group-item board-body">
-												<div class="col-sm-3 col-xs-3">
-													<span>07:00</span>
-												</div>
-												<div class="col-sm-6 col-xs-6">
-													<span>다들모여라 농구하자</span>
-												</div>
-												<div class="col-sm-3 col-xs-3">
-													<span>5/8</span>
-												</div>
-											</li>
-											<li class="list-group-item board-body">
-												<div class="col-sm-3 col-xs-3">
-													<span>07:00</span>
-												</div>
-												<div class="col-sm-6 col-xs-6">
-													<span>다들모여라 농구하자</span>
-												</div>
-												<div class="col-sm-3 col-xs-3">
-													<span>5/8</span>
-												</div>
-											</li>
+											--%>
+											<div id="meetingPagination"></div>
 										</ul>
 									</div>
 								</div>
@@ -422,6 +367,7 @@
 								<div class="row">
 									<div class="col-sm-6 col-xs-6">
 										<span class="title-text">코트리뷰</span>
+										<span>( 전체 ${court.totalReviewCount } 개 )</span>
 									</div>	
 									
 									<div class="col-sm-4 col-xs-4">
@@ -521,7 +467,7 @@
 										
 										<div class="row">
 											<div class="col-md-3"></div>
-											<div class="col-md-6 paging" id="pagination"></div>
+											<div class="col-md-6 paging" id="reviewPagination"></div>
 											<div class="col-md-3"></div>
 										</div>
 
@@ -541,14 +487,17 @@
 </div>
 <c:import url="../base/Footer.jsp"></c:import>
 
+
 <script type="text/javascript">
 	$(function() {
 		
+		// 처리 완료 메시지 
 		var alertMsg = "${alert}";
 		
 		if(alertMsg)
 			alert(alertMsg);
 		
+		// 주소 표시
 		var position = "${court.mapPosition}".split(",");
 		
 		$.ajax({
@@ -563,17 +512,19 @@
 	    		$("#address").text(data.documents[0].address.address_name);
 	    	},
 	    	error: function(e) {
+	    		console.log(e);
 	    		alert(e.responseText);
 	    	}
 	    });
 		
+		// 코트리뷰 페이지네이션 처리
 		$.ajax({
 			type: "get",
 			dataType: "text",
 			url: "<%=cp %>/ajax/court/${court.courtCode }/reviewindex",
 			data: {page: 1},
 			success: function(data) {
-				$("#pagination").html(data);
+				$("#reviewPagination").html(data);
 				$("li[data-page]").click(renderNewPage);
 			},
 			error: function(e) {
@@ -583,6 +534,82 @@
 		});
 		
 		
+		// 모임 날짜 목록 처리
+		$("#dateView")
+		.html( function () {
+			var now = new Date().getTime();
+			var dateList = [
+				[...new Array(7).keys()].map(i => new Date(now + i * 24 * 3600 * 1000)),
+				[...new Array(7).keys()].map(i => new Date(now + (i+7) * 24 * 3600 * 1000))
+			];
+			var viewDateList = "";
+			for(var i=0; i<dateList.length; i++) {
+				viewDateList += '<li class="list-group-item board-body">';
+				for(var j=0; j<dateList[i].length; j++) {
+					var tmp = dateList[i][j];
+					var val = tmp.getFullYear() + '-' + (tmp.getMonth()+1+'').padStart(2, '0') + '-' + (tmp.getDate() + '' ).padStart(2, '0');
+					if(j == 0)
+						viewDateList += '<div class="col-sm-1 col-xs-1 cal-left date-view_heading" data-date="'+ val +'">';
+					else if(j == dateList[i].length-1)
+						viewDateList += '<div class="col-sm-1 col-xs-1 cal-right date-view_heading" data-date="'+ val +'">';
+					else 
+						viewDateList += '<div class="col-sm-2 col-xs-2 date-view_heading" data-date="'+ val +'">';
+					viewDateList += (tmp.getMonth()+1+'').padStart(2, '0') + '/' + (tmp.getDate() + '' ).padStart(2, '0');
+					
+					viewDateList += '</div>';
+				}
+				viewDateList += '</li>';
+
+				viewDateList += '<li class="list-group-item board-body">';
+				for(var j=0; j<dateList[i].length; j++) {
+					var tmp = dateList[i][j];
+					var val = tmp.getFullYear() + '-' + (tmp.getMonth()+1+'').padStart(2, '0') + '-' + (tmp.getDate() + '' ).padStart(2, '0');
+					if(j == 0)
+						viewDateList += '<div class="col-sm-1 col-xs-1 cal-left date-view_body" data-date="'+ val +'">';
+					else if(j == dateList[i].length-1)
+						viewDateList += '<div class="col-sm-1 col-xs-1 cal-right date-view_body" data-date="'+ val +'">';					
+					else 
+						viewDateList += '<div class="col-sm-2 col-xs-2 date-view_body" data-date="'+ val +'">';
+					viewDateList += '</div>';
+				}
+				viewDateList += '</li>';
+			}
+			return viewDateList
+		})
+		.find(".date-view_body")
+		.map(function(i, elem) {
+			$.ajax({
+				type: "get",
+				url: "<%=cp %>/ajax/court/${court.courtCode}/meetingcount/" + $(elem).data("date"),
+				dataType: "text",
+				success: function (data) {
+					$(elem).text(data);
+				},
+				error: function (e) {
+					console.log(e);
+		    		alert(e.responseText);
+				}
+			});
+		});
+		
+		// 모임 목록 처리
+		$.ajax({
+			type: "get",
+			url: "<%=cp %>/ajax/court/${court.courtCode}/meetinglist/" + $(".date-view_heading[data-date]").data("date"),
+			dataType: "json",
+			success: renderMeetingView,
+			error: function (e) {
+				console.log(e);
+	    		alert(e.responseText);
+			}
+		})
+		
+		
+		// 모임 페이지네이션 처리
+		
+		
+		
+		// 이벤트 핸들러 처리
 		$("#btnReviewDelete").click(function () {
 			if(confirm("정말로 삭제하시겠습니까?"))
 				$(location).attr("href", "<%=cp %>/court/${court.courtCode }/review/" + $(this).attr("data-reviewcode") + "/delete");
@@ -762,7 +789,7 @@
 				
 				result += '<div class="row">\n';
 				result += '<div class="col-md-3"></div>\n';
-				result += '<div class="col-md-6 paging" id="pagination"></div>\n';
+				result += '<div class="col-md-6 paging" id="reviewPagination"></div>\n';
 				result += '<div class="col-md-3"></div>\n';
 				result += '</div>\n';
 				
@@ -777,7 +804,7 @@
 					url: "<%=cp %>/ajax/court/${court.courtCode }/reviewindex",
 					data: {page: page},
 					success: function(data) {
-						$("#pagination").html(data);
+						$("#reviewPagination").html(data);
 						$("li[data-page]").click(renderNewPage);
 					},
 					error: function(e) {
@@ -791,6 +818,19 @@
 				console.log(e);
 			}
 		});
+	}
+	
+	function renderMeetingView (data) {
+		var result = "";
+		if(data.length == 0)
+			result = '<li class="list-group-item board-body" style="text-align:center; padding-top: 15px;"> 모집 중인 모임이 존재하지 않습니다.</li>';
+		else {
+			for(var i=0; i<data.length; i++) {
+				// 여기 처리하기
+				// 페이징 이벤트 걸기
+			}
+		}
+		$("#meetingView").html(result);
 	}
 </script>
 </body>

@@ -127,7 +127,28 @@ public class AjaxController
 		model.addAttribute("result", ajax.getCourtReviewIndex(courtCode, page != null ? Integer.parseInt(page) : 1));
 		return "/ajax/Check";
 	}
+	
+	@RequestMapping("/court/{courtCode}/meetinglist/{meetingDate}")
+	public String courtMeetingList(Model model, @RequestParam(required=false) String page, @PathVariable String courtCode, @PathVariable String meetingDate)
+	{
+		model.addAttribute("result", ajax.getCourtMeetingList(courtCode, meetingDate, page != null ? Integer.parseInt(page) : 1));
+		return "/ajax/Check";
+	}
 
+	@RequestMapping("/court/{courtCode}/meetingindex/{meetingDate}")
+	public String courtMeetingIndex(Model model, @RequestParam(required=false) String page, @PathVariable String courtCode, @PathVariable String meetingDate)
+	{
+		model.addAttribute("result", ajax.getCourtMeetingIndex(courtCode, meetingDate, page != null ? Integer.parseInt(page) : 1));
+		return "/ajax/Check";
+	}
+	
+	@RequestMapping("/court/{courtCode}/meetingcount/{meetingDate}")
+	public String courtMeetingIndex(Model model, @PathVariable String courtCode, @PathVariable String meetingDate)
+	{
+		model.addAttribute("result", ajax.getCourtMeetingCount(courtCode, meetingDate));
+		return "/ajax/Check";
+	}
+	
 	@RequestMapping("/togethermeetinglist")
 	public String togetherMeetingList(Model model, @RequestParam("courtRegistrationCode") String courtRegistrationCode, @RequestParam("meetingDate") String meetingDate, @RequestParam("meetingTypeCode") String meetingTypeCode, @RequestParam("start") int start, @RequestParam("end") int end)
 	{
