@@ -101,12 +101,8 @@ public class PlayController
    
    
    // 빠른농구 참여
-   @RequestMapping("meeting/**")
-   public String playSpeedJoin()
-   {
-      return "/play/PlaySpeed_pu01";
-   }
-   
+
+
    
    // 함께농구로 이동
    @RequestMapping("/mode/together/**")
