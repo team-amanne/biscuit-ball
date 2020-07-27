@@ -140,7 +140,9 @@ String cp = request.getContextPath();
 					$("#citySelect").attr("disabled", true);
 					$("#mapSearch").attr("disabled", true);
 					
-					$("#myCourt").val($("myCourtCheckedVal").val());
+					$("#myCourt").val($("#myCourtCheckedVal").val());
+					$("#courtCode").val($("#myCourt").val());
+					
 					
 		      }
 			  else
@@ -149,10 +151,24 @@ String cp = request.getContextPath();
 					$("#citySelect").attr("disabled", false);
 					$("#mapSearch").attr("disabled", false);
 					
-					$("#myCourt").val("");
 		      }
 		});
 	      
+<<<<<<< HEAD
+=======
+	      // 내코트 없는 경우 내코트 선택 불가
+	      if ($("#myCourtCheckedVal").val() !=null)
+		{
+	    	  $("#myCourt").attr("disabled", false);
+		}
+	      else
+	    {
+	    	  $("#myCourt").attr("disabled", true);
+	    }
+	      
+	      
+	      
+>>>>>>> branch 'master' of https://github.com/team-amanne/biscuit-ball.git
 	      
 	      
 	      // ajax() 사용해 시군구 불러오기
@@ -498,7 +514,7 @@ $(function()
 		          		            {
 		          		            	/* 코트 정보 */
 		          		            	/* 코트이름 */
-		          		            	$("#courtCode").val(data.courtCode);
+	          		            		$("#courtCode").val(data.courtCode);		          		            		
 		          		            	$("#courtName").text(data.courtName);
 		          		            	/* 적정인원 최소 */
 		          		            	$("#minCourtCapacity").text(data.minCourtCapacity);
@@ -567,6 +583,8 @@ $(function()
 	{ 	
 		$("#resultList").css("display", "inline");
 		
+		alert($("#courtCode").val());
+		
 		$.ajax
 		({
 			type: "get",
@@ -591,18 +609,30 @@ $(function()
 				for (var i = 0; i < data.length; i++)
 				{
 					listPrint += "<li class='list-group-item board-body'><div class='row'><div class='col-md-4 col-xs-4'>";
+<<<<<<< HEAD
 					listPrint += "<span>"
 							+ data[i].meetingSubject
 							+ "</span>";
+=======
+					listPrint += "<span class='meetingPage' id='"+ data[i].meetingCode +"'>"+ data[i].meetingSubject+ "</span>";
+>>>>>>> branch 'master' of https://github.com/team-amanne/biscuit-ball.git
 					listPrint += "</div><div class='col-md-2 col-xs-2'>";
+<<<<<<< HEAD
 					listPrint += "<span>"
 							+ data[i].captainName
 							+ "</span>";
+=======
+					listPrint += "<span class='captainName' id='"+ data[i].captainAcctCode +"'>"+ data[i].captainName+ "</span>";
+>>>>>>> branch 'master' of https://github.com/team-amanne/biscuit-ball.git
 					listPrint += "</div><div class='col-md-3 col-xs-3'>";
+<<<<<<< HEAD
 					listPrint += "<span>"
 							+ $("#courtName")
 									.text()
 							+ "</span>";
+=======
+					listPrint += "<span class='courtName' id='"+ data[i].courtRegistrationCode +"'>"+ $("#courtName").text()+ "</span>";
+>>>>>>> branch 'master' of https://github.com/team-amanne/biscuit-ball.git
 					listPrint += "</div><div class='col-md-2 col-xs-2'>";
 					listPrint += "<span>"
 							+ data[i].meetingDate
@@ -638,6 +668,32 @@ $(function()
 						
 				}
 				$("#meetingList").html(listPrint);
+<<<<<<< HEAD
+=======
+				
+				alert(listPrint);
+				
+				
+				// 모임 제목 클릭하면 모임으로
+				$(".meetingPage").click(function()
+				{
+					//var id = ($(this).attr('id'));
+					var meetingCode = $(this).attr('id');
+					
+					
+					window.open("<%=cp%>/play/meeting/"+ meetingCode ,'새창', 'width=1000px, height=800px');
+					//childWindow.resizeTo(800, 800);
+				});
+				
+				// 코트 이름 클릭하면 코트 페이지로
+				$(".courtName").click(function()
+				{
+					var courtCode = ($(this).attr('id'));
+					
+					$(location).attr("href","<%=cp%>/court/"+ courtCode);
+				});
+				
+>>>>>>> branch 'master' of https://github.com/team-amanne/biscuit-ball.git
 			},
 			error : function(e)
 			{
@@ -646,6 +702,11 @@ $(function()
 					});
 		});
 	
+<<<<<<< HEAD
+=======
+		
+		// 모임 개설 이동
+>>>>>>> branch 'master' of https://github.com/team-amanne/biscuit-ball.git
 		$("#createMeeting").click(function()
 		{
 			$(location).attr("href","<%=cp%>/play/meeting/createfull");
