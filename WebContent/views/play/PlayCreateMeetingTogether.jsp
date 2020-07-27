@@ -172,7 +172,8 @@ $(function()
 	
     $("#meeting-create").click(function()
     { 
-    	alert($(':radio[name="meetingTypeCode"]:checked').val());
+    	alert($("#courtRegistrationCode").val());
+    	/* alert($(':radio[name="meetingTypeCode"]:checked').val()); */
     	$("#createMeet").submit();
     });
 });
@@ -271,7 +272,7 @@ $(function()
 									
 										<div class="panel-heading">모임 지역</div>
 										<div class="panel-body">
-											<div class="col-md-4">
+											<div class="col-md-6">
 												<select name="" class="form-control" id="regionSelect">
 													<option value=""> 
 													광역 시·도
@@ -282,19 +283,37 @@ $(function()
 													
 												</select>
 											</div>
-											<div class="col-md-5">
-												<select name="" id="citySelect" class="form-control">
-												<!-- 시군구 -->
+											<div class="col-md-6">
+												<select name="" class="form-control" id="regionSelect">
+													<option value=""> 
+													광역 시·도
+													</option>
+													<c:forEach var="regionDto" items="${regionList}">
+														<option value="${regionDto.regionCode}">${regionDto.regionName }</option>
+													</c:forEach>
+													
 												</select>
 											</div>
-											<div class="col-md-3">
-												<button type="button" class="btn btn-default btn-md btn-block" id="mapSearch">
-													검색</button>
-											</div>
+											
+											
 										<span class="err">*지역을 선택해주세요.</span>
 										</div>
+										
 									</div>
+									
 								</div>
+								
+								<div class="panel-heading">모집 인원수</div>
+											<div class="panel-body">
+											<div class="col-md-5">
+												<select name="" id="citySelect" class="form-control">
+												<c:forEach var="i" begin="2" end="10">
+													<option value= ${ i} > ${ i} 명
+													</option>
+												</c:forEach>
+												</select>
+											</div>
+										</div>
 								
 								
 								<div class="col-md-12" id="mapArea">
@@ -535,6 +554,7 @@ $(function()
 												</div>
 											</div>
 											<div class="col-md-4"></div>
+											<input type="hidden" id="courtRegistrationCode">
 										</div>
 									</div>
 								</div>
@@ -651,7 +671,7 @@ $(function()
 				          		            {
 				          		            	/* 코트 정보 */
 				          		            	/* 코트이름 */
-				          		            	$("#courtCode").val(data.courtCode);
+				          		            	$("#courtRegistrationCode").val(data.courtCode);
 				          		            	$("#courtName").text(data.courtName);
 				          		            	/* 적정인원 최소 */
 				          		            	$("#minCourtCapacity").text(data.minCourtCapacity);

@@ -149,7 +149,7 @@ public class PlayController
 			  
 			  return "/play/PlayCreateMeetingTogether";
 	   }
-	   else
+	   /*else
 	   {
 		   
 		   HttpSession session =  request.getSession();
@@ -165,7 +165,8 @@ public class PlayController
 		   model.addAttribute("regiondto", regiondto);
 		   
 		   return "/play/MeetingTogetherArticle";
-	   }
+	   }*/
+	   return "/play/MeetingTogetherArticle";
    }
    
    @RequestMapping("/meeting/createcomplete")
@@ -175,13 +176,11 @@ public class PlayController
 	   UserInfo info = (UserInfo)session.getAttribute("userInfo");
 	   
 	   String view = "redirect:/meeting/";
-	   System.out.println("확인");
 	   System.out.println(info.getUserCode());
 	   
-	   System.out.println(meetingDTO.getCaptainName());
-	   System.out.println(meetingMemberDTO.getBallExistOrNot());
+	   System.out.println(meetingDTO.getCourtRegistrationCode());
+	   System.out.println(meetingMemberDTO.getBallExistOrNot());	   
 	   model.addAttribute("meetingDTO", playModel.createMeeting(meetingDTO, meetingMemberDTO));
-	   
 	   return "완료";
 	   
    }
