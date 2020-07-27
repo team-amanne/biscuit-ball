@@ -160,4 +160,11 @@ public class AjaxController
 		view = "/ajax/Check";
 		return view;
 	}
+	
+	@RequestMapping("/meetings/{meetingDate}")
+	public String getMeetingListsByDate(Model model, @PathVariable("meetingDate") String meetingDate)
+	{
+		model.addAttribute("result", ajax.getMeetingListByRegion(meetingDate));
+		return "/ajax/Check";
+	}
 }

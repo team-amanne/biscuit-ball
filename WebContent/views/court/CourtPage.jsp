@@ -79,7 +79,6 @@
 <!-- 서브메뉴 -->
 <!-- 서브메뉴는 기능별(농구하기/코트검색/크루/...)로 복사해서 만들어두고 import 할 것 -->
 <c:import url="../base/CourtSubmenu.jsp"></c:import>
-
 <!-- 메인 -->
 <div class="main container-fluid">
 	<div class="section-title container">

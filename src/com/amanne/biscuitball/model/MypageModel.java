@@ -1,5 +1,9 @@
 package com.amanne.biscuitball.model;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -7,10 +11,15 @@ import org.apache.ibatis.annotations.Case;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import org.springframework.web.servlet.ModelAndView;
 
+import com.amanne.biscuitball.mybatis.IRegionDAO;
 import com.amanne.biscuitball.mybatis.IUserDAO;
+import com.amanne.biscuitball.mybatis.RegionDTO;
 import com.amanne.biscuitball.mybatis.UserDTO;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 @Service
 public class MypageModel
@@ -63,64 +72,123 @@ public class MypageModel
 	
 	public void updateUser(ModelAndView modelAndView, HttpServletRequest request)	// 회원정보 수정
 	{
-		// 요청 데이터 수신
-		HttpSession session = request.getSession();
-		UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+        HttpSession session = request.getSession();
+
+        String root = session.getServletContext().getRealPath("/");
+        String imgSavePath = File.separator +"upload" + File.separator + "images" + File.separator + "userProfile";
+        String savePath = root + imgSavePath;
+        //File.separator
+ 
+	    File dir = new File(savePath);
+	         
+	    if(!dir.exists())
+	       dir.mkdirs();
+	         
+		String encType = "UTF-8";
+		int maxFileSize = 5*1024*1024;
 		
-		// 작업객체생성
-		IUserDAO dao = sqlSession.getMapper(IUserDAO.class);
-
-		// 작업준비
-		UserDTO user = dao.getUser(userInfo.getUserAcctCode());
-		
-
-		// 요청이 들어온 url 가져오기
-		String oldUrl = request.getHeader("referer");
-		for(int n=0; n<4; n++)
-			oldUrl = oldUrl.substring(oldUrl.indexOf("/")+1, oldUrl.length());
-		if(oldUrl.indexOf("court")!=-1)
-			oldUrl = "court";
-
-		switch (oldUrl)
+		try
 		{
-			case "mypage/myprofile":
-			case "mypage/updateuser":
-				// 유저 프로필  → 유저 자기소개수정
-				String userProfileTxt = (String)request.getParameter("userProfileTxt");
-								
-				user.setUserProfileTxt(userProfileTxt);
-				userDTOCodeChange(user);
-				dao.updateUserProfile(user);
-				
-				user = dao.getUser(userInfo.getUserAcctCode());
-	
-				modelAndView.addObject("user", user);
-				modelAndView.setViewName("/mypage/MyPage");	
 			
-				break;
+			UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+			
+			// 작업객체생성
+			IUserDAO dao = sqlSession.getMapper(IUserDAO.class);
+	
+			// 작업준비
+			UserDTO user = dao.getUser(userInfo.getUserAcctCode());
+			
+	
+			// 요청이 들어온 url 가져오기
+			String oldUrl = request.getHeader("referer");
+			for(int n=0; n<4; n++)
+				oldUrl = oldUrl.substring(oldUrl.indexOf("/")+1, oldUrl.length());
+			if(oldUrl.indexOf("court")!=-1)
+				oldUrl = "court";
+			
+			switch (oldUrl)
+			{
+				case "mypage/myprofile":
+					MultipartRequest multRequest = new MultipartRequest(request, savePath, maxFileSize, encType, new DefaultFileRenamePolicy());
+					if((multRequest.getParameter("userRequestType")).equals("1"))	//	 자기소개글 변경
+					{
+						
+						String userProfileTxt = multRequest.getParameter("userProfileTxt");		// 프로필사진 변경				
+						user.setUserProfileTxt(userProfileTxt);
+						
+						
+					}
+					else if((multRequest.getParameter("userRequestType")).equals("2"))
+					{
+						
+						String userProfileImg = multRequest.getFilesystemName("userProfileImageUpdate");
+						userProfileImg = imgSavePath + File.separator + userProfileImg;
+						user.setUserProfileImg(userProfileImg);
+	
+					}
+					
+					userDTOCodeChange(user);
+					
+					dao.updateUserProfile(user);
+					
+					user = dao.getUser(userInfo.getUserAcctCode());
+		
+					modelAndView.addObject("user", user);
+					modelAndView.setViewName("redirect:/mypage/myprofile");	
 				
-			case "court":
-				// 코트  → 내 코트 변경
-				String updateUserCourtCode = (String)request.getParameter("userCourtCode");
-				user.setUserCourtCode(updateUserCourtCode);
-				userDTOCodeChange(user);
-				dao.updateUserProfile(user);
+					break;
+					
+				case "court":
+					// 코트  → 내 코트 변경
+					String updateUserCourtCode = (String)request.getParameter("userCourtCode");
+					user.setUserCourtCode(updateUserCourtCode);
+					userDTOCodeChange(user);
+					dao.updateUserProfile(user);
+					
+					user = dao.getUser(userInfo.getUserAcctCode());
+	
+					modelAndView.setViewName("redirect:/court/" + user.getUserCourtCode());	
 				
-				user = dao.getUser(userInfo.getUserAcctCode());
+					break;
+		
+				default:
+					break;
+			}
 
-				modelAndView.setViewName("redirect:/court/" + user.getUserCourtCode());	
-			
-				break;
-	
-			default:
-				break;
+		}catch (Exception e) {
+			System.out.println(e.toString());
+			e.printStackTrace();
 		}
-
-		
-
-		
-			
-	
-		
 	}
+	
+	public void myProfile(ModelAndView modelAndView, HttpServletRequest request)
+	   {
+	      // 요청 데이터 수신
+	      HttpSession session = request.getSession();
+	      UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");   
+	      
+	      // 작업객체생성
+	      IUserDAO dao = sqlSession.getMapper(IUserDAO.class);
+	      
+	      // 작업준비
+	      UserDTO user = dao.getUser(userInfo.getUserAcctCode());
+	  
+	      modelAndView.addObject("user", user);
+	      modelAndView.setViewName("/mypage/MyInfo");
+	      
+	      
+	   }
+	   
+	   // 광역시도 출력 메소드
+	   public ArrayList<RegionDTO> regionPrint()
+	   {
+	      ArrayList<RegionDTO> regionList = new ArrayList<RegionDTO>();
+	      
+	      IRegionDAO regionDao = sqlSession.getMapper(IRegionDAO.class);
+	      regionList=regionDao.getRegionList();
+	      
+	      return regionList;
+	      
+	      
+	   }
 }

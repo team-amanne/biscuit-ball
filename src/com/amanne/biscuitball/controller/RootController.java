@@ -21,115 +21,115 @@ import com.amanne.biscuitball.mybatis.UserDTO;
 public class RootController
 {
 
-   @Autowired
-   private SignUpModel signUp;
+	@Autowired
+	private SignUpModel signUp;
 
-   @Autowired
-   private LoginModel login;
-   
-   @Autowired
-   private HttpServletRequest request;
+	@Autowired
+	private LoginModel login;
+	
+	@Autowired
+	private HttpServletRequest request;
 
-   // login Form 불러옴
-   @RequestMapping("/login")
-   public String login()
-   {
-      return "/login/Login";
-   }
+	// login Form 불러옴
+	@RequestMapping("/login")
+	public String login()
+	{
+		return "/login/Login";
+	}
 
-   // login Action 로그인 액션
+	// login Action 로그인 액션
 
-   @RequestMapping("/logindo")
-   public String loginAction(Model model, LoginDTO dto)
-   {
-      
-      HttpSession session = request.getSession();
-      
-      dto.setIp(request.getRemoteAddr());
+	@RequestMapping("/logindo")
+	public String loginAction(Model model, LoginDTO dto)
+	{
 
-      UserInfo adminInfo = login.adminlogin(dto);
+		HttpSession session = request.getSession();
 
-      if (adminInfo != null)
-      {
-         model.addAttribute("adminInfo", adminInfo);
-         session.setAttribute("adminInfo", adminInfo);
+		dto.setIp(request.getRemoteAddr());
 
-         return "redirect:/";
-      } else
-      {
-         UserInfo userInfo = login.userlogin(dto);
+		UserInfo adminInfo = login.adminlogin(dto);
 
-         if (userInfo != null)
-         {
-            String userStatus = userInfo.getUserStatus();
+		if (adminInfo != null)
+		{
+			model.addAttribute("adminInfo", adminInfo);
+			session.setAttribute("adminInfo", adminInfo);
 
-            if (userStatus.equals("정지"))
-            {
-               return "redirect:/login";
-            } else
-            {
-               model.addAttribute("userInfo", userInfo);
-               session.setAttribute("userInfo", userInfo);
+			return "redirect:/";
+		} else
+		{
+			UserInfo userInfo = login.userlogin(dto);
 
-               return "redirect:/";
-            }
-         } else
-         {
-            return "redirect:/login";
-         }
-      }
+			if (userInfo != null)
+			{
+				String userStatus = userInfo.getUserStatus();
 
-   }
-   
-   // 로그아웃
-   @RequestMapping("/logout")
-   public String logout()
-   {
-      HttpSession session = request.getSession();
-      
-      session.removeAttribute("userInfo");
-      session.removeAttribute("adminInfo");
-      session.invalidate();
-      
-      return "redirect:/";
-   }
+				if (userStatus.equals("정지"))
+				{
+					return "redirect:/login";
+				} else
+				{
+					model.addAttribute("userInfo", userInfo);
+					session.setAttribute("userInfo", userInfo);
 
-   // 회원가입 Form 불러옴
-   @RequestMapping("/signup")
-   public String signUpForm(Model model)
-   {
-      model.addAttribute("regionList", signUp.signUpUserForm());
-      return "/signup/User_Signup";
-   }
+					return "redirect:/";
+				}
+			} else
+			{
+				return "redirect:/login";
+			}
+		}
 
-   // 회원가입 액션 
-   @RequestMapping(value="/signupdo", method = {RequestMethod.GET, RequestMethod.POST})
-   public String signUp(UserDTO user)
-   {   
-      return signUp.signUpUser(user);
-   }
-   
-   // 회원가입 완료
-   @RequestMapping(value="/signupcomplete", method = {RequestMethod.GET, RequestMethod.POST})
-   public String signUpComplete()
-   {   
-      return "/signup/User_SignupComplete";
-   }
-   
-   // 비밀번호 재설정 Form 불러옴
-   @RequestMapping("/passwordreset")
-   public String passwordReset()
-   {
-      return "/login/User_PasswordReset";
-   }
-   
-   // 메인 페이지 띄우기
-   @RequestMapping("/")
-   public String main()
-   {
-      
-      
-      return "/base/Main";
-   }
+	}
+
+	// 로그아웃
+	@RequestMapping("/logout")
+	public String logout()
+	{
+		HttpSession session = request.getSession();
+
+		session.removeAttribute("userInfo");
+		session.removeAttribute("adminInfo");
+		session.invalidate();
+
+		return "redirect:/";
+	}
+
+	// 회원가입 Form 불러옴
+	@RequestMapping("/signup")
+	public String signUpForm(Model model)
+	{
+		model.addAttribute("regionList", signUp.signUpUserForm());
+		return "/signup/User_Signup";
+	}
+
+	// 회원가입 액션
+	@RequestMapping(value = "/signupdo", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String signUp(UserDTO user)
+	{
+		return signUp.signUpUser(user);
+	}
+
+	// 회원가입 완료
+	@RequestMapping(value = "/signupcomplete", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String signUpComplete()
+	{
+		return "/signup/User_SignupComplete";
+	}
+
+	// 비밀번호 재설정 Form 불러옴
+	@RequestMapping("/passwordreset")
+	public String passwordReset()
+	{
+		return "/login/User_PasswordReset";
+	}
+
+	// 메인 페이지 띄우기
+	@RequestMapping("/")
+	public String main(Model model)
+	{		
+		return "/base/Main";
+	}
 
 }

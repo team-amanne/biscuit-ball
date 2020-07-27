@@ -78,7 +78,6 @@ public class PlayModel
 		}
 	
 	// 모임 개설 하기
-		
 		public MeetingDTO createMeeting(MeetingDTO meetingDTO, MeetingMemberDTO meetingMemberDTO)
 		{
 			IMeetingDAO dao = sqlSession.getMapper(IMeetingDAO.class);
@@ -95,10 +94,17 @@ public class PlayModel
 
 		}
 		
-		
-
-	// 
-		
-	// 유저 선택 조건 모임 가져오기
+		public MeetingDTO getMeetingList(String meetingCode)
+		{
+			IMeetingDAO dao = sqlSession.getMapper(IMeetingDAO.class);
+			
+			MeetingDTO meetingdto = dao.getMeeting(meetingCode);
+			ArrayList<MeetingMemberDTO> meetingMemberList = dao.getMeetingMemberList(meetingCode);
+			meetingdto.setMeetingMemberList(meetingMemberList);
+			
+			return meetingdto;
+		}
+	
+	
 	
 }
