@@ -2,16 +2,11 @@ package com.amanne.biscuitball.model;
 
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.amanne.biscuitball.mybatis.CourtDTO;
-import com.amanne.biscuitball.mybatis.ICourtDAO;
 import com.amanne.biscuitball.mybatis.IMeetingDAO;
 import com.amanne.biscuitball.mybatis.IRegionDAO;
 import com.amanne.biscuitball.mybatis.IUserDAO;
