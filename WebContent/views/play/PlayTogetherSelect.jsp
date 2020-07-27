@@ -591,48 +591,35 @@ $(function()
 						+ "</div><div class='col-md-3 col-xs-3'><span>장소</span></div><div class='col-md-2 col-xs-2'>"
 						+ "<span>일시</span></div><div class='col-md-1 col-xs-1'><span>인원</span></div></div></li>";
 
-				console.log(data);
 				for (var i=0; i<data.length; i++)
 				{
 					listPrint += "<li class='list-group-item board-body'><div class='row'><div class='col-md-4 col-xs-4'>";
-					listPrint += "<span id='meetingSubject'>"+ data[i].meetingSubject+ "</span>";
-					$('#meetingSubject').attr("href", "<%=cp%>/play/meeting/"+ data[i].meetingCode);
+					listPrint += "<span class='meetingSubject' id='meetingSubject"+String(i)+"' value='"+ data[i].meetingCode +"'>"+ data[i].meetingSubject+ "</span>";
 					listPrint += "</div><div class='col-md-2 col-xs-2'>";
-					listPrint += "<span id='captainName'>"+ data[i].captainName+ "</span>";
+					listPrint += "<span class='captainName' data-captainacctcode='"+ data[i].captainAcctCode +"'>"+ data[i].captainName+ "</span>";
 					listPrint += "</div><div class='col-md-3 col-xs-3'>";
-					listPrint += "<span id='courtName'>"+ $("#courtName").text()+ "</span>";
-					$('#courtName').attr("href", "<%=cp%>/play/meeting/"+ data[i].courtRegistrationCode);
+					listPrint += "<span class='courtName' data-courtcode='"+ data[i].courtRegistrationCode +"'>"+ $("#courtName").text()+ "</span>";
 					listPrint += "</div><div class='col-md-2 col-xs-2'>";
 					listPrint += "<span>"+ data[i].meetingDate+ "</span>";
 					listPrint += "</div><div class='col-md-1 col-xs-1'>";
 					listPrint += "<span>"+ data[i].nowPeopleNumber+ "/"+ data[i].meetingPeopleNumber+ "</span>";
 					listPrint += "</div></div></li>";
-
-					/* <li class="list-group-item board-body">
-					<div class="row">
-						<div class="col-md-4 col-xs-4">
-							<span>안녕하십니까 한판합시다</span>
-						</div>
-						<div class="col-md-2 col-xs-2">
-							<span>아맞네짱</span>
-						</div>
-						<div class="col-md-3 col-xs-3">
-							<span>서울 마포구 쌍용코트</span>
-						</div>
-						<div class="col-md-2 col-xs-2">
-							<span>2020-07-17 12:00</span>
-						</div>
-						<div class="col-md-1 col-xs-1">
-							<span>3/4</span>
-						</div>
-					</div>
-					</li> */
 					
+
+			
 						
 				}
 				$("#meetingList").html(listPrint);
 				
 				alert(listPrint);
+				
+				$(".meetingSubject").click(function()
+						{
+							var id = ($(this).attr('id'));
+							
+							window.open("<%=cp%>/play/meeting/"+$(id).val(),'새창', 'width=1000px, height=800px');
+							//childWindow.resizeTo(800, 800);
+						});
 			},
 			error : function(e)
 			{
@@ -641,10 +628,20 @@ $(function()
 					});
 		});
 	
+		$(".meetingSubject[data-meetingcode]").click(function()
+		{
+			alert("클릭");
+			window.open("<%=cp%>/play/meeting/"+$(this).val());
+		});
+		
+		
 		$("#createMeeting").click(function()
 		{
-			$(location).attr("href","<%=cp%>/play/meeting/createfull");
+			$(location).attr("herf","<%=cp%>/play/meeting/createfull");
 		});
+		
+		
+		
 
 		});
 	</script>

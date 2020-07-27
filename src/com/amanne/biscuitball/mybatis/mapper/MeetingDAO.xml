@@ -383,7 +383,7 @@
 		                AND MEET_CODE = MT.MEET_CODE
 		            ) as CAPTAINCODE
 		            FROM VIEW_MEETING MT
-		            WHERE MT.CONFIRM_OR_NOT = 'N0'
+		            WHERE MT.CONFIRM_OR_NOT = 'NO'
 		              AND MT.COURT_REG_CODE = #{courtRegistrationCode}
 		              AND MT.MEET_DATE > TO_DATE(#{meetingDate}, 'YYYY-MM-DD HH24:MI')
 		              AND MT.MEET_TYPE_CODE = #{meetingTypeCode}
