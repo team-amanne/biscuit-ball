@@ -149,11 +149,16 @@ public class PlayController
 			  
 			  return "/play/PlayCreateMeetingTogether";
 	   }
-	   
-	   return "/play/MeetingTogetherArticle";
-	   
-	   
+	   else
+	   {
+		   MeetingDTO meetingdto = playModel.getMeetingList(meeting_code);
+		   
+		   model.addAttribute("meetingdto", meetingdto);
+		   
+		   return "/play/MeetingTogetherArticle";
+	   }
    }
+   
    @RequestMapping("/meeting/createcomplete")
    public String MeetingArticle(Model model, MeetingDTO meeting_dto, @PathVariable("ballExistOrNot") String ballExistOrNot)
    {
