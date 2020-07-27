@@ -78,6 +78,7 @@ public class PlayModel
 		}
 	
 	// 모임 개설 하기
+		
 		public MeetingDTO createMeeting(MeetingDTO meetingDTO, MeetingMemberDTO meetingMemberDTO)
 		{
 			IMeetingDAO dao = sqlSession.getMapper(IMeetingDAO.class);
@@ -93,7 +94,7 @@ public class PlayModel
 			}
 
 		}
-	
+
 	// 
 		
 	// 유저 선택 조건 모임 가져오기

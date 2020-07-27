@@ -7,8 +7,7 @@
 
 <!--	public int registerMeeting(MeetingDTO meetingDTO, MeetingMemberDTO meetingMemberDTO); // 모임개설  -->
 		
-		<select id="registerMeeting"
- 		statementType="CALLABLE">
+		<select id="registerMeeting" statementType="CALLABLE">
 		{ call PRC_MEETING
 			(
 			    #{meetingDTO.meetingSubject}, 			<!-- 모임 제목  -->

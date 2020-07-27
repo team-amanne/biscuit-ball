@@ -155,6 +155,8 @@ public class PlayController
 	    HttpSession session = request.getSession();
 		UserInfo info = (UserInfo)session.getAttribute("userInfo");
 		
+		System.out.println(info.getUserCode());
+		System.out.println(meetingDTO.getQuickPlayOrNot());
 		MeetingMemberDTO meetingMemberDTO = new MeetingMemberDTO();
 		meetingMemberDTO.setBallExistOrNot(ballExistOrNot);
 		
@@ -163,4 +165,5 @@ public class PlayController
 	   return "/play/MeetingTogetherArticle";
 
    }
+   
 }
