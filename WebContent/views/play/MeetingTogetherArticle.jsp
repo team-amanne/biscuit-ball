@@ -14,6 +14,7 @@ String cp = request.getContextPath();
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="<%=cp%>/css/default.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
       
@@ -100,7 +101,7 @@ String cp = request.getContextPath();
 									<span class="">모임장소</span>
 									</div>
 									<div class="col-md-8">
-									${courtdto.regionName} ${courtdto.cityName } ${courtdto.courtName}
+									${courtdto.cityName } ${courtdto.courtName}
 									</div>
 								</div>
 								<div class="col-md-4">
@@ -108,7 +109,7 @@ String cp = request.getContextPath();
 									<span class="">시합/일반</span>
 									</div>
 									<div class="col-md-7">
-									${meetingdto.meetingTypeName.equal("ZL01")? "시합":"일반" }
+									${meetingdto.meetingTypeName=="ZL01"? "시합":"일반" }
 									</div>
 								</div>		
 								<div class="col-md-2 info-title" >
@@ -197,8 +198,11 @@ String cp = request.getContextPath();
 										<c:when test="${member.fairplayScore>=1 }">
 											<span class="fa fa-star"></span>
 										</c:when>
+										<c:when test="${member.fairplayScore>=0.5 }">
+										<span class="fa fa-star-half"></span>
+										</c:when>
 										<c:otherwise>
-											<span class="fa fa-star-half"></span>
+										정보없음
 										</c:otherwise>
 										
 										</c:choose>
@@ -234,16 +238,16 @@ String cp = request.getContextPath();
 							</div>
 							<div class="yesorno">
 							<button class="btn btn-default btn-lg btn-submit">
-							<c:forEach var="member" items="${memberlist.userAccountCode }">
-								<c:if test="${userInfo.userAcctCode==memberlist.userAccountCode }">
+							<c:forEach var="member" items="${memberlist }">
+								<c:if test="${userInfo.userAcctCode eq member.userAccountCode }">
 								참여 취소
 								</c:if>
 							</c:forEach>
 							
-								참여
+								참 여
 							</button>
-							<button class="btn btn-default btn-lg">
-								닫기
+							<button class="btn btn-default btn-lg" onclick="javascript:history.back();">
+								뒤로가기
 							</button>
 							</div>
 						

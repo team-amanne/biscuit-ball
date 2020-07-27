@@ -25,8 +25,8 @@
 	<select id="getRegionName" resultType="com.amanne.biscuitball.mybatis.RegionDTO">
 		SELECT REGION_NAME AS "regionName"
 		FROM TBL_REGION
-		ORDER BY REGION_CODE
 		WHERE REGION_CODE = #{regionCode}
+		ORDER BY REGION_CODE
 	</select>	
 	
 	

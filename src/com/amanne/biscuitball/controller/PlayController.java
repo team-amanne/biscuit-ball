@@ -162,16 +162,10 @@ public class PlayController
 		   
 		   ArrayList<MeetingMemberDTO>  memberlist = meetingdto.getMeetingMemberList();
 		   
-		   ArrayList<UserDTO> meetingmemberlist=null;
-		   UserDTO userdto=null;
+		   ArrayList<UserDTO> meetingmemberlist= new ArrayList<UserDTO>();
 		   
-		   for (MeetingMemberDTO meetingMemberDTO : memberlist)
-		   {
-			   userdto.setUserAccountCode(meetingMemberDTO.getJoinAccountCode());
-			   meetingmemberlist.add(userdto);
-			   
-		   }
-				
+		   meetingmemberlist = playModel.getMemberLIst(memberlist);	
+		   
 		   model.addAttribute("meetingdto", meetingdto);
 		   model.addAttribute("courtdto", courtdto);
 		   model.addAttribute("memberlist", meetingmemberlist);

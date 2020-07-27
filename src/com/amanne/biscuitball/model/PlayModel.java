@@ -113,13 +113,21 @@ public class PlayModel
 		}
 		
 		// 모임 참여 유저 정보 얻는 모델 메소드
-		public UserDTO getMemberLIst(String userAccountCode)
+		public ArrayList<UserDTO> getMemberLIst(ArrayList<MeetingMemberDTO> meetingmemberlist)
 		{
 			IUserDAO userdao = sqlSession.getMapper(IUserDAO.class);
 			
-			UserDTO userdto = userdao.getUser(userAccountCode);
 			
-			return userdto;
+			ArrayList<UserDTO> userdtolist = new ArrayList<UserDTO>();
+			
+			for (MeetingMemberDTO dto:meetingmemberlist)
+			{
+				UserDTO userdto = userdao.getUser(dto.getJoinAccountCode());
+				
+				userdtolist.add(userdto);
+			}
+			
+			return userdtolist;
 		}
 	
 	
