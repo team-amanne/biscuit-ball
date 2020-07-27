@@ -69,10 +69,11 @@
 					<div class="col-xs-1">
 					</div>
 					<div class="col-sm-2 col-xs-2">
-						<button type="button" class="btn btn-default btn"
+						<button type="button" class="btn btn-default btn btnUp"
 						<c:if test='${(sessionScope.userInfo.userAcctCode == dto.registrantAccountCode) || (dto.pollOrNot == "YES") }'>
-						disabled
+						disabled="disabled"
 						</c:if>
+						data-namecode="${dto.courtNameCode }"
 						>
 							<span class="far fa-thumbs-up" style="font-size:18px;"></span> 
 							<span>${dto.pollCount }</span>
@@ -106,129 +107,6 @@
 			</div>
 			</c:forEach>
 			<%-- 
-			<div class="panel panel-default">	
-				<div class="row panel-body">
-					<div class="col-xs-1">
-						<span class="title-text"><span>1</span></span>
-					</div>
-					<div class="col-xs-6">
-						<span class="title-text">길동이네 코트</span>
-					</div>
-					<div class="col-xs-1">
-					</div>
-					<div class="col-sm-2 col-xs-2">
-						<a href="#">
-							<button type="button" class="btn btn-default btn">
-								<span class="far fa-thumbs-up" style="font-size:18px;"></span> 
-								<span>30</span>
-							</button>	
-						</a>					
-					</div>
-					<div class="col-sm-2 col-xs-2">
-						<button type="button" class="btn btn-default btn-danger">신고</button>
-					</div>	
-				</div>
-				<hr>
-				<div class="row panel-body">
-					<div class="col-xs-3">
-						<span>등록자 :</span>
-						<span>동규</span>
-					</div>
-					<div class="col-xs-3">
-						<span>[20-07-01]</span>
-					</div>
-					<div class="col-xs-6">
-					</div>
-				</div>				
-				<div class="row">
-					<div class="col-md-3"></div>
-					<div class="col-md-6"></div>
-					<div class="col-md-3"></div>
-				</div>					
-			</div>
-			
-			<div class="panel panel-default">	
-				<div class="row panel-body">
-					<div class="col-xs-1">
-						<span class="title-text"><span>1</span></span>
-					</div>
-					<div class="col-xs-6">
-						<span class="title-text">길동이네 코트</span>
-					</div>
-					<div class="col-xs-1">
-					</div>
-					<div class="col-sm-2 col-xs-2">
-						<a href="#">
-							<button type="button" class="btn btn-default btn">
-								<span class="far fa-thumbs-up" style="font-size:18px;"></span> 
-								<span>30</span>
-							</button>	
-						</a>					
-					</div>
-					<div class="col-sm-2 col-xs-2">
-						<button type="button" class="btn btn-default btn-danger">신고</button>
-					</div>	
-				</div>
-				<hr>
-				<div class="row panel-body">
-					<div class="col-xs-3">
-						<span>등록자 :</span>
-						<span>동규</span>
-					</div>
-					<div class="col-xs-3">
-						<span>[20-07-01]</span>
-					</div>
-					<div class="col-xs-6">
-					</div>
-				</div>				
-				<div class="row">
-					<div class="col-md-3"></div>
-					<div class="col-md-6"></div>
-					<div class="col-md-3"></div>
-				</div>					
-			</div>
-			
-			<div class="panel panel-default">	
-				<div class="row panel-body">
-					<div class="col-xs-1">
-						<span class="title-text"><span>1</span></span>
-					</div>
-					<div class="col-xs-6">
-						<span class="title-text">길동이네 코트</span>
-					</div>
-					<div class="col-xs-1">
-					</div>
-					<div class="col-sm-2 col-xs-2">
-						<a href="#">
-							<button type="button" class="btn btn-default btn">
-								<span class="far fa-thumbs-up" style="font-size:18px;"></span> 
-								<span>30</span>
-							</button>	
-						</a>					
-					</div>
-					<div class="col-sm-2 col-xs-2">
-						<button type="button" class="btn btn-default btn-danger">신고</button>
-					</div>	
-				</div>
-				<hr>
-				<div class="row panel-body">
-					<div class="col-xs-3">
-						<span>등록자 :</span>
-						<span>동규</span>
-					</div>
-					<div class="col-xs-3">
-						<span>[20-07-01]</span>
-					</div>
-					<div class="col-xs-6">
-					</div>
-				</div>				
-				<div class="row">
-					<div class="col-md-3"></div>
-					<div class="col-md-6"></div>
-					<div class="col-md-3"></div>
-				</div>					
-			</div>
-			
 			<div class="panel panel-default">	
 				<div class="row panel-body">
 					<div class="col-xs-1">
@@ -297,6 +175,30 @@
 	$(function () {
 		
 		window.resizeTo( 600, 700 );
+		
+		$(".btnUp").click(function () {
+			
+			if($(this).attr("disabled") == "disabled")
+				return;
+			var url = "<%=cp %>/court/${courtCode }/name/" + $(this).data("namecode") + "/poll";
+			console.log(url)
+			
+			$.ajax({
+				type: "get",
+				url: url,
+				dataType: "text",
+				success: function (data) {
+					if(data.trim() == "1") {			
+						window.location.reload();
+					}
+				},
+				error: function (e) {
+					console.log(e);
+					alert(e.responseText);
+				}
+			});
+		});
+
 	});
 </script>
 </body>

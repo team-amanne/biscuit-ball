@@ -301,7 +301,7 @@ public class CourtController
 		
 		return view;
 	}
-	/*
+	
 	@RequestMapping("/{courtCode}/review/{reviewCode}/poll/up")
 	public String likeCourtReview(Model model, @PathVariable("courtCode") String courtCode, @PathVariable("reviewCode") String reviewCode)
 	{
@@ -318,7 +318,7 @@ public class CourtController
 		
 		return "/ajax/Check";
 	}
-	*/
+	
 	@RequestMapping("/{courtCode}/name")
 	public String courtNameList(Model model, @PathVariable("courtCode") String courtCode, @RequestParam(required=false) String page)
 	{
@@ -357,6 +357,17 @@ public class CourtController
 			dto.setRegistrantAccountCode(info.getUserAcctCode());
 		
 		courtModel.registerCourtName(dto);
+		
+		return view;
+	}
+	
+	@RequestMapping("/{courtCode}/name/{courtNameCode}/poll")
+	public String pollCourtName(Model model, @PathVariable("courtCode") String courtCode, @PathVariable("courtNameCode") String courtNameCode)
+	{
+		String view = "/ajax/Check";
+		UserInfo info = (UserInfo)session.getAttribute("userInfo");
+		
+		model.addAttribute("result", courtModel.pollCourtName(courtNameCode, info.getUserAcctCode()));
 		
 		return view;
 	}

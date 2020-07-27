@@ -604,7 +604,7 @@
 	<!-- public int pollCourtReview(PollDTO dto);	// 코트리뷰 투표 -->
 	<insert id="pollCourtReview" parameterType="com.amanne.biscuitball.mybatis.PollDTO">
 		INSERT INTO TBL_COURT_REVIEW_EVAL(COURT_REVIEW_EVAL_CODE, COURT_REVIEW_CODE, VOTER_ACCT_CODE, COURT_REVIEW_LIKE_CODE)
-		VALUES(TBL_CREATE_CODE('TBL_COURT_REVIEW_EVAL', SEQ_COURT_REVIEW_EVAL.NEXTVAL), #{pollSubjectCode}, #{voterAccountCode}, #{goodOrBad})
+		VALUES(FN_CREATE_CODE('TBL_COURT_REVIEW_EVAL', SEQ_COURT_REVIEW_EVAL.NEXTVAL), #{pollSubjectCode}, #{voterAccountCode}, #{goodOrBad})
 	</insert>
 	
 	<!-- public int updatePollCourtReview(PollDTO dto);	// 코트리뷰 투표 갱신 -->
