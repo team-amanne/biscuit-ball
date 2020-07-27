@@ -111,6 +111,16 @@ public class PlayModel
 			
 			return regiondto;
 		}
+		
+		// 모임 참여 유저 정보 얻는 모델 메소드
+		public UserDTO getMemberLIst(String userAccountCode)
+		{
+			IUserDAO userdao = sqlSession.getMapper(IUserDAO.class);
+			
+			UserDTO userdto = userdao.getUser(userAccountCode);
+			
+			return userdto;
+		}
 	
 	
 	

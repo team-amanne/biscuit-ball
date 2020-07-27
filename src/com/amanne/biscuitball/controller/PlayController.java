@@ -159,10 +159,22 @@ public class PlayController
 		   CourtDTO courtdto = courtModel.getCourt(meetingdto.getCourtRegistrationCode(), userinfo);
 		   RegionDTO regiondto = playModel.getRegionName(courtdto.getRegionCode());
 		   courtdto.setRegionName(regiondto.getRegionName());
+		   
+		   ArrayList<MeetingMemberDTO>  memberlist = meetingdto.getMeetingMemberList();
+		   
+		   ArrayList<UserDTO> meetingmemberlist=null;
+		   UserDTO userdto=null;
+		   
+		   for (MeetingMemberDTO meetingMemberDTO : memberlist)
+		   {
+			   userdto.setUserAccountCode(meetingMemberDTO.getJoinAccountCode());
+			   meetingmemberlist.add(userdto);
+			   
+		   }
 				
 		   model.addAttribute("meetingdto", meetingdto);
 		   model.addAttribute("courtdto", courtdto);
-		   model.addAttribute("regiondto", regiondto);
+		   model.addAttribute("memberlist", meetingmemberlist);
 		   
 		   return "/play/MeetingTogetherArticle";
 	   }
