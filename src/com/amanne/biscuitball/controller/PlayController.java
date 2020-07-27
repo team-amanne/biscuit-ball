@@ -175,6 +175,7 @@ public class PlayController
 		   model.addAttribute("meetingdto", meetingdto);
 		   model.addAttribute("courtdto", courtdto);
 		   model.addAttribute("memberlist", meetingmemberlist);
+		   model.addAttribute("userInfo", userinfo);
 		   
 		   return "/play/MeetingTogetherArticle";
 	   }
