@@ -106,6 +106,8 @@ public class CourtController
 		String savePath = File.separator + "upload" + File.separator + "images" + File.separator + "court";
 		File dir = new File(root + savePath);
 		
+		System.out.println(savePath);
+		
 		if(!dir.exists()) 
 			dir.mkdirs();
 		
