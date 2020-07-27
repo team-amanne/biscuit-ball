@@ -1,6 +1,5 @@
 package com.amanne.biscuitball.controller;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,8 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import com.amanne.biscuitball.model.CourtModel;
 import com.amanne.biscuitball.model.PlayModel;
 import com.amanne.biscuitball.model.UserInfo;
 import com.amanne.biscuitball.mybatis.CourtDTO;
@@ -21,8 +20,6 @@ import com.amanne.biscuitball.mybatis.MeetingDTO;
 import com.amanne.biscuitball.mybatis.MeetingMemberDTO;
 import com.amanne.biscuitball.mybatis.RegionDTO;
 import com.amanne.biscuitball.mybatis.UserDTO;
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 
 @Controller
@@ -35,6 +32,9 @@ public class PlayController
    
    @Autowired
 	private HttpServletRequest request;
+   
+   @Autowired
+   private CourtModel courtModel;
    
    
    // 파티 선택으로 이동
@@ -130,7 +130,7 @@ public class PlayController
       
    }
    
-   // 함께농구 개설 및 미팅 아티클
+// 함께농구 개설 및 미팅 아티클
    @RequestMapping("/meeting/{meeting_code}")
    public String MeetingArticle(Model model, @PathVariable String meeting_code)
    {
@@ -149,23 +149,54 @@ public class PlayController
 			  
 			  return "/play/PlayCreateMeetingTogether";
 	   }
-	   
-	   return "/play/MeetingTogetherArticle";
+	   else
+	   {
+		   
+		   HttpSession session =  request.getSession();
+		   UserInfo userinfo = (UserInfo)session.getAttribute("userInfo");
+		   
+		   MeetingDTO meetingdto = playModel.getMeetingList(meeting_code);
+		   CourtDTO courtdto = courtModel.getCourt(meetingdto.getCourtRegistrationCode(), userinfo);
+		   RegionDTO regiondto = playModel.getRegionName(courtdto.getRegionCode());
+		   courtdto.setRegionName(regiondto.getRegionName());
+		   
+		   ArrayList<MeetingMemberDTO>  memberlist = meetingdto.getMeetingMemberList();
+		   
+		   ArrayList<UserDTO> meetingmemberlist=null;
+		   UserDTO userdto=null;
+		   
+		   for (MeetingMemberDTO meetingMemberDTO : memberlist)
+		   {
+			   userdto.setUserAccountCode(meetingMemberDTO.getJoinAccountCode());
+			   meetingmemberlist.add(userdto);
+			   
+		   }
+				
+		   model.addAttribute("meetingdto", meetingdto);
+		   model.addAttribute("courtdto", courtdto);
+		   model.addAttribute("memberlist", meetingmemberlist);
+		   
+		   return "/play/MeetingTogetherArticle";
+	   }
    }
    
-   @RequestMapping(value="/meeting/**", method = {RequestMethod.GET, RequestMethod.POST})
-   public String createMeeting(Model model, MeetingDTO meetingDTO, String ballExistOrNot)
+   @RequestMapping("/meeting/createcomplete")
+   public String MeetingArticle(Model model, MeetingDTO meeting_dto, @PathVariable("ballExistOrNot") String ballExistOrNot)
    {
-	   	
-	    HttpSession session = request.getSession();
-		UserInfo info = (UserInfo)session.getAttribute("userInfo");
-		
-		MeetingMemberDTO meetingMemberDTO = new MeetingMemberDTO();
-		meetingMemberDTO.setBallExistOrNot(ballExistOrNot);
-		
-		model.addAttribute("meetingDTO", playModel.createMeeting(meetingDTO, meetingMemberDTO));
+	   HttpSession session = request.getSession();
+	   UserInfo info = (UserInfo)session.getAttribute("userInfo");
 	   
-	   return "/play/MeetingTogetherArticle";
-
+	   System.out.println("확인");
+	   System.out.println(info.getUserCode());
+	   System.out.println(ballExistOrNot);
+	   MeetingMemberDTO meetingMember_dto = new MeetingMemberDTO();
+	   
+	   meetingMember_dto.setBallExistOrNot(ballExistOrNot);
+		
+	   model.addAttribute("meetingDTO", playModel.createMeeting(meeting_dto, meetingMember_dto));
+	   
+	   return "완료";
+	   
    }
+   
 }

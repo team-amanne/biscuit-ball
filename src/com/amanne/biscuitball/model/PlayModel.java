@@ -2,15 +2,11 @@ package com.amanne.biscuitball.model;
 
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.amanne.biscuitball.mybatis.ICourtDAO;
 import com.amanne.biscuitball.mybatis.IMeetingDAO;
 import com.amanne.biscuitball.mybatis.IRegionDAO;
 import com.amanne.biscuitball.mybatis.IUserDAO;
@@ -93,9 +89,39 @@ public class PlayModel
 			}
 
 		}
-	
-	// 
 		
-	// 유저 선택 조건 모임 가져오기
+		// 모임상세 (함께농구)
+		public MeetingDTO getMeetingList(String meetingCode)
+		{
+			IMeetingDAO meetingdao = sqlSession.getMapper(IMeetingDAO.class);
+			
+			MeetingDTO meetingdto = meetingdao.getMeeting(meetingCode);
+			ArrayList<MeetingMemberDTO> meetingMemberList = meetingdao.getMeetingMemberList(meetingCode);
+			meetingdto.setMeetingMemberList(meetingMemberList);
+			
+			return meetingdto;
+		}
+		
+		// 광역시도 이름 얻는 모델 메소드... (코트DTO에 집어넣을 것)
+		public RegionDTO getRegionName(String regioncode)
+		{
+			IRegionDAO regiondao =sqlSession.getMapper(IRegionDAO.class);
+			
+			RegionDTO regiondto = regiondao.getRegionName(regioncode);
+			
+			return regiondto;
+		}
+		
+		// 모임 참여 유저 정보 얻는 모델 메소드
+		public UserDTO getMemberLIst(String userAccountCode)
+		{
+			IUserDAO userdao = sqlSession.getMapper(IUserDAO.class);
+			
+			UserDTO userdto = userdao.getUser(userAccountCode);
+			
+			return userdto;
+		}
+	
+	
 	
 }

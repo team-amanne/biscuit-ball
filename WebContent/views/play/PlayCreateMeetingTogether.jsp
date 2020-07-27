@@ -168,6 +168,12 @@ $(function()
 	   });
 	   
 	});
+	
+	
+    $("#meeting-create").click(function()
+    {
+    	$(location).attr("href","<%=cp%>/play/meeting/createcomplete");
+    });
 });
 
 		// 입력값 check
@@ -210,6 +216,55 @@ $(function()
 							</div>
 							<h4>모임 정보 입력</h4>
 							<div class="row">
+								<div class="col-md-4">
+									<div class="panel panel-default">
+										<div class="panel-heading">경기/일반</div>
+										<div class="panel-body playtype">
+											<label class="radio-inline radio" > 
+											<input type="radio" name="meetingType" id="inlineRadio1" value="ZL01">
+												경기
+											</label> 
+											<label class="radio-inline radio"> 
+											<input type="radio" name="meetingType" id="inlineRadio2" value="ZL02">
+												일반
+											</label>
+										
+										</div>
+									</div>
+								</div>
+								
+								<div class="col-md-4">
+									<div class="panel panel-default">
+										<div class="panel-heading">농구공 소유 여부</div>
+										<div class="panel-body playtype">
+											<label class="radio-inline radio" > 
+											<input type="radio" name="speedy" id="inlineRadio1" value="ZU01">
+												yes
+											</label> 
+											<label class="radio-inline radio"> 
+											<input type="radio" name="speedy" id="inlineRadio2" value="ZU02">
+												no
+											</label>
+										
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="panel panel-default">
+										<div class="panel-heading">농구공 소유여부</div>
+										<div class="panel-body playtype">
+											<label class="radio-inline radio" > 
+											<input type="radio" name="speedy" id="inlineRadio1" value="ZU01">
+												찬성
+											</label> 
+											<label class="radio-inline radio"> 
+											<input type="radio" name="speedy" id="inlineRadio2" value="ZU02">
+												반대
+											</label>
+										
+										</div>
+									</div>
+								</div>
 								<div class="col-md-6">
 									<div class="panel panel-default">
 									
@@ -239,39 +294,7 @@ $(function()
 										</div>
 									</div>
 								</div>
-								<div class="col-md-3">
-									<div class="panel panel-default">
-										<div class="panel-heading">경기/일반</div>
-										<div class="panel-body playtype">
-											<label class="radio-inline radio" > 
-											<input type="radio" name="meetingType" id="inlineRadio1" value="ZL01">
-												경기
-											</label> 
-											<label class="radio-inline radio"> 
-											<input type="radio" name="meetingType" id="inlineRadio2" value="ZL02">
-												일반
-											</label>
-										
-										</div>
-									</div>
-								</div>
 								
-								<div class="col-md-3">
-									<div class="panel panel-default">
-										<div class="panel-heading">빠른농구 참석여부</div>
-										<div class="panel-body playtype">
-											<label class="radio-inline radio" > 
-											<input type="radio" name="speedy" id="inlineRadio1" value="ZU01">
-												찬성
-											</label> 
-											<label class="radio-inline radio"> 
-											<input type="radio" name="speedy" id="inlineRadio2" value="ZU02">
-												반대
-											</label>
-										
-										</div>
-									</div>
-								</div>
 								
 								<div class="col-md-12" id="mapArea">
 									<div class="panel panel-default">
@@ -502,7 +525,7 @@ $(function()
 											<div class="col-md-4"></div>
 											<div class="col-md-4">
 												<div class="col-md-6">
-													<button class="btn btn-default btn-lg btn-block">
+													<button class="btn btn-default btn-lg btn-block" id="meeting-create" name="meeting-create">
 														개설</button>
 												</div>
 												<div class="col-md-6">

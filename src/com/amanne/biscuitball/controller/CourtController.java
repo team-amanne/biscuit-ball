@@ -106,6 +106,8 @@ public class CourtController
 		String savePath = File.separator + "upload" + File.separator + "images" + File.separator + "court";
 		File dir = new File(root + savePath);
 		
+		System.out.println(root + savePath);
+		
 		if(!dir.exists()) 
 			dir.mkdirs();
 		
@@ -130,6 +132,8 @@ public class CourtController
 				dto.setRegistrantAccountCode(info.getUserAcctCode());
 			dto.setCourtCapacityCode(req.getParameter("courtCapacityCode"));
 			dto.setCourtName(req.getParameter("courtName"));
+			
+			System.out.println(savePath + File.separator + saveFileName1);
 			dto.setCourtImg1(savePath + File.separator + saveFileName1);
 			dto.setCourtImg2(savePath + File.separator + saveFileName2);
 			dto.setCourtImg3(savePath + File.separator + saveFileName3);

@@ -1,10 +1,12 @@
 /*============================================
  	MeetingDTO.java
  	생성일: 2020.07.20
- 	최근수정일: 2020.07.21
+ 	최근수정일: 2020.07.27
 =============================================*/
 
 package com.amanne.biscuitball.mybatis;
+
+import java.util.ArrayList;
 
 public class MeetingDTO 
 {
@@ -30,11 +32,20 @@ public class MeetingDTO
 	private String captainName;				// 주장 닉네임
 	private String cityCode;				// 코트 소속 지역 코드
 	private String cityName;				// 코트 소속 지역 이름
+	private ArrayList<MeetingMemberDTO> meetingMemberList; // 모임 참여 멤버
 	private String returnValue;
 	
 	
 	
 	
+	public ArrayList<MeetingMemberDTO> getMeetingMemberList()
+	{
+		return meetingMemberList;
+	}
+	public void setMeetingMemberList(ArrayList<MeetingMemberDTO> meetingMemberList)
+	{
+		this.meetingMemberList = meetingMemberList;
+	}
 	public String getCatainAcctCode()
 	{
 		return catainAcctCode;

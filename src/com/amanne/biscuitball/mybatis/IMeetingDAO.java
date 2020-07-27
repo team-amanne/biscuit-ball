@@ -63,7 +63,7 @@ public interface IMeetingDAO
 	
 	public MeetingDTO getMeeting(String meetingCode); // 특정모임 조회
 
-	public List<MeetingMemberDTO> getMeetingMemberList(String meetingCode); // 특정모임 참가자 조회
+	public ArrayList<MeetingMemberDTO> getMeetingMemberList(String meetingCode); // 특정모임 참가자 조회
 	
 	
 	public ArrayList<MeetingDTO> getMeetingListByCityDate(@Param("courtRegistrationCode") String courtRegistrationCode, @Param
