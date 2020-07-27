@@ -87,7 +87,7 @@
 									<li><a href="#">친구관리</a></li>
 									<li><a href="#">차단관리</a></li>
 									<li class="divider"></li>
-									<li><a href="#" id="userLogout">로그아웃</a></li>
+									<li><a href="<%=cp %>/logout" id="userLogout">로그아웃</a></li>
 								</ul></li>
 
 						</c:when>

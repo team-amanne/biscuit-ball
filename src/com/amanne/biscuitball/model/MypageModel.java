@@ -72,17 +72,13 @@ public class MypageModel
 	
 	public void updateUser(ModelAndView modelAndView, HttpServletRequest request)	// 회원정보 수정
 	{
-
-		String uri = request.getRequestURI();
-	    String cp = request.getContextPath();
-
         HttpSession session = request.getSession();
 
         String root = session.getServletContext().getRealPath("/");
-        String savePath = root  + "upload" + File.separator + "images" + File.separator + "userProfile";
-  
-        System.out.println(savePath);
-        
+        String imgSavePath = File.separator +"upload" + File.separator + "images" + File.separator + "userProfile";
+        String savePath = root + imgSavePath;
+        //File.separator
+ 
 	    File dir = new File(savePath);
 	         
 	    if(!dir.exists())
@@ -93,7 +89,7 @@ public class MypageModel
 		
 		try
 		{
-			MultipartRequest multRequest = new MultipartRequest(request, savePath, maxFileSize, encType, new DefaultFileRenamePolicy());
+			
 			UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
 			
 			// 작업객체생성
@@ -109,31 +105,26 @@ public class MypageModel
 				oldUrl = oldUrl.substring(oldUrl.indexOf("/")+1, oldUrl.length());
 			if(oldUrl.indexOf("court")!=-1)
 				oldUrl = "court";
-	
-	
+			
 			switch (oldUrl)
 			{
 				case "mypage/myprofile":
-					
+					MultipartRequest multRequest = new MultipartRequest(request, savePath, maxFileSize, encType, new DefaultFileRenamePolicy());
 					if((multRequest.getParameter("userRequestType")).equals("1"))	//	 자기소개글 변경
 					{
-						System.out.println(user.getUserProfileTxt());
+						
 						String userProfileTxt = multRequest.getParameter("userProfileTxt");		// 프로필사진 변경				
 						user.setUserProfileTxt(userProfileTxt);
-						System.out.println(user.getUserProfileTxt());
+						
 						
 					}
 					else if((multRequest.getParameter("userRequestType")).equals("2"))
 					{
 						
-						String subject = multRequest.getParameter("subject");
-						String saveFileName = multRequest.getFilesystemName("upload");
-						System.out.println("22222222222222222");
-						//user.setUserProfileImg(userProfileImg);
-						String userProfileTxt = (String)multRequest.getParameter("userProfileTxt");	
-						
-						
-						user.setUserProfileTxt(userProfileTxt);
+						String userProfileImg = multRequest.getFilesystemName("userProfileImageUpdate");
+						userProfileImg = imgSavePath + File.separator + userProfileImg;
+						user.setUserProfileImg(userProfileImg);
+	
 					}
 					
 					userDTOCodeChange(user);

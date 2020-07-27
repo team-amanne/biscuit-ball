@@ -106,7 +106,7 @@ public class CourtController
 		String savePath = File.separator + "upload" + File.separator + "images" + File.separator + "court";
 		File dir = new File(root + savePath);
 		
-		System.out.println(savePath);
+		System.out.println(root + savePath);
 		
 		if(!dir.exists()) 
 			dir.mkdirs();
@@ -132,6 +132,8 @@ public class CourtController
 				dto.setRegistrantAccountCode(info.getUserAcctCode());
 			dto.setCourtCapacityCode(req.getParameter("courtCapacityCode"));
 			dto.setCourtName(req.getParameter("courtName"));
+			
+			System.out.println(savePath + File.separator + saveFileName1);
 			dto.setCourtImg1(savePath + File.separator + saveFileName1);
 			dto.setCourtImg2(savePath + File.separator + saveFileName2);
 			dto.setCourtImg3(savePath + File.separator + saveFileName3);
@@ -194,6 +196,72 @@ public class CourtController
 		return view;
 	}
 	
+	@RequestMapping("/{courtCode}/registerpoll")
+	public String showPollRegisterForm(Model model, @PathVariable("courtCode") String courtCode)
+	{
+		String view = "/court/CourtVote";
+		UserInfo info = (UserInfo)session.getAttribute("userInfo");
+		
+		model.addAttribute("court", courtModel.getCourtRegPollInfo(courtCode, info.getUserAcctCode()));
+		
+		return view;
+	}
+	
+	@RequestMapping("/{courtCode}/registerpoll/up")
+	public String pollRegisterYes(Model model, @PathVariable("courtCode") String courtCode)
+	{
+		String view = "/ajax/Check";
+		UserInfo info = (UserInfo)session.getAttribute("userInfo");
+		
+		model.addAttribute("result", courtModel.pollCourtRegisterYes(courtCode, info.getUserAcctCode()));
+		
+		return view;
+	}
+	
+	@RequestMapping("/{courtCode}/registerpoll/down")
+	public String pollRegisterNo(Model model, @PathVariable("courtCode") String courtCode)
+	{
+		String view = "/ajax/Check";
+		UserInfo info = (UserInfo)session.getAttribute("userInfo");
+		
+		model.addAttribute("result", courtModel.pollCourtRegisterNo(courtCode, info.getUserAcctCode()));
+		
+		return view;
+	}
+	
+	@RequestMapping("/{courtCode}/deletepoll")
+	public String showPollDeleteForm(Model model, @PathVariable("courtCode") String courtCode)
+	{
+		String view = "/court/CourtVote";
+		UserInfo info = (UserInfo)session.getAttribute("userInfo");
+		
+		model.addAttribute("court", courtModel.getCourtDelPollInfo(courtCode, info.getUserAcctCode()));
+		
+		return view;
+	}
+	
+	@RequestMapping("/{courtCode}/deletepoll/up")
+	public String pollDeleteYes(Model model, @PathVariable("courtCode") String courtCode, @RequestParam("requestCode") String requestCode)
+	{
+		String view = "/ajax/Check";
+		UserInfo info = (UserInfo)session.getAttribute("userInfo");
+		
+		model.addAttribute("result", courtModel.pollCourtDeleteYes(requestCode, info.getUserAcctCode()));
+		
+		return view;
+	}
+	
+	@RequestMapping("/{courtCode}/deletepoll/down")
+	public String pollDeleteNo(Model model, @PathVariable("courtCode") String courtCode, @RequestParam("requestCode") String requestCode)
+	{
+		String view = "/ajax/Check";
+		UserInfo info = (UserInfo)session.getAttribute("userInfo");
+		
+		model.addAttribute("result", courtModel.pollCourtDeleteNo(requestCode, info.getUserAcctCode()));
+		
+		return view;
+	}
+	
 	@RequestMapping("/{courtCode}/review/register")
 	public String courtReviewRegisterForm(Model model, @PathVariable("courtCode") String courtCode )
 	{
@@ -238,6 +306,23 @@ public class CourtController
 		return view;
 	}
 	
+	@RequestMapping("/{courtCode}/review/{reviewCode}/poll/up")
+	public String likeCourtReview(Model model, @PathVariable("courtCode") String courtCode, @PathVariable("reviewCode") String reviewCode)
+	{
+		UserInfo info = (UserInfo)session.getAttribute("userInfo");
+		model.addAttribute("result", courtModel.likeReview(reviewCode, info.getUserAcctCode()));
+		return "/ajax/Check";
+	}
+	
+	@RequestMapping("/{courtCode}/review/{reviewCode}/poll/down")
+	public String dislikeCourtReview(Model model, @PathVariable("courtCode") String courtCode, @PathVariable("reviewCode") String reviewCode) 
+	{
+		UserInfo info = (UserInfo)session.getAttribute("userInfo");
+		model.addAttribute("result", courtModel.dislikeReview(reviewCode, info.getUserAcctCode()));
+		
+		return "/ajax/Check";
+	}
+	
 	@RequestMapping("/{courtCode}/name")
 	public String courtNameList(Model model, @PathVariable("courtCode") String courtCode, @RequestParam(required=false) String page)
 	{
@@ -276,6 +361,17 @@ public class CourtController
 			dto.setRegistrantAccountCode(info.getUserAcctCode());
 		
 		courtModel.registerCourtName(dto);
+		
+		return view;
+	}
+	
+	@RequestMapping("/{courtCode}/name/{courtNameCode}/poll")
+	public String pollCourtName(Model model, @PathVariable("courtCode") String courtCode, @PathVariable("courtNameCode") String courtNameCode)
+	{
+		String view = "/ajax/Check";
+		UserInfo info = (UserInfo)session.getAttribute("userInfo");
+		
+		model.addAttribute("result", courtModel.pollCourtName(courtNameCode, info.getUserAcctCode()));
 		
 		return view;
 	}

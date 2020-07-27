@@ -42,8 +42,9 @@ public class PlayModel
 		return userDto;
 	}
 	
+	/*
 	// 개설 하는 유저 정보 가져오기
-	public void courtFounder(ModelAndView modelAndView, HttpServletRequest request)	// 회원정보 조회
+	public void playUserInfo(ModelAndView modelAndView, HttpServletRequest request)	// 회원정보 조회
 	{
 		// 요청 데이터 수신
 	      HttpSession session = request.getSession();
@@ -57,6 +58,20 @@ public class PlayModel
 	      modelAndView.addObject("user", user);
 	      modelAndView.setViewName("/play/PlayCreateMeeting");      		
 	}
+	*/
+	
+	// 개설 하는 유저 정보 가져오기
+		public UserDTO playUserInfo(UserInfo userInfo)	// 회원정보 조회
+		{
+		      
+		      // 작업객체생성
+		      IUserDAO dao = sqlSession.getMapper(IUserDAO.class);
+		      
+		      // 작업준비
+		      UserDTO userDto = dao.getUser(userInfo.getUserAcctCode());
+		      
+		      return userDto;
+		}
 	
 	// 유저 선택 조건 모임 가져오기
 	

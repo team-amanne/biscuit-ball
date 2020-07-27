@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.amanne.biscuitball.model.PlayModel;
 import com.amanne.biscuitball.model.UserInfo;
@@ -62,13 +61,28 @@ public class PlayController
       
       return "/play/PlaySpeed";
    }
-   
+   /*
    // 빠른농구 개설
    @RequestMapping(value="/meeting/create", method = {RequestMethod.GET, RequestMethod.POST})
    public ModelAndView playCreateMeeting(ModelAndView modelAndView, HttpServletRequest request)
    {
-	   playModel.courtFounder(modelAndView, request);
+	   playModel.playUserInfo(modelAndView, request);
 	   return  modelAndView;
+   }
+   */
+   
+   // 빠른농구 개설
+   @RequestMapping(value="/meeting/create", method = {RequestMethod.GET, RequestMethod.POST})
+   public String playCreateMeeting(Model model)
+   {
+	   HttpSession session = request.getSession();
+	   UserInfo userInfo = (UserInfo)session.getAttribute("userInfo");
+	  
+	   UserDTO userDto = playModel.playUserInfo(userInfo);
+	   
+	   model.addAttribute("userDto", userDto);
+	   
+	   return  "/play/PlayCreateMeeting";
    }
     
    @RequestMapping(value="/meeting/create/select", method = {RequestMethod.GET, RequestMethod.POST})
@@ -111,6 +125,23 @@ public class PlayController
 	 
       return "/play/PlayTogetherSelect";
       
+   }
+   
+   // 함께농구 개설
+   @RequestMapping("/meeting/createfull")
+   public String playCreateMeetingFull(Model model)
+   {
+	   	  // 광역시도 정보 랜더링
+		  ArrayList<RegionDTO> regionList= playModel.regionPrint();
+		  model.addAttribute("regionList", regionList);
+		  
+		  HttpSession session = request.getSession();
+		  UserInfo userInfo = (UserInfo)session.getAttribute("userInfo");
+		  
+		  UserDTO userDto = playModel.playUserInfo(userInfo);
+		  model.addAttribute("userDto",userDto);
+		  
+		  return "/play/PlayCreateMeetingTogether";
    }
    
 }

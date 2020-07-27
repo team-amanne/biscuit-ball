@@ -12,6 +12,7 @@ import com.amanne.biscuitball.mybatis.CourtNameDTO;
 import com.amanne.biscuitball.mybatis.CourtReviewDTO;
 import com.amanne.biscuitball.mybatis.ICourtDAO;
 import com.amanne.biscuitball.mybatis.IRegionDAO;
+import com.amanne.biscuitball.mybatis.PollDTO;
 import com.amanne.biscuitball.mybatis.RegionDTO;
 import com.amanne.biscuitball.util.MyUtil;
 
@@ -37,6 +38,7 @@ public class CourtModel
 				dto.setCourtReviewContent(dto.getCourtReviewContent().replaceAll("\\n", "<br>"));
 			result.setCourtReviewList(list);
 			
+			result.setTotalReviewCount(courtDao.countCourtReviews(courtCode));
 		}
 		
 		return result;
@@ -106,4 +108,116 @@ public class CourtModel
 		ICourtDAO courtDao = sqlSession.getMapper(ICourtDAO.class);
 		return courtDao.removeCourtAdmin(courtCode, adminCode);
 	}
+	
+	public CourtDTO getCourtRegPollInfo(String courtCode, String userAccountCode)
+	{
+		ICourtDAO courtDao = sqlSession.getMapper(ICourtDAO.class);
+		CourtDTO result = courtDao.getCourt(courtCode);
+		String poll = courtDao.checkCourtRegPoll(courtCode, userAccountCode);
+		if(poll != null)
+		{
+			result.setEnrollPollOrNot("YES");
+			result.setEnrollYesOrNo(poll);
+		}
+		else 
+		{
+			result.setEnrollPollOrNot("NO");
+			result.setEnrollYesOrNo("NONE");
+		}
+		return result;
+	}
+	
+	public CourtDTO getCourtDelPollInfo(String courtCode, String userAccountCode)
+	{
+		ICourtDAO courtDao = sqlSession.getMapper(ICourtDAO.class);
+		CourtDTO result = courtDao.getCourt(courtCode);
+		String poll = courtDao.checkCourtDelPoll(courtCode, userAccountCode);
+		if(poll != null)
+		{
+			result.setDelRequestPollOrNot("YES");
+			result.setDelRequestYesOrNo(poll);
+		}
+		else 
+		{
+			result.setDelRequestPollOrNot("NO");
+			result.setDelRequestYesOrNo("NONE");
+		}
+		return result;
+	}
+	
+	public int likeReview(String reviewCode, String userAcctCode) 
+	{
+		ICourtDAO courtDao = sqlSession.getMapper(ICourtDAO.class);
+		PollDTO dto = new PollDTO();
+		dto.setPollSubjectCode(reviewCode);
+		dto.setVoterAccountCode(userAcctCode);
+		dto.setGoodOrBad("ZU01");
+		
+		if(courtDao.updatePollCourtReview(dto) == 0)
+			return courtDao.pollCourtReview(dto);
+		return 0;
+	}
+
+	public int dislikeReview(String reviewCode, String userAcctCode) 
+	{
+		ICourtDAO courtDao = sqlSession.getMapper(ICourtDAO.class);
+		PollDTO dto = new PollDTO();
+		dto.setPollSubjectCode(reviewCode);
+		dto.setVoterAccountCode(userAcctCode);
+		dto.setGoodOrBad("ZU02");
+		
+		if(courtDao.updatePollCourtReview(dto) == 0)
+			return courtDao.pollCourtReview(dto);
+		return 0;
+	}
+	
+	public String pollCourtRegisterYes(String courtCode, String userAccountCode)
+	{
+		ICourtDAO courtDao = sqlSession.getMapper(ICourtDAO.class);
+		PollDTO dto = new PollDTO();
+		dto.setPollSubjectCode(courtCode);
+		dto.setVoterAccountCode(userAccountCode);
+		courtDao.pollCourtRegistrationYes(dto);
+		return dto.getReturnValue();
+	}
+
+	public String pollCourtRegisterNo(String courtCode, String userAccountCode)
+	{
+		ICourtDAO courtDao = sqlSession.getMapper(ICourtDAO.class);
+		PollDTO dto = new PollDTO();
+		dto.setPollSubjectCode(courtCode);
+		dto.setVoterAccountCode(userAccountCode);
+		courtDao.pollCourtRegistrationNo(dto);
+		return dto.getReturnValue();
+	}
+
+	public String pollCourtDeleteYes(String requestCode, String userAcctCode) 
+	{
+		ICourtDAO courtDao = sqlSession.getMapper(ICourtDAO.class);
+		PollDTO dto = new PollDTO();
+		dto.setPollSubjectCode(requestCode);
+		dto.setVoterAccountCode(userAcctCode);
+		courtDao.pollCourtDeleteRequestYes(dto);
+		return dto.getReturnValue();
+	}
+
+	public String pollCourtDeleteNo(String requestCode, String userAcctCode) 
+	{
+		ICourtDAO courtDao = sqlSession.getMapper(ICourtDAO.class);
+		PollDTO dto = new PollDTO();
+		dto.setPollSubjectCode(requestCode);
+		dto.setVoterAccountCode(userAcctCode);
+		courtDao.pollCourtDeleteRequestNo(dto);
+		return dto.getReturnValue();
+	}
+
+	public int pollCourtName(String courtNameCode, String userAcctCode)
+	{
+		ICourtDAO courtDao = sqlSession.getMapper(ICourtDAO.class);
+		PollDTO dto = new PollDTO();
+		dto.setPollSubjectCode(courtNameCode);
+		dto.setVoterAccountCode(userAcctCode);
+		return courtDao.pollCourtName(dto);
+	}
+	
 }

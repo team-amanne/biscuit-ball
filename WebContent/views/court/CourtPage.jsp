@@ -66,6 +66,10 @@
 .court-img:hover {
 	cursor: pointer;
 }
+
+.date-view_heading:hover {
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -75,7 +79,6 @@
 <!-- 서브메뉴 -->
 <!-- 서브메뉴는 기능별(농구하기/코트검색/크루/...)로 복사해서 만들어두고 import 할 것 -->
 <c:import url="../base/CourtSubmenu.jsp"></c:import>
-
 <!-- 메인 -->
 <div class="main container-fluid">
 	<div class="section-title container">
@@ -121,7 +124,7 @@
 									<c:if test="${sessionScope.adminInfo != null }">
 										<button type="button" class="btn btn-default btn-submit" id="btnAdminCourtDel" style="display: inline;">관리자 코트 삭제</button>
 									</c:if>
-									<c:if test='${court.courtStatus == "가등록 코트" or court.courtStatus == "정식등록 코트" }'>
+									<c:if test='${court.courtStatus == "정식등록 코트" }'>
 										<button type="button" class="btn btn-default btn-submit" id="btnDelReq">코트 삭제 요청</button>
 									</c:if>
 								</div>
@@ -159,9 +162,12 @@
 										<div class="col-sm-1 col-xs-1"></div>
 										<div class="col-sm-8 col-xs-8  panel panel-default">
 											<span class="subtitle-text">${court.courtName }</span>
-											<%-- <label style="display: none;">(가등록)</label>
-											<label>(${court.courtStatus })</label> 
-											<label style="display: none;">(삭제요청)</label> --%>
+											<c:if test="${court.courtStatus == '가등록 코트' }">
+												<label>(가등록)</label>
+											</c:if>											
+											<c:if test="${court.courtStatus == '삭제 투표중' }">
+												<label>(삭제요청)</label>
+											</c:if>
 										</div>
 										<div class="col-sm-1 col-xs-1">
 											<button type="button" class="btn btn-default btn-submit" id="btnName">더보기</button>
@@ -201,14 +207,25 @@
 															<label>적정인원수</label>
 														</div>
 														<div class="col-sm-8 col-xs-12">
-															<span>${court.minCourtCapacity }~${court.maxCourtCapacity } 명 (
-															<c:if test="${!empty court.courtCapacityComfidence  }">
-															신뢰도 ${court.courtCapacityComfidence } %
-															</c:if>
-															<c:if test="${empty court.courtCapacityComfidence }">
-															신뢰도 낮음
-															</c:if>
-															)</span>
+															<span>
+																${court.minCourtCapacity }
+																<c:choose>
+																	<c:when test="${court.maxCourtCapacity < 99 }">
+																	~ ${court.maxCourtCapacity } 명
+																	</c:when>
+																	<c:otherwise>
+																	명 이상
+																	</c:otherwise>
+																</c:choose>
+																(
+																<c:if test="${!empty court.courtCapacityComfidence  }">
+																신뢰도 ${court.courtCapacityComfidence } %
+																</c:if>
+																<c:if test="${empty court.courtCapacityComfidence }">
+																신뢰도 낮음
+																</c:if>
+																)
+															</span>
 														</div>
 													</div>
 													<div class="row">
@@ -288,24 +305,8 @@
 								<div class="row">
 									<div class="col-md-12">
 										<ul class="list-group playview">
-											<li class="list-group-item board-body">
-												<div class="col-sm-1 col-xs-1 cal-left">06/30</div>
-												<div class="col-sm-2 col-xs-2">07/01</div>
-												<div class="col-sm-2 col-xs-2">07/02</div>
-												<div class="col-sm-2 col-xs-2">07/03</div>
-												<div class="col-sm-2 col-xs-2">07/04</div>
-												<div class="col-sm-2 col-xs-2">07/05</div>
-												<div class="col-sm-1 col-xs-1 cal-right">07/06</div>
-											</li>
-											<li class="list-group-item board-body">
-												<div class="col-sm-1 col-xs-1 cal-left">5</div>
-												<div class="col-sm-2 col-xs-2">7</div>
-												<div class="col-sm-2 col-xs-2">6</div>
-												<div class="col-sm-2 col-xs-2">0</div>
-												<div class="col-sm-2 col-xs-2">5</div>
-												<div class="col-sm-2 col-xs-2">4</div>
-												<div class="col-sm-1 col-xs-1 cal-right">1</div>
-											</li>
+										<div id="dateView"></div>
+										<%--
 											<li class="list-group-item board-body">
 												<div class="col-sm-1 col-xs-1 cal-left">07/07</div>
 												<div class="col-sm-2 col-xs-2">07/08</div>
@@ -324,6 +325,7 @@
 												<div class="col-sm-2 col-xs-2">4</div>
 												<div class="col-sm-1 col-xs-1 cal-right">1</div>
 											</li>
+										 --%>
 											<li class="list-group-item board-header board-body">
 												<div class="col-sm-3 col-xs-3">
 													<span>시간</span>
@@ -335,6 +337,8 @@
 													<span>인원수</span>
 												</div>
 											</li>
+											<div id="meetingView"></div>
+											<%-- 
 											<li class="list-group-item board-body">
 												<div class="col-sm-3 col-xs-3">
 													<span>07:00</span>
@@ -346,50 +350,8 @@
 													<span>5/8</span>
 												</div>
 											</li>
-											<li class="list-group-item board-body">
-												<div class="col-sm-3 col-xs-3">
-													<span>07:00</span>
-												</div>
-												<div class="col-sm-6 col-xs-6">
-													<span>다들모여라 농구하자</span>
-												</div>
-												<div class="col-sm-3 col-xs-3">
-													<span>5/8</span>
-												</div>
-											</li>
-											<li class="list-group-item board-body">
-												<div class="col-sm-3 col-xs-3">
-													<span>07:00</span>
-												</div>
-												<div class="col-sm-6 col-xs-6">
-													<span>다들모여라 농구하자</span>
-												</div>
-												<div class="col-sm-3 col-xs-3">
-													<span>5/8</span>
-												</div>
-											</li>
-											<li class="list-group-item board-body">
-												<div class="col-sm-3 col-xs-3">
-													<span>07:00</span>
-												</div>
-												<div class="col-sm-6 col-xs-6">
-													<span>다들모여라 농구하자</span>
-												</div>
-												<div class="col-sm-3 col-xs-3">
-													<span>5/8</span>
-												</div>
-											</li>
-											<li class="list-group-item board-body">
-												<div class="col-sm-3 col-xs-3">
-													<span>07:00</span>
-												</div>
-												<div class="col-sm-6 col-xs-6">
-													<span>다들모여라 농구하자</span>
-												</div>
-												<div class="col-sm-3 col-xs-3">
-													<span>5/8</span>
-												</div>
-											</li>
+											--%>
+											<div id="meetingPagination" style="text-align:center;"></div>
 										</ul>
 									</div>
 								</div>
@@ -408,6 +370,7 @@
 								<div class="row">
 									<div class="col-sm-6 col-xs-6">
 										<span class="title-text">코트리뷰</span>
+										<span>( 전체 ${court.totalReviewCount } 개 )</span>
 									</div>	
 									
 									<div class="col-sm-4 col-xs-4">
@@ -439,7 +402,7 @@
 										<div class="col-sm-12 col-xs-12" style="text-align: center; padding-top: 20px;">등록된 리뷰가 없습니다.</div>
 										</c:if>
 										<c:forEach var="review" items="${court.courtReviewList }">
-										<div class="panel panel-default col-sm-12 col-xs-12">
+										<div class="panel panel-default col-sm-12 col-xs-12 review">
 											<div class="panel-body">
 												<div class="row">
 													<div class="col-sm-2 col-xs-2">
@@ -451,15 +414,23 @@
 													</div>
 													
 													<div class="col-sm-1 col-xs-2">
-														<button type="button" class="btn btn-default btn">
+														<button type="button" class="btn btn-default btn btnLike" data-reviewcode="${review.courtReviewCode }"
+														<c:if test="${review.pollOrNot == 'YES' }">
+														disabled="disabled"
+														</c:if>
+														>
 															<span class="far fa-thumbs-up" style="font-size:18px;"></span> 
-															<span>${review.likes }</span>
+															<span class="num-like">${review.likes }</span>
 														</button>
 													</div>
 													<div class="col-sm-1 col-xs-2">
-														<button type="button" class="btn btn-default btn">
+														<button type="button" class="btn btn-default btn btnDislike" data-reviewcode="${review.courtReviewCode }" 
+														<c:if test="${review.pollOrNot == 'YES' }">
+														disabled="disabled"
+														</c:if>
+														>
 															<span class="far fa-thumbs-down" style="font-size:18px;"></span> 
-															<span>${review.dislikes }</span>
+															<span class="num-dislike">${review.dislikes }</span>
 														</button>
 													</div>
 													<div class="col-sm-1 col-xs-2">
@@ -507,10 +478,9 @@
 										
 										<div class="row">
 											<div class="col-md-3"></div>
-											<div class="col-md-6 paging" id="pagination"></div>
+											<div class="col-md-6 paging" id="reviewPagination"></div>
 											<div class="col-md-3"></div>
 										</div>
-
 
 
 									</div>
@@ -528,14 +498,17 @@
 </div>
 <c:import url="../base/Footer.jsp"></c:import>
 
+
 <script type="text/javascript">
 	$(function() {
 		
+		// 처리 완료 메시지 
 		var alertMsg = "${alert}";
 		
 		if(alertMsg)
 			alert(alertMsg);
 		
+		// 주소 표시
 		var position = "${court.mapPosition}".split(",");
 		
 		$.ajax({
@@ -550,18 +523,20 @@
 	    		$("#address").text(data.documents[0].address.address_name);
 	    	},
 	    	error: function(e) {
+	    		console.log(e);
 	    		alert(e.responseText);
 	    	}
 	    });
 		
+		// 코트리뷰 페이지네이션 처리
 		$.ajax({
 			type: "get",
 			dataType: "text",
 			url: "<%=cp %>/ajax/court/${court.courtCode }/reviewindex",
 			data: {page: 1},
 			success: function(data) {
-				$("#pagination").html(data);
-				$("li[data-page]").click(renderNewPage);
+				$("#reviewPagination").html(data);
+				$("#reviewPagination li[data-page]").click(renderNewPage);
 			},
 			error: function(e) {
 				alert(e.responseText);
@@ -570,15 +545,198 @@
 		});
 		
 		
+		// 모임 날짜 목록 처리
+		$("#dateView")
+		.html( function () {
+			var now = new Date().getTime();
+			var dateList = [
+				[...new Array(7).keys()].map(i => new Date(now + i * 24 * 3600 * 1000)),
+				[...new Array(7).keys()].map(i => new Date(now + (i+7) * 24 * 3600 * 1000))
+			];
+			var viewDateList = "";
+			for(var i=0; i<dateList.length; i++) {
+				viewDateList += '<li class="list-group-item board-body">';
+				for(var j=0; j<dateList[i].length; j++) {
+					var tmp = dateList[i][j];
+					var val = tmp.getFullYear() + '-' + (tmp.getMonth()+1+'').padStart(2, '0') + '-' + (tmp.getDate() + '' ).padStart(2, '0');
+					if(j == 0)
+						viewDateList += '<div class="col-sm-1 col-xs-1 cal-left date-view_heading" data-date="'+ val +'">';
+					else if(j == dateList[i].length-1)
+						viewDateList += '<div class="col-sm-1 col-xs-1 cal-right date-view_heading" data-date="'+ val +'">';
+					else 
+						viewDateList += '<div class="col-sm-2 col-xs-2 date-view_heading" data-date="'+ val +'">';
+					viewDateList += (tmp.getMonth()+1+'').padStart(2, '0') + '/' + (tmp.getDate() + '' ).padStart(2, '0');
+					
+					viewDateList += '</div>';
+				}
+				viewDateList += '</li>';
+
+				viewDateList += '<li class="list-group-item board-body">';
+				for(var j=0; j<dateList[i].length; j++) {
+					var tmp = dateList[i][j];
+					var val = tmp.getFullYear() + '-' + (tmp.getMonth()+1+'').padStart(2, '0') + '-' + (tmp.getDate() + '' ).padStart(2, '0');
+					if(j == 0)
+						viewDateList += '<div class="col-sm-1 col-xs-1 cal-left date-view_body" data-date="'+ val +'">';
+					else if(j == dateList[i].length-1)
+						viewDateList += '<div class="col-sm-1 col-xs-1 cal-right date-view_body" data-date="'+ val +'">';					
+					else 
+						viewDateList += '<div class="col-sm-2 col-xs-2 date-view_body" data-date="'+ val +'">';
+					viewDateList += '</div>';
+				}
+				viewDateList += '</li>';
+			}
+			return viewDateList
+		})
+		.find(".date-view_body")
+		.map(function(i, elem) {
+			$.ajax({
+				type: "get",
+				url: "<%=cp %>/ajax/court/${court.courtCode}/meetingcount/" + $(elem).data("date"),
+				dataType: "text",
+				success: function (data) {
+					$(elem).text(data);
+				},
+				error: function (e) {
+					console.log(e);
+		    		alert(e.responseText);
+				}
+			});
+		});
+		
+		// 모임 목록 처리
+		
+		$.ajax({
+			type: "get",
+			url: "<%=cp %>/ajax/court/${court.courtCode}/meetinglist/" + $(".date-view_heading[data-date]").data("date"),
+			dataType: "json",
+			data: {page: 1},
+			success: function(data) {
+				var result = "";
+				if(data.length > 0) {
+														
+					for(var i=0; i<data.length; i++) {
+	
+						result += '<li class="list-group-item board-body">';
+						result += '	<div class="col-sm-3 col-xs-3">';
+						result += '		<span>' + data[i].meetingDate.split(" ")[1] + '</span>';
+						result += '	</div>';
+						result += '	<div class="col-sm-6 col-xs-6">';
+						result += '		<a onclick="window.open(this.href, \'_blank\', \'width=700, height=600\'); return false;"'
+						result += '		 href="' + '<%=cp %>/play/meeting/' + data[i].meetingCode;
+						result += '">' + data[i].meetingSubject + '</a>';
+						result += '	</div>';
+						result += '	<div class="col-sm-3 col-xs-3">';
+						result += '		<span>' + data[i].nowPeopleNumber + '/' + data[i].meetingPeopleNumber +'</span>';
+						result += '	</div>';
+						result += '</li>';
+					}
+				}
+				else {
+					result = "<div style='text-align: center; padding-top: 20px;'>모집 중인 모임이 없습니다.</div>";
+				}
+				
+				$("#meetingView").html(result);
+			},
+			error: function (e) {
+				console.log(e);
+	    		alert(e.responseText);
+			}
+		});
+		
+		$.ajax({
+			type: "get",
+			url: "<%=cp %>/ajax/court/${court.courtCode}/meetingindex/" + $(".date-view_heading[data-date]").data("date"),
+			dataType: "text",
+			data: {page: 1},
+			success: function (data) {
+				$("#meetingPagination").html(data);
+				$("#meetingPagination li[data-page]").click(renderMeetingView($(".date-view_heading[data-date]").data("date")));
+			},
+			error: function (e) {
+				console.log(e);
+	    		alert(e.responseText);
+			}
+		});
+		
+		$(".date-view_heading[data-date]").click(function() {
+			$.ajax({
+				type: "get",
+				url: "<%=cp %>/ajax/court/${court.courtCode}/meetinglist/" + $(this).data("date"),
+				dataType: "json",
+				data: {page: 1},
+				success: function(data) {
+					var result = "";
+					if(data.length > 0) {
+															
+						for(var i=0; i<data.length; i++) {
+		
+							result += '<li class="list-group-item board-body">';
+							result += '	<div class="col-sm-3 col-xs-3">';
+							result += '		<span>' + data[i].meetingDate.split(" ")[1] + '</span>';
+							result += '	</div>';
+							result += '	<div class="col-sm-6 col-xs-6">';
+							result += '		<a onclick="window.open(this.href, \'_blank\', \'width=700, height=600\'); return false;"'
+							result += '		 href="' + '<%=cp %>/play/meeting/' + data[i].meetingCode;
+							result += '">' + data[i].meetingSubject + '</a>';
+							result += '	</div>';
+							result += '	<div class="col-sm-3 col-xs-3">';
+							result += '		<span>' + data[i].nowPeopleNumber + '/' + data[i].meetingPeopleNumber +'</span>';
+							result += '	</div>';
+							result += '</li>';
+						}
+					}
+					else {
+						result = "<div style='text-align: center; padding-top: 20px;'>모집 중인 모임이 없습니다.</div>";
+					}
+					
+					$("#meetingView").html(result);
+				},
+				error: function (e) {
+					console.log(e);
+		    		alert(e.responseText);
+				}
+			});
+			
+			var date = $(this).data("date");
+			$.ajax({
+				type: "get",
+				url: "<%=cp %>/ajax/court/${court.courtCode}/meetingindex/" + date,
+				dataType: "text",
+				data: {page: 1},
+				success: function (data) {
+					$("#meetingPagination").html(data);
+					$("#meetingPagination li[data-page]").click(renderMeetingView(date));
+				},
+				error: function (e) {
+					console.log(e);
+		    		alert(e.responseText);
+				}
+			});
+		});
+		
+		
+		// 이벤트 핸들러 처리
 		$("#btnReviewDelete").click(function () {
 			if(confirm("정말로 삭제하시겠습니까?"))
 				$(location).attr("href", "<%=cp %>/court/${court.courtCode }/review/" + $(this).attr("data-reviewcode") + "/delete");
 		});
 		
 		$("#btnName").click(function () {
-			window.open("<%=cp %>/court/${court.courtCode }/name", "코트 > 코트 정도 > 코트 이름"
+			window.open("<%=cp %>/court/${court.courtCode }/name", "코트 > 코트 정보 > 코트 이름"
 					, "top=10, left=10, width=500, height=600, status=no, menubar=no, toolbar=no, resizable=no");
 		});
+		
+		$("#btnVoteRegister").click(function () {
+			window.open("<%=cp %>/court/${court.courtCode }/registerpoll", "코트 > 코트 정보 > 코트 등록 투표"
+					, "top=10, left=10, width=300, height=400, status=no, menubar=no, toolbar=no, resizable=no");
+		});
+		
+		$("#btnVoteDelete").click(function () {
+			window.open("<%=cp %>/court/${court.courtCode }/deletepoll", "코트 > 코트 정보 > 코트 삭제 투표"
+					, "top=10, left=10, width=300, height=400, status=no, menubar=no, toolbar=no, resizable=no");
+		});
+		
+		
 		
 		$(".court-img").hover(function() {
 			$(".court-img-heading").attr("src", $(this).attr("src"));
@@ -598,10 +756,64 @@
 			if(confirm("정말로 해당 코트를 삭제하시겠습니까?"))
 				$(location).attr("href", "<%=cp %>/court/${court.courtCode}/delete");
 		});
+		
+		$(".btnLike[data-reviewcode]").click(pollReviewLike);
+		$(".btnDislike[data-reviewcode]").click(pollReviewDislike);
+		
 	});
 	
+	function pollReviewDislike() {
+		var obj = $(this);
+		var reviewCode = obj.attr("data-reviewcode");
+		
+		if(obj.attr("disabled") == "disabled")
+			return;
+		
+		$.ajax({
+			type: "get",
+			url: "<%=cp %>/court/${court.courtCode}/review/" + reviewCode + "/poll/down",
+			dataType: "text",
+			success: function (data) {
+				obj.addClass("active");
+				obj.attr("disabled", "disabled");
+				obj.find(".num-dislike").text(parseInt(obj.find(".num-dislike").text()) + 1);
+				$(".btnLike[data-reviewcode='" + reviewCode + "']").removeClass("active");
+				$(".btnLike[data-reviewcode='" + reviewCode + "']").attr("disabled", "disabled");
+			}, 
+			error: function(e) {
+				console.log(e);
+				alert(e.responseText);
+			}
+		});
+	}
+	
+	function pollReviewLike() {
+		var obj = $(this);
+		var reviewCode = obj.attr("data-reviewcode");
+
+		if(obj.attr("disabled") == "disabled")
+			return;
+		
+		$.ajax({
+			type: "get",
+			url: "<%=cp %>/court/${court.courtCode}/review/" + reviewCode + "/poll/up",
+			dataType: "text",
+			success: function (data) {
+				obj.addClass("active");
+				obj.attr("disabled", "disabled");
+				obj.find(".num-like").text(parseInt(obj.find(".num-like").text()) + 1);
+				$(".btnDislike[data-reviewcode='" + reviewCode + "']").removeClass("active");
+				$(".btnDislike[data-reviewcode='" + reviewCode + "']").attr("disabled", "disabled");
+			}, 
+			error: function(e) {
+				console.log(e);
+				alert(e.responseText);
+			}
+		});
+	}
+	
 	function renderNewPage() {
-		var page = $(this).attr("data-page");
+		var page = $(this).data("page");
 		
 		$.ajax({
 			type: "get",
@@ -612,7 +824,7 @@
 				var result = "";
 				for(var i=0; i<data.length; i++) {
 
-					result += '<div class="panel panel-default col-sm-12 col-xs-12">\n';
+					result += '<div class="panel panel-default col-sm-12 col-xs-12 review">\n';
 					result += '	<div class="panel-body">\n';
 					result += '		<div class="row">\n';
 					result += '			<div class="col-sm-2 col-xs-2">\n';
@@ -624,15 +836,23 @@
 					result += '			</div>\n';
 					
 					result += '			<div class="col-sm-1 col-xs-2">\n';
-					result += '				<button type="button" class="btn btn-default btn">\n';
+					result += '				<button type="button" class="btn btn-default btn btnLike';
+					result += '" ';
+					if(data[i].pollOrNot == 'YES')
+						result += "disabled='disabled'";
+					result += 'data-reviewcode="' + data[i].courtReviewCode + '">\n';
 					result += '					<span class="far fa-thumbs-up" style="font-size:18px;"></span>\n'; 
-					result += '					<span>' + data[i].likes + '</span>\n';
+					result += '					<span class="num-like">' + data[i].likes + '</span>\n';
 					result += '				</button>\n';
 					result += '			</div>\n';
 					result += '			<div class="col-sm-1 col-xs-2">\n';
-					result += '				<button type="button" class="btn btn-default btn">\n';
+					result += '				<button type="button" class="btn btn-default btn btnDislike';
+					result += '" ';
+					if(data[i].pollOrNot == 'YES')
+						result += "disabled='disabled'";
+					result += 'data-reviewcode="' + data[i].courtReviewCode + '">\n';
 					result += '					<span class="far fa-thumbs-down" style="font-size:18px;"></span>\n'; 
-					result += '					<span>' + data[i].dislikes + '</span>\n';
+					result += '					<span class="num-dislike">' + data[i].dislikes + '</span>\n';
 					result += '				</button>\n';
 					result += '			</div>\n';
 					result += '			<div class="col-sm-1 col-xs-2">\n';
@@ -685,11 +905,18 @@
 				
 				result += '<div class="row">\n';
 				result += '<div class="col-md-3"></div>\n';
-				result += '<div class="col-md-6 paging" id="pagination"></div>\n';
+				result += '<div class="col-md-6 paging" id="reviewPagination"></div>\n';
 				result += '<div class="col-md-3"></div>\n';
 				result += '</div>\n';
 				
-				$("#reviewList").html(result);
+				$("#reviewList")
+				.html(result)
+				.find(".review")
+				.map(function(i, elem) {
+					$(elem).find(".btnLike[data-reviewcode]").click(pollReviewLike);
+					$(elem).find(".btnDislike[data-reviewcode]").click(pollReviewDislike);
+				});
+				
 				
 				$.ajax({
 					type: "get",
@@ -697,8 +924,8 @@
 					url: "<%=cp %>/ajax/court/${court.courtCode }/reviewindex",
 					data: {page: page},
 					success: function(data) {
-						$("#pagination").html(data);
-						$("li[data-page]").click(renderNewPage);
+						$("#reviewPagination").html(data);
+						$("#reviewPagination li[data-page]").click(renderNewPage);
 					},
 					error: function(e) {
 						alert(e.responseText);
@@ -712,6 +939,68 @@
 			}
 		});
 	}
+	
+	
+	function renderMeetingView(meetingDate) {
+		
+		return function() {
+			var meetingPage = $(this).data("page");
+			$.ajax({
+				type: "get",
+				dataType: "json",
+				url: "<%=cp %>/ajax/court/${court.courtCode}/meetinglist/" + meetingDate,
+				data: {page: meetingPage},
+				success: function(data) {
+					
+					var result = "";
+					if(data.length > 0) {
+															
+						for(var i=0; i<data.length; i++) {
+		
+							result += '<li class="list-group-item board-body">';
+							result += '	<div class="col-sm-3 col-xs-3">';
+							result += '		<span>' + data[i].meetingDate.split(" ")[1] + '</span>';
+							result += '	</div>';
+							result += '	<div class="col-sm-6 col-xs-6">';
+							result += '		<a href="' + '<%=cp %>/meeting/' + data[i].meetingCode;
+							result += '">' + data[i].meetingSubject + '</a>';
+							result += '	</div>';
+							result += '	<div class="col-sm-3 col-xs-3">';
+							result += '		<span>' + data[i].nowPeopleNumber + '/' + data[i].meetingPeopleNumber +'</span>';
+							result += '	</div>';
+							result += '</li>';
+						}
+					}
+					else {
+						result = "모집 중인 모임이 없습니다.";
+					}
+					
+					$("#meetingView").html(result);
+					
+					$.ajax({
+						type: "get",
+						url: "<%=cp %>/ajax/court/${court.courtCode}/meetingindex/" + $(".date-view_heading[data-date=" + meetingDate +"]").data("date"),
+						dataType: "text",
+						data: {page: meetingPage},
+						success: function (data) {
+							$("#meetingPagination").html(data);
+							$("#meetingPagination li[data-page]").click(renderMeetingView(meetingDate));
+						},
+						error: function (e) {
+							console.log(e);
+				    		alert(e.responseText);
+						}
+					});
+				},
+				error: function(e) {
+					alert(e.responseText);
+					console.log(e);
+				}
+			});
+		}
+	}
+	
+	
 </script>
 </body>
 </html>

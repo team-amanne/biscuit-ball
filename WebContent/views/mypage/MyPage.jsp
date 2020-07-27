@@ -113,7 +113,7 @@ $().ready(function()
 			return;
 	   }		   
 	   $("#userRequestType").val("2");
-	   //$("#frm").submit();
+	   $("#frm").submit();
    });
    
 	/* 파일 설정 */
@@ -153,7 +153,11 @@ $().ready(function()
    <div class="main container-fluid">
     <div class="section-title container">
       <span>메인 > 마이페이지 </span>
+      
       <hr />
+      <div class="col-md-12">
+      	<p class="subtitle-text">마이페이지</p>
+      </div>
    </div>
    <div class="row">
       <div class="col-md-12">
@@ -162,19 +166,16 @@ $().ready(function()
             </div>
             <div class="col-`md-8">
                <div class="row">
-                  <div class="col-md-12">
-                     <p class="subtitle-text">마이페이지</p>
-                  </div>
                </div>
                <div class="row">
-                  <div class="col-sm-4 col-xs-5 left-btn">
+                  <div class="col-sm-4 col-xs-5 right-btn">
                      <a><button type="button" class="btn btn-default" id="myinfomation">내 정보관리</button></a>
-                     <a><button type="button" class="btn btn-default" id="achievementList">업적 목록</button></a>
+                     <a><button type="button" class="btn btn-default" id="achievementList" style="margin-right: 25%;">업적 목록</button></a>
                   </div>
                   <div class="col-sm-4 col-xs-2">
                   </div>
-                  <div class="col-sm-4 col-xs-5 right-btn">
-                     <a><button type="button" class="btn btn-default btn-link" id="friend">친구 신청</button></a>
+                  <div class="col-sm-4 col-xs-5">
+                     <a><button type="button" class="btn btn-default btn-link" style="margin-left: 25%;" id="friend">친구 신청</button></a>
                      <a><button type="button" class="btn btn-default btn-link" id="userblock">차단 관리</button></a>
                   </div>
                </div>
@@ -183,7 +184,20 @@ $().ready(function()
                      
                   </div>
                   <div class="col-sm-4 col-xs-6" style="position: relative; z-index: 1; text-align: center;">
-                     <img src="<%=cp %>/views/img/UserProfile.jpg" height="150px;" width="150px;"/>
+                  
+
+                     
+                  <c:choose>
+					    <c:when test="${user.userProfileImg != null}">
+					        <img src="<%=cp %>${user.userProfileImg }" height="250px;" width="250px;" style=" border-radius: 70%; margin-bottom: 20px;"/>                     
+					    </c:when>
+					
+					    <c:otherwise>
+					        <img src="<%=cp %>/views/img/UserProfile.jpg" height="250px;" width="250px;"/>
+					    </c:otherwise>
+
+				  </c:choose>
+
                   </div>
                   <div class="col-sm-4 col-xs-3">
                   </div>
@@ -191,7 +205,7 @@ $().ready(function()
                <div class="row">
                   <div class="col-md-4 col-xs-3">
                   </div>
-                  <div class="col-md-4 col-xs-6" style="position: relative; left:10px; top: -10px; z-index: 2; text-align: center; display: block;">
+                  <div class="col-md-4 col-xs-6" style="position: relative;top: -10px; z-index: 2; text-align: center; display: block;">
                   <div style=" padding-bottom: 10px;">
                   		<input id="uploadprofilename" style="display: none; width: 55%; text-align:right;" readonly="readonly"> 
                         <button type="button" id="userProfileImageUpdateDo" style="display: none; width: 40%;">프로필사진 등록</button>                               	
@@ -207,7 +221,7 @@ $().ready(function()
                   </div>
                   
               
-                  <div class="col-sm-4 col-xs-6" style="text-align: center"><textarea class="form-control" name="userProfileTxtView" id="userProfileTxtView" rows="" style="resize: none; width: 400px; height: 100px;" >${user.userProfileTxt}</textarea></div>
+                  <div class="col-sm-4 col-xs-6" style="text-align: center"><textarea class="form-control" name="userProfileTxtView" id="userProfileTxtView" rows="" style="resize: none; width: 100%; height: 100px;" >${user.userProfileTxt}</textarea></div>
                   <input type="hidden" name="userProfileTxt" id="userProfileTxt">
                   <div class="col-sm-4 col-xs-3">
                   </div>
@@ -251,7 +265,7 @@ $().ready(function()
                               <span>대표업적</span>
                            </div>
                            <div class="col-sm-4 col-xs-4 panel-body">     
-                           	  <img alt="개인업적" src="<%=cp %>${user.titleAchievementImg}" class="icon_Achievement"
+                           	  <img alt="" src="<%=cp %>${user.titleAchievementImg}" class="icon_Achievement"
                            	   >                         
                               <span  class="user_item"> ${user.titleAchievementName}</span>
                            </div>
@@ -275,7 +289,9 @@ $().ready(function()
                               <span>내 코트</span>
                            </div>
                            <div class="col-sm-4 col-xs-4 panel-body">
-                              <a href="<%=cp %>/court/${user.userCourtCode}" class="icon_connect"><i class="fas fa-map-marked-alt"></i></a>
+                           <c:if test="${user.userCourtCode != null}">
+							    <a href="<%=cp %>/court/${user.userCourtCode}" class="icon_connect"><i class="fas fa-map-marked-alt"></i></a>                           
+						   </c:if>
                               <span class="user_item">${user.userCourtName}</span>
                            </div>
                         </div>
@@ -292,7 +308,9 @@ $().ready(function()
                               <span>내 크루</span>
                            </div>
                            <div class="col-sm-4 col-xs-4 panel-body">
+                           <c:if test="${user.userCrewName != null}">
                               <a href="#" class="icon_connect"><i class="fas fa-users"></i></a>
+                           </c:if>   
                               <span class="user_item">${user.userCrewName}</span>
                            </div>
                         </div>
