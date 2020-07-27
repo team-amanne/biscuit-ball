@@ -132,7 +132,6 @@ public class AjaxController
 	public String togetherMeetingList(Model model, @RequestParam("courtRegistrationCode") String courtRegistrationCode, @RequestParam("meetingDate") String meetingDate, @RequestParam("meetingTypeCode") String meetingTypeCode, @RequestParam("start") int start, @RequestParam("end") int end)
 	{
 		String view = null;
-		
 		meetingDate=meetingDate.replace("+", " ");
 		
 		model.addAttribute("result", ajax.getMeetingListByTogetherPlay(courtRegistrationCode, meetingDate, meetingTypeCode, start, end));

@@ -1,5 +1,6 @@
 package com.amanne.biscuitball.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,13 +9,19 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.amanne.biscuitball.model.PlayModel;
 import com.amanne.biscuitball.model.UserInfo;
+import com.amanne.biscuitball.mybatis.CourtDTO;
+import com.amanne.biscuitball.mybatis.MeetingDTO;
 import com.amanne.biscuitball.mybatis.RegionDTO;
 import com.amanne.biscuitball.mybatis.UserDTO;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 
 @Controller
@@ -126,6 +133,7 @@ public class PlayController
       
    }
    
+   
    // 함께농구 개설
    @RequestMapping("/meeting/createfull")
    public String playCreateMeetingFull(Model model)
@@ -142,5 +150,35 @@ public class PlayController
 		  
 		  return "/play/PlayCreateMeetingTogether";
    }
-   
+   /*
+   @RequestMapping(value="/meeting/**", method = {RequestMethod.GET, RequestMethod.POST})
+   public String createMeeting(Model model, @RequestParam(required=false) MeetingDTO meetingDTO)
+   {
+	   	String view = null;
+	   	
+	    HttpSession session = request.getSession();
+		UserInfo info = (UserInfo)session.getAttribute("userInfo");
+		MeetingMemberDTo dto = 
+		model.addAttribute("meetingDTO", playModel.createMeeting(meetingDTO, meetingMemberDTO);
+		
+		view = "/court/CourtRegistrationComplete";
+
+	   
+	   return "/play/MeetingTogetherArticle";
+
+   }
+   /*
+   @RequestMapping("/{courtCode}/delete")
+	public String deleteCourt(Model model, @PathVariable("courtCode") String courtCode)
+	{
+		String view = "redirect:/court/" + courtCode;
+		HttpSession session = request.getSession();
+		UserInfo info = (UserInfo)session.getAttribute("adminInfo");
+
+		if(courtModel.deleteCourtAdmin(info.getUserCode(), courtCode) != 1)
+			view += "?requestResult=fail";
+		
+		return view;
+	}
+   */
 }
