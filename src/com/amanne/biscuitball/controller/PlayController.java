@@ -1,5 +1,6 @@
 package com.amanne.biscuitball.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,13 +9,20 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.amanne.biscuitball.model.PlayModel;
 import com.amanne.biscuitball.model.UserInfo;
+import com.amanne.biscuitball.mybatis.CourtDTO;
+import com.amanne.biscuitball.mybatis.MeetingDTO;
+import com.amanne.biscuitball.mybatis.MeetingMemberDTO;
 import com.amanne.biscuitball.mybatis.RegionDTO;
 import com.amanne.biscuitball.mybatis.UserDTO;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 
 @Controller
@@ -87,19 +95,14 @@ public class PlayController
     
    @RequestMapping(value="/meeting/create/select", method = {RequestMethod.GET, RequestMethod.POST})
    public String playCourtSearch()
-   {
-	   
+   {	   
 	   return  "/play/PlaySpeed_pu02";
    }
    
    
    // 빠른농구 참여
-   @RequestMapping("meeting/**")
-   public String playSpeedJoin()
-   {
-      return "/play/PlaySpeed_pu01";
-   }
-   
+
+
    
    // 함께농구로 이동
    @RequestMapping("/mode/together/**")
@@ -127,21 +130,42 @@ public class PlayController
       
    }
    
-   // 함께농구 개설
-   @RequestMapping("/meeting/createfull")
-   public String playCreateMeetingFull(Model model)
+   // 함께농구 개설 및 미팅 아티클
+   @RequestMapping("/meeting/{meeting_code}")
+   public String MeetingArticle(Model model, @PathVariable String meeting_code)
    {
-	   	  // 광역시도 정보 랜더링
-		  ArrayList<RegionDTO> regionList= playModel.regionPrint();
-		  model.addAttribute("regionList", regionList);
-		  
-		  HttpSession session = request.getSession();
-		  UserInfo userInfo = (UserInfo)session.getAttribute("userInfo");
-		  
-		  UserDTO userDto = playModel.playUserInfo(userInfo);
-		  model.addAttribute("userDto",userDto);
-		  
-		  return "/play/PlayCreateMeetingTogether";
+	   // 함께농구 개설
+	   if (meeting_code.equals("createfull"))
+	   {
+		// 광역시도 정보 랜더링
+			  ArrayList<RegionDTO> regionList= playModel.regionPrint();
+			  model.addAttribute("regionList", regionList);
+			  
+			  HttpSession session = request.getSession();
+			  UserInfo userInfo = (UserInfo)session.getAttribute("userInfo");
+			  
+			  UserDTO userDto = playModel.playUserInfo(userInfo);
+			  model.addAttribute("userDto",userDto);
+			  
+			  return "/play/PlayCreateMeetingTogether";
+	   }
+	   
+	   return "/play/MeetingTogetherArticle";
    }
    
+   @RequestMapping(value="/meeting/**", method = {RequestMethod.GET, RequestMethod.POST})
+   public String createMeeting(Model model, MeetingDTO meetingDTO, String ballExistOrNot)
+   {
+	   	
+	    HttpSession session = request.getSession();
+		UserInfo info = (UserInfo)session.getAttribute("userInfo");
+		
+		MeetingMemberDTO meetingMemberDTO = new MeetingMemberDTO();
+		meetingMemberDTO.setBallExistOrNot(ballExistOrNot);
+		
+		model.addAttribute("meetingDTO", playModel.createMeeting(meetingDTO, meetingMemberDTO));
+	   
+	   return "/play/MeetingTogetherArticle";
+
+   }
 }

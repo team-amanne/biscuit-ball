@@ -70,7 +70,6 @@ $(document).ready(function()
 	
 	$("#city_select").change(function() {	 	
 	 	$("#regiondata").val($("#region_select option:selected").text());
-	 	alert($("#city_select option:selected").val())
 	 	$("#citydata").val($("#city_select option:selected").text());
 	});
 

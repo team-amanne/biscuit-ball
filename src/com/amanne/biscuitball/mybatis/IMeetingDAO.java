@@ -75,4 +75,10 @@ public interface IMeetingDAO
 	// 특정 코트, 날짜 조건으로 예정모임 조회
 	public ArrayList<MeetingDTO> getMeetingListByCourtDate(@Param("courtCode") String courtCode, @Param("meetingDate") String meetingDate, @Param("start") int start, @Param("end") int end);
 	public int countMeetingListByCourtDate(@Param("courtCode") String courtCode, @Param("meetingDate") String meetingDate);
+	
+	// 특정 지역, 날짜 조건으로 예정 모임 조회
+	public ArrayList<MeetingDTO> getMeetingListByRegionDate(@Param("regionCode") String regionCode, @Param("meetingDate") String meetingDate, @Param("start") int start, @Param("end") int end);
+	public int countMeetingListByRegionDate(@Param("regionCode") String regionCode, @Param("meetingDate") String meetingDate);
+	
+	
 }

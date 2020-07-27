@@ -2,22 +2,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	request.setCharacterEncoding("UTF-8");
-String cp = request.getContextPath();
+	String cp = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery.min.js"></script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<title>Biscuit Ball</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="<%=cp %>/css/default.css" />
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <style type="text/css">
 .test-carousel {
 	height: 500px;
@@ -65,22 +61,12 @@ margin-top: 23%;
 	align-items: center;
 }
 </style>
-<link rel="stylesheet" href="<%=cp %>/css/default.css" />
 
-<script type="text/javascript">
 
-		$(document).ready(function()
-		{
-			$("#userLogout").click(function()
-			{
-				$(location).attr("href", "<%=cp%>/logout");
-			});			
-		});
-</script>
 </head>
 <body>
 
-	<c:import url="Header.jsp"></c:import>
+<c:import url="Header.jsp"></c:import>
 
 <div class="container-fuild">
 	<div id="carousel-example-generic"
@@ -129,14 +115,14 @@ margin-top: 23%;
 			<a><span class="glyphicon glyphicon-chevron-left"></span></a> <span
 				class="sr-only">Previous</span>
 		</div>
-
-		<div class="col-md-1 col-xs-1">일</div>
-		<div class="col-md-1 col-xs-1">월</div>
-		<div class="col-md-1 col-xs-1">화</div>
-		<div class="col-md-1 col-xs-1">수</div>
-		<div class="col-md-1 col-xs-1">목</div>
-		<div class="col-md-1 col-xs-1">금</div>
-
+		<div id="dateView">
+			<div class="col-md-1 col-xs-1">일</div>
+			<div class="col-md-1 col-xs-1">월</div>
+			<div class="col-md-1 col-xs-1">화</div>
+			<div class="col-md-1 col-xs-1">수</div>
+			<div class="col-md-1 col-xs-1">목</div>
+			<div class="col-md-1 col-xs-1">금</div>
+		</div>
 		<div class="col-md-1 col-xs-1">
 			<a><span class="glyphicon glyphicon-chevron-right"></span></a> <span
 				class="sr-only">Next</span>
@@ -148,30 +134,23 @@ margin-top: 23%;
 		<div class="col-md-2 col-xs-2"></div>
 		<div class="col-md-8 col-xs-8 city-select">
 			<ul class="nav nav-tabs city-select nav-justified">
-				<li class="nav-item"><a href="" class="nav-link active"
-					data-toggle='tab'>서울</a></li>
-				<li class="nav-item"><a href="" class="nav-link"
-					data-toggle='tab'>경기</a></li>
-				<li class="nav-item"><a href="" class="nav-link"
-					data-toggle='tab'>인천</a></li>
-				<li class="nav-item"><a href="" class="nav-link"
-					data-toggle='tab'>부산</a></li>
-				<li class="nav-item"><a href="" class="nav-link"
-					data-toggle='tab'>대구</a></li>
-				<li class="nav-item"><a href="" class="nav-link"
-					data-toggle='tab'>광주</a></li>
-				<li class="nav-item"><a href="" class="nav-link"
-					data-toggle='tab'>대전</a></li>
-				<li class="nav-item"><a href="" class="nav-link"
-					data-toggle='tab'>경상</a></li>
-				<li class="nav-item"><a href="" class="nav-link"
-					data-toggle='tab'>전라</a></li>
-				<li class="nav-item"><a href="" class="nav-link"
-					data-toggle='tab'>충청</a></li>
-				<li class="nav-item"><a href="" class="nav-link"
-					data-toggle='tab'>강원</a></li>
-				<li class="nav-item"><a href="" class="nav-link"
-					data-toggle='tab'>제주</a></li>
+				<li class="nav-item"><a href="#ZQ01" class="nav-link active" data-toggle='tab'>서울</a></li>
+				<li class="nav-item"><a href="#ZQ02" class="nav-link" data-toggle='tab'>부산</a></li>
+				<li class="nav-item"><a href="#ZQ03" class="nav-link" data-toggle='tab'>대구</a></li>
+				<li class="nav-item"><a href="#ZQ04" class="nav-link" data-toggle='tab'>인천</a></li>
+				<li class="nav-item"><a href="#ZQ05" class="nav-link" data-toggle='tab'>광주</a></li>
+				<li class="nav-item"><a href="#ZQ06" class="nav-link" data-toggle='tab'>대전</a></li>
+				<li class="nav-item"><a href="#ZQ07" class="nav-link" data-toggle='tab'>울산</a></li>
+				<li class="nav-item"><a href="#ZQ08" class="nav-link" data-toggle='tab'>세종</a></li>
+				<li class="nav-item"><a href="#ZQ09" class="nav-link" data-toggle='tab'>경기</a></li>
+				<li class="nav-item"><a href="#ZQ10" class="nav-link" data-toggle='tab'>강원</a></li>
+				<li class="nav-item"><a href="#ZQ11" class="nav-link" data-toggle='tab'>충북</a></li>
+				<li class="nav-item"><a href="#ZQ12" class="nav-link" data-toggle='tab'>충남</a></li>
+				<li class="nav-item"><a href="#ZQ13" class="nav-link" data-toggle='tab'>전북</a></li>
+				<li class="nav-item"><a href="#ZQ14" class="nav-link" data-toggle='tab'>전남</a></li>
+				<li class="nav-item"><a href="#ZQ15" class="nav-link" data-toggle='tab'>경북</a></li>
+				<li class="nav-item"><a href="#ZQ16" class="nav-link" data-toggle='tab'>경남</a></li>
+				<li class="nav-item"><a href="#ZQ17" class="nav-link" data-toggle='tab'>제주</a></li>
 			</ul>
 		</div>
 
@@ -179,10 +158,11 @@ margin-top: 23%;
 
 	<div class="col-md-12 ">
 		<div class="col-md-2"></div>
-		<div class="col-md-8">
+		<div class="col-md-8 tab-content">
+			<!--  -->
 			<div class="col-md-12">
 				<p class="p_default">
-					전체 <span>n</span> 개의 모임
+					전체 <span id="meetingCount">n</span> 개의 모임
 				</p>
 
 				<div class="panel panel-default">
@@ -203,6 +183,8 @@ margin-top: 23%;
 						</div>
 					</div>
 				</div>
+				
+				<%--
 				<div class="panel panel-default">
 					<div class="panel-body content-box">
 						<div class="col-md-2 well meeting_info">
@@ -257,6 +239,7 @@ margin-top: 23%;
 						</div>
 					</div>
 				</div>
+				 --%>
 			</div>
 		</div>
 		<div class="col-md-2"></div>
@@ -270,7 +253,52 @@ margin-top: 23%;
 	<c:import url="Footer.jsp"></c:import>
 </div>
 
+
+
+<script type="text/javascript">
+
+	$(document).ready(function()
+	{
+		var now = new Date().getTime();
+		dateList = [...new Array(6).keys()].map(i => new Date(now + i * 24 * 3600 * 1000));
+				
+		var dateView = dateList.reduce(function(acc, cur, idx) 
+		{
+			var dataStr = cur.getFullYear() + '-' + (cur.getMonth()+1+'').padStart(2, '0') + '-' + (cur.getDate() + '' ).padStart(2, '0');
+			var viewStr = (cur.getMonth()+1+'').padStart(2, '0') + '/' + (cur.getDate() + '' ).padStart(2, '0');
+			return acc + '<div style="cursor: pointer;"class="dateview_date col-md-1 col-xs-1"' + 'data-page="' + dataStr + '"' +'>' + viewStr + '</div>\n';
+			
+		}, "");
+		
+		$("#dateView").html(dateView);
+		
+		var nowStr = dateList[0].getFullYear() + '-' + (dateList[0].getMonth()+1+'').padStart(2, '0') + '-' + (dateList[0].getDate() + '' ).padStart(2, '0'); 
+		
+		$.ajax(
+		{
+			type: "GET"
+			, url: "<%=cp %>/ajax/meetings/" + nowStr
+			, dataType: "json"
+			, success: function (regions) 
+			{
+				var region;
+				for(var i=0; i<regions.length; i++)
+				{
+					region = regions[i];
+					
+					
+					
+				}
+			}
+			, error: function (e)
+			{
+				console.log(e.responseText);
+				alert(e.responseText);
+			}
+			
+		});
+	});
+	
+</script>
 </body>
-
-
 </html>

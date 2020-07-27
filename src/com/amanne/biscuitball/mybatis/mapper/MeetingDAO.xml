@@ -494,5 +494,86 @@
 	]]>
 	</select>
 	
+<!-- public ArrayList<MeetingDTO> getMeetingListByRegionDate(String regionCode, String meetingDate, int start, int end); -->
+
+	<select id="getMeetingListByRegionDate" resultType="com.amanne.biscuitball.mybatis.MeetingDTO">
+	<![CDATA[
+		SELECT MEET_CODE as meetingCode
+		     , MEET_SUBJECT as meetingSubject
+		     , MEET_PEOPLE_NUMBER as meetingPeopleNumber
+		     , NOWPEOPLENUMBER  as nowPeopleNumber
+		     , MEET_OP_DATE as meetingOpenDate
+		     , MEET_DATE as meetingDate
+		     , MEET_END_DATE as meetingEndDate
+		     , MEET_CLOSE_DATE as meetingCloseDate
+		     , MEET_NOTICE as meetingNotice
+		     , MEET_TYPE_CODE as meetingTypeCode
+		     , QUICK_PLAY as quickPlayOrNot
+		     , COURT_REG_CODE as courtRegistrationCode
+		     , MIN_TIER as minTierCode
+		     , MAX_TIER as maxTierCode
+		     , CONFIRM_OR_NOT as confirmOrNot
+		     , CAPTAINCODE as captainAcctCode
+		     , CAPTAINNAME as captainName
+		FROM
+		(
+		    SELECT A.* , ROWNUM AS RNUM
+		    FROM
+		    (
+		        SELECT F2.*
+		        FROM
+		        (
+		            SELECT MT.*
+		            ,(
+		                SELECT COUNT(*)
+		                FROM TBL_MEETING_JOIN
+		                WHERE MEET_CODE = MT.MEET_CODE
+		            ) AS NOWPEOPLENUMBER 
+		            ,
+		            (
+		                SELECT USER_NICKNAME
+		                FROM VIEW_MEETING_JOIN
+		                WHERE CAPTAIN_OR_NOT = 'YES'
+		                AND MEET_CODE = MT.MEET_CODE
+		            ) as CAPTAINNAME
+		            ,
+		            (
+		                SELECT JOIN_ACCT_CODE
+		                FROM VIEW_MEETING_JOIN
+		                WHERE CAPTAIN_OR_NOT = 'YES'
+		                AND MEET_CODE = MT.MEET_CODE
+		            ) as CAPTAINCODE
+		            FROM VIEW_MEETING MT
+		            LEFT JOIN TBL_COURT_REGISTRATION CRT
+		            ON MT.COURT_REG_CODE = CRT.COURT_REG_CODE
+		            LEFT JOIN VIEW_CITY CT
+		            ON CRT.CITY_CODE = CT.CITY_CODE
+		            WHERE MT.MEET_DATE > TO_DATE(#{meetingDate}, 'YYYY-MM-DD')
+		              AND MT.MEET_DATE < TO_DATE(#{meetingDate}, 'YYYY-MM-DD') + 1
+		              AND MT.CONFIRM_OR_NOT = 'NO'
+		              AND CT.REGION_CODE = #{regionCode}
+		        ) F2
+		        ORDER BY F2.MEET_DATE
+		    ) A
+		)
+		WHERE RNUM >= #{start} AND RNUM <= #{end}
+	]]>
+	</select>
+	
+	<!-- public int countMeetingListByRegionDate(String regionCode, String meetingDate); -->
+	<select id="countMeetingListByRegionDate" resultType="java.lang.Integer">
+	<![CDATA[
+		SELECT COUNT(*)
+		FROM VIEW_MEETING MT
+		LEFT JOIN TBL_COURT_REGISTRATION CRT
+		ON MT.COURT_REG_CODE = CRT.COURT_REG_CODE
+		LEFT JOIN VIEW_CITY CT
+		ON CRT.CITY_CODE = CT.CITY_CODE
+		WHERE MT.MEET_DATE > TO_DATE(#{meetingDate}, 'YYYY-MM-DD')
+		  AND MT.MEET_DATE < TO_DATE(#{meetingDate}, 'YYYY-MM-DD') + 1
+		  AND MT.CONFIRM_OR_NOT = 'NO'
+		  AND CT.REGION_CODE = #{regionCode}
+	]]>
+	</select>
 
 </mapper>

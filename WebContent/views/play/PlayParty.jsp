@@ -67,7 +67,7 @@ String cp = request.getContextPath();
                      <div class="panel-body">
                         <h2>파 티</h2>
                         <p>친구와 함께</p>
-                        <button class="btn btn-ling" id="btn-party">PLAY</button>
+                        <button class="btn btn-default btn-ling" id="btn-party">PLAY</button>
                      </div>
                   </div>
                </div>
@@ -77,7 +77,7 @@ String cp = request.getContextPath();
                      <div class="panel-body">
                         <h2>개 인</h2>
                         <p>혼자서도 즐겁게</p>
-                        <button class="btn btn-submit" id="btn-solo">PLAY</button>
+                        <button class="btn btn-default btn-link" id="btn-solo">PLAY</button>
                      </div>
                   </div>
                </div>

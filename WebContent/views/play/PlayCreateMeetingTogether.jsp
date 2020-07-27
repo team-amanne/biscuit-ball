@@ -90,7 +90,6 @@ $(function()
 	
 	 //날짜 placeholder 오늘로 고정
 	var now = new Date();
-
     var year= now.getFullYear();
     var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);
     var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate();
@@ -211,7 +210,7 @@ $(function()
 							</div>
 							<h4>모임 정보 입력</h4>
 							<div class="row">
-								<div class="col-md-8">
+								<div class="col-md-6">
 									<div class="panel panel-default">
 									
 										<div class="panel-heading">모임 지역</div>
@@ -227,31 +226,47 @@ $(function()
 													
 												</select>
 											</div>
-											<div class="col-md-4">
+											<div class="col-md-5">
 												<select name="" id="citySelect" class="form-control">
 												<!-- 시군구 -->
 												</select>
 											</div>
-											<div class="col-md-4">
+											<div class="col-md-3">
 												<button type="button" class="btn btn-default btn-md btn-block" id="mapSearch">
-													지도검색</button>
+													검색</button>
 											</div>
 										<span class="err">*지역을 선택해주세요.</span>
 										</div>
 									</div>
 								</div>
-								
-								<div class="col-md-4">
+								<div class="col-md-3">
 									<div class="panel panel-default">
-										<div class="panel-heading">빠른농구 여부</div>
+										<div class="panel-heading">경기/일반</div>
 										<div class="panel-body playtype">
 											<label class="radio-inline radio" > 
-											<input type="radio" name="speedy" id="inlineRadio1" value="option1">
-												빠른농구
+											<input type="radio" name="meetingType" id="inlineRadio1" value="ZL01">
+												경기
 											</label> 
 											<label class="radio-inline radio"> 
-											<input type="radio" name="speedy" id="inlineRadio2" value="option2">
-												함께농구
+											<input type="radio" name="meetingType" id="inlineRadio2" value="ZL02">
+												일반
+											</label>
+										
+										</div>
+									</div>
+								</div>
+								
+								<div class="col-md-3">
+									<div class="panel panel-default">
+										<div class="panel-heading">빠른농구 참석여부</div>
+										<div class="panel-body playtype">
+											<label class="radio-inline radio" > 
+											<input type="radio" name="speedy" id="inlineRadio1" value="ZU01">
+												찬성
+											</label> 
+											<label class="radio-inline radio"> 
+											<input type="radio" name="speedy" id="inlineRadio2" value="ZU02">
+												반대
 											</label>
 										
 										</div>

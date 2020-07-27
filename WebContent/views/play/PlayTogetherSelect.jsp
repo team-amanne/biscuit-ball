@@ -140,7 +140,9 @@ String cp = request.getContextPath();
 					$("#citySelect").attr("disabled", true);
 					$("#mapSearch").attr("disabled", true);
 					
-					$("#myCourt").val($("myCourtCheckedVal").val());
+					$("#myCourt").val($("#myCourtCheckedVal").val());
+					$("#courtCode").val($("#myCourt").val());
+					
 					
 		      }
 			  else
@@ -149,11 +151,19 @@ String cp = request.getContextPath();
 					$("#citySelect").attr("disabled", false);
 					$("#mapSearch").attr("disabled", false);
 					
-					$("#myCourt").val("");
 		      }
 		});
 	      
-	      $('#meetingSubject').attr("href", "<%=cp%>/play/meeting/")
+	      // 내코트 없는 경우 내코트 선택 불가
+	      if ($("#myCourtCheckedVal").val() !=null)
+		{
+	    	  $("#myCourt").attr("disabled", false);
+		}
+	      else
+	    {
+	    	  $("#myCourt").attr("disabled", true);
+	    }
+	      
 	      
 	      
 	      
@@ -501,7 +511,7 @@ $(function()
 		          		            {
 		          		            	/* 코트 정보 */
 		          		            	/* 코트이름 */
-		          		            	$("#courtCode").val(data.courtCode);
+	          		            		$("#courtCode").val(data.courtCode);		          		            		
 		          		            	$("#courtName").text(data.courtName);
 		          		            	/* 적정인원 최소 */
 		          		            	$("#minCourtCapacity").text(data.minCourtCapacity);
@@ -570,6 +580,8 @@ $(function()
 	{ 	
 		$("#resultList").css("display", "inline");
 		
+		alert($("#courtCode").val());
+		
 		$.ajax
 		({
 			type: "get",
@@ -594,11 +606,11 @@ $(function()
 				for (var i=0; i<data.length; i++)
 				{
 					listPrint += "<li class='list-group-item board-body'><div class='row'><div class='col-md-4 col-xs-4'>";
-					listPrint += "<span class='meetingSubject' id='meetingSubject"+String(i)+"' value='"+ data[i].meetingCode +"'>"+ data[i].meetingSubject+ "</span>";
+					listPrint += "<span class='meetingPage' id='"+ data[i].meetingCode +"'>"+ data[i].meetingSubject+ "</span>";
 					listPrint += "</div><div class='col-md-2 col-xs-2'>";
-					listPrint += "<span class='captainName' data-captainacctcode='"+ data[i].captainAcctCode +"'>"+ data[i].captainName+ "</span>";
+					listPrint += "<span class='captainName' id='"+ data[i].captainAcctCode +"'>"+ data[i].captainName+ "</span>";
 					listPrint += "</div><div class='col-md-3 col-xs-3'>";
-					listPrint += "<span class='courtName' data-courtcode='"+ data[i].courtRegistrationCode +"'>"+ $("#courtName").text()+ "</span>";
+					listPrint += "<span class='courtName' id='"+ data[i].courtRegistrationCode +"'>"+ $("#courtName").text()+ "</span>";
 					listPrint += "</div><div class='col-md-2 col-xs-2'>";
 					listPrint += "<span>"+ data[i].meetingDate+ "</span>";
 					listPrint += "</div><div class='col-md-1 col-xs-1'>";
@@ -613,13 +625,26 @@ $(function()
 				
 				alert(listPrint);
 				
-				$(".meetingSubject").click(function()
-						{
-							var id = ($(this).attr('id'));
-							
-							window.open("<%=cp%>/play/meeting/"+$(id).val(),'새창', 'width=1000px, height=800px');
-							//childWindow.resizeTo(800, 800);
-						});
+				
+				// 모임 제목 클릭하면 모임으로
+				$(".meetingPage").click(function()
+				{
+					//var id = ($(this).attr('id'));
+					var meetingCode = $(this).attr('id');
+					
+					
+					window.open("<%=cp%>/play/meeting/"+ meetingCode ,'새창', 'width=1000px, height=800px');
+					//childWindow.resizeTo(800, 800);
+				});
+				
+				// 코트 이름 클릭하면 코트 페이지로
+				$(".courtName").click(function()
+				{
+					var courtCode = ($(this).attr('id'));
+					
+					$(location).attr("href","<%=cp%>/court/"+ courtCode);
+				});
+				
 			},
 			error : function(e)
 			{
@@ -628,16 +653,11 @@ $(function()
 					});
 		});
 	
-		$(".meetingSubject[data-meetingcode]").click(function()
-		{
-			alert("클릭");
-			window.open("<%=cp%>/play/meeting/"+$(this).val());
-		});
 		
-		
+		// 모임 개설 이동
 		$("#createMeeting").click(function()
 		{
-			$(location).attr("herf","<%=cp%>/play/meeting/createfull");
+			$(location).attr("href","<%=cp%>/play/meeting/createfull");
 		});
 		
 		

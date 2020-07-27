@@ -153,12 +153,18 @@ public class AjaxController
 	public String togetherMeetingList(Model model, @RequestParam("courtRegistrationCode") String courtRegistrationCode, @RequestParam("meetingDate") String meetingDate, @RequestParam("meetingTypeCode") String meetingTypeCode, @RequestParam("start") int start, @RequestParam("end") int end)
 	{
 		String view = null;
-		
 		meetingDate=meetingDate.replace("+", " ");
 		
 		model.addAttribute("result", ajax.getMeetingListByTogetherPlay(courtRegistrationCode, meetingDate, meetingTypeCode, start, end));
 		
 		view = "/ajax/Check";
 		return view;
+	}
+	
+	@RequestMapping("/meetings/{meetingDate}")
+	public String getMeetingListsByDate(Model model, @PathVariable("meetingDate") String meetingDate)
+	{
+		model.addAttribute("result", ajax.getMeetingListByRegion(meetingDate));
+		return "/ajax/Check";
 	}
 }

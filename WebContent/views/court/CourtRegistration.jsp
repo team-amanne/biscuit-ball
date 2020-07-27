@@ -266,6 +266,9 @@ String cp = request.getContextPath();
 						result += "<option value='" + data[i].cityCode +"'>" + data[i].cityName + "</option>\n";
 					
 					$("#citySelect").html(result);
+					$("#positionX").val("");
+					$("#positionY").val("");
+					$("#address").text("");
 				},
 				error: function(e){
 					alert(e.responseText);
@@ -308,6 +311,9 @@ String cp = request.getContextPath();
 		    		var lat = data.documents[0].y;
 		    		map.setCenter(new kakao.maps.LatLng(lat, lng));
 		    		marker.setPosition(map.getCenter());
+		    		$("#positionX").val("");
+					$("#positionY").val("");
+					$("#address").text("");
 		    	},
 		    	error: function(e) {
 		    		alert(e.responseText);
@@ -331,7 +337,42 @@ String cp = request.getContextPath();
 		    		xhr.setRequestHeader("Authorization", "KakaoAK e6e5dc704ed2b833d6f7a164f12f28b3");
 		    	},
 		    	success: function(data) {
-		    		$("#address").text(data.documents[0].address.address_name);
+		    		var address = data.documents[0].address
+		    		var addr1 = address.region_1depth_name;
+		    		var addr2 = address.region_2depth_name.split(" ")[0];
+		    		
+		    		$("#regionSelect").children().map(function (ri, re) {
+		    			
+		    			if($(re).text().trim() == addr1.trim()) {
+		    				$(re).prop("selected", true);
+		    				
+		    				$.ajax({
+								type: "get",
+								dataType: "json",
+								url: "<%=cp %>/ajax/citylist",
+								data: {regionCode: $(this).val()},
+								success: function(data) {
+									var result = "<option value=''>시·군·구</option>\n";
+									for(var i=0; i<data.length; i++) {
+										result += "<option value='" + data[i].cityCode +"'";
+										if(data[i].cityName == addr2)
+											result += " selected "
+										result += ">" + data[i].cityName + "</option>\n";
+									}
+									$("#citySelect").html(result);
+								},
+								error: function(e){
+									alert(e.responseText);
+								}
+							});
+		    				
+		    			}
+		    			else 
+		    				$(re).prop("selected", false);
+		    		});
+		    		
+		    		$("#address").text(address.address_name);
+		    		
 		    	},
 		    	error: function(e) {
 		    		alert(e.responseText);

@@ -16,6 +16,7 @@ import com.amanne.biscuitball.mybatis.IRegionDAO;
 import com.amanne.biscuitball.mybatis.IUserDAO;
 import com.amanne.biscuitball.util.MyUtil;
 import com.amanne.biscuitball.mybatis.MeetingDTO;
+import com.amanne.biscuitball.mybatis.RegionDTO;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -372,5 +373,57 @@ public class AjaxModel
 		}
 		
 		return arr.toString();
+	}
+	
+	public String getMeetingListByRegion(String meetingDate)
+	{
+		JSONArray result = new JSONArray();
+		IMeetingDAO dao = sqlSession.getMapper(IMeetingDAO.class);
+		IRegionDAO rgdao = sqlSession.getMapper(IRegionDAO.class);
+		ArrayList<RegionDTO> regionList = rgdao.getRegionList();
+		
+		for(RegionDTO region : regionList)
+		{
+			JSONObject regobj = new JSONObject();
+			regobj.put("regionCode", region.getRegionCode());
+			regobj.put("regionName", region.getRegionName());
+
+			JSONArray arr = new JSONArray();
+			int count = dao.countMeetingListByRegionDate(region.getRegionCode(), meetingDate);
+			
+			regobj.put("meetingCount", count);
+			
+			ArrayList<MeetingDTO> meets = dao.getMeetingListByRegionDate(region.getRegionCode(), meetingDate, 1, count);
+			for(MeetingDTO dto : meets)
+			{
+				JSONObject obj = new JSONObject();
+				
+				obj.put("meetingCode",dto.getMeetingCode() );
+				obj.put("meetingSubject", dto.getMeetingSubject() );
+				obj.put("meetingPeopleNumber", dto.getMeetingPeopleNumber() );
+				obj.put("meetingOpenDate", dto.getMeetingOpenDate() );
+				obj.put("meetingDate", dto.getMeetingDate() );
+				obj.put("meetingCloseDate", dto.getMeetingCloseDate() );
+				obj.put("meetingEndDate", dto.getMeetingEndDate() );
+				obj.put("meetingNotice", dto.getMeetingNotice() );
+				obj.put("meetingTypeCode",dto.getMeetingTypeCode() );
+				obj.put("meetingTypeName", dto.getMeetingTypeName() );
+				obj.put("quickPlayOrNot", dto.getQuickPlayOrNot() );
+				obj.put("courtRegistrationCode",dto.getCourtRegistrationCode() );
+				obj.put("minTierCode", dto.getMinTierCode() );
+				obj.put("maxTierCode", dto.getMaxTierCode() );
+				obj.put("confirmOrNot",dto.getConfirmOrNot() );
+				obj.put("blindOrNot", dto.getBlindOrNot());
+				obj.put("nowPeopleNumber",dto.getNowPeopleNumber() );
+				obj.put("captainName",dto.getCaptainName() );
+				
+				arr.add(obj);
+			}
+			
+			regobj.put("meetingList", arr);
+			result.add(regobj);
+		}
+		
+		return result.toString();
 	}
 }

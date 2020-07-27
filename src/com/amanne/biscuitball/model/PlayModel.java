@@ -10,8 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.amanne.biscuitball.mybatis.ICourtDAO;
+import com.amanne.biscuitball.mybatis.IMeetingDAO;
 import com.amanne.biscuitball.mybatis.IRegionDAO;
 import com.amanne.biscuitball.mybatis.IUserDAO;
+import com.amanne.biscuitball.mybatis.MeetingDTO;
+import com.amanne.biscuitball.mybatis.MeetingMemberDTO;
 import com.amanne.biscuitball.mybatis.RegionDTO;
 import com.amanne.biscuitball.mybatis.UserDTO;
 
@@ -73,6 +77,25 @@ public class PlayModel
 		      return userDto;
 		}
 	
+	// 모임 개설 하기
+		public MeetingDTO createMeeting(MeetingDTO meetingDTO, MeetingMemberDTO meetingMemberDTO)
+		{
+			IMeetingDAO dao = sqlSession.getMapper(IMeetingDAO.class);
+			
+			int result = dao.registerMeeting(meetingDTO, meetingMemberDTO);				
+			if(result > 0)
+			{				
+				return dao.getMeeting(meetingDTO.getMeetingCode());
+			}
+			else 
+			{
+				return null;
+			}
+
+		}
+	
+	// 
+		
 	// 유저 선택 조건 모임 가져오기
 	
 }
