@@ -301,7 +301,7 @@ public class CourtController
 		
 		return view;
 	}
-	/*
+	
 	@RequestMapping("/{courtCode}/review/{reviewCode}/poll/up")
 	public String likeCourtReview(Model model, @PathVariable("courtCode") String courtCode, @PathVariable("reviewCode") String reviewCode)
 	{
@@ -318,7 +318,7 @@ public class CourtController
 		
 		return "/ajax/Check";
 	}
-	*/
+	
 	@RequestMapping("/{courtCode}/name")
 	public String courtNameList(Model model, @PathVariable("courtCode") String courtCode, @RequestParam(required=false) String page)
 	{

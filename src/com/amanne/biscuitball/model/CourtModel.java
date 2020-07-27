@@ -145,8 +145,7 @@ public class CourtModel
 		return result;
 	}
 	
-	/*
-	public String likeReview(String reviewCode, String userAcctCode) 
+	public int likeReview(String reviewCode, String userAcctCode) 
 	{
 		ICourtDAO courtDao = sqlSession.getMapper(ICourtDAO.class);
 		PollDTO dto = new PollDTO();
@@ -155,22 +154,22 @@ public class CourtModel
 		dto.setGoodOrBad("ZU01");
 		
 		if(courtDao.updatePollCourtReview(dto) == 0)
-		{
-			
-		}
-		else
-		{
-			return "0";
-		}
+			return courtDao.pollCourtReview(dto);
+		return 0;
 	}
 
-	public String dislikeReview(String reviewCode, String userAcctCode) 
+	public int dislikeReview(String reviewCode, String userAcctCode) 
 	{
 		ICourtDAO courtDao = sqlSession.getMapper(ICourtDAO.class);
+		PollDTO dto = new PollDTO();
+		dto.setPollSubjectCode(reviewCode);
+		dto.setVoterAccountCode(userAcctCode);
+		dto.setGoodOrBad("ZU02");
 		
-		return null;
+		if(courtDao.updatePollCourtReview(dto) == 0)
+			return courtDao.pollCourtReview(dto);
+		return 0;
 	}
-	*/
 	
 	public String pollCourtRegisterYes(String courtCode, String userAccountCode)
 	{

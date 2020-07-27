@@ -66,6 +66,10 @@
 .court-img:hover {
 	cursor: pointer;
 }
+
+.date-view_heading:hover {
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -348,7 +352,7 @@
 												</div>
 											</li>
 											--%>
-											<div id="meetingPagination"></div>
+											<div id="meetingPagination" style="text-align:center;"></div>
 										</ul>
 									</div>
 								</div>
@@ -399,7 +403,7 @@
 										<div class="col-sm-12 col-xs-12" style="text-align: center; padding-top: 20px;">등록된 리뷰가 없습니다.</div>
 										</c:if>
 										<c:forEach var="review" items="${court.courtReviewList }">
-										<div class="panel panel-default col-sm-12 col-xs-12">
+										<div class="panel panel-default col-sm-12 col-xs-12 review">
 											<div class="panel-body">
 												<div class="row">
 													<div class="col-sm-2 col-xs-2">
@@ -411,15 +415,23 @@
 													</div>
 													
 													<div class="col-sm-1 col-xs-2">
-														<button type="button" class="btn btn-default btn btnLike" data-reviewcode="${review.courtReviewCode }">
+														<button type="button" class="btn btn-default btn btnLike" data-reviewcode="${review.courtReviewCode }"
+														<c:if test="${review.pollOrNot == 'YES' }">
+														disabled="disabled"
+														</c:if>
+														>
 															<span class="far fa-thumbs-up" style="font-size:18px;"></span> 
-															<span>${review.likes }</span>
+															<span class="num-like">${review.likes }</span>
 														</button>
 													</div>
 													<div class="col-sm-1 col-xs-2">
-														<button type="button" class="btn btn-default btn btnDislike" data-reviewcode="${review.courtReviewCode }" >
+														<button type="button" class="btn btn-default btn btnDislike" data-reviewcode="${review.courtReviewCode }" 
+														<c:if test="${review.pollOrNot == 'YES' }">
+														disabled="disabled"
+														</c:if>
+														>
 															<span class="far fa-thumbs-down" style="font-size:18px;"></span> 
-															<span>${review.dislikes }</span>
+															<span class="num-dislike">${review.dislikes }</span>
 														</button>
 													</div>
 													<div class="col-sm-1 col-xs-2">
@@ -525,7 +537,7 @@
 			data: {page: 1},
 			success: function(data) {
 				$("#reviewPagination").html(data);
-				$("li[data-page]").click(renderNewPage);
+				$("#reviewPagination li[data-page]").click(renderNewPage);
 			},
 			error: function(e) {
 				alert(e.responseText);
@@ -593,20 +605,115 @@
 		});
 		
 		// 모임 목록 처리
+		
 		$.ajax({
 			type: "get",
 			url: "<%=cp %>/ajax/court/${court.courtCode}/meetinglist/" + $(".date-view_heading[data-date]").data("date"),
 			dataType: "json",
-			success: renderMeetingView,
+			data: {page: 1},
+			success: function(data) {
+				var result = "";
+				if(data.length > 0) {
+														
+					for(var i=0; i<data.length; i++) {
+	
+						result += '<li class="list-group-item board-body">';
+						result += '	<div class="col-sm-3 col-xs-3">';
+						result += '		<span>' + data[i].meetingDate.split(" ")[1] + '</span>';
+						result += '	</div>';
+						result += '	<div class="col-sm-6 col-xs-6">';
+						result += '		<a onclick="window.open(this.href, \'_blank\', \'width=700, height=600\'); return false;"'
+						result += '		 href="' + '<%=cp %>/play/meeting/' + data[i].meetingCode;
+						result += '">' + data[i].meetingSubject + '</a>';
+						result += '	</div>';
+						result += '	<div class="col-sm-3 col-xs-3">';
+						result += '		<span>' + data[i].nowPeopleNumber + '/' + data[i].meetingPeopleNumber +'</span>';
+						result += '	</div>';
+						result += '</li>';
+					}
+				}
+				else {
+					result = "<div style='text-align: center; padding-top: 20px;'>모집 중인 모임이 없습니다.</div>";
+				}
+				
+				$("#meetingView").html(result);
+			},
 			error: function (e) {
 				console.log(e);
 	    		alert(e.responseText);
 			}
-		})
+		});
 		
+		$.ajax({
+			type: "get",
+			url: "<%=cp %>/ajax/court/${court.courtCode}/meetingindex/" + $(".date-view_heading[data-date]").data("date"),
+			dataType: "text",
+			data: {page: 1},
+			success: function (data) {
+				$("#meetingPagination").html(data);
+				$("#meetingPagination li[data-page]").click(renderMeetingView($(".date-view_heading[data-date]").data("date")));
+			},
+			error: function (e) {
+				console.log(e);
+	    		alert(e.responseText);
+			}
+		});
 		
-		// 모임 페이지네이션 처리
+		$(".date-view_heading[data-date]").click(function() {
+			$.ajax({
+				type: "get",
+				url: "<%=cp %>/ajax/court/${court.courtCode}/meetinglist/" + $(this).data("date"),
+				dataType: "json",
+				data: {page: 1},
+				success: function(data) {
+					var result = "";
+					if(data.length > 0) {
+															
+						for(var i=0; i<data.length; i++) {
 		
+							result += '<li class="list-group-item board-body">';
+							result += '	<div class="col-sm-3 col-xs-3">';
+							result += '		<span>' + data[i].meetingDate.split(" ")[1] + '</span>';
+							result += '	</div>';
+							result += '	<div class="col-sm-6 col-xs-6">';
+							result += '		<a onclick="window.open(this.href, \'_blank\', \'width=700, height=600\'); return false;"'
+							result += '		 href="' + '<%=cp %>/play/meeting/' + data[i].meetingCode;
+							result += '">' + data[i].meetingSubject + '</a>';
+							result += '	</div>';
+							result += '	<div class="col-sm-3 col-xs-3">';
+							result += '		<span>' + data[i].nowPeopleNumber + '/' + data[i].meetingPeopleNumber +'</span>';
+							result += '	</div>';
+							result += '</li>';
+						}
+					}
+					else {
+						result = "<div style='text-align: center; padding-top: 20px;'>모집 중인 모임이 없습니다.</div>";
+					}
+					
+					$("#meetingView").html(result);
+				},
+				error: function (e) {
+					console.log(e);
+		    		alert(e.responseText);
+				}
+			});
+			
+			var date = $(this).data("date");
+			$.ajax({
+				type: "get",
+				url: "<%=cp %>/ajax/court/${court.courtCode}/meetingindex/" + date,
+				dataType: "text",
+				data: {page: 1},
+				success: function (data) {
+					$("#meetingPagination").html(data);
+					$("#meetingPagination li[data-page]").click(renderMeetingView(date));
+				},
+				error: function (e) {
+					console.log(e);
+		    		alert(e.responseText);
+				}
+			});
+		});
 		
 		
 		// 이벤트 핸들러 처리
@@ -657,18 +764,22 @@
 	});
 	
 	function pollReviewDislike() {
-		var reviewCode = $(this).attr("data-reviewcode");
+		var obj = $(this);
+		var reviewCode = obj.attr("data-reviewcode");
 		
-		if($(this).is(".active"))
+		if(obj.attr("disabled") == "disabled")
 			return;
 		
 		$.ajax({
 			type: "get",
-			url: "<%=cp %>/court/${court.courtCode}/review/" + reviewCode + "/poll/like",
+			url: "<%=cp %>/court/${court.courtCode}/review/" + reviewCode + "/poll/down",
 			dataType: "text",
 			success: function (data) {
-				$(this).addClass("active");
+				obj.addClass("active");
+				obj.attr("disabled", "disabled");
+				obj.find(".num-dislike").text(parseInt(obj.find(".num-dislike").text()) + 1);
 				$(".btnLike[data-reviewcode='" + reviewCode + "']").removeClass("active");
+				$(".btnLike[data-reviewcode='" + reviewCode + "']").attr("disabled", "disabled");
 			}, 
 			error: function(e) {
 				console.log(e);
@@ -678,18 +789,22 @@
 	}
 	
 	function pollReviewLike() {
-		var reviewCode = $(this).attr("data-reviewcode");
+		var obj = $(this);
+		var reviewCode = obj.attr("data-reviewcode");
 
-		if($(this).is(".active"))
+		if(obj.attr("disabled") == "disabled")
 			return;
 		
 		$.ajax({
 			type: "get",
-			url: "<%=cp %>/court/${court.courtCode}/review/" + reviewCode + "/poll/dislike",
+			url: "<%=cp %>/court/${court.courtCode}/review/" + reviewCode + "/poll/up",
 			dataType: "text",
 			success: function (data) {
-				$(this).addClass("active");
+				obj.addClass("active");
+				obj.attr("disabled", "disabled");
+				obj.find(".num-like").text(parseInt(obj.find(".num-like").text()) + 1);
 				$(".btnDislike[data-reviewcode='" + reviewCode + "']").removeClass("active");
+				$(".btnDislike[data-reviewcode='" + reviewCode + "']").attr("disabled", "disabled");
 			}, 
 			error: function(e) {
 				console.log(e);
@@ -699,7 +814,7 @@
 	}
 	
 	function renderNewPage() {
-		var page = $(this).attr("data-page");
+		var page = $(this).data("page");
 		
 		$.ajax({
 			type: "get",
@@ -710,7 +825,7 @@
 				var result = "";
 				for(var i=0; i<data.length; i++) {
 
-					result += '<div class="panel panel-default col-sm-12 col-xs-12">\n';
+					result += '<div class="panel panel-default col-sm-12 col-xs-12 review">\n';
 					result += '	<div class="panel-body">\n';
 					result += '		<div class="row">\n';
 					result += '			<div class="col-sm-2 col-xs-2">\n';
@@ -723,20 +838,22 @@
 					
 					result += '			<div class="col-sm-1 col-xs-2">\n';
 					result += '				<button type="button" class="btn btn-default btn btnLike';
-					if(data[i].pollLikeOrDislike == "YES")
-						result += " active ";
-					result += '" data-reviewcode="' + data[i].courtReviewCode + '">\n';
+					result += '" ';
+					if(data[i].pollOrNot == 'YES')
+						result += "disabled='disabled'";
+					result += 'data-reviewcode="' + data[i].courtReviewCode + '">\n';
 					result += '					<span class="far fa-thumbs-up" style="font-size:18px;"></span>\n'; 
-					result += '					<span>' + data[i].likes + '</span>\n';
+					result += '					<span class="num-like">' + data[i].likes + '</span>\n';
 					result += '				</button>\n';
 					result += '			</div>\n';
 					result += '			<div class="col-sm-1 col-xs-2">\n';
 					result += '				<button type="button" class="btn btn-default btn btnDislike';
-					if(data[i].pollLikeOrDislike == "NO")
-						result += " active ";
-					result += '" data-reviewcode="' + data[i].courtReviewCode + '">\n';
+					result += '" ';
+					if(data[i].pollOrNot == 'YES')
+						result += "disabled='disabled'";
+					result += 'data-reviewcode="' + data[i].courtReviewCode + '">\n';
 					result += '					<span class="far fa-thumbs-down" style="font-size:18px;"></span>\n'; 
-					result += '					<span>' + data[i].dislikes + '</span>\n';
+					result += '					<span class="num-dislike">' + data[i].dislikes + '</span>\n';
 					result += '				</button>\n';
 					result += '			</div>\n';
 					result += '			<div class="col-sm-1 col-xs-2">\n';
@@ -793,10 +910,14 @@
 				result += '<div class="col-md-3"></div>\n';
 				result += '</div>\n';
 				
-				$("#reviewList").html(result);
+				$("#reviewList")
+				.html(result)
+				.find(".review")
+				.map(function(i, elem) {
+					$(elem).find(".btnLike[data-reviewcode]").click(pollReviewLike);
+					$(elem).find(".btnDislike[data-reviewcode]").click(pollReviewDislike);
+				});
 				
-				$(".btnLike[data-reviewcode]").click(pollReviewLike);
-				$(".btnDisike[data-reviewcode]").click(pollReviewDislike);
 				
 				$.ajax({
 					type: "get",
@@ -805,7 +926,7 @@
 					data: {page: page},
 					success: function(data) {
 						$("#reviewPagination").html(data);
-						$("li[data-page]").click(renderNewPage);
+						$("#reviewPagination li[data-page]").click(renderNewPage);
 					},
 					error: function(e) {
 						alert(e.responseText);
@@ -820,18 +941,67 @@
 		});
 	}
 	
-	function renderMeetingView (data) {
-		var result = "";
-		if(data.length == 0)
-			result = '<li class="list-group-item board-body" style="text-align:center; padding-top: 15px;"> 모집 중인 모임이 존재하지 않습니다.</li>';
-		else {
-			for(var i=0; i<data.length; i++) {
-				// 여기 처리하기
-				// 페이징 이벤트 걸기
-			}
+	
+	function renderMeetingView(meetingDate) {
+		
+		return function() {
+			var meetingPage = $(this).data("page");
+			$.ajax({
+				type: "get",
+				dataType: "json",
+				url: "<%=cp %>/ajax/court/${court.courtCode}/meetinglist/" + meetingDate,
+				data: {page: meetingPage},
+				success: function(data) {
+					
+					var result = "";
+					if(data.length > 0) {
+															
+						for(var i=0; i<data.length; i++) {
+		
+							result += '<li class="list-group-item board-body">';
+							result += '	<div class="col-sm-3 col-xs-3">';
+							result += '		<span>' + data[i].meetingDate.split(" ")[1] + '</span>';
+							result += '	</div>';
+							result += '	<div class="col-sm-6 col-xs-6">';
+							result += '		<a href="' + '<%=cp %>/meeting/' + data[i].meetingCode;
+							result += '">' + data[i].meetingSubject + '</a>';
+							result += '	</div>';
+							result += '	<div class="col-sm-3 col-xs-3">';
+							result += '		<span>' + data[i].nowPeopleNumber + '/' + data[i].meetingPeopleNumber +'</span>';
+							result += '	</div>';
+							result += '</li>';
+						}
+					}
+					else {
+						result = "모집 중인 모임이 없습니다.";
+					}
+					
+					$("#meetingView").html(result);
+					
+					$.ajax({
+						type: "get",
+						url: "<%=cp %>/ajax/court/${court.courtCode}/meetingindex/" + $(".date-view_heading[data-date=" + meetingDate +"]").data("date"),
+						dataType: "text",
+						data: {page: meetingPage},
+						success: function (data) {
+							$("#meetingPagination").html(data);
+							$("#meetingPagination li[data-page]").click(renderMeetingView(meetingDate));
+						},
+						error: function (e) {
+							console.log(e);
+				    		alert(e.responseText);
+						}
+					});
+				},
+				error: function(e) {
+					alert(e.responseText);
+					console.log(e);
+				}
+			});
 		}
-		$("#meetingView").html(result);
 	}
+	
+	
 </script>
 </body>
 </html>
