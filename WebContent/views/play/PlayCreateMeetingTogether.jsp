@@ -171,8 +171,9 @@ $(function()
 	
 	
     $("#meeting-create").click(function()
-    {
-    	$(location).attr("href","<%=cp%>/play/meeting/createcomplete");
+    { 
+    	alert($(':radio[name="meetingTypeCode"]:checked').val());
+    	$("#createMeet").submit();
     });
 });
 
@@ -200,7 +201,7 @@ $(function()
 		<!------------------------------------------ 컨텐츠 영역 --------------------------------->
 		<div class="row">
 			<div class="col-md-3"></div>
-			<form action="" class="createMeeting-form">
+			<form action="<%=cp%>/play/meeting/createcomplete" class="createMeeting-form" id="createMeet">
 				<div class="col-md-6">
 					<div class="row">
 					
@@ -211,7 +212,7 @@ $(function()
 						<div class="panel-body">
 								<div class="input-group input-group-lg subject">
 								<span class="input-group-addon">모임 제목</span>
-								<input type="text" class="form-control" id="meetingSubject">
+								<input type="text" class="form-control" id="meetingSubject" name="meetingSubject">
 								<span class="err">*모임 제목을 입력해주세요</span>
 							</div>
 							<h4>모임 정보 입력</h4>
@@ -221,11 +222,11 @@ $(function()
 										<div class="panel-heading">경기/일반</div>
 										<div class="panel-body playtype">
 											<label class="radio-inline radio" > 
-											<input type="radio" name="meetingType" id="inlineRadio1" value="ZL01">
+											<input type="radio" name="meetingTypeCode" id="inlineRadio1" value="ZL01">
 												경기
 											</label> 
 											<label class="radio-inline radio"> 
-											<input type="radio" name="meetingType" id="inlineRadio2" value="ZL02">
+											<input type="radio" name="meetingTypeCode" id="inlineRadio2" value="ZL02">
 												일반
 											</label>
 										
@@ -235,15 +236,15 @@ $(function()
 								
 								<div class="col-md-4">
 									<div class="panel panel-default">
-										<div class="panel-heading">농구공 소유 여부</div>
+										<div class="panel-heading">빠른농구 참가 여부</div>
 										<div class="panel-body playtype">
 											<label class="radio-inline radio" > 
-											<input type="radio" name="speedy" id="inlineRadio1" value="ZU01">
-												yes
+											<input type="radio" name="quickPlayOrNot" id="inlineRadio1" value="ZU01">
+												찬성
 											</label> 
 											<label class="radio-inline radio"> 
-											<input type="radio" name="speedy" id="inlineRadio2" value="ZU02">
-												no
+											<input type="radio" name="quickPlayOrNot" id="inlineRadio2" value="ZU02">
+												반대
 											</label>
 										
 										</div>
@@ -254,12 +255,12 @@ $(function()
 										<div class="panel-heading">농구공 소유여부</div>
 										<div class="panel-body playtype">
 											<label class="radio-inline radio" > 
-											<input type="radio" name="speedy" id="inlineRadio1" value="ZU01">
-												찬성
+											<input type="radio" name="ballExistOrNot" id="inlineRadio1" value="ZU01">
+												yes
 											</label> 
 											<label class="radio-inline radio"> 
-											<input type="radio" name="speedy" id="inlineRadio2" value="ZU02">
-												반대
+											<input type="radio" name="ballExistOrNot" id="inlineRadio2" value="ZU02">
+												no
 											</label>
 										
 										</div>

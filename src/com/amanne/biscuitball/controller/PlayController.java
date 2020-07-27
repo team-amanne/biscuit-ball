@@ -155,19 +155,18 @@ public class PlayController
 	   
    }
    @RequestMapping("/meeting/createcomplete")
-   public String MeetingArticle(Model model, MeetingDTO meeting_dto, @PathVariable("ballExistOrNot") String ballExistOrNot)
+   public String MeetingArticle(Model model, MeetingDTO meetingDTO, MeetingMemberDTO meetingMemberDTO)
    {
 	   HttpSession session = request.getSession();
 	   UserInfo info = (UserInfo)session.getAttribute("userInfo");
 	   
+	   String view = "redirect:/meeting/";
 	   System.out.println("확인");
 	   System.out.println(info.getUserCode());
-	   System.out.println(ballExistOrNot);
-	   MeetingMemberDTO meetingMember_dto = new MeetingMemberDTO();
 	   
-	   meetingMember_dto.setBallExistOrNot(ballExistOrNot);
-		
-	   model.addAttribute("meetingDTO", playModel.createMeeting(meeting_dto, meetingMember_dto));
+	   System.out.println(meetingDTO.getCaptainName());
+	   System.out.println(meetingMemberDTO.getBallExistOrNot());
+	   model.addAttribute("meetingDTO", playModel.createMeeting(meetingDTO, meetingMemberDTO));
 	   
 	   return "완료";
 	   
