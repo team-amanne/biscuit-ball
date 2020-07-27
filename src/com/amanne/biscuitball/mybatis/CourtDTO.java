@@ -14,7 +14,8 @@ public class CourtDTO
 	private String courtRegisteredDate; 				// 등록일시
 	private String cityCode;							// 시군구 코드
 	private String cityName;							// 시군구 이름
-	private String regionCode;							// 광역시도 이름
+	private String regionCode;							// 광역시도 코드
+	private String regionName;							// 광역시도 이름
 	private String mapPosition; 						// 좌표
 	private String mapPositionX; 						// x좌표
 	private String mapPositionY; 						// y좌표
@@ -66,6 +67,17 @@ public class CourtDTO
 	private String enrollPollOrNot;
 	private String enrollYesOrNo;
 	
+	
+	public String getRegionName()
+	{
+		return regionName;
+	}
+
+	public void setRegionName(String regionName)
+	{
+		this.regionName = regionName;
+	}
+
 	public String getDelRequestPollOrNot() {
 		return delRequestPollOrNot;
 	}
