@@ -69,7 +69,7 @@ String cp = request.getContextPath();
 								<div class="panel-body center-move">
 								<div class="col-md-6">
 									<div class="col-md-4 info-title">
-									<span class="board-header">제목</span>
+									<span class="">제목</span>
 									</div>
 									<div class="col-md-8">
 									${meetingdto.meetingSubject}
@@ -77,7 +77,7 @@ String cp = request.getContextPath();
 								</div>
 								<div class="col-md-4">
 									<div class="col-md-4 info-title">
-									<span class="board-header">주장</span>
+									<span class="">주장</span>
 									</div>
 									<div class="col-md-8">
 									${meetingdto.captainName}
@@ -96,23 +96,23 @@ String cp = request.getContextPath();
 								<div class="panel-body center-move">
 								<div class="col-md-6">
 									<div class="col-md-4 info-title">
-									<span class="board-header">모임장소</span>
+									<span class="">모임장소</span>
 									</div>
 									<div class="col-md-8">
-									서울 마포구 쌍용체육관
+									${courtdto.regionName} ${courtdto.cityName } ${courtdto.courtName}
 									</div>
 								</div>
 								<div class="col-md-4">
 									<div class="col-md-5 info-title">
-									<span class="board-header">시합/일반</span>
+									<span class="">시합/일반</span>
 									</div>
 									<div class="col-md-7">
-									시합
+									${meetingdto.meetingTypeName.equal("ZL01")? "시합":"일반" }
 									</div>
 								</div>		
 								<div class="col-md-2 info-title" >
 									
-									<span>n/n</span>명
+									<span>${nowPeopleNumber}/${meetingPeopleNumber}</span>명
 								</div>							
 								
 							</div>
@@ -131,22 +131,24 @@ String cp = request.getContextPath();
 										<div class="panel panel-default">
 										<div class="panel-body user-info">
 										<div class="col-md-4">
-										<span class="board-header">닉네임</span>
+										<span class="">닉네임</span>
 										</div>
 										<div class="col-md-4">
-										<span class="board-header">티어</span>
+										<span class="">티어</span>
 										</div>
 										<div class="col-md-4">
-										<span class="board-header">페어플레이 점수</span>
+										<span class="">페어플레이 점수</span>
 										</div>
 										</div>
 										</div>
 										<div class="panel panel-default">
 										<div class="panel-body user-info">
 										
-										<div class="col-md-4">아맞네</div>
+										<c:forEach var="member" items="${meetingdto.meetingMemberList }">
+										<div class="col-md-4">${member.userNickname }</div>
 										<div class="col-md-4">4 teir</div>
 										<div class="col-md-4">★★★☆</div>
+										</c:forEach>
 										
 										<div class="col-md-4">규쿤</div>
 										<div class="col-md-4">3 teir</div>
@@ -169,7 +171,7 @@ String cp = request.getContextPath();
 								<div class="panel-body center-move">
 								<div class="col-md-3">
 									<div class="col-md-8 info-title">
-									<span class="board-header">공지 사항</span>
+									<span class="">공지 사항</span>
 									</div>
 								</div>		
 								<div class="col-md-9">

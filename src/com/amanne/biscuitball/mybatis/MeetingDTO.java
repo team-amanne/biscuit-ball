@@ -1,7 +1,7 @@
 /*============================================
  	MeetingDTO.java
  	생성일: 2020.07.20
- 	최근수정일: 2020.07.21
+ 	최근수정일: 2020.07.27
 =============================================*/
 
 package com.amanne.biscuitball.mybatis;
@@ -22,6 +22,7 @@ public class MeetingDTO
 	private String meetingTypeName; 		// 모임타입
 	private String quickPlayOrNot; 			// 빠른농구 가능여부
 	private String courtRegistrationCode; 	// 모임코트개설번호
+	private String courtName;				// 코트 이름
 	private int minTierCode; 				// 최소티어
 	private int maxTierCode; 				// 최대티어
 	private String confirmOrNot; 			// 모임확정여부
@@ -29,6 +30,8 @@ public class MeetingDTO
 	private String nowPeopleNumber;			// 현재 참가자 수
 	private String catainAcctCode;			// 주장 계정 코드
 	private String captainName;				// 주장 닉네임
+	private String cityCode;				// 코트 소속 지역 코드
+	private String cityName;				// 코트 소속 지역 이름
 	private ArrayList<MeetingMemberDTO> meetingMemberList; // 모임 참여 멤버
 	private String returnValue;
 	
@@ -172,6 +175,24 @@ public class MeetingDTO
 	}
 	public void setReturnValue(String returnValue) {
 		this.returnValue = returnValue;
+	}
+	public String getCityCode() {
+		return cityCode;
+	}
+	public void setCityCode(String cityCode) {
+		this.cityCode = cityCode;
+	}
+	public String getCityName() {
+		return cityName;
+	}
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+	public String getCourtName() {
+		return courtName;
+	}
+	public void setCourtName(String courtName) {
+		this.courtName = courtName;
 	}
 	
 }

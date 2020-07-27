@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입.jsp</title>
+<title>메인 > 회원가입</title>
 <style type="text/css">
 
 /* flex 용 */
@@ -68,10 +68,7 @@
 <body>
 
 <!-- 헤더 -->
-<!-- 헤더 -->
 <c:import url="../base/Header.jsp"></c:import>
-<!-- 서브 -->
-<c:import url="../base/Submenu.jsp"></c:import>
 
 <div class="container-fluid">
       <div class="section-title container">
@@ -103,8 +100,8 @@
 		</div>
 		<div class="col-md-6 flex">		
 			<div class="last_button">
-				<button class="btn btn-warning" id="home" class="home">홈으로</button>
-				<button class="btn btn-warning" id="login" class="login">로그인</button>
+				<a href="<%=cp %>"><button class="btn btn-warning" id="home" class="home">홈으로</button></a>
+				<a href="<%=cp %>/login"><button class="btn btn-warning" id="login" class="login">로그인</button></a>
 			</div>
 		</div>
 		<div class="col-md-3">

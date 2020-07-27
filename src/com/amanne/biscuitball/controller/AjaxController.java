@@ -161,8 +161,8 @@ public class AjaxController
 		return view;
 	}
 	
-	@RequestMapping("/meetings/{meetingDate}")
-	public String getMeetingListsByDate(Model model, @PathVariable("meetingDate") String meetingDate)
+	@RequestMapping("/meetinglist/byregion")
+	public String getMeetingListsByDate(Model model, @RequestParam("meetingDate") String meetingDate)
 	{
 		model.addAttribute("result", ajax.getMeetingListByRegion(meetingDate));
 		return "/ajax/Check";

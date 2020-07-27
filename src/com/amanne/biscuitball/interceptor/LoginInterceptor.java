@@ -32,7 +32,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter
 		String cp = request.getContextPath();
 		
 		// 로그인 없이 접근 가능한 페이지는 여기에 추가
-		String[] excludes = {"/", "/signup", "/signupdo", "/login", "/logindo", "/signupcomplete", "/passwordreset"};
+		String[] excludes = {"/", "/signup", "/signupdo", "/login", "/logindo", "/signupcomplete", "/passwordreset", "/ajax/citylist", "/ajax/meetinglist/byregion"};
 		
 		if(uri.equals(cp))
 			return true;

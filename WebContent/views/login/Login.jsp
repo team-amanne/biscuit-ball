@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>로그인.jsp</title>
+<title>메인 > 로그인</title>
 <style type="text/css">
 
 
@@ -114,8 +114,7 @@
 </head>
 <body>
 
-	<c:import url="../base/Header.jsp"></c:import>
-<c:import url="../base/Submenu.jsp"></c:import>
+<c:import url="../base/Header.jsp"></c:import>
 
 <div class="container-fluid">
       <div class="section-title container">
@@ -147,7 +146,7 @@
 			</div>
 			
 			<div class="frame">
-				<span class="glyphicon glyphicon-plus sign_up" id="sign_up"><a href="">회원가입</a></span>
+				<span class="glyphicon glyphicon-plus sign_up" id="sign_up"><a href="<%=cp %>/signup">회원가입</a></span>
 				<span class="glyphicon glyphicon-exclamation-sign reset_password" id="reset_password"><a href="">비밀번호재설정</a></span>
 			</div>
 		</form>

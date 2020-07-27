@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>포지션테스트.jsp</title>
+<title>메인 > 회원가입 > 포지션테스트</title>
 <style type="text/css">
 
 /* 전체 틀 */

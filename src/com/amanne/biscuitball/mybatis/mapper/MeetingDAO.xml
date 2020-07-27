@@ -514,6 +514,9 @@
 		     , CONFIRM_OR_NOT as confirmOrNot
 		     , CAPTAINCODE as captainAcctCode
 		     , CAPTAINNAME as captainName
+		     , CITY_CODE as cityCode
+		     , CITY_NAME as cityName
+		     , COURT_NAME as courtName
 		FROM
 		(
 		    SELECT A.* , ROWNUM AS RNUM
@@ -542,8 +545,11 @@
 		                WHERE CAPTAIN_OR_NOT = 'YES'
 		                AND MEET_CODE = MT.MEET_CODE
 		            ) as CAPTAINCODE
+		            , CT.CITY_CODE
+		            , CT.CITY_NAME
+		            , CRT.COURT_NAME
 		            FROM VIEW_MEETING MT
-		            LEFT JOIN TBL_COURT_REGISTRATION CRT
+		            LEFT JOIN VIEW_COURT CRT
 		            ON MT.COURT_REG_CODE = CRT.COURT_REG_CODE
 		            LEFT JOIN VIEW_CITY CT
 		            ON CRT.CITY_CODE = CT.CITY_CODE
