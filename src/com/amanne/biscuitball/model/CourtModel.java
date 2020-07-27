@@ -210,6 +210,14 @@ public class CourtModel
 		courtDao.pollCourtDeleteRequestNo(dto);
 		return dto.getReturnValue();
 	}
-	
+
+	public int pollCourtName(String courtNameCode, String userAcctCode)
+	{
+		ICourtDAO courtDao = sqlSession.getMapper(ICourtDAO.class);
+		PollDTO dto = new PollDTO();
+		dto.setPollSubjectCode(courtNameCode);
+		dto.setVoterAccountCode(userAcctCode);
+		return courtDao.pollCourtName(dto);
+	}
 	
 }

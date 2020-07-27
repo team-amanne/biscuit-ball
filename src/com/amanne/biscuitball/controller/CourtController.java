@@ -361,5 +361,16 @@ public class CourtController
 		return view;
 	}
 	
+	@RequestMapping("/{courtCode}/name/{courtNameCode}/poll")
+	public String pollCourtName(Model model, @PathVariable("courtCode") String courtCode, @PathVariable("courtNameCode") String courtNameCode)
+	{
+		String view = "/ajax/Check";
+		UserInfo info = (UserInfo)session.getAttribute("userInfo");
+		
+		model.addAttribute("result", courtModel.pollCourtName(courtNameCode, info.getUserAcctCode()));
+		
+		return view;
+	}
+	
 }
 
