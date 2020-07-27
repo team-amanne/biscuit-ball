@@ -130,22 +130,27 @@ public class PlayController
       
    }
    
-   
-   // 함께농구 개설
-   @RequestMapping("/meeting/createfull")
-   public String playCreateMeetingFull(Model model)
+   // 함께농구 개설 및 미팅 아티클
+   @RequestMapping("/meeting/{meeting_code}")
+   public String MeetingArticle(Model model, @PathVariable String meeting_code)
    {
-	   	  // 광역시도 정보 랜더링
-		  ArrayList<RegionDTO> regionList= playModel.regionPrint();
-		  model.addAttribute("regionList", regionList);
-		  
-		  HttpSession session = request.getSession();
-		  UserInfo userInfo = (UserInfo)session.getAttribute("userInfo");
-		  
-		  UserDTO userDto = playModel.playUserInfo(userInfo);
-		  model.addAttribute("userDto",userDto);
-		  
-		  return "/play/PlayCreateMeetingTogether";
+	   // 함께농구 개설
+	   if (meeting_code.equals("createfull"))
+	   {
+		// 광역시도 정보 랜더링
+			  ArrayList<RegionDTO> regionList= playModel.regionPrint();
+			  model.addAttribute("regionList", regionList);
+			  
+			  HttpSession session = request.getSession();
+			  UserInfo userInfo = (UserInfo)session.getAttribute("userInfo");
+			  
+			  UserDTO userDto = playModel.playUserInfo(userInfo);
+			  model.addAttribute("userDto",userDto);
+			  
+			  return "/play/PlayCreateMeetingTogether";
+	   }
+	   
+	   return "/play/MeetingTogetherArticle";
    }
    
    @RequestMapping(value="/meeting/**", method = {RequestMethod.GET, RequestMethod.POST})

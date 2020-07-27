@@ -13,6 +13,8 @@ String cp = request.getContextPath();
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="<%=cp%>/css/board.css" />
+<link rel="stylesheet" href="<%=cp%>/css/default.css" />
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
       
@@ -40,50 +42,39 @@ String cp = request.getContextPath();
  </style>
 
 </head>
-<body>
 
-		<c:import url="../base/Header.jsp"></c:import>
-<c:import url="../base/PlaySubmenu.jsp"></c:import>
-
-	<div class="container-fluid main">
-	<div class="section-title container">
-		<h5>농구하기 > 함께농구</h5>
-		<hr />
-	</div>
-		<div class="row">
-			<div class="col-md-3"></div>
-			<div class="col-md-6">
+			<div class="">
 				<div class="row">
-					<div class="col-md-12">
-					<div class="col-md-10"><h3>모임</h3></div>
-					<div class="col-md-2">
+					<div class="col-md-12 col-xs-12">
+					<div class="col-md-10 col-xs-10"><h3>모임</h3></div>
+					<div class="col-md-2 col-xs-2">
 
 					</div>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-12 col-xs-12">
 						<div class="panel panel-default">
 						<div class="panel-body">
 							<div class="panel panel-default">
 								<div class="panel-body center-move">
-								<div class="col-md-6">
-									<div class="col-md-4 info-title">
-									<span class="board-header">제목</span>
+								<div class="col-md-6 col-xs-6">
+									<div class="col-md-4 col-xs-4 info-title">
+									<span class="">제목</span>
 									</div>
-									<div class="col-md-8">
+									<div class="col-md-8 col-xs-8">
 									제목입니다아
 									</div>
 								</div>
-								<div class="col-md-4">
-									<div class="col-md-4 info-title">
-									<span class="board-header">주장</span>
+								<div class="col-md-4 col-xs-4">
+									<div class="col-md-4 col-xs-4 info-title">
+									<span class="">주장</span>
 									</div>
-									<div class="col-md-8">
+									<div class="col-md-8 col-xs-8">
 									아맞네
 									</div>
 								</div>
-								<div class="col-md-2 info-title">
+								<div class="col-md-2 col-xs-2 info-title">
 									<button class="btn btn-default btn-xs">
 									모임 신고 하기
 									</button>
@@ -94,23 +85,23 @@ String cp = request.getContextPath();
 							
 							<div class="panel panel-default">
 								<div class="panel-body center-move">
-								<div class="col-md-6">
+								<div class="col-md-6 col-xs-6">
 									<div class="col-md-4 info-title">
-									<span class="board-header">모임장소</span>
+									<span class="">모임장소</span>
 									</div>
-									<div class="col-md-8">
+									<div class="col-md-8 col-xs-8">
 									서울 마포구 쌍용체육관
 									</div>
 								</div>
-								<div class="col-md-4">
-									<div class="col-md-5 info-title">
-									<span class="board-header">시합/일반</span>
+								<div class="col-md-4 col-xs-4">
+									<div class="col-md-5 col-xs-5 info-title">
+									<span class="">시합/일반</span>
 									</div>
-									<div class="col-md-7">
+									<div class="col-md-7 col-xs-7">
 									시합
 									</div>
 								</div>		
-								<div class="col-md-2 info-title" >
+								<div class="col-md-2 col-xs-2 info-title" >
 									
 									<span>n/n</span>명
 								</div>							
@@ -120,41 +111,41 @@ String cp = request.getContextPath();
 							</div>
 						<div class="panel panel-default">
 								<div class="panel-body center-move">
-								<div class="col-md-3">
-									<div class="col-md-8 info-title">
+								<div class="col-md-3 col-xs-3">
+									<div class="col-md-8 col-xs-8 info-title">
 									참여자 목록
 									</div>
 								</div>		
-								<div class="col-md-9">
+								<div class="col-md-9 col-xs-9">
 									<div class="panel panel-default">
 										<div class="panel-body">
 										<div class="panel panel-default">
 										<div class="panel-body user-info">
-										<div class="col-md-4">
-										<span class="board-header">닉네임</span>
+										<div class="col-md-4 col-xs-4">
+										<span class="">닉네임</span>
 										</div>
-										<div class="col-md-4">
-										<span class="board-header">티어</span>
+										<div class="col-md-4 col-xs-4">
+										<span class="">티어</span>
 										</div>
-										<div class="col-md-4">
-										<span class="board-header">페어플레이 점수</span>
+										<div class="col-md-4 col-xs-4">
+										<span class="">페어플레이 점수</span>
 										</div>
 										</div>
 										</div>
 										<div class="panel panel-default">
 										<div class="panel-body user-info">
 										
-										<div class="col-md-4">아맞네</div>
-										<div class="col-md-4">4 teir</div>
-										<div class="col-md-4">★★★☆</div>
+										<div class="col-md-4 col-xs-4">아맞네</div>
+										<div class="col-md-4 col-xs-4">4 teir</div>
+										<div class="col-md-4 col-xs-4">★★★☆</div>
 										
-										<div class="col-md-4">규쿤</div>
-										<div class="col-md-4">3 teir</div>
-										<div class="col-md-4">★★★☆</div>
+										<div class="col-md-4 col-xs-4">규쿤</div>
+										<div class="col-md-4 col-xs-4">3 teir</div>
+										<div class="col-md-4 col-xs-4">★★★☆</div>
 										
-										<div class="col-md-4">갓진녕</div>
-										<div class="col-md-4">5 teir</div>
-										<div class="col-md-4">★★★☆</div>
+										<div class="col-md-4 col-xs-4">갓진녕</div>
+										<div class="col-md-4 col-xs-4">5 teir</div>
+										<div class="col-md-4 col-xs-4">★★★☆</div>
 										
 										</div>
 										</div>
@@ -167,12 +158,12 @@ String cp = request.getContextPath();
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-body center-move">
-								<div class="col-md-3">
-									<div class="col-md-8 info-title">
-									<span class="board-header">공지 사항</span>
+								<div class="col-md-3 col-xs-3">
+									<div class="col-md-8 col-xs-8 info-title">
+									<span class="">공지 사항</span>
 									</div>
 								</div>		
-								<div class="col-md-9">
+								<div class="col-md-9 col-xs-9">
 									<div class="panel panel-default">
 										<div class="panel-body">
 										
@@ -185,7 +176,7 @@ String cp = request.getContextPath();
 							
 							</div>
 							<div class="yesorno">
-							<button class="btn btn-default btn-lg btn-submit">
+							<button class="btn btn-default btn-lg btn-link">
 								참여
 							</button>
 							<button class="btn btn-default btn-lg">
@@ -198,12 +189,6 @@ String cp = request.getContextPath();
 					</div>
 				</div>
 			</div>
-			<div class="col-md-3"></div>
-		</div>
-	</div>
-
-
-	<c:import url="../base/Footer.jsp"></c:import>
 
 </body>
 </html>
