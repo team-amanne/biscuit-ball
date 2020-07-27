@@ -6,6 +6,8 @@
 
 package com.amanne.biscuitball.mybatis;
 
+import java.util.ArrayList;
+
 public class MeetingDTO 
 {
 	private String meetingCode; 			// 모임등록번호
@@ -27,11 +29,20 @@ public class MeetingDTO
 	private String nowPeopleNumber;			// 현재 참가자 수
 	private String catainAcctCode;			// 주장 계정 코드
 	private String captainName;				// 주장 닉네임
+	private ArrayList<MeetingMemberDTO> meetingMemberList; // 모임 참여 멤버
 	private String returnValue;
 	
 	
 	
 	
+	public ArrayList<MeetingMemberDTO> getMeetingMemberList()
+	{
+		return meetingMemberList;
+	}
+	public void setMeetingMemberList(ArrayList<MeetingMemberDTO> meetingMemberList)
+	{
+		this.meetingMemberList = meetingMemberList;
+	}
 	public String getCatainAcctCode()
 	{
 		return catainAcctCode;
