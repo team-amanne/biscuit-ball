@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.amanne.biscuitball.mybatis.CourtDTO;
 import com.amanne.biscuitball.mybatis.ICourtDAO;
 import com.amanne.biscuitball.mybatis.IMeetingDAO;
 import com.amanne.biscuitball.mybatis.IRegionDAO;
@@ -94,15 +95,26 @@ public class PlayModel
 
 		}
 		
+		// 모임상세 (함께농구)
 		public MeetingDTO getMeetingList(String meetingCode)
 		{
-			IMeetingDAO dao = sqlSession.getMapper(IMeetingDAO.class);
+			IMeetingDAO meetingdao = sqlSession.getMapper(IMeetingDAO.class);
 			
-			MeetingDTO meetingdto = dao.getMeeting(meetingCode);
-			ArrayList<MeetingMemberDTO> meetingMemberList = dao.getMeetingMemberList(meetingCode);
+			MeetingDTO meetingdto = meetingdao.getMeeting(meetingCode);
+			ArrayList<MeetingMemberDTO> meetingMemberList = meetingdao.getMeetingMemberList(meetingCode);
 			meetingdto.setMeetingMemberList(meetingMemberList);
 			
 			return meetingdto;
+		}
+		
+		// 광역시도 이름 얻는 모델 메소드... (코트DTO에 집어넣을 것)
+		public RegionDTO getRegionName(String regioncode)
+		{
+			IRegionDAO regiondao =sqlSession.getMapper(IRegionDAO.class);
+			
+			RegionDTO regiondto = regiondao.getRegionName(regioncode);
+			
+			return regiondto;
 		}
 	
 	

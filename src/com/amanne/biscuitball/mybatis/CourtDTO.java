@@ -13,8 +13,8 @@ public class CourtDTO
 	private String courtCode; 							// 코트등록코드
 	private String courtRegisteredDate; 				// 등록일시
 	private String cityCode;							// 시군구 코드
-	private String cityName;
-	private String regionCode;
+	private String cityName;							// 시군구 이름
+	private String regionCode;							// 광역시도 이름
 	private String mapPosition; 						// 좌표
 	private String mapPositionX; 						// x좌표
 	private String mapPositionY; 						// y좌표
