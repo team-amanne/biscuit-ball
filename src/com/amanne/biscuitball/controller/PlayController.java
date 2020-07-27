@@ -151,24 +151,26 @@ public class PlayController
 	   }
 	   
 	   return "/play/MeetingTogetherArticle";
-   }
-   
-   @RequestMapping(value="/meeting/**", method = {RequestMethod.GET, RequestMethod.POST})
-   public String createMeeting(Model model, MeetingDTO meetingDTO, String ballExistOrNot)
-   {
-	   	
-	    HttpSession session = request.getSession();
-		UserInfo info = (UserInfo)session.getAttribute("userInfo");
-		
-		System.out.println(info.getUserCode());
-		System.out.println(meetingDTO.getQuickPlayOrNot());
-		MeetingMemberDTO meetingMemberDTO = new MeetingMemberDTO();
-		meetingMemberDTO.setBallExistOrNot(ballExistOrNot);
-		
-		model.addAttribute("meetingDTO", playModel.createMeeting(meetingDTO, meetingMemberDTO));
 	   
-	   return "/play/MeetingTogetherArticle";
-
+	   
+   }
+   @RequestMapping("/meeting/createcomplete")
+   public String MeetingArticle(Model model, MeetingDTO meeting_dto, @PathVariable("ballExistOrNot") String ballExistOrNot)
+   {
+	   HttpSession session = request.getSession();
+	   UserInfo info = (UserInfo)session.getAttribute("userInfo");
+	   
+	   System.out.println("확인");
+	   System.out.println(info.getUserCode());
+	   System.out.println(ballExistOrNot);
+	   MeetingMemberDTO meetingMember_dto = new MeetingMemberDTO();
+	   
+	   meetingMember_dto.setBallExistOrNot(ballExistOrNot);
+		
+	   model.addAttribute("meetingDTO", playModel.createMeeting(meeting_dto, meetingMember_dto));
+	   
+	   return "완료";
+	   
    }
    
 }

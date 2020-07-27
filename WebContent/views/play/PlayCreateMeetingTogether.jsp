@@ -168,6 +168,12 @@ $(function()
 	   });
 	   
 	});
+	
+	
+    $("#meeting-create").click(function()
+    {
+    	$(location).attr("href","<%=cp%>/play/meeting/createcomplete");
+    });
 });
 
 		// 입력값 check
@@ -233,11 +239,11 @@ $(function()
 										<div class="panel-body playtype">
 											<label class="radio-inline radio" > 
 											<input type="radio" name="speedy" id="inlineRadio1" value="ZU01">
-												찬성
+												yes
 											</label> 
 											<label class="radio-inline radio"> 
 											<input type="radio" name="speedy" id="inlineRadio2" value="ZU02">
-												반대
+												no
 											</label>
 										
 										</div>
@@ -519,7 +525,7 @@ $(function()
 											<div class="col-md-4"></div>
 											<div class="col-md-4">
 												<div class="col-md-6">
-													<button class="btn btn-default btn-lg btn-block">
+													<button class="btn btn-default btn-lg btn-block" id="meeting-create" name="meeting-create">
 														개설</button>
 												</div>
 												<div class="col-md-6">
