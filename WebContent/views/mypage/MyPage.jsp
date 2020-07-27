@@ -230,7 +230,7 @@ $().ready(function()
                   <div class="col-sm-5 col-xs-5">
                   </div>
                   <div class="col-sm-2 col-xs-2">
-                     <button type="button" class="btn btn-default btn-submit btn-block" id="introduce">자기소개글 등록</button>
+                     <button type="button" class="btn btn-default btn-submit btn-block btn-link" id="introduce">자기소개글 등록</button>
                   </div>
                   <div class="col-sm-2 col-xs-2">
                   </div>
