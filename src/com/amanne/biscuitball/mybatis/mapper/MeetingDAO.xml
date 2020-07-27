@@ -419,7 +419,55 @@
         <![CDATA[
             ORDER BY (meetingPeopleNumber - nowPeopleNumber), meetingDate
 		]]>
-		</select>
-
+	</select>
+		
+<!-- public ArrayList<MeetingDTO> getMeetingListByCourtDate(String courtCode, String meetingDate, int start, int end); -->
+	<select id="getMeetingListByCourtDate" resultType="com.amanne.biscuitball.mybatis.MeetingDTO">
+	<![CDATA[
+		SELECT MEET_CODE as meetingCode
+			 , MEET_SUBJECT as meetingSubject
+			 , MEET_PEOPLE_NUMBER as meetingPeopleNumber
+			 , MEET_OP_DATE as meetingOpenDate
+			 , MEET_DATE as meetingDate
+			 , MEET_END_DATE as meetingEndDate
+			 , MEET_CLOSE_DATE as meetingCloseDate
+			 , MEET_NOTICE as meetingNotice
+			 , MEET_TYPE_CODE as meetingTypeCode
+			 , QUICK_PLAY as quickPlayOrNot
+			 , COURT_REG_CODE as courtRegistrationCode
+			 , MIN_TIER as minTierCode
+			 , MAX_TIER as maxTierCode
+			 , CONFIRM_OR_NOT as confirmOrNot
+		FROM
+		(
+			SELECT A.*, ROWNUM AS RNUM
+			FROM
+			(
+				SELECT *
+				FROM VIEW_MEETING
+				WHERE MEET_DATE > TO_DATE(#{meetingDate}, 'YYYY-MM-DD')
+			      AND MEET_DATE < TO_DATE(#{meetingDate}, 'YYYY-MM-DD') + 1
+			      AND CONFIRM_OR_NOT = 'NO'
+			      AND COURT_REG_CODE = #{courtCode}
+			    ORDER BY MEET_DATE
+		    ) A
+	    )
+	    WHERE RNUM >= #{start} AND RNUM <= #{end}
+	]]>
+	</select>
+	
+<!-- public int countMeetingListByCourtDate(String courtCode, String meetingDate); -->
+	<select id="countMeetingListByCourtDate" resultType="java.lang.Integer">
+	<![CDATA[
+		SELECT COUNT(*)
+		FROM VIEW_MEETING
+	    WHERE MEET_DATE > TO_DATE(#{meetingDate}, 'YYYY-MM-DD')
+	      AND MEET_DATE < TO_DATE(#{meetingDate}, 'YYYY-MM-DD') + 1
+	      AND CONFIRM_OR_NOT = 'NO'
+	      AND COURT_REG_CODE = #{courtCode}
+	    ORDER BY MEET_DATE
+	]]>
+	</select>
+	
 
 </mapper>
