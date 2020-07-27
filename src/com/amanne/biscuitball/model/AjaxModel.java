@@ -416,6 +416,9 @@ public class AjaxModel
 				obj.put("blindOrNot", dto.getBlindOrNot());
 				obj.put("nowPeopleNumber",dto.getNowPeopleNumber() );
 				obj.put("captainName",dto.getCaptainName() );
+				obj.put("cityCode", dto.getCityCode());
+				obj.put("cityName", dto.getCityName());
+				obj.put("courtName", dto.getCourtName());
 				
 				arr.add(obj);
 			}
