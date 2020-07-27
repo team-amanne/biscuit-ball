@@ -577,4 +577,42 @@
 		VALUES(FN_CREATE_CODE('TBL_ADMIN_COURT_DELETE', SEQ_ADMIN_COURT_DELETE.NEXTVAL), SYSDATE, #{adminCode}, #{courtCode})
 	</insert>
 	
+	<!-- public String checkCourtRegPoll(String courtCode, String userAccountCode);	// 코트 등록 투표 여부 확인 -->
+	<select id="checkCourtRegPoll" resultType="java.lang.String">
+		SELECT Y.YES_NO
+		FROM TBL_COURT_REGISTRATION C
+		LEFT JOIN TBL_COURT_REG_POLL P
+		ON C.COURT_REG_CODE = P.COURT_REG_CODE
+		LEFT JOIN TBL_YES_NO Y
+		ON P.COURT_REG_AGREE_CODE = Y.YES_NO_CODE
+		WHERE P.VOTER_ACCT_CODE=#{userAccountCode}
+		  AND C.COURT_REG_CODE=#{courtCode}
+	</select>
+	
+	<!-- public String checkCourtDelPoll(String courtCode, String userAccountCode);	// 코트 삭제 투표 여부 확인 -->
+	<select id="checkCourtDelPoll" resultType="java.lang.String">
+		SELECT Y.YES_NO
+		FROM VIEW_COURT C
+		LEFT JOIN TBL_COURT_DELETE_POLL P
+		ON C.COURT_DELREQ_CODE = P.COURT_DELREQ_CODE
+		LEFT JOIN TBL_YES_NO Y
+		ON P.COURT_DEL_AGREE_CODE = Y.YES_NO_CODE
+		WHERE P.VOTER_ACCT_CODE=#{userAccountCode}
+		  AND C.COURT_REG_CODE=#{courtCode}
+	</select>
+	
+	<!-- public int pollCourtReview(PollDTO dto);	// 코트리뷰 투표 -->
+	<insert id="pollCourtReview" parameterType="com.amanne.biscuitball.mybatis.PollDTO">
+		INSERT INTO TBL_COURT_REVIEW_EVAL(COURT_REVIEW_EVAL_CODE, COURT_REVIEW_CODE, VOTER_ACCT_CODE, COURT_REVIEW_LIKE_CODE)
+		VALUES(TBL_CREATE_CODE('TBL_COURT_REVIEW_EVAL', SEQ_COURT_REVIEW_EVAL.NEXTVAL), #{pollSubjectCode}, #{voterAccountCode}, #{goodOrBad})
+	</insert>
+	
+	<!-- public int updatePollCourtReview(PollDTO dto);	// 코트리뷰 투표 갱신 -->
+	<update id="updatePollCourtReview" parameterType="com.amanne.biscuitball.mybatis.PollDTO">
+		UPDATE TBL_COURT_REVIEW_EVAL
+		SET COURT_REVIEW_LIKE_CODE=#{goodOrBad}
+		WHERE COURT_REVIEW_CODE=#{pollSubjectCode} 
+		  AND VOTER_ACCT_CODE=#{voterAccountCode}
+	</update>
+	
 </mapper>

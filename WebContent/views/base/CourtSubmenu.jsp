@@ -9,7 +9,29 @@
 <!-- 페이지별 서브 메뉴바 -->
 <div class="navbar navbar-default nav-tablist">
 	<ul class="nav navbar-nav navbar-center nav-tablist-tabs">
-		<li ${param.active == "search" ? "class='active'" : "" }><a ${param.active == "search" ? "" : "href='#'" }>코트검색</a></li>
-		<li ${param.active == "register" ? "class='active'" : "" }><a ${param.active == "register" ? "" : "href='#'" }>코트등록</a></li>
+		<li
+		<c:if test='${param.active == "search" }'>
+		class="active"
+		</c:if> 
+		>
+			<a
+			<c:if test='${param.active != "search" }'>
+			href="#"
+			</c:if> 
+			>코트검색</a>
+		</li>
+
+		
+		<li
+		<c:if test='${param.active == "register" }'>
+		class="active"
+		</c:if> 
+		>
+			<a
+			<c:if test='${param.active != "register" }'>
+			href="<%=cp %>/court/register"
+			</c:if> 
+			>코트등록</a>
+		</li>
 	</ul>
 </div>

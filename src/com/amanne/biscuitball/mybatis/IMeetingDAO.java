@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-import org.springframework.web.bind.annotation.RequestParam;
 
 public interface IMeetingDAO
 {
@@ -72,4 +71,8 @@ public interface IMeetingDAO
 	
 	public int countMeetingListByCityDate(String courtRegistrationCode, @Param("meetingDate") String meetingDate, @Param("meetingTypeCode") String meetingTypeCode, @Param("start") int start, @Param("end") int end);	// 날짜, 지역에 따른 모임 리스트 카운트
 	
+	
+	// 특정 코트, 날짜 조건으로 예정모임 조회
+	public ArrayList<MeetingDTO> getMeetingListByCourtDate(@Param("courtCode") String courtCode, @Param("meetingDate") String meetingDate, @Param("start") int start, @Param("end") int end);
+	public int countMeetingListByCourtDate(@Param("courtCode") String courtCode, @Param("meetingDate") String meetingDate);
 }

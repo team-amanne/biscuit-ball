@@ -150,7 +150,7 @@
 			FROM TBL_MEETING MT
 			WHERE MEET_COURT_REG_CODE = #{courtCode}
             AND MEET_DATE > SYSDATE
-            AND confirmOrNot IS 'NO'
+            AND confirmOrNot = 'NO'
             ORDER BY (meetingPeopleNumber - nowPeopleNumber), meetingDate
   
 		]]>
@@ -337,57 +337,62 @@
 , @RequestParam("meetingTypeCode") String meetingTypeCode, @RequestParam("start") int start, @RequestParam("end") int end); -->
 		<select id="getMeetingListByCityDate" resultType="com.amanne.biscuitball.mybatis.MeetingDTO">
 		<![CDATA[
-			SELECT MEET_CODE as meetingCode
-            , MEET_SUBJECT as meetingSubject
-            , MEET_PEOPLE_NUMBER as meetingPeopleNumber
-            , NOWPEOPLENUMBER  as nowPeopleNumber
-            , MEET_OP_DATE as meetingOpenDate
-            , MEET_DATE as meetingDate
-            , MEET_END_DATE as meetingEndDate
-            , MEET_CLOSE_DATE as meetingCloseDate
-            , MEET_NOTICE as meetingNotice
-            , MEET_TYPE_CODE as meetingTypeCode
-            , QUICK_PLAY as quickPlayOrNot
-            , COURT_REG_CODE as courtRegistrationCode
-            , MIN_TIER as minTierCode
-            , MAX_TIER as maxTierCode
-            , CONFIRM_OR_NOT as confirmOrNot
-            , CAPTAINNAME as captainName
-			FROM 
-			(
-			SELECT MT.*, ROWNUM AS RNUM
-            ,(
-            	SELECT COUNT(*)
-            	FROM TBL_MEETING_JOIN
-            	WHERE MEET_CODE = MT.MEET_CODE
-              ) AS NOWPEOPLENUMBER 
-              ,
-              (
-            	SELECT USER_NICKNAME
-				FROM VIEW_MEETING_JOIN
-				WHERE CAPTAIN_OR_NOT = 'YES'
-				AND MEET_CODE = MT.MEET_CODE
-			  ) as CAPTAINNAME
-			FROM VIEW_MEETING MT
-			WHERE CONFIRM_OR_NOT = 'NO'
-			AND COURT_REG_CODE = #{courtRegistrationCode}
+				 SELECT MEET_CODE as meetingCode
+		, MEET_SUBJECT as meetingSubject
+		, MEET_PEOPLE_NUMBER as meetingPeopleNumber
+		, NOWPEOPLENUMBER  as nowPeopleNumber
+		, MEET_OP_DATE as meetingOpenDate
+		, MEET_DATE as meetingDate
+		, MEET_END_DATE as meetingEndDate
+		, MEET_CLOSE_DATE as meetingCloseDate
+		, MEET_NOTICE as meetingNotice
+		, MEET_TYPE_CODE as meetingTypeCode
+		, QUICK_PLAY as quickPlayOrNot
+		, COURT_REG_CODE as courtRegistrationCode
+		, MIN_TIER as minTierCode
+		, MAX_TIER as maxTierCode
+		, CONFIRM_OR_NOT as confirmOrNot
+		, CAPTAINCODE as captainAcctCode
+		, CAPTAINNAME as captainName
+		FROM 
+		(
+		    SELECT A.* , ROWNUM AS RNUM
+		    FROM
+		    (
+		        SELECT F2.*
+		        FROM
+		        (
+		            SELECT MT.*
+		            ,(
+		                SELECT COUNT(*)
+		                FROM TBL_MEETING_JOIN
+		                WHERE MEET_CODE = MT.MEET_CODE
+		            ) AS NOWPEOPLENUMBER 
+		            ,
+		            (
+		                SELECT USER_NICKNAME
+		                FROM VIEW_MEETING_JOIN
+		                WHERE CAPTAIN_OR_NOT = 'YES'
+		                AND MEET_CODE = MT.MEET_CODE
+		            ) as CAPTAINNAME
+		            ,
+		            (
+		                SELECT JOIN_ACCT_CODE
+		                FROM VIEW_MEETING_JOIN
+		                WHERE CAPTAIN_OR_NOT = 'YES'
+		                AND MEET_CODE = MT.MEET_CODE
+		            ) as CAPTAINCODE
+		            FROM VIEW_MEETING MT
+		            WHERE MT.CONFIRM_OR_NOT = 'NO'
+		              AND MT.COURT_REG_CODE = #{courtRegistrationCode}
+		              AND MT.MEET_DATE > TO_DATE(#{meetingDate}, 'YYYY-MM-DD HH24:MI')
+		              AND MT.MEET_TYPE_CODE = #{meetingTypeCode}
+		        ) F2
+		        ORDER BY (F2.MEET_PEOPLE_NUMBER - F2.NOWPEOPLENUMBER), F2.MEET_DATE
+		    ) A
+		)
 		]]>
-		<if test="meetingDate != null">
-		<![CDATA[
-			AND MT.MEET_DATE > TO_DATE(#{meetingDate}, 'YYYY-MM-DD HH24:MI')
-		]]>
-		</if>
-		<if test="meetingTypeCode != null">
-		<![CDATA[
-			AND MT.MEET_TYPE_CODE = #{meetingTypeCode}
-			)
-		]]>
-		</if>
-        	WHERE RNUM <![CDATA[>]]>= #{start}  AND  RNUM  <![CDATA[<]]>= #{end}
-        <![CDATA[
-            ORDER BY (meetingPeopleNumber - nowPeopleNumber), meetingDate
-		]]>
-		
+		WHERE RNUM <![CDATA[>]]>= #{start}  AND  RNUM  <![CDATA[<]]>= #{end}
 		</select>
 		
 		
@@ -414,7 +419,55 @@
         <![CDATA[
             ORDER BY (meetingPeopleNumber - nowPeopleNumber), meetingDate
 		]]>
-		</select>
-
+	</select>
+		
+<!-- public ArrayList<MeetingDTO> getMeetingListByCourtDate(String courtCode, String meetingDate, int start, int end); -->
+	<select id="getMeetingListByCourtDate" resultType="com.amanne.biscuitball.mybatis.MeetingDTO">
+	<![CDATA[
+		SELECT MEET_CODE as meetingCode
+			 , MEET_SUBJECT as meetingSubject
+			 , MEET_PEOPLE_NUMBER as meetingPeopleNumber
+			 , MEET_OP_DATE as meetingOpenDate
+			 , MEET_DATE as meetingDate
+			 , MEET_END_DATE as meetingEndDate
+			 , MEET_CLOSE_DATE as meetingCloseDate
+			 , MEET_NOTICE as meetingNotice
+			 , MEET_TYPE_CODE as meetingTypeCode
+			 , QUICK_PLAY as quickPlayOrNot
+			 , COURT_REG_CODE as courtRegistrationCode
+			 , MIN_TIER as minTierCode
+			 , MAX_TIER as maxTierCode
+			 , CONFIRM_OR_NOT as confirmOrNot
+		FROM
+		(
+			SELECT A.*, ROWNUM AS RNUM
+			FROM
+			(
+				SELECT *
+				FROM VIEW_MEETING
+				WHERE MEET_DATE > TO_DATE(#{meetingDate}, 'YYYY-MM-DD')
+			      AND MEET_DATE < TO_DATE(#{meetingDate}, 'YYYY-MM-DD') + 1
+			      AND CONFIRM_OR_NOT = 'NO'
+			      AND COURT_REG_CODE = #{courtCode}
+			    ORDER BY MEET_DATE
+		    ) A
+	    )
+	    WHERE RNUM >= #{start} AND RNUM <= #{end}
+	]]>
+	</select>
+	
+<!-- public int countMeetingListByCourtDate(String courtCode, String meetingDate); -->
+	<select id="countMeetingListByCourtDate" resultType="java.lang.Integer">
+	<![CDATA[
+		SELECT COUNT(*)
+		FROM VIEW_MEETING
+	    WHERE MEET_DATE > TO_DATE(#{meetingDate}, 'YYYY-MM-DD')
+	      AND MEET_DATE < TO_DATE(#{meetingDate}, 'YYYY-MM-DD') + 1
+	      AND CONFIRM_OR_NOT = 'NO'
+	      AND COURT_REG_CODE = #{courtCode}
+	    ORDER BY MEET_DATE
+	]]>
+	</select>
+	
 
 </mapper>
