@@ -72,7 +72,7 @@ String cp = request.getContextPath();
 									<span class="board-header">제목</span>
 									</div>
 									<div class="col-md-8">
-									제목입니다아
+									${meetingdto.meetingSubject}
 									</div>
 								</div>
 								<div class="col-md-4">
@@ -80,12 +80,12 @@ String cp = request.getContextPath();
 									<span class="board-header">주장</span>
 									</div>
 									<div class="col-md-8">
-									아맞네
+									${meetingdto.captainName}
 									</div>
 								</div>
 								<div class="col-md-2 info-title">
 									<button class="btn btn-default btn-xs">
-									모임 신고 하기
+									모임 신고
 									</button>
 								</div>
 								
