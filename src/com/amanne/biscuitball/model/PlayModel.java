@@ -2,6 +2,7 @@ package com.amanne.biscuitball.model;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,10 @@ public class PlayModel
 {
 	@Autowired
 	private SqlSession sqlSession;
+	
+	@Autowired
+	private HttpSession session;
+
 	
 	// 광역시도 출력 메소드
 	public ArrayList<RegionDTO> regionPrint()
