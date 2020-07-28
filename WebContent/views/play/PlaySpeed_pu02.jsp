@@ -64,7 +64,9 @@ String cp = request.getContextPath();
 						<li class="list-group-item">
 							<div class="col-md-7 courtInfo">
 								<span class="">만족도</span>
-							</div> <span class="star-score" id="avgCourtSatisfaction"> </span>
+							</div> ㅁㄴㅇ로ㅠㄴ유마ㅓ롸<span class="star-score" id="avgCourtSatisfaction">
+								
+							</span>
 						</li>
 					</ul>
 					<h4>코트 시설</h4>

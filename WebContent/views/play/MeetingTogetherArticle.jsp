@@ -3,7 +3,7 @@
 
 <%
 	request.setCharacterEncoding("UTF-8");
-String cp = request.getContextPath();
+	String cp = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
@@ -47,7 +47,7 @@ String cp = request.getContextPath();
 
 <div class="container-fluid main">
 <div class="section-title container">
-	<h5>농구하기 > 함께농구</h5>
+	<h5></h5>
 	<hr />
 </div>
 	<div class="row">

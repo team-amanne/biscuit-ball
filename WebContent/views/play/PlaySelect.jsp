@@ -63,7 +63,7 @@ String cp = request.getContextPath();
                      <div class="panel-body">
                         <h2>빠른농구</h2>
                         <p>지금 당장 농구하고 싶다면?</p>
-                        <button class="btn btn-link" id="btn-speed">PLAY</button>
+                        <button class="btn btn-default btn-ling" st id="">PLAY</button> <!-- btn-speed -->
                      </div>
                   </div>
                </div>

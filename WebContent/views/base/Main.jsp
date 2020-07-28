@@ -82,16 +82,16 @@ margin-top: 23%;
 		<!-- Wrapper for slides -->
 		<div class="carousel-inner" role="listbox">
 			<div class="item active main-img" align="center">
-				<img src="<%=cp %>/views/img/main_play.jpg" alt="농구하기" width="1200" height="500">
+				<img src="<%=cp %>/images/other/main_play.jpg" alt="농구하기" width="1200" height="500">
 				<div class="carousel-caption">
 				</div>
 			</div>
 			<div class="item" align="center">
-				<img src="<%=cp %>/views/img/main_crew.jpg" alt="크루" width="1200" height="500">
+				<img src="<%=cp %>/images/other/main_crew.jpg" alt="크루" width="1200" height="500">
 				<div class="carousel-caption"></div>
 			</div>
 			<div class="item" align="center">
-				<img src="<%=cp %>/views/img/main_court.jpg" alt="코트" width="1200" height="500">
+				<img src="<%=cp %>/images/other/main_court.jpg" alt="코트" width="1200" height="500">
 				<div class="carousel-caption" style="top: 25%; left: 15%; width: 450px; height: 200px; background-color: rgba(255, 255, 255, 0.5);">
 					<h2 style="font-weight: bold;">알고 있는 코트가 있으신가요?</h2>
 					<p style="margin-bottom: 20px; font-weight: bold;">BiscuitBall 은 언제나 당신의 의견을 기다립니다</p>
@@ -288,8 +288,8 @@ margin-top: 23%;
 			
 			for(var j=0; j<meetings.length; j++)
 			{
-				var [addr1, addr2] = meetings[i].cityName.split(" ");
-				var [hour, minute, second] = meetings[i].meetingDate.split(" ")[1].split(":");
+				var [addr1, addr2] = meetings[j].cityName.split(" ");
+				var [hour, minute, second] = meetings[j].meetingDate.split(" ")[1].split(":");
 				
 				result += '<div class="panel panel-default">';
 				result += '<div class="panel-body content-box">';
@@ -300,20 +300,20 @@ margin-top: 23%;
 				result += '</div>';
 				
 				result += '<div class="col-md-6 meeting_content" align="left">';
-				result += '<h3>' + meetings[i].meetingSubject + '</h3>';
+				result += '<h3>' + meetings[j].meetingSubject + '</h3>';
 				
-				result += '<p><span>' + addr1 + '</span> > <span>'+ addr2 +'</span> > <span>' + meetings[i].courtName + '</span></p>';
+				result += '<p><span>' + addr1 + '</span> > <span>'+ addr2 +'</span> > <span>' + meetings[j].courtName + '</span></p>';
 				result += '<p><span>';
-				if(meetings[i].meetingTypeCode == 'ZL01')
+				if(meetings[j].meetingTypeCode == 'ZL01')
 					result += '시합';
-				if(meetings[i].meetingTypeCode == 'ZL02')
+				if(meetings[j].meetingTypeCode == 'ZL02')
 					result += '일반';
 				result += '</span> | <span>성별무관</span> | <span>LV';
-				result += meetings[i].minTierCode + ' - LV' + meetings[i].maxTierCode + '</span> | <span>20 - 35 세</span></p>';
+				result += meetings[j].minTierCode + ' - LV' + meetings[j].maxTierCode + '</span> | <span>20 - 35 세</span></p>';
 				
 				result += '</div>';
 				result += '<div class="col-md-3" align="center">';
-				result += '<button class="btn btn-default btn-block btn-link" onclick="window.location.href=\'<%=cp %>/play/meeting/' + meetings[i].meetingCode + '\'">';
+				result += '<button class="btn btn-default btn-block btn-link" onclick="window.location.href=\'<%=cp %>/play/meeting/' + meetings[j].meetingCode + '\'">';
 				result += '상세보기';
 				result += '</button>';
 				

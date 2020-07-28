@@ -63,7 +63,7 @@
 		<div class="col-md-3">
 		</div>
 		<div class="col-md-6 image_frame">
-			<img src="<%=cp %>/views/img/page_error.png" id="image">
+			<img src="<%=cp %>/images/other/page_error.png" id="image">
 		</div>
 		<div class="col-md-3">
 		</div>

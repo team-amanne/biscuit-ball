@@ -349,7 +349,9 @@ $(function()
 															<div class="col-md-7 courtInfo">
 																<span class="">코트이름</span>
 															</div>
+															<div class="col-md-5 courtInfo">
 															<p id="courtName"></p>
+															</div>
 														</li>
 														<li class="list-group-item">
 															<div class="col-md-7 courtInfo">
