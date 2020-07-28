@@ -9,7 +9,7 @@
 <html>
 <head>
 
-<title>관리자 메인(현황)</title>
+<title>BiscuitBail >관리자 메인(현황)</title>
 <style type="text/css">
 
 .board-header, .board-body
@@ -63,7 +63,7 @@
 					<div class="col-md-8">
 						<div class="row top">
 							<div class="col-md-12">
-								<p>괸리자 > 메인</p>
+								<p></p>
 								<hr>
 								<div class="bar">
 									<ul class="list-group bar1">

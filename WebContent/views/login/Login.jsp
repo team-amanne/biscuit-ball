@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>메인 > 로그인</title>
+<title>BiscuitBail > 로그인</title>
 <style type="text/css">
 
 
@@ -118,7 +118,7 @@
 
 <div class="container-fluid">
       <div class="section-title container">
-         <h5>로그인</h5>
+         <h5></h5>
          <hr />
       </div>
 	<div class="row">

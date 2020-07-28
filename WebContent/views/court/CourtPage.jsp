@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>코트 > 코트 정보</title>
+<title>BiscuitBail > 코트 정보</title>
 <!-- 부트스트랩/제이쿼리 -->
 <!-- 부가적인 테마 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -82,7 +82,7 @@
 <!-- 메인 -->
 <div class="main container-fluid">
 	<div class="section-title container">
-		<h5>코트 > 코트 정보</h5>
+		<h5></h5>
 		<hr />
 	</div>
 	<div class="row">
@@ -722,17 +722,17 @@
 		});
 		
 		$("#btnName").click(function () {
-			window.open("<%=cp %>/court/${court.courtCode }/name", "코트 > 코트 정보 > 코트 이름"
+			window.open("<%=cp %>/court/${court.courtCode }/name", "BiscuitBail > 코트 이름"
 					, "top=10, left=10, width=500, height=600, status=no, menubar=no, toolbar=no, resizable=no");
 		});
 		
 		$("#btnVoteRegister").click(function () {
-			window.open("<%=cp %>/court/${court.courtCode }/registerpoll", "코트 > 코트 정보 > 코트 등록 투표"
+			window.open("<%=cp %>/court/${court.courtCode }/registerpoll", "BiscuitBail > 코트 등록 투표"
 					, "top=10, left=10, width=300, height=400, status=no, menubar=no, toolbar=no, resizable=no");
 		});
 		
 		$("#btnVoteDelete").click(function () {
-			window.open("<%=cp %>/court/${court.courtCode }/deletepoll", "코트 > 코트 정보 > 코트 삭제 투표"
+			window.open("<%=cp %>/court/${court.courtCode }/deletepoll", "BiscuitBail > 코트 삭제 투표"
 					, "top=10, left=10, width=300, height=400, status=no, menubar=no, toolbar=no, resizable=no");
 		});
 		

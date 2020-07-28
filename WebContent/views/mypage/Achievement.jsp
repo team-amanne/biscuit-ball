@@ -16,7 +16,7 @@ String cp = request.getContextPath();
 	crossorigin="anonymous"></script>
 
 
-<title>업적 현황</title>
+<title>BiscuitBail > 업적 현황</title>
 
 <!-- 부트스트랩/제이쿼리 -->
 <link rel="stylesheet"

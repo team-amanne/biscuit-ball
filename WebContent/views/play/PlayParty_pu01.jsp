@@ -7,7 +7,7 @@ String cp = request.getContextPath();
 <html>
 <head>
 <meta charset="UTF-8">
-<title>파티 생성</title>
+<title>BiscuitBail > 파티 생성</title>
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">

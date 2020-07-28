@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>괸리자 계정삭제.jsp</title>
+<title>BiscuitBail > 괸리자 계정삭제</title>
 <style type="text/css">
 
 .content_title_value
@@ -48,7 +48,7 @@
 
 <div class="container-fluid">
       <div class="section-title container">
-         <h5>관리자 계정 삭제</h5>
+         <h5></h5>
          <hr />
       </div>
 	<div class="row">

@@ -8,7 +8,7 @@ String cp = request.getContextPath();
 <html>
 <head>
 <meta charset="UTF-8">
-<title>빠른농구</title>
+<title>BiscuitBail > 빠른농구</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/default.css">
@@ -107,7 +107,7 @@ $(document).ready(function()
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
 		<div class="section-title">
-			<h5>농구하기 > 사용자선택 > 빠른농구 </h5>
+			<h5></h5>
 			<hr />
 		</div>
 	</div>
