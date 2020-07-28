@@ -2,6 +2,7 @@ package com.amanne.biscuitball.model;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,10 @@ public class PlayModel
 {
 	@Autowired
 	private SqlSession sqlSession;
+	
+	@Autowired
+	private HttpSession session;
+
 	
 	// 광역시도 출력 메소드
 	public ArrayList<RegionDTO> regionPrint()
@@ -74,20 +79,40 @@ public class PlayModel
 	}
 	
 	// 모임 개설 하기
-	public MeetingDTO createMeeting(MeetingDTO meetingDTO, MeetingMemberDTO meetingMemberDTO)
-	{
-		IMeetingDAO dao = sqlSession.getMapper(IMeetingDAO.class);
-		
-		int result = dao.registerMeeting(meetingDTO, meetingMemberDTO);				
-		if(result > 0)
-		{				
-			return dao.getMeeting(meetingDTO.getMeetingCode());
-		}
-		else 
-		{
-			return null;
-		}
-	}
+    public String createMeeting(MeetingDTO meetingDTO, MeetingMemberDTO meetingMemberDTO)
+    {
+       IMeetingDAO dao = sqlSession.getMapper(IMeetingDAO.class);
+              
+       UserInfo userInfo = (UserInfo) session.getAttribute("userInfo"); 
+       
+       meetingDTO.setOpenerAcctCode(userInfo.getUserAcctCode());
+       /*
+       System.out.println(meetingDTO.getMeetingSubject());
+       System.out.println(meetingDTO.getMeetingPeopleNumber());
+       System.out.println(meetingDTO.getMeetingDate());
+       System.out.println(meetingDTO.getMeetingEndDate());
+       System.out.println(meetingDTO.getMeetingCloseDate());
+       System.out.println(meetingDTO.getMeetingNotice());
+       System.out.println(meetingDTO.getAblLimitCode());
+       System.out.println(meetingDTO.getMeetingTypeCode());
+       System.out.println(meetingDTO.getQuickPlayOrNot());
+       System.out.println(meetingDTO.getCourtRegistrationCode());
+       System.out.println(meetingDTO.getOpenerAcctCode());
+       System.out.println(meetingMemberDTO.getBallExistOrNot()); 
+       */ 
+       dao.registerMeeting(meetingDTO, meetingMemberDTO);
+       String result = meetingDTO.getReturnValue();
+       //System.out.println(result);
+       if(result != null)
+       {  
+          return result;
+       }
+       else 
+       {
+          return "";
+       }
+
+    }
 		
 	// 모임상세 (함께농구)
 	public MeetingDTO getMeetingList(String meetingCode)

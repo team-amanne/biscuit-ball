@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 public interface IMeetingDAO
 {
-	public int registerMeeting(MeetingDTO meetingDTO, MeetingMemberDTO meetingMemberDTO); // 모임개설
+	public void registerMeeting(@Param("meetingDTO")MeetingDTO meetingDTO, @Param("meetingMemberDTO")MeetingMemberDTO meetingMemberDTO); // 모임개설
 
 	public int joinMeeting(MeetingMemberDTO meetingMemberDTO); // 모임참가
 

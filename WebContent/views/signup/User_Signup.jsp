@@ -242,11 +242,7 @@ String cp = request.getContextPath();
 
 <script type="text/javascript">
       $(function() {       
-          
-    	  
-    	  
-    	  
-         // 이메일 유효성검사
+ // 이메일 유효성검사
          $("#email_certify").click( function() {
              var email = $('#userEmail').val();
              

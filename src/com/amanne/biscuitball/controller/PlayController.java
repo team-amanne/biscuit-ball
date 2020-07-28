@@ -176,19 +176,15 @@ public class PlayController
 	}
 	
 	@RequestMapping("/meeting/createcomplete")
-	public String MeetingArticle(Model model, MeetingDTO meeting_dto, @PathVariable("ballExistOrNot") String ballExistOrNot)
-	{
-		HttpSession session = request.getSession();
-		UserInfo info = (UserInfo)session.getAttribute("userInfo");
-	
-		MeetingMemberDTO meetingMember_dto = new MeetingMemberDTO();
-		
-		meetingMember_dto.setBallExistOrNot(ballExistOrNot);
-			
-		model.addAttribute("meetingDTO", playModel.createMeeting(meeting_dto, meetingMember_dto));
-		
-		return "완료";
-		   
+   public String MeetingArticle(Model model, MeetingDTO meetingDTO, MeetingMemberDTO meetingMemberDTO)
+   {
+	   
+	   String view = "redirect:/play/meeting/";
+   
+	   String result = playModel.createMeeting(meetingDTO, meetingMemberDTO);
+	   view = view + result; 
+	   return view;
+	   
 	}
 	
 	@RequestMapping("/meeting/{meeting_code}/join")
@@ -200,7 +196,7 @@ public class PlayController
 		
 		return "redirect:/play/meeting/" + meetingCode;
 	}
-   
+  
 	@RequestMapping("/meeting/{meeting_code}/joincancel")
 	public String cancelJoinMeeting(Model model, @PathVariable("meeting_code") String meetingCode)
 	{
