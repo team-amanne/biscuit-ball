@@ -962,7 +962,7 @@
 							result += '		<span>' + data[i].meetingDate.split(" ")[1] + '</span>';
 							result += '	</div>';
 							result += '	<div class="col-sm-6 col-xs-6">';
-							result += '		<a href="' + '<%=cp %>/meeting/' + data[i].meetingCode;
+							result += '		<a href="' + '<%=cp %>/play/meeting/' + data[i].meetingCode;
 							result += '">' + data[i].meetingSubject + '</a>';
 							result += '	</div>';
 							result += '	<div class="col-sm-3 col-xs-3">';
