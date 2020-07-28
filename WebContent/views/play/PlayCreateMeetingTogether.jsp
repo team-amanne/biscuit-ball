@@ -11,7 +11,7 @@ String cp = request.getContextPath();
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>BiscuitBail > 모임개설</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%=cp%>/css/board.css" />
@@ -212,7 +212,7 @@ $(function()
 	<div class="container-fluid main">
 		<!------------------------------------------ 섹션 ---------------------------------------->
 		<div class="section-title container">
-			<h5>농구하기 > 사용자선택 > 모임개설</h5>
+			<h5></h5>
 			<hr />
 		</div>
 

@@ -8,7 +8,7 @@ String cp = request.getContextPath();
 <html>
 <head>
 <meta charset="UTF-8">
-<title>메인 > 회원가입</title>
+<title>BiscuitBail > 회원가입</title>
 <style type="text/css">
 
 /* flex 용 */
@@ -632,7 +632,7 @@ String cp = request.getContextPath();
    <form action="<%=cp%>/signupdo" id="signUp_submit" method="post">
    <div class="container-fluid">
       <div class="section-title container">
-         <h5>메인 홈 > 회원가입</h5>
+         <h5></h5>
          <hr />
       </div>
       <div class="row">
@@ -658,7 +658,7 @@ String cp = request.getContextPath();
                </div>
                <div class="col-sm-4 col-xs-4">
                   <input type="password" class="form-control userPassword"
-                     id="userPassword" name="userPassword" placeholder="*********">
+                     id="userPassword" name="userPassword" placeholder="*********" maxlength="15">
                </div>
             </div>
             <div class="row">

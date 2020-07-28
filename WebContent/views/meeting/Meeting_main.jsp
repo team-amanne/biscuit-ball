@@ -9,7 +9,7 @@ String cp = request.getContextPath();
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>BiscuitBail > 모임관리</title>
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/default.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -53,7 +53,7 @@ String cp = request.getContextPath();
 
 	<div class="container-fluid main">
 		<div class="section-title container">
-			<h5>농구하기 > 모임관리</h5>
+			<h5></h5>
 			<hr />
 		</div>
 		<div class="col-md-12">

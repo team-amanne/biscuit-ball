@@ -49,7 +49,7 @@ String cp = request.getContextPath();
 
 
 
-<title>insert title here</title>
+<title>BiscuitBail > 코트 관리</title>
 
 <!-- 부트스트랩/제이쿼리 -->
 <!-- 부가적인 테마 -->
@@ -66,7 +66,7 @@ String cp = request.getContextPath();
 	<!-- 메인 -->
 	<div class="main container-fluid">
 		<div class="section-title container">
-			<span>관리자 > 코트 관리 </span>
+			<span></span>
 			<hr />
 		</div>
 		<div class="row">

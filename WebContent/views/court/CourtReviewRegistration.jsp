@@ -8,7 +8,7 @@
 <html>
 <head>
 
-<title>코트 > 코트 정보 > 코트 리뷰 등록</title>
+<title>BiscuitBail > 코트 리뷰 등록</title>
 <!-- 부트스트랩/제이쿼리 -->
 <!-- 부가적인 테마 -->
 
@@ -63,7 +63,7 @@
 <!-- 메인 -->
 <div class="main container-fluid">
 	<div class="section-title container">
-		<h5>코트 > 코트 정보 > 코트 리뷰 등록</h5>
+		<h5></h5>
 		<hr />
 	</div>
 	<div class="row">

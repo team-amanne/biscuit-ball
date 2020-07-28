@@ -10,7 +10,7 @@
 
 
 
-<title>코트 > 코트 정보 > 코트 이름</title>
+<title>BiscuitBail > 코트 이름</title>
 
 <!-- 부트스트랩/제이쿼리 -->
 <link rel="stylesheet"
@@ -43,7 +43,7 @@
 			<div class="row">
 				<div class="col-md-8 col-xs-8">
 					<p class="title-text">코트 이름 투표</p>
-				</div>
+				</div> 
 				<div class="col-md-4 col-xs-4">
 					<a href="<%=cp %>/court/${courtCode }/name/register">
 						<button type="button" class="btn btn-default btn-submit" >이름 등록</button>

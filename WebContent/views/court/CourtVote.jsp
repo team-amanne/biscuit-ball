@@ -8,7 +8,7 @@ String cp = request.getContextPath();
 <html>
 <head>
 <meta charset="UTF-8">
-<title>코트 > 코트 정보 > 투표</title>
+<title>BiscuitBail > 코트정보투표</title>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 

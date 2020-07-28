@@ -137,7 +137,7 @@ $().ready(function()
 
 </script>
 
-<title>마이페이지</title>
+<title>BiscuitBail > 마이페이지</title>
 
 </head>
 <body>
@@ -152,7 +152,7 @@ $().ready(function()
    <input type="hidden" id="userRequestType" name="userRequestType">
    <div class="main container-fluid">
     <div class="section-title container">
-      <span>메인 > 마이페이지 </span>
+      <span></span>
       
       <hr />
       <div class="col-md-12">
@@ -230,7 +230,7 @@ $().ready(function()
                   <div class="col-sm-5 col-xs-5">
                   </div>
                   <div class="col-sm-2 col-xs-2">
-                     <button type="button" class="btn btn-default btn-submit btn-block" id="introduce">자기소개글 등록</button>
+                     <button type="button" class="btn btn-default btn-submit btn-block btn-link" id="introduce">자기소개글 등록</button>
                   </div>
                   <div class="col-sm-2 col-xs-2">
                   </div>
