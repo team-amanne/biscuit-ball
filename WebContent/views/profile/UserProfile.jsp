@@ -115,7 +115,7 @@ $().ready(function()
    <input type="hidden" id="userRequestType" name="userRequestType">
    <div class="main container-fluid">
     <div class="section-title container">
-      <span>메인 > 마이페이지 </span>
+      <span></span>
       
       <hr />
       <div class="col-md-12">
@@ -132,14 +132,10 @@ $().ready(function()
                </div>
                <div class="row">
                   <div class="col-sm-4 col-xs-5 right-btn">
-                     <a><button type="button" class="btn btn-default" id="myinfomation">내 정보관리</button></a>
-                     <a><button type="button" class="btn btn-default" id="achievementList" style="margin-right: 25%;">업적 목록</button></a>
                   </div>
                   <div class="col-sm-4 col-xs-2">
                   </div>
                   <div class="col-sm-4 col-xs-5">
-                     <a><button type="button" class="btn btn-default btn-link" style="margin-left: 25%;" id="friend">친구 신청</button></a>
-                     <a><button type="button" class="btn btn-default btn-link" id="userblock">차단 관리</button></a>
                   </div>
                </div>
                <div class="row">
