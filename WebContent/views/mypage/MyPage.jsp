@@ -137,7 +137,7 @@ $().ready(function()
 
 </script>
 
-<title>마이페이지</title>
+<title>BiscuitBail > 마이페이지</title>
 
 </head>
 <body>
@@ -152,7 +152,7 @@ $().ready(function()
    <input type="hidden" id="userRequestType" name="userRequestType">
    <div class="main container-fluid">
     <div class="section-title container">
-      <span>메인 > 마이페이지 </span>
+      <span></span>
       
       <hr />
       <div class="col-md-12">

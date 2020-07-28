@@ -31,7 +31,7 @@
 
 
 
-<title>코트 > 코트 정보 > 삭제 요청</title>
+<title>BiscuitBail > 삭제 요청</title>
 
 <!-- 부트스트랩/제이쿼리 -->
 <!-- 부가적인 테마 -->
@@ -53,7 +53,7 @@
 	<!-- 메인 -->
 	<div class="main container-fluid">
 		<div class="section-title container">
-			<span>코트 > 코트 삭제요청 </span>
+			<span></span>
 			<hr />
 		</div>
 	<div class="row">

@@ -7,7 +7,7 @@ String cp = request.getContextPath();
 <!DOCTYPE html>
 <html>
 <head>
-<title>코트 > 코트 등록</title>
+<title>BiscuitBail > 코트 등록</title>
 
 <!-- 부트스트랩/제이쿼리 -->
 <!-- 부가적인 테마 -->
@@ -73,7 +73,7 @@ String cp = request.getContextPath();
 	<!-- 메인 -->
 	<div class="main container-fluid">
 		<div class="section-title container">
-			<span>코트 > 코트 등록</span>
+			<span></span>
 			<hr />
 		</div>
 		<div class="row">

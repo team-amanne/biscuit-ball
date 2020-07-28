@@ -100,7 +100,7 @@ $().ready(function()
 
 </script>
 
-<title>마이페이지</title>
+<title>BiscuitBail > 유저프로필</title>
 
 </head>
 <body>
@@ -119,7 +119,7 @@ $().ready(function()
       
       <hr />
       <div class="col-md-12">
-      	<p class="subtitle-text">유저프로필</p>
+      	<p class="subtitle-text"></p>
       </div>
    </div>
    <div class="row">

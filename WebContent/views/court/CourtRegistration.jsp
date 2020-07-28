@@ -8,7 +8,7 @@ String cp = request.getContextPath();
 <html>
 <head>
 <meta charset="UTF-8">
-<title>코트 > 코트 등록</title>
+<title>BiscuitBail > 코트 등록</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/default.css">
@@ -53,7 +53,7 @@ String cp = request.getContextPath();
 
 <div class="container-fuild main">
 	<div class="section-title container">
-		<h5>코트 > 코트 등록</h5>
+		<h5></h5>
 		<hr />
 	</div>
 	<div class="col-md-2"></div>

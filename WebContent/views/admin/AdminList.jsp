@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>관리자 > 관리자 목록.jsp</title>
+<title>BiscuitBail > 관리자 목록</title>
 
 <style type="text/css">
 
@@ -51,7 +51,7 @@
 					<div class="col-md-8">
 						<div class="row top">
 							<div class="col-md-12">
-								<p>관리자 > 관리자 목록</p>
+								<p></p>
 								<hr>
 							</div>
 						</div>

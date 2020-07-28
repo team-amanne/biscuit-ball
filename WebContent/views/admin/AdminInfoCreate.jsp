@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 계정 생성.jsp</title>
+<title>BiscuitBail >관리자 계정 생성</title>
 <style type="text/css">
 
 .email_value, .nickname_value
@@ -72,7 +72,7 @@
 
 <div class="container-fluid">
       <div class="section-title container">
-         <p>관리자 > 관리자 계정 관리 > 관리자 계정 생성</p>
+         <p></p>
          <hr />
       </div>
 	<div class="row">

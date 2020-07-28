@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>관리자 > 특정 관리자.jsp</title>
+<title>BiscuitBail > 특정 관리자</title>
 <style type="text/css">
 
 .admin_number_name, .admin_email_name, .admin_nickname_name
@@ -79,7 +79,7 @@
 					<div class="col-md-8">
 						<div class="row top">
 							<div class="col-md-12">
-								<p>관리자 > 특정 관리자</p>
+								<p></p>
 								<hr>
 								
 								<div>
