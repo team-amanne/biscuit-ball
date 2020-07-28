@@ -126,15 +126,6 @@ public class PlayModel
 		return meetingdto;
 	}
 		
-	// 광역시도 이름 얻는 모델 메소드... (코트DTO에 집어넣을 것)
-	public RegionDTO getRegionName(String regioncode)
-	{
-		IRegionDAO regiondao =sqlSession.getMapper(IRegionDAO.class);
-		
-		RegionDTO regiondto = regiondao.getRegionName(regioncode);
-		
-		return regiondto;
-	}
 		
 	// 모임 참여 유저 정보 얻는 모델 메소드
 	public ArrayList<UserDTO> getMemberLIst(ArrayList<MeetingMemberDTO> meetingmemberlist)
