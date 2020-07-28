@@ -157,8 +157,6 @@ public class PlayController
 	
 			MeetingDTO meetingdto = playModel.getMeetingList(meeting_code);
 			CourtDTO courtdto = courtModel.getCourt(meetingdto.getCourtRegistrationCode(), userinfo);
-			RegionDTO regiondto = playModel.getRegionName(courtdto.getRegionCode());
-			courtdto.setRegionName(regiondto.getRegionName());
 			
 			ArrayList<MeetingMemberDTO>  memberlist = meetingdto.getMeetingMemberList();
 			
