@@ -274,7 +274,10 @@ String cp = request.getContextPath();
                                     지도검색 <span class="glyphicon glyphicon-map-marker"></span>
                                  </button>
                               </div>
-                              <div class="col-md-2">
+                             </div>
+                            </div>
+                          
+                             <%--  <div class="col-md-2">
                                  <label class="checkbox-inline radio"> <input
                                     type="checkbox" name="inlineCheckOptions" id="myCourt"
                                     value=""> 내 코트
@@ -282,7 +285,7 @@ String cp = request.getContextPath();
                                     id="myCourtCheckedVal">
                               </div>
                            </div>
-                        </div>
+                        </div> --%>
 
                         <div class="panel panel-default">
                            <div class="panel-heading panel-head">지도 선택</div>

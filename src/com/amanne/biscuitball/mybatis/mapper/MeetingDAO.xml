@@ -21,7 +21,8 @@
 			    #{meetingDTO.quickPlayOrNot},			<!-- 빠른 농구 가능 여부 -->
 			    #{meetingDTO.courtRegistrationCode},	<!-- 모임 장소(코트) -->
 			    #{meetingDTO.openerAcctCode},			<!-- 개설자 계정 코드 -->
-			    #{meetingMemberDTO.ballExistOrNot}      <!-- 개설자 공 소유 여부 -->
+			    #{meetingMemberDTO.ballExistOrNot},     <!-- 개설자 공 소유 여부 -->
+			    #{meetingDTO.returnValue, mode=OUT, jdbcType=VARCHAR}
 		   
 			)
 		}
@@ -166,6 +167,30 @@
 		]]>
 		</select>
 		
+		
+<!-- 		public String getAbilityLimit(@Param("maxtier")int maxtier, @Param("mintier")int mintier); -->
+
+		<select id="getAbilityLimit" resultType="java.lang.String">
+		<![CDATA[
+			SELECT ABL_LIMIT_CODE
+			FROM TBL_ABILITY_LIMIT
+			WHERE MIN_TIER_CODE =
+			(
+			SELECT TIER_CODE
+			FROM TBL_TIER
+			WHERE TIER_GRADE=#{mintier}
+			)
+			AND
+			MAX_TIER_CODE = 
+			(
+			SELECT TIER_CODE
+			FROM TBL_TIER
+			WHERE TIER_GRADE=#{maxtier}
+			)
+		]]>
+		
+		
+		</select>
 <!--	public List<MeetingDTO> getPastMeetingList(String userAccountCode); // 참여했던 모임 조회  -->
 
 		<select id="getPastMeetingList" resultType="com.amanne.biscuitball.mybatis.MeetingDTO">

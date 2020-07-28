@@ -184,16 +184,12 @@ public class PlayController
    @RequestMapping("/meeting/createcomplete")
    public String MeetingArticle(Model model, MeetingDTO meetingDTO, MeetingMemberDTO meetingMemberDTO)
    {
-	   HttpSession session = request.getSession();
-	   UserInfo info = (UserInfo)session.getAttribute("userInfo");
 	   
-	   String view = "redirect:/meeting/";
-	   System.out.println(info.getUserCode());
-	   
-	   System.out.println(meetingDTO.getCourtRegistrationCode());
-	   System.out.println(meetingMemberDTO.getBallExistOrNot());	   
-	   model.addAttribute("meetingDTO", playModel.createMeeting(meetingDTO, meetingMemberDTO));
-	   return "완료";
+	   String view = "redirect:/play/meeting/";
+   
+	   String result = playModel.createMeeting(meetingDTO, meetingMemberDTO);
+	   view = view + result; 
+	   return view;
 	   
    }
    

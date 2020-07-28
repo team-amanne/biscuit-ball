@@ -7,11 +7,13 @@ import org.apache.ibatis.annotations.Param;
 
 public interface IMeetingDAO
 {
-	public int registerMeeting(MeetingDTO meetingDTO, MeetingMemberDTO meetingMemberDTO); // 모임개설
+	public void registerMeeting(@Param("meetingDTO")MeetingDTO meetingDTO, @Param("meetingMemberDTO")MeetingMemberDTO meetingMemberDTO); // 모임개설
 
 	public int joinMeeting(MeetingMemberDTO meetingMemberDTO); // 모임참가
 
 	public int cancelJoinMeeting(MeetingMemberDTO meetingMemberDTO); // 모임참가취소
+	
+	public String getAbilityLimit(@Param("maxtier")int maxtier, @Param("mintier")int mintier);
 
 	public int inputMeetingPlaylog(MeetingPlaylogDTO meetingPlaylogDTO); // 플레이로그등록
 
@@ -28,7 +30,8 @@ public interface IMeetingDAO
 	public int updateMeetingCommentComment(MeetingCommentDTO meetingCommentDTO); // 모임댓글수정
 
 	public int removeMeetingCommentComment(MeetingCommentDTO meetingCommentDTO); // 모임댓글삭제
-
+	
+	
 	
 	
 	public List<MeetingDTO> getMeetingByMapPosition(String posX, String posY); // 코트중심 예정 모임 조회

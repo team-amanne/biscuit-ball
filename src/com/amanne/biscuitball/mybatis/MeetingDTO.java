@@ -28,12 +28,29 @@ public class MeetingDTO
 	private String confirmOrNot; 			// 모임확정여부
 	private String blindOrNot; 				// 블라인드여부
 	private String nowPeopleNumber;			// 현재 참가자 수
+	private String openerAcctCode;			// 첫 주장 코드
 	private String catainAcctCode;			// 주장 계정 코드
 	private String captainName;				// 주장 닉네임
+	public String getOpenerAcctCode() {
+		return openerAcctCode;
+	}
+	public void setOpenerAcctCode(String openerAcctCode) {
+		this.openerAcctCode = openerAcctCode;
+	}
+
 	private String cityCode;				// 코트 소속 지역 코드
 	private String cityName;				// 코트 소속 지역 이름
-	private ArrayList<MeetingMemberDTO> meetingMemberList; // 모임 참여 멤버
+	private String ablLimitCode;			// 최소 실력 조건
 	private String returnValue;
+	public String getAblLimitCode() {
+		return ablLimitCode;
+	}
+	public void setAblLimitCode(String ablLimitCode) {
+		this.ablLimitCode = ablLimitCode;
+	}
+	
+	private ArrayList<MeetingMemberDTO> meetingMemberList; // 모임 참여 멤버
+	
 	
 	
 	
