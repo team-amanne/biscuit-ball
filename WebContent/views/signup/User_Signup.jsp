@@ -662,7 +662,7 @@ String cp = request.getContextPath();
                </div>
                <div class="col-sm-4 col-xs-4">
                   <input type="password" class="form-control userPassword"
-                     id="userPassword" name="userPassword" placeholder="*********">
+                     id="userPassword" name="userPassword" placeholder="*********" maxlength="15">
                </div>
             </div>
             <div class="row">
