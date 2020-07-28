@@ -280,7 +280,75 @@ $().ready(function()
                               <span>페어플레이 점수</span>
                            </div>
                            <div class="col-sm-4 col-xs-4 panel-body">
-                              <span class="user_item">${user.fairplayScore}</span>
+                              <span class="user_item">
+                              	<c:choose>
+								<c:when test="${user.fairplayScore==5 }">
+									<span class="fa fa-star"></span>
+									<span class="fa fa-star"></span>
+									<span class="fa fa-star"></span>
+									<span class="fa fa-star"></span>
+									<span class="fa fa-star"></span>
+									${user.fairplayScore }
+								</c:when>
+								<c:when test="${user.fairplayScore>=4.5 }">
+									<span class="fa fa-star"></span>
+									<span class="fa fa-star"></span>
+									<span class="fa fa-star"></span>
+									<span class="fa fa-star"></span>
+									<span class="fa fa-star-half"></span>
+									${user.fairplayScore }
+								</c:when>
+								<c:when test="${user.fairplayScore>=4 }">
+									<span class="fa fa-star"></span>
+									<span class="fa fa-star"></span>
+									<span class="fa fa-star"></span>
+									<span class="fa fa-star"></span>
+									${user.fairplayScore }
+								</c:when>
+								<c:when test="${user.fairplayScore>=3.5 }">
+									<span class="fa fa-star"></span>
+									<span class="fa fa-star"></span>
+									<span class="fa fa-star"></span>
+									<span class="fa fa-star-half"></span>
+									${user.fairplayScore }
+								</c:when>
+								<c:when test="${user.fairplayScore>=3 }">
+									<span class="fa fa-star"></span>
+									<span class="fa fa-star"></span>
+									<span class="fa fa-star"></span>
+									${user.fairplayScore }
+								</c:when>
+								<c:when test="${user.fairplayScore>=2.5 }">
+									<span class="fa fa-star"></span>
+									<span class="fa fa-star"></span>
+									<span class="fa fa-star-half"></span>
+									${user.fairplayScore }
+								</c:when>
+								<c:when test="${user.fairplayScore>=2 }">
+									<span class="fa fa-star"></span>
+									<span class="fa fa-star"></span>
+									${user.fairplayScore }
+								</c:when>
+								<c:when test="${user.fairplayScore>=1.5 }">
+									<span class="fa fa-star"></span>
+									<span class="fa fa-star-half"></span>
+									${user.fairplayScore }
+								</c:when>
+								<c:when test="${user.fairplayScore>=1 }">
+									<span class="fa fa-star"></span>
+									${user.fairplayScore }
+								</c:when>
+								<c:when test="${user.fairplayScore>=0.5 }">
+									<span class="fa fa-star-half"></span>
+									${user.fairplayScore }
+								</c:when>
+								<c:otherwise>
+								정보없음
+								</c:otherwise>
+								
+								</c:choose>
+                              
+                              </span>
                            </div>
                         </div>
                      </div>

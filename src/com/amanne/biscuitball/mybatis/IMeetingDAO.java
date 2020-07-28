@@ -11,7 +11,7 @@ public interface IMeetingDAO
 
 	public int joinMeeting(MeetingMemberDTO meetingMemberDTO); // 모임참가
 
-	public int cancelJoinMeeting(MeetingMemberDTO meetingMemberDTO); // 모임참가취소
+	public void cancelJoinMeeting(MeetingMemberDTO meetingMemberDTO); // 모임참가취소
 
 	public int inputMeetingPlaylog(MeetingPlaylogDTO meetingPlaylogDTO); // 플레이로그등록
 

@@ -61,75 +61,97 @@ public class PlayModel
 	*/
 	
 	// 개설 하는 유저 정보 가져오기
-		public UserDTO playUserInfo(UserInfo userInfo)	// 회원정보 조회
-		{
-		      
-		      // 작업객체생성
-		      IUserDAO dao = sqlSession.getMapper(IUserDAO.class);
-		      
-		      // 작업준비
-		      UserDTO userDto = dao.getUser(userInfo.getUserAcctCode());
-		      
-		      return userDto;
-		}
+	public UserDTO playUserInfo(UserInfo userInfo)	// 회원정보 조회
+	{
+	      
+		// 작업객체생성
+		IUserDAO dao = sqlSession.getMapper(IUserDAO.class);
+		
+		// 작업준비
+		UserDTO userDto = dao.getUser(userInfo.getUserAcctCode());
+		
+		return userDto;
+	}
 	
 	// 모임 개설 하기
-		public MeetingDTO createMeeting(MeetingDTO meetingDTO, MeetingMemberDTO meetingMemberDTO)
+	public MeetingDTO createMeeting(MeetingDTO meetingDTO, MeetingMemberDTO meetingMemberDTO)
+	{
+		IMeetingDAO dao = sqlSession.getMapper(IMeetingDAO.class);
+		
+		int result = dao.registerMeeting(meetingDTO, meetingMemberDTO);				
+		if(result > 0)
+		{				
+			return dao.getMeeting(meetingDTO.getMeetingCode());
+		}
+		else 
 		{
-			IMeetingDAO dao = sqlSession.getMapper(IMeetingDAO.class);
+			return null;
+		}
+	}
+		
+	// 모임상세 (함께농구)
+	public MeetingDTO getMeetingList(String meetingCode)
+	{
+		IMeetingDAO meetingdao = sqlSession.getMapper(IMeetingDAO.class);
+		
+		MeetingDTO meetingdto = meetingdao.getMeeting(meetingCode);
+		ArrayList<MeetingMemberDTO> meetingMemberList = meetingdao.getMeetingMemberList(meetingCode);
+		meetingdto.setMeetingMemberList(meetingMemberList);
+		
+		return meetingdto;
+	}
+		
+	// 광역시도 이름 얻는 모델 메소드... (코트DTO에 집어넣을 것)
+	public RegionDTO getRegionName(String regioncode)
+	{
+		IRegionDAO regiondao =sqlSession.getMapper(IRegionDAO.class);
+		
+		RegionDTO regiondto = regiondao.getRegionName(regioncode);
+		
+		return regiondto;
+	}
+		
+	// 모임 참여 유저 정보 얻는 모델 메소드
+	public ArrayList<UserDTO> getMemberLIst(ArrayList<MeetingMemberDTO> meetingmemberlist)
+	{
+		IUserDAO userdao = sqlSession.getMapper(IUserDAO.class);
 			
-			int result = dao.registerMeeting(meetingDTO, meetingMemberDTO);				
-			if(result > 0)
-			{				
-				return dao.getMeeting(meetingDTO.getMeetingCode());
-			}
-			else 
-			{
-				return null;
-			}
+		ArrayList<UserDTO> userdtolist = new ArrayList<UserDTO>();
+			
+		for (MeetingMemberDTO dto:meetingmemberlist)
+		{
+			UserDTO userdto = userdao.getUser(dto.getJoinAccountCode());
+			
+			userdtolist.add(userdto);
+		}
+		
+		return userdtolist;
+	}
 
-		}
+	public int joinMeeting(String meetingCode, String userAcctCode, String ballExistOrNot)
+	{
+		IMeetingDAO meetingdao = sqlSession.getMapper(IMeetingDAO.class);
 		
-		// 모임상세 (함께농구)
-		public MeetingDTO getMeetingList(String meetingCode)
-		{
-			IMeetingDAO meetingdao = sqlSession.getMapper(IMeetingDAO.class);
-			
-			MeetingDTO meetingdto = meetingdao.getMeeting(meetingCode);
-			ArrayList<MeetingMemberDTO> meetingMemberList = meetingdao.getMeetingMemberList(meetingCode);
-			meetingdto.setMeetingMemberList(meetingMemberList);
-			
-			return meetingdto;
-		}
+		MeetingMemberDTO dto = new MeetingMemberDTO();
+		dto.setMeetCode(meetingCode);
+		dto.setJoinAccountCode(userAcctCode);
+		dto.setCaptainOrNot("ZU02");
+		dto.setBallExistOrNot(ballExistOrNot);
 		
-		// 광역시도 이름 얻는 모델 메소드... (코트DTO에 집어넣을 것)
-		public RegionDTO getRegionName(String regioncode)
-		{
-			IRegionDAO regiondao =sqlSession.getMapper(IRegionDAO.class);
-			
-			RegionDTO regiondto = regiondao.getRegionName(regioncode);
-			
-			return regiondto;
-		}
-		
-		// 모임 참여 유저 정보 얻는 모델 메소드
-		public ArrayList<UserDTO> getMemberLIst(ArrayList<MeetingMemberDTO> meetingmemberlist)
-		{
-			IUserDAO userdao = sqlSession.getMapper(IUserDAO.class);
-			
-			
-			ArrayList<UserDTO> userdtolist = new ArrayList<UserDTO>();
-			
-			for (MeetingMemberDTO dto:meetingmemberlist)
-			{
-				UserDTO userdto = userdao.getUser(dto.getJoinAccountCode());
-				
-				userdtolist.add(userdto);
-			}
-			
-			return userdtolist;
-		}
+		return meetingdao.joinMeeting(dto);
+	}
 	
-	
+	public String cancelJoinMeeting(String meetingCode, String userAcctCode)
+	{
+		IMeetingDAO meetingdao = sqlSession.getMapper(IMeetingDAO.class);
+		
+		MeetingMemberDTO dto = new MeetingMemberDTO();
+		dto.setMeetCode(meetingCode);
+		dto.setJoinAccountCode(userAcctCode);
+		
+		meetingdao.cancelJoinMeeting(dto);
+		
+		return dto.isReturnValue();
+	}
 	
 }

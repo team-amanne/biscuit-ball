@@ -35,7 +35,7 @@
 		</insert>	
 		
 
-<!--	public int cancelJoinMeeting(MeetingMemberDTO meetingMemberDTO); // 모임참가취소  -->
+<!--	public void cancelJoinMeeting(MeetingMemberDTO meetingMemberDTO); // 모임참가취소  -->
 		
 		<select id="cancelJoinMeeting"
  		statementType="CALLABLE"
@@ -44,6 +44,7 @@
 			(
 			    #{joinAccountCode}, 			<!-- 모임 취소 회원 코드  -->
 			    #{meetCode}, 					<!-- 취소할 모임 번호 -->
+			    #{returnValue, mode=OUT, jdbcType=VARCHAR}
 			)
 		}
 		</select>

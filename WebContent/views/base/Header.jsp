@@ -69,8 +69,15 @@
 						<%-- 로그인 되었을 때 --%>
 						<c:when test="${sessionScope.userInfo != null }">
 
-							<li class="border-left"><a href="#"> <span id="alarm" class="glyphicon glyphicon-bell" aria-hidden="true"></span> <span class="badge">5</span>
-							</a></li>
+							<li class="border-left">
+								<a href="#"> 
+									<span id="alarm" class="glyphicon glyphicon-bell" aria-hidden="true"></span> 
+									<span class="badge">
+										<c:if test="${empty notificationCount }">0</c:if>
+										<c:if test="${!empty notificationCount }">${notificationCount }</c:if>
+									</span>
+								</a>
+							</li>
 							<li class="dropdown box text-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-user left"></span> <span class="box-content left">${sessionScope.userInfo.userNickname }</span> <span class="caret"></span>
 							</a>
 								<ul class="dropdown-menu" role="menu">
@@ -94,8 +101,12 @@
 
 						<c:when test="${sessionScope.adminInfo != null }">
 
-							<li class="border-left"><a href="#"> <span id="alarm" class="glyphicon glyphicon-bell" aria-hidden="true"></span> <span class="badge">5</span>
-							</a></li>
+							<li class="border-left">
+								<a href="#"> 
+									<span id="alarm" class="glyphicon glyphicon-bell" aria-hidden="true"></span> 
+									<%-- <span class="badge">5</span> --%>
+								</a>
+							</li>
 							<li class="dropdown box text-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-user left"></span> <span class="box-content left">${sessionScope.adminInfo.userNickname }</span> <span class="caret"></span>
 							</a>
 								<ul class="dropdown-menu" role="menu">
