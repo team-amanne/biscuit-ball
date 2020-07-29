@@ -81,10 +81,10 @@
 		</div>
 		<div class="col-md-8">
 			<div class="category_button2">
-				<button type="button" id="button1" class="form-control" style="width: 190px; height: 120px; background-image: url('<%=cp%>/views/img/Test2.png'); ">
+				<button type="button" id="button1" class="form-control" style="width: 190px; height: 120px; background-image: url('<%=cp%>/images/other/Test2.png'); ">
 				</button>
 				<div id="space2"></div>
-				<button type="button" id="button2" class="form-control" style="width: 190px; height: 120px; background-image: url('<%=cp%>/views/img/Test3.png'); ">
+				<button type="button" id="button2" class="form-control" style="width: 190px; height: 120px; background-image: url('<%=cp%>/images/other/Test3.png'); ">
 				</button>
 			</div>
 		
