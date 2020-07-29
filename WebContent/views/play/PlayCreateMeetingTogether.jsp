@@ -120,13 +120,13 @@ $(function()
 	var userBirthday = "${userDto.userBirthday}".substring(0,4);
 	var age = year - parseInt(userBirthday)+1;
 	
-	
+	/*
 	for(var i=parseInt(tier); i<=5; i=i+1) {        
         var html;
         html += "<option value="+userBirthday+">LV."+i+"</option>"
     }
     $("#tier-check").append(html);
-    
+    */
     
     for(var i=0; i<=Math.floor(age/10)*10; i=i+10) {        
         var minage;
@@ -498,11 +498,11 @@ $(function()
 													<div class="panel-body">
 														<select name="ablLimitCode" id="tier-check"
 															class="form-control">
-															<option value="ZB05">1</option>
-															<option value="ZB09">2</option>
-															<option value="ZB12">3</option>
-															<option value="ZB14">4</option>
-															<option value="ZB15">5</option>
+															<option value="ZB05">1LV</option>
+															<option value="ZB09">2LV</option>
+															<option value="ZB12">3LV</option>
+															<option value="ZB14">4LV</option>
+															<option value="ZB15">5LV</option>
 														</select>
 													</div>
 												</div>
