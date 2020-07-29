@@ -113,7 +113,7 @@
 <!-- 서브 -->
 <c:import url="../base/Submenu.jsp"></c:import>
 
-<div class="container-fluid">
+<div class="main container-fluid">
       <div class="section-title container">
          <h5>내담당 문의/신고 > 처리중인 신고 목록</h5>
          <hr />
@@ -485,7 +485,7 @@
 		<div class="col-md-2">
 		</div>
 	</div>
-	
+</div>
 </div>
 
 <c:import url="../base/Footer.jsp"></c:import>
