@@ -70,15 +70,15 @@
 		<div class="col-md-8">
 			<div class="category_button">
 				<div class="button1">
-					<button type="button" id="button1" class="form-control" style="width: 190px; height: 120px; background-image: url('<%=cp%>/views/img/Test1.png'); ">
+					<button type="button" id="button1" class="form-control" style="width: 190px; height: 120px; background-image: url('<%=cp%>/images/other/Test1.png'); ">
 					</button>
 				</div>
 				<div class="button2">
-					<button type="button" id="button2" class="form-control" style="width: 190px; height: 120px; background-image: url('<%=cp%>/views/img/Test2.png'); ">
+					<button type="button" id="button2" class="form-control" style="width: 190px; height: 120px; background-image: url('<%=cp%>/images/other/Test2.png'); ">
 					</button>
 				</div>
 				<div class="button3">
-					<button type="button" id="button3" class="form-control" style="width: 190px; height: 120px; background-image: url('<%=cp%>/views/img/Test3.png'); ">
+					<button type="button" id="button3" class="form-control" style="width: 190px; height: 120px; background-image: url('<%=cp%>/images/other/Test3.png'); ">
 					</button>
 				</div>
 			</div>
