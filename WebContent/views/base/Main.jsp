@@ -82,17 +82,17 @@ margin-top: 23%;
 		<!-- Wrapper for slides -->
 		<div class="carousel-inner" role="listbox">
 			<div class="item active main-img" align="center">
-				<img src="<%=cp %>/views/img/main_play.jpg" alt="농구하기" width="1200" height="500">
+				<img src="<%=cp %>/images/other/main_play.jpg" alt="농구하기" width="1200" height="500">
 				<div class="carousel-caption">
 				</div>
 			</div>
 			<div class="item" align="center">
-				<img src="<%=cp %>/views/img/main_crew.jpg" alt="크루" width="1200" height="500">
+				<img src="<%=cp %>/images/other/main_crew.jpg" alt="크루" width="1200" height="500">
 				<div class="carousel-caption"></div>
 			</div>
 			<div class="item" align="center">
-				<img src="<%=cp %>/views/img/main_court.jpg" alt="코트" width="1200" height="500">
-				<div class="carousel-caption" style="top: 25%; height: 200px; background-color: rgba(255, 255, 255, 0.5);">
+				<img src="<%=cp %>/images/other/main_court.jpg" alt="코트" width="1200" height="500">
+				<div class="carousel-caption" style="top: 25%; left: 15%; width: 450px; height: 200px; background-color: rgba(255, 255, 255, 0.5);">
 					<h2 style="font-weight: bold;">알고 있는 코트가 있으신가요?</h2>
 					<p style="margin-bottom: 20px; font-weight: bold;">BiscuitBall 은 언제나 당신의 의견을 기다립니다</p>
 					<a href="<%=cp %>/court/register"><button type="button" class="btn" 

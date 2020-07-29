@@ -83,7 +83,7 @@
 							
 						</div>
 						<div class="col-sm-4 col-xs-6" style="position: relative; z-index: 1; text-align: center;">
-							<img src="<%=cp %>/views/img/UserProfile.jpg" height="150px;" width="150px;"/>
+							<img src="<%=cp %>/images/other/UserProfile.jpg" height="150px;" width="150px;"/>
 						</div>
 						<div class="col-sm-4 col-xs-3">
 						</div>
