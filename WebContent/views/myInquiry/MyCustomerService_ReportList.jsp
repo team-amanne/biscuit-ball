@@ -60,9 +60,8 @@
 
 .submit_delete
 {
-	width: 160px;
 	display: flex;
-	margin-left: 45.5%;
+	margin-left: 59.5%;
 }
 
 #check

@@ -31,22 +31,12 @@
 	text-align: center;
 }
 
-/* 처리중인 문의, 처리중인 신고 버튼 */
-.category_button1 
-{
-	display: flex;
-	margin-bottom: 15px;
-	margin-left: auto;
-	width: 980px;
-}
-
 /* 문의내역, 신고내역 버튼 */
 .category_button2 
 {
 	display: flex;
 	margin-bottom: 15px;
-	margin-left: auto;
-	width: 70%;
+	margin-left: 36%;
 }
 
 /* 숫자 도형 색깔 */
@@ -59,8 +49,7 @@
 .bar
 {
 	display: flex;
-	margin-left: auto;
-	width: 65%;
+	margin-left: 40%;
 }
 
 /* 현황판 간격 */
@@ -92,10 +81,10 @@
 		</div>
 		<div class="col-md-8">
 			<div class="category_button2">
-				<button type="button" id="button1" class="form-control" style="width: 190px; height: 120px; background-image: url('test/Test2.png'); ">
+				<button type="button" id="button1" class="form-control" style="width: 190px; height: 120px; background-image: url('<%=cp%>/views/img/Test2.png'); ">
 				</button>
 				<div id="space2"></div>
-				<button type="button" id="button2" class="form-control" style="width: 190px; height: 120px; background-image: url('test/Test3.png'); ">
+				<button type="button" id="button2" class="form-control" style="width: 190px; height: 120px; background-image: url('<%=cp%>/views/img/Test3.png'); ">
 				</button>
 			</div>
 		
