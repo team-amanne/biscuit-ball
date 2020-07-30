@@ -364,7 +364,7 @@ $(function() {
 														개설</button>
 												</div>
 												<div class="col-md-6">
-													<button type="button" class="btn btn-default btn-lg btn-block">
+													<button type="button" class="btn btn-default btn-lg btn-block" >
 														취소</button>
 												</div>
 											</div>

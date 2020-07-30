@@ -86,7 +86,7 @@ public class PlayModel
        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo"); 
        
        meetingDTO.setOpenerAcctCode(userInfo.getUserAcctCode());
-       /*
+       
        System.out.println(meetingDTO.getMeetingSubject());
        System.out.println(meetingDTO.getMeetingPeopleNumber());
        System.out.println(meetingDTO.getMeetingDate());
@@ -99,10 +99,10 @@ public class PlayModel
        System.out.println(meetingDTO.getCourtRegistrationCode());
        System.out.println(meetingDTO.getOpenerAcctCode());
        System.out.println(meetingMemberDTO.getBallExistOrNot()); 
-       */ 
+       
        dao.registerMeeting(meetingDTO, meetingMemberDTO);
        String result = meetingDTO.getReturnValue();
-       //System.out.println(result);
+       System.out.println(result);
        if(result != null)
        {  
           return result;
