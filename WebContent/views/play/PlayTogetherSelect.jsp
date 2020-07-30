@@ -30,7 +30,6 @@ String cp = request.getContextPath();
 }
 
 .map-container {
-   width: 450px;
    height: 500px;
 }
 
@@ -227,10 +226,10 @@ String cp = request.getContextPath();
                            <div class="panel-heading panel-head">경기/일반 선택</div>
                            <div class="panel-body">
                               <label class="radio-inline radio"> 
-                              <input type="radio"name="meetingType" id="inlineRadio1" value="ZL01" >시합
+                              	<input type="radio"name="meetingType" id="inlineRadio1" value="ZL01" >시합
                               </label> 
                               <label class="radio-inline radio"> 
-                              <input type="radio" name="meetingType" id="inlineRadio2" value="ZL02" checked="checked"> 일반
+                              	<input type="radio" name="meetingType" id="inlineRadio2" value="ZL02" checked="checked"> 일반
                               </label>
                            </div>
                         </div>
@@ -296,76 +295,77 @@ String cp = request.getContextPath();
                            
                         </div> 
 						<div class="col-md-9">
-                        <div class="panel panel-default">
-                           <div class="panel-heading panel-head">지도 선택</div>
-                           <div class="panel-body">
-                              <div class="col-md-8 map-container" id="map"></div>
-
-                              <!-- 마커 클릭 시 등장하는 코트 정보  -->
-                              <div class="col-md-4" id="courtInfo">
-                              <div class="col-md-12" id="courtinfoboard" style="display: none;">
-                                 <h4>코트 정보</h4>
-                                 <ul class="list-group" id="">
-                                    <li class="list-group-item">
-                                       <div class="col-md-5 courtInfo">
-                                          <span class="">코트이름</span>
-                                       </div>
-                                       <p id="courtName"></p>
-                                    </li>
-                                    <li class="list-group-item">
-                                       <div class="col-md-5 courtInfo">
-                                          <span class="">적정인원</span>
-                                       </div> <span id="minCourtCapacity"></span>~<span
-                                       id="maxCourtCapacity"></span>
-                                    </li>
-                                    <li class="list-group-item">
-                                       <div class="col-md-5 courtInfo">
-                                          <span class="">코트등급</span>
-                                       </div>
-                                       <p id="courtRating"></p>
-                                    </li>
-                                    <li class="list-group-item">
-                                       <div class="col-md-5 courtInfo">
-                                          <span class="">만족도</span>
-                                       </div> <span class="star-score" id="avgCourtSatisfaction">
-                                    </span>
-                                    </li>
-                                 </ul>
-                                 <h4>코트 시설</h4>
-                                 <ul class="list-group">
-                                    <li class="list-group-item">
-                                       <div class="col-md-5 courtInfo">
-                                          <span class="">화장실</span>
-                                       </div> <span class="" id="toilet"></span>&nbsp;&nbsp;&nbsp;&nbsp;
-                                       <span class="" id="toiletConfidence"></span>
-                                    </li>
-                                    <li class="list-group-item">
-                                       <div class="col-md-5 courtInfo">
-                                          <span class="">샤워실</span>
-                                       </div> <span class="" id="shower"></span>&nbsp;&nbsp;&nbsp;&nbsp;
-                                       <span class="" id="showerConfidence"></span>
-                                    </li>
-                                    <li class="list-group-item">
-                                       <div class="col-md-5 courtInfo">
-                                          <span class="">주차장</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                                       </div> <span class="" id="parkinglot"></span>&nbsp;&nbsp;&nbsp;&nbsp;
-                                       <span class="" id="parkinglotConfidence"></span>
-                                    </li>
-                                 </ul>
+	                        <div class="panel panel-default">
+	                           <div class="panel-heading panel-head">지도 선택</div>
+	                           <div class="panel-body">
+	                              <div class="col-md-7 map-container" id="map"></div>
+	
+	                              <!-- 마커 클릭 시 등장하는 코트 정보  -->
+	                              <div class="col-md-5" id="courtInfo">
+	                              	<div class="col-md-12 btn-serach">
+	                                    <button class="btn btn-default btn-block btn-lg"
+	                                       id="playSearch">함께농구 검색</button>
+	                                    <button class="btn btn-default btn-block btn-lg" id="createMeeting">
+	                                       함께농구 개설</button>
+	                                 </div>
+		                              <div class="col-md-12" id="courtinfoboard" style="display: none;">
+		                                 <h4>코트 정보</h4>
+		                                 <ul class="list-group" id="">
+		                                    <li class="list-group-item">
+		                                       <div class="col-md-5 courtInfo">
+		                                          <span class="">코트이름</span>
+		                                       </div>
+		                                       <p id="courtName"></p>
+		                                    </li>
+		                                    <li class="list-group-item">
+		                                       <div class="col-md-5 courtInfo">
+		                                          <span class="">적정인원</span>
+		                                       </div> <span id="minCourtCapacity"></span>~<span
+		                                       id="maxCourtCapacity"></span>
+		                                    </li>
+		                                    <li class="list-group-item">
+		                                       <div class="col-md-5 courtInfo">
+		                                          <span class="">코트등급</span>
+		                                       </div>
+		                                       <p id="courtRating"></p>
+		                                    </li>
+		                                    <li class="list-group-item">
+		                                       <div class="col-md-5 courtInfo">
+		                                          <span class="">만족도</span>
+		                                       </div> <span class="star-score" id="avgCourtSatisfaction">
+		                                    </span>
+		                                    </li>
+		                                 </ul>
+		                                 <h4>코트 시설</h4>
+		                                 <ul class="list-group">
+		                                    <li class="list-group-item">
+		                                       <div class="col-md-5 courtInfo">
+		                                          <span class="">화장실</span>
+		                                       </div> <span class="" id="toilet"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+		                                       <span class="" id="toiletConfidence"></span>
+		                                    </li>
+		                                    <li class="list-group-item">
+		                                       <div class="col-md-5 courtInfo">
+		                                          <span class="">샤워실</span>
+		                                       </div> <span class="" id="shower"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+		                                       <span class="" id="showerConfidence"></span>
+		                                    </li>
+		                                    <li class="list-group-item">
+		                                       <div class="col-md-5 courtInfo">
+		                                          <span class="">주차장</span>&nbsp;&nbsp;&nbsp;&nbsp;
+		                                       </div> <span class="" id="parkinglot"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+		                                       <span class="" id="parkinglotConfidence"></span>
+		                                    </li>
+		                                 </ul>
 									</div>
-                                 <div class="col-md-12 btn-serach">
-                                    <button class="btn btn-default btn-block btn-lg"
-                                       id="playSearch">함께농구 검색</button>
-                                    <button class="btn btn-default btn-block btn-lg" id="createMeeting">
-                                       함께농구 개설</button>
-                                 </div>
-                                 <div class="col-md-12" id="requestmessage">
-                                 		
-                                 </div>
-
-                              </div>
-                           </div>
-                        </div>
+	                                 
+	                                 <div class="col-md-12" id="requestmessage">
+	                                 		
+	                                 </div>
+	
+	                              </div>
+	                           </div>
+	                        </div>
                         </div>
                         </div>
                      </div>
