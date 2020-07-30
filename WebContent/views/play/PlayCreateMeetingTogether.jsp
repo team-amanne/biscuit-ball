@@ -833,22 +833,24 @@ $(function()
 				   });
 				   
 				});
-							   
+				
+			   
 			  //모임 시작
 			    $('#startTime').change(function() 
 			   {
-			    var meetDate = $('#dateselect1').val() + $('#startTime option:selected').val();
-			   	 $('#meetingDate').val(meetDate);
-				});
+			   /* var meetDate = $('#dateselect1').val() + $('#startTime').val();
+			   	 $('#meetingDate').val(meetDate);*/
+			   		var meetDate = $('#dateselect1').val() + " " + $('#startTime option:selected').val();
+		      	 	$('#meetingDate').val(meetDate);
+				})
 				
 				 //모임 종료
 			    $('#endTime').change(function() 
 			   {
-			    	/*var meetDate = $('#dateselect1').val() + " " + $('#startTime option:selected').val();
-			      	 $('#meetingDate').val(meetDate);*/
+			    	
 			    	var meetEndDate = $('#dateselect1').val() + " " + $('#endTime option:selected').val();
 			      	 $('#meetingEndDate').val(meetEndDate);
-				});
+				})
 				
 				 //모집 종료
 			    $('#closeTime').change(function() 
@@ -863,9 +865,20 @@ $(function()
 			
 			function check() {
 				
-				alert($('#startTime option:selected').val()+ "/"
-						   $('#endTime option:selected').val() + "/"
-						   $('#closeTime option:selected').val())
+				var startTime = $('#startTime option:selected').val();
+				var endTime = $('#endTime option:selected').val();
+				var closeTime = $('#closeTime option:selected').val();
+				startTime = parseInt(startTime.replace(":00", ""));
+				endTime = parseInt(endTime.replace(":00", ""));
+				closeTime = parseInt(closeTime.replace(":00", ""));
+				
+				var playTime = startTime-closeTime;
+				
+				// alert(startTime + "/" + endTime + "/" + closeTime);
+				// return false;
+				
+				
+				  
 				if($("#meetingSubject").val() == "")
 		        {
 		           $("#subjectCheck").text("입력 항목이 누락되었습니다.");
@@ -890,52 +903,13 @@ $(function()
 		    		alert("날짜를 입력하세요");
 		    		return false;
 		    	}
-		    	else
-		    	{
-		    		return false;
-		    		
-		    	}
+		    	if($('#dateselect1').val() == $('#dateselect2').val() && playTime < 3 || endTime<startTime)
+	    		{
+	    			alert("시간 조건에 맞지않습니다 다시 입력해주세요");
+	    			return false;
+	    		}
 		    	
 			}
-		    	/*
-		    	
-		    	
-		    	else
-		    	{
-		    		if($('#dateselect1').val() == $('#dateselect2').val() && $('#startTime').val())
-		        	{
-		        		alert("")
-		        	}
-		    	}
-		    	
-		    	
-		    	if()
-		    	// 고민좀
-		    	/*
-		    	if( $("#citySelect option:selected").val() == "" ||  $("#citySelect option:selected").val() == "시·군·구 선택" ) 
-			    {
-			       alert('지역을 선택해주세요');
-			       $("#citySelect").focus();
-			       return false;
-			    }
-		    	
-		    	if( $("#startTime option:selected").val() == "" ||  $("#endTime option:selected").val() == "" ) 
-			    {
-			       alert('시간을 선택해주세요');
-			       $("#citySelect").focus();
-			       return false;
-			    }
-				return false;
-				
-			}
-			/*
-			$("#meeting-create").click(function()
-				 
-					{ 
-				    	$("#createMeet").submit();
-				    });*/
-				    
-
 	</script>
 
 </body>
