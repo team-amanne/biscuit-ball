@@ -188,6 +188,11 @@ String cp = request.getContextPath();
          });
          });
          
+         
+         // 값이 없을 시 재선택 요청
+         
+       
+         
    });
    
 
@@ -293,9 +298,10 @@ String cp = request.getContextPath();
                               <div class="col-md-8 map-container" id="map"></div>
 
                               <!-- 마커 클릭 시 등장하는 코트 정보  -->
-                              <div class="col-md-4" id="courtInfo" style="display: none">
+                              <div class="col-md-4" id="courtInfo">
+                              <div class="col-md-12" id="courtinfoboard" style="display: none;">
                                  <h4>코트 정보</h4>
-                                 <ul class="list-group">
+                                 <ul class="list-group" id="">
                                     <li class="list-group-item">
                                        <div class="col-md-5 courtInfo">
                                           <span class="">코트이름</span>
@@ -342,12 +348,15 @@ String cp = request.getContextPath();
                                        <span class="" id="parkinglotConfidence"></span>
                                     </li>
                                  </ul>
-
+									</div>
                                  <div class="col-md-12 btn-serach">
                                     <button class="btn btn-default btn-block btn-lg"
                                        id="playSearch">함께농구 검색</button>
                                     <button class="btn btn-default btn-block btn-lg" id="createMeeting">
                                        함께농구 개설</button>
+                                 </div>
+                                 <div class="col-md-12" id="requestmessage">
+                                 		
                                  </div>
 
                               </div>
@@ -512,6 +521,7 @@ $(function()
                                   data: {mapPositionX: courtPositionX, mapPositionY: courtPositionY},
                                   success: function(data)
                                   {
+                                	  $("#courtinfoboard").css("display", "inline");
                                      /* 코트 정보 */
                                      /* 코트이름 */
                                      $("#courtCode").val(data.courtCode);                                        
@@ -534,7 +544,7 @@ $(function()
                                      $("#parkinglot").text(data.parkinglot);
                                      $("#parkinglotConfidence").text(data.parkinglotConfidence);
                                      
-                                     $("#courtInfo").css('display','inline');
+                     
                                      
                               },
                                error: function(e) {
@@ -583,79 +593,112 @@ $(function()
    // 모임 검색
    $("#playSearch").click(function()
    {    
+	  // 입력 요청 메시지 담을 변수
+	   var inputRequest = "";
+	  $("#requestmessage").html("");
+	   
       $("#resultList").css("display", "inline");
       
-      //alert($("#courtCode").val());
+      // 사용자 입력 값 없을 시 처리
+      if ($("input[name='meetingType']:checked").val() != null && $("#dateselect1").val() != null && $("#timeselect").val() != null && $("#regionSelect").val() != null && $("#citySelect").val() != null && $("#courtCode").val() != null)
+	  {
       
-      $.ajax
-      ({
-         type: "get",
-            dataType: "json",
-            url: "<%=cp%>/ajax/togethermeetinglist",
-         data :
-         {
-            courtRegistrationCode : $("#courtCode").val(),
-            meetingDate : $("#dateselect1").val()+" "+$("#timeselect option:selected").val(),
-            meetingTypeCode : $('input[name="meetingType"]:checked').val(),
-            start : 1,
-            end : 10
-         },
-         success : function(data)
-         {
-
-            var listPrint = "<li class='list-group-item board-body board-header'><div class='row'>"
-                  + "<div class='col-md-4 col-xs-4'><span>제목</span></div><div class='col-md-2 col-xs-2'><span>주장</span>"
-                  + "</div><div class='col-md-3 col-xs-3'><span>장소</span></div><div class='col-md-2 col-xs-2'>"
-                  + "<span>일시</span></div><div class='col-md-1 col-xs-1'><span>인원</span></div></div></li>";
-
-            for (var i=0; i<data.length; i++)
-            {
-               listPrint += "<li class='list-group-item board-body'><div class='row'><div class='col-md-4 col-xs-4'>";
-               listPrint += "<span class='meetingPage' id='"+ data[i].meetingCode +"'>"+ data[i].meetingSubject+ "</span>";
-               listPrint += "</div><div class='col-md-2 col-xs-2'>";
-               listPrint += "<span class='captainName' id='"+ data[i].captainAcctCode +"'>"+ data[i].captainName+ "</span>";
-               listPrint += "</div><div class='col-md-3 col-xs-3'>";
-               listPrint += "<span class='courtName' id='"+ data[i].courtRegistrationCode +"'>"+ $("#courtName").text()+ "</span>";
-               listPrint += "</div><div class='col-md-2 col-xs-2'>";
-               listPrint += "<span>"+ data[i].meetingDate+ "</span>";
-               listPrint += "</div><div class='col-md-1 col-xs-1'>";
-               listPrint += "<span>"+ data[i].nowPeopleNumber+ "/"+ data[i].meetingPeopleNumber+ "</span>";
-               listPrint += "</div></div></li>";
-               
-
-         
-                  
-            }
-            $("#meetingList").html(listPrint);
-            
-            //alert(listPrint);
-            
-            
-            // 모임 제목 클릭하면 모임으로
-            $(".meetingPage").click(function()
-            {
-               //var id = ($(this).attr('id'));
-               var meetingCode = $(this).attr('id');
-               
-               $(location).attr("href","<%=cp%>/play/meeting/"+ meetingCode);
-               //childWindow.resizeTo(800, 800);
-            });
-            
-            // 코트 이름 클릭하면 코트 페이지로
-            $(".courtName").click(function()
-            {
-               var courtCode = ($(this).attr('id'));
-               
-               $(location).attr("href","<%=cp%>/court/"+ courtCode);
-            });
-            
-         },
-         error : function(e)
-         {
-            alert(e.responseText);
-         }
-               });
-      });
+	      $.ajax
+	      ({
+	         type: "get",
+	            dataType: "json",
+	            url: "<%=cp%>/ajax/togethermeetinglist",
+	         data :
+	         {
+	            courtRegistrationCode : $("#courtCode").val(),
+	            meetingDate : $("#dateselect1").val()+" "+$("#timeselect option:selected").val(),
+	            meetingTypeCode : $('input[name="meetingType"]:checked').val(),
+	            start : 1,
+	            end : 10
+	         },
+	         success : function(data)
+	         {
+	
+	            var listPrint = "<li class='list-group-item board-body board-header'><div class='row'>"
+	                  + "<div class='col-md-4 col-xs-4'><span>제목</span></div><div class='col-md-2 col-xs-2'><span>주장</span>"
+	                  + "</div><div class='col-md-3 col-xs-3'><span>장소</span></div><div class='col-md-2 col-xs-2'>"
+	                  + "<span>일시</span></div><div class='col-md-1 col-xs-1'><span>인원</span></div></div></li>";
+	
+	            for (var i=0; i<data.length; i++)
+	            {
+	               listPrint += "<li class='list-group-item board-body'><div class='row'><div class='col-md-4 col-xs-4'>";
+	               listPrint += "<span class='meetingPage' id='"+ data[i].meetingCode +"'>"+ data[i].meetingSubject+ "</span>";
+	               listPrint += "</div><div class='col-md-2 col-xs-2'>";
+	               listPrint += "<span class='captainName' id='"+ data[i].captainAcctCode +"'>"+ data[i].captainName+ "</span>";
+	               listPrint += "</div><div class='col-md-3 col-xs-3'>";
+	               listPrint += "<span class='courtName' id='"+ data[i].courtRegistrationCode +"'>"+ $("#courtName").text()+ "</span>";
+	               listPrint += "</div><div class='col-md-2 col-xs-2'>";
+	               listPrint += "<span>"+ data[i].meetingDate+ "</span>";
+	               listPrint += "</div><div class='col-md-1 col-xs-1'>";
+	               listPrint += "<span>"+ data[i].nowPeopleNumber+ "/"+ data[i].meetingPeopleNumber+ "</span>";
+	               listPrint += "</div></div></li>";
+	               
+	
+	         
+	                  
+	            }
+	            $("#meetingList").html(listPrint);
+	            
+	            //alert(listPrint);
+	            
+	            
+	            // 모임 제목 클릭하면 모임으로
+	            $(".meetingPage").click(function()
+	            {
+	               //var id = ($(this).attr('id'));
+	               var meetingCode = $(this).attr('id');
+	               
+	               $(location).attr("href","<%=cp%>/play/meeting/"+ meetingCode);
+	               //childWindow.resizeTo(800, 800);
+	            });
+	            
+	            // 코트 이름 클릭하면 코트 페이지로
+	            $(".courtName").click(function()
+	            {
+	               var courtCode = ($(this).attr('id'));
+	               
+	               $(location).attr("href","<%=cp%>/court/"+ courtCode);
+	            });
+	            
+	         },
+	         error : function(e)
+	         {
+	            alert(e.responseText);
+	         }
+	               
+      	});
+   
+   } // 모든 값이 채워졌을 때  모임 검색이 실행 됨
+   else		// 값이 하나라도 없을 때
+   {
+	   if (!$("input[name='meetingType']:checked").val())
+	{
+		inputRequest += "모임 종류를 선택해 주세요<br>";
+	}
+	   
+	   if (!$("#dateselect1").val() || !$("#timeselect").val() != null)
+	{
+		inputRequest += "모임 시간을 선택해주세요 <br>";
+	}
+	   
+	   if ( !$("#regionSelect").val() || !$("#citySelect").val() )
+	{
+		inputRequest += "모임 지역을 선택해주세요 <br>";
+	}
+	   
+	   if (!$("#courtCode").val())
+	{
+		inputRequest += "모임을 할 코트를 선택해주세요<br>;"
+	}
+	   // 입력 요청 메시지 출력
+	   $("#requestmessage").html(inputRequest);
+	   
+   }
    
       
       // 모임 개설 이동
@@ -663,11 +706,9 @@ $(function()
       {
          $(location).attr("href","<%=cp%>/play/meeting/createfull");
       });
-      
-      
-      
+   });
 
-      });
+});
    </script>
 
 </body>
