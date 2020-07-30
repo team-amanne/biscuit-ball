@@ -833,26 +833,22 @@ $(function()
 				   });
 				   
 				});
-				
-				
-			    
-			    
+							   
 			  //모임 시작
 			    $('#startTime').change(function() 
 			   {
-			    var meetDate = $('#dateselect1').val() + $('#startTime').val();
+			    var meetDate = $('#dateselect1').val() + $('#startTime option:selected').val();
 			   	 $('#meetingDate').val(meetDate);
-			   	 //alert(meetDate);
-				})
+				});
 				
 				 //모임 종료
 			    $('#endTime').change(function() 
 			   {
-			    	var meetDate = $('#dateselect1').val() + " " + $('#startTime option:selected').val();
-			      	 $('#meetingDate').val(meetDate);
+			    	/*var meetDate = $('#dateselect1').val() + " " + $('#startTime option:selected').val();
+			      	 $('#meetingDate').val(meetDate);*/
 			    	var meetEndDate = $('#dateselect1').val() + " " + $('#endTime option:selected').val();
 			      	 $('#meetingEndDate').val(meetEndDate);
-				})
+				});
 				
 				 //모집 종료
 			    $('#closeTime').change(function() 
@@ -866,6 +862,10 @@ $(function()
 			
 			
 			function check() {
+				
+				alert($('#startTime option:selected').val()+ "/"
+						   $('#endTime option:selected').val() + "/"
+						   $('#closeTime option:selected').val())
 				if($("#meetingSubject").val() == "")
 		        {
 		           $("#subjectCheck").text("입력 항목이 누락되었습니다.");
@@ -890,6 +890,12 @@ $(function()
 		    		alert("날짜를 입력하세요");
 		    		return false;
 		    	}
+		    	else
+		    	{
+		    		return false;
+		    		
+		    	}
+		    	
 			}
 		    	/*
 		    	
