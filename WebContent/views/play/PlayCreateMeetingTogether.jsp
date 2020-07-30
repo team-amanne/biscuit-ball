@@ -4,7 +4,7 @@
 
 <%
 	request.setCharacterEncoding("UTF-8");
-String cp = request.getContextPath();
+	String cp = request.getContextPath();
 %>
 
 <!DOCTYPE html>
@@ -75,9 +75,7 @@ select {
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 
-
 <script type="text/javascript">
-
 $(function()
 {
 	
@@ -115,6 +113,7 @@ $(function()
     });
     
     // 실력 조건, 나이 조건 자바스크립트
+    
     
     var tier = "${userDto.tierName}";
 	var userBirthday = "${userDto.userBirthday}".substring(0,4);
@@ -165,21 +164,76 @@ $(function()
 	
     $("#meeting-create").click(function()
     { 
+    	if($("#meetingSubject").val() == "")
+        {
+           $("#subjectCheck").text("입력 항목이 누락되었습니다.");
+           $("#subjectCheck").css("color", "red");
+           $("#meetingSubject").focus();
+           return false;  
+        }
+        else
+        {
+           $("#subjectCheck").text("");  
+        }
+    	
+    	if($(':radio[name="meetingTypeCode"]:checked').length < 1 
+    			|| $(':radio[name="quickPlayOrNot"]:checked').length < 1
+    			|| $(':radio[name="ballExistOrNot"]:checked').length < 1)
+    	{
+		    alert('카테고리를 선택해주세요');
+		    return false;
+		   
+		}
+    	
+    	if($('#dateselect1').val() == "" || $('#dateselect2').val() == "")
+    	{
+    		alert("날짜를 입력하세요");
+    		return false;
+    	}
+    	
+    	else
+    	{
+    		if($('#dateselect1').val() == $('#dateselect2').val() && $('#startTime').val())
+        	{
+        		alert("")
+        	}
+    	}
+    	
+    	
+    	if()
+    	// 고민좀
+    	/*
+    	if( $("#citySelect option:selected").val() == "" ||  $("#citySelect option:selected").val() == "시·군·구 선택" ) 
+	    {
+	       alert('지역을 선택해주세요');
+	       $("#citySelect").focus();
+	       return false;
+	    }
+    	
+    	if( $("#startTime option:selected").val() == "" ||  $("#endTime option:selected").val() == "" ) 
+	    {
+	       alert('시간을 선택해주세요');
+	       $("#citySelect").focus();
+	       return false;
+	    }
+		*/
+             
+    	
     	$("#createMeet").submit();
     });
     
     
-  //모임 시작
-    $('#meetTimeSelect').change(function() 
+  	//모임 시작
+    $('#startTime').change(function() 
    {
-    var meetDate = $('#dateselect1').val() + $('#meetTimeSelect').val();
+    var meetDate = $('#dateselect1').val() + $('#startTime').val();
    	 $('#meetingDate').val(meetDate);
    	 alert(meetDate);
 	})
 	
 	 //모임 종료
     $('#endTime').change(function() 
-   {
+   	{
     	var meetDate = $('#dateselect1').val() + " " + $('#startTime option:selected').val();
       	 $('#meetingDate').val(meetDate);
     	var meetEndDate = $('#dateselect1').val() + " " + $('#endTime option:selected').val();
@@ -188,7 +242,7 @@ $(function()
 	
 	 //모집 종료
     $('#closeTime').change(function() 
-   {
+   	{
     	var meetCloseDate = $('#dateselect2').val() + " " + $('#closeTime option:selected').val();
     	$('#meetingCloseDate').val(meetCloseDate);
     	
@@ -234,6 +288,7 @@ $(function()
 										class="form-control" id="meetingSubject" name="meetingSubject">
 									<span class="err">*모임 제목을 입력해주세요</span>
 								</div>
+								<div id="subjectCheck"></div>
 								<h4>모임 정보 입력</h4>
 								<div class="row">
 									<div class="col-md-4">
@@ -249,9 +304,11 @@ $(function()
 												</label>
 
 											</div>
+											
 										</div>
+										
 									</div>
-
+									<div id="meetingTypeCodeCheck"></div>
 									<div class="col-md-4">
 										<div class="panel panel-default">
 											<div class="panel-heading">빠른농구 참가 여부</div>
