@@ -49,18 +49,18 @@
 								<p>문의/신고 > 메인</p>
 								<hr>
 								<div class="button_image">
-									<button type="button" class="a-link"><img src="<%=cp %>/views/img/Test1.png"></button>
+									<button type="button" class="a-link"><img src="<%=cp %>/images/other/Test1.png"></button>
 
-									<button type="button" class="a-link"><img src="<%=cp %>/views/img/Test2.png"></button>
+									<button type="button" class="a-link"><img src="<%=cp %>/images/other/Test2.png"></button>
 									
-									<button type="button" class="a-link"><img src="<%=cp %>/views/img/Test3.png"></button>
+									<button type="button" class="a-link"><img src="<%=cp %>/images/other/Test3.png"></button>
 								</div>
 							</div>
 						</div>
 						<ul class="list-group">
 							<li class="list-group-item board-body board-header">
 								<div class="row">															
-									<div class="col-sm-12 col-xs-12">
+									<div class="col-sm-11 col-xs-11">
 										<span>문 의 내 역</span>
 									</div>
 									<div class="col-sm-1 col-xs-1">
@@ -153,7 +153,7 @@
 						<ul class="list-group">
 							<li class="list-group-item board-body board-header">
 								<div class="row">															
-									<div class="col-sm-12 col-xs-12">
+									<div class="col-sm-11 col-xs-11">
 										<span>신 고 내 역</span>
 									</div>								
 									<div class="col-sm-1 col-xs-1">

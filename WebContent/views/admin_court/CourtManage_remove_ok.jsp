@@ -2,11 +2,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	request.setCharacterEncoding("utf-8");
-	String cp = request.getContextPath();
+String cp = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
 <head>
+
+<!-- 카카오 지도 api -->
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc64d6281d98a5c7b78142fa0cbd2f7c"></script>
+
 
 <!-- Font Awesome icons (free version)-->
 <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js"
@@ -44,7 +49,7 @@
 
 
 
-<title>BiscuitBail > 코트 등록완료</title>
+<title>BiscuitBail > 코트 관리</title>
 
 <!-- 부트스트랩/제이쿼리 -->
 <!-- 부가적인 테마 -->
@@ -61,7 +66,7 @@
 	<!-- 메인 -->
 	<div class="main container-fluid">
 		<div class="section-title container">
-			<span> </span>
+			<span></span>
 			<hr />
 		</div>
 		<div class="row">
@@ -71,7 +76,7 @@
 					<div class="col-md-8">
 						<div class="row">
 							<div class="col-md-12 complete">
-								<h3>코트가 등록되었습니다.</h3>
+								<h3>해당코트가 정상적으로 삭제되었습니다.</h3>
 							</div>
 						</div>
 						<div class="row">
@@ -79,7 +84,7 @@
 							<div class="col-xs-10 panel panel-default">
 								<div class="row  panel-heading panel-body">
 									<div class="col-xs-12">
-										<span>등록된 코트 정보</span>
+										<span>삭제요청된 코트 정보</span>
 									</div>
 								</div>
 								<div class="row panel-body">

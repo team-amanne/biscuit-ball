@@ -87,62 +87,70 @@ String cp = request.getContextPath();
 
 											<div class="col-sm-12 col-xs-12">
 												<div class="row panel-body">
-													<div class="col-sm-4 col-xs-4">
-														<label>연령대</label>
-													</div>
-													<div class="col-sm-3 col-xs-3">
-														<label class="radio-inline"> <input type="radio"
-															name="inlineRadio1" id="inlineRadio1" value="option1">
-															상관없음
-														</label>
-													</div>
-													<div class="col-sm-4 col-xs-5">
-														<label class="radio-inline"> <input type="radio"
-															name="inlineRadio1" id="inlineRadio2" value="option2">
-															나와 비슷한 연령대
-														</label>
-													</div>
-													<div class="col-sm-1"></div>
-												</div>
-
-												<div class="row panel-body">
-													<div class="col-sm-4 col-xs-4">
-														<label>실력</label>
-													</div>
-													<div class="col-sm-3 col-xs-3">
-														<label class="radio-inline"> <input type="radio"
-															name="inlineRadio2" id="inlineRadio2-1" value="option1">
-															상관없음
-														</label>
-													</div>
-													<div class="col-sm-4 col-xs-4">
-														<label class="radio-inline"> <input type="radio"
-															name="inlineRadio2" id="inlineRadio2-1" value="option2">
-															내 실력점수 이상
-														</label>
-													</div>
-													<div class="col-sm-2 col-xs-2"></div>
-												</div>
-
-
-
-
-												<div class="row panel-body">
-													<div class="col-sm-4 col-xs-4">
-														<label>페어플레이점수</label>
-													</div>
-													<div class="col-sm-3 col-xs-3">
-														<label class="radio-inline"> <input type="radio"
-															name="inlineRadio3" id="inlineRadio1-2" value="option1">
-															상관없음
-														</label>
-													</div>
-													<div class="col-sm-4 col-xs-4">
-														<label class="radio-inline"> <input type="radio"
-															name="inlineRadio3" id="inlineRadio2-2" value="option2">
-															내 페어플레이점수 이상
-														</label>
-													</div>
+														<div class="flex">
+															<span class="form-control name">연령제한*</span>
+																<select class="form-control age col-sm-3 col-xs-3" id="age">
+																	<option selected="selected">최소 연령선택</option>
+																	<option>10대</option>
+																	<option>20대</option>
+																	<option>30대</option>
+																	<option>40대</option>
+																	<option>50대</option>
+																	<option>60대 이상</option>
+																	<option>연령제한 없음</option>
+																</select>
+																<span style="font-size: 18pt; margin-left: 10px;"> ~ </span>
+																<select class="form-control age2" id="age2">
+																	<option selected="selected">최대 연령선택</option>
+																	<option>10대</option>
+																	<option>20대</option>
+																	<option>30대</option>
+																	<option>40대</option>
+																	<option>50대</option>
+																	<option>60대 이상</option>
+																	<option>연령제한 없음</option>
+																</select>
+														</div>
+														<div class="flex">
+															<span class="form-control name">실력제한*</span>
+																<select class="form-control ability" id="ability">
+																	<option selected="selected">최소 실력선택</option>
+																	<option>하</option>
+																	<option>중</option>
+																	<option>상</option>
+																	<option>실력제한 없음</option>
+																</select>
+																<span style="font-size: 18pt; margin-left: 10px;"> ~ </span>
+																<select class="form-control ability2" id="ability2">
+																	<option selected="selected">최대 실력선택</option>
+																	<option>하</option>
+																	<option>중</option>
+																	<option>상</option>
+																	<option>실력제한 없음</option>
+																</select>
+														</div>
+														<div class="flex">
+															<span class="form-control name">페어플레이제한*</span>				
+																<select class="form-control fairplay" id="fairplay">
+																	<option selected="selected">최소 페어플레이 점수 제한</option>
+																	<option>1점대</option>
+																	<option>2점대</option>
+																	<option>3점대</option>
+																	<option>4점대</option>						
+																	<option>5점대</option>
+																	<option>점수제한 없음</option>
+																</select>
+																<span style="font-size: 18pt; margin-left: 10px;"> ~ </span>
+																<select class="form-control fairplay2" id="fairplay2">
+																	<option selected="selected">최대 페어플레이 점수 제한</option>
+																	<option>1점대</option>
+																	<option>2점대</option>
+																	<option>3점대</option>
+																	<option>4점대</option>						
+																	<option>5점대</option>
+																	<option>점수제한 없음</option>
+																</select>
+														</div>
 													<div class="col-sm-2 col-xs-2"></div>
 												</div>
 											</div>

@@ -70,7 +70,7 @@
 					<div class="col-md-8 col-xs-12 panel panel-default">						
 						<div class="row top">
 							<div class="col-md-12">
-								<h4>친구관리</h4>
+								<h4>차단 유저관리</h4>
 							</div>
 						</div>
 						<ul class="list-group">

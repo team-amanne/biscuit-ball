@@ -65,7 +65,7 @@
 	margin-left: 45.5%;
 }
 
-.check
+#check
 {
 	height: 20px;
 	margin: 0px;

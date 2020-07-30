@@ -14,6 +14,10 @@
 .content_title_value
 {
 	background-color: orange !important;
+	cursor: auto !important;
+	color: white !important;
+	font-weight: bold;
+	
 }
 
 .content
@@ -25,7 +29,7 @@
 
 .button
 {
-	margin-left: 32%;
+	margin-left: 35%;
 }
 
 .confirm

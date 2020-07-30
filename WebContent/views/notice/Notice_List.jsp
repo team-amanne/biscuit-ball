@@ -36,7 +36,7 @@
 
 .button_right
 {
-	margin-left: 141%;
+	margin-left: 217%;
 }
 
 </style>

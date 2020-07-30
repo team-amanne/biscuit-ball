@@ -107,40 +107,25 @@
 	<div class="row">
 		<div class="col-md-2">
 		</div>
-		<div class="col-md-8 ">
-		</div>
-		<div class="col-md-2">
-		</div>
-		
-	</div>
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-sm-8 category">
-			<button type="button" class="btn btn-warning">
-				전체
-			</button> 
-			<button type="button" class="btn btn-outline-secondary">
-				농구하기
-			</button> 
-			<button type="button" class="btn btn-outline-secondary">
-				크루
-			</button> 
-			<button type="button" class="btn btn-outline-secondary">
-				대전
-			</button> 
-			<button type="button" class="btn btn-outline-secondary">
-				마이페이지
-			</button>
-			<button type="button" class="btn btn-outline-secondary">
-				코트페이지
-			</button>
-			<button type="button" class="btn btn-outline-secondary">
-				친구·차단
-			</button>
-			<button type="button" class="btn btn-outline-secondary">
-				기타
-			</button>
+		<div class="col-sm-8">
+				<ul class="nav nav-tabs" role="tablist">
+					<li role="presentation" class="active"><a href="#home"
+						aria-controls="home" role="tab" data-toggle="tab">전체</a></li>
+					<li role="presentation"><a href="#profile"
+						aria-controls="profile" role="tab" data-toggle="tab">농구하기</a></li>
+					<li role="presentation"><a href="#profile"
+						aria-controls="profile" role="tab" data-toggle="tab2">크루</a></li>
+					<li role="presentation"><a href="#profile"
+						aria-controls="profile" role="tab" data-toggle="tab2">대전</a></li>
+					<li role="presentation"><a href="#profile"
+						aria-controls="profile" role="tab" data-toggle="tab2">마이페이지</a></li>
+					<li role="presentation"><a href="#profile"
+						aria-controls="profile" role="tab" data-toggle="tab2">코트페이지</a></li>
+					<li role="presentation"><a href="#profile"
+						aria-controls="profile" role="tab" data-toggle="tab2">친구·차단</a></li>
+					<li role="presentation"><a href="#profile"
+						aria-controls="profile" role="tab" data-toggle="tab2">기타</a></li>
+				</ul>
 		</div>
 		<div class="col-md-2">
 		</div>
@@ -184,7 +169,7 @@
 							<span>[농구하기]</span>
 						</div>
 						<div class="col-md-3">
-							<span><a href="">농구공 대신  축구공 가져가도되요?</a></span>
+							<span><a href="">농구공 대신 축구공</a></span>
 						</div>
 						<div class="col-md-2">
 							<span><a href="">버거맨</a></span>
@@ -207,7 +192,7 @@
 							<span>[크루]</span>
 						</div>
 						<div class="col-md-3">
-							<span><a href="">크루탈퇴하려는데 에러가 납니다</a></span>
+							<span><a href="">크루탈퇴하려는데..</a></span>
 						</div>
 						<div class="col-md-2">
 							<span><a href="">용산특급</a></span>
@@ -230,7 +215,7 @@
 							<span>[기타]</span>
 						</div>
 						<div class="col-md-3">
-							<span><a href="">이럴경우엔 어떻게 해결해야하나요?</a></span>
+							<span><a href="">이럴경우엔 어떻하죠?</a></span>
 						</div>
 						<div class="col-md-2">
 							<span><a href="">tmdwn1523</a></span>
@@ -322,7 +307,7 @@
 							<span>[코트페이지]</span>
 						</div>
 						<div class="col-md-3">
-							<span><a href="">코트설정 바뀐게 반영이 안됩니다.</a></span>
+							<span><a href="">코트설정 이 안바뀌어요</a></span>
 						</div>
 						<div class="col-md-2">
 							<span><a href="">GM한별</a></span>
@@ -368,7 +353,7 @@
 							<span>[친구·차단]</span>
 						</div>
 						<div class="col-md-3">
-							<span><a href="">차단했는데도 그사람 글이 계속보여요</a></span>
+							<span><a href="">차단했는데도 효과없어요</a></span>
 						</div>
 						<div class="col-md-2">
 							<span><a href="">GM한별</a></span>
@@ -409,15 +394,6 @@
 			</div>
 		<div class="col-md-2"></div>
 				
-		<div class="col-md-2">
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8">
-		</div>
 		<div class="col-md-2">
 		</div>
 	</div>

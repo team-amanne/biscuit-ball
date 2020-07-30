@@ -59,7 +59,7 @@
 }
 
 /* 체크박스 */
-.check
+#check
 {
 	height: 20px;
 	margin: 0px;
@@ -115,7 +115,7 @@
 			<ul class="list-group post">
 					<li class="list-group-item title_board_bar">
 						<div class="col-md-1">
-							<span><input type="checkbox" class="form-control" id="check"></span>
+							<span><input type="checkbox" class="form-control check" id="check"></span>
 						</div>
 						<div class="col-md-1">
 							<span>번호</span>
@@ -138,7 +138,7 @@
 					</li>
 					<li class="list-group-item post_board">
 						<div class="col-md-1">
-							<span><input type="checkbox" class="form-control" id="check"></span>
+							<span><input type="checkbox" class="form-control check" id="check"></span>
 						</div>
 						<div class="col-md-1">
 							<span>10</span>
@@ -161,7 +161,7 @@
 					</li>
 					<li class="list-group-item post_board">
 						<div class="col-md-1">
-							<span><input type="checkbox" class="form-control" id="check"></span>
+							<span><input type="checkbox" class="form-control check" id="check"></span>
 						</div>
 						<div class="col-md-1">
 							<span>9</span>
@@ -184,7 +184,7 @@
 					</li>
 					<li class="list-group-item post_board">
 						<div class="col-md-1">
-							<span><input type="checkbox" class="form-control" id="check"></span>
+							<span><input type="checkbox" class="form-control check" id="check"></span>
 						</div>
 						<div class="col-md-1">
 							<span>8</span>
@@ -207,7 +207,7 @@
 					</li>
 					<li class="list-group-item post_board">
 						<div class="col-md-1">
-							<span><input type="checkbox" class="form-control" id="check"></span>
+							<span><input type="checkbox" class="form-control check" id="check"></span>
 						</div>
 						<div class="col-md-1">
 							<span>7</span>
@@ -230,7 +230,7 @@
 					</li>
 					<li class="list-group-item post_board">
 						<div class="col-md-1">
-							<span><input type="checkbox" class="form-control" id="check"></span>
+							<span><input type="checkbox" class="form-control check" id="check"></span>
 						</div>
 						<div class="col-md-1">
 							<span>6</span>
@@ -253,7 +253,7 @@
 					</li>
 					<li class="list-group-item post_board">
 						<div class="col-md-1">
-							<span><input type="checkbox" class="form-control" id="check"></span>
+							<span><input type="checkbox" class="form-control check" id="check"></span>
 						</div>
 						<div class="col-md-1">
 							<span>5</span>
@@ -276,7 +276,7 @@
 					</li>
 					<li class="list-group-item post_board">
 						<div class="col-md-1">
-							<span><input type="checkbox" class="form-control" id="check"></span>
+							<span><input type="checkbox" class="form-control check" id="check"></span>
 						</div>
 						<div class="col-md-1">
 							<span>4</span>
@@ -299,7 +299,7 @@
 					</li>
 					<li class="list-group-item post_board">
 						<div class="col-md-1">
-							<span><input type="checkbox" class="form-control" id="check"></span>
+							<span><input type="checkbox" class="form-control check" id="check"></span>
 						</div>
 						<div class="col-md-1">
 							<span>3</span>
@@ -345,7 +345,7 @@
 					</li>
 					<li class="list-group-item post_board">
 						<div class="col-md-1">
-							<span><input type="checkbox" class="form-control" id="check"></span>
+							<span><input type="checkbox" class="form-control check" id="check"></span>
 						</div>
 						<div class="col-md-1">
 							<span>1</span>

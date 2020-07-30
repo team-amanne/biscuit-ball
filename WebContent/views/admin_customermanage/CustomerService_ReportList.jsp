@@ -176,30 +176,24 @@
 		<div class="col-md-2">
 		</div>
 		<div class="col-sm-8 category">
-			<button type="button" class="btn btn-warning">
-				전체
-			</button> 
-			<button type="button" class="btn btn-outline-secondary">
-				욕설/인신공격
-			</button> 
-			<button type="button" class="btn btn-outline-secondary">
-				음란성/선정성
-			</button> 
-			<button type="button" class="btn btn-outline-secondary">
-				악성코드/스파이웨어
-			</button> 
-			<button type="button" class="btn btn-outline-secondary">
-				불법광고
-			</button>
-			<button type="button" class="btn btn-outline-secondary">
-				도배/댓글반복
-			</button>
-			<button type="button" class="btn btn-outline-secondary">
-				영리목적
-			</button>
-			<button type="button" class="btn btn-outline-secondary">
-				기타
-			</button>
+			<ul class="nav nav-tabs" role="tablist">
+				<li role="presentation" class="active"><a href="#home"
+					aria-controls="home" role="tab" data-toggle="tab">전체</a></li>
+				<li role="presentation"><a href="#profile"
+					aria-controls="profile" role="tab" data-toggle="tab">욕설/인신공격</a></li>
+				<li role="presentation"><a href="#profile"
+					aria-controls="profile" role="tab" data-toggle="tab2">음란성/선정성</a></li>
+				<li role="presentation"><a href="#profile"
+					aria-controls="profile" role="tab" data-toggle="tab2">악성코드/스파이웨어</a></li>
+				<li role="presentation"><a href="#profile"
+					aria-controls="profile" role="tab" data-toggle="tab2">불법광고</a></li>
+				<li role="presentation"><a href="#profile"
+					aria-controls="profile" role="tab" data-toggle="tab2">도배/댓글반복</a></li>
+				<li role="presentation"><a href="#profile"
+					aria-controls="profile" role="tab" data-toggle="tab2">영리목적</a></li>
+				<li role="presentation"><a href="#profile"
+					aria-controls="profile" role="tab" data-toggle="tab2">기타</a></li>
+			</ul>
 		</div>
 		<div class="col-md-2">
 		</div>
@@ -298,7 +292,7 @@
 							<span>2020.07.10</span>
 						</div>
 						<div class="col-md-2">
-							<span class="board-header">[ <span style="color: green; font-weight: bold;">접수완료</span> ]</span>
+							<span>[ <span style="color: green; font-weight: bold;">접수완료</span> ]</span>
 						</div>
 					</li>
 					<li class="list-group-item post_board">
@@ -321,7 +315,7 @@
 							<span>2020.07.10</span>
 						</div>
 						<div class="col-md-2">
-							<span class="board-header">[ <span style="color: blue; font-weight: bold;">처리중</span> ]</span>
+							<span>[ <span style="color: blue; font-weight: bold;">처리중</span> ]</span>
 						</div>
 					</li>
 					<li class="list-group-item post_board">

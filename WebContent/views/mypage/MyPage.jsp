@@ -344,10 +344,11 @@ $().ready(function()
             <div class="col-md-2">
             </div>
          </div>
-         </form>
       </div>
    </div>
 </div>
+         </form>
+
 
     <c:import url="../base/Footer.jsp"></c:import>
 	
