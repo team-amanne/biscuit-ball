@@ -479,8 +479,6 @@ String cp = request.getContextPath();
    <!-- 헤더 -->
    <c:import url="../base/Header.jsp"></c:import>
    <!-- 서브 -->
-   <c:import url="../base/Submenu.jsp"></c:import>
-   <form action="<%=cp%>/signupdo" id="signUp_submit" method="post">
    <div class="main container-fluid">
       <div class="section-title container">
          <p>회원가입</p>
