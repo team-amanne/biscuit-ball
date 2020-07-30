@@ -41,6 +41,9 @@
    href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/default.css">
 <link rel="stylesheet" href="<%=cp%>/css/board.css" />
+<script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
 </head>
 <body>
 	<!-- 헤더 -->
