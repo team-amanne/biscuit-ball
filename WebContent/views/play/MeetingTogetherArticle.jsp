@@ -254,7 +254,7 @@
 							</c:if>
 							 --%>
 							<button class="btn btn-default btn-lg" onclick="location.href='<%=cp %>/play/party'">
-								농구하기
+								메뉴 메인
 							</button>
 						</div>
 					
