@@ -29,11 +29,6 @@
 	text-align: center;
 }
 
-.category /* 카테고리 버튼 */
-{
-	margin-bottom: 4px;
-}
-
 /* 검색 소속 flex */
 .search
 {
@@ -58,23 +53,11 @@
 	margin: auto;
 }
 
-.submit_delete
-{
-	display: flex;
-	margin-left: 59.5%;
-}
-
 #check
 {
 	height: 20px;
 	margin: 0px;
 	width: 30%;
-}
-
-.category_button /* 카테고리 버튼 */
-{
-	display: flex;
-	margin-bottom: 20px;
 }
 
 /* 숫자 도형 색깔 */

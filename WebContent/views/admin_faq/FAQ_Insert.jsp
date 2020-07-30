@@ -130,11 +130,11 @@
 					<div class="col-md-8 button">
 						<div class="button">
 							<div class="submit">
-								<button type="submit" class="btn btn-default btn-submit button_middle" id="submit">등록</button> 
+								<button type="submit" class="btn btn-warning btn-submit button_middle" id="submit">등록</button> 
 							</div>
 							
 							<div class="cancel">
-								<button type="button" class="btn btn-default btn-cancel button_middle" id="cancel">취소</button> 
+								<button type="button" class="btn btn-warning btn-cancel button_middle" id="cancel">취소</button> 
 							</div>
 						</div>				
 					</div>
