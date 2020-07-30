@@ -18,16 +18,23 @@
 	<context:component-scan base-package="com.amanne.biscuitball.model" />
 	<context:component-scan base-package="com.amanne.biscuitball.util" />
 	<context:component-scan base-package="com.amanne.biscuitball.mybatis" />
-	
+	<!-- 
 	<bean id="mainDataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver"></property>
 		<property name="url" value="jdbc:oracle:thin:@211.238.142.163:1521:xe"></property>
 		<property name="username" value="amanne"></property>
 		<property name="password" value="java006$"></property>
 	</bean>
+	 -->
+	<bean id="dbcpDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
+		<property name="url" value="jdbc:oracle:thin:@211.238.142.163:1521:xe"></property>
+		<property name="username" value="amanne"></property>
+		<property name="password" value="java006$"></property>
+	</bean>
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="mainDataSource"></property>
+		<property name="dataSource" ref="dbcpDataSource"></property>
 		<property name="mapperLocations" value="classpath:com/amanne/biscuitball/mybatis/mapper/*.xml">
 		</property>
 	</bean>
