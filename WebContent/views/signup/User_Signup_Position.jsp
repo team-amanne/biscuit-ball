@@ -97,9 +97,9 @@
 					<div class="col-md-3">
 						<div class="flex">
 								<div class="radio_check">
-									<label class="radio_button1"><input type='radio' id="yes"   name='click' value='1'></label>
-										<label class="radio_button2"><input type='radio' id="normal" class="normal" name='click' value='2'></label>
-									<label class="radio_button3"><input type='radio' id="no"    name='click' value='3'></label>
+									<label class="radio_button1"><input type='radio' id="yes"   name='click1' value='1'></label>
+										<label class="radio_button2"><input type='radio' id="normal" class="normal" name='click1' value='2'></label>
+									<label class="radio_button3"><input type='radio' id="no"    name='click1' value='3'></label>
 								</div>
 						</div>
 					</div>
@@ -111,9 +111,9 @@
 					<div class="col-md-3">
 						<div class="flex">
 								<div class="radio_check">
-									<label class="radio_button1"><input type='radio' id="yes"   name='click' value='1'></label>
-									<label class="radio_button2"><input type='radio' id="normal" class="normal" name='click' value='2'></label>
-									<label class="radio_button3"><input type='radio' id="no"    name='click' value='3'></label>
+									<label class="radio_button1"><input type='radio' id="yes"   name='click2' value='1'></label>
+									<label class="radio_button2"><input type='radio' id="normal" class="normal" name='click2' value='2'></label>
+									<label class="radio_button3"><input type='radio' id="no"    name='click2' value='3'></label>
 								</div>
 						</div>
 					</div>
@@ -125,9 +125,9 @@
 					<div class="col-md-3">
 						<div class="flex">
 								<div class="radio_check">
-									<label class="radio_button1"><input type='radio' id="yes"   name='click' value='1'></label>
-									<label class="radio_button2"><input type='radio' id="normal" class="normal" name='click' value='2'></label>
-									<label class="radio_button3"><input type='radio' id="no"    name='click' value='3'></label>
+									<label class="radio_button1"><input type='radio' id="yes"   name='click3' value='1'></label>
+									<label class="radio_button2"><input type='radio' id="normal" class="normal" name='click3' value='2'></label>
+									<label class="radio_button3"><input type='radio' id="no"    name='click3' value='3'></label>
 								</div>
 						</div>
 					</div>
@@ -139,9 +139,9 @@
 					<div class="col-md-3">
 						<div class="flex">
 								<div class="radio_check">
-									<label class="radio_button1"><input type='radio' id="yes"   name='click' value='1'></label>
-									<label class="radio_button2"><input type='radio' id="normal" class="normal" name='click' value='2'></label>
-									<label class="radio_button3"><input type='radio' id="no"    name='click' value='3'></label>
+									<label class="radio_button1"><input type='radio' id="yes"   name='click4' value='1'></label>
+									<label class="radio_button2"><input type='radio' id="normal" class="normal" name='click4' value='2'></label>
+									<label class="radio_button3"><input type='radio' id="no"    name='click4' value='3'></label>
 								</div>
 						</div>
 					</div>
@@ -153,9 +153,9 @@
 					<div class="col-md-3">
 						<div class="flex">
 								<div class="radio_check">
-									<label class="radio_button1"><input type='radio' id="yes"   name='click' value='1'></label>
-									<label class="radio_button2"><input type='radio' id="normal" class="normal" name='click' value='2'></label>
-									<label class="radio_button3"><input type='radio' id="no"    name='click' value='3'></label>
+									<label class="radio_button1"><input type='radio' id="yes"   name='click5' value='1'></label>
+									<label class="radio_button2"><input type='radio' id="normal" class="normal" name='click5' value='2'></label>
+									<label class="radio_button3"><input type='radio' id="no"    name='click5' value='3'></label>
 								</div>
 						</div>
 					</div>
@@ -167,9 +167,9 @@
 					<div class="col-md-3">
 						<div class="flex">
 								<div class="radio_check">
-									<label class="radio_button1"><input type='radio' id="yes"   name='click' value='1'></label>
-									<label class="radio_button2"><input type='radio' id="normal" class="normal" name='click' value='2'></label>
-									<label class="radio_button3"><input type='radio' id="no"    name='click' value='3'></label>
+									<label class="radio_button1"><input type='radio' id="yes"   name='click6' value='1'></label>
+									<label class="radio_button2"><input type='radio' id="normal" class="normal" name='click6' value='2'></label>
+									<label class="radio_button3"><input type='radio' id="no"    name='click6' value='3'></label>
 								</div>
 						</div>
 					</div>
@@ -181,9 +181,9 @@
 					<div class="col-md-3">
 						<div class="flex">
 								<div class="radio_check">
-									<label class="radio_button1"><input type='radio' id="yes"   name='click' value='1'></label>
-									<label class="radio_button2"><input type='radio' id="normal" class="normal" name='click' value='2'></label>
-									<label class="radio_button3"><input type='radio' id="no"    name='click' value='3'></label>
+									<label class="radio_button1"><input type='radio' id="yes"   name='click7' value='1'></label>
+									<label class="radio_button2"><input type='radio' id="normal" class="normal" name='click7' value='2'></label>
+									<label class="radio_button3"><input type='radio' id="no"    name='click7' value='3'></label>
 								</div>
 						</div>
 					</div>
@@ -195,9 +195,9 @@
 					<div class="col-md-3">
 						<div class="flex">
 								<div class="radio_check">
-									<label class="radio_button1"><input type='radio' id="yes"   name='click' value='1'></label>
-									<label class="radio_button2"><input type='radio' id="normal" class="normal" name='click' value='2'></label>
-									<label class="radio_button3"><input type='radio' id="no"    name='click' value='3'></label>
+									<label class="radio_button1"><input type='radio' id="yes"   name='click8' value='1'></label>
+									<label class="radio_button2"><input type='radio' id="normal" class="normal" name='click8' value='2'></label>
+									<label class="radio_button3"><input type='radio' id="no"    name='click8' value='3'></label>
 								</div>
 						</div>
 					</div>
@@ -209,9 +209,9 @@
 					<div class="col-md-3">
 						<div class="flex">
 								<div class="radio_check">
-									<label class="radio_button1"><input type='radio' id="yes"   name='click' value='1'></label>
-									<label class="radio_button2"><input type='radio' id="normal" class="normal" name='click' value='2'></label>
-									<label class="radio_button3"><input type='radio' id="no"    name='click' value='3'></label>
+									<label class="radio_button1"><input type='radio' id="yes"   name='click9' value='1'></label>
+									<label class="radio_button2"><input type='radio' id="normal" class="normal" name='click9' value='2'></label>
+									<label class="radio_button3"><input type='radio' id="no"    name='click9' value='3'></label>
 								</div>
 						</div>
 					</div>
@@ -223,9 +223,9 @@
 					<div class="col-md-3">
 						<div class="flex">
 								<div class="radio_check">
-									<label class="radio_button1"><input type='radio' id="yes"   name='click' value='1'></label>
-									<label class="radio_button2"><input type='radio' id="normal" class="normal" name='click' value='2'></label>
-									<label class="radio_button3"><input type='radio' id="no"    name='click' value='3'></label>
+									<label class="radio_button1"><input type='radio' id="yes"   name='click10' value='1'></label>
+									<label class="radio_button2"><input type='radio' id="normal" class="normal" name='click10' value='2'></label>
+									<label class="radio_button3"><input type='radio' id="no"    name='click10' value='3'></label>
 								</div>
 						</div>
 					</div>
@@ -233,7 +233,7 @@
 			</ul>	
 			
 				<div>
-					<button class="form-control result" id="result">결과 확인하기</button>
+					<button class="btn btn-warning button_middle result" id="result">결과 확인하기</button>
 				</div>
 			
 			
