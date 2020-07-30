@@ -98,10 +98,10 @@ margin-top: 23%;
 			<div class="item" align="center">
 				<img src="<%=cp %>/images/other/main_crew.jpg" alt="크루" width="1200" height="500">
 				<div class="carousel-caption" style="top: 25%; left: 15%; width: 450px; height: 200px; background-color: rgba(255, 255, 255, 0.5);">
-					<h2 style="font-weight: bold;">팀과 함께하세요!</h2>
+					<h2 style="font-weight: bold;">크루와 함께하세요!</h2>
 					<p style="margin-bottom: 20px; font-weight: bold;">BiscuitBall의 유저들이 당신을 기다립니다</p>
 					<a href="#"><button type="button" class="btn" 
-					 style="background-color: orange; color: white; border: none; padding: 10px 20px; font-weight: bold; font-size: 18px;">농구 하기</button></a>
+					 style="background-color: orange; color: white; border: none; padding: 10px 20px; font-weight: bold; font-size: 18px;">크루 보기</button></a>
 				</div>
 			</div>
 			<div class="item" align="center">
