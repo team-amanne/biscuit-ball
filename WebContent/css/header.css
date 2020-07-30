@@ -130,8 +130,7 @@
 .header .navbar-nav > .active > a
 , .header .navbar-nav > .active > a:hover
 , .header .navbar-nav > .active > a:focus {
-	background-color: var(--nav-point);
-	color: white;
+	background-color: white;
 	font-weight: bold;
 }
 

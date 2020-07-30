@@ -44,7 +44,7 @@ String cp = request.getContextPath();
 <body>
 
    <!-- 헤더 -->
-      <c:import url="../base/Header.jsp"></c:import>
+      <c:import url="../base/Header.jsp?active=play"></c:import>
 <c:import url="../base/PlaySubmenu.jsp"></c:import>
 
    <div class="main container-fluid">
