@@ -134,7 +134,7 @@ margin-top: 23%;
 			<a><span class="glyphicon glyphicon-chevron-left"></span></a>
 			<span class="sr-only">Previous</span>
 		</div>
-		<div id="dateView" class="col-md-6 col-xs-6">
+		<div id="dateView" class="col-md-6 col-xs-6 dateView">
 			<div class="col-md-1 col-xs-1">일</div>
 			<div class="col-md-1 col-xs-1">월</div>
 			<div class="col-md-1 col-xs-1">화</div>

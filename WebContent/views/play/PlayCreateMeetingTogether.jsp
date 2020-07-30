@@ -4,7 +4,7 @@
 
 <%
 	request.setCharacterEncoding("UTF-8");
-String cp = request.getContextPath();
+	String cp = request.getContextPath();
 %>
 
 <!DOCTYPE html>
@@ -75,7 +75,138 @@ select {
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 
+<script type="text/javascript">
+$(function()
+{
+	
+	 //날짜 placeholder 오늘로 고정
+	var now = new Date();
+    var year= now.getFullYear();
+    var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);
+    var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate();
+    var sysdate = now.getDate();
+    
+    // 오늘로부터 14일 선택 가능하게 만듦(데이트 피커)
+    var maxDate = new Date();
+    var endDay = sysdate+14;
+    maxDate.setDate(endDay);
+            
+    var today = "ex) " + year + '-' + mon + '-' + day;
+    $("#dateselect1").attr("placeholder", today);
+    
+    //데이트피커 사용
+    $("#dateselect1").datepicker({
+  	  
+  	  minDate: 0,
+  	  maxDate: maxDate,
+  	  dateFormat: "yy-mm-dd"
+    });
+    
+    $("#dateselect2").attr("placeholder", today);
+    
+    //데이트피커 사용
+    $("#dateselect2").datepicker({
+  	  
+  	  minDate: 0,
+  	  maxDate: maxDate,
+  	  dateFormat: "yy-mm-dd"
+    });
+    
+    // 실력 조건, 나이 조건 자바스크립트
+    
+    
+    var tier = "${userDto.tierName}";
+	var userBirthday = "${userDto.userBirthday}".substring(0,4);
+	var age = year - parseInt(userBirthday)+1;
+	
+	/*
+	for(var i=parseInt(tier); i<=5; i=i+1) {        
+        var html;
+        html += "<option value="+userBirthday+">LV."+i+"</option>"
+    }
+    $("#tier-check").append(html);
+    */
+    
+    for(var i=0; i<=Math.floor(age/10)*10; i=i+10) {        
+        var minage;
+        minage += "<option value="+i+">"+i+"대</option>"
+    }
+    $("#minage-check").append(minage);
 
+    for(var i=Math.floor(age/10)*10; i<=100; i=i+10) {        
+        var maxage;
+        maxage += "<option value="+i+">"+i+"대</option>"
+    }
+    $("#maxage-check").append(maxage);
+    
+	
+	// ajax() 사용해 시군구 불러오기
+    $("#regionSelect").on("change", function()
+	 {
+	   $.ajax({
+	      type: "get",
+	      dataType: "json",
+	      url: "<%=cp%>/ajax/citylist",
+	      data: {regionCode: $(this).val()},
+	      success: function(data) {
+	         var result = "<option value=''>시·군·구</option>\n";
+	         for(var i=0; i<data.length; i++)
+	            result += "<option value='" + data[i].cityCode +"'>" + data[i].cityName + "</option>\n";
+	         $("#citySelect").html(result);
+	      },
+	      error: function(e){
+	         alert(e.responseText);
+	      }
+	   });
+	   
+	});
+	
+	/*
+    $("#meeting-create").click(function()
+    { 
+
+    	
+		
+             
+    	
+    	$("#createMeet").submit();
+    	
+		
+    });
+	
+    
+    
+  	//모임 시작
+    $('#startTime').change(function() 
+   {
+    var meetDate = $('#dateselect1').val() + $('#startTime').val();
+   	 $('#meetingDate').val(meetDate);
+   	 alert(meetDate);
+	})
+	
+	 //모임 종료
+    $('#endTime').change(function() 
+   	{
+    	var meetDate = $('#dateselect1').val() + " " + $('#startTime option:selected').val();
+      	 $('#meetingDate').val(meetDate);
+    	var meetEndDate = $('#dateselect1').val() + " " + $('#endTime option:selected').val();
+      	 $('#meetingEndDate').val(meetEndDate);
+	})
+	
+	 //모집 종료
+    $('#closeTime').change(function() 
+   	{
+    	var meetCloseDate = $('#dateselect2').val() + " " + $('#closeTime option:selected').val();
+    	$('#meetingCloseDate').val(meetCloseDate);
+    	
+	})
+});
+*/
+
+		// 입력값 check
+		
+
+</script>
 
 
 </head>
@@ -97,7 +228,7 @@ select {
 		<div class="row">
 			<div class="col-md-3"></div>
 			<form action="<%=cp%>/play/meeting/createcomplete"
-				class="createMeeting-form" id="createMeet">
+				class="createMeeting-form" id="createMeet" onsubmit="return check()">
 				<div class="col-md-6">
 					<div class="row">
 
@@ -111,6 +242,7 @@ select {
 										class="form-control" id="meetingSubject" name="meetingSubject">
 									<span class="err">*모임 제목을 입력해주세요</span>
 								</div>
+								<div id="subjectCheck"></div>
 								<h4>모임 정보 입력</h4>
 								<div class="row">
 									<div class="col-md-4">
@@ -126,9 +258,11 @@ select {
 												</label>
 
 											</div>
+											
 										</div>
+										
 									</div>
-
+									<div id="meetingTypeCodeCheck"></div>
 									<div class="col-md-4">
 										<div class="panel panel-default">
 											<div class="panel-heading">빠른농구 참가 여부</div>
@@ -700,26 +834,20 @@ select {
 				   
 				});
 				
-				
-			    $("#meeting-create").click(function()
-			    { 
-			    	$("#createMeet").submit();
-			    });
-			    
-			    
+			   
 			  //모임 시작
 			    $('#startTime').change(function() 
 			   {
-			    var meetDate = $('#dateselect1').val() + $('#startTime').val();
-			   	 $('#meetingDate').val(meetDate);
-			   	 //alert(meetDate);
+			   /* var meetDate = $('#dateselect1').val() + $('#startTime').val();
+			   	 $('#meetingDate').val(meetDate);*/
+			   		var meetDate = $('#dateselect1').val() + " " + $('#startTime option:selected').val();
+		      	 	$('#meetingDate').val(meetDate);
 				})
 				
 				 //모임 종료
 			    $('#endTime').change(function() 
 			   {
-			    	var meetDate = $('#dateselect1').val() + " " + $('#startTime option:selected').val();
-			      	 $('#meetingDate').val(meetDate);
+			    	
 			    	var meetEndDate = $('#dateselect1').val() + " " + $('#endTime option:selected').val();
 			      	 $('#meetingEndDate').val(meetEndDate);
 				})
@@ -733,7 +861,55 @@ select {
 				});
 				
 			});
-
+			
+			
+			function check() {
+				
+				var startTime = $('#startTime option:selected').val();
+				var endTime = $('#endTime option:selected').val();
+				var closeTime = $('#closeTime option:selected').val();
+				startTime = parseInt(startTime.replace(":00", ""));
+				endTime = parseInt(endTime.replace(":00", ""));
+				closeTime = parseInt(closeTime.replace(":00", ""));
+				
+				var playTime = startTime-closeTime;
+				
+				// alert(startTime + "/" + endTime + "/" + closeTime);
+				// return false;
+				
+				
+				  
+				if($("#meetingSubject").val() == "")
+		        {
+		           $("#subjectCheck").text("입력 항목이 누락되었습니다.");
+		           $("#subjectCheck").css("color", "red");
+		           $("#meetingSubject").focus();
+		           return false;  
+		        }
+		        else
+		        {
+		           $("#subjectCheck").text("");  
+		        }
+				if($(':radio[name="meetingTypeCode"]:checked').length < 1 
+		    			|| $(':radio[name="quickPlayOrNot"]:checked').length < 1
+		    			|| $(':radio[name="ballExistOrNot"]:checked').length < 1)
+		    	{
+				    alert('카테고리를 선택해주세요');
+				    return false;  
+				}
+		    	
+		    	if($('#dateselect1').val() == "" || $('#dateselect2').val() == "")
+		    	{
+		    		alert("날짜를 입력하세요");
+		    		return false;
+		    	}
+		    	if($('#dateselect1').val() == $('#dateselect2').val() && playTime < 3 || endTime<startTime)
+	    		{
+	    			alert("시간 조건에 맞지않습니다 다시 입력해주세요");
+	    			return false;
+	    		}
+		    	
+			}
 	</script>
 
 </body>
