@@ -160,14 +160,14 @@ String cp = request.getContextPath();
       });
          
          // 내코트 없는 경우 내코트 선택 불가
-         if ($("#myCourtCheckedVal").val() !=null)
-      {
+         if ($("#myCourtCheckedVal").val() !="")
+     	 {
             $("#myCourt").attr("disabled", false);
-      }
+      	}
          else
-       {
+         {
             $("#myCourt").attr("disabled", true);
-       }
+         }
          
          
          
@@ -285,9 +285,10 @@ String cp = request.getContextPath();
                                  </button>
                               </div>
                               <div class="col-md-2">
-                                 <label class="checkbox-inline radio"> <input
-                                    type="checkbox" name="inlineCheckOptions" id="myCourt" value=""> 내 코트
-                                 </label> <input type="hidden" value="${userDto.userCourtCode}" id="myCourtCheckedVal">
+                                 <label class="checkbox-inline radio"> 
+                                 <input type="checkbox" name="inlineCheckOptions" id="myCourt" > 내 코트
+                                 </label> 
+                                 <input type="hidden" value="${userDto.userCourtCode}" id="myCourtCheckedVal">
                               </div>
                              </div>
                             </div>
