@@ -64,23 +64,18 @@ String cp = request.getContextPath();
 
 
 
-<link rel="stylesheet"
-   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet"
-   href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="<%=cp%>/css/default.css" />
-<link rel="stylesheet" href="<%=cp%>/css/board.css" />
-<script type="text/javascript"
-   src="http://code.jquery.com/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css"
-   href="css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
 <!-- 달력(datepicker) -->
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet"
-   href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="<%=cp%>/css/default.css" />
+<link rel="stylesheet" href="<%=cp%>/css/board.css" />
+
 <style>
 /*datepicer 버튼 롤오버 시 손가락 모양 표시*/
 .ui-datepicker-trigger {
@@ -400,7 +395,7 @@ String cp = request.getContextPath();
                }
                else
                   $("#tel_check").text("");
-            
+            /*
             // 전화번호 인증번호 입력확인
             if($("#tel4").val() == "")
             {
@@ -412,7 +407,7 @@ String cp = request.getContextPath();
             }
             else
                $("#tel-certify-check").text("");
-            
+            */
             // // 포지션 입력없음
             if( $("#userPositionCode option:selected").val() == "포지션선택")
                {
@@ -425,7 +420,8 @@ String cp = request.getContextPath();
                {
                   $("#position_check").text("");
                }
-
+				
+          
                $("#signUp_submit").submit();
                        
       });
