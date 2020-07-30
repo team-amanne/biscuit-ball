@@ -602,12 +602,12 @@ $(function()
 	   var inputRequest = "";
 	  $("#requestmessage").html("");
 	   
-      $("#resultList").css("display", "inline");
       
-      // 사용자 입력 값 없을 시 처리
-      if ($("#dateselect1").val() != null && $("#timeselect").val() != null && $("#regionSelect").text()!="광역시·도" && $("#citySelect").text() != "" && $("#citySelect").text() != "시·군·구" && $("#courtCode").val() != null)
+      
+      // 사용자 입력 값 있을 시에만 에이젝스 실행
+      if ($("#dateselect1").val() != null && $("#timeselect").val() != null && $("#regionSelect").text()!="광역시·도" && $("#citySelect").val() != null && $("#courtCode").val() != null)
 	  {
-      
+    	  $("#resultList").css("display", "inline");
 	      $.ajax
 	      ({
 	         type: "get",
@@ -697,6 +697,7 @@ $(function()
 	}
 	   // 입력 요청 메시지 출력
 	   $("#requestmessage").html(inputRequest);
+	   return;
 	   
    }
    
