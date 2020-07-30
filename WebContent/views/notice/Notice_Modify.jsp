@@ -12,6 +12,8 @@
 <style type="text/css">
 
 
+
+
 </style>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -63,13 +65,13 @@
 			<div class="col-md-2">
 			</div>
 			<div class="col-md-8 username flex">
-					<div class="form-control username_name" id="username_name">
-						작성자
-					</div>
-					
-					<div class="form-control username_value" id="username_value">
-						GM동규
-					</div>
+				<div class="form-control username_name" id="username_name">
+					작성자
+				</div>
+				
+				<div class="form-control username_value" id="username_value">
+					GM동규
+				</div>
 			</div>
 			<div class="col-md-2">
 			</div>
@@ -83,7 +85,7 @@
 						제목
 					</div>
 					<div class="title_value">
-						<input type="text" class="form-control" id="title_value" value="불법 및 도박, 현금거래 등 처벌 안내">
+						<input type="text" class="form-control title_value" id="title_value" value="불법 및 도박, 현금거래 등 처벌 안내">
 					</div>
 				</div>
 			</div>

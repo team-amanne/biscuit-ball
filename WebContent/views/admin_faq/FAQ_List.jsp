@@ -27,9 +27,15 @@
 	width: 200px;
 }
 
-.button_right
+.click_button
 {
-	margin-left: 141%;
+	margin-left: auto !important;
+    width: 205px !important;
+}
+
+.create_button
+{
+	margin-right: 10px;
 }
 
 </style>
@@ -43,8 +49,8 @@
 </head>
 <body>
 
-		<c:import url="../base/Header.jsp"></c:import>
-<c:import url="../base/Submenu.jsp"></c:import>
+	<c:import url="../base/Header.jsp"></c:import>
+	<c:import url="../base/Submenu.jsp"></c:import>
 	
 	<!-- 메인 -->
 	<div class="main container-fluid">
@@ -296,13 +302,14 @@
 								<button type="button" class="btn btn-warning btn-submit button_small">검색</button>
 							</div>
 							
-													<div class="row"> 
-							<div class="col-md-12 button_right">
-								<button class="btn btn-default btn-submit button_middle" type="submit">작성하기</button>
-								<button class="btn btn-default button_middle" type="submit">삭제하기</button>
-							</div>	
-						</div>
-							
+							<div class="col-md-12 click_button flex">
+								<div class="create_button">
+									<button class="btn btn-warning btn-submit button_small" type="submit" id="create">작성하기</button>
+								</div>
+								<div class="delete_button">
+									<button class="btn btn-warning button_small" type="submit" id="delete">삭제하기</button>
+								</div>
+							</div>
 						</div>
 
 					</div>

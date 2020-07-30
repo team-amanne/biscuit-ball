@@ -18,74 +18,11 @@ String cp = request.getContextPath();
    width: 80%;
 }
 
-/* 이메일 */
-#email {
-   margin-left: 90px;
-   margin-bottom: 10px;
-   width: 279px;
-}
-
-/* 이메일 인증 */
-#email_certify {
-   margin-left: 10px;
-   width: 98px;
-   height: 34px;
-}
-
-/* 비밀번호1 */
-#password1 {
-   margin-left: 70px;
-   margin-bottom: 10px;
-   width: 279px;
-}
-
-/* 비밀번호2 */
-#password2 {
-   margin-left: 25px;
-   margin-bottom: 10px;
-   width: 279px;
-}
-
-/* 이름 */
-#name {
-   margin-left: 109px;
-   margin-bottom: 10px;
-   width: 279px;
-}
-
-/* 닉네임 */
-#nickname {
-   margin-left: 88px;
-   margin-bottom: 10px;
-   width: 279px;
-}
-
-/* 닉네임 중복확인 */
-#nickname_check {
-   margin-left: 10px;
-   width: 98px;
-   height: 34px;
-}
-
 /* 라벨명 */
 .f_size {
    font-size: 15pt;
    font-weight: bold;
    margin-top: 5px;
-}
-
-/* 생년월일 */
-#birtday {
-   margin-left: 24px;
-   margin-bottom: 10px;
-   width: 279px;
-}
-
-
-/* 성별 라디오버튼 */
-#jender {
-   margin-right: 5px;
-   width: 220px;
 }
 
 /* 여자, 남자 */
@@ -99,108 +36,27 @@ String cp = request.getContextPath();
    font-size: 15pt;
 }
 
-/* 신장 */
-#key_height {
-   margin-left: 107px;
-   margin-bottom: 10px;
-   width: 279px;
+.select, .position, .tels
+{
+	padding-left: 4px !important;
+	margin-left: 0px !important;
 }
 
-/* 자기평가실력 */
-#self {
-   margin-left: 27px;
-   margin-bottom: 10px;
-   width: 129px;
+.tel1, .tel2, .tel3
+{
+	width: 107px !important;
 }
 
-/* 지역선택 */
-#country {
-   margin-left: 66px;
-   margin-bottom: 10px;
-   width: 130px;
+.space
+{
+	margin: 5px;
 }
 
-/* 지역구(시 군 구) */
-#region {
-   margin-left: 10px;
-   margin-bottom: 10px;
-   width: 140px;
+.button
+{
+	margin-left: 17%;
 }
 
-/* 전화번호 1번째 3번째 입력칸 */
-#tel1 {
-   margin-left: 66px;
-   margin-bottom: 10px;
-   width: 80px;
-}
-
-/* 전화번호 2번째 입력칸 */
-#tel2 {
-   width: 80px;
-   margin-left: 7px;
-   margin-right: 7px;
-   margin-bottom: 10px;
-}
-
-/* 전화번호 3번째 입력칸 */
-#tel3 {
-   width: 80px;
-   margin-bottom: 10px;
-}
-
-/* 전화번호 인증번호 입력칸 */
-#tel4 {
-   margin-left: 66px;
-   margin-bottom: 10px;
-   width: 279px;
-}
-
-/* 전화번호 인증 */
-#tel_certify {
-   margin-left: 10px;
-   width: 98px;
-   height: 34px;
-}
-
-#tel_certify_send {
-   margin-left: 10px;
-   width: 110px;
-   height: 34px;
-}
-
-/* 포지션 선택 */
-#position {
-   margin-left: 46px;
-   width: 279px;
-}
-
-/* 포지션 추천버튼 */
-#position_recommend {
-   margin-left: 10px;
-   width: 98px;
-   height: 34px;
-}
-
-/* 회원가입, 돌아가기 버튼 포함클래스 */
-.last_button {
-   margin-left: auto;
-   width: 480px;
-   margin-top: 50px;
-}
-
-/* 회원가입 완료버튼 */
-#sign_up {
-   margin-left: 10px;
-   width: 98px;
-   height: 34px;
-}
-
-/* 돌아가기 버튼 */
-#back {
-   margin-left: 10px;
-   width: 98px;
-   height: 34px;
-}
 
 </style>
 
@@ -213,6 +69,7 @@ String cp = request.getContextPath();
 <link rel="stylesheet"
    href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="<%=cp%>/css/default.css" />
+<link rel="stylesheet" href="<%=cp%>/css/board.css" />
 <script type="text/javascript"
    src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
@@ -587,8 +444,6 @@ String cp = request.getContextPath();
                       ,
                       changeMonth : true //콤보박스에서 월 선택 가능                
                       ,
-                      showOn : "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시  
-                      ,
                       buttonImage : "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
                       ,
                       buttonImageOnly : true //기본 버튼의 회색 부분을 없애고, 이미지만 보이게 함
@@ -630,9 +485,9 @@ String cp = request.getContextPath();
    <!-- 서브 -->
    <c:import url="../base/Submenu.jsp"></c:import>
    <form action="<%=cp%>/signupdo" id="signUp_submit" method="post">
-   <div class="container-fluid">
+   <div class="main container-fluid">
       <div class="section-title container">
-         <h5></h5>
+         <p>회원가입</p>
          <hr />
       </div>
       <div class="row">
@@ -650,8 +505,8 @@ String cp = request.getContextPath();
                   <button class="btn btn-warning email_certify" id="email_certify">중복확인</button>
                </div>
                <div class="col-sm-2 col-xs-2" id="id_check"></div>
-
             </div>
+            
             <div class="row">
                <div class="col-sm-3 col-xs-3">
                   <label class="f_size">비밀번호*</label>
@@ -661,6 +516,7 @@ String cp = request.getContextPath();
                      id="userPassword" name="userPassword" placeholder="*********" maxlength="15">
                </div>
             </div>
+            
             <div class="row">
                <div class="col-sm-3 col-xs-3">
                   <label class="f_size">비밀번호 재확인*</label>
@@ -676,16 +532,17 @@ String cp = request.getContextPath();
                </div>
                <div class="col-sm-2 col-xs-2" id="pwd_check"></div>
             </div>
+            
             <div class="row">
                <div class="col-sm-3 col-xs-3">
                   <label class="f_size">이름*</label>
                </div>
                <div class="col-sm-4 col-xs-4">
-                  <input type="text" class="form-control userName" id="userName"
-                     name="userName" placeholder="홍길동규">
+                  <input type="text" class="form-control userName" id="userName" name="userName" placeholder="홍길동규">
                </div>
-               <div class="col-sm-3 col-xs-3" id="name_check"></div>
+               <div class="col-sm-5 col-xs-5" id="name_check"></div>
             </div>
+            
             <div class="row">
                <div class="col-sm-3 col-xs-3">
                   <label class="f_size">닉네임*</label>
@@ -706,10 +563,11 @@ String cp = request.getContextPath();
                   <label class="f_size datepicker" style="width: 150px;">생년월일*</label>
                </div>
                <div class="col-sm-4 col-xs-4">
-                  <input type="text" id="datepicker" name="userBirthday">
+                  <input type="text" id="datepicker" name="userBirthday" class="form-control">
                </div>
-               <div class="col-sm-2 col-xs-2" id="birth_check"></div>
+               <div class="col-sm-3 col-xs-3" id="birth_check"></div>
             </div>
+            
             <div class="row">
                <div class="col-sm-3 col-xs-3">
                   <label class="f_size userGenderCode" id="userGenderCode">성별*</label>
@@ -723,6 +581,7 @@ String cp = request.getContextPath();
                   </label>
                </div>
             </div>
+            
             <div class="row">
                <div class="col-sm-3 col-xs-3">
                   <label class="f_size">신장*</label>
@@ -733,6 +592,7 @@ String cp = request.getContextPath();
                </div>
                <div class="col-sm-2 col-xs-2" id="height_check"></div>
             </div>
+            
             <div class="row">
                <div class="col-sm-3 col-xs-3">
                   <label class="f_size">자기실력평가*</label>
@@ -747,49 +607,63 @@ String cp = request.getContextPath();
                   </select>
                </div>
                <div class="col-sm-3 col-xs-3" id="selfEvaluation_check"></div>
-
             </div>
+            
             <div class=" flex row">
                <div class="col-sm-4 col-xs-4">
                   <label class="f_size">거점지역*</label>
                </div>
-               <div class="col-sm-3 col-xs-3">
-                  <select name="" class="form-control" id="regionSelect">
+               <div class="col-sm-2 col-xs-2 select">
+                  <select name="" class="form-control regionSelect" id="regionSelect">
 						<option value="">광역시·도</option>
 						<c:forEach var="regionDto"  items="${regionList }">
 						<option value="${regionDto.regionCode }">${regionDto.regionName } </option>
 						</c:forEach>
 				</select>
                </div>
-               <div class="col-sm-3 col-xs-3">
-					<select class="form-control" name='userCityCode' id="citySelect">
-											
-					</select>
-			</div>
-               <div class="col-sm-2 col-xs-2 city_check"></div>
+               <div class="col-sm-2 col-xs-2">
+					<select class="form-control citySelect" name='userCityCode' id="citySelect"></select>
+				</div>
+               		<div class="col-sm-2 col-xs-2 city_check"></div>
             </div>
+            
             <div class="flex row">
-               <div class="col-sm-3 col-xs-3">
+               <div class="col-sm-4 col-xs-4">
                   <label class="f_size">전화번호*</label>
                </div>
-               <select class="form-control tel1" id="tel1">
-
-                  <option selected="selected">선택</option>
-                  <option>010</option>
-                  <option>011</option>
-                  <option>012</option>
-                  <option>017</option>
-                  <option>018</option>
-                  <option>019</option>
-               </select>
-               <div id="space1">-</div>
-               <input type="tel" class="form-control tel2" id="tel2">
-               <div id="space2">-</div>
-               <input type="tel" class="form-control tel3" id="tel3"> 
-               <input type="hidden" name="userTel" id="userTel">
-
-               <button class="btn btn-warning" id="tel_certify">인증</button>
-               <div class="col-sm-2 col-xs-2" id="tel_check"></div>
+               
+               <div class="col-sm-4 col-xs-4 flex tels">
+	               <div class="col-sm-1.5 col-xs-1.5">
+		               <select class="form-control tel1" id="tel1">
+		                  <option selected="selected">선택</option>
+		                  <option>010</option>
+		                  <option>011</option>
+		                  <option>012</option>
+		                  <option>017</option>
+		                  <option>018</option>
+		                  <option>019</option>
+		               </select>
+	               </div>
+					
+	               <div class="space"> - </div>
+	               
+	               <div class="col-sm-1.5 col-xs-1.5">
+	               		<input type="tel" class="form-control tel2" id="tel2">
+	               </div>
+	               
+	               <div class="space"> - </div>
+	               
+	               <div class="col-sm-1.5 col-xs-1.5">
+	                	<input type="tel" class="form-control tel3" id="tel3"> 
+	               		<input type="hidden" name="userTel" id="userTel">
+	               </div>
+	               <div class="col-sm-3 col-xs-3">
+               			<button class="btn btn-warning tel_certify" id="tel_certify">인증</button>
+               	   </div>
+	               
+               </div>
+               
+               <div id="tel_check"></div>
             </div>
 
             <div class="flex row" style="display: none;" id="certification">
@@ -805,54 +679,50 @@ String cp = request.getContextPath();
                      id="tel_certify_send">인증번호 발송</button>
                </div>
                <div class="col-sm-2 col-xs-2" id="tel-certify-check"></div>
-
             </div>
 
-            <div class="flex row">
-               <div class="col-sm-4 col-xs-4">
-                  <label class="f_size">선호포지션*</label>
-               </div>
-               <div class="col-sm-4 col-xs-4">
-                  <select class="form-control userPositionCode"
-                     id="userPositionCode" name="userPositionCode">
-                     <option selected="selected">포지션선택</option>
-                     <option value="ZP01">포인트가드</option>
-                     <option value="ZP02">센터</option>
-                     <option value="ZP03">슈팅가드</option>
-                     <option value="ZP04">스몰 포워드</option>
-                     <option value="ZP05">파워 포워드</option>
-                  </select>
-               </div>
-               <div class="col-sm-2 col-xs-2">
-	               <button class="btn btn-warning position_recommend"
-	                  id="position_recommend">포지션 추천</button>
-            	</div>
-            	<div class="col-sm-2 col-xs-2" id="position_check"></div>
-         </div>
-         <div class="flex row">
+      <div class="flex row">
+	        <div class="col-sm-4 col-xs-4">
+	           <label class="f_size">선호포지션*</label>
+	        </div>
+	        <div class="col-sm-4 col-xs-4 position">
+	           <select class="form-control userPositionCode"
+	              id="userPositionCode" name="userPositionCode">
+	              <option selected="selected">포지션선택</option>
+	              <option value="ZP01">포인트가드</option>
+	              <option value="ZP02">센터</option>
+	              <option value="ZP03">슈팅가드</option>
+	              <option value="ZP04">스몰 포워드</option>
+	              <option value="ZP05">파워 포워드</option>
+	           </select>
+	        </div>
+	        <div class="col-sm-2 col-xs-2">
+	         	<button class="btn btn-warning position_recommend" id="position_recommend">포지션 추천</button>
+	     	</div>
+     	<div class="col-sm-2 col-xs-2" id="position_check"></div>
+      </div>
+      <div class="flex row">
          <div class="col-sm-4 col-xs-4">
-            <label class="f_size" id="">sms수신여부*</label>
+            <label class="f_size" id="">SMS 수신여부*</label>
          </div>
          <div class="col-sm-5 col-xs-5">
-            <label class="radio-inline radio_button"> <input
-               type="radio" name="snsSync" value="ZU02" checked="checked">NO
-            </label> <label class="radio-inline radio_button"> <input
-               type="radio" name="snsSync" value="ZU01">YES
+            <label class="radio-inline radio_button"> 
+            	<input type="radio" name="snsSync" value="ZU01" checked="checked">YES
             </label>
+            <label class="radio-inline radio_button"> 
+            	<input type="radio" name="snsSync" value="ZU02">NO
+            </label> 
          </div>
       </div>
          <div class="col-md-3"></div>
       </div>
-
-
-      
 
       <div class="row">
          <div class="col-md-3"></div>
-         <div class="col-md-6 flex">
-            <div class="last_button">
-               <button class="btn btn-warning sign_up" id="sign_up">회원가입</button>
-               <button class="btn btn-warning back" id="back">돌아가기</button>
+         <div class="col-md-6">
+            <div class="align_center button">
+               <button class="btn btn-warning button_middle sign_up" id="sign_up">회원가입</button>
+               <button class="btn btn-warning button_middle back" id="back">돌아가기</button>
             </div>
          </div>
       </div>
