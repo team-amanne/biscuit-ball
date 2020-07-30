@@ -214,7 +214,7 @@ String cp = request.getContextPath();
             }
            
           });
-          
+        
          // 전화번호 인증버튼확인
          $("#tel_certify").click(function() {            
               var tel = $('#tel1').val() +"-"+ $('#tel2').val() + "-" + $('#tel3').val();
@@ -400,7 +400,7 @@ String cp = request.getContextPath();
                }
                else
                   $("#tel_check").text("");
-            
+            /*
             // 전화번호 인증번호 입력확인
             if($("#tel4").val() == "")
             {
@@ -412,7 +412,7 @@ String cp = request.getContextPath();
             }
             else
                $("#tel-certify-check").text("");
-            
+            */
             // // 포지션 입력없음
             if( $("#userPositionCode option:selected").val() == "포지션선택")
                {

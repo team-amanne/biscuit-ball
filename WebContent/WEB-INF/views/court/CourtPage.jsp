@@ -406,7 +406,7 @@
 											<div class="panel-body">
 												<div class="row">
 													<div class="col-sm-2 col-xs-2">
-														<a href="#"><span>${review.registrantNickname }</span></a>
+														<a href="<%=cp %>/userpage/${review.registrantAccountCode }"><span>${review.registrantNickname }</span></a>
 													</div>
 													<div class="col-sm-4 col-xs-2"></div>
 													<div class="col-sm-3 col-xs-6">
