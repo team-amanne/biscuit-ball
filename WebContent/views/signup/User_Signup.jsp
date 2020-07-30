@@ -697,7 +697,7 @@ String cp = request.getContextPath();
               </select>
            </div>
            <div class="col-sm-2 col-xs-2">
-               <button class="btn btn-warning position_recommend" id="position_recommend">포지션 추천</button>
+               <button type="button" class="btn btn-warning position_recommend" id="position_recommend" disabled="disabled">포지션 추천</button>
            </div>
         <div class="col-sm-2 col-xs-2" id="position_check"></div>
       </div>
