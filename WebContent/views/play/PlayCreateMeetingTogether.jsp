@@ -75,7 +75,6 @@ select {
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 
-<<<<<<< HEAD
 <script type="text/javascript">
 $(function()
 {
@@ -162,66 +161,19 @@ $(function()
 	   
 	});
 	
-	
+	/*
     $("#meeting-create").click(function()
     { 
-    	if($("#meetingSubject").val() == "")
-        {
-           $("#subjectCheck").text("입력 항목이 누락되었습니다.");
-           $("#subjectCheck").css("color", "red");
-           $("#meetingSubject").focus();
-           return false;  
-        }
-        else
-        {
-           $("#subjectCheck").text("");  
-        }
+
     	
-    	if($(':radio[name="meetingTypeCode"]:checked').length < 1 
-    			|| $(':radio[name="quickPlayOrNot"]:checked').length < 1
-    			|| $(':radio[name="ballExistOrNot"]:checked').length < 1)
-    	{
-		    alert('카테고리를 선택해주세요');
-		    return false;
-		   
-		}
-    	
-    	if($('#dateselect1').val() == "" || $('#dateselect2').val() == "")
-    	{
-    		alert("날짜를 입력하세요");
-    		return false;
-    	}
-    	
-    	else
-    	{
-    		if($('#dateselect1').val() == $('#dateselect2').val() && $('#startTime').val())
-        	{
-        		alert("")
-        	}
-    	}
-    	
-    	
-    	if()
-    	// 고민좀
-    	/*
-    	if( $("#citySelect option:selected").val() == "" ||  $("#citySelect option:selected").val() == "시·군·구 선택" ) 
-	    {
-	       alert('지역을 선택해주세요');
-	       $("#citySelect").focus();
-	       return false;
-	    }
-    	
-    	if( $("#startTime option:selected").val() == "" ||  $("#endTime option:selected").val() == "" ) 
-	    {
-	       alert('시간을 선택해주세요');
-	       $("#citySelect").focus();
-	       return false;
-	    }
-		*/
+		
              
     	
     	$("#createMeet").submit();
+    	
+		
     });
+	
     
     
   	//모임 시작
@@ -249,14 +201,12 @@ $(function()
     	
 	})
 });
+*/
 
 		// 입력값 check
 		
 
 </script>
-=======
-
->>>>>>> branch 'master' of https://github.com/team-amanne/biscuit-ball.git
 
 
 </head>
@@ -278,7 +228,7 @@ $(function()
 		<div class="row">
 			<div class="col-md-3"></div>
 			<form action="<%=cp%>/play/meeting/createcomplete"
-				class="createMeeting-form" id="createMeet">
+				class="createMeeting-form" id="createMeet" onsubmit="return check()">
 				<div class="col-md-6">
 					<div class="row">
 
@@ -885,10 +835,6 @@ $(function()
 				});
 				
 				
-			    $("#meeting-create").click(function()
-			    { 
-			    	$("#createMeet").submit();
-			    });
 			    
 			    
 			  //모임 시작
@@ -917,6 +863,72 @@ $(function()
 				});
 				
 			});
+			
+			
+			function check() {
+				if($("#meetingSubject").val() == "")
+		        {
+		           $("#subjectCheck").text("입력 항목이 누락되었습니다.");
+		           $("#subjectCheck").css("color", "red");
+		           $("#meetingSubject").focus();
+		           return false;  
+		        }
+		        else
+		        {
+		           $("#subjectCheck").text("");  
+		        }
+				if($(':radio[name="meetingTypeCode"]:checked').length < 1 
+		    			|| $(':radio[name="quickPlayOrNot"]:checked').length < 1
+		    			|| $(':radio[name="ballExistOrNot"]:checked').length < 1)
+		    	{
+				    alert('카테고리를 선택해주세요');
+				    return false;  
+				}
+		    	
+		    	if($('#dateselect1').val() == "" || $('#dateselect2').val() == "")
+		    	{
+		    		alert("날짜를 입력하세요");
+		    		return false;
+		    	}
+			}
+		    	/*
+		    	
+		    	
+		    	else
+		    	{
+		    		if($('#dateselect1').val() == $('#dateselect2').val() && $('#startTime').val())
+		        	{
+		        		alert("")
+		        	}
+		    	}
+		    	
+		    	
+		    	if()
+		    	// 고민좀
+		    	/*
+		    	if( $("#citySelect option:selected").val() == "" ||  $("#citySelect option:selected").val() == "시·군·구 선택" ) 
+			    {
+			       alert('지역을 선택해주세요');
+			       $("#citySelect").focus();
+			       return false;
+			    }
+		    	
+		    	if( $("#startTime option:selected").val() == "" ||  $("#endTime option:selected").val() == "" ) 
+			    {
+			       alert('시간을 선택해주세요');
+			       $("#citySelect").focus();
+			       return false;
+			    }
+				return false;
+				
+			}
+			/*
+			$("#meeting-create").click(function()
+				 
+					{ 
+				    	$("#createMeet").submit();
+				    });*/
+				    
 
 	</script>
 
