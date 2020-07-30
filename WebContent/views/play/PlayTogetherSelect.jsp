@@ -78,6 +78,11 @@ String cp = request.getContextPath();
    text-align: center;
 }
 
+#requestmessage
+{
+	color: red;
+}
+
 </style>
 
 <!-- 달력(datepicker) -->
@@ -600,7 +605,7 @@ $(function()
       $("#resultList").css("display", "inline");
       
       // 사용자 입력 값 없을 시 처리
-      if ($("input[name='meetingType']:checked").val() != null && $("#dateselect1").val() != null && $("#timeselect").val() != null && $("#regionSelect").val() != null && $("#citySelect").val() != null && $("#courtCode").val() != null)
+      if ($("#dateselect1").val() != null && $("#timeselect").val() != null && $("#regionSelect").text()!="광역시·도" && $("#citySelect").text() != "" && $("#citySelect").text() != "시·군·구" && $("#courtCode").val() != null)
 	  {
       
 	      $.ajax
@@ -676,12 +681,7 @@ $(function()
    } // 모든 값이 채워졌을 때  모임 검색이 실행 됨
    else		// 값이 하나라도 없을 때
    {
-	   if (!$("input[name='meetingType']:checked").val())
-	{
-		inputRequest += "모임 종류를 선택해 주세요<br>";
-	}
-	   
-	   if (!$("#dateselect1").val() || !$("#timeselect").val() != null)
+	   if (!$("#dateselect1").val() || !$("#timeselect").val())
 	{
 		inputRequest += "모임 시간을 선택해주세요 <br>";
 	}
@@ -693,20 +693,20 @@ $(function()
 	   
 	   if (!$("#courtCode").val())
 	{
-		inputRequest += "모임을 할 코트를 선택해주세요<br>;"
+		inputRequest += "모임을 할 코트를 선택해주세요<br>";
 	}
 	   // 입력 요청 메시지 출력
 	   $("#requestmessage").html(inputRequest);
 	   
    }
    
-      
+   });   
       // 모임 개설 이동
       $("#createMeeting").click(function()
       {
          $(location).attr("href","<%=cp%>/play/meeting/createfull");
       });
-   });
+   
 
 });
    </script>
