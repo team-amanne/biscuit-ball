@@ -37,7 +37,7 @@
 					<li ${param.active == "court" ? "class='active'" : "" }>
 						<a
 						<c:if test='${param.active != "court" }'>
-						href = <c:url value=""></c:url>
+						href = <c:url value="/court/search"></c:url>
 						</c:if>
 						>
 						코트 정보
@@ -87,14 +87,14 @@
 									<li><a href="#">내 크루 가기</a></li>
 									<li class="divider"></li>
 									<li><span>마이페이지</span></li>
-									<li><a href="<%=cp%>/mypage">내 프로필</a></li>
+									<li><a href=<c:url value="/mypage"></c:url>>내 프로필</a></li>
 									<li><a href="#">회원정보 수정</a></li>
 									<li><a href="#">메시지함</a></li>
 									<li><a href="#">업적관리</a></li>
 									<li><a href="#">친구관리</a></li>
 									<li><a href="#">차단관리</a></li>
 									<li class="divider"></li>
-									<li><a href="<%=cp %>/logout" id="userLogout">로그아웃</a></li>
+									<li><a href=<c:url value="/logout"></c:url> id="userLogout">로그아웃</a></li>
 								</ul></li>
 
 						</c:when>
@@ -119,8 +119,8 @@
 
 						<c:otherwise>
 
-							<li><a href="<%=cp%>/login">로그인</a></li>
-							<li><a href="<%=cp%>/signup" class="btn-register">회원가입</a></li>
+							<li><a href=<c:url value="/login"></c:url>>로그인</a></li>
+							<li><a href=<c:url value="/signup"></c:url> class="btn-register">회원가입</a></li>
 
 						</c:otherwise>
 
@@ -160,8 +160,8 @@
 
 					<c:otherwise>
 
-						<li><a href="<%=cp %>/login" class="btn btn-default">로그인</a></li>
-						<li><a href="<%=cp %>/signup" class="btn btn-register">회원가입</a></li>
+						<li><a href=<c:url value="/login"></c:url> class="btn btn-default">로그인</a></li>
+						<li><a href=<c:url value="/signup"></c:url> class="btn btn-register">회원가입</a></li>
 
 					</c:otherwise>
 
@@ -172,8 +172,8 @@
 			<!-- 모바일 메뉴 아이콘 클릭했을 때 확장되는 화면 -->
 			<div class="collapse navbar-collapse" id="display-sm-collapse-menu">
 				<ul class="nav navbar-nav">
-					<li><a href="<%=cp%>/play/party">농구하기</a></li>
-					<li><a href="#">코트검색</a></li>
+					<li><a href=<c:url value="/play/party"></c:url>>농구하기</a></li>
+					<li><a href=<c:url value="/court/search"></c:url>>코트검색</a></li>
 					<li><a href="#">크루</a></li>
 					<li><a href="#">대전</a></li>
 				</ul>
@@ -205,14 +205,14 @@
 						<li><a href="#">내 코트 가기</a></li>
 						<li><a href="#">내 크루 가기</a></li>
 						<li class="divider"></li>
-						<li><a href="#">내 프로필</a></li>
+						<li><a href=<c:url value="/mypage"></c:url>>내 프로필</a></li>
 						<li><a href="#">회원정보 수정</a></li>
 						<li><a href="#">메시지함</a></li>
 						<li><a href="#">업적관리</a></li>
 						<li><a href="#">친구관리</a></li>
 						<li><a href="#">차단관리</a></li>
 						<li class="divider"></li>
-						<li><a href="<%=cp %>/logout">로그아웃</a></li>
+						<li><a href=<c:url value="/logout"></c:url>>로그아웃</a></li>
 					</ul>
 				</div>
 
@@ -225,7 +225,7 @@
 					<ul class="nav navbar-nav">
 						<li><a href="#">계정정보 수정</a></li>
 						<li class="divider"></li>
-						<li><a href="<%=cp %>/logout">로그아웃</a></li>
+						<li><a href=<c:url value="/logout"></c:url>>로그아웃</a></li>
 					</ul>
 				</div>
 
