@@ -342,7 +342,7 @@ String cp = request.getContextPath();
 										data: {mapPositionX: courtPositionX, mapPositionY: courtPositionY},
 										success: function(data)
 										{
-											/* $("#courtinfoboard").css("display", "inline"); */
+											console.log(data);
 											/* 코트 정보 */
 											/* 코트이름 */
 											$("#courtLink").attr("href", "<%=cp %>/court/" + data.courtCode);
@@ -373,9 +373,9 @@ String cp = request.getContextPath();
 											$("#toilet").removeClass("fa-times-circle-o");
 											$("#toilet").removeClass("fa-question-circle");
 											
-											if(data.toilet == "YES")
+											if(data.toilet == "있음")
 												$("#toilet").addClass("fa-check-circle-o");
-											else if(data.toilet == "NO")
+											else if(data.toilet == "없음")
 												$("#toilet").addClass("fa-times-circle-o");
 											else
 												$("#toilet").addClass("fa-question-circle");
@@ -385,9 +385,9 @@ String cp = request.getContextPath();
 											$("#shower").removeClass("fa-times-circle-o");
 											$("#shower").removeClass("fa-question-circle");
 											
-											if(data.shower == "YES")
+											if(data.shower == "있음")
 												$("#shower").addClass("fa-check-circle-o");
-											else if(data.shower == "NO")
+											else if(data.shower == "없음")
 												$("#shower").addClass("fa-times-circle-o");
 											else
 												$("#shower").addClass("fa-question-circle");
@@ -397,9 +397,9 @@ String cp = request.getContextPath();
 											$("#parkinglot").removeClass("fa-times-circle-o");
 											$("#parkinglot").removeClass("fa-question-circle");
 											
-											if(data.shower == "YES")
+											if(data.shower == "있음")
 												$("#parkinglot").addClass("fa-check-circle-o");
-											else if(data.shower == "NO")
+											else if(data.shower == "없음")
 												$("#parkinglot").addClass("fa-times-circle-o");
 											else
 												$("#parkinglot").addClass("fa-question-circle");

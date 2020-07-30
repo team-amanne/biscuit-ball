@@ -14,6 +14,8 @@
 .content_title_value
 {
 	background-color: orange !important;
+	color: white !important;
+	cursor: auto !important;
 }
 
 .content
@@ -25,7 +27,8 @@
 
 .button
 {
-	margin-left: 32%;
+	margin-left: auto;
+    width: 650px;
 }
 
 .confirm
@@ -48,7 +51,7 @@
 
 <div class="container-fluid">
       <div class="section-title container">
-         <p>자주묻는질문(FAQ) > 특정 자주묻는질문(FAQ) > 삭제</p>
+         <h5></h5>
          <hr />
       </div>
 	<div class="row">
@@ -62,14 +65,14 @@
 			<div class="form-control content">
 				<div class="content_value align_center">
 				<br>
-						게시물을 삭제하시겠습니까?
+						해당 게시물을 삭제 하시겠습니까?
 				</div>
 				<div class="button flex">
 					<div class="confirm">
-						<input type="button" class="btn btn-warning button_large" value="확인" id="confirm">
+						<input type="button" class="btn btn-warning button_middle" value="확인" id="confirm">
 					</div>
 					<div class="cancel">
-						<input type="button" class="btn btn-warning button_large" value="취소" id="cancel">
+						<input type="button" class="btn btn-warning button_middle" value="취소" id="cancel">
 					</div>
 				</div>
 			</div>
