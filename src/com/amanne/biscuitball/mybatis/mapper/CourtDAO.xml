@@ -551,8 +551,15 @@
 	<!-- public String getCourtByMapPosition(@Param("posx") String posx, @Param("posy") String posy);	// 좌표로 코드 찾기 -->
 	<select id="getCourtByMapPosition" resultType="java.lang.String">
 		SELECT COURT_REG_CODE
-		FROM TBL_COURT_REGISTRATION
-		WHERE #{posx} || ',' || #{posy} LIKE COURT_MAP_POSITION || '%'
+		FROM
+		(
+		    SELECT COURT_REG_CODE
+		         , TO_NUMBER(SUBSTR(COURT_MAP_POSITION, 1, INSTR(COURT_MAP_POSITION, ',', 1, 1) - 1)) AS POSX
+		         , TO_NUMBER(SUBSTR(COURT_MAP_POSITION, INSTR(COURT_MAP_POSITION, ',', 1, 1) + 1)) AS POSY
+		    FROM TBL_COURT_REGISTRATION
+		)
+		WHERE ROUND(POSX, 12) = ROUND(${posx}, 12)
+		  AND ROUND(POSY, 12) = ROUND(${posy}, 12)
 	</select>
 	
 	<!-- public int removeCourtReview(String courtReviewCode);	// 코트 리뷰 삭제 처리 -->

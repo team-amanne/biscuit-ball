@@ -28,6 +28,7 @@ String cp = request.getContextPath();
 </style>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 
    $(document).ready(function()

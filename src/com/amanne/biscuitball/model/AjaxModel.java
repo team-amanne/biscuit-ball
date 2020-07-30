@@ -227,6 +227,7 @@ public class AjaxModel
 		obj.put("courtCapacityCode", dto.getCourtCapacityCode());
 		obj.put("minCourtCapacity", dto.getMinCourtCapacity());
 		obj.put("maxCourtCapacity", dto.getMaxCourtCapacity());
+		obj.put("courtCapacityComfidence", dto.getCourtCapacityComfidence());
 		obj.put("toilet", dto.getToilet());
 		obj.put("toiletConfidence", dto.getToiletConfidence());
 		obj.put("shower", dto.getShower());
