@@ -248,7 +248,7 @@ String cp = request.getContextPath();
                     {
                         $("#tel_check").text("사용가능한 전화번호입니다");
                         $("#tel_check").css("color", "green");
-                        $("#certification").css("display","inline");
+                        //$("#certification").css("display","inline");
 
                     }
                     },
@@ -663,7 +663,7 @@ String cp = request.getContextPath();
 	               
                </div>
                
-               <div id="tel_check"></div>
+               <div id="tel_check" ></div>
             </div>
 
             <div class="flex row" style="display: none;" id="certification">
@@ -697,7 +697,7 @@ String cp = request.getContextPath();
 	           </select>
 	        </div>
 	        <div class="col-sm-2 col-xs-2">
-	         	<button class="btn btn-warning position_recommend" id="position_recommend">포지션 추천</button>
+	         	<button class="btn btn-warning position_recommend" id="position_recommend" disabled="disabled">포지션 추천</button>
 	     	</div>
      	<div class="col-sm-2 col-xs-2" id="position_check"></div>
       </div>
