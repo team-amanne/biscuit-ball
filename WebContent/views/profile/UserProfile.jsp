@@ -109,7 +109,7 @@ $().ready(function()
 
    <!-- 서브메뉴 -->
    <!-- 서브메뉴는 기능별(농구하기/코트검색/크루/...)로 복사해서 만들어두고 import 할 것 -->
-   <c:import url="../base/Submenu.jsp"></c:import>
+   <%-- <c:import url="../base/Submenu.jsp"></c:import> --%>
 <form action=".." method="post"  enctype="multipart/form-data" id="frm" name="frm">
    <!-- 메인  enctype="multipart/form-data"  -->
    <input type="hidden" id="userRequestType" name="userRequestType">
@@ -181,11 +181,13 @@ $().ready(function()
                <div class="row">
                   <div class="col-sm-5 col-xs-5">
                   </div>
-                  <div class="col-sm-2 col-xs-2">
+                  <div class="col-sm-4 col-xs-4">
                   </div>
-                  <div class="col-sm-5 col-xs-5">
-                  <p><button type="button" class="btn btn-default btn-link btn-block " style="width: 30%; margin-left: 40%" id="referee">심판정보</button></p>
-                  </div>      
+                  <div class="col-sm-3 col-xs-3" style="">
+                  <p><a><button type="button" class="btn btn-default " style="margin-left: 25%;" id="friend" disabled="disabled">친구 신청</button></a>
+                    <a><button type="button" class="btn btn-default" id="referee" disabled="disabled">심판정보</button></a></p>
+                  </div>
+                        
                            
                </div>
                <div class="row">

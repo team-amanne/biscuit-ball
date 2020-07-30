@@ -38,23 +38,23 @@ String cp = request.getContextPath();
 
 .select, .position, .tels
 {
-	padding-left: 4px !important;
-	margin-left: 0px !important;
+   padding-left: 4px !important;
+   margin-left: 0px !important;
 }
 
 .tel1, .tel2, .tel3
 {
-	width: 107px !important;
+   width: 107px !important;
 }
 
 .space
 {
-	margin: 5px;
+   margin: 5px;
 }
 
 .button
 {
-	margin-left: 17%;
+   margin-left: 17%;
 }
 
 
@@ -92,7 +92,7 @@ String cp = request.getContextPath();
 }
 
 .sign .row {
-	height: 50px;
+   height: 50px;
 }
 </style>
 
@@ -216,8 +216,8 @@ String cp = request.getContextPath();
           });
           
          // 전화번호 인증버튼확인
-         $("#tel_certify").click(function() {        	 
-           	var tel = $('#tel1').val() +"-"+ $('#tel2').val() + "-" + $('#tel3').val();
+         $("#tel_certify").click(function() {            
+              var tel = $('#tel1').val() +"-"+ $('#tel2').val() + "-" + $('#tel3').val();
             if($("#tel1 option:selected").val() == "선택" || $("#tel2").val() == "" || $("#tel3").val() == "")
             {
                  $("#tel_check").text("입력 항목이 누락되었습니다.");
@@ -282,8 +282,8 @@ String cp = request.getContextPath();
          
          // 거점지역 띄우기
           // ajax() 사용해 시군구 불러오기
-	      $("#regionSelect").on("change", function()
-      	 {
+         $("#regionSelect").on("change", function()
+          {
          $.ajax({
             type: "get",
             dataType: "json",
@@ -299,17 +299,17 @@ String cp = request.getContextPath();
                alert(e.responseText);
             }
          });
-      	});
+         });
          
          // submit시 발생 
          $("#sign_up").click(function() {
-        	 
-        	
-        	 
-        	 var str = $("#tel1").val() + "-" + $("#tel2").val() + "-" + $("#tel3").val();  
-        	 
-        	$("#userTel").val(str);
-               	    
+            
+           
+            
+            var str = $("#tel1").val() + "-" + $("#tel2").val() + "-" + $("#tel3").val();  
+            
+           $("#userTel").val(str);
+                      
             // 이메일 입력없음
             if($("#userEmail").val() == "")
                {
@@ -422,11 +422,11 @@ String cp = request.getContextPath();
                   return false;  
                }
                else
-            	{
+               {
                   $("#position_check").text("");
-            	}
+               }
 
-            	$("#signUp_submit").submit();
+               $("#signUp_submit").submit();
                        
       });
                
@@ -615,16 +615,16 @@ String cp = request.getContextPath();
                </div>
                <div class="col-sm-2 col-xs-2 select">
                   <select name="" class="form-control regionSelect" id="regionSelect">
-						<option value="">광역시·도</option>
-						<c:forEach var="regionDto"  items="${regionList }">
-						<option value="${regionDto.regionCode }">${regionDto.regionName } </option>
-						</c:forEach>
-				</select>
+                  <option value="">광역시·도</option>
+                  <c:forEach var="regionDto"  items="${regionList }">
+                  <option value="${regionDto.regionCode }">${regionDto.regionName } </option>
+                  </c:forEach>
+            </select>
                </div>
                <div class="col-sm-2 col-xs-2">
-					<select class="form-control citySelect" name='userCityCode' id="citySelect"></select>
-				</div>
-               		<div class="col-sm-2 col-xs-2 city_check"></div>
+               <select class="form-control citySelect" name='userCityCode' id="citySelect"></select>
+            </div>
+                     <div class="col-sm-2 col-xs-2 city_check"></div>
             </div>
             
             <div class="flex row">
@@ -633,34 +633,34 @@ String cp = request.getContextPath();
                </div>
                
                <div class="col-sm-4 col-xs-4 flex tels">
-	               <div class="col-sm-1.5 col-xs-1.5">
-		               <select class="form-control tel1" id="tel1">
-		                  <option selected="selected">선택</option>
-		                  <option>010</option>
-		                  <option>011</option>
-		                  <option>012</option>
-		                  <option>017</option>
-		                  <option>018</option>
-		                  <option>019</option>
-		               </select>
-	               </div>
-					
-	               <div class="space"> - </div>
-	               
-	               <div class="col-sm-1.5 col-xs-1.5">
-	               		<input type="tel" class="form-control tel2" id="tel2">
-	               </div>
-	               
-	               <div class="space"> - </div>
-	               
-	               <div class="col-sm-1.5 col-xs-1.5">
-	                	<input type="tel" class="form-control tel3" id="tel3"> 
-	               		<input type="hidden" name="userTel" id="userTel">
-	               </div>
-	               <div class="col-sm-3 col-xs-3">
-               			<button class="btn btn-warning tel_certify" id="tel_certify">인증</button>
-               	   </div>
-	               
+                  <div class="col-sm-1.5 col-xs-1.5">
+                     <select class="form-control tel1" id="tel1">
+                        <option selected="selected">선택</option>
+                        <option>010</option>
+                        <option>011</option>
+                        <option>012</option>
+                        <option>017</option>
+                        <option>018</option>
+                        <option>019</option>
+                     </select>
+                  </div>
+               
+                  <div class="space"> - </div>
+                  
+                  <div class="col-sm-1.5 col-xs-1.5">
+                        <input type="tel" class="form-control tel2" id="tel2">
+                  </div>
+                  
+                  <div class="space"> - </div>
+                  
+                  <div class="col-sm-1.5 col-xs-1.5">
+                      <input type="tel" class="form-control tel3" id="tel3"> 
+                        <input type="hidden" name="userTel" id="userTel">
+                  </div>
+                  <div class="col-sm-3 col-xs-3">
+                        <button class="btn btn-warning tel_certify" id="tel_certify">인증</button>
+                     </div>
+                  
                </div>
                
                <div id="tel_check"></div>
@@ -682,24 +682,24 @@ String cp = request.getContextPath();
             </div>
 
       <div class="flex row">
-	        <div class="col-sm-4 col-xs-4">
-	           <label class="f_size">선호포지션*</label>
-	        </div>
-	        <div class="col-sm-4 col-xs-4 position">
-	           <select class="form-control userPositionCode"
-	              id="userPositionCode" name="userPositionCode">
-	              <option selected="selected">포지션선택</option>
-	              <option value="ZP01">포인트가드</option>
-	              <option value="ZP02">센터</option>
-	              <option value="ZP03">슈팅가드</option>
-	              <option value="ZP04">스몰 포워드</option>
-	              <option value="ZP05">파워 포워드</option>
-	           </select>
-	        </div>
-	        <div class="col-sm-2 col-xs-2">
-	         	<button class="btn btn-warning position_recommend" id="position_recommend">포지션 추천</button>
-	     	</div>
-     	<div class="col-sm-2 col-xs-2" id="position_check"></div>
+           <div class="col-sm-4 col-xs-4">
+              <label class="f_size">선호포지션*</label>
+           </div>
+           <div class="col-sm-4 col-xs-4 position">
+              <select class="form-control userPositionCode"
+                 id="userPositionCode" name="userPositionCode">
+                 <option selected="selected">포지션선택</option>
+                 <option value="ZP01">포인트가드</option>
+                 <option value="ZP02">센터</option>
+                 <option value="ZP03">슈팅가드</option>
+                 <option value="ZP04">스몰 포워드</option>
+                 <option value="ZP05">파워 포워드</option>
+              </select>
+           </div>
+           <div class="col-sm-2 col-xs-2">
+               <button class="btn btn-warning position_recommend" id="position_recommend">포지션 추천</button>
+           </div>
+        <div class="col-sm-2 col-xs-2" id="position_check"></div>
       </div>
       <div class="flex row">
          <div class="col-sm-4 col-xs-4">
@@ -707,10 +707,10 @@ String cp = request.getContextPath();
          </div>
          <div class="col-sm-5 col-xs-5">
             <label class="radio-inline radio_button"> 
-            	<input type="radio" name="snsSync" value="ZU01" checked="checked">YES
+               <input type="radio" name="snsSync" value="ZU01" checked="checked">YES
             </label>
             <label class="radio-inline radio_button"> 
-            	<input type="radio" name="snsSync" value="ZU02">NO
+               <input type="radio" name="snsSync" value="ZU02">NO
             </label> 
          </div>
       </div>

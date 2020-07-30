@@ -18,6 +18,7 @@
 	text-align: center;
 	background-color: orange !important;
 	font-weight: bold;
+	color: white;
 }
 
 /* 게시판 내용틀 */

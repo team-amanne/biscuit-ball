@@ -17,6 +17,7 @@
 	text-align: center;
 	background-color: orange !important;
 	font-weight: bold;
+	color: white;
 }
 
 .post	/* 게시판 내용 */
@@ -80,9 +81,9 @@
 	margin-right: 10px;
 }
 
-.button_right
+.button
 {
-	margin-left: 273%;
+	margin-left: auto;
 }
 
 </style>
@@ -445,13 +446,11 @@
 				<div class="search_button">
 					<button type="button" class="btn btn-warning btn-submit button_small">검색</button>
 				</div>
-					<div class="row"> 
-						<div class="col-md-12 button_right">
-							<button class="btn btn-warning button_middle" type="submit">작성하기</button>
-							<button class="btn btn-warning button_middle" type="submit">삭제하기</button>
-						</div>	
-					</div>
-			</div>	
+				<div class="button">
+					<button type="button" class="btn btn-warning btn-submit button_small">작성하기</button>
+					<button type="button" class="btn btn-warning btn-submit button_small">삭제하기</button>
+				</div>
+			</div>
 		</div>
 		<div class="col-md-2">		
 		</div>

@@ -63,13 +63,13 @@
 		</div>
 		<div class="col-md-8 button">
 			<div class="category_button1">
-					<button type="button" id="button1" class="form-control" style="width: 210px; height: 135px; background-image: url('<%=cp %>/views/img/h1.png');">
+					<button type="button" id="button1" class="form-control" style="width: 210px; height: 135px; background-image: url('<%=cp %>/images/other/h1.png');">
 					</button>
 
-					<button type="button" id="button2" class="form-control" style="width: 210px; height: 135px; background-image: url('<%=cp %>/views/img/h2.png'); ">
+					<button type="button" id="button2" class="form-control" style="width: 210px; height: 135px; background-image: url('<%=cp %>/images/other/h2.png'); ">
 					</button>
 
-					<button type="button" id="button3" class="form-control" style="width: 210px; height: 135px; background-image: url('<%=cp %>/views/img/h3.png'); ">
+					<button type="button" id="button3" class="form-control" style="width: 210px; height: 135px; background-image: url('<%=cp %>/images/other/h3.png'); ">
 					</button>
 			</div>
 				<div class="bar">

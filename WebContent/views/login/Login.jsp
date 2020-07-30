@@ -107,6 +107,17 @@
 			}
 			
 		});
+		
+		$("#password").keyup(function(e)
+		{
+			if(e.keyCode == 13)  
+			{
+				$("#loginForm").submit();
+			}
+				
+		});
+
+
 	});
 
 </script>
@@ -142,7 +153,7 @@
 		
 			<div class="login_button">
 				<button type="button" class="btn btn-default btn-lg sign" id="login">로그인</button>
-				<button type="button" class="kakaosign" id="kakaosign"><img src="<%=cp %>/images/other/kakao.png" style="max-width: 100%; height: auto; margin-top: 10px"></button>
+				<button type="button" class="kakaosign btn-block" id="kakaosign"><img src="<%=cp %>/images/other/kakao.png" style="max-width: 100%; height: auto; margin-top: 10px"></button>
 			</div>
 			
 			<div class="frame">
@@ -155,6 +166,7 @@
 		</div>
 	</div>
 </div>
+
 
 <c:import url="../base/Footer.jsp"></c:import>
 

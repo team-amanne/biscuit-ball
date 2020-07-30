@@ -120,6 +120,7 @@ public class PlayController
 		if (userInfo != null)
 		{
 			UserDTO userDto =  playModel.userHomeCourt(userInfo.getUserAcctCode());
+			System.out.println(userDto.getUserCourtCode());
 			model.addAttribute("userDto", userDto);
 		}
 		else

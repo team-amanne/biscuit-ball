@@ -99,7 +99,12 @@
 								<span class="">모임장소</span>
 								</div>
 								<div class="col-md-8">
-								${courtdto.cityName } ${courtdto.courtName}
+								<c:if test="${courtdto.courtCode != null}">
+							
+								<a href="<%=cp %>/court/${courtdto.courtCode}" class="icon_connect">
+								<span>${courtdto.cityName } ${courtdto.courtName}</span>
+								</a>
+								</c:if>
 								</div>
 							</div>
 							<div class="col-md-4">

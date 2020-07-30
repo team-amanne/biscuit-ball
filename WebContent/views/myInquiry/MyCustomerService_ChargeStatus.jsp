@@ -36,7 +36,7 @@
 {
 	display: flex;
 	margin-bottom: 15px;
-	margin-left: 36%;
+	margin-left: 33%;
 }
 
 /* 숫자 도형 색깔 */
@@ -48,8 +48,8 @@
 /* 현황판 크기조절 */
 .bar
 {
-	display: flex;
-	margin-left: 40%;
+    display: flex;
+    margin-left: 36%;
 }
 
 /* 현황판 간격 */

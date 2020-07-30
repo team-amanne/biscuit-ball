@@ -42,7 +42,7 @@ public class PlayModel
 	{
 		UserDTO userDto = new UserDTO();
 		IUserDAO userDao = sqlSession.getMapper(IUserDAO.class);
-		userDao.getUser(userAccountCode);
+		userDto = userDao.getUser(userAccountCode);
 		
 		return userDto;
 	}

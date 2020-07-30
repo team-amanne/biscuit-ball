@@ -160,14 +160,14 @@ String cp = request.getContextPath();
       });
          
          // 내코트 없는 경우 내코트 선택 불가
-         if ($("#myCourtCheckedVal").val() !=null)
-      {
+         if ($("#myCourtCheckedVal").val() !="")
+     	 {
             $("#myCourt").attr("disabled", false);
-      }
+      	}
          else
-       {
+         {
             $("#myCourt").attr("disabled", true);
-       }
+         }
          
          
          
@@ -284,19 +284,18 @@ String cp = request.getContextPath();
                                     지도검색 <span class="glyphicon glyphicon-map-marker"></span>
                                  </button>
                               </div>
+                              <div class="col-md-2">
+                                 <label class="checkbox-inline radio"> 
+                                 <input type="checkbox" name="inlineCheckOptions" id="myCourt" > 내 코트
+                                 </label> 
+                                 <input type="hidden" value="${userDto.userCourtCode}" id="myCourtCheckedVal">
+                              </div>
                              </div>
                             </div>
                           
-                             <%--  <div class="col-md-2">
-                                 <label class="checkbox-inline radio"> <input
-                                    type="checkbox" name="inlineCheckOptions" id="myCourt"
-                                    value=""> 내 코트
-                                 </label> <input type="hidden" value="${userDto.userCourtCode }"
-                                    id="myCourtCheckedVal">
-                              </div>
-                           </div>
-                        </div> --%>
-
+                           
+                        </div> 
+						<div class="col-md-9">
                         <div class="panel panel-default">
                            <div class="panel-heading panel-head">지도 선택</div>
                            <div class="panel-body">
@@ -367,12 +366,13 @@ String cp = request.getContextPath();
                               </div>
                            </div>
                         </div>
+                        </div>
+                        </div>
                      </div>
                   </div>
                </div>
             </div>
          </div>
-      </div>
       <!-- <div class="col-md-1"></div> -->
       <hr />
 
@@ -605,8 +605,16 @@ $(function()
       
       
       // 사용자 입력 값 있을 시에만 에이젝스 실행
-      if ($("#dateselect1").val() != null && $("#timeselect").val() != null && $("#regionSelect").text()!="광역시·도" && $("#citySelect").val() != null && $("#courtCode").val() != null)
+      if ($("#dateselect1").val() != null && $("#timeselect").val() != null && (($("#regionSelect").text()!="광역시·도" && $("#citySelect").val() != null) || $("#myCourt").is(":checked")==true) 
+    		  		&& $("#courtCode").val() != null)
 	  {
+    	  
+    	  // 내 코트 선택 시 출력 코트 이름에 내 코트 이름 넣기
+    	  if ($("#myCourt").is(":checked")==true)
+		{
+	   			$("#courtName").text("${userDto.userCourtName}");
+		}
+   
     	  $("#resultList").css("display", "inline");
 	      $.ajax
 	      ({

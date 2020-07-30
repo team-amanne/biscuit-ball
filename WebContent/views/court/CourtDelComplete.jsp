@@ -51,7 +51,7 @@
       <div class="col-md-2">
       </div>
       <div class="col-md-8 image_frame">
-         <img src="<%=cp%>/views/img/blindpage.png">
+         <img src="<%=cp%>/images/other/blindpage.png">
       </div>
       <div class="col-md-2">
       </div>

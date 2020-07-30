@@ -146,7 +146,7 @@ $().ready(function()
 
    <!-- 서브메뉴 -->
    <!-- 서브메뉴는 기능별(농구하기/코트검색/크루/...)로 복사해서 만들어두고 import 할 것 -->
-   <c:import url="../base/Submenu.jsp"></c:import>
+   <c:import url="../base/Mypagemenu.jsp"></c:import>
 <form action=".." method="post"  enctype="multipart/form-data" id="frm" name="frm">
    <!-- 메인  enctype="multipart/form-data"  -->
    <input type="hidden" id="userRequestType" name="userRequestType">
@@ -169,14 +169,14 @@ $().ready(function()
                </div>
                <div class="row">
                   <div class="col-sm-4 col-xs-5 right-btn">
-                     <a><button type="button" class="btn btn-default" id="myinfomation">내 정보관리</button></a>
-                     <a><button type="button" class="btn btn-default" id="achievementList" style="margin-right: 25%;">업적 목록</button></a>
+                     <a><button type="button" class="btn btn-default" id="myinfomation" disabled="disabled">내 정보관리</button></a>
+                     <a><button type="button" class="btn btn-default " id="achievementList" style="margin-right: 25%;" disabled="disabled">업적 목록</button></a>
                   </div>
                   <div class="col-sm-4 col-xs-2">
                   </div>
-                  <div class="col-sm-4 col-xs-5">
-                     <a><button type="button" class="btn btn-default btn-link" style="margin-left: 25%;" id="friend">친구 신청</button></a>
-                     <a><button type="button" class="btn btn-default btn-link" id="userblock">차단 관리</button></a>
+                  <div class="col-sm-4 col-xs-5" >
+                     <a><button type="button" class="btn btn-default " style="margin-left: 25%;" id="friend" disabled="disabled">친구 관리</button></a>
+                     <a><button type="button" class="btn btn-default " id="userblock" disabled="disabled">차단 관리</button></a>
                   </div>
                </div>
                <div class="row">
@@ -235,7 +235,7 @@ $().ready(function()
                   <div class="col-sm-2 col-xs-2">
                   </div>
                   <div class="col-sm-2 col-xs-2">
-                  <p><button type="button" class="btn btn-default btn-link btn-block" id="referee">심판정보</button></p>
+                  <p><button type="button" class="btn btn-default btn-block" id="referee" disabled="disabled">심판정보</button></p>
                   </div>      
                            
                </div>

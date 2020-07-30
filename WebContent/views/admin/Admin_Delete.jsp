@@ -14,6 +14,8 @@
 .content_title_value
 {
 	background-color: orange !important;
+	color: white !important;
+	cursor: auto !important;
 }
 
 .content
@@ -25,7 +27,8 @@
 
 .button
 {
-	margin-left: 32%;
+	margin-left: auto;
+    width: 650px;
 }
 
 .confirm
@@ -44,7 +47,6 @@
 <body>
 
 	<c:import url="../base/Header.jsp"></c:import>
-<c:import url="../base/Submenu.jsp"></c:import>
 
 <div class="container-fluid">
       <div class="section-title container">
@@ -56,20 +58,20 @@
 		</div>
 		<div class="col-md-8">	
 			<div class="content_title">
-				<input type="text" class="form-control content_title_value" id="content_title_value" value="게시물 변경" readonly="readonly">
+				<input type="text" class="form-control content_title_value" id="content_title_value" value="관리자 계정 삭제" readonly="readonly">
 			</div>
 			
 			<div class="form-control content">
 				<div class="content_value align_center">
 				<br>
-						정말로 이 계정을 삭제시키시겠습니까?
+						해당 관리자 계정을 삭제시키시겠습니까?
 				</div>
 				<div class="button flex">
 					<div class="confirm">
-						<input type="button" class="btn btn-warning button_large" value="확인" id="confirm">
+						<input type="button" class="btn btn-warning button_middle" value="확인" id="confirm">
 					</div>
 					<div class="cancel">
-						<input type="button" class="btn btn-warning button_large" value="취소" id="cancel">
+						<input type="button" class="btn btn-warning button_middle" value="취소" id="cancel">
 					</div>
 				</div>
 			</div>

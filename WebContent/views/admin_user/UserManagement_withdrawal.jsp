@@ -14,6 +14,8 @@
 .content_title_value
 {
 	background-color: orange !important;
+	color: white !important;
+	cursor: auto !important;
 }
 
 .content
