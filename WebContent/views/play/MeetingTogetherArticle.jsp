@@ -253,8 +253,8 @@
 							<button class="btn btn-default btn-lg btn-submit" onclick="cancelJoinMeeting()">참여취소</button>							
 							</c:if>
 							 --%>
-							<button class="btn btn-default btn-lg" onclick="javascript:history.back();">
-								뒤로가기
+							<button class="btn btn-default btn-lg" onclick="location.href='<%=cp %>/play/party'">
+								농구하기
 							</button>
 						</div>
 					

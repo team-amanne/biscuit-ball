@@ -425,7 +425,7 @@
 		              AND MT.MEET_DATE > TO_DATE(#{meetingDate}, 'YYYY-MM-DD HH24:MI')
 		              AND MT.MEET_TYPE_CODE = #{meetingTypeCode}
 		        ) F2
-		        ORDER BY (F2.MEET_PEOPLE_NUMBER - F2.NOWPEOPLENUMBER), F2.MEET_DATE
+		        ORDER BY F2.MEET_DATE, (F2.MEET_PEOPLE_NUMBER - F2.NOWPEOPLENUMBER)
 		    ) A
 		)
 		]]>

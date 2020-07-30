@@ -76,129 +76,6 @@ select {
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 
 
-<script type="text/javascript">
-
-$(function()
-{
-	
-	 //날짜 placeholder 오늘로 고정
-	var now = new Date();
-    var year= now.getFullYear();
-    var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);
-    var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate();
-    var sysdate = now.getDate();
-    
-    // 오늘로부터 14일 선택 가능하게 만듦(데이트 피커)
-    var maxDate = new Date();
-    var endDay = sysdate+14;
-    maxDate.setDate(endDay);
-            
-    var today = "ex) " + year + '-' + mon + '-' + day;
-    $("#dateselect1").attr("placeholder", today);
-    
-    //데이트피커 사용
-    $("#dateselect1").datepicker({
-  	  
-  	  minDate: 0,
-  	  maxDate: maxDate,
-  	  dateFormat: "yy-mm-dd"
-    });
-    
-    $("#dateselect2").attr("placeholder", today);
-    
-    //데이트피커 사용
-    $("#dateselect2").datepicker({
-  	  
-  	  minDate: 0,
-  	  maxDate: maxDate,
-  	  dateFormat: "yy-mm-dd"
-    });
-    
-    // 실력 조건, 나이 조건 자바스크립트
-    
-    var tier = "${userDto.tierName}";
-	var userBirthday = "${userDto.userBirthday}".substring(0,4);
-	var age = year - parseInt(userBirthday)+1;
-	
-	/*
-	for(var i=parseInt(tier); i<=5; i=i+1) {        
-        var html;
-        html += "<option value="+userBirthday+">LV."+i+"</option>"
-    }
-    $("#tier-check").append(html);
-    */
-    
-    for(var i=0; i<=Math.floor(age/10)*10; i=i+10) {        
-        var minage;
-        minage += "<option value="+i+">"+i+"대</option>"
-    }
-    $("#minage-check").append(minage);
-
-    for(var i=Math.floor(age/10)*10; i<=100; i=i+10) {        
-        var maxage;
-        maxage += "<option value="+i+">"+i+"대</option>"
-    }
-    $("#maxage-check").append(maxage);
-    
-	
-	// ajax() 사용해 시군구 불러오기
-    $("#regionSelect").on("change", function()
-	 {
-	   $.ajax({
-	      type: "get",
-	      dataType: "json",
-	      url: "<%=cp%>/ajax/citylist",
-	      data: {regionCode: $(this).val()},
-	      success: function(data) {
-	         var result = "<option value=''>시·군·구</option>\n";
-	         for(var i=0; i<data.length; i++)
-	            result += "<option value='" + data[i].cityCode +"'>" + data[i].cityName + "</option>\n";
-	         $("#citySelect").html(result);
-	      },
-	      error: function(e){
-	         alert(e.responseText);
-	      }
-	   });
-	   
-	});
-	
-	
-    $("#meeting-create").click(function()
-    { 
-    	$("#createMeet").submit();
-    });
-    
-    
-  //모임 시작
-    $('#meetTimeSelect').change(function() 
-   {
-    var meetDate = $('#dateselect1').val() + $('#meetTimeSelect').val();
-   	 $('#meetingDate').val(meetDate);
-   	 alert(meetDate);
-	})
-	
-	 //모임 종료
-    $('#endTime').change(function() 
-   {
-    	var meetDate = $('#dateselect1').val() + " " + $('#startTime option:selected').val();
-      	 $('#meetingDate').val(meetDate);
-    	var meetEndDate = $('#dateselect1').val() + " " + $('#endTime option:selected').val();
-      	 $('#meetingEndDate').val(meetEndDate);
-	})
-	
-	 //모집 종료
-    $('#closeTime').change(function() 
-   {
-    	var meetCloseDate = $('#dateselect2').val() + " " + $('#closeTime option:selected').val();
-    	$('#meetingCloseDate').val(meetCloseDate);
-    	
-	})
-});
-
-		// 입력값 check
-		
-
-</script>
 
 
 </head>
@@ -345,7 +222,7 @@ $(function()
 												<div class="col-md-4" id="courtInfo" style="display: none;">
 													<h4>코트 정보</h4>
 													<ul class="list-group">
-														<li class="list-group-item">
+														<li class="list-group-item" style="height: 50px">
 															<div class="col-md-7 courtInfo">
 																<span class="">코트이름</span>
 															</div>
@@ -419,14 +296,14 @@ $(function()
 
 														<div class="col-md-4">
 															<div class="input-group">
-																<span class="input-group-addon">시작 시간</span> <select
-																	class="form-control" id="startTime" name="meetTimeSelect">
+																<span class="input-group-addon">시작 시간</span>
+																<select class="form-control" id="startTime" name="meetTimeSelect">
 																	<c:forEach var="i" begin="0" end="24">
 																		<option value="${String.format('%02d:00', i)}">
 																			<c:choose>
 																				<c:when test="${i <10}">
-															0${i }:00
-                                 							</c:when>
+																				0${i }:00
+					                                 							</c:when>
 																				<c:otherwise>${i }:00</c:otherwise>
 																			</c:choose>
 																		</option>
@@ -560,7 +437,7 @@ $(function()
 															id="meeting-create" name="meeting-create">개설</button>
 													</div>
 													<div class="col-md-6">
-														<button class="btn btn-default btn-lg btn-block">
+														<button class="btn btn-default btn-lg btn-block" type="button" onclick="location.href='<%=cp %>/play/mode/together'"> 
 															취소</button>
 													</div>
 												</div>
@@ -704,7 +581,7 @@ $(function()
 			                                           
 			                                    },
 			                                     error: function(e) {
-			                                        alert(e.responseText);
+			                                        //alert(e.responseText);
 			                                     }
 			                                  });
 			                                    
@@ -742,6 +619,119 @@ $(function()
 			            
 			         });
 			   
+			   //날짜 placeholder 오늘로 고정
+				var now = new Date();
+			    var year= now.getFullYear();
+			    var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);
+			    var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate();
+			    var sysdate = now.getDate();
+			    
+			    // 오늘로부터 14일 선택 가능하게 만듦(데이트 피커)
+			    var maxDate = new Date();
+			    var endDay = sysdate+14;
+			    maxDate.setDate(endDay);
+			            
+			    var today = "ex) " + year + '-' + mon + '-' + day;
+			    $("#dateselect1").attr("placeholder", today);
+			    
+			    //데이트피커 사용
+			    $("#dateselect1").datepicker({
+			  	  
+			  	  minDate: 0,
+			  	  maxDate: maxDate,
+			  	  dateFormat: "yy-mm-dd"
+			    });
+			    
+			    $("#dateselect2").attr("placeholder", today);
+			    
+			    //데이트피커 사용
+			    $("#dateselect2").datepicker({
+			  	  
+			  	  minDate: 0,
+			  	  maxDate: maxDate,
+			  	  dateFormat: "yy-mm-dd"
+			    });
+			    
+			    // 실력 조건, 나이 조건 자바스크립트
+			    
+			    var tier = "${userDto.tierName}";
+				var userBirthday = "${userDto.userBirthday}".substring(0,4);
+				var age = year - parseInt(userBirthday)+1;
+				
+				/*
+				for(var i=parseInt(tier); i<=5; i=i+1) {        
+			        var html;
+			        html += "<option value="+userBirthday+">LV."+i+"</option>"
+			    }
+			    $("#tier-check").append(html);
+			    */
+			    
+			    for(var i=0; i<=Math.floor(age/10)*10; i=i+10) {        
+			        var minage;
+			        minage += "<option value="+i+">"+i+"대</option>"
+			    }
+			    $("#minage-check").append(minage);
+
+			    for(var i=Math.floor(age/10)*10; i<=100; i=i+10) {        
+			        var maxage;
+			        maxage += "<option value="+i+">"+i+"대</option>"
+			    }
+			    $("#maxage-check").append(maxage);
+			    
+				
+				// ajax() 사용해 시군구 불러오기
+			    $("#regionSelect").on("change", function()
+				 {
+				   $.ajax({
+				      type: "get",
+				      dataType: "json",
+				      url: "<%=cp%>/ajax/citylist",
+				      data: {regionCode: $(this).val()},
+				      success: function(data) {
+				         var result = "<option value=''>시·군·구</option>\n";
+				         for(var i=0; i<data.length; i++)
+				            result += "<option value='" + data[i].cityCode +"'>" + data[i].cityName + "</option>\n";
+				         $("#citySelect").html(result);
+				      },
+				      error: function(e){
+				         alert(e.responseText);
+				      }
+				   });
+				   
+				});
+				
+				
+			    $("#meeting-create").click(function()
+			    { 
+			    	$("#createMeet").submit();
+			    });
+			    
+			    
+			  //모임 시작
+			    $('#startTime').change(function() 
+			   {
+			    var meetDate = $('#dateselect1').val() + $('#startTime').val();
+			   	 $('#meetingDate').val(meetDate);
+			   	 //alert(meetDate);
+				})
+				
+				 //모임 종료
+			    $('#endTime').change(function() 
+			   {
+			    	var meetDate = $('#dateselect1').val() + " " + $('#startTime option:selected').val();
+			      	 $('#meetingDate').val(meetDate);
+			    	var meetEndDate = $('#dateselect1').val() + " " + $('#endTime option:selected').val();
+			      	 $('#meetingEndDate').val(meetEndDate);
+				})
+				
+				 //모집 종료
+			    $('#closeTime').change(function() 
+			   {
+			    	var meetCloseDate = $('#dateselect2').val() + " " + $('#closeTime option:selected').val();
+			    	$('#meetingCloseDate').val(meetCloseDate);
+			    	
+				});
+				
 			});
 
 	</script>

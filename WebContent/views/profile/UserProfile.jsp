@@ -152,7 +152,7 @@ $().ready(function()
 					    </c:when>
 					
 					    <c:otherwise>
-					        <img src="<%=cp %>/views/img/UserProfile.jpg" height="250px;" width="250px;"/>
+					        <img src="<%=cp %>/images/other/UserProfile.jpg" height="250px;" width="250px;"/>
 					    </c:otherwise>
 
 				  </c:choose>
