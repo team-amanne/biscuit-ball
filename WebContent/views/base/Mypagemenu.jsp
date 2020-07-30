@@ -11,7 +11,7 @@
 		<li class="active"><a href="#">마이페이지</a></li>
 		<li><a href="#">내 정보관리</a></li>
 		<li><a href="#">업적 목록</a></li>
-		<li><a href="#">친구 신청</a></li>
+		<li><a href="#">친구 관리</a></li>
 		<li><a href="#">차단 관리</a></li>
 		<li><a href="#">심판정보</a></li>
 	</ul>

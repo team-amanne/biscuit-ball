@@ -175,7 +175,7 @@ $().ready(function()
                   <div class="col-sm-4 col-xs-2">
                   </div>
                   <div class="col-sm-4 col-xs-5" >
-                     <a><button type="button" class="btn btn-default " style="margin-left: 25%;" id="friend" disabled="disabled">친구 신청</button></a>
+                     <a><button type="button" class="btn btn-default " style="margin-left: 25%;" id="friend" disabled="disabled">친구 관리</button></a>
                      <a><button type="button" class="btn btn-default " id="userblock" disabled="disabled">차단 관리</button></a>
                   </div>
                </div>
