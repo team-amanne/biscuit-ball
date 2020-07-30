@@ -30,13 +30,13 @@
 
 .type_name, .date_name, .reason_name
 {
-	width: 180px !important;
+	width: 110px !important;
 	text-align: center;
 }
 
 .type_value, .date_value, .reason_value
 {
-	width: 250px !important;
+	width: 280px !important;
 }
 
 .calendar_value

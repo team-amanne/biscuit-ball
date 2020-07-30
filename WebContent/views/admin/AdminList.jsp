@@ -181,7 +181,7 @@
 										<input type='text' class="form-control" id="search_content">
 									</div>
 									<div class="search_button">
-										<button type="button" class="btn btn-default btn-submit button_small">검색</button>
+										<button type="button" class="btn btn-warning btn-submit button_small">검색</button>
 									</div>
 								</div>	
 							

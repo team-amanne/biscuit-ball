@@ -96,6 +96,11 @@
 {
 	margin-right: 10px;
 }
+
+.button
+{
+	margin-left: auto;
+}
 </style>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -462,14 +467,9 @@
 				<div class="search_button">
 					<button type="button" class="btn btn-warning btn-submit button_small">검색</button>
 				</div>
-				
-				<div class="submit_delete" align="right">
-					<div class="submit">
-						<button type="submit" class="btn btn-warning button_small" id="submit">작성하기</button> 
-					</div>
-					<div class="delete">
-						<button type="button" class="btn btn-warning button_small" id="delete">삭제하기</button> 
-					</div>	
+				<div class="button">
+					<button type="button" class="btn btn-warning btn-submit button_small">작성하기</button>
+					<button type="button" class="btn btn-warning btn-submit button_small">삭제하기</button>
 				</div>
 			</div>	
 		</div>
