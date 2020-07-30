@@ -16,7 +16,7 @@
 		>
 			<a
 			<c:if test='${param.active != "search" }'>
-			href="#"
+			href="<%=cp %>/court/search"
 			</c:if> 
 			>코트검색</a>
 		</li>

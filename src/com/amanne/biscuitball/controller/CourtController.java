@@ -1,7 +1,7 @@
 /*============================================
  	CourtController.java
  	생성일: 2020.07.24
- 	최근수정일: 2020.07.24
+ 	최근수정일: 2020.07.30
 =============================================*/
 
 package com.amanne.biscuitball.controller;
@@ -44,6 +44,10 @@ public class CourtController
 						, @RequestParam(required=false) String requestResult)
 	{
 		String view = null;
+		
+		
+		if(courtCode.equals("search"))
+			return searchForm(model);
 		
 		CourtDTO court = null;
 		
@@ -372,6 +376,15 @@ public class CourtController
 		UserInfo info = (UserInfo)session.getAttribute("userInfo");
 		
 		model.addAttribute("result", courtModel.pollCourtName(courtNameCode, info.getUserAcctCode()));
+		
+		return view;
+	}
+	
+	public String searchForm(Model model)
+	{
+		String view = "/search/SearchCourt";
+		
+		model.addAttribute("regions", courtModel.getRegionList());
 		
 		return view;
 	}
