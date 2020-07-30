@@ -17,6 +17,7 @@
 	text-align: center;
 	background-color: orange !important;
 	font-weight: bold;
+	color: white;
 }
 
 .post	/* 게시판 내용 */
@@ -29,32 +30,22 @@
 	text-align: center;
 }
 
-.category /* 카테고리 버튼 */
+/* 검색 소속 flex */
+.search
 {
-	margin-bottom: 4px;
-}
-
-#s_category /* 검색창 카테고리  */
-{
-	width: 110px;
-}
-
-.search_category /* 검색창 카테고리 */
-{
-	width: 300px;
 	display: flex;
-	margin: auto;
 }
 
-#search_text /* 검색내용 입력 */
+/* 검색 카테고리 */
+.search_value
 {
 	width: 220px;
-	margin-right: 5px;
 }
 
-.search	/* 검색버튼 */
+/* 검색입력 */
+.search_content
 {
-	margin-left: auto;
+	width: 200px;
 }
 
 .page /* 페이징 */
@@ -63,39 +54,11 @@
 	margin: auto;
 }
 
-.submit_delete
-{
-	width: 160px;
-	display: flex;
-	margin-left: auto;
-}
-
-#submit
-{
-	margin-right: 2px;
-}
-
-#delete
-{
-	margin-right: auto;
-}
-
 #check
 {
 	height: 20px;
 	margin: 0px;
 	width: 30%;
-}
-
-.category_button /* 카테고리 버튼 */
-{
-	display: flex;
-	margin-bottom: 20px;
-}
-
-#button1,#button2,#button3,#button4	/* 문의 작성, 문의 내역, 신고 내역 버튼 정렬 */
-{
-	margin: auto;
 }
 
 /* 숫자 도형 색깔 */
@@ -109,13 +72,18 @@
 {
 	display: flex;
 	margin-left: auto;
-	width: 77%;
+	width: 70%;
 }
 
 /* 현황판 간격 */
 .bar1, .bar2, .bar3
 {
 	margin-right: 10px;
+}
+
+.button
+{
+	margin-left: auto;
 }
 
 
@@ -465,49 +433,31 @@
 		<div class="col-md-2">
 		</div>
 	</div>
-	
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8">
-		</div>
-		<div class="col-md-2">
-		</div>
-	</div>
 		
 	<div class="row">
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-8">
+			<div class="search">
 				<div class="search_category">
-					<div>
-						<select class="form-control" id="s_category">
-					 		<option>제목</option>
-					  		<option>내용</option>
-					  		<option>작성자</option>
-					  		<option>카테고리</option>
-						</select>
-					</div>
-					
-					<div class="search_text">
-						<input type='text' class="form-control" id="search_text">
-					</div>
-					
-					<div class="search">
-						<button type="button" class="btn btn-warning">검색</button> 
-					</div>
+					<select class="form-control" id="search_category">
+				 		<option>제목</option>
+				  		<option>내용</option>
+				  		<option>작성자</option>
+				  		<option>카테고리</option>
+					</select>
 				</div>
-				
-				<div class="submit_delete" align="right">
-					<div class="sd">
-						<button type="submit" class="btn btn-warning" id="submit">작성하기</button> 
-					</div>
-							
-					<div class="sd">
-						<button type="button" class="btn btn-warning" id="delete">삭제하기</button> 
-					</div>	
+				<div class="search_value">
+					<input type='text' class="form-control" id="search_content">
 				</div>
-		
+				<div class="search_button">
+					<button type="button" class="btn btn-warning btn-submit button_small">검색</button>
+				</div>
+				<div class="button">
+					<button type="button" class="btn btn-warning btn-submit button_small">작성하기</button>
+					<button type="button" class="btn btn-warning btn-submit button_small">삭제하기</button>
+				</div>
+			</div>
 		</div>
 		<div class="col-md-2">		
 		</div>
@@ -542,19 +492,6 @@
 					</li>
 				</ul>
 			</nav>
-		</div>
-		<div class="col-md-2">
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-4">
-		</div>
-		<div class="col-md-2">
 		</div>
 		<div class="col-md-2">
 		</div>

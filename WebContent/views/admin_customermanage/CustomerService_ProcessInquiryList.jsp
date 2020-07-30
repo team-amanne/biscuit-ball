@@ -53,7 +53,7 @@
 	margin: auto;
 }
 
-.check
+#check
 {
 	height: 20px;
 	margin: 0px;

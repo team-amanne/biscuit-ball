@@ -14,6 +14,8 @@
 .content_title_value
 {
 	background-color: orange !important;
+	cursor: auto !important;
+	color: white !important;
 }
 
 .content
@@ -62,7 +64,7 @@
 			<div class="form-control content">
 				<div class="content_value align_center">
 				<br>
-						정말 이 게시물을 신고로 이동시키겠습니까?
+						게시물을 신고로 이동시키겠습니까?
 				</div>
 				<div class="button flex">
 					<div class="confirm">

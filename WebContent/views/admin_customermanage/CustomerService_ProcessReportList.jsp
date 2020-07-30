@@ -29,11 +29,6 @@
 	text-align: center;
 }
 
-.category /* 카테고리 버튼 */
-{
-	margin-bottom: 4px;
-}
-
 /* 검색 소속 flex */
 .search
 {
@@ -58,24 +53,11 @@
 	margin: auto;
 }
 
-.submit_delete
-{
-	width: 160px;
-	display: flex;
-	margin-left: 45.5%;
-}
-
 #check
 {
 	height: 20px;
 	margin: 0px;
 	width: 30%;
-}
-
-.category_button /* 카테고리 버튼 */
-{
-	display: flex;
-	margin-bottom: 20px;
 }
 
 /* 숫자 도형 색깔 */
@@ -98,9 +80,9 @@
 	margin-right: 10px;
 }
 
-.button_right
+.button
 {
-	margin-left: 141%;
+	margin-left: auto;
 }
 </style>
 <link rel="stylesheet"
@@ -470,7 +452,7 @@
 				</div>
 				
 				<div class="row"> 
-					<div class="col-md-12 button_right">
+					<div class="col-md-12 button">
 						<button class="btn btn-warning button_middle" type="submit">작성하기</button>
 						<button class="btn btn-warning button_middle" type="submit">삭제하기</button>
 					</div>	
