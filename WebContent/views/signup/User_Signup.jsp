@@ -248,7 +248,7 @@ String cp = request.getContextPath();
                     {
                         $("#tel_check").text("사용가능한 전화번호입니다");
                         $("#tel_check").css("color", "green");
-                        $("#certification").css("display","inline");
+                        // 전화번호 인증 보이기$("#certification").css("display","inline");
 
                     }
                     },
@@ -260,7 +260,7 @@ String cp = request.getContextPath();
             } 
           });
          
-         
+     	/*
         //  전화인증번호 체크
          $("#certification").click(function() {
                        
@@ -278,7 +278,7 @@ String cp = request.getContextPath();
              }
                
           });
-         
+         */
          
          // 거점지역 띄우기
           // ajax() 사용해 시군구 불러오기
@@ -538,7 +538,7 @@ String cp = request.getContextPath();
                   <label class="f_size">이름*</label>
                </div>
                <div class="col-sm-4 col-xs-4">
-                  <input type="text" class="form-control userName" id="userName" name="userName" placeholder="홍길동규">
+                  <input type="text" class="form-control userName" id="userName" name="userName" placeholder="홍길동">
                </div>
                <div class="col-sm-5 col-xs-5" id="name_check"></div>
             </div>
@@ -550,7 +550,7 @@ String cp = request.getContextPath();
 
                <div class="col-sm-4 col-xs-4">
                   <input type="text" class="form-control userNickname"
-                     id="userNickname" name="userNickname" placeholder="동규의칠갑산">
+                     id="userNickname" name="userNickname" placeholder="닉네임">
                </div>
                <div class="col-sm-2 col-xs-2">
                   <button class="btn btn-warning nickname_check" id="nickname_check">중복확인</button>
@@ -658,13 +658,16 @@ String cp = request.getContextPath();
                         <input type="hidden" name="userTel" id="userTel">
                   </div>
                   <div class="col-sm-3 col-xs-3">
-                        <button class="btn btn-warning tel_certify" id="tel_certify">인증</button>
-                     </div>
-                  
+                        <button class="btn btn-warning tel_certify" id="tel_certify">중복확인</button>
+                    </div>
+                    
+                    
                </div>
                
-               <div id="tel_check"></div>
+               
             </div>
+            <div id="tel_check"></div>
+           
 
             <div class="flex row" style="display: none;" id="certification">
                <div class="col-sm-3 col-xs-3">
