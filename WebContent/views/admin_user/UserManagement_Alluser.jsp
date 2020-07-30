@@ -18,6 +18,7 @@
 	text-align: center;
 	background-color: orange !important;
 	font-weight: bold;
+	color: white;
 }
 
 /* 게시판 내용틀 */
@@ -91,23 +92,7 @@
          <h5>회원관리 > 전체 회원 목록</h5>
          <hr />
       </div>
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8 ">
-		</div>
-		<div class="col-md-2">
-		</div>
-		
-	</div>
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-sm-8">
-		</div>
-		<div class="col-md-2">
-		</div>
-	</div>
+
 	<div class="row">
 		<div class="col-md-2">
 		</div>
@@ -370,15 +355,6 @@
 			</div>
 		<div class="col-md-2"></div>
 				
-		<div class="col-md-2">
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8">
-		</div>
 		<div class="col-md-2">
 		</div>
 	</div>
