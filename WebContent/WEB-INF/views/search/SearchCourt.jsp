@@ -35,7 +35,7 @@ String cp = request.getContextPath();
 
 <body>
 
-<c:import url="../base/Header.jsp"></c:import>
+<c:import url="../base/Header.jsp?active=court"></c:import>
 <c:import url="../base/CourtSubmenu.jsp?active=search"></c:import>
 
 <div class="container-fluid main">
@@ -287,7 +287,7 @@ String cp = request.getContextPath();
 		                	
 							for(var i=0; i<data.length; i++)
 							{
-								if($("#capacitySelect").val() != "")
+								if($("#capacitySelect").val())
 								{
 									var [minCap, maxCap] = $("#capacitySelect").val().split(",");
 									if(data[i].minCourtCapacity < minCap || data[i].maxCourtCapacity > maxCap)
@@ -332,6 +332,8 @@ String cp = request.getContextPath();
 									var courtPositionX = this.getPosition().getLng();
 									var courtPositionY = this.getPosition().getLat();
 		                         
+									console.log(courtPositionX, courtPositionY);
+									
 									$.ajax(
 									{
 										type: "get",
@@ -340,6 +342,7 @@ String cp = request.getContextPath();
 										data: {mapPositionX: courtPositionX, mapPositionY: courtPositionY},
 										success: function(data)
 										{
+											console.log(data);
 											/* 코트 정보 */
 											/* 코트이름 */
 											$("#courtLink").attr("href", "<%=cp %>/court/" + data.courtCode);

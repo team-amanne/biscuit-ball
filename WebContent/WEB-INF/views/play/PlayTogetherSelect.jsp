@@ -30,7 +30,6 @@ String cp = request.getContextPath();
 }
 
 .map-container {
-   width: 450px;
    height: 500px;
 }
 
@@ -206,7 +205,7 @@ String cp = request.getContextPath();
 <body>
 
    <!-- 헤더 -->
-   <c:import url="../base/Header.jsp"></c:import>
+   <c:import url="../base/Header.jsp?active=play"></c:import>
    <c:import url="../base/PlaySubmenu.jsp"></c:import>
 
    <div class="container-fluid main">
@@ -227,10 +226,10 @@ String cp = request.getContextPath();
                            <div class="panel-heading panel-head">경기/일반 선택</div>
                            <div class="panel-body">
                               <label class="radio-inline radio"> 
-                              <input type="radio"name="meetingType" id="inlineRadio1" value="ZL01" >시합
+                              	<input type="radio"name="meetingType" id="inlineRadio1" value="ZL01" >시합
                               </label> 
                               <label class="radio-inline radio"> 
-                              <input type="radio" name="meetingType" id="inlineRadio2" value="ZL02" checked="checked"> 일반
+                              	<input type="radio" name="meetingType" id="inlineRadio2" value="ZL02" checked="checked"> 일반
                               </label>
                            </div>
                         </div>
@@ -296,76 +295,77 @@ String cp = request.getContextPath();
                            
                         </div> 
 						<div class="col-md-9">
-                        <div class="panel panel-default">
-                           <div class="panel-heading panel-head">지도 선택</div>
-                           <div class="panel-body">
-                              <div class="col-md-8 map-container" id="map"></div>
-
-                              <!-- 마커 클릭 시 등장하는 코트 정보  -->
-                              <div class="col-md-4" id="courtInfo">
-                              <div class="col-md-12" id="courtinfoboard" style="display: none;">
-                                 <h4>코트 정보</h4>
-                                 <ul class="list-group" id="">
-                                    <li class="list-group-item">
-                                       <div class="col-md-5 courtInfo">
-                                          <span class="">코트이름</span>
-                                       </div>
-                                       <p id="courtName"></p>
-                                    </li>
-                                    <li class="list-group-item">
-                                       <div class="col-md-5 courtInfo">
-                                          <span class="">적정인원</span>
-                                       </div> <span id="minCourtCapacity"></span>~<span
-                                       id="maxCourtCapacity"></span>
-                                    </li>
-                                    <li class="list-group-item">
-                                       <div class="col-md-5 courtInfo">
-                                          <span class="">코트등급</span>
-                                       </div>
-                                       <p id="courtRating"></p>
-                                    </li>
-                                    <li class="list-group-item">
-                                       <div class="col-md-5 courtInfo">
-                                          <span class="">만족도</span>
-                                       </div> <span class="star-score" id="avgCourtSatisfaction">
-                                    </span>
-                                    </li>
-                                 </ul>
-                                 <h4>코트 시설</h4>
-                                 <ul class="list-group">
-                                    <li class="list-group-item">
-                                       <div class="col-md-5 courtInfo">
-                                          <span class="">화장실</span>
-                                       </div> <span class="" id="toilet"></span>&nbsp;&nbsp;&nbsp;&nbsp;
-                                       <span class="" id="toiletConfidence"></span>
-                                    </li>
-                                    <li class="list-group-item">
-                                       <div class="col-md-5 courtInfo">
-                                          <span class="">샤워실</span>
-                                       </div> <span class="" id="shower"></span>&nbsp;&nbsp;&nbsp;&nbsp;
-                                       <span class="" id="showerConfidence"></span>
-                                    </li>
-                                    <li class="list-group-item">
-                                       <div class="col-md-5 courtInfo">
-                                          <span class="">주차장</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                                       </div> <span class="" id="parkinglot"></span>&nbsp;&nbsp;&nbsp;&nbsp;
-                                       <span class="" id="parkinglotConfidence"></span>
-                                    </li>
-                                 </ul>
+	                        <div class="panel panel-default">
+	                           <div class="panel-heading panel-head">지도 선택</div>
+	                           <div class="panel-body">
+	                              <div class="col-md-7 map-container" id="map"></div>
+	
+	                              <!-- 마커 클릭 시 등장하는 코트 정보  -->
+	                              <div class="col-md-5" id="courtInfo">
+	                              	<div class="col-md-12 btn-serach">
+	                                    <button class="btn btn-default btn-block btn-lg"
+	                                       id="playSearch">함께농구 검색</button>
+	                                    <button class="btn btn-default btn-block btn-lg" id="createMeeting">
+	                                       함께농구 개설</button>
+	                                 </div>
+		                              <div class="col-md-12" id="courtinfoboard" style="display: none;">
+		                                 <h4>코트 정보</h4>
+		                                 <ul class="list-group" id="">
+		                                    <li class="list-group-item">
+		                                       <div class="col-md-5 courtInfo">
+		                                          <span class="">코트이름</span>
+		                                       </div>
+		                                       <p id="courtName"></p>
+		                                    </li>
+		                                    <li class="list-group-item">
+		                                       <div class="col-md-5 courtInfo">
+		                                          <span class="">적정인원</span>
+		                                       </div> <span id="minCourtCapacity"></span>~<span
+		                                       id="maxCourtCapacity"></span>
+		                                    </li>
+		                                    <li class="list-group-item">
+		                                       <div class="col-md-5 courtInfo">
+		                                          <span class="">코트등급</span>
+		                                       </div>
+		                                       <p id="courtRating"></p>
+		                                    </li>
+		                                    <li class="list-group-item">
+		                                       <div class="col-md-5 courtInfo">
+		                                          <span class="">만족도</span>
+		                                       </div> <span class="star-score" id="avgCourtSatisfaction">
+		                                    </span>
+		                                    </li>
+		                                 </ul>
+		                                 <h4>코트 시설</h4>
+		                                 <ul class="list-group">
+		                                    <li class="list-group-item">
+		                                       <div class="col-md-5 courtInfo">
+		                                          <span class="">화장실</span>
+		                                       </div> <span class="" id="toilet"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+		                                       <span class="" id="toiletConfidence"></span>
+		                                    </li>
+		                                    <li class="list-group-item">
+		                                       <div class="col-md-5 courtInfo">
+		                                          <span class="">샤워실</span>
+		                                       </div> <span class="" id="shower"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+		                                       <span class="" id="showerConfidence"></span>
+		                                    </li>
+		                                    <li class="list-group-item">
+		                                       <div class="col-md-5 courtInfo">
+		                                          <span class="">주차장</span>&nbsp;&nbsp;&nbsp;&nbsp;
+		                                       </div> <span class="" id="parkinglot"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+		                                       <span class="" id="parkinglotConfidence"></span>
+		                                    </li>
+		                                 </ul>
 									</div>
-                                 <div class="col-md-12 btn-serach">
-                                    <button class="btn btn-default btn-block btn-lg"
-                                       id="playSearch">함께농구 검색</button>
-                                    <button class="btn btn-default btn-block btn-lg" id="createMeeting">
-                                       함께농구 개설</button>
-                                 </div>
-                                 <div class="col-md-12" id="requestmessage">
-                                 		
-                                 </div>
-
-                              </div>
-                           </div>
-                        </div>
+	                                 
+	                                 <div class="col-md-12" id="requestmessage">
+	                                 		
+	                                 </div>
+	
+	                              </div>
+	                           </div>
+	                        </div>
                         </div>
                         </div>
                      </div>
@@ -394,7 +394,7 @@ String cp = request.getContextPath();
 
                   <div class="row">
                      <div class="col-md-12  right-btn">
-                        <button class="btn btn-default btn-link" type="submit">모임
+                        <button class="btn btn-default btn-link" id="meetingcreate2" type="submit">모임
                            개설</button>
                      </div>
                   </div>
@@ -637,24 +637,33 @@ $(function()
 	                  + "</div><div class='col-md-3 col-xs-3'><span>장소</span></div><div class='col-md-2 col-xs-2'>"
 	                  + "<span>일시</span></div><div class='col-md-1 col-xs-1'><span>인원</span></div></div></li>";
 	
-	            for (var i=0; i<data.length; i++)
-	            {
-	               listPrint += "<li class='list-group-item board-body'><div class='row'><div class='col-md-4 col-xs-4'>";
-	               listPrint += "<span class='meetingPage' id='"+ data[i].meetingCode +"'>"+ data[i].meetingSubject+ "</span>";
-	               listPrint += "</div><div class='col-md-2 col-xs-2'>";
-	               listPrint += "<span class='captainName' id='"+ data[i].captainAcctCode +"'>"+ data[i].captainName+ "</span>";
-	               listPrint += "</div><div class='col-md-3 col-xs-3'>";
-	               listPrint += "<span class='courtName' id='"+ data[i].courtRegistrationCode +"'>"+ $("#courtName").text()+ "</span>";
-	               listPrint += "</div><div class='col-md-2 col-xs-2'>";
-	               listPrint += "<span>"+ data[i].meetingDate+ "</span>";
-	               listPrint += "</div><div class='col-md-1 col-xs-1'>";
-	               listPrint += "<span>"+ data[i].nowPeopleNumber+ "/"+ data[i].meetingPeopleNumber+ "</span>";
-	               listPrint += "</div></div></li>";
-	               
-	
-	         
 	                  
-	            }
+                if (data.length==0)
+				{
+					listPrint += "<div align='center' style='font-size: 14pt; margin-top: 2%;'>해당 조건의 모임이 존재하지 않습니다.</div>"
+				}
+                else
+                {
+                	for (var i=0; i<data.length; i++)
+    	            {
+    	            	
+    	            	
+    	            	listPrint += "<li class='list-group-item board-body'><div class='row'><div class='col-md-4 col-xs-4'>";
+      	               listPrint += "<span class='meetingPage' id='"+ data[i].meetingCode +"'>"+ data[i].meetingSubject+ "</span>";
+      	               listPrint += "</div><div class='col-md-2 col-xs-2'>";
+      	               listPrint += "<span class='captainName' id='"+ data[i].captainAcctCode +"'>"+ data[i].captainName+ "</span>";
+      	               listPrint += "</div><div class='col-md-3 col-xs-3'>";
+      	               listPrint += "<span class='courtName' id='"+ data[i].courtRegistrationCode +"'>"+ $("#courtName").text()+ "</span>";
+      	               listPrint += "</div><div class='col-md-2 col-xs-2'>";
+      	               listPrint += "<span>"+ data[i].meetingDate+ "</span>";
+      	               listPrint += "</div><div class='col-md-1 col-xs-1'>";
+      	               listPrint += "<span>"+ data[i].nowPeopleNumber+ "/"+ data[i].meetingPeopleNumber+ "</span>";
+      	               listPrint += "</div></div></li>";
+    	            	
+    	            }
+                	
+                }
+	            
 	            $("#meetingList").html(listPrint);
 	            
 	            //alert(listPrint);
@@ -712,6 +721,11 @@ $(function()
    });   
       // 모임 개설 이동
       $("#createMeeting").click(function()
+      {
+         $(location).attr("href","<%=cp%>/play/meeting/createfull");
+      });
+      
+      $("#meetingcreate2").click(function()
       {
          $(location).attr("href","<%=cp%>/play/meeting/createfull");
       });
