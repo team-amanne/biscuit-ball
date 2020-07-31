@@ -169,7 +169,7 @@ $().ready(function()
                </div>
                <div class="row">
                   <div class="col-sm-4 col-xs-5 right-btn">
-                     <a><button type="button" class="btn btn-default" id="myinfomation" disabled="disabled">내 정보관리</button></a>
+                     <a><button type="button" class="btn btn-default" id="myinfomation">내 정보관리</button></a>
                      <a><button type="button" class="btn btn-default " id="achievementList" style="margin-right: 25%;" disabled="disabled">업적 목록</button></a>
                   </div>
                   <div class="col-sm-4 col-xs-2">

@@ -43,7 +43,6 @@ $(document).ready(function()
 		$("#frm").attr("action","<%=cp%>/play/meeting").submit();
 	});
 	
-	
 
 	/* 도시, 시군구 선택 */
 	$("#region_select").on("change", function()
@@ -76,7 +75,7 @@ $(document).ready(function()
 	
 	$("#Speed_create").on("click", function() {
 		
-		if($(':radio[name="game_type"]:checked').length < 1 || $(':radio[name="ball"]:checked').length < 1){
+		if($(':radio[name="game_type"]:checked').length < 1 || $(':radio[name="ballExistOrNot"]:checked').length < 1){
 		    alert('카테고리를 선택해주세요');
 		    return false;
 		   
@@ -146,10 +145,10 @@ $(document).ready(function()
 										</div>
 										<div class="panel-body ball_align">
 											<label for="yes" class="radio-inline">
-												<input type="radio" name="ball" id="yes" value="yes" /> 지참
+												<input type="radio" name="ballExistOrNot" id="yes" value="ZU01" /> 지참
 											</label>
 											<label for="no" class="radio-inline">
-												<input type="radio" name="ball" id="no" value="no"/> 미지참
+												<input type="radio" name="ballExistOrNot" id="no" value="ZU02"/> 미지참
 											</label>
 										</div>
 									</div>
@@ -214,3 +213,5 @@ $(document).ready(function()
 
 </body>
 </html>
+
+
