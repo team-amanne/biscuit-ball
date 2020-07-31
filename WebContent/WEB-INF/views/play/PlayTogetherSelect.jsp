@@ -12,6 +12,7 @@ String cp = request.getContextPath();
 <title>BiscuitBail > 함께농구 조건 선택</title>
 <link rel="stylesheet"
    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="<%=cp%>/css/board.css" />
 <link rel="stylesheet" href="<%=cp%>/css/default.css" />
 <style type="text/css">
