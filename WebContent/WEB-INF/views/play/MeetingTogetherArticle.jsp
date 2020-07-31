@@ -42,7 +42,7 @@
 </head>
 <body>
 
-<c:import url="../base/Header.jsp"></c:import>
+<c:import url="../base/Header.jsp?active=play"></c:import>
 <c:import url="../base/PlaySubmenu.jsp"></c:import>
 
 <div class="container-fluid main">

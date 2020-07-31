@@ -107,6 +107,7 @@ public class RootController
 	{ RequestMethod.GET, RequestMethod.POST })
 	public String signUp(UserDTO user)
 	{
+		System.out.println("2");
 		return signUp.signUpUser(user);
 	}
 
@@ -115,6 +116,7 @@ public class RootController
 	{ RequestMethod.GET, RequestMethod.POST })
 	public String signUpComplete()
 	{
+		System.out.println("3");
 		return "/signup/User_SignupComplete";
 	}
 

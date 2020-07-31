@@ -21,10 +21,26 @@ public class SignUpModel
 	{
 		IUserDAO dao = sqlSession.getMapper(IUserDAO.class);
 
+		System.out.println(user.getUserTel());
+
+		System.out.println(user.getUserEmail());
+		System.out.println(user.getUserPassword());
+		System.out.println(user.getUserName());
+		System.out.println(user.getUserNickname());
+		System.out.println(user.getUserBirthday());
+		System.out.println(user.getUserGenderCode());
+		System.out.println(user.getUserHeight());
+		System.out.println(user.getSelfEvaluationType());
+		System.out.println(user.getUserCityCode());
+		System.out.println(user.getUserPositionCode());
+		System.out.println(user.getSnsSync());
+		
+		
+		
 		dao.registerUser(user);	// 회원가입
 		
 		String result = user.getReturnValue();	// 처리 결과
-
+		System.out.println(result);
 		if(result.equals("1"))  // 회원가입성공
 			return "redirect:/signupcomplete";
 		

@@ -11,6 +11,9 @@ String cp = request.getContextPath();
 <title>BiscuitBail > 코트 등록</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/default.css">
 <link rel="stylesheet" href="<%=cp%>/css/board.css" />
 <style type="text/css">
@@ -239,7 +242,6 @@ String cp = request.getContextPath();
 <br style="clear: both;" />
 <c:import url="../base/Footer.jsp"></c:import>
 
-<script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=71d2a00bcbaa2c09a70387dda258c248&libraries=services,clusterer,drawing"></script>
 <script type="text/javascript">
 	
