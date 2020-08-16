@@ -11,11 +11,17 @@
 <title>친구관리.jsp</title>
 
 <!-- 부트스트랩/제이쿼리 -->
-<!-- 부트스트랩/제이쿼리 -->
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/default.css">
 <link rel="stylesheet" href="<%=cp%>/css/board.css" />
+<link rel="stylesheet" href="<%=cp %>/css/default.css" />
+
+
+
+
 <style type="text/css">
 .title-text
 {
@@ -36,7 +42,7 @@
 
 	<!-- 서브메뉴 -->
 	<!-- 서브메뉴는 기능별(농구하기/코트검색/크루/...)로 복사해서 만들어두고 import 할 것 -->
-	<c:import url="../base/Submenu.jsp"></c:import>
+	<c:import url="../base/MypageSubmenu.jsp?active=friend"></c:import>
 
 	<!-- 메인 -->
 	<div class="main container-fluid">

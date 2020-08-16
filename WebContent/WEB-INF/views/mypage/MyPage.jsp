@@ -11,10 +11,10 @@
 
 <!-- 부트스트랩/제이쿼리 -->
 <!-- 부가적인 테마 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />      
-<link rel="stylesheet" href="<%=cp %>/css/board.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%=cp %>/css/default.css" />
-<script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 
 <!-- Font Awesome icons (free version)-->
@@ -146,7 +146,7 @@ $().ready(function()
 
    <!-- 서브메뉴 -->
    <!-- 서브메뉴는 기능별(농구하기/코트검색/크루/...)로 복사해서 만들어두고 import 할 것 -->
-   <c:import url="../base/Mypagemenu.jsp"></c:import>
+   <c:import url="../base/MypageSubmenu.jsp?active=mypage"></c:import>
 <form action=".." method="post"  enctype="multipart/form-data" id="frm" name="frm">
    <!-- 메인  enctype="multipart/form-data"  -->
    <input type="hidden" id="userRequestType" name="userRequestType">
