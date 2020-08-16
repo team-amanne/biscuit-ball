@@ -10,13 +10,13 @@
 <div class="navbar navbar-default nav-tablist">
 	<ul class="nav navbar-nav navbar-center nav-tablist-tabs">
 		<li
-		<c:if test='${param.active == "party" }'>		
+		<c:if test='${param.active == "mode" }'>		
 			class="active"
 		</c:if> 
 		>
 			<a
-			<c:if test='${param.active != "party" }'>
-			href="<%=cp %>/play/party"
+			<c:if test='${param.active != "mode" }'>
+			href="<%=cp %>/play/mode"
 			</c:if> 
 			>농구하기</a>
 		</li>
@@ -35,7 +35,7 @@
 		</li>
 		<!-- <li class="active"><a>농구하기</a></li> -->
 		<li
-		<c:if test='${param.active == "manage/list" }'>
+		<c:if test='${param.active == "manage/playlog" }'>
 		
 		class="active"
 		</c:if> 

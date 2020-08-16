@@ -100,7 +100,7 @@ $(document).ready(function()
 <body>
    <!-- 헤더 -->
       <c:import url="../base/Header.jsp"></c:import>
-<c:import url="../base/PlaySubmenu.jsp"></c:import>
+<c:import url="../base/PlaySubmenu.jsp?active=mode"></c:import>
 
 <div class="main container-fluid">
    <div class="col-md-2"></div>

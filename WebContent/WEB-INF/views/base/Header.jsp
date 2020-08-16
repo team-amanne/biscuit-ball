@@ -28,7 +28,7 @@
 					<li ${param.active == "play" ? "class='active'" : "" }>
 						<a
 						<c:if test='${param.active != "play" }'>
-						href = <c:url value="/play/party"></c:url>
+						href = <c:url value="/play/mode"></c:url>
 						</c:if>
 						>
 						농구하기
