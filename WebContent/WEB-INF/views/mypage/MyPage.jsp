@@ -169,14 +169,14 @@ $().ready(function()
                </div>
                <div class="row">
                   <div class="col-sm-4 col-xs-5 right-btn">
-                     <a><button type="button" class="btn btn-default" id="myinfomation" disabled="disabled">내 정보관리</button></a>
-                     <a><button type="button" class="btn btn-default " id="achievementList" style="margin-right: 25%;" disabled="disabled">업적 목록</button></a>
+                     <a><button type="button" class="btn btn-default" id="myinfomation">내 정보관리</button></a>
+                     <a><button type="button" class="btn btn-default " id="achievementList" style="margin-right: 25%;">업적 목록</button></a>
                   </div>
                   <div class="col-sm-4 col-xs-2">
                   </div>
                   <div class="col-sm-4 col-xs-5" >
-                     <a><button type="button" class="btn btn-default " style="margin-left: 25%;" id="friend" disabled="disabled">친구 관리</button></a>
-                     <a><button type="button" class="btn btn-default " id="userblock" disabled="disabled">차단 관리</button></a>
+                     <a><button type="button" class="btn btn-default " style="margin-left: 25%;" id="friend">친구 관리</button></a>
+                     <a><button type="button" class="btn btn-default " id="userblock">차단 관리</button></a>
                   </div>
                </div>
                <div class="row">
@@ -227,18 +227,15 @@ $().ready(function()
                   </div>
                </div>
                <div class="row">
-                  <div class="col-sm-5 col-xs-5">
+                  <div class="col-sm-5 col-xs-3">
                   </div>
-                  <div class="col-sm-2 col-xs-2">
+                  <div class="col-sm-2 col-xs-6">
                      <button type="button" class="btn btn-default btn-submit btn-block btn-link" id="introduce">자기소개글 등록</button>
                   </div>
-                  <div class="col-sm-2 col-xs-2">
+                  <div class="col-sm-5 col-xs-3">
                   </div>
-                  <div class="col-sm-2 col-xs-2">
-                  <p><button type="button" class="btn btn-default btn-block" id="referee" disabled="disabled">심판정보</button></p>
-                  </div>      
-                           
                </div>
+               <br>
                <div class="row">
                   <div class="col-md-1">
                   </div>
