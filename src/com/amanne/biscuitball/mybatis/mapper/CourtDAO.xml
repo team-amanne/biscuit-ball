@@ -16,7 +16,7 @@
 		    , COURT_IMG2
 		    , COURT_IMG3
 		    , REGISTRANT_ACCT_CODE
-		    , COURT_REG_CAPACITY
+		    , COURT_CAPACITY_CODE
 		    , CITY_CODE
 		)
 		VALUES(

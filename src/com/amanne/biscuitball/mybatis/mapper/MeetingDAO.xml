@@ -61,7 +61,7 @@
 		
 		<insert id="inputFairplayScore" parameterType="com.amanne.biscuitball.mybatis.EvaluationDTO">
 		INSERT INTO TBL_FAIRPLAYSCORE(FPS_CODE, FAIRPLAYSCORE , PL_CODE , EVALUATEE_MEET_JOIN_CODE)
-		VALUES(FN_CREATE_CODE('TBL_FAIRPLAYSCORE', SEQ_FAIRPLAYSCORE.NEXTVAL), #{fairplayScoreCode},#{playlogCode},#{evaluateeMeetingJoinCode})
+		VALUES(FN_CREATE_CODE('TBL_FAIRPLAYSCORE', SEQ_FAIRPLAYSCORE.NEXTVAL), #{fairplayScore},#{playlogCode},#{evaluateeMeetingJoinCode})
 		</insert>
 		
 <!--	public int inputPersonalAbilityEvaluation(EvaluationDTO personalAbilityEvaluationDTO); // 실력평가  -->
@@ -70,7 +70,7 @@
 		INSERT INTO TBL_PERSONAL_ABILITY_EVAL(PER_ABL_EVAL_CODE, PL_CODE , EVALUATEE_MEET_JOIN_CODE , ABL_EVAL_TYPE_CODE)
 		VALUES(FN_CREATE_CODE('TBL_PERSONAL_ABILITY_EVAL', SEQ_PERSONAL_ABILITY_EVAL.NEXTVAL), #{playlogCode},#{evaluateeMeetingJoinCode},#{abilityEvaluationTypeCode})
 		</insert>
-
+		
 <!--	public int inputNoshow(NoshowDTO noshowDTO); // 노쇼기록  -->
 
 		<insert id="inputNoshow" parameterType="com.amanne.biscuitball.mybatis.NoshowDTO">
@@ -234,18 +234,43 @@
 
 		<select id="getMeetingListNotInputPlaylog" resultType="com.amanne.biscuitball.mybatis.MeetingDTO">
 		<![CDATA[
-			SELECT MT.MEET_CODE as meetingCode
+			 SELECT MT.MEET_CODE as meetingCode
 	            , MT.MEET_SUBJECT as meetingSubject
+                , (
+                   SELECT COUNT(*)
+                   FROM TBL_MEETING_JOIN
+                   WHERE MEET_CODE = MT.MEET_CODE
+                  ) as nowPeopleNumber
 	            , MT.MEET_PEOPLE_NUMBER as meetingPeopleNumber
 	            , MT.MEET_OP_DATE as meetingOpenDate
 	            , MT.MEET_DATE as meetingDate
 	            , MT.MEET_END_DATE as meetingEndDate
 	            , MT.MEET_CLOSE_DATE as meetingCloseDate
-	            , MT.MEET_NOTICE as meetingNotice
 	            , MT.MEET_TYPE_CODE as meetingTypeCode
 	            , MT.MEET_TYPE_NAME as meetingTypeName
-	            , MT.QUICK_PLAY as quickPlayOrNot
 	            , MT.COURT_REG_CODE as courtRegistrationCode
+                , (
+                   SELECT COURT_NAME
+                   FROM TBL_COURT_REGISTRATION
+                   WHERE COURT_REG_CODE = MT.COURT_REG_CODE
+                  ) as courtName
+                , (
+                   SELECT JOIN_ACCT_CODE
+                   FROM TBL_MEETING_JOIN
+                   WHERE MEET_CODE = MT.MEET_CODE
+                   AND CAPTAIN_CODE = 'ZU01'
+                  ) as catainAcctCode
+                , (
+                  SELECT USER_NICKNAME
+                  FROM TBL_USER_ACCOUNT
+                  WHERE USER_ACCT_CODE =
+                    (
+                    SELECT JOIN_ACCT_CODE
+                    FROM TBL_MEETING_JOIN
+                    WHERE MEET_CODE = MT.MEET_CODE
+                    AND CAPTAIN_CODE = 'ZU01'
+                    )
+                 ) as captainName
 	            , MT.MIN_TIER as minTierCode
 	            , MT.MAX_TIER as maxTierCode
 	            , MT.CONFIRM_OR_NOT as confirmOrNot
@@ -254,9 +279,13 @@
 			ON MJ.MEET_CODE = MT.MEET_CODE
 			LEFT JOIN VIEW_PLAYLOG PL
 			ON MJ.MEET_JOIN_CODE = PL.MEET_JOIN_CODE
-			WHERE PL.PL_CODE IS NULL
+			WHERE MT.MEET_PEOPLE_NUMBER =  
+            (
+               SELECT COUNT(*)
+               FROM TBL_MEETING_JOIN
+               WHERE MEET_CODE = MT.MEET_CODE
+            )  AND PL.PL_CODE IS NULL AND SYSDATE > MEET_END_DATE
 			AND MJ.JOIN_ACCT_CODE = #{userAccountCode}
-			
 		]]>
 		</select>
 
@@ -281,6 +310,11 @@
 			SELECT MJ.MEET_JOIN_CODE
             , MT.MEET_CODE as meetingCode
             , MT.MEET_SUBJECT as meetingSubject
+            , (
+               SELECT COUNT(*)
+               FROM TBL_MEETING_JOIN
+               WHERE MEET_CODE = MT.MEET_CODE
+              ) as nowPeopleNumber
             , MT.MEET_PEOPLE_NUMBER as meetingPeopleNumber
             , MT.MEET_OP_DATE as meetingOpenDate
             , MT.MEET_DATE as meetingDate
@@ -289,13 +323,36 @@
             , MT.MEET_NOTICE as meetingNotice
             , MT.MEET_TYPE_CODE as meetingTypeCode
             , MT.MEET_TYPE_NAME as meetingTypeName
-			FROM VIEW_MEETING_JOIN MJ
-			LEFT JOIN VIEW_MEETING MT
-			ON MJ.MEET_CODE = MT.MEET_CODE
-			WHERE MJ.JOIN_ACCT_CODE = #{userAccountCode}
-			AND MT.MEET_DATE > SYSDATE
-			AND MJ.MEET_JOIN_CANCEL_CODE IS NULL
-			ORDER BY MT.MEET_DATE
+            , MT.COURT_REG_CODE as courtRegistrationCode 
+            , (
+               SELECT COURT_NAME
+               FROM TBL_COURT_REGISTRATION
+               WHERE COURT_REG_CODE = MT.COURT_REG_CODE
+              ) as courtName
+            , (
+               SELECT JOIN_ACCT_CODE
+               FROM TBL_MEETING_JOIN
+               WHERE MEET_CODE = MT.MEET_CODE
+               AND CAPTAIN_CODE = 'ZU01'
+              ) as captainAcctCode
+            , (
+              SELECT USER_NICKNAME
+              FROM TBL_USER_ACCOUNT
+              WHERE USER_ACCT_CODE =
+                (
+                SELECT JOIN_ACCT_CODE
+                FROM TBL_MEETING_JOIN
+                WHERE MEET_CODE = MT.MEET_CODE
+                AND CAPTAIN_CODE = 'ZU01'
+                )
+             ) as  captainName
+         FROM VIEW_MEETING_JOIN MJ
+         LEFT JOIN VIEW_MEETING MT
+         ON MJ.MEET_CODE = MT.MEET_CODE
+         WHERE MJ.JOIN_ACCT_CODE = #{userAccountCode}
+         AND MT.MEET_DATE > SYSDATE
+         AND MJ.MEET_JOIN_CANCEL_CODE IS NULL
+         ORDER BY MT.MEET_DATE
 		]]>
 		</select>
 

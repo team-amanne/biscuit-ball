@@ -249,8 +249,8 @@
 								</c:if>
 							</c:forEach>
 							
-							<c:if test="${isJoined == 'NO' }">
-							<button class="btn btn-default btn-lg btn-submit" onclick="joinMeeting()">참 여</button>
+							<c:if test="${isJoined == 'NO' and meetingdto.nowPeopleNumber < meetingdto.meetingPeopleNumber}">
+									<button class="btn btn-default btn-lg btn-submit" onclick="joinMeeting()">참 여</button>
 							</c:if>
 							
 							<%--

@@ -142,7 +142,7 @@ public class AjaxController
 		return "/ajax/Check";
 	}
 	
-	@RequestMapping("/court/{courtCode}/meetingcount/{meetingDate}")
+@RequestMapping("/court/{courtCode}/meetingcount/{meetingDate}")
 	public String courtMeetingIndex(Model model, @PathVariable String courtCode, @PathVariable String meetingDate)
 	{
 		model.addAttribute("result", ajax.getCourtMeetingCount(courtCode, meetingDate));
@@ -167,4 +167,31 @@ public class AjaxController
 		model.addAttribute("result", ajax.getMeetingListByRegion(meetingDate));
 		return "/ajax/Check";
 	}
+	
+	// 모임 예정 리스트
+	@RequestMapping("/manage/list")
+	public String getJoinMeetingList(Model model)
+	{
+		String view = null;
+		
+		model.addAttribute("result", ajax.getJoinMeetingList());
+		
+		view = "/ajax/Check";
+		return view;
+	}
+	
+	// 플레이로그 미입력 리스트
+	@RequestMapping("/manage/playlog")
+	public String getMeetingListNotInputPlaylog(Model model)
+	{
+		String view = null;
+		System.out.println("ajaxCon");
+		
+		model.addAttribute("result", ajax.getNotInputPlaylogList());
+		
+		view = "/ajax/Check";
+		return view;
+	}
+	
+	
 }

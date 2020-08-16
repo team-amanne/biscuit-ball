@@ -49,13 +49,13 @@ public interface IMeetingDAO
 
 	
 	
-	public List<MeetingDTO> getMeetingListNotInputPlaylog(String userAccountCode); // PL입력x 모임 조회
+	public ArrayList<MeetingDTO> getMeetingListNotInputPlaylog(String userAccountCode); // PL입력x 모임 조회
 
 	public int countMeetingsNotInputPlaylog(String userAccountCode); // PL입력x 모임 전체 수
 
 	
 	
-	public List<MeetingDTO> getJoinMeetingList(String userAccountCode); // 참여신청한 모임 조회(예정)
+	public ArrayList<MeetingDTO> getJoinMeetingList(String userAccountCode); // 참여신청한 모임 조회(예정)
 
 	public int countJoinMeeting(String userAccountCode); // 참여신청한 모임 전체 수(예정)
 

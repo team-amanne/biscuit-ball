@@ -59,12 +59,13 @@ public class LoginModel
        {
           UserDTO userDto = new UserDTO();
           userDto = userDao.getUser(returnValue);
-    
-          
+
            userInfo.setUserCode(userDto.getUserCode());
            userInfo.setUserAcctCode(userDto.getUserAccountCode());
            userInfo.setUserNickname(userDto.getUserNickname());
-           userInfo.setCrewMemberCode(userDto.getUserCrewMemberCode());           
+           userInfo.setCrewMemberCode(userDto.getUserCrewMemberCode());
+           userInfo.setTierCode(userDto.getTierCode()); 
+           userInfo.setTierName((userDto.getTierName()));
            userInfo.setCrewCode(userDto.getUserCrewCode());
            userInfo.setUserStatus(userDto.getUserStatus());
 

@@ -8,11 +8,13 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.amanne.biscuitball.mybatis.EvaluationDTO;
 import com.amanne.biscuitball.mybatis.IMeetingDAO;
 import com.amanne.biscuitball.mybatis.IRegionDAO;
 import com.amanne.biscuitball.mybatis.IUserDAO;
 import com.amanne.biscuitball.mybatis.MeetingDTO;
 import com.amanne.biscuitball.mybatis.MeetingMemberDTO;
+import com.amanne.biscuitball.mybatis.MeetingPlaylogDTO;
 import com.amanne.biscuitball.mybatis.RegionDTO;
 import com.amanne.biscuitball.mybatis.UserDTO;
 
@@ -169,5 +171,33 @@ public class PlayModel
 		
 		return dto.isReturnValue();
 	}
+	
+	public String InputPlaylog(MeetingPlaylogDTO meetingPlaylogDTO, EvaluationDTO evaluationDTO )
+    {
+       IMeetingDAO dao = sqlSession.getMapper(IMeetingDAO.class);
+              
+       UserInfo userInfo = (UserInfo) session.getAttribute("userInfo"); 
+       
+       meetingPlaylogDTO.setJoinAccountCode(userInfo.getUserAcctCode());
+       
+       dao.inputMeetingPlaylog(meetingPlaylogDTO);
+       
+       evaluationDTO.setPlaylogCode(meetingPlaylogDTO.getPlaylogCode());;
+       
+       dao.inputFairplayScore(evaluationDTO);
+       dao.inputPersonalAbilityEvaluation(evaluationDTO);
+
+       String result = meetingPlaylogDTO.getReturnValue();
+       System.out.println(result);
+       if(result != null)
+       {  
+          return result;
+       }
+       else 
+       {
+          return "";
+       }
+
+    }
 	
 }

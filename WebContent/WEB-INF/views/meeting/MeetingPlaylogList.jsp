@@ -47,12 +47,118 @@ String cp = request.getContextPath();
 	color: orange;
 }
 </style>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript">
+
+$(function() 
+{
+$.ajax
+({
+ 	type: "get",
+    dataType: "json",
+    url: "<%=cp%>/ajax/manage/playlog",
+ success : function(data)
+ {
+
+    var listPrint = "<li class='list-group-item list-header list-item'><div class='row'>"
+    	  + "<div class='col-md-1 col-xs-1'><span>종류</span></div>"
+          + "<div class='col-md-3 col-xs-3'><span>제목</span></div>"
+          + "<div class='col-md-2 col-xs-2'><span>주장</span></div>"
+          + "<div class='col-md-2 col-xs-2'><span>장소</span></div>"
+          + "<div class='col-md-2 col-xs-2'><span>모임시간</span></div>"
+          + "<div class='col-md-1 col-xs-1'><span>인원</span></div>"
+          + "<div class='col-md-1 col-xs-1'><span></span></div></div></li>";
+    
+          
+          if (data.length==0)
+			{
+				listPrint += "<div align='center' style='font-size: 14pt; margin-top: 2%;'>해당 조건의 모임이 존재하지 않습니다.</div>"
+			}
+          else
+          {
+          	for (var i=0; i<data.length; i++)
+	            {
+          		
+	            	
+	            	listPrint += "<li class='list-group-item list-item'><div class='row'><div class='col-md-1 col-xs-1'>";
+	               	listPrint += "<span id='"+ data[i].meetingTypeCode +"'>"+ data[i].meetingTypeName+ "</span>";
+	               	listPrint += "</div><div class='col-md-3 col-xs-3'>";
+	               	listPrint += "<span class='meetingPage' id='"+ data[i].meetingCode +"'>"+ data[i].meetingSubject+ "</span>";
+	               	listPrint += "</div><div class='col-md-2 col-xs-2'>";
+	               	listPrint += "<span class='captainName' id='"+ data[i].captainAcctCode +"'>"+ data[i].captainName+ "</span>";
+	               	listPrint += "</div><div class='col-md-2 col-xs-2'>";
+	               	listPrint += "<span class='courtName' id='"+ data[i].courtRegistrationCode +"'>"+ data[i].courtName+ "</span>";
+	               	listPrint += "</div><div class='col-md-2 col-xs-2'>";
+	               	listPrint += "<span>"+ data[i].meetingDate+ "</span>";
+	               	listPrint += "</div><div class='col-md-1 col-xs-1'>";
+	               	listPrint += "<span>"+ data[i].meetingPeopleNumber+ "</span>";
+	               	listPrint += "</div><div class='col-md-1 col-xs-1'>";
+	               	listPrint += "<button class='btn btn-default btn-sm btn-block playlogInput' id='"+ data[i].meetingCode +"'>입력</button>";
+
+	            }
+          	
+          }
+          
+          $("#meetingList").html(listPrint);
+          
+          //alert(listPrint);
+          
+          
+          // 모임 제목 클릭하면 모임으로
+          $(".meetingPage").click(function()
+          {
+             //var id = ($(this).attr('id'));
+             var meetingCode = $(this).attr('id');
+             $(location).attr("href","<%=cp%>/play/meeting/"+ meetingCode);
+             //childWindow.resizeTo(800, 800);
+          });
+
+          // 주장 이름 클릭하면 프로필로
+          $(".captainName").click(function()
+          {
+             //var id = ($(this).attr('id'));
+             var captainAcctCode = $(this).attr('id');
+             $(location).attr("href","<%=cp%>/userpage/"+ captainAcctCode);
+             //childWindow.resizeTo(800, 800);
+          });
+
+          // 코트 이름 클릭하면 코트 페이지로
+          $(".courtName").click(function()
+          {
+             var courtCode = ($(this).attr('id'));
+             
+             $(location).attr("href","<%=cp%>/court/"+ courtCode);
+          });
+          
+          $(".playlogInput").click(function()
+          {
+        	  var meetingCode = $(this).attr('id');
+              $(location).attr("href","<%=cp%>/play/meeting/manage/playlog/"+ meetingCode);
+        	  
+          });
+          
+   
+    
+ },
+ error : function(e)
+ {
+    alert(e.responseText+"오류");
+ }
+       
+	});
+});
+
+</script>
+
+
 </head>
 <body>
 
 	<!-- 헤더 -->
+
 		<c:import url="../base/Header.jsp"></c:import>
-<c:import url="../base/Submenu.jsp"></c:import>
+<c:import url="../base/PlaySubmenu.jsp"></c:import>
 
 	<div class="container-fluid main">
 		<div class="section-title container">
@@ -71,6 +177,7 @@ String cp = request.getContextPath();
 							<div class="col-md-12">
 								<h4>전체 플레이로그</h4>
 								<hr>
+								
 							</div>
 						</div>
 						<div class="row top-btn">
@@ -80,143 +187,11 @@ String cp = request.getContextPath();
 								<button class="btn btn-submit" type="button">더보기</button>
 							</div>
 						</div>
-
-						<ul class="list-group">
-							<li class="list-group-item list-header list-item">
-								<div class="col-md-1">
-									<span class="board-header">번호</span>
-								</div>
-								<div class="col-md-1">
-									<span class="board-header">주장</span>
-								</div>
-								<div class="col-md-3">
-									<span class="board-header">장소</span>
-								</div>
-								<div class="col-md-2">
-									<span class="board-header">모임시간</span>
-								</div>
-								<div class="col-md-1">
-									<span class="board-header">인원</span>
-								</div>
-								<div class="col-md-2">
-									<span class="board-header">경기/일반</span>
-								</div>
-								<div class="col-md-2">
-									<span class="board-header">입력 여부</span>
-								</div>
-								
-							</li>
-							<li class="list-group-item list-item">
-								<div class="col-md-1">
-									<span class="board-header">103</span>
-								</div>
-								<div class="col-md-1">
-									<span class="board-header">아맞네</span>
-								</div>
-								<div class="col-md-3">
-									<span class="board-header">서울 마포구 쌍용코트</span>
-								</div>
-								<div class="col-md-2">
-									<span class="board-header">2020-07-09 12:00</span>
-								</div>
-								<div class="col-md-1">
-									<span class="board-header">4</span>
-								</div>
-								<div class="col-md-2">
-									<span class="board-header">경기</span>
-								</div>
-								<div class="col-md-2">
-									<span class="board-header">
-										<button class="btn btn-default btn-sm">
-										입력하기
-										</button>
-									</span>
-								</div>
-							</li>
-							<li class="list-group-item list-item">
-								<div class="col-md-1">
-									<span class="board-header">102</span>
-								</div>
-								<div class="col-md-1">
-									<span class="board-header">갓진녕</span>
-								</div>
-								<div class="col-md-3">
-									<span class="board-header">제주 서귀포시 해피코트</span>
-								</div>
-								<div class="col-md-2">
-									<span class="board-header">2020-07-08 12:00</span>
-								</div>
-								<div class="col-md-1">
-									<span class="board-header">4</span>
-								</div>
-								<div class="col-md-2">
-									<span class="board-header">일반</span>
-								</div>
-								<div class="col-md-2">
-									<span class="board-header">
-										<button class="btn btn-default btn-sm" disabled="disabled">
-										입력 완료
-										</button>
-									</span>
-								</div>
-							</li>
-							<li class="list-group-item list-item">
-								<div class="col-md-1">
-									<span class="board-header">102</span>
-								</div>
-								<div class="col-md-1">
-									<span class="board-header">성철성철</span>
-								</div>
-								<div class="col-md-3">
-									<span class="board-header">인천 미추홀구 집앞코트</span>
-								</div>
-								<div class="col-md-2">
-									<span class="board-header">2020-07-08 12:00</span>
-								</div>
-								<div class="col-md-1">
-									<span class="board-header">4</span>
-								</div>
-								<div class="col-md-2">
-									<span class="board-header">일반</span>
-								</div>
-								<div class="col-md-2">
-									<span class="board-header">
-										<button class="btn btn-default btn-sm" disabled="disabled">
-										입력 완료
-										</button>
-									</span>
-								</div>
-							</li>
-							<li class="list-group-item list-item">
-								<div class="col-md-1">
-									<span class="board-header">102</span>
-								</div>
-								<div class="col-md-1">
-									<span class="board-header">한별</span>
-								</div>
-								<div class="col-md-3">
-									<span class="board-header">인천 미추홀구 집앞코트</span>
-								</div>
-								<div class="col-md-2">
-									<span class="board-header">2020-07-08 12:00</span>
-								</div>
-								<div class="col-md-1">
-									<span class="board-header">4</span>
-								</div>
-								<div class="col-md-2">
-									<span class="board-header">일반</span>
-								</div>
-								<div class="col-md-2">
-									<span class="board-header">
-										<button class="btn btn-default btn-sm" disabled="disabled">
-										입력 완료
-										</button>
-									</span>
-								</div>
-							</li>
+						<ul class="list-group" id="meetingList">
 							
-
+							<!-- 게시판 출력 영역 -->
 						</ul>
+
 						<div class="row">
 							<div class="col-md-12"></div>
 						</div>

@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.amanne.biscuitball.model.CourtModel;
+import com.amanne.biscuitball.model.MypageModel;
 import com.amanne.biscuitball.model.PlayModel;
 import com.amanne.biscuitball.model.UserInfo;
 import com.amanne.biscuitball.mybatis.CourtDTO;
@@ -204,6 +206,56 @@ public class PlayController
 		playModel.cancelJoinMeeting(meetingCode, info.getUserAcctCode());
 		
 		return "redirect:/play/meeting/" + meetingCode;
+	}
+	
+	@RequestMapping("/meeting/manage/list")
+	public String meetingList()
+	{
+		String view = null;
+		
+		view = "/meeting/MeetingList";
+		
+		return view;
+	}
+	
+	@RequestMapping("/meeting/manage/playlog")
+	public String meetingPlaylogListInput()
+	{
+		String view = null;
+		
+		view = "/meeting/MeetingPlaylogList";
+		
+		return view;
+	}
+	
+	// 미입력 플레이로그
+	@RequestMapping("/meeting/manage/playlog/{meeting_code}")
+	public String meetingPlaylogListInput(Model model, @PathVariable("meeting_code") String meeting_code)
+	{
+		String view = null;
+		
+		//model.addAttribute("regions", courtModel.getRegionList());
+		
+		HttpSession session = request.getSession();
+		UserInfo userinfo = (UserInfo)session.getAttribute("userInfo");
+		
+		MeetingDTO meetingdto = playModel.getMeetingList(meeting_code);
+		CourtDTO courtdto = courtModel.getCourt(meetingdto.getCourtRegistrationCode(), userinfo);
+		System.out.println(userinfo.getTierName());
+		ArrayList<MeetingMemberDTO>  memberlist = meetingdto.getMeetingMemberList();
+		
+		ArrayList<UserDTO> meetingmemberlist= new ArrayList<UserDTO>();
+		
+		meetingmemberlist = playModel.getMemberLIst(memberlist);		
+		model.addAttribute("meetingdto", meetingdto);
+		model.addAttribute("courtdto", courtdto);
+		model.addAttribute("memberlist", meetingmemberlist);
+		model.addAttribute("userinfo", userinfo);
+
+		
+		view = "/meeting/MeetingPlaylogInput";
+		
+		return view;
 	}
 	
 }

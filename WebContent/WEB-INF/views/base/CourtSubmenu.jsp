@@ -11,6 +11,7 @@
 	<ul class="nav navbar-nav navbar-center nav-tablist-tabs">
 		<li
 		<c:if test='${param.active == "search" }'>
+		
 		class="active"
 		</c:if> 
 		>

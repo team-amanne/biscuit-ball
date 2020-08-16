@@ -24,6 +24,9 @@ public class MeetingPlaylogDTO
 	private ArrayList<NoshowDTO> noshowList; 			// 노쇼리스트
 	private String returnValue;
 	
+	public String getReturnValue() {
+		return returnValue;
+	}
 	public String getPlaylogCode() {
 		return playlogCode;
 	}

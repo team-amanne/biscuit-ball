@@ -81,9 +81,7 @@ String cp = request.getContextPath();
 .ui-datepicker-trigger {
    cursor: pointer;
 }
-/*datepicer input 롤오버 시 손가락 모양 표시*/
-.hasDatepicker {
-   cursor: pointer;
+/*datepicer input 롤오버 시 손가락
 }
 
 .sign .row {
@@ -480,6 +478,7 @@ String cp = request.getContextPath();
    <c:import url="../base/Header.jsp"></c:import>
    <!-- 서브 -->
    <div class="main container-fluid">
+   <form action="signupdo" id="signUp_submit">
       <div class="section-title container">
          <p>회원가입</p>
          <hr />
@@ -724,8 +723,9 @@ String cp = request.getContextPath();
          </div>
       </div>
    </div>
+    </form>
   </div>
-   </form>
+  
    <c:import url="../base/Footer.jsp"></c:import>
 
 </body>
