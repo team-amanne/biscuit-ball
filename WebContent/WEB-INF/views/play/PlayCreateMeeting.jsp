@@ -149,7 +149,7 @@ select {
 
    <!-- 헤더 -->
    <c:import url="../base/Header.jsp"></c:import>
-   <c:import url="../base/PlaySubmenu.jsp"></c:import>
+   <c:import url="../base/PlaySubmenu.jsp?active=mode"></c:import>
 
    <!------------------------------------------ 바디 ------------------------------------------------>
    <div class="container-fluid main">
