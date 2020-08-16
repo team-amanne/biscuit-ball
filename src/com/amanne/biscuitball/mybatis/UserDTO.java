@@ -10,51 +10,51 @@ import java.util.ArrayList;
 
 public class UserDTO 
 {
-   private String   userCode;               //   회원코드   
-   private String   userAccountCode;         //   회원계정코드   
-   private String   userNickname;            //   닉네임   
-   private String   snsSync;               //   sns연동여부   
+   private String   userCode;            	//   회원코드   
+   private String   userAccountCode;        //   회원계정코드   
+   private String   userNickname;           //   닉네임   
+   private String   snsSync;                //   sns연동여부   
    private String   userName;               //   이름   
-   private String   userEmail;               //   이메일   
-   private String   userPassword;            //   비밀번호   
-   private String   userTel;               //   전화번호   
-   private String   userBirthday;            //   생일   
-   private int      userHeight;               //   키   
-   private String   userRegisteredDate;         //   등록일시   
-   private String   userGenderCode;            //   성별코드   
-   private String   userGender;               //   성별   
-   private String   selfEvaluationType;         //   자기평가실력
+   private String   userEmail;              //   이메일   
+   private String   userPassword;           //   비밀번호   
+   private String   userTel;                //   전화번호   
+   private String   userBirthday;           //   생일   
+   private int      userHeight;             //   키   
+   private String   userRegisteredDate;     //   등록일시   
+   private String   userGenderCode;        	//   성별코드   
+   private String   userGender;            	//   성별   
+   private String   selfEvaluationType;     //   자기평가실력
    private String   tierCode;               //   실력코드
    private String   tierName;               //   실력등급   
-   private double   fairplayScore;            //   fps   
-   private String   userCityCode;            //   거점지역코드
+   private double   fairplayScore;          //   fps   
+   private String   userCityCode;           //   거점지역코드
    private String   userCity;               //   거점지역명      
-   private String   userProfileImg;            //   프로필사진경로   
-   private String   userProfileTxt;            //   자기소개글   
-   private String   userCourtCode;            //   내코트코드   
-   private String   userCourtName;            //   내코트명      
-   private String   userCrewCode;            //   내크루코드   
-   private String   userCrewName;            //   내크루명   
-   private String   userCrewMemberCode;         //   크루멤버코드   
-   private String   userPosition;            //   선호포지션명   
-   private String   userPositionAbbr;         //   선호포지션약어
-   private String  userPositionCode;          //  유저포지션코드
+   private String   userProfileImg;         //   프로필사진경로   
+   private String   userProfileTxt;         //   자기소개글   
+   private String   userCourtCode;          //   내코트코드   
+   private String   userCourtName;          //   내코트명      
+   private String   userCrewCode;           //   내크루코드   
+   private String   userCrewName;           //   내크루명   
+   private String   userCrewMemberCode;     //   크루멤버코드   
+   private String   userPosition;           //   선호포지션명   
+   private String   userPositionAbbr;       //   선호포지션약어
+   private String   userPositionCode;       //   유저포지션코드
    private String   titleAchievementGetCode;   //   업적획득코드   
    private String   titleAchievementCode;      //   획득업적코드   
    private String   titleAchievementName;      //   획득업적명   
-   private String   titleAchievementImg;      //   획득업적아이콘경로   
-   private String   smsReceive;               //   sms수신여부   
-   private String   cityOpen;               //   거점지역공개여부   
-   private String   achvOpen;               //   획득업적공개여부   
-   private String   genderOpen;               //   성별공개여부   
-   private String   courtOpen;               //   내코트공개여부   
-   private String   playlogOpen;            //   플레이로그공개여부   
-   private String   msgBlockCode;            //   메시지블록종류코드   
-   private String   msgBlockType;            //   메시지블록종류      
-   private ArrayList<UserDTO>   friendList;      //   친구목록   
-   private ArrayList<UserDTO>   userBlockList;   //   차단회원목록   
-   private int   penaltyCount;               //   제재횟수   
-   private String   userStatus;               //   제재상태   
+   private String   titleAchievementImg;       //   획득업적아이콘경로   
+   private String   smsReceive;                //   sms수신여부   
+   private String   cityOpen;                  //   거점지역공개여부   
+   private String   achvOpen;                  //   획득업적공개여부   
+   private String   genderOpen;                //   성별공개여부   
+   private String   courtOpen;                 //   내코트공개여부   
+   private String   playlogOpen;               //   플레이로그공개여부   
+   private String   msgBlockCode;              //   메시지블록종류코드   
+   private String   msgBlockType;              //   메시지블록종류      
+   private ArrayList<UserDTO>   friendList;    //   친구목록   
+   private ArrayList<UserDTO>   userBlockList; //   차단회원목록   
+   private int   penaltyCount;                 //   제재횟수   
+   private String   userStatus;                //   제재상태   
    private String   userDeleteRequestedDate;   //   탈퇴요청일
 
    private String returnValue;

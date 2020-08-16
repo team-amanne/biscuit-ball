@@ -2,6 +2,9 @@ package com.amanne.biscuitball.model;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +18,7 @@ import com.amanne.biscuitball.mybatis.IMeetingDAO;
 import com.amanne.biscuitball.mybatis.IRegionDAO;
 import com.amanne.biscuitball.mybatis.IUserDAO;
 import com.amanne.biscuitball.util.MyUtil;
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 import com.amanne.biscuitball.mybatis.MeetingDTO;
 import com.amanne.biscuitball.mybatis.RegionDTO;
 
@@ -26,6 +30,10 @@ public class AjaxModel
 {
 	@Autowired
 	private SqlSession sqlSession;
+	
+	@Autowired
+	private HttpSession session;
+	
 	@Autowired
 	private MyUtil util;
 	
@@ -429,5 +437,84 @@ public class AjaxModel
 		}
 		
 		return result.toString();
+	}
+	
+	
+	// 함께농구 모임 예정리스트 반환(모임 일시, 모임 타입, 코트)
+	public String getJoinMeetingList()
+	{
+		UserInfo info = (UserInfo)session.getAttribute("userInfo");
+		
+		IMeetingDAO dao = sqlSession.getMapper(IMeetingDAO.class);
+		ArrayList<MeetingDTO> list = dao.getJoinMeetingList(info.getUserAcctCode());
+		JSONArray arr = new JSONArray();
+		JSONObject obj = null;
+		for(MeetingDTO dto : list)
+		{
+			obj = new JSONObject();
+			
+			obj.put("meetingCode",dto.getMeetingCode() );
+			obj.put("meetingSubject", dto.getMeetingSubject() );
+			obj.put("meetingPeopleNumber", dto.getMeetingPeopleNumber() );
+			obj.put("meetingOpenDate", dto.getMeetingOpenDate() );
+			obj.put("meetingDate", dto.getMeetingDate() );
+			obj.put("meetingCloseDate", dto.getMeetingCloseDate() );
+			obj.put("meetingEndDate", dto.getMeetingEndDate() );
+			obj.put("meetingNotice", dto.getMeetingNotice() );
+			obj.put("meetingTypeCode",dto.getMeetingTypeCode() );
+			obj.put("meetingTypeName", dto.getMeetingTypeName() );
+			obj.put("quickPlayOrNot", dto.getQuickPlayOrNot() );
+			obj.put("courtRegistrationCode",dto.getCourtRegistrationCode() );
+			obj.put("courtName",dto.getCourtName());
+			obj.put("nowPeopleNumber",dto.getNowPeopleNumber() );
+			obj.put("captainAcctCode",dto.getCaptainAcctCode() );
+			obj.put("captainName",dto.getCaptainName() );
+			obj.put("returnValue",dto.getReturnValue() );
+			System.out.println(obj);
+			arr.add(obj);
+
+		}
+		
+		return arr.toString();
+	}
+		
+		// 미입력 플레이로그 리스트
+		public String getNotInputPlaylogList()
+		{
+			UserInfo info = (UserInfo)session.getAttribute("userInfo");
+			
+			IMeetingDAO dao = sqlSession.getMapper(IMeetingDAO.class);
+			ArrayList<MeetingDTO> list = dao.getMeetingListNotInputPlaylog(info.getUserAcctCode());
+			JSONArray arr = new JSONArray();
+			JSONObject obj = null;
+			System.out.println("ajaxMo");
+			for(MeetingDTO dto : list)
+			{
+				obj = new JSONObject();
+				
+				obj.put("meetingCode",dto.getMeetingCode() );
+				obj.put("meetingSubject", dto.getMeetingSubject() );
+				obj.put("meetingPeopleNumber", dto.getMeetingPeopleNumber() );
+				obj.put("meetingOpenDate", dto.getMeetingOpenDate() );
+				obj.put("meetingDate", dto.getMeetingDate() );
+				obj.put("meetingCloseDate", dto.getMeetingCloseDate() );
+				obj.put("meetingEndDate", dto.getMeetingEndDate() );
+				obj.put("meetingNotice", dto.getMeetingNotice() );
+				obj.put("meetingTypeCode",dto.getMeetingTypeCode() );
+				obj.put("meetingTypeName", dto.getMeetingTypeName() );
+				obj.put("quickPlayOrNot", dto.getQuickPlayOrNot() );
+				obj.put("courtRegistrationCode",dto.getCourtRegistrationCode() );
+				obj.put("courtName",dto.getCourtName());
+				obj.put("nowPeopleNumber",dto.getNowPeopleNumber() );
+				obj.put("captainAcctCode",dto.getCaptainAcctCode() );
+				obj.put("captainName",dto.getCaptainName() );
+				obj.put("returnValue",dto.getReturnValue() );
+				System.out.println(obj);
+				arr.add(obj);
+			}
+		
+		
+		
+		return arr.toString();
 	}
 }

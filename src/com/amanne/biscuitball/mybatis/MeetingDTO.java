@@ -29,7 +29,7 @@ public class MeetingDTO
 	private String blindOrNot; 				// 블라인드여부
 	private String nowPeopleNumber;			// 현재 참가자 수
 	private String openerAcctCode;			// 첫 주장 코드
-	private String catainAcctCode;			// 주장 계정 코드
+	private String captainAcctCode;			// 주장 계정 코드
 	private String captainName;				// 주장 닉네임
 	public String getOpenerAcctCode() {
 		return openerAcctCode;
@@ -63,13 +63,13 @@ public class MeetingDTO
 	{
 		this.meetingMemberList = meetingMemberList;
 	}
-	public String getCatainAcctCode()
+	public String getCaptainAcctCode()
 	{
-		return catainAcctCode;
+		return captainAcctCode;
 	}
-	public void setCatainAcctCode(String catainAcctCode)
+	public void setCaptainAcctCode(String catainAcctCode)
 	{
-		this.catainAcctCode = catainAcctCode;
+		this.captainAcctCode = catainAcctCode;
 	}
 	public String getCaptainName()
 	{

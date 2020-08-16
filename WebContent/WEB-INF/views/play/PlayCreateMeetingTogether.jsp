@@ -432,7 +432,7 @@ $(function()
 															<div class="input-group">
 																<span class="input-group-addon">시작 시간</span>
 																<select class="form-control" id="startTime" name="meetTimeSelect">
-																	<c:forEach var="i" begin="0" end="24">
+																	<c:forEach var="i" begin="0" end="23">
 																		<option value="${String.format('%02d:00', i)}">
 																			<c:choose>
 																				<c:when test="${i <10}">
@@ -451,7 +451,7 @@ $(function()
 															<div class="input-group">
 																<span class="input-group-addon">끝 시간</span> <select
 																	class="form-control" id="endTime" name="meetEndTimeSelect">
-																	<c:forEach var="i" begin="0" end="24">
+																	<c:forEach var="i" begin="0" end="23">
 																		<option value="${String.format('%02d:00', i)}">
 																			<c:choose>
 																				<c:when test="${i <10}">

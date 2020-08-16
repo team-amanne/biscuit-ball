@@ -10,10 +10,25 @@ public class UserInfo
 {
 	private String	userCode;		//	회원코드	
 	private String	userAcctCode;	//	회원계정코드	
-	private String	userNickname;	//	닉네임	
+	private String	userNickname;	//	닉네임
+	private String   tierCode;      //   실력코드
+	private String   tierName;      //   실력등급   
 	private String	crewCode;		//	소속크루코드	
 	private String	crewMemberCode;	//	현재크루멤버코드	
 	private String	userStatus;		//	제재상태
+	
+	public String getTierCode() {
+		return tierCode;
+	}
+	public void setTierCode(String tierCode) {
+		this.tierCode = tierCode;
+	}
+	public String getTierName() {
+		return tierName;
+	}
+	public void setTierName(String tierName) {
+		this.tierName = tierName;
+	}
 	
 	public String getUserCode() {
 		return userCode;

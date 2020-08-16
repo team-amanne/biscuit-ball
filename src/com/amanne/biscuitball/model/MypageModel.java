@@ -173,8 +173,7 @@ public class MypageModel
 	  
 	      modelAndView.addObject("user", user);
 	      modelAndView.setViewName("/mypage/MyInfo");
-	      
-	      
+    
 	   }
 	   
 	   // 광역시도 출력 메소드
@@ -186,7 +185,6 @@ public class MypageModel
 	      regionList=regionDao.getRegionList();
 	      
 	      return regionList;
-	      
-	      
+      
 	   }
 }

@@ -78,19 +78,19 @@ String cp = request.getContextPath();
 											<div class="col-md-4 info-title">
 												<span>제목</span>
 											</div>
-											<div class="col-md-6">제목입니다아</div>
+											<div class="col-md-6">${meetingdto.meetingSubject}</div>
 										</div>
 										<div class="col-md-3">
 											<div class="col-md-4 info-title">
 												<span>주장</span>
 											</div>
-											<div class="col-md-8">아맞네</div>
+											<div class="col-md-8">${meetingdto.captainName}</div>
 										</div>
 										<div class="col-md-3">
 											<div class="col-md-6 info-title">
 												<span>인원</span>
 											</div>
-											<div class="col-md-6">4명</div>
+											<div class="col-md-6">${meetingdto.meetingPeopleNumber}명</div>
 										</div>
 
 									</div>
@@ -104,26 +104,32 @@ String cp = request.getContextPath();
 											<div class="col-md-4 info-title">
 												<span>시합</span>
 											</div>
-											<div class="col-md-8">일반</div>
+											<div class="col-md-8">${meetingdto.meetingTypeName}</div>
 										</div>
 										<div class="col-md-6">
 											<div class="col-md-4 info-title">
 												<span>장소</span>
 											</div>
-											<div class="col-md-8">서울 마포구 아맞네 코트</div>
+											<div class="col-md-8">
+											<c:if test="${courtdto.courtCode != null}">									
+												<a href="<%=cp %>/court/${courtdto.courtCode}" class="icon_connect">
+												<span>${courtdto.cityName } ${courtdto.courtName}</span>
+												</a>
+											</c:if>
+											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="col-md-4 info-title">
 												<span>시작일시</span>
 											</div>
-											<div class="col-md-8">2020-07-10 12:00</div>
+											<div class="col-md-8">${meetingdto.meetingDate}</div>
 										</div>
 
 										<div class="col-md-6">
 											<div class="col-md-4 info-title">
 												<span>종료일시</span>
 											</div>
-											<div class="col-md-8">2020-07-10 14:00</div>
+											<div class="col-md-8">${meetingdto.meetingEndDate}</div>
 										</div>
 
 									</div>
@@ -147,62 +153,101 @@ String cp = request.getContextPath();
 										
 								</div>
 							</li>
+							
+							<c:forEach var="member" items="${memberlist}">
+							
 							<li class="list-group-item board-body">
-								<div class="row">															
+								<div class="row">
 									<div class="col-sm-4 col-xs-4">
-										<span>아맞네</span>
+										<a href="<%=cp %>/userpage/${member.userAccountCode }">${member.userNickname }</a>
 									</div>
-									<div class="col-md-4 col-xs-4">
-										<span>2Level</span>
-									</div>
-									<div class="col-md-4 col-xs-4">
+									<div class="col-sm-4 col-xs-4">Lv.${member.tierName }</div>
+									<div class="col-sm-4 col-xs-4">
+									<c:choose>
+									<c:when test="${member.fairplayScore==5 }">
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+									</c:when>
+									<c:when test="${member.fairplayScore>=4.5 }">
+										<span class="fa fa-star"></span>
 										<span class="fa fa-star"></span>
 										<span class="fa fa-star"></span>
 										<span class="fa fa-star"></span>
 										<span class="fa fa-star-half"></span>
-									</div>
-										
-								</div>
-							</li>
-							<li class="list-group-item board-body">
-								<div class="row">															
-									<div class="col-sm-4 col-xs-4">
-										<span>아맞네</span>
-									</div>
-									<div class="col-md-4 col-xs-4">
-										<span>2Level</span>
-									</div>
-									<div class="col-md-4 col-xs-4">
+									</c:when>
+									<c:when test="${member.fairplayScore>=4 }">
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+									</c:when>
+									<c:when test="${member.fairplayScore>=3.5 }">
 										<span class="fa fa-star"></span>
 										<span class="fa fa-star"></span>
 										<span class="fa fa-star"></span>
 										<span class="fa fa-star-half"></span>
+									</c:when>
+									<c:when test="${member.fairplayScore>=3 }">
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+									</c:when>
+									<c:when test="${member.fairplayScore>=2.5 }">
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star-half"></span>
+									</c:when>
+									<c:when test="${member.fairplayScore>=2 }">
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+									</c:when>
+									<c:when test="${member.fairplayScore>=1.5 }">
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star-half"></span>
+									</c:when>
+									<c:when test="${member.fairplayScore>=1 }">
+										<span class="fa fa-star"></span>
+									</c:when>
+									<c:when test="${member.fairplayScore>=0.5 }">
+									<span class="fa fa-star-half"></span>
+									</c:when>
+									<c:otherwise>
+									정보없음
+									</c:otherwise>
+									
+									</c:choose>
+									
 									</div>
-										
 								</div>
 							</li>
-							<li class="list-group-item board-body">
-								<div class="row">															
-									<div class="col-sm-4 col-xs-4">
-										<span>아맞네</span>
-									</div>
-									<div class="col-md-4 col-xs-4">
-										<span>2Level</span>
-									</div>
-									<div class="col-md-4 col-xs-4">
-										<span class="fa fa-star star-score"></span>
-										<span class="fa fa-star star-score"></span>
-										<span class="fa fa-star star-score"></span>
-										<span class="fa fa-star-half star-score"></span>
-									</div>
+						</c:forEach>
 										
-								</div>
-							</li>
-								
 						</ul>
-
-								<p class="subtitle-text">플레이로그 입력</p>
+								<p class="subtitle-text">플레이로그 입력</p>	
+								 <form action="<%=cp%>/play/meeting/manage/playlog/${meetingdto.meetingDate}"
+           						 class="meetingPlaylog-form">							
 								<ul class="list-group">
+									<li class="list-group-item board-body">
+										<div class="col-sm-4 col-xs-4">
+											<span>실제플레이 시간</span>
+										</div>
+										<div class="col-sm-4 col-xs-4">
+											<select class="form-control" id="playTime" name="timeSelect">
+                                                   <c:forEach var="i" begin="30" end="1440" step="30">
+                                                      <option value="${i }">
+                                                            ${i }분
+                                                      </option>
+                                                   </c:forEach>
+                                                </select>
+										</div>
+									</li>
+								</ul>
+								
+								<ul class="list-group">
+									
 									<li class="list-group-item board-body board-header">
 										<div class="row">
 											<div class="col-sm-4 col-xs-4">
@@ -215,23 +260,37 @@ String cp = request.getContextPath();
 												<span>페어플레이 평가</span>
 											</div>
 										</div>
-									</li>
+									</li>									
+									<c:forEach var="member" items="${memberlist}">
+									<c:if test="${userinfo.userAcctCode != member.userAccountCode}">
 									<li class="list-group-item board-body">
 										<div class="row">
 											<div class="col-sm-4 col-xs-4">
-												<span>아맞네</span>
+												<a href="<%=cp %>/userpage/${member.userAccountCode }">${member.userNickname }</a>
 											</div>
+											
 											<div class="col-sm-4 col-xs-4">
-												<select name="" id="" class="form-control">
-													<option value="">UP</option>
-													<option value="">SAME</option>
-													<option value="">DOWN</option>
+												<c:choose>
+												<c:when test="${userinfo.tierName >= member.tierName}">
+												<select name="" id="" class="form-control">												
+													<option value="ZA01">UP</option>
+													<option value="ZA02">SAME</option>
+													<option value="ZA03">DOWN</option>
+		
 												</select>
+												</c:when>
+												<c:otherwise>
+												<select name="" id="" class="form-control">													
+													<option value="">평가불가</option>
+												</select>
+												</c:otherwise>
+												</c:choose>
 											</div>
+		
 											<div class="col-sm-4 col-xs-4">
 												<div id="half-stars-example">
 													<div id="half-stars-example">
-														<div class="rating-group">
+														<div class="rating-group" id="fairplayScore">
 															<input class="rating__input rating__input--none" checked
 																name="rating2" id="rating2-0" value="0" type="radio">
 															<label aria-label="0 stars" class="rating__label"
@@ -297,133 +356,17 @@ String cp = request.getContextPath();
 											</div>
 										</div>
 									</li>
-									<li class="list-group-item board-body">
-										<div class="row">
-											<div class="col-sm-4 col-xs-4">
-												<span>규쿤</span>
-											</div>
-											<div class="col-sm-4 col-xs-4">
-												<select name="" id="" class="form-control">
-													<option value="">UP</option>
-													<option value="">SAME</option>
-													<option value="">DOWN</option>
-												</select>
-											</div>
-											<div class="col-sm-4 col-xs-4">
-												<div id="half-stars-example">
-    <div class="rating-group">
-        <input class="rating__input rating__input--none" checked name="rating2_1" id="rating2-0_1" value="0" type="radio">
-        <label aria-label="0 stars" class="rating__label" for="rating2-0_1">&nbsp;</label>
-        <label aria-label="0.5 stars" class="rating__label rating__label--half" for="rating2-05_1"><i class="rating__icon rating__icon--star fa fa-star-half"></i></label>
-        <input class="rating__input" name="rating2_1" id="rating2-05_1" value="0.5" type="radio">
-        <label aria-label="1 star" class="rating__label" for="rating2-10_1"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-        <input class="rating__input" name="rating2_1" id="rating2-10_1" value="1" type="radio">
-        <label aria-label="1.5 stars" class="rating__label rating__label--half" for="rating2-15_1"><i class="rating__icon rating__icon--star fa fa-star-half"></i></label>
-        <input class="rating__input" name="rating2_1" id="rating2-15_1" value="1.5" type="radio">
-        <label aria-label="2 stars" class="rating__label" for="rating2-20_1"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-        <input class="rating__input" name="rating2_1" id="rating2-20_1" value="2" type="radio">
-        <label aria-label="2.5 stars" class="rating__label rating__label--half" for="rating2-25_1"><i class="rating__icon rating__icon--star fa fa-star-half"></i></label>
-        <input class="rating__input" name="rating2_1" id="rating2-25_1" value="2.5" type="radio" checked>
-        <label aria-label="3 stars" class="rating__label" for="rating2-30_1"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-        <input class="rating__input" name="rating2_1" id="rating2-30_1" value="3" type="radio">
-        <label aria-label="3.5 stars" class="rating__label rating__label--half" for="rating2-35_1"><i class="rating__icon rating__icon--star fa fa-star-half"></i></label>
-        <input class="rating__input" name="rating2_1" id="rating2-35_1" value="3.5" type="radio">
-        <label aria-label="4 stars" class="rating__label" for="rating2-40_1"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-        <input class="rating__input" name="rating2_1" id="rating2-40_1" value="4" type="radio">
-        <label aria-label="4.5 stars" class="rating__label rating__label--half" for="rating2-45_1"><i class="rating__icon rating__icon--star fa fa-star-half"></i></label>
-        <input class="rating__input" name="rating2_1" id="rating2-45_1" value="4.5" type="radio">
-        <label aria-label="5 stars" class="rating__label" for="rating2-50_1"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-        <input class="rating__input" name="rating2_1" id="rating2-50_1" value="5" type="radio">
-    </div>
-</div>
-											</div>
-										</div>
-									</li>
-									<li class="list-group-item board-body">
-										<div class="row">
-											<div class="col-sm-4 col-xs-4">
-												<span>성철쓰</span>
-											</div>
-											<div class="col-sm-4 col-xs-4">
-												<select name="" id="" class="form-control">
-													<option value="">UP</option>
-													<option value="">SAME</option>
-													<option value="">DOWN</option>
-												</select>
-											</div>
-											<div class="col-sm-4 col-xs-4">
-												
-												<div id="half-stars-example">
-
-    <div class="rating-group">
-    	<!-- 한 페이지에 여러번 사용할 경우 name, id(label for="") 바꿔주세요 -->
-        <input class="rating__input rating__input--none" checked name="rating3" id="rating2-0_2" value="0" type="radio">
-        <label aria-label="0 stars" class="rating__label" for="rating2-0_2">&nbsp;</label>
-        
-        <label aria-label="0.5 stars" class="rating__label rating__label--half" for="rating2-05_2">
-        	<i class="rating__icon rating__icon--star fa fa-star-half"></i>
-        </label>
-        <input class="rating__input" name="rating3" id="rating2-05_2" value="0.5" type="radio">
-        
-        <label aria-label="1 star" class="rating__label" for="rating2-10_2">
-        	<i class="rating__icon rating__icon--star fa fa-star"></i>
-        </label>
-        <input class="rating__input" name="rating3" id="rating2-10_2" value="1" type="radio">
-        
-        <label aria-label="1.5 stars" class="rating__label rating__label--half" for="rating2-15_2">
-        	<i class="rating__icon rating__icon--star fa fa-star-half"></i>
-        </label>
-        <input class="rating__input" name="rating3" id="rating2-15_2" value="1.5" type="radio">
-        
-        <label aria-label="2 stars" class="rating__label" for="rating2-20_2">
-        	<i class="rating__icon rating__icon--star fa fa-star"></i>
-        </label>
-        <input class="rating__input" name="rating3" id="rating2-20_2" value="2" type="radio">
-        
-        <label aria-label="2.5 stars" class="rating__label rating__label--half" for="rating2-25_2">
-        	<i class="rating__icon rating__icon--star fa fa-star-half"></i>
-        </label>
-        <input class="rating__input" name="rating3" id="rating2-25_2" value="2.5" type="radio" checked>
-        
-        <label aria-label="3 stars" class="rating__label" for="rating2-30_2">
-        	<i class="rating__icon rating__icon--star fa fa-star"></i>
-        </label>
-        <input class="rating__input" name="rating3" id="rating2-30_2" value="3" type="radio">
-        
-        <label aria-label="3.5 stars" class="rating__label rating__label--half" for="rating2-35_2">
-        	<i class="rating__icon rating__icon--star fa fa-star-half"></i>
-        </label>
-        <input class="rating__input" name="rating3" id="rating2-35_2" value="3.5" type="radio">
-        
-        <label aria-label="4 stars" class="rating__label" for="rating2-40_2">
-        	<i class="rating__icon rating__icon--star fa fa-star"></i>
-        </label>
-        <input class="rating__input" name="rating3" id="rating2-40_2" value="4" type="radio">
-        
-        <label aria-label="4.5 stars" class="rating__label rating__label--half" for="rating2-45_2">
-        	<i class="rating__icon rating__icon--star fa fa-star-half"></i>
-        </label>
-        <input class="rating__input" name="rating3" id="rating2-45_2" value="4.5" type="radio">
-        
-        <label aria-label="5 stars" class="rating__label" for="rating2-50_2">
-        	<i class="rating__icon rating__icon--star fa fa-star"></i>
-        </label>
-        <input class="rating__input" name="rating3" id="rating2-50_2" value="5" type="radio">
-        
-    </div>
-</div>
-												
-											</div>
-										</div>
-									</li>
+									</c:if>
+								</c:forEach>
 
 								</ul>
 
 
 								<div class="btn_action">
-									<button class="btn btn-default btn-lg btn-submit">입력완료</button>
-									<button class="btn btn-default btn-lg">목록으로</button>
+									<button type="button" class="btn btn-default btn-lg btn-submit">입력완료</button>
+									<button type="button" class="btn btn-default btn-lg">목록으로</button>
 								</div>
+								</form>
 
 							</div>
 						</div>
