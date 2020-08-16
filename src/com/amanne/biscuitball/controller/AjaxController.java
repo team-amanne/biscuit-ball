@@ -193,5 +193,17 @@ public class AjaxController
 		return view;
 	}
 	
+	// 이메일로 유저코드 가져오기
+	@RequestMapping("/passwardreset/usercode")
+	public String getUsercodeByEmail(Model model, @RequestParam("userEmail") String userEmail)
+	{
+		String view=null;
+		
+		model.addAttribute("result", ajax.getUserCodeByEmail(userEmail));
+		
+		view = "/ajax/Check";
+		return view;
+	}
+	
 	
 }

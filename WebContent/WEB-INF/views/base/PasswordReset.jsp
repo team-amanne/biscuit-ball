@@ -12,6 +12,7 @@ String cp = request.getContextPath();
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/default.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <style type="text/css">
 .input-title {
 	font-size: 12pt;
@@ -23,7 +24,77 @@ String cp = request.getContextPath();
 	text-align: right;
 	font-size: 10pt;
 }
+
+.sendMessage
+{
+	display: none;
+}
+
+.inputCode
+{
+	display: none;
+}
+
 </style>
+<script type="text/javascript">
+
+	$(document).ready(function()
+	{
+		$("#btnSendCode").click(function()
+		{
+			//alert("확인");
+			$.ajax(
+			{
+				url: "<%=cp%>/ajax/check/email",
+				type: "get",
+				data: {email: $("#userEmail").val()},
+				success: function(data)
+				{
+					// 입력한 이메일이 존재하는 경우
+					if (data==1)
+					{
+						
+						$.ajax(
+						{
+							
+							url: "<%=cp%>/ajax/passwardreset/usercode",
+							type: "get",
+							data: {userEmail: $("#userEmail").val()},
+							success: function(data)
+							{
+								// 인증코드를 정상적으로 발생시켰을 경우
+								if (data != 0)
+								{
+									$(".sendMessage").css("display","inline");
+									$(".inputCode").css("display","inline");
+									//alert(data+" 는 코드");
+								}
+								
+								//consol.log("실패");
+							}
+							
+						});
+						
+						
+					}
+					// 입력한 이메일이 존재하지 않는 경우
+					else
+					{
+						$(".sendMessage").text("가입하지 않은 이메일입니다.");
+						$(".sendMessage").css("display","inline");
+					}
+				},
+				error: function(e)
+				{
+		          alert(e.responseText);
+		        }
+			});
+		});
+	});
+	
+
+</script>
+
 </head>
 <body>
 
@@ -49,10 +120,11 @@ String cp = request.getContextPath();
 								<span class="input-title">이메일 입력</span>
 							</div>
 							<div class="col-sm-8 col-xs-8">
-								<input type="text" class="form-control" />
+								<input type="text" class="form-control" id="userEmail">
+								
 							</div>
 							<div class="col-sm-2 col-xs-2">
-								<button class="btn btn-submit btn-block btn-default">
+								<button id="btnSendCode" class="btn btn-submit btn-block btn-default">
 									인증 코드 발송</button>
 							</div>
 
@@ -60,11 +132,11 @@ String cp = request.getContextPath();
 					</li>
 
 				</ul>
-				<p class="text-orange">인증코드가 회원님의 이메일로 발송되었습니다.</p>
+				<p class="text-orange sendMessage">인증코드가 회원님의 이메일로 발송되었습니다.</p>
 			</div>
 			
 
-			<div class="col-md-12 col-xs-12">
+			<div class="col-md-12 col-xs-12 inputCode">
 
 				<ul class="list-group">
 

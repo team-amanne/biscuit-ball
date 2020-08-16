@@ -92,4 +92,5 @@ public interface IUserDAO
 	
 	public ArrayList<UserDTO> getBlockUserList(@Param("userAccountCode")String userAccountCode, @Param("start") int start, @Param("end") int end); // 특정 유저 블락유저 조회
 	
+	public String getUserCodeByEmail(@Param("userEmail") String userEmail);//이메일로 유저 코드 검색
 }

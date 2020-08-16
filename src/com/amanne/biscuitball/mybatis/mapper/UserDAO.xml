@@ -705,5 +705,16 @@
       WHERE RNUM <![CDATA[>]]>= #{start}  AND  RNUM  <![CDATA[<]]>= #{end}
       
    </select>
+   
+   <!-- 이메일로 유저 코드 검색 -->
+   <!--public String getUserCodeByEmail(@Param("userEmail") String userEmail); -->
+   <select id="getUserCodeByEmail"
+	 parameterType="java.lang.String"
+	 resultType="java.lang.String">
+      SELECT USER_CODE as userCode
+	  FROM VIEW_USER
+	  WHERE USER_EMAIL = #{userEmail}
+    
+   </select>
 </mapper>
 

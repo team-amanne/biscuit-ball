@@ -517,4 +517,13 @@ public class AjaxModel
 		
 		return arr.toString();
 	}
+		
+	// 이메일로 유저코드 가져오기
+	public String getUserCodeByEmail(String userEmail)
+	{
+		IUserDAO dao = sqlSession.getMapper(IUserDAO.class);
+		String userCode = dao.getUserCodeByEmail(userEmail);
+		
+		return userCode;
+	}
 }
