@@ -11,7 +11,6 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -27,13 +26,14 @@ import com.amanne.biscuitball.mybatis.IMeetingDAO;
 import com.amanne.biscuitball.mybatis.IRegionDAO;
 import com.amanne.biscuitball.mybatis.IUserDAO;
 import com.amanne.biscuitball.util.MyUtil;
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 import com.amanne.biscuitball.mybatis.MeetingDTO;
 import com.amanne.biscuitball.mybatis.RegionDTO;
 import com.amanne.biscuitball.mybatis.UserDTO;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
+
 
 
 @Service
@@ -599,6 +599,7 @@ public class AjaxModel
 		return result;
 	}
 	
+
 	// 비밀번호 재설정 
 	public UserDTO resetPassword(UserDTO dto, String issueCode)
 	{
@@ -609,5 +610,40 @@ public class AjaxModel
 		return dto;
 	}
 	
+
+    public String sendSms(String tel, String authNum)
+    {   
     
+    String api_key = "NCSS6MO67UHDWOA0"; 
+    // 발급받은 APIKEY
+    String api_secret = "1OE23338HFQL10Q2K7DAT6KHPDVHJCGM";
+    // 발급받은 APIKEY SECRET KEY
+
+    System.out.println("번호 : " + tel);
+    net.nurigo.java_sdk.api.Message coolsms = new net.nurigo.java_sdk.api.Message(api_key, api_secret);
+
+    System.out.println("Hello");
+
+    // 4 params(to, from, type, text) are mandatory. must be filled
+    HashMap<String, String> params = new HashMap<String, String>();
+    params.put("to", tel);
+    params.put("from", "01087382204"); // 인증받은 발신번호
+    params.put("type", "SMS");
+    params.put("text", "[COME-IT] 인증번호 : " + authNum);
+    params.put("app_version", "test app 1.2"); // application name and version
+
+    try
+    {
+       // send() 는 메시지를 보내는 함수
+       org.json.simple.JSONObject obj = (org.json.simple.JSONObject)coolsms.send(params);
+       System.out.println("에러코드" + obj.get("error_count"));
+
+    } catch (CoolsmsException e)
+    {
+       System.out.println(e.getMessage());
+       System.out.println(e.getCode());
+    }
+
+    return authNum;
+    }
 }

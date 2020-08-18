@@ -489,8 +489,7 @@ $(function()
                              latlng: new kakao.maps.LatLng(tmp[1], tmp[0])
                          };
                      }
-                     
-                        
+   
                      for (var i = 0; i < positions.length; i ++) 
                      {
                          // 마커를 생성합니다
@@ -513,7 +512,7 @@ $(function()
                          kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
                          
                          
-                      // 마커에 클릭이벤트를 등록 → 코트 정보 html에 표시
+                      	// 마커에 클릭이벤트를 등록 → 코트 정보 html에 표시
                         kakao.maps.event.addListener(marker, 'click', function() 
                         {
                               var courtPositionX = this.getPosition().getLng();
