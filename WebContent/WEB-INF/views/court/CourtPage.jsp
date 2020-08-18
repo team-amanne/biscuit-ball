@@ -138,19 +138,19 @@
 									<div class="row">
 										<div class="panel panel-heading">
 											<div style="height: 190px; display: table-cell; vertical-align: middle;">
-												<img src="<%=cp%>${court.courtImg1}" class="court-img-heading" width="380px;" height="200px" />
+												<img src="${court.courtImg1}" class="court-img-heading" width="380px;" height="200px" />
 
 											</div>
 										</div>
 										<div class="row panel-body" style="height: 80px;">
 											<div class="col-sm-4 col-xs-4">
-												<img src="<%=cp%>${court.courtImg1}" class="court-img" width="80px;" height="50px" />
+												<img src="${court.courtImg1}" class="court-img" width="80px;" height="50px" />
 											</div>
 											<div class="col-sm-4 col-xs-4">
-												<img src="<%=cp%>${court.courtImg2}" class="court-img" width="80px;" height="50px"/>
+												<img src="${court.courtImg2}" class="court-img" width="80px;" height="50px"/>
 											</div>
 											<div class="col-sm-4 col-xs-4">
-												<img src="<%=cp%>${court.courtImg3}" class="court-img" width="80px;" height="50px"/>
+												<img src="${court.courtImg3}" class="court-img" width="80px;" height="50px"/>
 											</div>
 										</div>											
 									</div>

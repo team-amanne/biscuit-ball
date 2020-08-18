@@ -6,7 +6,16 @@
 
 package com.amanne.biscuitball.controller;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
+import java.nio.file.Files;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -107,10 +116,8 @@ public class CourtController
 		
 		// 이미지 업로드 처리
 		String root = session.getServletContext().getRealPath("/");
-		String savePath = File.separator + "upload" + File.separator + "images" + File.separator + "court";
+		String savePath = File.separator + "temp" + File.separator + "images";
 		File dir = new File(root + savePath);
-		
-		System.out.println(root + savePath);
 		
 		if(!dir.exists()) 
 			dir.mkdirs();
@@ -122,9 +129,55 @@ public class CourtController
 		{
 			MultipartRequest req = null;
 			req = new MultipartRequest(request, root + savePath, maxFileSize, encType, new DefaultFileRenamePolicy());
-			String saveFileName1 = req.getFilesystemName("courtImg1");
-			String saveFileName2 = req.getFilesystemName("courtImg2");
-			String saveFileName3 = req.getFilesystemName("courtImg3");
+			
+			String url  = "http://13.124.193.209:8090/BiscuitBallImage/upload";
+			String charset = "UTF-8";
+			File[] imgFiles = {req.getFile("courtImg1"), req.getFile("courtImg2"), req.getFile("courtImg3")};
+			String[] imgRefPaths = new String[3];
+			String boundary = Long.toHexString(System.currentTimeMillis());
+			String CRLF = "\r\n";
+			
+			URLConnection connection = null;
+			
+			for(int i=0; i<imgFiles.length; i++) 
+			{
+				connection = new URL(url).openConnection();
+				connection.setDoOutput(true);
+				connection.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
+				
+				try 
+				{
+					OutputStream output = connection.getOutputStream();
+					PrintWriter writer = new PrintWriter(new OutputStreamWriter(output, charset), true);
+					
+					// Send binary file.
+				    writer.append("--" + boundary).append(CRLF);
+				    writer.append("Content-Disposition: form-data; name=\"image\"; filename=\"" + imgFiles[i].getName() + "\"").append(CRLF);
+				    writer.append("Content-Type: " + URLConnection.guessContentTypeFromName(imgFiles[i].getName())).append(CRLF);
+				    writer.append("Content-Transfer-Encoding: binary").append(CRLF);
+				    writer.append(CRLF).flush();
+				    Files.copy(imgFiles[i].toPath(), output);
+				    output.flush(); // Important before continuing with writer!
+				    writer.append(CRLF).flush(); // CRLF is important! It indicates end of boundary.
+
+				    // End of multipart/form-data.
+				    writer.append("--" + boundary + "--").append(CRLF).flush();
+				} 
+				catch (Exception re) 
+				{
+					System.out.println(re.toString());
+					re.printStackTrace();
+				}
+				
+				if (((HttpURLConnection)connection).getResponseCode() == 200)
+				{
+					BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+					imgRefPaths[i] = br.readLine().trim();
+				}
+
+			}
+			
+			
 			
 			CourtDTO dto = new CourtDTO();
 			
@@ -137,10 +190,9 @@ public class CourtController
 			dto.setCourtCapacityCode(req.getParameter("courtCapacityCode"));
 			dto.setCourtName(req.getParameter("courtName"));
 			
-			System.out.println(savePath + File.separator + saveFileName1);
-			dto.setCourtImg1(savePath + File.separator + saveFileName1);
-			dto.setCourtImg2(savePath + File.separator + saveFileName2);
-			dto.setCourtImg3(savePath + File.separator + saveFileName3);
+			dto.setCourtImg1(imgRefPaths[0]);
+			dto.setCourtImg2(imgRefPaths[1]);
+			dto.setCourtImg3(imgRefPaths[2]);
 			
 			result = courtModel.registerCourt(dto);
 			
