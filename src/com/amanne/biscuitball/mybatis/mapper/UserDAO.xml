@@ -206,7 +206,7 @@
 	
 	<!-- 	public void issuePasswordResetCode(String userCode) // 비번재설정코드발급-->
 	<select id="issuePasswordResetCode" 
-	 parameterType="java.lang.String"
+	 parameterType="com.amanne.biscuitball.mybatis.UserDTO"
 	 statementType="CALLABLE">
 		{ call PRC_PWD_RESET_CODE
 			(
