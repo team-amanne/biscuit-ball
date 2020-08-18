@@ -29,6 +29,7 @@ public class UserDTO
    private double   fairplayScore;          //   fps   
    private String   userCityCode;           //   거점지역코드
    private String   userCity;               //   거점지역명      
+   private String   userRegionCode;			//   지역코드
    private String   userProfileImg;         //   프로필사진경로   
    private String   userProfileTxt;         //   자기소개글   
    private String   userCourtCode;          //   내코트코드   

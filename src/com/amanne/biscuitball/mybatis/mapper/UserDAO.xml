@@ -507,6 +507,7 @@
 		        , VUP.FPS as fairplayScore
 		        , VUP.USER_CITY as userCity
 		        , VUP.USER_CITY_CODE as userCityCode
+		        , VUP.USER_REGION_CODE as userRegionCode
 		        , VUP.COURT_NAME as userCourtName
 		        , VUP.USER_PROFILE_IMG as userProfileImg
 		        , VUP.USER_PROFILE_TXT as userProfileTxt
