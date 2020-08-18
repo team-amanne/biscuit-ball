@@ -36,7 +36,7 @@ public interface IUserDAO
 
 	public void getAchievement(PersonalAchievementDTO personalAchievementDTO); // 개인업적획득
 
-	public void issuePasswordResetCode(String userCode); // 비번재설정코드발급
+	public void issuePasswordResetCode(UserDTO userDTO); // 비번재설정코드발급
 
 	public void resetPassword(String userCode, String issueCode); // 비밀번호재설정
 
@@ -92,4 +92,5 @@ public interface IUserDAO
 	
 	public ArrayList<UserDTO> getBlockUserList(@Param("userAccountCode")String userAccountCode, @Param("start") int start, @Param("end") int end); // 특정 유저 블락유저 조회
 	
+	public String getUserCodeByEmail(@Param("userEmail") String userEmail);//이메일로 유저 코드 검색
 }

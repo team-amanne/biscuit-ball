@@ -12,19 +12,18 @@
 
 
 <!-- 부가적인 테마 -->
-<link rel="stylesheet"
-   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
 <title>내 정보관리</title>
 
+
 <!-- 부트스트랩/제이쿼리 -->
-<link rel="stylesheet"
-   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
-<script src="http://code.jquery.com/jquery.min.js"></script>
-<script
-   src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
-
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
+<link rel="stylesheet" type="text/css" href="<%=cp%>/css/default.css">
+<link rel="stylesheet" href="<%=cp%>/css/board.css" />
+<link rel="stylesheet" href="<%=cp %>/css/default.css" />
 
 
 <style type="text/css">
@@ -114,7 +113,7 @@ $(document).ready(function()
    <c:import url="../base/Header.jsp"></c:import>
    <!-- 서브메뉴 -->
    <!-- 서브메뉴는 기능별(농구하기/코트검색/크루/...)로 복사해서 만들어두고 import 할 것 -->
-   <c:import url="../base/Submenu.jsp"></c:import>
+   <c:import url="../base/MypageSubmenu.jsp?active=myinfo"></c:import>
 
    <!-- 메인 -->
    <div class="main container-fluid">
@@ -182,19 +181,19 @@ $(document).ready(function()
                               </div>
                              
                               <div class="col-sm-3 col-xs-4">
-                              <c:set var="sub_citycode" value="${user.userCityCode }"/>
+                              <c:set var="userCityCode" value="${user.userCityCode }"/>
+                              <c:set var="userRegionCode" value="${user.userRegionCode }"/>
                                  <select class="form-control" id="city_select" name="city_select">
                            <c:forEach var="city" items="${regionList }">
                            <option value="${city.regionCode}"
-                              <c:if test="${sub_citycode eq city.regionCode }">selected </c:if>>${city.regionName}
+                              <c:if test="${userRegionCode eq city.regionCode }">selected </c:if>>${city.regionName}
                            </option>
-                           <c:out value="${city.regionCode}"></c:out>
                            </c:forEach>
                                  </select>
                               </div>
-                              <c:out value="${sub_citycode}"></c:out>
                               
-                              
+                       
+                                                            
                               <div class="col-sm-3 col-xs-4">
                                  <select class="form-control" id="region_select" name="region_select">
                                     <option>시군구 선택</option>

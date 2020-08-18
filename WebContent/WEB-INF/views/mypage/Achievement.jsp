@@ -8,9 +8,6 @@ String cp = request.getContextPath();
 <html>
 <head>
 
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
-
 <!-- Font Awesome icons (free version)-->
 <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js"
 	crossorigin="anonymous"></script>
@@ -19,18 +16,11 @@ String cp = request.getContextPath();
 <title>BiscuitBail > 업적 현황</title>
 
 <!-- 부트스트랩/제이쿼리 -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
-<script src="http://code.jquery.com/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="<%=cp %>/css/default.css" />
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-
-
-
-
-<link rel="stylesheet" href="<%=cp%>/css/board.css" />
-<link rel="stylesheet" href="<%=cp%>/css/default.css" />
 <style type="text/css">
 /* 
 .list-group-item {
@@ -56,7 +46,7 @@ String cp = request.getContextPath();
 	<c:import url="../base/Header.jsp"></c:import>
 	<!-- 서브메뉴 -->
 	<!-- 서브메뉴는 기능별(농구하기/코트검색/크루/...)로 복사해서 만들어두고 import 할 것 -->
-	<c:import url="../base/Submenu.jsp"></c:import>
+	<c:import url="../base/MypageSubmenu.jsp?active=achievement"></c:import>
 
 	<!-- 메인 -->
 	<div class="main container-fluid">

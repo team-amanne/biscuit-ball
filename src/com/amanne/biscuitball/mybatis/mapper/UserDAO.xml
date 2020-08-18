@@ -206,7 +206,7 @@
 	
 	<!-- 	public void issuePasswordResetCode(String userCode) // 비번재설정코드발급-->
 	<select id="issuePasswordResetCode" 
-	 parameterType="java.lang.String"
+	 parameterType="com.amanne.biscuitball.mybatis.UserDTO"
 	 statementType="CALLABLE">
 		{ call PRC_PWD_RESET_CODE
 			(
@@ -507,6 +507,7 @@
 		        , VUP.FPS as fairplayScore
 		        , VUP.USER_CITY as userCity
 		        , VUP.USER_CITY_CODE as userCityCode
+		        , VUP.USER_REGION_CODE as userRegionCode
 		        , VUP.COURT_NAME as userCourtName
 		        , VUP.USER_PROFILE_IMG as userProfileImg
 		        , VUP.USER_PROFILE_TXT as userProfileTxt
@@ -704,6 +705,17 @@
       )
       WHERE RNUM <![CDATA[>]]>= #{start}  AND  RNUM  <![CDATA[<]]>= #{end}
       
+   </select>
+   
+   <!-- 이메일로 유저 코드 검색 -->
+   <!--public String getUserCodeByEmail(@Param("userEmail") String userEmail); -->
+   <select id="getUserCodeByEmail"
+	 parameterType="java.lang.String"
+	 resultType="java.lang.String">
+      SELECT USER_CODE as userCode
+	  FROM VIEW_USER
+	  WHERE USER_EMAIL = #{userEmail}
+    
    </select>
 </mapper>
 

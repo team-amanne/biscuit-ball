@@ -6,17 +6,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.amanne.biscuitball.model.AjaxModel;
 import com.amanne.biscuitball.model.UserInfo;
-
-import java.util.HashMap;
-import net.nurigo.java_sdk.api.Message;
-
-import net.nurigo.java_sdk.exceptions.CoolsmsException;
-import org.json.simple.JSONObject;
+import com.amanne.biscuitball.mybatis.UserDTO;
 
 @Controller
 @RequestMapping("/ajax")
@@ -200,17 +194,45 @@ public class AjaxController
 		return view;
 	}
 	
-	@RequestMapping("/check/sendSMS")
-	   public String sendSms(Model model,@RequestParam("tel") String tel,@RequestParam("authNum") String authNum) throws CoolsmsException
-	   {
-	      String view = null;
-	      
-	      model.addAttribute("result", ajax.sendSms(tel, authNum));
-
-	      view = "/ajax/Check";
-	      return view;
-	      
-	   }
+	// 이메일로 유저코드 가져오기
+	@RequestMapping("/passwardreset/usercode")
+	public String getUsercodeByEmail(Model model, @RequestParam("userEmail") String userEmail)
+	{
+		String view=null;
+		
+		model.addAttribute("result", ajax.getUserCodeByEmail(userEmail));
+		
+		view = "/ajax/Check";
+		return view;
+	}
+	
+	// 비밀번호 변경 코드 생성하기
+	@RequestMapping("/passwardreset/issuecode")
+	public String getCodeByUserCode(Model model, @RequestParam("userCode") String userCode)
+	{
+		String view = null;
+		
+		UserDTO dto = new UserDTO();
+		dto.setUserCode(userCode);
+		
+		System.out.println(ajax.getCodeByUserCode(dto).getReturnValue());
+		model.addAttribute("result", ajax.getCodeByUserCode(dto).getReturnValue());
+		
+		view = "/ajax/Check";
+		return view;
+	}
+	
+	// 비번재설정 코드 이메일발송
+	@RequestMapping("/passwordreset/sendemail")
+	public String sendEmail(Model model, @RequestParam("userEmail") String userEmail ,@RequestParam("issueCode") String issueCode)
+	{
+		String view = null;
+		
+		model.addAttribute("result", ajax.sendEmail(userEmail, issueCode));
+		
+		view = "/ajax/Check";
+		return view;
+	}
 	
 	
 }

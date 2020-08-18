@@ -67,7 +67,7 @@ public class MyPageController
 	@RequestMapping("/userblock")
 	public String userblock()
 	{
-		return "/mypage/Userblock";
+		return "/mypage/UserBlock";
 	}
 	
 	

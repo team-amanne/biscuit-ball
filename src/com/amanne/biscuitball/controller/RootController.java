@@ -126,7 +126,7 @@ public class RootController
 	@RequestMapping("/passwordreset")
 	public String passwordReset()
 	{
-		return "/login/User_PasswordReset";
+		return "/base/PasswordReset";
 	}
 
 	// 메인 페이지 띄우기

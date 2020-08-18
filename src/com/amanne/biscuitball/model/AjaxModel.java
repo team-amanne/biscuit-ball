@@ -1,8 +1,15 @@
 package com.amanne.biscuitball.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Properties;
 
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeUtility;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -22,9 +29,8 @@ import com.amanne.biscuitball.util.MyUtil;
 import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 import com.amanne.biscuitball.mybatis.MeetingDTO;
 import com.amanne.biscuitball.mybatis.RegionDTO;
+import com.amanne.biscuitball.mybatis.UserDTO;
 
-import net.nurigo.java_sdk.api.Message;
-import net.nurigo.java_sdk.exceptions.CoolsmsException;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -516,44 +522,78 @@ public class AjaxModel
 				arr.add(obj);
 			}
 		
-		
-		
 		return arr.toString();
 	}
-		public String sendSms(String tel, String authNum)
-		{	
 		
-		String api_key = "NCSS6MO67UHDWOA0"; 
-		// 발급받은 APIKEY
-		String api_secret = "1OE23338HFQL10Q2K7DAT6KHPDVHJCGM";
-		// 발급받은 APIKEY SECRET KEY
+	// 이메일로 유저코드 가져오기
+	public String getUserCodeByEmail(String userEmail)
+	{
+		IUserDAO dao = sqlSession.getMapper(IUserDAO.class);
+		String userCode = dao.getUserCodeByEmail(userEmail);
+		
+		return userCode;
+	}
+	
+	// 유저코드로 비번재설정코드 생성
+	public UserDTO getCodeByUserCode(UserDTO dto)
+	{
+		IUserDAO dao = sqlSession.getMapper(IUserDAO.class);
 
-		System.out.println("번호 : " + tel);
-		Message coolsms = new Message(api_key, api_secret);
-
-		System.out.println("Hello");
-
-		// 4 params(to, from, type, text) are mandatory. must be filled
-		HashMap<String, String> params = new HashMap<String, String>();
-		params.put("to", tel);
-		params.put("from", "01087382204"); // 인증받은 발신번호
-		params.put("type", "SMS");
-		params.put("text", "[COME-IT] 인증번호 : " + authNum);
-		params.put("app_version", "test app 1.2"); // application name and version
-
+		dao.issuePasswordResetCode(dto);
+		
+		return dto;
+	}
+	
+	// 비밀번호 재설정 코드 메일 발송
+	public int sendEmail(String userEmail, String issueCode)
+	{
+		int result=0;
+		
+		String host = "smtp.gmail.com";
+		String subject = "BiscuitBall 비밀번호 재설정 인증 코드";
+		String fromName = "BiscuitBall";
+		String from = "authorkim0921@gmail.com";
+		String to1 = userEmail;
+		
+		String content = "비밀번호 재설정 코드는 [ "+issueCode+" ] 입니다";
+		
 		try
 		{
-			// send() 는 메시지를 보내는 함수
-			org.json.simple.JSONObject obj = (org.json.simple.JSONObject)coolsms.send(params);
-			System.out.println("에러코드" + obj.get("error_count"));
-
-		} catch (CoolsmsException e)
+			Properties props = new Properties();
+			
+			props.put("mail.smtp.starttls.enable", "true");
+			props.put("mail.transport.protocol","smtp");
+			props.put("mail.smtp.host", host);
+			props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+			props.put("mail.smtp.user", from);
+			props.put("mail.smtp.auth", "true");
+			
+			Session mailSession = Session.getInstance(props, new javax.mail.Authenticator() 
+											{
+												protected PasswordAuthentication getPasswordAuthentication() 
+												{
+													return new PasswordAuthentication("authorkim0921", "@juber2539");
+												} 
+											});
+			
+			Message msg = new MimeMessage(mailSession);
+			msg.setFrom(new InternetAddress(from, MimeUtility.encodeText(fromName, "UTF-8", "B"))); // 보내는 사람 설정
+			
+			InternetAddress[] address1 = { new InternetAddress(to1)};
+			msg.setRecipients(Message.RecipientType.TO, address1);	// 받는사람 설정 1
+			msg.setSubject(subject);	// 제목 설정
+			msg.setSentDate(new java.util.Date());	// 보내는 날짜 설정
+			msg.setContent(content, "text/html;charset=euc-kr");
+			
+			Transport.send(msg);	// 메일 보내기
+			
+			result = 1;
+			
+		} catch (Exception e)
 		{
-			System.out.println(e.getMessage());
-			System.out.println(e.getCode());
-		}
-
-		return authNum;
+			e.printStackTrace();
 		}
 		
+		return result;
+	}
 }
