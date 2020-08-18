@@ -61,7 +61,7 @@ public class MypageModel
 		
 		// 작업준비
 		UserDTO user = dao.getUser(userInfo.getUserAcctCode());
-
+		
 		modelAndView.addObject("user", user);
 		modelAndView.setViewName("/mypage/MyPage");		
 	

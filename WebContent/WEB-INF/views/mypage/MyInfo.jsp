@@ -181,18 +181,18 @@ $(document).ready(function()
                               </div>
                              
                               <div class="col-sm-3 col-xs-4">
-                              <c:set var="sub_citycode" value="${user.userCityCode }"/>
-                              <c:set var="sub_citycode" value="${user.userCityCode }"/>
+                              <c:set var="userCityCode" value="${user.userCityCode }"/>
+                              <c:set var="userRegionCode" value="${user.userRegionCode }"/>
                                  <select class="form-control" id="city_select" name="city_select">
                            <c:forEach var="city" items="${regionList }">
-                           <option value="${city.regionCode}" 
-                             <c:if test="${sub_citycode eq city.regionCode }">selected </c:if> >${city.regionName}
+                           <option value="${city.regionCode}"
+                              <c:if test="${userRegionCode eq city.regionCode }">selected </c:if>>${city.regionName}
                            </option>
                            </c:forEach>
                                  </select>
                               </div>
                               
-                              <!-- 시티 코드  --><c:out value="${sub_citycode}"></c:out>
+                       
                                                             
                               <div class="col-sm-3 col-xs-4">
                                  <select class="form-control" id="region_select" name="region_select">

@@ -157,6 +157,9 @@ $().ready(function()
       <hr />
       <div class="col-md-12">
       	<p class="subtitle-text">마이페이지</p>
+      	
+      	
+      	
       </div>
    </div>
    <div class="row">
