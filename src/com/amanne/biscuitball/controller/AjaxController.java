@@ -12,6 +12,11 @@ import com.amanne.biscuitball.model.AjaxModel;
 import com.amanne.biscuitball.model.UserInfo;
 import com.amanne.biscuitball.mybatis.UserDTO;
 
+import java.util.HashMap;
+import net.nurigo.java_sdk.api.Message;
+
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
+import org.json.simple.JSONObject;
 @Controller
 @RequestMapping("/ajax")
 public class AjaxController
@@ -234,5 +239,16 @@ public class AjaxController
 		return view;
 	}
 	
+	@RequestMapping("/check/sendSMS")
+    public String sendSms(Model model,@RequestParam("tel") String tel,@RequestParam("authNum") String authNum) throws CoolsmsException
+    {
+       String view = null;
+       
+       model.addAttribute("result", ajax.sendSms(tel, authNum));
+
+       view = "/ajax/Check";
+       return view;
+       
+    }
 	
 }
