@@ -1,6 +1,7 @@
 package com.amanne.biscuitball.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -33,6 +34,7 @@ import com.amanne.biscuitball.mybatis.UserDTO;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+
 
 @Service
 public class AjaxModel
@@ -596,4 +598,16 @@ public class AjaxModel
 		
 		return result;
 	}
+	
+	// 비밀번호 재설정 
+	public UserDTO resetPassword(UserDTO dto, String issueCode)
+	{
+		
+		IUserDAO dao = sqlSession.getMapper(IUserDAO.class);
+		dao.resetPassword(dto, issueCode);
+		
+		return dto;
+	}
+	
+    
 }

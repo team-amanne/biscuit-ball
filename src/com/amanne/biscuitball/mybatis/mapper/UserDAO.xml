@@ -218,12 +218,12 @@
 	
 	<!-- 	public void resetPassword(String userCode, String issueCode) // 비밀번호재설정 -->
 	<select id="resetPassword" 
-	 parameterType="java.lang.String"
+	 parameterType="com.amanne.biscuitball.mybatis.UserDTO"
 	 statementType="CALLABLE">
 	 	{ call PRC_PWD_RESET
 			(
 			    #{issueCode},
-			    #{userCode},
+			    #{userPassword},
 			    #{returnValue ,mode=OUT, jdbcType=VARCHAR}
 			)
 		}

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.amanne.biscuitball.mybatis.UserDTO;
 
+
 @Controller
 @RequestMapping("/")
 public class RootController
@@ -126,6 +127,13 @@ public class RootController
 	{
 		return "/base/PasswordReset";
 	}
+	
+	// 재설정 비밀번호 입력 form 불러옴
+	@RequestMapping("/passwordreset/reset")
+	public String passwordResetPopup()
+	{
+		return "/base/PasswordReset_pu";
+	}
 
 	// 메인 페이지 띄우기
 	@RequestMapping("/")
@@ -133,5 +141,4 @@ public class RootController
 	{		
 		return "/base/Main";
 	}
-	
 }

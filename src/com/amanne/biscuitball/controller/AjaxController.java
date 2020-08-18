@@ -12,6 +12,7 @@ import com.amanne.biscuitball.model.AjaxModel;
 import com.amanne.biscuitball.model.UserInfo;
 import com.amanne.biscuitball.mybatis.UserDTO;
 
+
 @Controller
 @RequestMapping("/ajax")
 public class AjaxController
@@ -234,5 +235,21 @@ public class AjaxController
 		return view;
 	}
 	
+	// 새로운 비밀번호로 변경
+	@RequestMapping("/passwordreset/resetpassword")
+	public String resetPassword
+	(Model model, @RequestParam("issueCode") String issueCode, @RequestParam("password") String password )
+	{
+		String view = null;
+		
+		UserDTO dto = new UserDTO();
+		dto.setUserCode(password);
+		
+		model.addAttribute("result",ajax.resetPassword(dto, issueCode).getReturnValue());
+		
+		view = "/ajax/Check";
+		return view;
+		
+	}
 	
 }

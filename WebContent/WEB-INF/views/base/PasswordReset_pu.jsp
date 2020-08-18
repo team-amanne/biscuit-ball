@@ -50,6 +50,12 @@
 	margin-top: 5px;
 }
 
+.err
+{
+	color: red;
+	font-size: 9pt;
+	display: none;
+}
 
 </style>
 <link rel="stylesheet"
@@ -59,13 +65,58 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+<script type="text/javascript">
+
+	$(document).ready(function()
+	{
+		$("#password_certify").click(function()
+		{
+			if ($("#password1").val() != #("#password2").val() )
+			{
+				$("#err").css("display","inline");
+				
+				return;
+			}
+			
+			var issueCode = ${issueCode};
+			var userCode = ${userCode};
+			var password = $("#password1").val();
+			
+			$.ajax(
+			{
+				url: "<%=cp%>/passwordreset/resetpassword",
+				type: "post",
+				data:
+				{
+					issueCode: issueCode,
+					userCode : userCode,
+					password : password
+				}
+				success: function(data)
+				{
+					if (data=='1')
+					{
+						alert("비밀번호 변경 완료");
+						$(location).attr("href","<%=cp%>/login");
+					}
+					else
+					{
+						$("#err").text("인증 코드가 올바르지 않습니다.");
+						$("#err").css("display","inline");
+					}
+					
+				}
+			});
+		});
+		
+	});
+
+</script>
 </head>
 <body>
 
 <!-- 헤더 -->
 <c:import url="../base/Header.jsp"></c:import>
-<!-- 서브 -->
-<c:import url="../base/Submenu.jsp"></c:import>
 
 <div class="container-fluid">
       <div class="section-title container">
@@ -85,6 +136,7 @@
 				<input type="password" class="form-control" id="password2" placeholder="영문,소문자,숫자,특수문자 8~15자">
 				
 				<button class="btn btn-warning" id="password_certify">비밀번호 재설정</button>
+				<span id="err" class="err">비밀번호가 일치하지 않습니다.</span>
 			</div>
 		</div>
 		<div class="col-md-3">
