@@ -222,5 +222,17 @@ public class AjaxController
 		return view;
 	}
 	
+	// 비번재설정 코드 이메일발송
+	@RequestMapping("/passwordreset/sendemail")
+	public String sendEmail(Model model, @RequestParam("userEmail") String userEmail ,@RequestParam("issueCode") String issueCode)
+	{
+		String view = null;
+		
+		model.addAttribute("result", ajax.sendEmail(userEmail, issueCode));
+		
+		view = "/ajax/Check";
+		return view;
+	}
+	
 	
 }

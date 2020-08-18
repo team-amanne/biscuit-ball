@@ -1,7 +1,15 @@
 package com.amanne.biscuitball.model;
 
 import java.util.ArrayList;
+import java.util.Properties;
 
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeUtility;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -534,5 +542,58 @@ public class AjaxModel
 		dao.issuePasswordResetCode(dto);
 		
 		return dto;
+	}
+	
+	// 비밀번호 재설정 코드 메일 발송
+	public int sendEmail(String userEmail, String issueCode)
+	{
+		int result=0;
+		
+		String host = "smtp.gmail.com";
+		String subject = "BiscuitBall 비밀번호 재설정 인증 코드";
+		String fromName = "BiscuitBall";
+		String from = "authorkim0921@gmail.com";
+		String to1 = userEmail;
+		
+		String content = "비밀번호 재설정 코드는 [ "+issueCode+" ] 입니다";
+		
+		try
+		{
+			Properties props = new Properties();
+			
+			props.put("mail.smtp.starttls.enable", "true");
+			props.put("mail.transport.protocol","smtp");
+			props.put("mail.smtp.host", host);
+			props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+			props.put("mail.smtp.user", from);
+			props.put("mail.smtp.auth", "true");
+			
+			Session mailSession = Session.getInstance(props, new javax.mail.Authenticator() 
+											{
+												protected PasswordAuthentication getPasswordAuthentication() 
+												{
+													return new PasswordAuthentication("authorkim0921", "@juber2539");
+												} 
+											});
+			
+			Message msg = new MimeMessage(mailSession);
+			msg.setFrom(new InternetAddress(from, MimeUtility.encodeText(fromName, "UTF-8", "B"))); // 보내는 사람 설정
+			
+			InternetAddress[] address1 = { new InternetAddress(to1)};
+			msg.setRecipients(Message.RecipientType.TO, address1);	// 받는사람 설정 1
+			msg.setSubject(subject);	// 제목 설정
+			msg.setSentDate(new java.util.Date());	// 보내는 날짜 설정
+			msg.setContent(content, "text/html;charset=euc-kr");
+			
+			Transport.send(msg);	// 메일 보내기
+			
+			result = 1;
+			
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 }

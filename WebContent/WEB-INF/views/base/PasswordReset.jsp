@@ -82,10 +82,31 @@ String cp = request.getContextPath();
 										{
 											if (code!=0)
 											{
-												alert(code+" 는 유저코드");
+												$.ajax(
+												{
+													url: "<%=cp%>/ajax/passwordreset/sendemail",
+													type: "post",
+													data: 
+													{
+														userEmail: $("#userEmail").val(),
+														issueCode: code
+													},
+													success: function(result)
+													{
+														if (result==0)
+														{
+															alert("메일발송실패");
+														}
+														else
+														{
+															alert("메일 발송 성공");
+															$(".sendMessage").css("display","inline");
+															$(".inputCode").css("display","inline");
+														}
+														
+													}
+												});
 												
-												$(".sendMessage").css("display","inline");
-												$(".inputCode").css("display","inline");
 											}
 											else
 											{
