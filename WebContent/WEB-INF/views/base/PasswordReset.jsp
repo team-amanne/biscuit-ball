@@ -35,6 +35,11 @@ String cp = request.getContextPath();
 	display: none;
 }
 
+.errMessage
+{
+	display: none;
+}
+
 </style>
 <script type="text/javascript">
 
@@ -62,12 +67,37 @@ String cp = request.getContextPath();
 							data: {userEmail: $("#userEmail").val()},
 							success: function(data)
 							{
-								// 인증코드를 정상적으로 발생시켰을 경우
 								if (data != 0)
 								{
-									$(".sendMessage").css("display","inline");
-									$(".inputCode").css("display","inline");
-									//alert(data+" 는 코드");
+									// Test 생성된 유저코드
+									//alert(data+" 는 유저코드");
+									
+									// 비번 변경 코드 생성하는 에이젝스
+									$.ajax(
+									{
+										url: "<%=cp%>/ajax/passwardreset/issuecode",
+										type: "post",
+										data: {userCode: data},
+										success: function(code)
+										{
+											if (code!=0)
+											{
+												alert(code+" 는 유저코드");
+												
+												$(".sendMessage").css("display","inline");
+												$(".inputCode").css("display","inline");
+											}
+											else
+											{
+												alert("코드가 발급되지 못했습니다.");
+											}
+										},
+										error: function(e)
+										{
+								          alert(e.responseText);
+								        }
+										
+									});
 								}
 								
 								//consol.log("실패");
@@ -155,7 +185,7 @@ String cp = request.getContextPath();
 						</div>
 					</li>
 				</ul>
-				<p class="text-orange">잘못된 인증코드입니다.</p>
+				<p class="text-orange errMessage">잘못된 인증코드입니다.</p>
 			</div>
 		</div>
 		<div class="col-md-2 col-xs-2"></div>

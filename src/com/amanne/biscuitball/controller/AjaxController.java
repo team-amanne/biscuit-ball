@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.amanne.biscuitball.model.AjaxModel;
 import com.amanne.biscuitball.model.UserInfo;
+import com.amanne.biscuitball.mybatis.UserDTO;
 
 @Controller
 @RequestMapping("/ajax")
@@ -200,6 +201,22 @@ public class AjaxController
 		String view=null;
 		
 		model.addAttribute("result", ajax.getUserCodeByEmail(userEmail));
+		
+		view = "/ajax/Check";
+		return view;
+	}
+	
+	// 비밀번호 변경 코드 생성하기
+	@RequestMapping("/passwardreset/issuecode")
+	public String getCodeByUserCode(Model model, @RequestParam("userCode") String userCode)
+	{
+		String view = null;
+		
+		UserDTO dto = new UserDTO();
+		dto.setUserCode(userCode);
+		
+		System.out.println(ajax.getCodeByUserCode(dto).getReturnValue());
+		model.addAttribute("result", ajax.getCodeByUserCode(dto).getReturnValue());
 		
 		view = "/ajax/Check";
 		return view;

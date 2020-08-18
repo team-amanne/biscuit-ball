@@ -36,7 +36,7 @@ public interface IUserDAO
 
 	public void getAchievement(PersonalAchievementDTO personalAchievementDTO); // 개인업적획득
 
-	public void issuePasswordResetCode(String userCode); // 비번재설정코드발급
+	public void issuePasswordResetCode(UserDTO userDTO); // 비번재설정코드발급
 
 	public void resetPassword(String userCode, String issueCode); // 비밀번호재설정
 

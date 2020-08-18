@@ -21,6 +21,7 @@ import com.amanne.biscuitball.util.MyUtil;
 import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 import com.amanne.biscuitball.mybatis.MeetingDTO;
 import com.amanne.biscuitball.mybatis.RegionDTO;
+import com.amanne.biscuitball.mybatis.UserDTO;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -513,8 +514,6 @@ public class AjaxModel
 				arr.add(obj);
 			}
 		
-		
-		
 		return arr.toString();
 	}
 		
@@ -525,5 +524,15 @@ public class AjaxModel
 		String userCode = dao.getUserCodeByEmail(userEmail);
 		
 		return userCode;
+	}
+	
+	// 유저코드로 비번재설정코드 생성
+	public UserDTO getCodeByUserCode(UserDTO dto)
+	{
+		IUserDAO dao = sqlSession.getMapper(IUserDAO.class);
+
+		dao.issuePasswordResetCode(dto);
+		
+		return dto;
 	}
 }
