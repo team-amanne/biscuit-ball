@@ -1,8 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-   request.setCharacterEncoding("UTF-8");
-String cp = request.getContextPath();
+   	request.setCharacterEncoding("UTF-8");
+	String cp = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
@@ -57,6 +57,16 @@ String cp = request.getContextPath();
    margin-left: 17%;
 }
 
+/* 인증번호 */
+.certification
+{
+	display: none;
+}
+.telCheck2
+{
+	display: none; 
+}
+
 
 </style>
 
@@ -76,6 +86,7 @@ String cp = request.getContextPath();
 <link rel="stylesheet" href="<%=cp%>/css/default.css" />
 <link rel="stylesheet" href="<%=cp%>/css/board.css" />
 
+
 <style>
 /*datepicer 버튼 롤오버 시 손가락 모양 표시*/
 .ui-datepicker-trigger {
@@ -91,75 +102,93 @@ String cp = request.getContextPath();
 
 
 <script type="text/javascript">
-      $(function() {       
- // 이메일 유효성검사
-         $("#email_certify").click( function() {
-             var email = $('#userEmail').val();
-             
-             //입력여부
-             if($("#userEmail").val() == "")
-              {
-                 $("#id_check").text("입력 항목이 누락되었습니다.");
-                 $("#id_check").css("color", "red");
-                 $("#userEmail").focus();
-                 
-                 return false;  
-              }
-              else
-              {
-                 $("#id_check").text(""); 
-                 
-                 // 중복여부
-                 $.ajax({
-                 url : '<%=cp%>/ajax/check/email?email='+ email,
-                     type : 'get',
-                     success : function(data) {
-                     console.log("1 = 중복o / 0 = 중복x : " + data);
-                 if (data == 1) 
-                     {
-                        // 1 : 아이디가 중복되는 문구
-                        $("#id_check").text("사용중인 이메일입니다");
-                        $("#id_check").css("color", "red");
-                        $('#userEmail').val('');
-                        $('#userEmail').focus();
-                       
-                        
-                     } 
-                 else 
-                     {
-                         $("#id_check").text("사용가능한 이메일입니다");
-                         $("#id_check").css("color", "green");
-                         
-                     }
-                     },
-                     error : function() {
-                     console.log("실패");
-                     }
-                  }); 
-                 return false;
-              }
-        });
+      $(function() {   
+    	// 이메일 유효성검사
+          $("#email_certify").click( function() {
+              var email = $('#userEmail').val();
 
-         
-         
+              //입력여부
+              if($("#userEmail").val() == "")
+               {
+                  $("#id_check").text("입력 항목이 누락되었습니다.");
+                  $("#id_check").css("color", "red");
+                  $("#userEmail").focus();
+
+                  return false;
+               }
+               else
+               {
+                  $("#id_check").text(""); 
+
+                  // 중복여부
+                  $.ajax({
+                  url : '<%=cp%>/ajax/check/email?email='+ email,
+                      type : 'get',
+                      success : function(data) {
+                      console.log("1 = 중복o / 0 = 중복x : " + data);
+                  if (data == 1) 
+                      {
+                         // 1 : 아이디가 중복되는 문구
+                         $("#id_check").text("사용중인 이메일입니다");
+                         $("#id_check").css("color", "red");
+                         $('#userEmail').val('');
+                         $('#userEmail').focus();
+
+
+                      } 
+                  else 
+                      {
+                          $("#id_check").text("사용가능한 이메일입니다");
+                          $("#id_check").css("color", "green");
+
+                      }
+                      },
+                      error : function() {
+                      console.log("실패");
+                      }
+                   }); 
+                  return false;
+               }
+         });
+    	  
+    	  // 비밀번호자리수제한
+    	/*   
+    	 $("#userPassword").focusout(function() {
+    		if($("#userPassword").length < 9)
+    		{
+    			alert($("#userPassword").length);
+    			$("#pwd_check").text("비밀번호는 8~15자리로 입력해주세요");
+    			$("#pwd_check").css("color", "red");
+    			$("#userPassword").focus();
+    		}
+    		else
+    			$("#pwd_check").text("");
+	
+		}) */
          // 비밀번호 일치여부
           $("#password2").focusout(function() {
             $(".pwd-fail").css("display","none");
             $(".pwd-sucess").css("display","none");
-          var pwd1 = $("#userPassword").val();
+          	var pwd1 = $("#userPassword").val();
             var pwd2 = $("#password2").val();
      
-            if ( pwd1 != '' && pwd2 == '' ) {
+            if ( pwd1 != '' && pwd2 == '' ) 
+            {
                 null;
-            } else if (pwd1 != "" || pwd2 != "") {
-                if (pwd1 == pwd2) {
+            } 
+            else if (pwd1 != "" || pwd2 != "") 
+            {
+                if (pwd1 == pwd2) 
+                {
                     $(".pwd-sucess").css("display","inline");
-                } else {
+                } 
+                else 
+                {
                    $(".pwd-fail").css("display","inline");
                    $("#password2").focus();
                 }
             }
-        });
+   		});
          
          // 닉네임 중복여부
          $("#nickname_check").click( function() {
@@ -209,8 +238,10 @@ String cp = request.getContextPath();
           });
           
          // 전화번호 인증버튼확인
-         $("#tel_certify").click(function() {            
-              var tel = $('#tel1').val() +"-"+ $('#tel2').val() + "-" + $('#tel3').val();
+         $("#tel_certify").click(function() {
+        	alert("확인");			
+        	
+            var tel = $('#tel1').val() +"-"+ $('#tel2').val() + "-" + $('#tel3').val();
             if($("#tel1 option:selected").val() == "선택" || $("#tel2").val() == "" || $("#tel3").val() == "")
             {
                  $("#tel_check").text("입력 항목이 누락되었습니다.");
@@ -240,19 +271,66 @@ String cp = request.getContextPath();
                else 
                     {
                         $("#tel_check").text("사용가능한 전화번호입니다");
-                        $("#tel_check").css("color", "green");
-                        // 전화번호 인증 보이기$("#certification").css("display","inline");
+                        $("#tel_check").css("color", "green");                        
+                        $("#telCheck2").css("display","inline");
 
                     }
                     },
                     error : function() {
                     console.log("실패");
                     }
-            });
-                return false;
-            } 
-          });
+            	});
+            }
+             
+         });
          
+         // 전화인증번호 발송 
+        $("#sendBtn").click(function() {
+        	$("#certification").css("display","inline");
+        	var tel = $('#tel1').val() +"-"+ $('#tel2').val() + "-" + $('#tel3').val();
+        	var authNum="";
+            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+            for (var i = 0; i < 6; i++)
+            {
+            	authNum += possible.charAt(Math.floor(Math.random() * possible.length));
+            }
+            
+            $.ajax({
+                type: "GET",
+                url: "<%=cp%>/ajax/check/sendSMS",
+                data: {
+                    "tel" : tel, "authNum" : authNum 
+                },
+                success: function(data){
+                	$("#certified").val(data);
+                	alert('인증번호가 정상적으로 발송되었습니다.');
+                	$("#certification").css("display","inline");
+                	return false;
+                },
+                error: function(e){
+                    alert(e.responseText);
+                }                
+            });                           
+		});
+        
+        // 전화인증번호확인
+        $("#checkBtn").click(function() 
+        {
+        	if($("#certified").val()==$("#inputCertifiedNumber").val())
+        	{
+        		alert("인증되었습니다");
+        		$("#certified").val("check");
+        	}
+        	else
+        	{
+        		alert("인증번호가 틀렸습니다");
+        		$("#inputCertifiedNumber").val("");
+        		$("#inputCertifiedNumber").focus();
+        	}
+        	
+        });
+        
      	/*
         //  전화인증번호 체크
          $("#certification").click(function() {
@@ -309,7 +387,7 @@ String cp = request.getContextPath();
                   $("#id_check").text("입력 항목이 누락되었습니다.");
                   $("#id_check").css("color", "red");
                   $("#userEmail").focus();
-
+                  
                   return false;  
                }
                else
@@ -392,21 +470,18 @@ String cp = request.getContextPath();
                   return false;  
                }
                else
-                  $("#tel_check").text("");
-            /*
-            // 전화번호 인증번호 입력확인
-            if($("#tel4").val() == "")
-            {
-               $("#tel-certify-check").text("입력 항목이 누락되었습니다.");
-               $("#tel-certify-check").css("color", "red");
-               $("tel4").focus();
-
-               return false;  
-            }
-            else
-               $("#tel-certify-check").text("");
-            */
-            // // 포지션 입력없음
+            	   if($("#certified").val() != check)
+            	    {
+            		   	$("#tel_check").text("전화번호를 인증하세요.");
+   	            		$("#tel_check").css("color", "red");
+   	                	$("#certified").focus();        	           
+            	    }
+            	   else
+                  		$("#tel_check").text("");
+            
+            
+          
+           // 포지션 입력없음
             if( $("#userPositionCode option:selected").val() == "포지션선택")
                {
                   $("#position_check").text("입력 항목이 누락되었습니다.");
@@ -495,7 +570,7 @@ String cp = request.getContextPath();
                      id="userEmail" name="userEmail" placeholder="email"></span>
                </div>
                <div class="col-sm-2 col-xs-2">
-                  <button class="btn btn-warning email_certify" id="email_certify">중복확인</button>
+                  <button type="button" class="btn btn-warning email_certify" id="email_certify">중복확인</button>
                </div>
                <div class="col-sm-2 col-xs-2" id="id_check"></div>
             </div>
@@ -508,6 +583,8 @@ String cp = request.getContextPath();
                   <input type="password" class="form-control userPassword"
                      id="userPassword" name="userPassword" placeholder="*********" maxlength="15">
                </div>
+                <div class="col-sm-2 col-xs-2" id="pwd_check"></div>
+              
             </div>
             
             <div class="row">
@@ -546,7 +623,7 @@ String cp = request.getContextPath();
                      id="userNickname" name="userNickname" placeholder="닉네임">
                </div>
                <div class="col-sm-2 col-xs-2">
-                  <button class="btn btn-warning nickname_check" id="nickname_check">중복확인</button>
+                  <button type="button" class="btn btn-warning nickname_check" id="nickname_check">중복확인</button>
                </div>
                <div class="col-sm-2 col-xs-2" id="nick_check"></div>
             </div>
@@ -650,9 +727,15 @@ String cp = request.getContextPath();
                       <input type="tel" class="form-control tel3" id="tel3"> 
                         <input type="hidden" name="userTel" id="userTel">
                   </div>
-                  <div class="col-sm-3 col-xs-3">
-                        <button class="btn btn-warning tel_certify" id="tel_certify">중복확인</button>
-                    </div>
+                  <div class="col-sm-3 col-xs-3 telCheck1">
+                       <button type="button" class="btn btn-warning tel_certify" id="tel_certify">중복확인</button>
+                   </div>
+                   <div class="col-sm-1 col-xs-1">
+                   </div>
+                   <div class="col-sm-3 col-xs-3 telCheck2" id="telCheck2">
+                  <button type="button" class="btn btn-warning tel_certify_send"
+                     id="sendBtn">인증번호 발송</button>
+               </div>
                     
                     
                </div>
@@ -662,21 +745,22 @@ String cp = request.getContextPath();
             <div id="tel_check"></div>
            
 
-            <div class="flex row" style="display: none;" id="certification">
+            <div class="flex row certification" id="certification" style="display: none;">
                <div class="col-sm-3 col-xs-3">
                   <label class="f_size">인증번호*</label>
                </div>
                <div class="col-sm-4 col-xs-4">
-                  <input type="tel" class="form-control tel4" id="tel4"
+                  <input type="tel" class="form-control tel4" id="inputCertifiedNumber"
                      placeholder="인증번호를 입력해주세요" name="smsReceive">
+                  <input type="hidden" name="certified" id="certified">
                </div>
-               <div class="col-sm-2 col-xs-2">
-                  <button class="btn btn-warning tel_certify_send"
-                     id="tel_certify_send">인증번호 발송</button>
+               
+               <div class="col-sm-2 col-xs-2" id="tel-certify-check">
+               		<button type="button" class="btn btn-warning tel_certify_send"
+                     id="checkBtn">인증번호 인증</button>
                </div>
-               <div class="col-sm-2 col-xs-2" id="tel-certify-check"></div>
             </div>
-
+	
       <div class="flex row">
            <div class="col-sm-4 col-xs-4">
               <label class="f_size">선호포지션*</label>

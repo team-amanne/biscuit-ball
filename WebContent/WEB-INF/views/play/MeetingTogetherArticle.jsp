@@ -123,7 +123,7 @@
 						</div>
 						
 						</div>
-					<div class="panel panel-default">
+						<div class="panel panel-default">
 							<div class="panel-body center-move">
 							<div class="col-md-3">
 								<div class="col-md-8 info-title">
