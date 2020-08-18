@@ -91,7 +91,7 @@
 					issueCode: issueCode,
 					userCode : userCode,
 					password : password
-				}
+				},
 				success: function(data)
 				{
 					if (data=='1')
