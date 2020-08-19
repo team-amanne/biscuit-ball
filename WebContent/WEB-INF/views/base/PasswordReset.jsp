@@ -71,7 +71,7 @@ String cp = request.getContextPath();
 								{
 									// Test 생성된 유저코드
 									//alert(data+" 는 유저코드");
-									
+									$("#userCode").val(data);
 									// 비번 변경 코드 생성하는 에이젝스
 									$.ajax(
 									{
@@ -140,7 +140,17 @@ String cp = request.getContextPath();
 		          alert(e.responseText);
 		        }
 			});
+			
+			
+			
 		});
+		
+		// 인증번호 입력 → 클릭 후
+		$("#btn-codeInput").click(function()
+		{
+			$("#submitForm").submit();
+		});
+		
 	});
 	
 
@@ -158,15 +168,17 @@ String cp = request.getContextPath();
 
 		<div class="col-md-2 col-xs-2"></div>
 		<div class="col-md-8 col-xs-8">
+		<form id="submitForm" action="<%=cp%>/passwordreset/reset" method="post">
 			<div class="col-md-12 col-xs-12">
 				<p class="subtitle-text">비밀번호 재설정 인증을 받을 이메일을 입력해주세요</p>
 			</div>
 			<div class="col-md-12 col-xs-12">
-
+			
 				<ul class="list-group">
 
 					<li class="list-group-item board-body">
 						<div class="row">
+						
 							<div class="col-sm-2 col-xs-2" align="center">
 								<span class="input-title">이메일 입력</span>
 							</div>
@@ -178,7 +190,7 @@ String cp = request.getContextPath();
 								<button id="btnSendCode" class="btn btn-submit btn-block btn-default">
 									인증 코드 발송</button>
 							</div>
-
+						
 						</div>
 					</li>
 
@@ -196,18 +208,19 @@ String cp = request.getContextPath();
 							<div class="col-sm-2 col-xs-2" align="center">
 							</div>
 							<div class="col-sm-8 col-xs-8">
-								<input type="text" class="form-control" />
+								<input type="text" class="form-control" id="issueCode" name="issueCode">
 							</div>
 							<div class="col-sm-2 col-xs-2">
-								<button class="btn btn-submit btn-block btn-default">
+								<button id="btn-codeInput" class="btn btn-submit btn-block btn-default">
 									인증 코드 입력</button>
 							</div>
-
+							<input id="userCode" name="userCode" type="hidden" />
 						</div>
 					</li>
 				</ul>
 				<p class="text-orange errMessage">잘못된 인증코드입니다.</p>
 			</div>
+		</form>
 		</div>
 		<div class="col-md-2 col-xs-2"></div>
 	</div>

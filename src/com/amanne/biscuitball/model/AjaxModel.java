@@ -11,7 +11,6 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -27,7 +26,6 @@ import com.amanne.biscuitball.mybatis.IMeetingDAO;
 import com.amanne.biscuitball.mybatis.IRegionDAO;
 import com.amanne.biscuitball.mybatis.IUserDAO;
 import com.amanne.biscuitball.util.MyUtil;
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 import com.amanne.biscuitball.mybatis.MeetingDTO;
 import com.amanne.biscuitball.mybatis.RegionDTO;
 import com.amanne.biscuitball.mybatis.UserDTO;
@@ -35,6 +33,7 @@ import com.amanne.biscuitball.mybatis.UserDTO;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
+
 
 
 @Service
@@ -600,6 +599,18 @@ public class AjaxModel
 		return result;
 	}
 	
+
+	// 비밀번호 재설정 
+	public UserDTO resetPassword(UserDTO dto, String issueCode)
+	{
+		
+		IUserDAO dao = sqlSession.getMapper(IUserDAO.class);
+		dao.resetPassword(dto, issueCode);
+		
+		return dto;
+	}
+	
+
     public String sendSms(String tel, String authNum)
     {   
     

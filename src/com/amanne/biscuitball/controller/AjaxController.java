@@ -239,6 +239,23 @@ public class AjaxController
 		return view;
 	}
 	
+	// 새로운 비밀번호로 변경
+	@RequestMapping("/passwordreset/resetpassword")
+	public String resetPassword
+	(Model model, @RequestParam("issueCode") String issueCode, @RequestParam("password") String password )
+	{
+		String view = null;
+		
+		UserDTO dto = new UserDTO();
+		dto.setUserCode(password);
+		
+		model.addAttribute("result",ajax.resetPassword(dto, issueCode).getReturnValue());
+		
+		view = "/ajax/Check";
+		return view;
+		
+	}
+
 	@RequestMapping("/check/sendSMS")
     public String sendSms(Model model,@RequestParam("tel") String tel,@RequestParam("authNum") String authNum) throws CoolsmsException
     {
@@ -250,5 +267,6 @@ public class AjaxController
        return view;
        
     }
+
 	
 }

@@ -38,7 +38,7 @@ public interface IUserDAO
 
 	public void issuePasswordResetCode(UserDTO userDTO); // 비번재설정코드발급
 
-	public void resetPassword(String userCode, String issueCode); // 비밀번호재설정
+	public void resetPassword(UserDTO userDTO, String issueCode); // 비밀번호재설정
 
 	public int blockUser(String blockingAccountCode, String blockedAccountCode); // 회원차단
 
