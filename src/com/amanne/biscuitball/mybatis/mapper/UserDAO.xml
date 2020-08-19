@@ -130,7 +130,8 @@
 		  , USER_COURT_OP_CODE= #{courtOpen, jdbcType=VARCHAR}
 		  , USER_PL_OP_CODE= #{playlogOpen, jdbcType=VARCHAR}
 		  , MSG_BLOCK_TYPE_CODE= #{msgBlockCode, jdbcType=VARCHAR}
-		WHERE USER_ACCT_CODE = #{userAccountCode}		
+		WHERE USER_ACCT_CODE = #{userAccountCode}	
+		
 	</update>
 
 	<!-- public int addSnsSync(String userCode, String snsKey) // SNS연동-->

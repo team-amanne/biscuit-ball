@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import com.amanne.biscuitball.model.MypageModel;
+import com.amanne.biscuitball.mybatis.CityDTO;
+import com.amanne.biscuitball.mybatis.IRegionDAO;
 import com.amanne.biscuitball.mybatis.RegionDTO;
+import com.amanne.biscuitball.mybatis.UserDTO;
 
 
 
@@ -23,7 +27,7 @@ public class MyPageController
 	@Autowired
 	private MypageModel mypage;
 
-
+	
 	// 마이페이지 조회
 	@RequestMapping("")
 	public String createMyPage()
@@ -31,8 +35,6 @@ public class MyPageController
 
 		return "redirect:/mypage/myprofile";
 		
-		//$(location).attr("href", "<%=cp %>/mypage/updateuser?userCourtCode=${court.courtCode }");
-
 	}
 
 
@@ -44,12 +46,6 @@ public class MyPageController
 		mypage.myPage(modelAndView, request);
 		return modelAndView;
 
-	}
-
-	@RequestMapping("/account")
-	public String myInfo()
-	{
-		return "/mypage/MyInfo";
 	}
 
 	@RequestMapping("/achievement")
@@ -81,14 +77,26 @@ public class MyPageController
 
 	}
 	
+	@RequestMapping(value = "/mypageinfoupdate", method =
+		{ RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView mypageinfoupdate(ModelAndView modelAndView, HttpServletRequest request)
+	{
+		mypage.mypageinfoupdate(modelAndView, request);
+		return modelAndView;
+
+	}
+	
+	
    @RequestMapping(value = "/account", method ={ RequestMethod.GET, RequestMethod.POST })
-   public ModelAndView myInfo(ModelAndView modelAndView, HttpServletRequest request, Model model)
-   {
+   public ModelAndView myWInfo(ModelAndView modelAndView, HttpServletRequest request, Model model)
+   {	   
       // 도시 리스트
       ArrayList<RegionDTO> regionList = mypage.regionPrint();
+
       model.addAttribute("regionList", regionList);
    
       mypage.myProfile(modelAndView, request);
+       
       return modelAndView;
 
    }
