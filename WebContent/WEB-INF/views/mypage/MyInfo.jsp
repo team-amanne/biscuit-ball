@@ -75,6 +75,71 @@ $(document).ready(function()
        
     });
    
+   // submit 할 때
+   $("#myinfoForm").submit(function() 
+    { 
+	  
+	  //전화번호 숫자 처리
+	  var tel2 = $("#tel2").val();
+	  var tel3 = $("#tel3").val();
+	  
+	  var failType;
+	  
+	  var regex= /[^0-9]/g;
+
+	  if( !regexp.test(tel2)) 
+	  {
+		  alert("전화번호에 숫자만 입력해주세요.");
+		  $("#tel2").focus();
+		  return false;
+
+	  }
+	  else if( !regexp.test(tel3) )
+	  {
+		  alert("전화번호에 숫자만 입력해주세요.");
+		  $("#tel3").focus();
+		  return false;
+	  }
+	   
+    });
+
+   // 전화번호 4자리 체크 tel2
+   $("#tel2").keyup(function (event) {
+
+       regexp = /\d\d\d\d{2,4}/gi;
+
+       v = $(this).val();
+
+       if (regexp.test(v)) {
+
+           alert("숫자는 4자리까지만 입력가능 합니다.");
+
+           $(this).val(v.replace(regexp, ''));
+           $("#tel2").focus();
+
+       }
+
+   });
+   
+// 전화번호 4자리 체크 tel3
+   $("#tel3").keyup(function (event) {
+
+       regexp = /\d\d\d\d{2,4}/gi;
+
+       v = $(this).val();
+
+       if (regexp.test(v)) {
+
+           alert("숫자는 4자리까지만 입력가능 합니다.");
+
+           $(this).val(v.replace(regexp, ''));
+           $("#tel3").focus();
+
+       }
+
+   });
+   
+   
 /*
    $("#regionSelect").change(function() {
        alert("확인"); 
@@ -137,7 +202,7 @@ $(document).ready(function()
                         
 
 						<!-- form -->                         
-                        <form class="form-horizontal" action="mypageinfoupdate" method="post">
+                        <form class="form-horizontal" action="mypageinfoupdate" method="post" id="myinfoForm">
                            <div class="row form-group list-top">
                               <div class="col-md-3 col-sm-2">
                                  <label class="control-label">이름</label>
@@ -254,10 +319,10 @@ $(document).ready(function()
                                        </select>
                                     </div>
                                     <div class="col-sm-2 col-xs-3">
-                                       <input type="text" class="form-control" id="tel2" name="tel2">
+                                       <input type="text" class="form-control" id="tel2" name="tel2" maxlength="4">
                                     </div>
                                     <div class="col-sm-2 col-xs-3">
-                                       <input type="text" class="form-control" id="tel3" name="tel3">
+                                       <input type="text" class="form-control" id="tel3" name="tel3" maxlength="4">
                                     </div>
                                     <div class="col-sm-3 col-xs-3">
                                        <button class="btn btn-default submit-btn" type="submit">전화번호

@@ -71,7 +71,7 @@ $().ready(function()
 {
    $("#myinfomation").click(function()
    {
-       $(location).attr("href","<%=cp%>/mypage/account");
+       $(location).attr("href","<%=cp%>/mypage/myinfo");
    });
    
    $("#achievementList").click(function()

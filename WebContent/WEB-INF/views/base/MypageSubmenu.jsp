@@ -29,7 +29,7 @@
 		>
 			<a
 			<c:if test='${param.active != "myinfo" }'>
-			href="<%=cp %>/mypage/account"
+			href="<%=cp %>/mypage/myinfo"
 			</c:if> 
 			>내 정보관리</a>
 		</li>

@@ -105,10 +105,12 @@
 	 parameterType="com.amanne.biscuitball.mybatis.UserDTO"
 	 statementType="CALLABLE">	
 		UPDATE TBL_USER
-		SET USER_PWD= #{userPassword}
-		  , USER_TEL= #{userTel}
+		SET USER_TEL= #{userTel}
 		  , USER_HEIGHT= #{userHeight}
 		  , USER_CITY_CODE= #{userCityCode}
+		  <if test="userPassword != null">
+		  ,	USER_PWD= #{userPassword} 			
+		  </if>
 		WHERE USER_ACCT_CODE = #{userAccountCode}
 		
 	</update>

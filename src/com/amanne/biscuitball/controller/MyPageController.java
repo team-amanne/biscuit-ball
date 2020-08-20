@@ -79,25 +79,25 @@ public class MyPageController
 	
 	@RequestMapping(value = "/mypageinfoupdate", method =
 		{ RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView mypageinfoupdate(ModelAndView modelAndView, HttpServletRequest request)
+	public String mypageinfoupdate(Model model, HttpServletRequest request)
 	{
-		mypage.mypageinfoupdate(modelAndView, request);
-		return modelAndView;
+		mypage.mypageinfoupdate(model, request);
+		return myInfo(model, request);
 
 	}
 	
 	
-   @RequestMapping(value = "/account", method ={ RequestMethod.GET, RequestMethod.POST })
-   public ModelAndView myWInfo(ModelAndView modelAndView, HttpServletRequest request, Model model)
+   @RequestMapping(value = "/myinfo", method ={ RequestMethod.GET, RequestMethod.POST })
+   public String myInfo(Model model, HttpServletRequest request)
    {	   
       // 도시 리스트
       ArrayList<RegionDTO> regionList = mypage.regionPrint();
 
       model.addAttribute("regionList", regionList);
    
-      mypage.myProfile(modelAndView, request);
-       
-      return modelAndView;
+      mypage.myProfile(model, request);
+      
+      return "/mypage/MyInfo";
 
    }
 	

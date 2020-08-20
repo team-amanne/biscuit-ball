@@ -69,7 +69,7 @@ public class MypageModel
 
 	}
 	
-	public void mypageinfoupdate(ModelAndView modelAndView, HttpServletRequest request) // 내 정보 수정
+	public void mypageinfoupdate(Model model, HttpServletRequest request) // 내 정보 수정
 	{	
 		HttpSession session = request.getSession();
 		
@@ -86,27 +86,14 @@ public class MypageModel
 		user.setUserRegionCode((String)request.getParameter("regionSelect"));
 		user.setUserPositionCode((String)request.getParameter("position"));
 
-		System.out.println(user.getUserProfileImg());
-		System.out.println(user.getUserProfileTxt());
-		System.out.println(user.getUserCourtCode());
-		System.out.println(user.getUserPositionCode());  
-		System.out.println(user.getTitleAchievementCode());
-		System.out.println(user.getSmsReceive());
-		System.out.println(user.getCityOpen());
-		System.out.println(user.getAchvOpen());
-		System.out.println(user.getGenderOpen());
-		System.out.println(user.getCourtOpen());
-		System.out.println(user.getPlaylogOpen());
-		System.out.println(user.getMsgBlockCode());
-		System.out.println(user.getUserAccountCode());
-		
-		
-		
-		
-		
-		
-		dao.updateUserProfile(user);
+		userDTOCodeChange(user);
 	
+		dao.updateUserProfile(user);
+		dao.updateUser(user);
+		
+		dao.getUser(userInfo.getUserAcctCode());
+		
+		model.addAttribute("user", user);
 		
 		
 	}
@@ -202,7 +189,7 @@ public class MypageModel
 		}
 	}
 	
-	public void myProfile(ModelAndView modelAndView, HttpServletRequest request)
+	public void myProfile(Model model, HttpServletRequest request)
 	{
 	      // 요청 데이터 수신
 	      HttpSession session = request.getSession();
@@ -215,11 +202,10 @@ public class MypageModel
 	      UserDTO user = dao.getUser(userInfo.getUserAcctCode());
 	  
 	      ArrayList<CityDTO> city = cityPrint(user.getUserRegionCode());
-	      	      
-	      modelAndView.addObject("user", user);
-	      modelAndView.addObject("city", city);
-	      
-	      modelAndView.setViewName("/mypage/MyInfo");
+
+	      model.addAttribute("user", user);
+	      model.addAttribute("city", city);
+
     
 	}
 	
