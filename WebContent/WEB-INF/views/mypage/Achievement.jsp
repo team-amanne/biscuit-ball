@@ -92,7 +92,7 @@ String cp = request.getContextPath();
 											</div>
 										</div>
 									</li>
-									<li class="list-group-item board-body">
+									<li class="list-group-item board-body" id="latelyAchievement1">
 										<div class="row">
 											<div class="col-sm-2 col-xs-3">
 												<span class="glyphicon glyphicon-star"></span>
@@ -108,7 +108,7 @@ String cp = request.getContextPath();
 											</div>
 										</div>
 									</li>
-									<li class="list-group-item board-body">
+									<li class="list-group-item board-body" id="latelyAchievement2">
 										<div class="row">
 											<div class="col-sm-2 col-xs-3">
 												<span class="glyphicon glyphicon-star"></span>
@@ -124,7 +124,7 @@ String cp = request.getContextPath();
 											</div>
 										</div>
 									</li>
-									<li class="list-group-item board-body">
+									<li class="list-group-item board-body"  id="latelyAchievement3">
 										<div class="row">
 											<div class="col-sm-2 col-xs-3">
 												<span class="glyphicon glyphicon-star"></span>
@@ -176,8 +176,8 @@ String cp = request.getContextPath();
 								<div style="text-align: center;">
 
 
-									<div class="row">
-										<div class="col-sm-4 col-xs-4">
+									<div class="row" id="tailAchievement">
+										<div class="col-sm-4 col-xs-4" id="tailAchievement1" name="tailAchievement1">
 											<ul class="list-group">
 												<li class="list-group-item board-header">
 													<div>
@@ -224,7 +224,7 @@ String cp = request.getContextPath();
 												</li>
 											</ul>
 										</div>
-										<div class="col-sm-4 col-xs-4">
+										<div class="col-sm-4 col-xs-4" id="tailAchievement2" name="tailAchievement2">
 											<ul class="list-group">
 												<li class="list-group-item board-header">
 													<div>
@@ -270,7 +270,7 @@ String cp = request.getContextPath();
 												</li>
 											</ul>
 										</div>
-										<div class="col-sm-4 col-xs-4">
+										<div class="col-sm-4 col-xs-4" id="tailAchievement3" name="tailAchievement3">
 											<ul class="list-group">
 												<li class="list-group-item board-header">
 													<div>
@@ -316,7 +316,7 @@ String cp = request.getContextPath();
 												</li>
 											</ul>
 										</div>
-										<div class="col-sm-4 col-xs-4">
+										<div class="col-sm-4 col-xs-4" id="tailAchievement4" name="tailAchievement4">
 											<ul class="list-group">
 												<li class="list-group-item board-header">
 													<div>
@@ -362,7 +362,7 @@ String cp = request.getContextPath();
 												</li>
 											</ul>
 										</div>
-										<div class="col-sm-4 col-xs-4">
+										<div class="col-sm-4 col-xs-4"  id="tailAchievement5" name="tailAchievement5">
 											<ul class="list-group">
 												<li class="list-group-item board-header">
 													<div>
@@ -408,7 +408,7 @@ String cp = request.getContextPath();
 												</li>
 											</ul>
 										</div>
-										<div class="col-sm-4 col-xs-4">
+										<div class="col-sm-4 col-xs-4" id="tailAchievement6" name="tailAchievement6">
 											<ul class="list-group">
 												<li class="list-group-item board-header">
 													<div>

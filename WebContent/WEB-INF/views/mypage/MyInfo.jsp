@@ -54,7 +54,7 @@
 
 $(document).ready(function() 
 {
-   $("#city_select").on("change", function()
+   $("#regionSelect").on("change", function()
     {
        $.ajax({
           type: "get",
@@ -66,7 +66,7 @@ $(document).ready(function()
              for(var i=0; i<data.length; i++)
                 result += "<option value='" + data[i].cityCode +"'>" + data[i].cityName + "</option>\n";
              
-             $("#region_select").html(result);
+             $("#citySelect").html(result);
           },
           error: function(e){
              alert(e.responseText);
@@ -74,14 +74,80 @@ $(document).ready(function()
        });
        
     });
+   
+   // submit 할 때
+   $("#myinfoForm").submit(function() 
+    { 
+	  
+	  //전화번호 숫자 처리
+	  var tel2 = $("#tel2").val();
+	  var tel3 = $("#tel3").val();
+	  
+	  var failType;
+	  
+	  var regex= /[^0-9]/g;
 
-   $("#region_select").change(function() {
-      /* alert("확인"); */
-       $("#citydata").val($("#city_select option:selected").text());
-       $("#ragiondata").val($("#region_select option:selected").text());
-       alert($("#region_select option:selected").text());
+	  if( !regexp.test(tel2)) 
+	  {
+		  alert("전화번호에 숫자만 입력해주세요.");
+		  $("#tel2").focus();
+		  return false;
+
+	  }
+	  else if( !regexp.test(tel3) )
+	  {
+		  alert("전화번호에 숫자만 입력해주세요.");
+		  $("#tel3").focus();
+		  return false;
+	  }
+	   
+    });
+
+   // 전화번호 4자리 체크 tel2
+   $("#tel2").keyup(function (event) {
+
+       regexp = /\d\d\d\d{2,4}/gi;
+
+       v = $(this).val();
+
+       if (regexp.test(v)) {
+
+           alert("숫자는 4자리까지만 입력가능 합니다.");
+
+           $(this).val(v.replace(regexp, ''));
+           $("#tel2").focus();
+
+       }
+
    });
    
+// 전화번호 4자리 체크 tel3
+   $("#tel3").keyup(function (event) {
+
+       regexp = /\d\d\d\d{2,4}/gi;
+
+       v = $(this).val();
+
+       if (regexp.test(v)) {
+
+           alert("숫자는 4자리까지만 입력가능 합니다.");
+
+           $(this).val(v.replace(regexp, ''));
+           $("#tel3").focus();
+
+       }
+
+   });
+   
+   
+/*
+   $("#regionSelect").change(function() {
+       alert("확인"); 
+       $("#citydata").val($("#citySelect option:selected").text());
+       $("#ragiondata").val($("#regionSelect option:selected").text());
+       alert($("#regionSelect option:selected").text());
+   });
+*/  
    /* 생년월일 뒷부분 자르기 */
    var sub_birthday = '${user.userBirthday}';
    var birthday = sub_birthday.substring(0,10);
@@ -133,13 +199,16 @@ $(document).ready(function()
                         <div class="row">
                            <div class="col-md-12"></div>
                         </div>
-                        <form class="form-horizontal">
+                        
+
+						<!-- form -->                         
+                        <form class="form-horizontal" action="mypageinfoupdate" method="post" id="myinfoForm">
                            <div class="row form-group list-top">
                               <div class="col-md-3 col-sm-2">
                                  <label class="control-label">이름</label>
                               </div>
                               <div class="col-md-9 col-sm-10">
-                                 <p class="form-control-static">${user.userNickname}</p>
+                                 <p class="form-control-static">${user.userName}</p>
                                  
                               </div>
                            </div>
@@ -181,12 +250,14 @@ $(document).ready(function()
                               </div>
                              
                               <div class="col-sm-3 col-xs-4">
-                              <c:set var="userCityCode" value="${user.userCityCode }"/>
-                              <c:set var="userRegionCode" value="${user.userRegionCode }"/>
-                                 <select class="form-control" id="city_select" name="city_select">
-                           <c:forEach var="city" items="${regionList }">
-                           <option value="${city.regionCode}"
-                              <c:if test="${userRegionCode eq city.regionCode }">selected </c:if>>${city.regionName}
+                              
+                           <c:set var="userCityCode" value="${user.userCityCode }"/>
+                           <c:set var="userRegionCode" value="${user.userRegionCode }"/>
+                              
+                                 <select class="form-control" id="regionSelect" name="regionSelect">
+                           <c:forEach var="region" items="${regionList }">
+                           <option value="${region.regionCode}"
+                              <c:if test="${userRegionCode eq region.regionCode }">selected </c:if>>${region.regionName}
                            </option>
                            </c:forEach>
                                  </select>
@@ -195,8 +266,13 @@ $(document).ready(function()
                        
                                                             
                               <div class="col-sm-3 col-xs-4">
-                                 <select class="form-control" id="region_select" name="region_select">
+                                 <select class="form-control" id="citySelect" name="citySelect">
                                     <option>시군구 선택</option>
+                                    <c:forEach var="city" items="${city }">
+                                       <option value="${city.cityCode}"
+                                       <c:if test="${userCityCode eq city.cityCode }">selected </c:if>
+                                       >${city.cityName}</option>
+                                    </c:forEach>
                                  </select>
                               </div>
                               <div class="col-md-2 col-xs-2"></div>
@@ -209,7 +285,7 @@ $(document).ready(function()
                                  <div class="row form-group">
                                     <div class="col-sm-2 col-xs-3">
                                     <c:set var="sub_tel" value="${user.userTel }"/>
-                                       <select class="form-control">
+                                       <select class="form-control" name="sub_tel">
                                           <option value="010"
                                              <c:if test="${fn:substring(sub_tel,0,3) eq 010 }">selected </c:if>>010
                                           </option>
@@ -243,10 +319,10 @@ $(document).ready(function()
                                        </select>
                                     </div>
                                     <div class="col-sm-2 col-xs-3">
-                                       <input type="text" class="form-control" id="tel2">
+                                       <input type="text" class="form-control" id="tel2" name="tel2" maxlength="4">
                                     </div>
                                     <div class="col-sm-2 col-xs-3">
-                                       <input type="text" class="form-control" id="tel3">
+                                       <input type="text" class="form-control" id="tel3" name="tel3" maxlength="4">
                                     </div>
                                     <div class="col-sm-3 col-xs-3">
                                        <button class="btn btn-default submit-btn" type="submit">전화번호
@@ -283,41 +359,32 @@ $(document).ready(function()
                               </div>
                               <div class="col-sm-6 col-xs-9">
                                  <select class="form-control" id="position" name="position">
-                                    <option value="센터"
+                                    <option value="ZP01"
                                     <c:if test="${user.userPosition eq '센터' }">selected </c:if>>센터
                                     </option>
-                                    <option value="슈팅가드"
-                                    <c:if test="${user.userPosition eq '슈팅가드' }">selected </c:if>>슈팅가드
-                                    </option>
-                                    <option value="스몰포워드"
-                                    <c:if test="${user.userPosition eq '스몰포워드' }">selected </c:if>>스몰포워드
-                                    </option>
-                                    <option value="파워포워드"
+                                    <option value="ZP02"
                                     <c:if test="${user.userPosition eq '파워포워드' }">selected </c:if>>파워포워드
                                     </option>
-                                    <option value="포인트가드"
+                                    <option value="ZP03"
+                                    <c:if test="${user.userPosition eq '슈팅가드' }">selected </c:if>>슈팅가드
+                                    </option>
+                                    <option value="ZP04"
                                     <c:if test="${user.userPosition eq '포인트가드' }">selected </c:if>>포인트가드
+                                    </option>
+                                    <option value="ZP05"
+                                    <c:if test="${user.userPosition eq '스몰포워드' }">selected </c:if>>스몰포워드
                                     </option>
                                  </select>
                               </div>
                            </div>
-                           <div class="row form-group">
-                              <div class="col-sm-3 col-xs-3">
-                                 <label for="inputPassword" class="control-label">SMS
-                                    알림</label>
-                              </div>
-                              <div class="col-sm-3 col-xs-4">
-                                 <input type="radio" name="sms" id="YES" value="YES" class="custom-control-input"
-                                  <c:if test="${user.smsReceive eq 'YES' }">checked </c:if>>
-                                 <label class="custom-control-label" for="YES">수신동의</label>
-                              </div>
-                              <div class="col-sm-3 col-xs-4">
-                                 <input type="radio" name="sms" id="NO" value="NO" class="custom-control-input"
-                                 <c:if test="${user.smsReceive eq 'NO' }">checked </c:if>>
-                                 <label class="custom-control-label" for="NO">수신거부</label>
-                              </div>
-                              <div class="col-sm-3"></div>
-                           </div>
+                           
+                           
+                           
+
+
+
+
+                           
                            <div class="row">
                               <div class="col-sm-3 col-xs-3">
                                  <label for="inputPassword" class="control-label">SNS
@@ -348,7 +415,7 @@ $(document).ready(function()
                      </div>
                      <div class="row list-bottom">
                         <div class="col-md-12" style="text-align: center;">
-                           <button class="btn btn-default" type="submit">회원탈퇴</button>
+                           <button class="btn btn-default" type="button">회원탈퇴</button>
                         </div>
                      </div>
                   </div>

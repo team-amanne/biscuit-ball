@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
    request.setCharacterEncoding("utf-8");
-   String cp = request.getContextPath();
+   String cp = request.getContextPath();    
 %>
 <!DOCTYPE html>
 <html>
@@ -71,7 +71,7 @@ $().ready(function()
 {
    $("#myinfomation").click(function()
    {
-       $(location).attr("href","<%=cp%>/mypage/account");
+       $(location).attr("href","<%=cp%>/mypage/myinfo");
    });
    
    $("#achievementList").click(function()
