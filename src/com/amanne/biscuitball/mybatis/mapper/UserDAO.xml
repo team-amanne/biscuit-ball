@@ -105,10 +105,12 @@
 	 parameterType="com.amanne.biscuitball.mybatis.UserDTO"
 	 statementType="CALLABLE">	
 		UPDATE TBL_USER
-		SET USER_PWD= #{userPassword}
-		  , USER_TEL= #{userTel}
+		SET USER_TEL= #{userTel}
 		  , USER_HEIGHT= #{userHeight}
 		  , USER_CITY_CODE= #{userCityCode}
+		  <if test="userPassword != null">
+		  ,	USER_PWD= #{userPassword} 			
+		  </if>
 		WHERE USER_ACCT_CODE = #{userAccountCode}
 		
 	</update>
@@ -130,7 +132,8 @@
 		  , USER_COURT_OP_CODE= #{courtOpen, jdbcType=VARCHAR}
 		  , USER_PL_OP_CODE= #{playlogOpen, jdbcType=VARCHAR}
 		  , MSG_BLOCK_TYPE_CODE= #{msgBlockCode, jdbcType=VARCHAR}
-		WHERE USER_ACCT_CODE = #{userAccountCode}		
+		WHERE USER_ACCT_CODE = #{userAccountCode}	
+		
 	</update>
 
 	<!-- public int addSnsSync(String userCode, String snsKey) // SNS연동-->
@@ -224,7 +227,7 @@
 			(
 			    #{issueCode},
 			    #{userPassword},
-			    #{returnValue ,mode=OUT, jdbcType=VARCHAR}
+			    #{userDTO.returnValue ,mode=OUT, jdbcType=VARCHAR}
 			)
 		}
 	</select>
