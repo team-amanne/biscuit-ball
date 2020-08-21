@@ -95,6 +95,12 @@ $(document).ready(function()
 
 });
 
+function openModal(modalname){
+	  document.get
+	  $("#modal").fadeIn(300);
+	  $("."+modalname).fadeIn(300);
+	}
+
 </script>
 </head>
 <body>
@@ -191,8 +197,10 @@ $(document).ready(function()
                         </div>
                         <div class="col-md-10">
                            <button type="button" class="btn btn-default btn-lg btn-block" name="button" id="Speed_create">빠른농구 개설</button>
-                           <button type="button" class="btn btn-default btn-lg btn-block" name="button" id="Speed_join">빠른농구 참여</button>
+                           <a href="javascript:openModal('modal1');" class="button modal-open"><button type="button" class="btn btn-default btn-lg btn-block" name="button" id="Speed_join">빠른농구 참여</button></a>
                         </div>
+                       
+
                         <div class="col-md-1">
                         </div>
                      </div>
@@ -210,6 +218,21 @@ $(document).ready(function()
 </div>
 
 <c:import url="../base/Footer.jsp"></c:import>
+
+<script type="text/javascript">
+
+//모임 제목 클릭하면 모임으로
+$(".meetingPage").click(function()
+{
+   //var id = ($(this).attr('id'));
+   var meetingCode = $(this).attr('id');
+   
+   $(location).attr("href","<%=cp%>/play/meeting/"+ meetingCode);
+   //childWindow.resizeTo(800, 800);
+});
+
+</script>
+
 
 </body>
 </html>

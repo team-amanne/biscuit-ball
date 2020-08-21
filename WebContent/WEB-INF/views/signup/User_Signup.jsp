@@ -106,6 +106,8 @@
     	// 이메일 유효성검사
           $("#email_certify").click( function() {
               var email = $('#userEmail').val();
+            //이메일 정규식
+              var emailRule = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 
               //입력여부
               if($("#userEmail").val() == "")
@@ -119,6 +121,15 @@
                else
                {
                   $("#id_check").text(""); 
+                  
+                   
+                  if(!emailRule.test(email)) {            
+                	  	$("#id_check").text("이메일 형식이 올바르지 않습니다.");
+                      	$("#id_check").css("color", "red");
+                      	$("#userEmail").focus();
+                              return false;
+                  }
+
 
                   // 중복여부
                   $.ajax({
@@ -133,8 +144,6 @@
                          $("#id_check").css("color", "red");
                          $('#userEmail').val('');
                          $('#userEmail').focus();
-
-
                       } 
                   else 
                       {
@@ -151,20 +160,23 @@
                }
          });
     	  
-    	  // 비밀번호자리수제한
-    	/*   
+    	  // 비밀번호자리수제한 
     	 $("#userPassword").focusout(function() {
-    		if($("#userPassword").length < 9)
+    		 var passRule = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[*!@#$%^&+=]).*$/;
+    		 var pwd1 = $("#userPassword").val();
+    		 if(!passRule.test(pwd1) ){
+    			
+    				$("#pwd_check").text("비밀번호 형식이 올바르지 않습니다");
+     				$("#pwd_check").css("color", "red");
+     				$("#userPassword").focus();
+    			    return false;
+    			}
+    		 else
     		{
-    			alert($("#userPassword").length);
-    			$("#pwd_check").text("비밀번호는 8~15자리로 입력해주세요");
-    			$("#pwd_check").css("color", "red");
-    			$("#userPassword").focus();
+     			$("#pwd_check").text("");
     		}
-    		else
-    			$("#pwd_check").text("");
 	
-		}) */
+		}); 
          // 비밀번호 일치여부
           $("#password2").focusout(function() {
             $(".pwd-fail").css("display","none");
@@ -239,7 +251,8 @@
           
          // 전화번호 인증버튼확인
          $("#tel_certify").click(function() {
-        	alert("확인");			
+        	alert("확인");
+        	var telRule = /^\d{3}-\d{3,4}-\d{4}$/;
         	
             var tel = $('#tel1').val() +"-"+ $('#tel2').val() + "-" + $('#tel3').val();
             if($("#tel1 option:selected").val() == "선택" || $("#tel2").val() == "" || $("#tel3").val() == "")
@@ -251,7 +264,13 @@
             }
             else
             {
-                $("#tel_check").text("");               
+                $("#tel_check").text(""); 
+                if(!telRule.test(tel)) {            
+            	  	$("#tel_check").text("전화번호 형식이 올바르지 않습니다.");
+                  	$("#tel_check").css("color", "red");
+                  	$("#tel1").focus();
+                    return false;
+              	}
                 $.ajax({
                url : '<%=cp%>/ajax/check/tel?tel='+ tel,
                     type : 'get',
@@ -273,7 +292,8 @@
                         $("#tel_check").text("사용가능한 전화번호입니다");
                         $("#tel_check").css("color", "green");                        
                         $("#telCheck2").css("display","inline");
-
+                        
+                        
                     }
                     },
                     error : function() {
@@ -330,7 +350,27 @@
         	}
         	
         });
-        
+        //신장 제한
+         $("#userHeight").focusout(function() {
+        	
+    		var passRule = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[*!@#$%^&+=]).*$/;
+    		var userHeight = $("#userHeight").val();
+    		if(100 <= userHeight && userHeight<=250)
+    		{
+    			$("#height_check").text("");
+    			
+    		}
+    		else
+    		{
+    			$("#height_check").text("신장은 100 ~ 250으로 입력해주세요");
+             	$("#height_check").css("color", "red");
+             	$("#userHeight").focus(""); 
+             	$("#userHeight").focus();  
+    			return false;
+    		}
+	
+		}); 
+       
      	/*
         //  전화인증번호 체크
          $("#certification").click(function() {
@@ -437,7 +477,9 @@
                   return false;  
                }
                else
-                  $("#height_check").text("");
+                 	$("#height_check").text("");
+            		if(100 <= parseInt($("#userHeight").val()) && parseInt($("#userHeight").val())<=250)
+            	
             // 거점지역 입력없음
             if( $("#citySelect option:selected").val() == "")
             {
@@ -470,17 +512,19 @@
                   return false;  
                }
                else
-            	   if($("#certified").val() != check)
+            	   if($("#certified").val() == "check")
             	    {
-            		   	$("#tel_check").text("전화번호를 인증하세요.");
-   	            		$("#tel_check").css("color", "red");
-   	                	$("#certified").focus();        	           
+            		   $("#tel_check").text("");
+            		  
             	    }
             	   else
-                  		$("#tel_check").text("");
+            		   	$("#tel_check").text("전화번호를 인증하세요.");
+            			$("#tel_check").css("color", "red");
+                		$("#certified").focus();
+                		return false; 
             
-            
-          
+           // 인증번호 확인 없을시 
+           
            // 포지션 입력없음
             if( $("#userPositionCode option:selected").val() == "포지션선택")
                {
