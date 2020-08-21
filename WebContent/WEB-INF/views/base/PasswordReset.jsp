@@ -82,6 +82,9 @@ String cp = request.getContextPath();
 										{
 											if (code!=0)
 											{
+												
+												$("#issueCode").val(code);
+												
 												$.ajax(
 												{
 													url: "<%=cp%>/ajax/passwordreset/sendemail",
@@ -102,6 +105,7 @@ String cp = request.getContextPath();
 															alert("메일 발송 성공");
 															$(".sendMessage").css("display","inline");
 															$(".inputCode").css("display","inline");
+															alert($("#issueCode").val());
 														}
 														
 													}
@@ -148,7 +152,14 @@ String cp = request.getContextPath();
 		// 인증번호 입력 → 클릭 후
 		$("#btn-codeInput").click(function()
 		{
-			$("#submitForm").submit();
+			if ($("#btn-codeInput").val()!=$("#issueCode").val())
+			{
+				$("#errMessage").css("display", "inline");
+			}
+			else
+			{
+				$("#submitForm").submit();
+			}
 		});
 		
 	});
@@ -168,7 +179,7 @@ String cp = request.getContextPath();
 
 		<div class="col-md-2 col-xs-2"></div>
 		<div class="col-md-8 col-xs-8">
-		<form id="submitForm" action="<%=cp%>/passwordreset/reset" method="post">
+		
 			<div class="col-md-12 col-xs-12">
 				<p class="subtitle-text">비밀번호 재설정 인증을 받을 이메일을 입력해주세요</p>
 			</div>
@@ -200,7 +211,7 @@ String cp = request.getContextPath();
 			
 
 			<div class="col-md-12 col-xs-12 inputCode">
-
+			<form id="submitForm" action="<%=cp%>/passwordreset/reset" method="post">
 				<ul class="list-group">
 
 					<li class="list-group-item board-body">
@@ -215,12 +226,13 @@ String cp = request.getContextPath();
 									인증 코드 입력</button>
 							</div>
 							<input id="userCode" name="userCode" type="hidden" />
+							<input id="issueCode" name="issueCode" type="hidden" />
 						</div>
 					</li>
 				</ul>
 				<p class="text-orange errMessage">잘못된 인증코드입니다.</p>
+				</form>
 			</div>
-		</form>
 		</div>
 		<div class="col-md-2 col-xs-2"></div>
 	</div>

@@ -601,11 +601,11 @@ public class AjaxModel
 	
 
 	// 비밀번호 재설정 
-	public UserDTO resetPassword(UserDTO dto, String issueCode)
+	public UserDTO resetPassword(UserDTO dto, String issueCode, String userPassword)
 	{
-		
+		//System.out.println(dto.getUserCode()+" "+ issueCode+ " " + userPassword+ " "+ "/확인용");
 		IUserDAO dao = sqlSession.getMapper(IUserDAO.class);
-		dao.resetPassword(dto, issueCode);
+		dao.resetPassword(dto, issueCode, userPassword);
 		
 		return dto;
 	}

@@ -9,9 +9,10 @@ import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.amanne.biscuitball.mybatis.CityDTO;
 import com.amanne.biscuitball.mybatis.IRegionDAO;
 import com.amanne.biscuitball.mybatis.IUserDAO;
 import com.amanne.biscuitball.mybatis.RegionDTO;
@@ -66,6 +67,35 @@ public class MypageModel
 		modelAndView.setViewName("/mypage/MyPage");		
 	
 
+	}
+	
+	public void mypageinfoupdate(Model model, HttpServletRequest request) // 내 정보 수정
+	{	
+		HttpSession session = request.getSession();
+		
+		UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+		IUserDAO dao = sqlSession.getMapper(IUserDAO.class);
+		
+		UserDTO user = dao.getUser(userInfo.getUserAcctCode());
+		
+		String tel = (String)request.getParameter("sub_tel") + "-"
+		           + (String)request.getParameter("tel2") + "-"
+		           + (String)request.getParameter("tel3");
+		user.setUserTel(tel);
+		user.setUserCityCode((String)request.getParameter("citySelect"));
+		user.setUserRegionCode((String)request.getParameter("regionSelect"));
+		user.setUserPositionCode((String)request.getParameter("position"));
+
+		userDTOCodeChange(user);
+	
+		dao.updateUserProfile(user);
+		dao.updateUser(user);
+		
+		dao.getUser(userInfo.getUserAcctCode());
+		
+		model.addAttribute("user", user);
+		
+		
 	}
 	
 	public void updateUser(ModelAndView modelAndView, HttpServletRequest request)	// 회원정보 수정
@@ -159,8 +189,8 @@ public class MypageModel
 		}
 	}
 	
-	public void myProfile(ModelAndView modelAndView, HttpServletRequest request)
-	   {
+	public void myProfile(Model model, HttpServletRequest request)
+	{
 	      // 요청 데이터 수신
 	      HttpSession session = request.getSession();
 	      UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");   
@@ -171,10 +201,14 @@ public class MypageModel
 	      // 작업준비
 	      UserDTO user = dao.getUser(userInfo.getUserAcctCode());
 	  
-	      modelAndView.addObject("user", user);
-	      modelAndView.setViewName("/mypage/MyInfo");
+	      ArrayList<CityDTO> city = cityPrint(user.getUserRegionCode());
+
+	      model.addAttribute("user", user);
+	      model.addAttribute("city", city);
+
     
-	   }
+	}
+	
 	   
 	   // 광역시도 출력 메소드
 	   public ArrayList<RegionDTO> regionPrint()
@@ -187,4 +221,18 @@ public class MypageModel
 	      return regionList;
       
 	   }
+	   
+	   public ArrayList<CityDTO> cityPrint(String regionCode)
+	   {
+	      ArrayList<CityDTO> cityList = new ArrayList<CityDTO>();
+	      
+	      IRegionDAO regionDao = sqlSession.getMapper(IRegionDAO.class);
+	      cityList = regionDao.getCityList(regionCode);
+	      
+	      return cityList;
+      
+	   }
+	   
+	  
+	   
 }

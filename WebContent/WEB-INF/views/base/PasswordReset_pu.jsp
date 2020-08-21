@@ -60,36 +60,36 @@
 </style>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="<%=cp %>/css/default.css" />
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
 <script type="text/javascript">
 
 	$(document).ready(function()
 	{
 		$("#password_certify").click(function()
 		{
-			if ($("#password1").val() != #("#password2").val() )
+			if ($("#password1").val() != $("#password2").val() )
 			{
 				$("#err").css("display","inline");
 				
 				return;
 			}
 			
-			var issueCode = ${issueCode};
-			var userCode = ${userCode};
+			var issueCode = $("#issueCode").val();
 			var password = $("#password1").val();
+			var userCode = $("#userCode").val();
+			alert(issueCode);
+			
 			
 			$.ajax(
 			{
-				url: "<%=cp%>/passwordreset/resetpassword",
+				url: "<%=cp%>/ajax/passwordreset/resetpassword",
 				type: "post",
 				data:
 				{
-					issueCode: issueCode,
-					userCode : userCode,
+					userCode: userCode,
+					issueCode: $("#issueCode").val(),
 					password : password
 				},
 				success: function(data)
@@ -103,6 +103,7 @@
 					{
 						$("#err").text("인증 코드가 올바르지 않습니다.");
 						$("#err").css("display","inline");
+						alert(data);
 					}
 					
 				}
@@ -137,6 +138,9 @@
 				
 				<button class="btn btn-warning" id="password_certify">비밀번호 재설정</button>
 				<span id="err" class="err">비밀번호가 일치하지 않습니다.</span>
+				<input type="hidden" id="userCode" value="${param.userCode }">
+				<input type="hidden" id="issueCode" value="${param.issueCode }">
+				
 			</div>
 		</div>
 		<div class="col-md-3">
