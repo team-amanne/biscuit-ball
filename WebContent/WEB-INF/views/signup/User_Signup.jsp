@@ -419,6 +419,7 @@
             
             var str = $("#tel1").val() + "-" + $("#tel2").val() + "-" + $("#tel3").val();  
             
+            
            $("#userTel").val(str);
                       
             // 이메일 입력없음
@@ -490,7 +491,7 @@
             }
             else
                $("#city_check").text("");
-            
+            		alert("확인1");
             // 자기 실력 평가입력없음
             if( $("#selfEvaluationType option:selected").val() == "실력선택")
                {
@@ -502,8 +503,9 @@
                else
                   $("#selfevaluation_check").text("");
             
-               
+            alert("확인2");
             // 전화번호 입력없음
+            alert($("#certified").val());
             if($("#tel1 option:selected").val() == "선택" || $("#tel2").val() == "" || $("#tel3").val() == "")
                {
                   $("#tel_check").text("입력 항목이 누락되었습니다.");
@@ -512,19 +514,22 @@
                   return false;  
                }
                else
-            	   if($("#certified").val() == "check")
-            	    {
-            		   $("#tel_check").text("");
-            		  
-            	    }
+            {
+            	  	if($("#certified").val() == "check")
+            	   	{
+            		   	$("#tel_check").text("");            		  
+            	   	}
             	   else
+            		{
             		   	$("#tel_check").text("전화번호를 인증하세요.");
             			$("#tel_check").css("color", "red");
                 		$("#certified").focus();
                 		return false; 
+            		}
+            	}
             
            // 인증번호 확인 없을시 
-           
+           alert("확인3");
            // 포지션 입력없음
             if( $("#userPositionCode option:selected").val() == "포지션선택")
                {

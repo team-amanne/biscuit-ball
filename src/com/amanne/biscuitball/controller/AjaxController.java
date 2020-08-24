@@ -191,7 +191,6 @@ public class AjaxController
 	public String getMeetingListNotInputPlaylog(Model model)
 	{
 		String view = null;
-		System.out.println("ajaxCon");
 		
 		model.addAttribute("result", ajax.getNotInputPlaylogList());
 		
@@ -253,7 +252,8 @@ public class AjaxController
 		return view;
 		
 	}
-
+	
+	
 	@RequestMapping("/check/sendSMS")
     public String sendSms(Model model,@RequestParam("tel") String tel,@RequestParam("authNum") String authNum) throws CoolsmsException
     {
@@ -262,9 +262,20 @@ public class AjaxController
        model.addAttribute("result", ajax.sendSms(tel, authNum));
 
        view = "/ajax/Check";
-       return view;
-       
+       return view;   
     }
+	
+	
+	@RequestMapping("/meeting/modal")
+	public String getSpeedMeetingCode(Model model, @RequestParam("cityCode") String cityCode, @RequestParam("meetingTypeCode") String meetingTypeCode
+			, @RequestParam("ballExistOrNot") String ballExistOrNot, @RequestParam("speedSeqNumber") int speedSeqNumber)
+	{
+		String view = null;
+	       System.out.println("ajaxCon");	
+	       model.addAttribute("result", ajax.getSpeedMeetingCode(cityCode, meetingTypeCode, ballExistOrNot,speedSeqNumber));
+	       view = "/ajax/Check";
+	       return view;
+	}
 
 	
 }

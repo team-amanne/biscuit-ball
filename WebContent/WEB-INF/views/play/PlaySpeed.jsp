@@ -13,6 +13,13 @@ String cp = request.getContextPath();
    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/default.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>
+
+<!-- 모달 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
+
 <style type="text/css">
 
    h5.region
@@ -29,6 +36,10 @@ String cp = request.getContextPath();
    {
       text-align: center;
    }
+   .modal
+   {
+   		max-width: 100%; width: auto;
+   } 
    
 </style>
 <script type="text/javascript">
@@ -89,23 +100,273 @@ $(document).ready(function()
       
       
       $("#frm").submit();      
-   });   
+   });  
+   
+   var modalLayer = $("#modalLayer");
+   var modalLink = $(".modalLink");
+   var modalCont = $(".modalContent");
+   var marginLeft = modalCont.outerWidth()/2;
+   var marginTop = modalCont.outerHeight()/2; 
+  
+   	$("#Speedjoin").click(function(){
+    modalLayer.fadeIn("slow");
+    modalCont.css({"margin-top" : -marginTop, "margin-left" : -marginLeft});
+    $(this).blur();
+    $(".modalContent > a").focus(); 
+     
+     
+    alert("확인");
+     var inputRequest = "";
+ 	   alert($("#citydata").val());
+ 	   alert($('input[name="ballExistOrNot"]:checked').val());
+ 	   alert()
+    	// 사용자 입력 값 있을 시에만 에이젝스 실행
+    if ((($("#regionSelect").text()!="광역시·도" && $("#citySelect").val() != null) || $("#myCourt").is(":checked")==true) 
+  		  		&& $("#courtCode").val() != null)
+ 	  {
+  	  
+  	var count = 1;
+  	
+ 	  	$.ajax
+ 	  	({
+ 	  		type: "get",
+ 	        dataType: "json",
+ 			url: "<%=cp%>/ajax/meeting/modal",
+ 	        data :
+ 	        {
+ 	        	cityCode : $("#citydata").val(),
+ 	        	speedSeqNumber : count,
+ 	        	ballExistOrNot : $('input[name="ballExistOrNot"]:checked').val(),
+ 	            meetingTypeCode : $('input[name="meetingType"]:checked').val(),
+
+ 	        },
+ 	        success : function(data)
+ 	        { 	                  
+            if (data.length==0)
+ 			{
+ 				listPrint += "<div align='center' style='font-size: 14pt; margin-top: 2%;'>해당 조건의 모임이 존재하지 않습니다.</div>"
+ 			}
+            else
+            {
+            	
+              } 	      
+ 	          $("#meetingList").html(listPrint);  
+ 	          //alert(listPrint); 	           
+ 	          // 모임 제목 클릭하면 모임으로
+ 	    		$(".meetingPage").click(function()
+ 	          	{
+ 	          		// var id = ($(this).attr('id'));
+ 	          		var meetingCode = $(this).attr('id');
+ 	          		$(location).attr("href","<%=cp%>/play/meeting/"+ meetingCode);
+ 	            	//childWindow.resizeTo(800, 800);
+ 	        	});
+ 	            
+ 	            // 코트 이름 클릭하면 코트 페이지로
+ 	            $(".courtName").click(function()
+ 	            {
+ 	               var courtCode = ($(this).attr('id')); 	           
+ 	               $(location).attr("href","<%=cp%>/court/"+ courtCode);
+ 	               
+ 	            });
+ 	            
+ 	         },
+ 	         error : function(e)
+ 	         {
+ 	            alert(e.responseText);
+ 	         }
+ 	               
+    	});
+
+ } // 모든 값이 채워졌을 때  모임 검색이 실행 됨
+ else		// 값이 하나라도 없을 때
+ {
+ 	   
+ 	   if ( !$("#regionSelect").val() || !$("#citySelect").val() )
+ 	{
+ 		inputRequest += "모임 지역을 선택해주세요 <br>";
+ 	}
+ 	   // 입력 요청 메시지 출력
+ 	   $("#requestmessage").html(inputRequest);
+ 	   return;
+ 	   
+ }
+     
+     return false;
+   });
+  
+   $(".modalContent > button").click(function(){
+     modalLayer.fadeOut("slow");
+     modalLink.focus();
+   });        
+
    
    
 
 });
 
-function openModal(modalname){
-	  document.get
-	  $("#modal").fadeIn(300);
-	  $("."+modalname).fadeIn(300);
-	}
+
+//모임 검색
+$("#playSearch").click(function()
+{    
+	// 입력 요청 메시지 담을 변수
+	
+
+});   
 
 </script>
 </head>
 <body>
    <!-- 헤더 -->
-      <c:import url="../base/Header.jsp"></c:import>
+   
+
+<div class="row modal" id="ex1">
+
+				<div class="row">
+					<div class="col-md-10"><h3>모임 상세</h3></div>
+					<div class="col-md-2">
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-12">
+						<div class="panel panel-default article">
+						<div class="panel-body">
+							<div class="panel panel-default">
+								<div class="panel-body center-move">
+								<div class="col-md-6">
+									<div class="col-md-4 info-title">
+									<span class="board-header">제목</span>
+									</div>
+									<div class="col-md-8">
+									제목입니다아
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="col-md-4 info-title">
+									<span class="board-header">주장</span>
+									</div>
+									<div class="col-md-8">
+									아맞네
+									</div>
+								</div>
+								<div class="col-md-2 info-title">
+									<button class="btn btn-default btn-xs">
+									모임 신고 하기
+									</button>
+								</div>
+								
+								</div>
+							</div>
+							
+							<div class="panel panel-default">
+								<div class="panel-body center-move">
+								<div class="col-md-6">
+									<div class="col-md-4 info-title">
+									<span class="board-header">모임장소</span>
+									</div>
+									<div class="col-md-8">
+									서울 마포구 쌍용체육관
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="col-md-5 info-title">
+									<span class="board-header">시합/일반</span>
+									</div>
+									<div class="col-md-7">
+									시합
+									</div>
+								</div>		
+								<div class="col-md-2 info-title" >
+									
+									<span>n/n</span>명
+								</div>							
+								
+							</div>
+							
+							</div>
+						<div class="panel panel-default">
+								<div class="panel-body center-move">
+								<div class="col-md-3">
+									<div class="col-md-8 info-title">
+									참여자 목록
+									</div>
+								</div>		
+								<div class="col-md-9">
+									<div class="panel panel-default">
+										<div class="panel-body">
+										<div class="panel panel-default">
+										<div class="panel-body user-info">
+										<div class="col-md-4">
+										<span class="board-header">닉네임</span>
+										</div>
+										<div class="col-md-4">
+										<span class="board-header">티어</span>
+										</div>
+										<div class="col-md-4">
+										<span class="board-header">페어플레이 점수</span>
+										</div>
+										</div>
+										</div>
+										<div class="panel panel-default">
+										<div class="panel-body user-info">
+										
+										<div class="col-md-4">아맞네</div>
+										<div class="col-md-4">4 teir</div>
+										<div class="col-md-4">★★★☆</div>
+										
+										<div class="col-md-4">규쿤</div>
+										<div class="col-md-4">3 teir</div>
+										<div class="col-md-4">★★★☆</div>
+										
+										<div class="col-md-4">갓진녕</div>
+										<div class="col-md-4">5 teir</div>
+										<div class="col-md-4">★★★☆</div>
+										
+										</div>
+										</div>
+										
+										</div>
+									</div>
+								</div>								
+							</div>
+							
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-body center-move">
+								<div class="col-md-3">
+									<div class="col-md-8 info-title">
+									<span class="board-header">공지 사항</span>
+									</div>
+								</div>		
+								<div class="col-md-9">
+									<div class="panel panel-default">
+										<div class="panel-body">
+										
+											오늘 모임 후 뒷풀이 있습니다. 
+											참여는 자유롭게 해주세요
+										</div>
+									</div>
+								</div>								
+							</div>
+							
+							</div>
+							<div class="yesorno">
+							<a href="#" rel="modal:close">닫기</a>
+							<button class="btn btn-default btn-lg">
+								목록으로
+							</button>
+						</div>						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+<c:import url="../base/Header.jsp"></c:import>
 <c:import url="../base/PlaySubmenu.jsp?active=mode"></c:import>
 
 <div class="main container-fluid">
@@ -136,10 +397,10 @@ function openModal(modalname){
                               </div>
                               <div class="panel-body game_type_align">
                                  <label for="rank" class="radio-inline">
-                                    <input type="radio" name="game_type" id="rank" value="rank" value="1"/> 경기
+                                    <input type="radio" name="game_type" id="rank" value="rank" value="ZL01"/> 시합
                                  </label>
                                  <label for="normal" class="radio-inline">
-                                    <input type="radio" name="game_type" id="normal" value="normal" value="0" /> 일반
+                                    <input type="radio" name="game_type" id="normal" value="normal" value="ZL02" /> 일반
                                  </label>
                               </div>
                            </div>                           
@@ -196,10 +457,13 @@ function openModal(modalname){
                         <div class="col-md-1">
                         </div>
                         <div class="col-md-10">
-                           <button type="button" class="btn btn-default btn-lg btn-block" name="button" id="Speed_create">빠른농구 개설</button>
-                           <a href="javascript:openModal('modal1');" class="button modal-open"><button type="button" class="btn btn-default btn-lg btn-block" name="button" id="Speed_join">빠른농구 참여</button></a>
+                           	<button type="button" class="btn btn-default btn-lg btn-block" name="button" id="Speed_create">빠른농구 개설</button>
+                         	<a href="#ex1" rel="modal:open">
+                           	<button type="button" class="btn btn-default btn-lg btn-block" name="button" id="Speedjoin">모달</button>
+                           	</a>
+                           	<button type="button" class="btn btn-default btn-lg btn-block" name="button" id="Speed_join">빠른농구 참여</button>
                         </div>
-                       
+
 
                         <div class="col-md-1">
                         </div>
@@ -211,10 +475,10 @@ function openModal(modalname){
             </div>
          </div>
       </form>
+     
+ 
+      
       </div>
-      <div class="col-md-3">
-      </div>
-   </div>
 </div>
 
 <c:import url="../base/Footer.jsp"></c:import>
@@ -230,6 +494,9 @@ $(".meetingPage").click(function()
    $(location).attr("href","<%=cp%>/play/meeting/"+ meetingCode);
    //childWindow.resizeTo(800, 800);
 });
+
+
+
 
 </script>
 

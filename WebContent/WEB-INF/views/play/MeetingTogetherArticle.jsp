@@ -115,8 +115,7 @@
 								${meetingdto.meetingTypeName=="ZL01"? "시합":"일반" }
 								</div>
 							</div>		
-							<div class="col-md-2 info-title" >
-								
+							<div class="col-md-2 info-title" >								
 								<span>${meetingdto.nowPeopleNumber}/${meetingdto.meetingPeopleNumber}</span>명
 							</div>							
 							

@@ -646,4 +646,46 @@ public class AjaxModel
 
     return authNum;
     }
+    
+    public String getSpeedMeetingCode(String cityCode, String meetingTypeCode, String ballExistOrNot, int speedSeqNumber)
+    {
+    	UserInfo info = (UserInfo)session.getAttribute("userInfo");
+    	
+    	IMeetingDAO dao = sqlSession.getMapper(IMeetingDAO.class);
+		ArrayList<MeetingDTO> list = dao.getSpeedMeetingCode(cityCode, meetingTypeCode, ballExistOrNot, info.getUserAcctCode(), speedSeqNumber);
+		
+		JSONArray arr = new JSONArray();
+		JSONObject obj = null;
+		
+		for(MeetingDTO dto : list)
+		{
+			obj = new JSONObject();			
+			obj.put("meetingCode",dto.getMeetingCode() );
+			obj.put("meetingSubject", dto.getMeetingSubject() );
+			obj.put("meetingPeopleNumber", dto.getMeetingPeopleNumber() );
+			obj.put("meetingOpenDate", dto.getMeetingOpenDate() );
+			obj.put("meetingDate", dto.getMeetingDate() );
+			obj.put("meetingCloseDate", dto.getMeetingCloseDate() );
+			obj.put("meetingEndDate", dto.getMeetingEndDate() );
+			obj.put("meetingNotice", dto.getMeetingNotice() );
+			obj.put("meetingTypeCode",dto.getMeetingTypeCode() );
+			obj.put("meetingTypeName", dto.getMeetingTypeName() );
+			obj.put("quickPlayOrNot", dto.getQuickPlayOrNot() );
+			obj.put("courtRegistrationCode",dto.getCourtRegistrationCode() );
+			obj.put("minTierCode", dto.getMinTierCode() );
+			obj.put("maxTierCode", dto.getMaxTierCode() );
+			obj.put("confirmOrNot",dto.getConfirmOrNot() );
+			obj.put("blindOrNot", dto.getBlindOrNot());
+			obj.put("nowPeopleNumber",dto.getNowPeopleNumber() );
+			obj.put("captainName",dto.getCaptainName() );
+			obj.put("cityCode", dto.getCityCode());
+			obj.put("cityName", dto.getCityName());
+			obj.put("courtName", dto.getCourtName());			
+			arr.add(obj);
+		}
+	
+		return arr.toString();
+    }
+    
+    
 }

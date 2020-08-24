@@ -35,6 +35,111 @@
 		VALUES(FN_CREATE_CODE('TBL_MEETING_JOIN', SEQ_MEETING_JOIN.NEXTVAL), #{meetCode}, SYSDATE , #{joinAccountCode}, #{captainOrNot}, #{ballExistOrNot})
 		</insert>	
 		
+<!-- public ArrayList<MeetingDTO> getSpeedMeetingCode(String cityCode, String meetingTypeCode, String ballExistOrNot, String userAccountCode, int speedSeqNumber);   // 빠른농구참가 -->
+   <select id="getSpeedMeetingCode"  resultType="com.amanne.biscuitball.mybatis.MeetingDTO">
+   <![CDATA[
+		SELECT MT.MEET_CODE as meetingCode
+	        , MT.MEET_SUBJECT as meetingSubject
+	        , MT.NOWPEOPLENUMBER as nowPeopleNumber
+	        , MT.MEET_PEOPLE_NUMBER as meetingPeopleNumber
+	        , MT.CAPTAINACCTCODE as catainAcctCode
+	        , MT.CAPTAINNAME as captainName
+	        , MT.MEET_OP_DATE as meetingOpenDate
+	        , MT.MEET_DATE as meetingDate
+	        , MT.MEET_END_DATE as meetingEndDate
+	        , MT.MEET_CLOSE_DATE as meetingCloseDate
+	        , MT.MEET_NOTICE as meetingNotice
+	        , MT.MEET_TYPE_CODE as meetingTypeCode
+	        , MT.MEET_TYPE_NAME as meetingTypeName
+	        , MT.QUICK_PLAY as quickPlayOrNot
+	        , MT.COURT_REG_CODE as courtRegistrationCode
+	        , MT.COURTNAME as courtName
+	        , MT.MIN_TIER as minTierCode
+	        , MT.MAX_TIER as maxTierCode
+	        , CONFIRM_OR_NOT as confirmOrNot
+	    FROM
+	    (
+	    SELECT T.*
+	    ,(
+	        SELECT COURT_NAME
+	        FROM TBL_COURT_REGISTRATION
+	        WHERE COURT_REG_CODE = T.COURT_REG_CODE
+	    ) AS COURTNAME
+	    ,(
+	        SELECT JOIN_ACCT_CODE
+	        FROM TBL_MEETING_JOIN
+	        WHERE MEET_CODE = T.MEET_CODE
+	        AND CAPTAIN_CODE = 'ZU01'
+	    ) AS CAPTAINACCTCODE
+	    ,(
+	        SELECT USER_NICKNAME
+	        FROM TBL_USER_ACCOUNT
+	        WHERE USER_ACCT_CODE =
+	        (
+	            SELECT JOIN_ACCT_CODE
+	            FROM TBL_MEETING_JOIN
+	            WHERE MEET_CODE = T.MEET_CODE
+	            AND CAPTAIN_CODE = 'ZU01'
+	        )
+	    ) AS CAPTAINNAME
+	    , ROWNUM AS SEQ
+	    FROM
+	    (
+	            SELECT M.*
+	            ,(
+	                SELECT COUNT(*)
+	                FROM TBL_MEETING_JOIN
+	                WHERE MEET_CODE = M.MEET_CODE
+	            ) AS NOWPEOPLENUMBER 
+	            FROM VIEW_MEETING M LEFT JOIN TBL_COURT_REGISTRATION CR
+	            ON M.COURT_REG_CODE = CR.COURT_REG_CODE
+	            WHERE CR.CITY_CODE = #{cityCode}
+	            AND M.MEET_TYPE_CODE = #{meetingTypeCode}
+	            AND M.QUICK_PLAY = 'YES'
+	            AND
+	            (
+	            SELECT TRUNC(SYSDATE,'DD')
+	            FROM DUAL
+	            )
+	            <= M.MEET_DATE
+	            AND
+	            M.MEET_DATE
+	            <
+	            (
+	            SELECT TRUNC(SYSDATE,'DD')+1
+	            FROM DUAL
+	            )
+	            ORDER BY MEET_DATE
+	    )T
+	    WHERE T.MEET_PEOPLE_NUMBER >
+	    T.NOWPEOPLENUMBER
+	    AND
+	    (
+	        SELECT COUNT(*)
+	        FROM TBL_MEETING_JOIN
+	        WHERE MEET_CODE = T.MEET_CODE
+	        AND JOIN_ACCT_CODE =#{userAccountCode}
+	    )
+	    = 0
+      ]]>
+      <if test="ballExistOrNot == ZU02">
+      <![CDATA[
+      	AND 
+	    (
+	        SELECT COUNT(*)
+	        FROM TBL_MEETING_JOIN
+	        WHERE MEET_CODE = T.MEET_CODE
+	        AND BALL_EXIST_CODE = 'ZU01'
+	    )
+    	> 0
+      ]]>
+      </if>
+    <![CDATA[
+  	) MT
+	WHERE SEQ = #{speedSeqNumber}
+	]]>
+   </select>
+		
 
 <!--	public void cancelJoinMeeting(MeetingMemberDTO meetingMemberDTO); // 모임참가취소  -->
 		
@@ -125,7 +230,7 @@
 <!--	public int countMeetingByMapPosition(String posX, String posY); // 코트중심 예정 모임 전체 수  보류 ㅠㅠ -->
 
 <!--	public List<MeetingDTO> getMeetingListByCourt(String courtCode); // 특정코트의 예정 모임 조회  -->
-
+		
 		<select id="getMeetingListByCourt" resultType="com.amanne.biscuitball.mybatis.MeetingDTO">
 		<![CDATA[
 			SELECT MT.MEET_CODE as meetingCode
@@ -152,11 +257,10 @@
 			WHERE MEET_COURT_REG_CODE = #{courtCode}
             AND MEET_DATE > SYSDATE
             AND confirmOrNot = 'NO'
-            ORDER BY (meetingPeopleNumber - nowPeopleNumber), meetingDate
-  
+            ORDER BY (meetingPeopleNumber - nowPeopleNumber), meetingDate  
 		]]>
 		</select>
-
+		
 <!--	public int countMeetingsByCourt(String courtCode); // 특정코트의 예정 모임 수  -->
 
 		<select id="countMeetingsByCourt" resultType="java.lang.Integer">
@@ -431,7 +535,7 @@
 , @RequestParam("meetingTypeCode") String meetingTypeCode, @RequestParam("start") int start, @RequestParam("end") int end); -->
 		<select id="getMeetingListByCityDate" resultType="com.amanne.biscuitball.mybatis.MeetingDTO">
 		<![CDATA[
-				 SELECT MEET_CODE as meetingCode
+		SELECT MEET_CODE as meetingCode
 		, MEET_SUBJECT as meetingSubject
 		, MEET_PEOPLE_NUMBER as meetingPeopleNumber
 		, NOWPEOPLENUMBER  as nowPeopleNumber
