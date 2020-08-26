@@ -583,47 +583,273 @@
       userAccountCode, @Param("start") int start, @Param("end") int end) -->
    <select id="getPersonalAchievementList"
       resultType="com.amanne.biscuitball.mybatis.PersonalAchievementDTO">
-      SELECT
-      (
-      SELECT USER_ACCT_CODE
-      FROM TBL_USER_ACCOUNT
-      WHERE USER_ACCT_CODE = #{userAccountCode}
-      ) as getterAccountCode
-      , (
-      SELECT USER_NICKNAME
-      FROM TBL_USER_ACCOUNT
-      WHERE USER_ACCT_CODE = #{userAccountCode}
-      ) as getterNickname
-      , V1.PERS_ACHV_CODE as personalAchievementCode, V1.PERS_ACHV_NAME as
-      personalAchievementName
-      , V1.PERS_ACHV_IMG as personalAchievementImg,
-      V1.PERS_ACHV_CONDITION as personalAchievementCondition
-      ,
-      V2.PERS_ACHV_GET_CODE personalAchievementGetCode,V2.PERS_ACHV_GET_DATE
-      as getAchievementStatus
-      , CASE WHEN V2.PERS_ACHV_CODE IS NOT NULL THEN
-      '획득'
-      ELSE '획득못함'
-      END as getAchievementStatus
-      , CASE WHEN
-      (
-      SELECT TITLE_ACHV_CODE
-      FROM VIEW_USER
-      WHERE USER_CODE= #{userAccountCode}
-      ) = V2.PERS_ACHV_CODE THEN '대표업적'
-      ELSE '대표업적아님'
-      END as
-      titleAchievementStatus
-      FROM TBL_PERSONAL_ACHIEVEMENTS V1 LEFT JOIN
-      (
-      SELECT
-      PERS_ACHV_GET_CODE,PERS_ACHV_GET_DATE,GETTER_ACCT_CODE,GETTER_NICKNAME,PERS_ACHV_CODE,PERS_ACHV_NAME,PERS_ACHV_IMG,PERS_ACHV_CONDITION
-      FROM VIEW_PERSONAL_ACHIEVEMENT_GET
-      WHERE GETTER_ACCT_CODE =
-      #{userAccountCode}
-      )V2
-      ON V1.PERS_ACHV_CODE = V2.PERS_ACHV_CODE
-      WHERE RNUM <![CDATA[>]]>= #{start}  AND  RNUM  <![CDATA[<]]>= #{end}
+      SELECT getterAccountCode AS getterAccountCode
+     , personalAchievementGetCode AS personalAchievementGetCode
+     , getterNickname AS getterNickname
+     , personalAchievementCode AS personalAchievementCode
+     , personalAchievementName AS personalAchievementName
+     , personalAchievementImg AS personalAchievementImg
+     , personalAchievementCondition AS personalAchievementCondition
+     , personalAchievementGetDate AS personalAchievementGetDate
+     , titleAchievementStatus AS titleAchievementStatus
+     , getAchievementStatus AS getAchievementStatus
+	FROM
+	(
+	    SELECT V2.PERS_ACHV_GET_CODE personalAchievementGetCode
+	         , #{userAccountCode} AS getterAccountCode
+	         , (
+	               SELECT USER_NICKNAME
+	               FROM TBL_USER_ACCOUNT
+	               WHERE USER_ACCT_CODE = #{userAccountCode}
+	           ) AS getterNickname
+	         , V1.PERS_ACHV_CODE AS personalAchievementCode
+	         , V1.PERS_ACHV_NAME AS personalAchievementName
+	         , V1.PERS_ACHV_IMG AS personalAchievementImg
+	         , V1.PERS_ACHV_CONDITION AS personalAchievementCondition        
+	         , V2.PERS_ACHV_GET_DATE AS personalAchievementGetDate
+	         , CASE WHEN (
+	                         SELECT TITLE_ACHV_CODE
+	                         FROM VIEW_USER
+	                         WHERE USER_CODE= #{userAccountCode}
+	                     ) = V2.PERS_ACHV_CODE THEN 'YES'
+	           ELSE 'NO'    
+	           END AS titleAchievementStatus
+	         , S1.GET_ACHIEVEMENT_STATUS AS getAchievementStatus
+	         , ROW_NUMBER() OVER(ORDER BY V2.PERS_ACHV_GET_CODE, S1.GET_ACHIEVEMENT_STATUS DESC) AS pageNumber
+	    FROM TBL_PERSONAL_ACHIEVEMENTS V1 LEFT JOIN
+	    (
+	      SELECT
+	      PERS_ACHV_GET_CODE,PERS_ACHV_GET_DATE,GETTER_ACCT_CODE,GETTER_NICKNAME,PERS_ACHV_CODE,PERS_ACHV_NAME,PERS_ACHV_IMG,PERS_ACHV_CONDITION
+	      FROM VIEW_PERSONAL_ACHIEVEMENT_GET
+	      WHERE GETTER_ACCT_CODE =
+	      #{userAccountCode}
+	    )V2
+	    ON V1.PERS_ACHV_CODE = V2.PERS_ACHV_CODE
+	    JOIN
+	    (
+	        SELECT 'ZO01' AS PERS_ACHV_CODE                                                                                              -- 회원가입
+	             , 100 AS GET_ACHIEVEMENT_STATUS                             
+	        FROM DUAL
+	        
+	        UNION
+	        
+	        SELECT 'ZO02' AS PERS_ACHV_CODE                                                                                              -- 첫 모임 플레이
+	             , CASE WHEN (
+	                            SELECT COUNT(*) AS COUNT
+	                            FROM   TBL_PERSONAL_ACHIEVEMENT_GET
+	                            WHERE  GETTER_ACCT_CODE = #{userAccountCode}                                                                     -- 유저 코드*
+	                            AND    PERS_ACHV_CODE = 'ZO02' 
+	                         ) = 1 THEN 100
+	               WHEN (
+	                        SELECT COUNT(MEET_CODE) AS COUNT
+	                        FROM
+	                        (
+	                            SELECT TM.MEET_CODE
+	                            FROM   TBL_MEETING TM
+	                            LEFT JOIN   TBL_MEETING_JOIN TMJ
+	                            ON     TM.MEET_CODE = TMJ.MEET_CODE
+	                            LEFT JOIN   (          
+	                                        SELECT MEET_CODE, COUNT(MEET_CODE) AS JOIN_COUNT
+	                                        FROM VIEW_MEETING_JOIN
+	                                        WHERE CANCEL_OR_NOT = '참여 중'
+	                                        GROUP BY MEET_CODE
+	                                   ) VMJ
+	                            ON     TM.MEET_CODE = VMJ.MEET_CODE
+	                            WHERE  TMJ.JOIN_ACCT_CODE = #{userAccountCode}                                                                   -- 유저 코드*
+	                            AND    TM.MEET_PEOPLE_NUMBER = VMJ.JOIN_COUNT
+	                            AND    TM.MEET_DATE <![CDATA[<]]>= SYSDATE
+	                        )
+	                    ) <![CDATA[>]]> 0 THEN 100
+	               ELSE 0 
+	               END AS GET_ACHIEVEMENT_STATUS
+	        FROM DUAL
+	        
+	        UNION
+	        
+	        SELECT 'ZO03' AS PERS_ACHV_CODE                                                                                              -- 모임 100회 플레이   
+	             , CASE WHEN (
+	                            SELECT COUNT(*) AS COUNT
+	                            FROM   TBL_PERSONAL_ACHIEVEMENT_GET
+	                            WHERE  GETTER_ACCT_CODE = #{userAccountCode}                                                                     -- 유저 코드*
+	                            AND    PERS_ACHV_CODE = 'ZO03' 
+	                         ) = 1 THEN 100
+	               ELSE (                  
+	                        SELECT COUNT(MEET_CODE) AS MEET_COUNT
+	                        FROM
+	                        (
+	                            SELECT TM.MEET_CODE
+	                            FROM   TBL_MEETING TM
+	                            LEFT JOIN   TBL_MEETING_JOIN TMJ
+	                            ON     TM.MEET_CODE = TMJ.MEET_CODE
+	                            LEFT JOIN   (          
+	                                        SELECT MEET_CODE, COUNT(MEET_CODE) AS JOIN_COUNT
+	                                        FROM VIEW_MEETING_JOIN
+	                                        WHERE CANCEL_OR_NOT = '참여 중'
+	                                        GROUP BY MEET_CODE
+	                                   ) VMJ
+	                            ON     TM.MEET_CODE = VMJ.MEET_CODE
+	                            WHERE  TMJ.JOIN_ACCT_CODE = #{userAccountCode}                                                                   -- 유저 코드*
+	                            AND    TM.MEET_PEOPLE_NUMBER = VMJ.JOIN_COUNT
+	                            AND    TM.MEET_DATE <![CDATA[<]]>= SYSDATE
+	                        )
+	                    )
+	               END AS GET_ACHIEVEMENT_STATUS
+	        FROM DUAL
+	        
+	        
+	        UNION
+	        
+	        SELECT  'ZO04' AS PERS_ACHV_CODE                                                                                             -- 친구 50명 이상
+	             , CASE WHEN (
+	                            SELECT COUNT(*) AS COUNT
+	                            FROM   TBL_PERSONAL_ACHIEVEMENT_GET
+	                            WHERE  GETTER_ACCT_CODE = #{userAccountCode}                                                                     -- 유저 코드*
+	                            AND    PERS_ACHV_CODE = 'ZO04' 
+	                         ) = 1 THEN 100
+	                ELSE (
+	                        SELECT COUNT(FRIEND_REQ_RES_CODE) * 2
+	                        FROM   TBL_FRIEND_REQUEST
+	                        WHERE  FRIEND_REQ_RES_CODE = 'ZU01'
+	                        AND    ( RECEIVER_ACCT_CODE = #{userAccountCode} OR SENDER_ACCT_CODE = #{userAccountCode} )                                   -- 유저 코드*
+	                     ) 
+	                END AS GET_ACHIEVEMENT_STATUS
+	        FROM DUAL
+	         
+	        UNION
+	         
+	        SELECT 'ZO05' AS PERS_ACHV_CODE                                                                                              -- 생일날 플레이
+	             , CASE WHEN (
+	                            SELECT COUNT(*) AS COUNT
+	                            FROM   TBL_PERSONAL_ACHIEVEMENT_GET
+	                            WHERE  GETTER_ACCT_CODE = #{userAccountCode}                                                                     -- 유저 코드*
+	                            AND    PERS_ACHV_CODE = 'ZO05' 
+	                         ) = 1 THEN 100
+	               ELSE (
+	                        SELECT COUNT(PLAY_DATE)
+	                        FROM
+	                        (
+	                                SELECT LPAD(EXTRACT(MONTH FROM MEET_DATE), 2, '0') || LPAD(EXTRACT(DAY FROM MEET_DATE), 2, '0') AS PLAY_DATE
+	                                FROM
+	                                (
+	                                    SELECT TM.MEET_DATE AS MEET_DATE
+	                                    FROM   TBL_MEETING TM
+	                                    LEFT JOIN   TBL_MEETING_JOIN TMJ
+	                                    ON     TM.MEET_CODE = TMJ.MEET_CODE
+	                                    LEFT JOIN   (          
+	                                                SELECT MEET_CODE, COUNT(MEET_CODE) AS JOIN_COUNT
+	                                                FROM VIEW_MEETING_JOIN
+	                                                WHERE CANCEL_OR_NOT = '참여 중'
+	                                                GROUP BY MEET_CODE
+	                                           ) VMJ
+	                                    ON     TM.MEET_CODE = VMJ.MEET_CODE
+	                                    WHERE  TMJ.JOIN_ACCT_CODE = #{userAccountCode}                                                           -- 유저 코드*
+	                                    AND    TM.MEET_PEOPLE_NUMBER = VMJ.JOIN_COUNT
+	                                    AND    TM.MEET_DATE <![CDATA[<]]>= SYSDATE  
+	                                )
+	                        )
+	                        WHERE PLAY_DATE = (
+	                                                     SELECT LPAD(EXTRACT(MONTH FROM USER_BIRTHDAY), 2, '0')
+	                                                         || LPAD(EXTRACT(DAY FROM USER_BIRTHDAY), 2, '0') AS PLAY_DATE
+	                                                     FROM   TBL_USER
+	                                                     WHERE  USER_ACCT_CODE = #{userAccountCode}                                              -- 유저 코드*
+	                                          )
+	                    )
+	               END AS GET_ACHIEVEMENT_STATUS
+	        FROM DUAL
+	        
+	        UNION
+	        
+	        SELECT 'ZO06' AS PERS_ACHV_CODE                                                                                              -- 내 리뷰 좋아요 1000회
+	             , CASE WHEN (
+	                            SELECT COUNT(*) AS COUNT
+	                            FROM   TBL_PERSONAL_ACHIEVEMENT_GET
+	                            WHERE  GETTER_ACCT_CODE = #{userAccountCode}                                                                     -- 유저 코드*
+	                            AND    PERS_ACHV_CODE = 'ZO06' 
+	                         ) = 1 THEN 100
+	               ELSE (
+	                        SELECT COUNT(COURT_REVIEW_CODE)/10
+	                        FROM
+	                        (
+	                            SELECT TCR.COURT_REVIEW_CODE
+	                            FROM   TBL_COURT_REVIEW TCR
+	                            JOIN   TBL_COURT_REVIEW_EVAL TCRE
+	                            ON     TCR.COURT_REVIEW_CODE = TCRE.COURT_REVIEW_CODE
+	                            WHERE  TCR.REGISTRANT_ACCT_CODE = #{userAccountCode}                                                             -- 유저 코드*
+	                        )
+	                    )
+	               END AS GET_ACHIEVEMENT_STATUS
+	        FROM DUAL
+	        
+	        UNION
+	        
+	        SELECT 'ZO07' AS PERS_ACHV_CODE                                                                                              -- 농구공지참 플레이 10회
+	             , CASE WHEN (
+	                            SELECT COUNT(*) AS COUNT
+	                            FROM   TBL_PERSONAL_ACHIEVEMENT_GET
+	                            WHERE  GETTER_ACCT_CODE = #{userAccountCode}                                                                     -- 유저 코드*
+	                            AND    PERS_ACHV_CODE = 'ZO07' 
+	                         ) = 1 THEN 100
+	               ELSE (
+	                        SELECT COUNT(MEET_CODE)*10 AS MEET_COUNT
+	                        FROM
+	                        (
+	                            SELECT TM.MEET_CODE
+	                            FROM   TBL_MEETING TM
+	                            LEFT JOIN   TBL_MEETING_JOIN TMJ
+	                            ON     TM.MEET_CODE = TMJ.MEET_CODE
+	                            LEFT JOIN   (          
+	                                        SELECT MEET_CODE, COUNT(MEET_CODE) AS JOIN_COUNT
+	                                        FROM VIEW_MEETING_JOIN
+	                                        WHERE CANCEL_OR_NOT = '참여 중'
+	                                        GROUP BY MEET_CODE
+	                                   ) VMJ
+	                            ON     TM.MEET_CODE = VMJ.MEET_CODE
+	                            WHERE  TMJ.JOIN_ACCT_CODE = #{userAccountCode}                                                                   -- 유저 코드*
+	                            AND    TM.MEET_PEOPLE_NUMBER = VMJ.JOIN_COUNT
+	                            AND    TM.MEET_DATE <![CDATA[<]]>= SYSDATE
+	                            AND    TMJ.BALL_EXIST_CODE = 'ZU01'
+	                        )
+	                    )
+	               END AS GET_ACHIEVEMENT_STATUS
+	        FROM DUAL
+	        
+	        UNION
+	        
+	        SELECT 'ZO08' AS PERS_ACHV_CODE                                                                                              -- 농구공지참 플레이 100회
+	             , CASE WHEN (
+	                            SELECT COUNT(*) AS COUNT
+	                            FROM   TBL_PERSONAL_ACHIEVEMENT_GET
+	                            WHERE  GETTER_ACCT_CODE = #{userAccountCode}                                                                     -- 유저 코드*
+	                            AND    PERS_ACHV_CODE = 'ZO08' 
+	                         ) = 1 THEN 100
+	               ELSE (
+	                        SELECT COUNT(MEET_CODE) AS MEET_COUNT
+	                        FROM
+	                        (
+	                            SELECT TM.MEET_CODE
+	                            FROM   TBL_MEETING TM
+	                            LEFT JOIN   TBL_MEETING_JOIN TMJ
+	                            ON     TM.MEET_CODE = TMJ.MEET_CODE
+	                            LEFT JOIN   (          
+	                                        SELECT MEET_CODE, COUNT(MEET_CODE) AS JOIN_COUNT
+	                                        FROM VIEW_MEETING_JOIN
+	                                        WHERE CANCEL_OR_NOT = '참여 중'
+	                                        GROUP BY MEET_CODE
+	                                   ) VMJ
+	                            ON     TM.MEET_CODE = VMJ.MEET_CODE
+	                            WHERE  TMJ.JOIN_ACCT_CODE = #{userAccountCode}                                                                   -- 유저 코드*
+	                            AND    TM.MEET_PEOPLE_NUMBER = VMJ.JOIN_COUNT
+	                            AND    TM.MEET_DATE <![CDATA[<]]>= SYSDATE
+	                            AND    TMJ.BALL_EXIST_CODE = 'ZU01'
+	                        )
+	                    )
+	               END AS GET_ACHIEVEMENT_STATUS
+	        FROM DUAL
+	    ) S1
+	    ON V1.PERS_ACHV_CODE = S1.PERS_ACHV_CODE
+	)
+	WHERE pageNumber <![CDATA[>]]>= #{start} AND pageNumber <![CDATA[<]]>= #{end}                                                                                            -- 페이징 업적 순서번호
+	ORDER BY pageNumber
    </select>
 
 

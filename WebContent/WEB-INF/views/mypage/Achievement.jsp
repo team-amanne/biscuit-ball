@@ -35,8 +35,17 @@ String cp = request.getContextPath();
 	text-align: left;
 }
 #proIcon {
- display:none;
- color:white;
+	display:none;
+	color:white;
+}
+
+.pagination{
+	display: block;
+	text-align: center;
+}
+
+.pagination > li > a {
+	float: none;
 }
 </style>
 
@@ -51,7 +60,7 @@ String cp = request.getContextPath();
 	<!-- 메인 -->
 	<div class="main container-fluid">
 		 <div class="section-title container">
-			<span>마이페이지 > 개인 업적 관리</span>
+			<span>마이페이지 > 개인 업적 관리</span>	
 			<hr />
 		</div>
 		<div class="row">
