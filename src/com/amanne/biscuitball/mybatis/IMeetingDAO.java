@@ -29,7 +29,7 @@ public interface IMeetingDAO
 
 	public int removeMeetingCommentComment(MeetingCommentDTO meetingCommentDTO); // 모임댓글삭제
 
-	public ArrayList<MeetingDTO> getSpeedMeetingCode(String cityCode, String meetingTypeCode, String ballExistOrNot, String userAccountCode, int speedSeqNumber); // 빠른 모임 참가
+	public MeetingDTO getSpeedMeeting(@Param("meetingDTO")MeetingDTO meetingDTO, @Param("meetingMemberDTO")MeetingMemberDTO meetingMemberDTO); // 빠른 모임 참가
 	
 	public List<MeetingDTO> getMeetingByMapPosition(String posX, String posY); // 코트중심 예정 모임 조회
 

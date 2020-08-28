@@ -35,14 +35,14 @@
 		VALUES(FN_CREATE_CODE('TBL_MEETING_JOIN', SEQ_MEETING_JOIN.NEXTVAL), #{meetCode}, SYSDATE , #{joinAccountCode}, #{captainOrNot}, #{ballExistOrNot})
 		</insert>	
 		
-<!-- public ArrayList<MeetingDTO> getSpeedMeetingCode(String cityCode, String meetingTypeCode, String ballExistOrNot, String userAccountCode, int speedSeqNumber);   // 빠른농구참가 -->
-   <select id="getSpeedMeetingCode"  resultType="com.amanne.biscuitball.mybatis.MeetingDTO">
+<!-- public MeetingDTO getSpeedMeeting(MeetingDTO meetingDTO, MeetingMemberDTO meetingMemberDTO);   // 빠른농구참가 -->
+   <select id="getSpeedMeeting"  resultType="com.amanne.biscuitball.mybatis.MeetingDTO">
    <![CDATA[
 		SELECT MT.MEET_CODE as meetingCode
 	        , MT.MEET_SUBJECT as meetingSubject
 	        , MT.NOWPEOPLENUMBER as nowPeopleNumber
 	        , MT.MEET_PEOPLE_NUMBER as meetingPeopleNumber
-	        , MT.CAPTAINACCTCODE as catainAcctCode
+	        , MT.CAPTAINACCTCODE as captainAcctCode
 	        , MT.CAPTAINNAME as captainName
 	        , MT.MEET_OP_DATE as meetingOpenDate
 	        , MT.MEET_DATE as meetingDate
@@ -93,8 +93,8 @@
 	            ) AS NOWPEOPLENUMBER 
 	            FROM VIEW_MEETING M LEFT JOIN TBL_COURT_REGISTRATION CR
 	            ON M.COURT_REG_CODE = CR.COURT_REG_CODE
-	            WHERE CR.CITY_CODE = #{cityCode}
-	            AND M.MEET_TYPE_CODE = #{meetingTypeCode}
+	            WHERE CR.CITY_CODE = #{meetingDTO.cityCode}
+	            AND M.MEET_TYPE_CODE = #{meetingDTO.meetingTypeCode}
 	            AND M.QUICK_PLAY = 'YES'
 	            AND
 	            (
@@ -114,16 +114,15 @@
 	    WHERE T.MEET_PEOPLE_NUMBER >
 	    T.NOWPEOPLENUMBER
 	    AND
-	    (
+         (
 	        SELECT COUNT(*)
 	        FROM TBL_MEETING_JOIN
 	        WHERE MEET_CODE = T.MEET_CODE
-	        AND JOIN_ACCT_CODE =#{userAccountCode}
+	        AND JOIN_ACCT_CODE = #{meetingMemberDTO.joinAccountCode}
 	    )
-	    = 0
-      ]]>
-      <if test="ballExistOrNot == ZU02">
-      <![CDATA[
+    	= 0
+	    ]]>
+	    <if test='meetingMemberDTO.ballExistOrNot.equals("ZU02")'>	
       	AND 
 	    (
 	        SELECT COUNT(*)
@@ -132,11 +131,10 @@
 	        AND BALL_EXIST_CODE = 'ZU01'
 	    )
     	> 0
-      ]]>
-      </if>
+    	</if>
     <![CDATA[
   	) MT
-	WHERE SEQ = #{speedSeqNumber}
+	WHERE SEQ = #{meetingDTO.speedSeqNumber}
 	]]>
    </select>
 		

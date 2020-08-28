@@ -9,9 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.amanne.biscuitball.model.AjaxModel;
+import com.amanne.biscuitball.model.PlayModel;
 import com.amanne.biscuitball.model.UserInfo;
+import com.amanne.biscuitball.mybatis.MeetingDTO;
+import com.amanne.biscuitball.mybatis.MeetingMemberDTO;
 import com.amanne.biscuitball.mybatis.UserDTO;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import net.nurigo.java_sdk.api.Message;
 
@@ -23,6 +27,7 @@ public class AjaxController
 {
 	@Autowired
 	private AjaxModel ajax;
+
 	@Autowired
 	private HttpSession session;
 	
@@ -112,6 +117,7 @@ public class AjaxController
 		String view = null;
 		
 		model.addAttribute("result", ajax.getCourtCodeByPosition(mapPositionX, mapPositionY)); 
+		System.out.println(ajax.getCourtCodeByPosition(mapPositionX, mapPositionY));
 		
 		view = "/ajax/Check";
 		return view;
@@ -267,14 +273,28 @@ public class AjaxController
 	
 	
 	@RequestMapping("/meeting/modal")
-	public String getSpeedMeetingCode(Model model, @RequestParam("cityCode") String cityCode, @RequestParam("meetingTypeCode") String meetingTypeCode
-			, @RequestParam("ballExistOrNot") String ballExistOrNot, @RequestParam("speedSeqNumber") int speedSeqNumber)
+	public String getSpeedMeeting(Model model, MeetingDTO meetingDTO, MeetingMemberDTO meetingMemberDTO)
 	{
 		String view = null;
-	       System.out.println("ajaxCon");	
-	       model.addAttribute("result", ajax.getSpeedMeetingCode(cityCode, meetingTypeCode, ballExistOrNot,speedSeqNumber));
-	       view = "/ajax/Check";
-	       return view;
+		System.out.println(meetingDTO.getCityCode() + meetingDTO.getMeetingTypeCode() 
+    	+ meetingMemberDTO.getBallExistOrNot() + meetingDTO.getSpeedSeqNumber());	
+	    model.addAttribute("result", ajax.getSpeedMeetingCode(meetingDTO, meetingMemberDTO));
+	    System.out.println(ajax.getSpeedMeetingCode(meetingDTO, meetingMemberDTO));
+	    
+	    view = "/ajax/Check";
+	    return view;
+	}
+	
+	@RequestMapping("/meetingmember/modal")
+	public String getSpeedMeetingMember(Model model, @RequestParam("meetingCode") String meetingCode)
+	{
+		String view = null;
+		
+		
+		model.addAttribute("result", ajax.getSpeedMeetingMember(meetingCode));
+	    System.out.println(ajax.getSpeedMeetingMember(meetingCode));
+	    view = "/ajax/Check";
+	    return view;
 	}
 
 	

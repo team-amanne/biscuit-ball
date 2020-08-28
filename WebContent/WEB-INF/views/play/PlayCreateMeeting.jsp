@@ -618,7 +618,7 @@ select {
                                                  dataType: "json",
                                                  url: "<%=cp%>/ajax/court",
                                                  data: {mapPositionX: courtPositionX, mapPositionY: courtPositionY},
-                                                 success: function(data)
+                                                 success: function(data)                                                 
                                                  {
                                                     /* 코트 정보 */
                                                     /* 코트이름 */

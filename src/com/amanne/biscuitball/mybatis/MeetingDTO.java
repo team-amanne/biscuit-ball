@@ -32,17 +32,26 @@ public class MeetingDTO
 	private String captainAcctCode;			// 주장 계정 코드
 	private String captainName;				// 주장 닉네임
 	private int speedSeqNumber;				// 빠른농구 번호
-	public String getOpenerAcctCode() {
-		return openerAcctCode;
-	}
-	public void setOpenerAcctCode(String openerAcctCode) {
-		this.openerAcctCode = openerAcctCode;
-	}
-
 	private String cityCode;				// 코트 소속 지역 코드
 	private String cityName;				// 코트 소속 지역 이름
 	private String ablLimitCode;			// 최소 실력 조건
 	private String returnValue;
+	
+	public String getOpenerAcctCode() {
+		return openerAcctCode;
+	}
+	
+	public void setOpenerAcctCode(String openerAcctCode) {
+		this.openerAcctCode = openerAcctCode;
+	}
+	
+	public int getSpeedSeqNumber() {
+		return speedSeqNumber;
+	}
+	public void setSpeedSeqNumber(int speedSeqNumber) {
+		this.speedSeqNumber = speedSeqNumber;
+	}
+	
 	public String getAblLimitCode() {
 		return ablLimitCode;
 	}

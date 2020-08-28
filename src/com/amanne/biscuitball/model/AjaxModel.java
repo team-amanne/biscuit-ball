@@ -27,6 +27,7 @@ import com.amanne.biscuitball.mybatis.IRegionDAO;
 import com.amanne.biscuitball.mybatis.IUserDAO;
 import com.amanne.biscuitball.util.MyUtil;
 import com.amanne.biscuitball.mybatis.MeetingDTO;
+import com.amanne.biscuitball.mybatis.MeetingMemberDTO;
 import com.amanne.biscuitball.mybatis.RegionDTO;
 import com.amanne.biscuitball.mybatis.UserDTO;
 
@@ -41,6 +42,9 @@ public class AjaxModel
 {
 	@Autowired
 	private SqlSession sqlSession;
+	
+	@Autowired
+	private PlayModel playModel;
 	
 	@Autowired
 	private HttpSession session;
@@ -498,7 +502,7 @@ public class AjaxModel
 			ArrayList<MeetingDTO> list = dao.getMeetingListNotInputPlaylog(info.getUserAcctCode());
 			JSONArray arr = new JSONArray();
 			JSONObject obj = null;
-			System.out.println("ajaxMo");
+			
 			for(MeetingDTO dto : list)
 			{
 				obj = new JSONObject();
@@ -647,18 +651,24 @@ public class AjaxModel
     return authNum;
     }
     
-    public String getSpeedMeetingCode(String cityCode, String meetingTypeCode, String ballExistOrNot, int speedSeqNumber)
+    public String getSpeedMeetingCode(MeetingDTO meetingDTO, MeetingMemberDTO meetingMemberDTO)
     {
     	UserInfo info = (UserInfo)session.getAttribute("userInfo");
+    	meetingMemberDTO.setJoinAccountCode(info.getUserAcctCode()); 
     	
-    	IMeetingDAO dao = sqlSession.getMapper(IMeetingDAO.class);
-		ArrayList<MeetingDTO> list = dao.getSpeedMeetingCode(cityCode, meetingTypeCode, ballExistOrNot, info.getUserAcctCode(), speedSeqNumber);
+    	IMeetingDAO dao = sqlSession.getMapper(IMeetingDAO.class);   	
+    	System.out.println(meetingMemberDTO.getJoinAccountCode() + " " + meetingDTO.getCityCode() + meetingDTO.getMeetingTypeCode() 
+    	+ meetingMemberDTO.getBallExistOrNot() + meetingDTO.getSpeedSeqNumber());
+		MeetingDTO dto = dao.getSpeedMeeting(meetingDTO, meetingMemberDTO);
 		
-		JSONArray arr = new JSONArray();
-		JSONObject obj = null;
-		
-		for(MeetingDTO dto : list)
-		{
+			System.out.println("확인");
+			System.out.println(dto.getMeetingCode());
+			System.out.println(dto.getMeetingSubject());
+			System.out.println(dto.getMeetingSubject());
+			System.out.println(dto.getCaptainName());
+			System.out.println(dto.getCaptainAcctCode());
+			
+			JSONObject obj = null;
 			obj = new JSONObject();			
 			obj.put("meetingCode",dto.getMeetingCode() );
 			obj.put("meetingSubject", dto.getMeetingSubject() );
@@ -677,15 +687,40 @@ public class AjaxModel
 			obj.put("confirmOrNot",dto.getConfirmOrNot() );
 			obj.put("blindOrNot", dto.getBlindOrNot());
 			obj.put("nowPeopleNumber",dto.getNowPeopleNumber() );
+			obj.put("captainAcctCode",dto.getCaptainAcctCode());
 			obj.put("captainName",dto.getCaptainName() );
 			obj.put("cityCode", dto.getCityCode());
 			obj.put("cityName", dto.getCityName());
-			obj.put("courtName", dto.getCourtName());			
+			obj.put("courtName", dto.getCourtName());	
+			System.out.println(obj);
+		
+	
+		return obj.toString();
+    }
+    // 빠른농구 모달 멤버
+    public String getSpeedMeetingMember(String meetingCode)
+    {
+    	MeetingDTO meetingdto = playModel.getMeetingList(meetingCode);
+    	
+    	ArrayList<UserDTO> list = playModel.getMemberLIst(meetingdto.getMeetingMemberList());
+    	System.out.println(meetingCode);
+    	
+    	JSONArray arr = new JSONArray();
+    	JSONObject obj = null;
+    	
+    	for(UserDTO dto : list)
+		{
+			obj = new JSONObject();
+			obj.put("userAccountCode",dto.getUserAccountCode());
+			obj.put("userNickname",dto.getUserNickname());
+			obj.put("tierCode",dto.getTierCode());
+			obj.put("tierName",dto.getTierName());
+			obj.put("fairplayScore",dto.getFairplayScore());
+			System.out.println(obj);
 			arr.add(obj);
 		}
 	
-		return arr.toString();
+	return arr.toString();
     }
-    
     
 }
