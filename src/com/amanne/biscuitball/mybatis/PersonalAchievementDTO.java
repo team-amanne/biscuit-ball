@@ -16,7 +16,7 @@ public class PersonalAchievementDTO
    private String getterAccountCode;             // 획득회원계정코드   
    private String getterNickname;               // 획득회원닉네임
    private String personalAchievementGetDate;       // 획득일시
-   private String getAchievementStatus;         // 획득여부
+   private int	  getAchievementStatus;         // 획득현황
    private String titleAchievementStatus;         // 대표업적여부
    private String returnValue;
    
@@ -30,11 +30,11 @@ public class PersonalAchievementDTO
 
    
    
-   public String getGetAchievementStatus() {
+   public int getGetAchievementStatus() {
       return getAchievementStatus;
    }
 
-   public void setGetAchievementStatus(String getAchievementStatus) {
+   public void setGetAchievementStatus(int getAchievementStatus) {
       this.getAchievementStatus = getAchievementStatus;
    }
 

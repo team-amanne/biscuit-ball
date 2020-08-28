@@ -49,8 +49,9 @@ public class MyPageController
 	}
 
 	@RequestMapping("/achievement")
-	public String achievementList()
+	public String achievementList(Model model, HttpServletRequest request)
 	{
+		mypage.achievement(model, request);
 		return "/mypage/Achievement";
 	}
 
