@@ -578,12 +578,62 @@
       WHERE USER_ACCT_CODE = #{userAccountCode}
    </select>
 
+
+
    <!-- 특정유저 획득업적조회 -->
    <!-- public ArrayList<PersonalAchievementDTO> getPersonalAchievementList(@Param("userAccountCode")String 
       userAccountCode, @Param("start") int start, @Param("end") int end) -->
    <select id="getPersonalAchievementList"
       resultType="com.amanne.biscuitball.mybatis.PersonalAchievementDTO">
-      SELECT getterAccountCode AS getterAccountCode
+      SELECT
+      (
+      SELECT USER_ACCT_CODE
+      FROM TBL_USER_ACCOUNT
+      WHERE USER_ACCT_CODE = #{userAccountCode}
+      ) as getterAccountCode
+      , (
+      SELECT USER_NICKNAME
+      FROM TBL_USER_ACCOUNT
+      WHERE USER_ACCT_CODE = #{userAccountCode}
+      ) as getterNickname
+      , V1.PERS_ACHV_CODE as personalAchievementCode, V1.PERS_ACHV_NAME as
+      personalAchievementName
+      , V1.PERS_ACHV_IMG as personalAchievementImg,
+      V1.PERS_ACHV_CONDITION as personalAchievementCondition
+      ,
+      V2.PERS_ACHV_GET_CODE personalAchievementGetCode,V2.PERS_ACHV_GET_DATE
+      as getAchievementStatus
+      , CASE WHEN V2.PERS_ACHV_CODE IS NOT NULL THEN
+      '획득'
+      ELSE '획득못함'
+      END as getAchievementStatus
+      , CASE WHEN
+      (
+      SELECT TITLE_ACHV_CODE
+      FROM VIEW_USER
+      WHERE USER_CODE= #{userAccountCode}
+      ) = V2.PERS_ACHV_CODE THEN '대표업적'
+      ELSE '대표업적아님'
+      END as
+      titleAchievementStatus
+      FROM TBL_PERSONAL_ACHIEVEMENTS V1 LEFT JOIN
+      (
+      SELECT
+      PERS_ACHV_GET_CODE,PERS_ACHV_GET_DATE,GETTER_ACCT_CODE,GETTER_NICKNAME,PERS_ACHV_CODE,PERS_ACHV_NAME,PERS_ACHV_IMG,PERS_ACHV_CONDITION
+      FROM VIEW_PERSONAL_ACHIEVEMENT_GET
+      WHERE GETTER_ACCT_CODE =
+      #{userAccountCode}
+      )V2
+      ON V1.PERS_ACHV_CODE = V2.PERS_ACHV_CODE
+      WHERE RNUM <![CDATA[>]]>= #{start}  AND  RNUM  <![CDATA[<]]>= #{end}
+   </select>
+
+   <!-- 특정 유저 업적 현황 조회 -->
+   <!-- public ArrayList<PersonalAchievementDTO> getPersonalAchievementStatusList(@Param("userAccountCode")String userAccountCode, @Param("start") int start, @Param("end") int end); // 특정 유저 업적현황 조회 -->
+   <select id="getPersonalAchievementStatusList"
+   resultType="com.amanne.biscuitball.mybatis.PersonalAchievementDTO">
+   
+   SELECT getterAccountCode AS getterAccountCode
      , personalAchievementGetCode AS personalAchievementGetCode
      , getterNickname AS getterNickname
      , personalAchievementCode AS personalAchievementCode
@@ -781,13 +831,59 @@
 	        FROM DUAL
 	        
 	        UNION
+	  
+	        SELECT 'ZO07' AS PERS_ACHV_CODE                                                                                                  -- 실력평가 100회
+	             , CASE WHEN (
+	                            SELECT COUNT(*) AS COUNT
+	                            FROM   TBL_PERSONAL_ACHIEVEMENT_GET
+	                            WHERE  GETTER_ACCT_CODE = #{userAccountCode}                                                                          -- 유저 코드*
+	                            AND    PERS_ACHV_CODE = 'ZO07' 
+	                         ) = 1 THEN 100
+	               ELSE (
+	                            SELECT COUNT(*)*10 AS COUNT
+	                            FROM TBL_MEETING TM
+	                            JOIN TBL_MEETING_JOIN TMJ
+	                            ON   TM.MEET_CODE = TMJ.MEET_CODE
+	                            JOIN TBL_PLAYLOG TP
+	                            ON   TMJ.MEET_JOIN_CODE = TP.EVALUATOR_MEET_JOIN_CODE
+	                            JOIN TBL_PERSONAL_ABILITY_EVAL TPAE
+	                            ON   TP.PL_CODE = TPAE.PL_CODE
+	                            WHERE TMJ.JOIN_ACCT_CODE = #{userAccountCode}                                                                        -- 유저 코드* 
+	                    )                                                                    
+	               END AS GET_ACHIEVEMENT_STATUS          
+	        FROM DUAL
 	        
-	        SELECT 'ZO07' AS PERS_ACHV_CODE                                                                                              -- 농구공지참 플레이 10회
+	        UNION
+	        
+	        SELECT 'ZO08' AS PERS_ACHV_CODE                                                                                                  -- 실력평가 10회
+	             , CASE WHEN (
+	                            SELECT COUNT(*) AS COUNT
+	                            FROM   TBL_PERSONAL_ACHIEVEMENT_GET
+	                            WHERE  GETTER_ACCT_CODE = #{userAccountCode}                                                                          -- 유저 코드*
+	                            AND    PERS_ACHV_CODE = 'ZO08' 
+	                         ) = 1 THEN 100
+	               ELSE (
+	                            SELECT COUNT(*) AS COUNT
+	                            FROM TBL_MEETING TM
+	                            JOIN TBL_MEETING_JOIN TMJ
+	                            ON   TM.MEET_CODE = TMJ.MEET_CODE
+	                            JOIN TBL_PLAYLOG TP
+	                            ON   TMJ.MEET_JOIN_CODE = TP.EVALUATOR_MEET_JOIN_CODE
+	                            JOIN TBL_PERSONAL_ABILITY_EVAL TPAE
+	                            ON   TP.PL_CODE = TPAE.PL_CODE
+	                            WHERE TMJ.JOIN_ACCT_CODE = #{userAccountCode}                                                                        -- 유저 코드* 
+	                    )                                                                    
+	               END AS GET_ACHIEVEMENT_STATUS          
+	        FROM DUAL
+	        
+	        UNION  
+	        
+	        SELECT 'ZO09' AS PERS_ACHV_CODE                                                                                              -- 농구공지참 플레이 10회
 	             , CASE WHEN (
 	                            SELECT COUNT(*) AS COUNT
 	                            FROM   TBL_PERSONAL_ACHIEVEMENT_GET
 	                            WHERE  GETTER_ACCT_CODE = #{userAccountCode}                                                                     -- 유저 코드*
-	                            AND    PERS_ACHV_CODE = 'ZO07' 
+	                            AND    PERS_ACHV_CODE = 'ZO09' 
 	                         ) = 1 THEN 100
 	               ELSE (
 	                        SELECT COUNT(MEET_CODE)*10 AS MEET_COUNT
@@ -815,12 +911,12 @@
 	        
 	        UNION
 	        
-	        SELECT 'ZO08' AS PERS_ACHV_CODE                                                                                              -- 농구공지참 플레이 100회
+	        SELECT 'ZO10' AS PERS_ACHV_CODE                                                                                              -- 농구공지참 플레이 100회
 	             , CASE WHEN (
 	                            SELECT COUNT(*) AS COUNT
 	                            FROM   TBL_PERSONAL_ACHIEVEMENT_GET
 	                            WHERE  GETTER_ACCT_CODE = #{userAccountCode}                                                                     -- 유저 코드*
-	                            AND    PERS_ACHV_CODE = 'ZO08' 
+	                            AND    PERS_ACHV_CODE = 'ZO10' 
 	                         ) = 1 THEN 100
 	               ELSE (
 	                        SELECT COUNT(MEET_CODE) AS MEET_COUNT
@@ -850,6 +946,7 @@
 	)
 	WHERE pageNumber <![CDATA[>]]>= #{start} AND pageNumber <![CDATA[<]]>= #{end}                                                                                            -- 페이징 업적 순서번호
 	ORDER BY pageNumber
+   
    </select>
 
 
