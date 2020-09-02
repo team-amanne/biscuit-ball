@@ -244,70 +244,17 @@ public class MypageModel
 			
 			// 작업준비
 			UserDTO user = dao.getUser(userInfo.getUserAcctCode());
+			
+			// 개인업적 1~6 현황조회			
+			ArrayList<PersonalAchievementDTO> achievementList = dao.getPersonalAchievementStatusList(userInfo.getUserAcctCode(), 1, 6);
+			// 최근 획득 개인업적 3개 조회
+			ArrayList<PersonalAchievementDTO> latelyAchievementList = dao.getLatelyPersonalAchievementList(userInfo.getUserAcctCode());			
+			
+			model.addAttribute("user", user);
+			model.addAttribute("achievementList", achievementList);
+			model.addAttribute("latelyAchievementList", latelyAchievementList);
 
 		}
 	   
-	   /*
-	   
-	    		
-		ArrayList<PersonalAchievementDTO> list = dao.getPersonalAchievementList("AF000011", 1, 6);
-		
-		System.out.println(list.get(1).getGetterAccountCode());
-		System.out.println(list.get(1).getPersonalAchievementGetCode());
-		System.out.println(list.get(1).getGetterNickname());
-		System.out.println(list.get(1).getPersonalAchievementCode());
-		System.out.println(list.get(1).getPersonalAchievementName());
-		System.out.println(list.get(1).getPersonalAchievementImg());
-		System.out.println(list.get(1).getPersonalAchievementCondition());
-		System.out.println(list.get(1).getPersonalAchievementGetDate());
-		System.out.println(list.get(1).getTitleAchievementStatus());
-		System.out.println(list.get(1).getGetAchievementStatus());
 
-		System.out.println(list.get(2).getGetterAccountCode());
-		System.out.println(list.get(2).getPersonalAchievementGetCode());
-		System.out.println(list.get(2).getGetterNickname());
-		System.out.println(list.get(2).getPersonalAchievementCode());
-		System.out.println(list.get(2).getPersonalAchievementName());
-		System.out.println(list.get(2).getPersonalAchievementImg());
-		System.out.println(list.get(2).getPersonalAchievementCondition());
-		System.out.println(list.get(2).getPersonalAchievementGetDate());
-		System.out.println(list.get(2).getTitleAchievementStatus());
-		System.out.println(list.get(2).getGetAchievementStatus());
-		
-		System.out.println(list.get(3).getGetterAccountCode());
-		System.out.println(list.get(3).getPersonalAchievementGetCode());
-		System.out.println(list.get(3).getGetterNickname());
-		System.out.println(list.get(3).getPersonalAchievementCode());
-		System.out.println(list.get(3).getPersonalAchievementName());
-		System.out.println(list.get(3).getPersonalAchievementImg());
-		System.out.println(list.get(3).getPersonalAchievementCondition());
-		System.out.println(list.get(3).getPersonalAchievementGetDate());
-		System.out.println(list.get(3).getTitleAchievementStatus());
-		System.out.println(list.get(3).getGetAchievementStatus());
-		
-		System.out.println(list.get(4).getGetterAccountCode());
-		System.out.println(list.get(4).getPersonalAchievementGetCode());
-		System.out.println(list.get(4).getGetterNickname());
-		System.out.println(list.get(4).getPersonalAchievementCode());
-		System.out.println(list.get(4).getPersonalAchievementName());
-		System.out.println(list.get(4).getPersonalAchievementImg());
-		System.out.println(list.get(4).getPersonalAchievementCondition());
-		System.out.println(list.get(4).getPersonalAchievementGetDate());
-		System.out.println(list.get(4).getTitleAchievementStatus());
-		System.out.println(list.get(4).getGetAchievementStatus());
-		
-		System.out.println(list.get(5).getGetterAccountCode());
-		System.out.println(list.get(5).getPersonalAchievementGetCode());
-		System.out.println(list.get(5).getGetterNickname());
-		System.out.println(list.get(5).getPersonalAchievementCode());
-		System.out.println(list.get(5).getPersonalAchievementName());
-		System.out.println(list.get(5).getPersonalAchievementImg());
-		System.out.println(list.get(5).getPersonalAchievementCondition());
-		System.out.println(list.get(5).getPersonalAchievementGetDate());
-		System.out.println(list.get(5).getTitleAchievementStatus());
-		System.out.println(list.get(5).getGetAchievementStatus());
-
-	    
-	   */
-	   
 }

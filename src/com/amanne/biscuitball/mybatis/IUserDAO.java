@@ -84,6 +84,10 @@ public interface IUserDAO
 
 	public ArrayList<PersonalAchievementDTO> getPersonalAchievementList(@Param("userAccountCode")String userAccountCode, @Param("start") int start, @Param("end") int end); // 특정 유저 획득 업적 조회
 
+	public ArrayList<PersonalAchievementDTO> getPersonalAchievementStatusList(@Param("userAccountCode")String userAccountCode, @Param("start") int start, @Param("end") int end); // 특정 유저 업적 현황 조회
+	
+	public ArrayList<PersonalAchievementDTO> getLatelyPersonalAchievementList(@Param("userAccountCode")String userAccountCode); // 특정 유저 최근 획득 업적 조회
+	
 	public int countPersonalAchievements(String userAccountCode); // 특정 유저 획득 업적 전체 수
 
 	public ArrayList<UserDTO> getFriendList(@Param("userAccountCode")String userAccountCode, @Param("start") int start, @Param("end") int end); // 특정 유저 친구 조회
