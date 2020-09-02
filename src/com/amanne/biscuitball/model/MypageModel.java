@@ -244,10 +244,15 @@ public class MypageModel
 			
 			// 작업준비
 			UserDTO user = dao.getUser(userInfo.getUserAcctCode());
-			ArrayList<PersonalAchievementDTO> achievementList = dao.getPersonalAchievementStatusList( userInfo.getUserAcctCode(), 1, 6);
+			
+			// 개인업적 1~6 현황조회			
+			ArrayList<PersonalAchievementDTO> achievementList = dao.getPersonalAchievementStatusList(userInfo.getUserAcctCode(), 1, 6);
+			// 최근 획득 개인업적 3개 조회
+			ArrayList<PersonalAchievementDTO> latelyAchievementList = dao.getLatelyPersonalAchievementList(userInfo.getUserAcctCode());			
 			
 			model.addAttribute("user", user);
 			model.addAttribute("achievementList", achievementList);
+			model.addAttribute("latelyAchievementList", latelyAchievementList);
 
 		}
 	   

@@ -578,7 +578,23 @@
       WHERE USER_ACCT_CODE = #{userAccountCode}
    </select>
 
-
+   <!-- 특정유저 최근획득업적조회 -->
+   <!-- public ArrayList<PersonalAchievementDTO> getLatelyPersonalAchievementList(@Param("userAccountCode")String userAccountCode-->
+   <select id="getLatelyPersonalAchievementList"
+      resultType="com.amanne.biscuitball.mybatis.PersonalAchievementDTO">
+    SELECT PERS_ACHV_NAME AS personalAchievementName, PERS_ACHV_IMG AS personalAchievementImg
+    , PERS_ACHV_CONDITION AS personalAchievementCondition, PERS_ACHV_GET_DATE AS personalAchievementGetDate
+	FROM
+	(
+	    SELECT TPA.PERS_ACHV_NAME, TPA.PERS_ACHV_IMG, TPA.PERS_ACHV_CONDITION, TPAG.PERS_ACHV_GET_DATE
+	         , ROW_NUMBER() OVER(ORDER BY TPAG.PERS_ACHV_GET_DATE) ROWNUMBER
+	    FROM TBL_PERSONAL_ACHIEVEMENT_GET TPAG
+	    JOIN TBL_PERSONAL_ACHIEVEMENTS TPA
+	    ON TPAG.PERS_ACHV_CODE = TPA.PERS_ACHV_CODE
+	    WHERE TPAG.GETTER_ACCT_CODE = #{userAccountCode}
+	)
+	WHERE ROWNUMBER  <![CDATA[<]]>  4
+   </select>
 
    <!-- 특정유저 획득업적조회 -->
    <!-- public ArrayList<PersonalAchievementDTO> getPersonalAchievementList(@Param("userAccountCode")String 
