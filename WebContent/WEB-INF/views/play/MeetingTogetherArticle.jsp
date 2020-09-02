@@ -246,7 +246,7 @@ String cp = request.getContextPath();
 							</c:if>
 							 --%>
 									<button class="btn btn-default btn-lg"
-										onclick="location.href='<%=cp%>/play/party'">메뉴 메인</button>
+										onclick="location.href='<%=cp%>/play/mode'">메뉴 메인</button>
 								</div>
 
 							</div>

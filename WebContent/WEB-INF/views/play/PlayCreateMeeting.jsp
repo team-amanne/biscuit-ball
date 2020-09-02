@@ -79,11 +79,16 @@ select {
    {
       var tier = "${userDto.tierName}";
       var now = new Date();
+      
        var year= now.getFullYear();
        var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);
        var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate();
        var sysdate = now.getDate();
        
+       
+       $("input:radio[name='meetingTypeCode']:radio[value='" + $("#select1").val() +"']").prop('checked', true);
+       $("input:radio[name='ballExistOrNot']:radio[value='" + $("#select2").val() +"']").prop('checked', true); 
+   		
        
        var today =  year + '-' + mon + '-' + day;
        $("#dateselect1").val(today);
@@ -173,7 +178,8 @@ select {
                   <div class="panel panel-default">
                      <div class="panel-body">
                         <div class="input-group input-group-lg subject">
-                           <span class="input-group-addon">모임 제목</span> <input type="text"
+                           <span class="input-group-addon">모임 제목</span>                            
+                           <input type="text"
                               class="form-control" id="meetingSubject" name="meetingSubject">
                            <span class="err">*모임 제목을 입력해주세요</span>
                         </div>
@@ -191,7 +197,7 @@ select {
                                        type="radio" name="meetingTypeCode" id="inlineRadio2"
                                        value="ZL02"> 일반
                                     </label>
-                                    <input type="hidden" id="select1" value="">
+                                    <input type="hidden" id="select1" value="<%=request.getParameter("meetingType") %>">
 
                                  </div>
                                  
@@ -211,6 +217,7 @@ select {
                                        type="radio" name="ballExistOrNot" id="inlineRadio2"
                                        value="ZU02"> no
                                     </label>
+                                    <input type="hidden" id="select2" value="<%=request.getParameter("ballExistOrNot") %>">
 
                                  </div>
                               </div>
@@ -710,7 +717,7 @@ select {
              }
              $("#maxage-check").append(maxage);
              
-         
+             $("#mapSearch").trigger("click");
             
             
           

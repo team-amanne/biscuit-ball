@@ -138,7 +138,7 @@ String cp = request.getContextPath();
 
 								<h4>참여자 정보</h4>
 
-								<ul class="list-group">
+						<ul class="list-group">
 							<li class="list-group-item board-body board-header">
 								<div class="row">															
 									<div class="col-sm-4 col-xs-4">
@@ -229,22 +229,7 @@ String cp = request.getContextPath();
 								<p class="subtitle-text">플레이로그 입력</p>	
 								 <form action="<%=cp%>/play/meeting/manage/playlog/${meetingdto.meetingDate}"
            						 class="meetingPlaylog-form">							
-								<ul class="list-group">
-									<li class="list-group-item board-body">
-										<div class="col-sm-4 col-xs-4">
-											<span>실제플레이 시간</span>
-										</div>
-										<div class="col-sm-4 col-xs-4">
-											<select class="form-control" id="playTime" name="timeSelect">
-                                                   <c:forEach var="i" begin="30" end="1440" step="30">
-                                                      <option value="${i }">
-                                                            ${i }분
-                                                      </option>
-                                                   </c:forEach>
-                                                </select>
-										</div>
-									</li>
-								</ul>
+								
 								
 								<ul class="list-group">
 									
@@ -360,7 +345,27 @@ String cp = request.getContextPath();
 								</c:forEach>
 
 								</ul>
-
+								
+								<ul class="list-group">								
+									<li class="list-group-item board-body">
+									<div class="row">
+										<div class="col-sm-4 col-xs-4">
+											<span>실제플레이 시간</span>
+										</div>
+										<div class="col-sm-2">
+										</div>
+										<div class="col-sm-4 col-xs-4">
+											<select class="form-control" id="playTime" name="timeSelect">
+                                                   <c:forEach var="i" begin="30" end="1440" step="30">
+                                                      <option value="${i }">
+                                                            ${i }분
+                                                      </option>
+                                                   </c:forEach>
+                                                </select>
+										</div>
+										</div>
+									</li>									
+								</ul>
 
 								<div class="btn_action">
 									<button type="button" class="btn btn-default btn-lg btn-submit">입력완료</button>
