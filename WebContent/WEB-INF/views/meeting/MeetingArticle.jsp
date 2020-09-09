@@ -34,8 +34,6 @@ String cp = request.getContextPath();
 	{
 		text-align: center;
 	}
-	
-	
    
  </style>
 

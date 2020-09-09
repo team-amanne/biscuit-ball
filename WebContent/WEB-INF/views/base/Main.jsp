@@ -91,7 +91,7 @@ margin-top: 23%;
 				<div class="carousel-caption" style="top: 25%; left: 15%; width: 450px; height: 200px; background-color: rgba(255, 255, 255, 0.5);">
 					<h2 style="font-weight: bold;">지금 당장 농구하고 싶다면?</h2>
 					<p style="margin-bottom: 20px; font-weight: bold;">BiscuitBall 은 당신의 참여를 기다립니다</p>
-					<a href="<%=cp %>/play/party"><button type="button" class="btn" 
+					<a href="<%=cp %>/play/mode"><button type="button" class="btn" 
 					 style="background-color: orange; color: white; border: none; padding: 10px 20px; font-weight: bold; font-size: 18px;">농구 하기</button></a>
 				</div>
 			</div>

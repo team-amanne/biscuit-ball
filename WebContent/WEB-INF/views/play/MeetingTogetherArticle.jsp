@@ -240,11 +240,11 @@ String cp = request.getContextPath();
 											onclick="joinMeeting()">참 여</button>
 									</c:if>
 
-									<%--
+							
 							<c:if test="${isJoined == 'YES' }">
 							<button class="btn btn-default btn-lg btn-submit" onclick="cancelJoinMeeting()">참여취소</button>							
 							</c:if>
-							 --%>
+							
 									<button class="btn btn-default btn-lg"
 										onclick="location.href='<%=cp%>/play/mode'">메뉴 메인</button>
 								</div>
@@ -273,13 +273,12 @@ String cp = request.getContextPath();
 		else if(ballExistOrNot === false)
 			location.href = url + "?ballExistOrNot=ZU02"
 	}
-	<%--
+	
 	function cancelJoinMeeting()
 	{
 		if(confirm("정말 참가를 취소하시겠습니까?"))
 			location.href = "<%=cp %>/play/meeting/${meetingdto.meetingCode }/joincancel";
 	}
-	 --%>
 </script>
 </body>
 </html>

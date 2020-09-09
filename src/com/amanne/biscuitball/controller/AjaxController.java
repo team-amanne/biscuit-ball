@@ -277,10 +277,10 @@ public class AjaxController
 	public String getSpeedMeeting(Model model, MeetingDTO meetingDTO, MeetingMemberDTO meetingMemberDTO)
 	{
 		String view = null;
-		System.out.println(meetingDTO.getCityCode() + meetingDTO.getMeetingTypeCode() 
+		System.out.println("1" + meetingDTO.getCityCode() + meetingDTO.getMeetingTypeCode() 
     	+ meetingMemberDTO.getBallExistOrNot() + meetingDTO.getSpeedSeqNumber());	
 	    model.addAttribute("result", ajax.getSpeedMeetingCode(meetingDTO, meetingMemberDTO));
-	    System.out.println(ajax.getSpeedMeetingCode(meetingDTO, meetingMemberDTO));
+	    System.out.println("2" + ajax.getSpeedMeetingCode(meetingDTO, meetingMemberDTO));
 	    
 	    view = "/ajax/Check";
 	    return view;

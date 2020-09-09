@@ -112,6 +112,18 @@ $(function()
   	  dateFormat: "yy-mm-dd"
     });
     
+    $("#dateselect1").on("change", function() 
+  	       	{
+  	        	if($("#dateselect1").val() < today)
+  	        	{
+  	        		alert("날짜를 다시 입력하세요");
+  	        		$("#dateselect1").val("");
+  	        	}
+  	        		      	 	
+  	        });
+  	         
+  	           
+    
     // 실력 조건, 나이 조건 자바스크립트
     
     
@@ -233,7 +245,7 @@ $(function()
 					<div class="row">
 
 						<!--------------------------------모임개설 입력 패널 ------------------------->
-						<h3>모임 개설 입력 사항</h3>
+						<h3>모임 개설 입력 사항123</h3>
 						<br>
 						<div class="panel panel-default">
 							<div class="panel-body">
@@ -759,14 +771,16 @@ $(function()
 			    var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);
 			    var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate();
 			    var sysdate = now.getDate();
+			    var hours = now.getHours(); 	// 시
+		        var minutes = now.getMinutes(); // 분
 			    
 			    // 오늘로부터 14일 선택 가능하게 만듦(데이트 피커)
 			    var maxDate = new Date();
 			    var endDay = sysdate+14;
 			    maxDate.setDate(endDay);
 			            
-			    var today = "ex) " + year + '-' + mon + '-' + day;
-			    $("#dateselect1").attr("placeholder", today);
+			    var today = year + '-' + mon + '-' + day;
+			    $("#dateselect1").attr("placeholder", "ex) " + today);
 			    
 			    //데이트피커 사용
 			    $("#dateselect1").datepicker({
@@ -776,7 +790,7 @@ $(function()
 			  	  dateFormat: "yy-mm-dd"
 			    });
 			    
-			    $("#dateselect2").attr("placeholder", today);
+			    $("#dateselect2").attr("placeholder", "ex) " + today);
 			    
 			    //데이트피커 사용
 			    $("#dateselect2").datepicker({
@@ -834,15 +848,32 @@ $(function()
 				   
 				});
 				
-			   
-			  //모임 시작
+				$("#dateselect1").on("change", function() 
+			   	{
+			  		if($("#dateselect1").val() < today)
+			        {
+			            alert("날짜를 다시 입력하세요");
+			            $("#dateselect1").val("");
+			        }
+				});
+				
+				
+			  //모임 시작 시간
 			    $('#startTime').change(function() 
 			   {
-			   /* var meetDate = $('#dateselect1').val() + $('#startTime').val();
-			   	 $('#meetingDate').val(meetDate);*/
 			   		var meetDate = $('#dateselect1').val() + " " + $('#startTime option:selected').val();
 		      	 	$('#meetingDate').val(meetDate);
-				})
+			    if($("#dateselect1").val()==today)
+				{
+					var time = parseInt($("#startTime").val().substring("0","2"));
+					if(hours >= time)
+					{
+						alert("시간대를 다시 입력해주세요");
+						$("#timeselect").val(hours + minues);
+					}
+				}
+ 	
+				});
 				
 				 //모임 종료
 			    $('#endTime').change(function() 
@@ -850,13 +881,29 @@ $(function()
 			    	
 			    	var meetEndDate = $('#dateselect1').val() + " " + $('#endTime option:selected').val();
 			      	 $('#meetingEndDate').val(meetEndDate);
+			      	 
+			      	if($("#endTime").val()<$("#startTime").val())
+					{	
+			      		alert("시간대를 다시 입력해주세요");
+					}
 				})
+				
+				
+				$("#dateselect2").on("change", function() 
+			   	{
+			  		if($("#dateselect1").val() <= $("#dateselect2").val()) 
+			        {
+			            alert("날짜를 다시 입력하세요");
+			            $("#dateselect2").val("");
+			        }
+				});
 				
 				 //모집 종료
 			    $('#closeTime').change(function() 
 			   {
 			    	var meetCloseDate = $('#dateselect2').val() + " " + $('#closeTime option:selected').val();
 			    	$('#meetingCloseDate').val(meetCloseDate);
+			    	
 			    	
 				});
 				

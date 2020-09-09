@@ -92,7 +92,6 @@ String cp = request.getContextPath();
 											</div>
 											<div class="col-md-6">${meetingdto.meetingPeopleNumber}명</div>
 										</div>
-
 									</div>
 								</div>
 

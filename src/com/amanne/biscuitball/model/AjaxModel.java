@@ -663,12 +663,12 @@ public class AjaxModel
     	+ meetingMemberDTO.getBallExistOrNot() + meetingDTO.getSpeedSeqNumber());
 		MeetingDTO dto = dao.getSpeedMeeting(meetingDTO, meetingMemberDTO);
 		
-			System.out.println("확인");
-			System.out.println(dto.getMeetingCode());
+			System.out.println("확인" + dao.getSpeedMeeting(meetingDTO, meetingMemberDTO));
+			System.out.println(dto.getMeetingCode() + "Mo1");
 			System.out.println(dto.getMeetingSubject());
 			System.out.println(dto.getMeetingSubject());
 			System.out.println(dto.getCaptainName());
-			System.out.println(dto.getCaptainAcctCode());
+			System.out.println(dto.getCaptainAcctCode()+ "Mo2");
 			
 			JSONObject obj = null;
 			obj = new JSONObject();			

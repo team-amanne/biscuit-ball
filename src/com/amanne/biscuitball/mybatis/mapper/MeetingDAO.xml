@@ -22,8 +22,7 @@
 			    #{meetingDTO.courtRegistrationCode},	<!-- 모임 장소(코트) -->
 			    #{meetingDTO.openerAcctCode},			<!-- 개설자 계정 코드 -->
 			    #{meetingMemberDTO.ballExistOrNot},     <!-- 개설자 공 소유 여부 -->
-			    #{meetingDTO.returnValue, mode=OUT, jdbcType=VARCHAR}
-		   
+			    #{meetingDTO.returnValue, mode=OUT, jdbcType=VARCHAR}		   
 			)
 		}
 		</select>
@@ -246,11 +245,23 @@
             , MT.MIN_TIER as minTierCode
             , MT.MAX_TIER as maxTierCode
             , CONFIRM_OR_NOT as confirmOrNot
-            , (
-            	SELECT COUNT(*)
-            	FROM TBL_MEETING_JOIN
-            	WHERE MEET_CODE = MT.MEET_CODE
-              ) as nowPeopleNumber
+            ,(
+                SELECT COUNT(*)
+                FROM TBL_MEETING_JOIN
+                WHERE MEET_CODE = MT.MEET_CODE
+                AND 
+                MEET_JOIN_CODE NOT IN
+                (
+                    SELECT MEET_JOIN_CODE
+                    FROM TBL_MEETING_JOIN_CANCEL
+                    WHERE MEET_JOIN_CODE IN
+                    (
+                        SELECT MEET_JOIN_CODE
+                        FROM TBL_MEETING_JOIN
+                        WHERE MEET_CODE = MT.MEET_CODE
+                    )
+                )
+             ) as nowPeopleNumber 
 			FROM TBL_MEETING MT
 			WHERE MEET_COURT_REG_CODE = #{courtCode}
             AND MEET_DATE > SYSDATE
@@ -502,6 +513,18 @@
                 SELECT COUNT(*)
                 FROM TBL_MEETING_JOIN
                 WHERE MEET_CODE = MT.MEET_CODE
+                AND 
+                MEET_JOIN_CODE NOT IN
+                (
+                    SELECT MEET_JOIN_CODE
+                    FROM TBL_MEETING_JOIN_CANCEL
+                    WHERE MEET_JOIN_CODE IN
+                    (
+                        SELECT MEET_JOIN_CODE
+                        FROM TBL_MEETING_JOIN
+                        WHERE MEET_CODE = MT.MEET_CODE
+                    )
+                )
              ) AS NOWPEOPLENUMBER 
 			FROM VIEW_MEETING MT
 			WHERE MEET_CODE = #{meetingCode}
@@ -509,7 +532,7 @@
 		]]>
 		</select>
 
-<!--    public List<MeetingMemberDTO> getMeetingMemberList(String meetingCode); // 특정모임 참가자 조회 -->
+<!--    public ArrayList<MeetingMemberDTO> getMeetingMemberList(String meetingCode); // 특정모임 참가자 조회 -->
 	
 		<select id="getMeetingMemberList" resultType="com.amanne.biscuitball.mybatis.MeetingMemberDTO">
 		<![CDATA[
@@ -522,6 +545,12 @@
             , BALL_EXIST_OR_NOT as ballExistOrNot
 			FROM VIEW_MEETING_JOIN
 			WHERE MEET_CODE = #{meetingCode}
+			AND 
+            MEET_JOIN_CODE NOT IN 
+            (
+            SELECT MEET_JOIN_CODE
+            FROM TBL_MEETING_JOIN_CANCEL
+            )
 			ORDER BY MEET_JOIN_CODE
 		]]>
 		</select>
@@ -563,9 +592,20 @@
 		                SELECT COUNT(*)
 		                FROM TBL_MEETING_JOIN
 		                WHERE MEET_CODE = MT.MEET_CODE
-		            ) AS NOWPEOPLENUMBER 
-		            ,
-		            (
+		                AND 
+		                MEET_JOIN_CODE NOT IN
+		                (
+		                    SELECT MEET_JOIN_CODE
+		                    FROM TBL_MEETING_JOIN_CANCEL
+		                    WHERE MEET_JOIN_CODE IN
+		                    (
+		                        SELECT MEET_JOIN_CODE
+		                        FROM TBL_MEETING_JOIN
+		                        WHERE MEET_CODE = MT.MEET_CODE
+		                    )
+		                )
+		             ) AS NOWPEOPLENUMBER 
+		            ,(
 		                SELECT USER_NICKNAME
 		                FROM VIEW_MEETING_JOIN
 		                WHERE CAPTAIN_OR_NOT = 'YES'
@@ -650,7 +690,19 @@
 		                SELECT COUNT(*)
 		                FROM TBL_MEETING_JOIN
 		                WHERE MEET_CODE = MT.MEET_CODE
-		            ) AS NOWPEOPLENUMBER 
+		                AND 
+		                MEET_JOIN_CODE NOT IN
+		                (
+		                    SELECT MEET_JOIN_CODE
+		                    FROM TBL_MEETING_JOIN_CANCEL
+		                    WHERE MEET_JOIN_CODE IN
+		                    (
+		                        SELECT MEET_JOIN_CODE
+		                        FROM TBL_MEETING_JOIN
+		                        WHERE MEET_CODE = MT.MEET_CODE
+		                    )
+		                )
+		             ) AS NOWPEOPLENUMBER
 		            ,
 		            (
 		                SELECT USER_NICKNAME
@@ -723,11 +775,23 @@
 		        FROM
 		        (
 		            SELECT MT.*
-		            ,(
+		           ,(
 		                SELECT COUNT(*)
 		                FROM TBL_MEETING_JOIN
 		                WHERE MEET_CODE = MT.MEET_CODE
-		            ) AS NOWPEOPLENUMBER 
+		                AND 
+		                MEET_JOIN_CODE NOT IN
+		                (
+		                    SELECT MEET_JOIN_CODE
+		                    FROM TBL_MEETING_JOIN_CANCEL
+		                    WHERE MEET_JOIN_CODE IN
+		                    (
+		                        SELECT MEET_JOIN_CODE
+		                        FROM TBL_MEETING_JOIN
+		                        WHERE MEET_CODE = MT.MEET_CODE
+		                    )
+		                )
+		             ) AS NOWPEOPLENUMBER
 		            ,
 		            (
 		                SELECT USER_NICKNAME

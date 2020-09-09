@@ -95,8 +95,10 @@ select {
        $("#dateselect2").val(today);
        
        var tier = "${userDto.tierName}";
-      var userBirthday = "${userDto.userBirthday}".substring(0,4);
-      var age = year - parseInt(userBirthday)+1;
+      	var userBirthday = "${userDto.userBirthday}".substring(0,4);
+      	var age = year - parseInt(userBirthday)+1;
+      	
+      	
       
       
       

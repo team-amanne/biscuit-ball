@@ -149,6 +149,7 @@ public class PlayController
 			UserInfo userInfo = (UserInfo)session.getAttribute("userInfo");
 			
 			UserDTO userDto = playModel.playUserInfo(userInfo);
+			
 			model.addAttribute("userDto",userDto);
 			
 			return "/play/PlayCreateMeetingTogether";
@@ -161,7 +162,7 @@ public class PlayController
 			MeetingDTO meetingdto = playModel.getMeetingList(meeting_code);
 			CourtDTO courtdto = courtModel.getCourt(meetingdto.getCourtRegistrationCode(), userinfo);
 			
-			ArrayList<MeetingMemberDTO>  memberlist = meetingdto.getMeetingMemberList();
+			ArrayList<MeetingMemberDTO> memberlist = meetingdto.getMeetingMemberList();
 			
 			ArrayList<UserDTO> meetingmemberlist= new ArrayList<UserDTO>();
 			
@@ -176,7 +177,7 @@ public class PlayController
 		}
 	}
 	
-	@RequestMapping("/meeting/createcomplete")
+	 @RequestMapping("/meeting/createcomplete")
    public String MeetingArticle(Model model, MeetingDTO meetingDTO, MeetingMemberDTO meetingMemberDTO)
    {
 	   
@@ -188,6 +189,7 @@ public class PlayController
 	   
 	}
 	
+	// 모임 참가
 	@RequestMapping("/meeting/{meeting_code}/join")
 	public String joinMeeting(Model model, @PathVariable("meeting_code") String meetingCode, @RequestParam("ballExistOrNot") String ballExistOrNot)
 	{
@@ -197,16 +199,23 @@ public class PlayController
 		
 		return "redirect:/play/meeting/" + meetingCode;
 	}
-  
+	
+	// 모임취소
 	@RequestMapping("/meeting/{meeting_code}/joincancel")
-	public String cancelJoinMeeting(Model model, @PathVariable("meeting_code") String meetingCode)
+	public String joinMeeting(Model model, @PathVariable("meeting_code") String meetingCode)
 	{
 		UserInfo info = (UserInfo)request.getSession().getAttribute("userInfo");
+		System.out.println("취소1");
 		
 		playModel.cancelJoinMeeting(meetingCode, info.getUserAcctCode());
-		
+		/*
+		playModel.joinMeeting(meetingCode, info.getUserAcctCode(), ballExistOrNot);
+		 */
+		System.out.println("취소4");
 		return "redirect:/play/meeting/" + meetingCode;
 	}
+  
+	
 	
 	@RequestMapping("/meeting/manage/list")
 	public String meetingList()
