@@ -107,14 +107,15 @@ String cp = request.getContextPath();
          var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);
          var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate();
          var sysdate = now.getDate();
-         
+         var hours = now.getHours(); // 시
+         var minutes = now.getMinutes();
          // 오늘로부터 14일 선택 가능하게 만듦(데이트 피커)
          var maxDate = new Date();
          var endDay = sysdate+14;
          maxDate.setDate(endDay);
                  
-         var today = "ex) " + year + '-' + mon + '-' + day;
-         $("#dateselect1").attr("placeholder", today);
+         var today =  year + '-' + mon + '-' + day;
+         $("#dateselect1").attr("placeholder", "ex) " + today);
          
          //데이트피커 사용
          $("#dateselect1").datepicker({
@@ -124,7 +125,7 @@ String cp = request.getContextPath();
             dateFormat: "yy-mm-dd"
          });
          
-         $("#dateselect2").attr("placeholder", today);
+         $("#dateselect2").attr("placeholder", "ex) " + today);
          
          //데이트피커 사용
          $("#dateselect2").datepicker({
@@ -133,6 +134,31 @@ String cp = request.getContextPath();
             maxDate: maxDate,
             dateFormat: "yy-mm-dd"
          });
+         
+        $("#dateselect1").on("change", function() 
+       	{
+        	if($("#dateselect1").val() < today)
+        	{
+        		alert("날짜를 다시 입력하세요");
+        		$("#dateselect1").val("");
+        	}
+        		      	 	
+        });
+         
+        $("#timeselect").on("change", function() 
+        {
+        	if($("#dateselect1").val()==today)
+        	{
+        		var time = parseInt($("#timeselect").val().substring("0","2"));
+        		if(hours >= time)
+        		{
+        			alert("시간대를 다시 입력해주세요");
+        			$("#timeselect").val("");
+        		}
+        		
+        	}
+        				
+        });
          
          // 내 코트 체크 시 지도 검색 비활성화
          
@@ -241,6 +267,9 @@ String cp = request.getContextPath();
                                  <input type="text" class="form-control" placeholder=""
                                     id="dateselect1"> <select class="form-control"
                                     id="timeselect">
+                                    <option value="">
+                                    	시간선택
+                                    </option>
                                     <c:forEach var="i" begin="0" end="24">
                                        <option value="${String.format('%02d:00', i)}">
                                           <c:choose>

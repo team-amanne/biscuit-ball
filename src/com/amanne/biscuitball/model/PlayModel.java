@@ -104,7 +104,7 @@ public class PlayModel
        
        dao.registerMeeting(meetingDTO, meetingMemberDTO);
        String result = meetingDTO.getReturnValue();
-       System.out.println(result);
+       System.out.println("코드"+result);
        if(result != null)
        {  
           return result;
@@ -123,6 +123,7 @@ public class PlayModel
 		
 		MeetingDTO meetingdto = meetingdao.getMeeting(meetingCode);
 		ArrayList<MeetingMemberDTO> meetingMemberList = meetingdao.getMeetingMemberList(meetingCode);
+		System.out.println(meetingMemberList);
 		meetingdto.setMeetingMemberList(meetingMemberList);
 		
 		return meetingdto;
@@ -163,12 +164,13 @@ public class PlayModel
 	{
 		IMeetingDAO meetingdao = sqlSession.getMapper(IMeetingDAO.class);
 		
+		System.out.println("취소2");
 		MeetingMemberDTO dto = new MeetingMemberDTO();
 		dto.setMeetCode(meetingCode);
 		dto.setJoinAccountCode(userAcctCode);
 		
 		meetingdao.cancelJoinMeeting(dto);
-		
+		System.out.println("취소3 ");
 		return dto.isReturnValue();
 	}
 	

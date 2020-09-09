@@ -74,15 +74,14 @@ String cp = request.getContextPath();
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-12">
-								
+							<div class="col-md-12">								
 								<div class="row">
 									<div class="col-md-12">
 										<span class="list-title">최근 획득업적 현황</span>
 									</div>
 								</div>
 								<div class="row">
-										<p> </p>
+									<p> </p>
 								</div>
 								<ul class="list-group">
 									<li class="list-group-item board-body board-header">
