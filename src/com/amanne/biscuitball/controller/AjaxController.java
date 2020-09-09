@@ -1,5 +1,6 @@
 package com.amanne.biscuitball.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -296,6 +297,17 @@ public class AjaxController
 	    view = "/ajax/Check";
 	    return view;
 	}
-
+	
+	// 업적 페이징
+	@RequestMapping("/achievemcentpaging")
+	public String achievements(Model model, HttpServletRequest request, @RequestParam("pageNum") String pageNum)
+	{
+		String view = null;
+		
+		model.addAttribute("result", ajax.getAchievemcentList(request, pageNum));
+		
+		view = "/ajax/Check";
+		return view;
+	}
 	
 }

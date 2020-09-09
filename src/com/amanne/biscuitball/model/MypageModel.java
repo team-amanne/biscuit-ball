@@ -250,9 +250,39 @@ public class MypageModel
 			// 최근 획득 개인업적 3개 조회
 			ArrayList<PersonalAchievementDTO> latelyAchievementList = dao.getLatelyPersonalAchievementList(userInfo.getUserAcctCode());			
 			
+			// 전체 업적 수, 업적 획득 수 조회
+			int getCountPersonalAchievements = dao.getCountPersonalAchievements(userInfo.getUserAcctCode());
+			int totalCountPersonalAchievements = dao.totalCountPersonalAchievements();
+			
+			
+			// 전체 업적 달성률
+			String totalGetPersonalAchievementsPercent = String.format("%.1f", ((double)getCountPersonalAchievements/totalCountPersonalAchievements)*100.0);
+			System.out.println();		
+						
+			// 날짜정보 시간까지만 표현 
+			for (PersonalAchievementDTO dto : latelyAchievementList)
+			{
+				dto.setPersonalAchievementGetDate(dto.getPersonalAchievementGetDate().substring(0, 10));
+			}
+			
+
+			for (PersonalAchievementDTO dto : achievementList)
+			{
+
+				if(dto.getPersonalAchievementGetDate() != null) 
+				{	
+					dto.setPersonalAchievementGetDate(dto.getPersonalAchievementGetDate().substring(0, 10));		
+				}
+			
+			}
+			
 			model.addAttribute("user", user);
 			model.addAttribute("achievementList", achievementList);
 			model.addAttribute("latelyAchievementList", latelyAchievementList);
+			model.addAttribute("getCountPersonalAchievements", latelyAchievementList);
+			model.addAttribute("getCountPersonalAchievements", getCountPersonalAchievements);
+			model.addAttribute("totalCountPersonalAchievements", totalCountPersonalAchievements);
+			model.addAttribute("totalGetPersonalAchievementsPercent", totalGetPersonalAchievementsPercent);
 
 		}
 	   

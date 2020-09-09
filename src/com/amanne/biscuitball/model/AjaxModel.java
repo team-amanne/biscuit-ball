@@ -11,6 +11,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -28,6 +29,7 @@ import com.amanne.biscuitball.mybatis.IUserDAO;
 import com.amanne.biscuitball.util.MyUtil;
 import com.amanne.biscuitball.mybatis.MeetingDTO;
 import com.amanne.biscuitball.mybatis.MeetingMemberDTO;
+import com.amanne.biscuitball.mybatis.PersonalAchievementDTO;
 import com.amanne.biscuitball.mybatis.RegionDTO;
 import com.amanne.biscuitball.mybatis.UserDTO;
 
@@ -45,7 +47,7 @@ public class AjaxModel
 	
 	@Autowired
 	private PlayModel playModel;
-	
+
 	@Autowired
 	private HttpSession session;
 	
@@ -722,5 +724,42 @@ public class AjaxModel
 	
 	return arr.toString();
     }
+    
+    // 업적페이징
+    public String getAchievemcentList(HttpServletRequest request, String pageNum)
+    {
+    	HttpSession session = request.getSession();
+    	UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+    	
+    	IUserDAO dao = sqlSession.getMapper(IUserDAO.class);
+    	
+    	ArrayList<PersonalAchievementDTO> list = 
+    			dao.getPersonalAchievementStatusList(userInfo.getUserCode(), Integer.parseInt(pageNum), Integer.parseInt(pageNum)+5);
+
+    	JSONArray arr = new JSONArray();
+    	JSONObject obj = null; 	
+
+    	
+    	for(PersonalAchievementDTO dto : list)
+		{
+			obj = new JSONObject();
+			obj.put("personalAchievementGetCode",dto.getPersonalAchievementGetCode());
+			obj.put("personalAchievementCode",dto.getPersonalAchievementCode());
+			obj.put("personalAchievementName",dto.getPersonalAchievementName());
+			obj.put("personalAchievementImg",dto.getPersonalAchievementImg());
+			obj.put("personalAchievementCondition",dto.getPersonalAchievementCondition());
+			obj.put("getterAccountCode",dto.getGetterAccountCode());
+			obj.put("getterNickname",dto.getGetterNickname());
+			obj.put("personalAchievementGetDate",dto.getPersonalAchievementGetDate());
+			obj.put("getAchievementStatus",dto.getGetAchievementStatus());
+			obj.put("titleAchievementStatus",dto.getTitleAchievementStatus());
+			arr.add(obj);		
+		}
+	
+    	
+    	return arr.toString();
+    }
+    
+    
     
 }

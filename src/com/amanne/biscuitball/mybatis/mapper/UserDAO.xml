@@ -967,12 +967,21 @@
 
 
    <!-- 특정 유저 획득 업적 전체 수 -->
-   <!-- public int countPersonalAchievements(String userAccountCode) -->
-   <select id="countPersonalAchievements"
-      parameterType="java.lang.String">
+   <!-- public int getCountPersonalAchievements(String userAccountCode) -->
+   <select id="getCountPersonalAchievements"
+      parameterType="java.lang.String"
+      resultType="java.lang.Integer">
       SELECT COUNT(*)
       FROM VIEW_PERSONAL_ACHIEVEMENT_GET
       WHERE GETTER_ACCT_CODE = #{userAccountCode}
+   </select>
+	
+   <!-- 업적 전체 수 -->
+   <!-- public int totalCountPersonalAchievements(); -->
+   <select id="totalCountPersonalAchievements"
+  	  resultType="java.lang.Integer">
+      SELECT COUNT(*)
+      FROM TBL_PERSONAL_ACHIEVEMENTS
    </select>
 
    <!-- 특정 유저 친구 조회 -->
