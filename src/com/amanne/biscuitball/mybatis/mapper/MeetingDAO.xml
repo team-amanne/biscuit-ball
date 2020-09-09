@@ -592,9 +592,20 @@
 		                SELECT COUNT(*)
 		                FROM TBL_MEETING_JOIN
 		                WHERE MEET_CODE = MT.MEET_CODE
-		            ) AS NOWPEOPLENUMBER 
-		            ,
-		            (
+		                AND 
+		                MEET_JOIN_CODE NOT IN
+		                (
+		                    SELECT MEET_JOIN_CODE
+		                    FROM TBL_MEETING_JOIN_CANCEL
+		                    WHERE MEET_JOIN_CODE IN
+		                    (
+		                        SELECT MEET_JOIN_CODE
+		                        FROM TBL_MEETING_JOIN
+		                        WHERE MEET_CODE = MT.MEET_CODE
+		                    )
+		                )
+		             ) AS NOWPEOPLENUMBER 
+		            ,(
 		                SELECT USER_NICKNAME
 		                FROM VIEW_MEETING_JOIN
 		                WHERE CAPTAIN_OR_NOT = 'YES'
