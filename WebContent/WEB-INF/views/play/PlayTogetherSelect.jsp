@@ -419,8 +419,12 @@ String cp = request.getContextPath();
                      </div>
                   </div>
                   <ul class="list-group" id="meetingList">
+                  
                      <!-- 게시판 출력 영역 -->
+                    
                   </ul>
+                   <div id="meetingPagination" style="text-align:center;"></div>
+                  
 
                   <div class="row">
                      <div class="col-md-12  right-btn">
@@ -431,34 +435,14 @@ String cp = request.getContextPath();
 
 
                </div>
-
-               <div class="row">
-                  <div class="col-md-4"></div>
-                  <div class="col-md-4 paging">
-                     <ul class="pagination">
-                        <li class="disabled"><a href="#"> <span>«</span>
-                        </a></li>
-                        <li class="active"><a href="#" class="select-page">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#"> <span>»</span>
-                        </a></li>
-                     </ul>
-                  </div>
-                  <div class="col-md-4"></div>
-               </div>
-               <div class="row">
-                  <div class="col-md-12"></div>
-               </div>
             </div>
             <div class="col-md-2">
                <input type="hidden" id="courtCode">
             </div>
          </div>
       </div>
-   </div>
+
+ 
 
 
    <c:import url="../base/Footer.jsp"></c:import>
@@ -645,84 +629,147 @@ $(function()
 		}
    
     	  $("#resultList").css("display", "inline");
-	      $.ajax
-	      ({
-	         type: "get",
-	            dataType: "json",
-	            url: "<%=cp%>/ajax/togethermeetinglist",
-	         data :
-	         {
-	            courtRegistrationCode : $("#courtCode").val(),
-	            meetingDate : $("#dateselect1").val()+" "+$("#timeselect option:selected").val(),
-	            meetingTypeCode : $('input[name="meetingType"]:checked').val(),
-	            start : 1,
-	            end : 10
-	         },
-	         success : function(data)
-	         {
-	
-	            var listPrint = "<li class='list-group-item board-body board-header'><div class='row'>"
+    	  
+    	  
+    	  
+    	  
+    	  
+    	  $.ajax({
+  			type: "get",
+  			url: "<%=cp %>/ajax/court/" + $("#courtCode").val() + "/meetinglist/" + $("#dateselect1").val(),
+  			dataType: "json",
+  			data: {page: 1},
+  			success: function(data) {
+  				var listPrint = "<li class='list-group-item board-body board-header'><div class='row'>"
 	                  + "<div class='col-md-4 col-xs-4'><span>제목</span></div><div class='col-md-2 col-xs-2'><span>주장</span>"
 	                  + "</div><div class='col-md-3 col-xs-3'><span>장소</span></div><div class='col-md-2 col-xs-2'>"
 	                  + "<span>일시</span></div><div class='col-md-1 col-xs-1'><span>인원</span></div></div></li>";
-	
-	                  
-                if (data.length==0)
-				{
-					listPrint += "<div align='center' style='font-size: 14pt; margin-top: 2%;'>해당 조건의 모임이 존재하지 않습니다.</div>"
-				}
-                else
-                {
-                	for (var i=0; i<data.length; i++)
-    	            {
-    	            	
-    	            	
-    	            	listPrint += "<li class='list-group-item board-body'><div class='row'><div class='col-md-4 col-xs-4'>";
-      	               listPrint += "<span class='meetingPage' id='"+ data[i].meetingCode +"'>"+ data[i].meetingSubject+ "</span>";
-      	               listPrint += "</div><div class='col-md-2 col-xs-2'>";
-      	               listPrint += "<span class='captainName' id='"+ data[i].captainAcctCode +"'>"+ data[i].captainName+ "</span>";
-      	               listPrint += "</div><div class='col-md-3 col-xs-3'>";
-      	               listPrint += "<span class='courtName' id='"+ data[i].courtRegistrationCode +"'>"+ $("#courtName").text()+ "</span>";
-      	               listPrint += "</div><div class='col-md-2 col-xs-2'>";
-      	               listPrint += "<span>"+ data[i].meetingDate+ "</span>";
-      	               listPrint += "</div><div class='col-md-1 col-xs-1'>";
-      	               listPrint += "<span>"+ data[i].nowPeopleNumber+ "/"+ data[i].meetingPeopleNumber+ "</span>";
-      	               listPrint += "</div></div></li>";
-    	            	
-    	            }
-                	
-                }
-	            
-	            $("#meetingList").html(listPrint);
-	            
-	            //alert(listPrint);
-	            
-	            
-	            // 모임 제목 클릭하면 모임으로
-	            $(".meetingPage").click(function()
-	            {
-	               //var id = ($(this).attr('id'));
-	               var meetingCode = $(this).attr('id');
-	               
-	               $(location).attr("href","<%=cp%>/play/meeting/"+ meetingCode);
-	               //childWindow.resizeTo(800, 800);
-	            });
-	            
-	            // 코트 이름 클릭하면 코트 페이지로
-	            $(".courtName").click(function()
-	            {
-	               var courtCode = ($(this).attr('id'));
-	               
-	               $(location).attr("href","<%=cp%>/court/"+ courtCode);
-	            });
-	            
-	         },
-	         error : function(e)
-	         {
-	            alert(e.responseText);
-	         }
-	               
-      	});
+  				if(data.length > 0) {
+  														
+  					for(var i=0; i<data.length; i++) {
+  							
+  							listPrint += "<li class='list-group-item board-body'><div class='row'><div class='col-md-4 col-xs-4'>";
+  		      	               listPrint += "<span class='meetingPage' id='"+ data[i].meetingCode +"'>"+ data[i].meetingSubject+ "</span>";
+  		      	               listPrint += "</div><div class='col-md-2 col-xs-2'>";
+  		      	               listPrint += "<span class='captainName' id='"+ data[i].captainAcctCode +"'>"+ data[i].captainName+ "</span>";
+  		      	               listPrint += "</div><div class='col-md-3 col-xs-3'>";
+  		      	               listPrint += "<span class='courtName' id='"+ data[i].courtRegistrationCode +"'>"+ $("#courtName").text()+ "</span>";
+  		      	               listPrint += "</div><div class='col-md-2 col-xs-2'>";
+  		      	               listPrint += "<span>"+ data[i].meetingDate+ "</span>";
+  		      	               listPrint += "</div><div class='col-md-1 col-xs-1'>";
+  		      	               listPrint += "<span>"+ data[i].nowPeopleNumber+ "/"+ data[i].meetingPeopleNumber+ "</span>";
+  		      	               listPrint += "</div></div></li>";
+  		
+  							
+  						}
+  				}
+  				else {
+  					listPrint = "<div style='text-align: center; padding-top: 20px;'>모집 중인 모임이 없습니다.</div>";
+  				}
+  				
+  				 $("#meetingList").html(listPrint);
+  			},
+  			error: function (e) {
+  				console.log(e);
+  	    		alert(e.responseText);
+  			}
+  		});
+  		
+  		$.ajax({
+  			type: "get",
+  			url: "<%=cp %>/ajax/court/" + $("#courtCode").val() + "/meetingindex/" + $("#dateselect1").val(),
+  			dataType: "text",
+  			data: {page: 1},
+  			success: function (data) {
+  				$("#meetingPagination").html(data);
+  				$("#meetingPagination li[data-page]").click(renderMeetingView($(".date-view_heading[data-date]").data("date")));
+  			},
+  			error: function (e) {
+  				console.log(e);
+  	    		alert(e.responseText);
+  			}
+  		});
+  		
+  		$(".date-view_heading[data-date]").click(function() {
+  			$.ajax({
+  				type: "get",
+  				url: "<%=cp %>/ajax/court/" + $("#courtCode").val() + "/meetinglist/" + $(this).data("date"),
+  				dataType: "json",
+  				data: {page: 1},
+  				success: function(data) {
+  					var listPrint = "<li class='list-group-item board-body board-header'><div class='row'>"
+	                  + "<div class='col-md-4 col-xs-4'><span>제목</span></div><div class='col-md-2 col-xs-2'><span>주장</span>"
+	                  + "</div><div class='col-md-3 col-xs-3'><span>장소</span></div><div class='col-md-2 col-xs-2'>"
+	                  + "<span>일시</span></div><div class='col-md-1 col-xs-1'><span>인원</span></div></div></li>";
+  					if(data.length > 0) {
+  															
+  						for(var i=0; i<data.length; i++) {
+  							
+  							listPrint += "<li class='list-group-item board-body'><div class='row'><div class='col-md-4 col-xs-4'>";
+  		      	               listPrint += "<span class='meetingPage' id='"+ data[i].meetingCode +"'>"+ data[i].meetingSubject+ "</span>";
+  		      	               listPrint += "</div><div class='col-md-2 col-xs-2'>";
+  		      	               listPrint += "<span class='captainName' id='"+ data[i].captainAcctCode +"'>"+ data[i].captainName+ "</span>";
+  		      	               listPrint += "</div><div class='col-md-3 col-xs-3'>";
+  		      	               listPrint += "<span class='courtName' id='"+ data[i].courtRegistrationCode +"'>"+ $("#courtName").text()+ "</span>";
+  		      	               listPrint += "</div><div class='col-md-2 col-xs-2'>";
+  		      	               listPrint += "<span>"+ data[i].meetingDate+ "</span>";
+  		      	               listPrint += "</div><div class='col-md-1 col-xs-1'>";
+  		      	               listPrint += "<span>"+ data[i].nowPeopleNumber+ "/"+ data[i].meetingPeopleNumber+ "</span>";
+  		      	               listPrint += "</div></div></li>";
+  		
+  							
+  						}
+  					}
+  					else {
+  						listPrint = "<div style='text-align: center; padding-top: 20px;'>모집 중인 모임이 없습니다.</div>";
+  					}
+  					
+  					 $("#meetingList").html(listPrint);
+  				},
+  				error: function (e) {
+  					console.log(e);
+  		    		alert(e.responseText);
+  				}
+  			});
+  			
+  			var date = $(this).data("date");
+  			$.ajax({
+  				type: "get",
+  				url: "<%=cp %>/ajax/court/" + $("#courtCode").val() + "/meetingindex/" + date,
+  				dataType: "text",
+  				data: {page: 1},
+  				success: function (data) {
+  					$("#meetingPagination").html(data);
+  					$("#meetingPagination li[data-page]").click(renderMeetingView(date));
+  				},
+  				error: function (e) {
+  					console.log(e);
+  		    		alert(e.responseText);
+  				}
+  			});
+  		});
+    	  
+    	  
+    	  
+    	  
+    	  
+    	  
+    	  
+    	  
+    	  
+    	  
+    	  
+    	  
+    	  
+    	  
+    	  
+    	  
+    	  
+    	  
+    	  
+    	  
+    	  
+    	  
    
    } // 모든 값이 채워졌을 때  모임 검색이 실행 됨
    else		// 값이 하나라도 없을 때
@@ -761,6 +808,70 @@ $(function()
    
 
 });
+
+
+
+function renderMeetingView(meetingDate) {
+	
+	return function() {
+		var meetingPage = $(this).data("page");
+		$.ajax({
+			type: "get",
+			dataType: "json",
+			url: "<%=cp %>/ajax/court/" + $("#courtCode").val() + "/meetinglist/" + $("#dateselect1").val(),
+			data: {page: meetingPage},
+			success: function(data) {
+				alert("확인");
+				
+				var listPrint = "<li class='list-group-item board-body board-header'><div class='row'>"
+	                  + "<div class='col-md-4 col-xs-4'><span>제목</span></div><div class='col-md-2 col-xs-2'><span>주장</span>"
+	                  + "</div><div class='col-md-3 col-xs-3'><span>장소</span></div><div class='col-md-2 col-xs-2'>"
+	                  + "<span>일시</span></div><div class='col-md-1 col-xs-1'><span>인원</span></div></div></li>";;
+				if(data.length > 0) {
+														
+					for(var i=0; i<data.length; i++) {
+	
+						listPrint += "<li class='list-group-item board-body'><div class='row'><div class='col-md-4 col-xs-4'>";
+	      	               listPrint += "<span class='meetingPage' id='"+ data[i].meetingCode +"'>"+ data[i].meetingSubject+ "</span>";
+	      	               listPrint += "</div><div class='col-md-2 col-xs-2'>";
+	      	               listPrint += "<span class='captainName' id='"+ data[i].captainAcctCode +"'>"+ data[i].captainName+ "</span>";
+	      	               listPrint += "</div><div class='col-md-3 col-xs-3'>";
+	      	               listPrint += "<span class='courtName' id='"+ data[i].courtRegistrationCode +"'>"+ $("#courtName").text()+ "</span>";
+	      	               listPrint += "</div><div class='col-md-2 col-xs-2'>";
+	      	               listPrint += "<span>"+ data[i].meetingDate+ "</span>";
+	      	               listPrint += "</div><div class='col-md-1 col-xs-1'>";
+	      	               listPrint += "<span>"+ data[i].nowPeopleNumber+ "/"+ data[i].meetingPeopleNumber+ "</span>";
+	      	               listPrint += "</div></div></li>";
+					}
+				}
+				else {
+					result = "모집 중인 모임이 없습니다.";
+				}
+				
+				$("#meetingList").html(listPrint);
+				
+				$.ajax({
+					type: "get",
+					url: "<%=cp %>/ajax/court/" + $("#courtCode").val() + "/meetingindex/" + $(".date-view_heading[data-date=" + meetingDate +"]").data("date"),
+					dataType: "text",
+					data: {page: meetingPage},
+					success: function (data) {
+						$("#meetingPagination").html(data);
+						$("#meetingPagination li[data-page]").click(renderMeetingView(meetingDate));
+					},
+					error: function (e) {
+						console.log(e);
+			    		alert(e.responseText);
+					}
+				});
+			},
+			error: function(e) {
+				alert(e.responseText);
+				console.log(e);
+			}
+		});
+	}
+}
    </script>
 
 </body>

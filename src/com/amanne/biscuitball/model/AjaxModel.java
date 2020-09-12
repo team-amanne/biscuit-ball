@@ -315,13 +315,14 @@ public class AjaxModel
 	public String getCourtMeetingList(String courtCode, String meetingDate, int page)
 	{
 		IMeetingDAO dao = sqlSession.getMapper(IMeetingDAO.class);
+		System.out.println(courtCode + " " + meetingDate + "모델" + page);
 		JSONArray arr = new JSONArray();
 		JSONObject obj = null;
 		ArrayList<MeetingDTO> list = dao.getMeetingListByCourtDate(courtCode, meetingDate, (page-1) * 5 + 1, page * 5);
+		System.out.println("리스트" + list);
 		for(MeetingDTO dto : list)
 		{
 			obj = new JSONObject();
-			
 			obj.put("meetingCode",dto.getMeetingCode() );
 			obj.put("meetingSubject", dto.getMeetingSubject() );
 			obj.put("meetingPeopleNumber", dto.getMeetingPeopleNumber() );
@@ -659,16 +660,10 @@ public class AjaxModel
     	meetingMemberDTO.setJoinAccountCode(info.getUserAcctCode()); 
     	
     	IMeetingDAO dao = sqlSession.getMapper(IMeetingDAO.class);   	
-    	System.out.println(meetingMemberDTO.getJoinAccountCode() + " " + meetingDTO.getCityCode() + meetingDTO.getMeetingTypeCode() 
-    	+ meetingMemberDTO.getBallExistOrNot() + meetingDTO.getSpeedSeqNumber());
+
 		MeetingDTO dto = dao.getSpeedMeeting(meetingDTO, meetingMemberDTO);
 		
-			System.out.println("확인" + dao.getSpeedMeeting(meetingDTO, meetingMemberDTO));
-			System.out.println(dto.getMeetingCode() + "Mo1");
-			System.out.println(dto.getMeetingSubject());
-			System.out.println(dto.getMeetingSubject());
-			System.out.println(dto.getCaptainName());
-			System.out.println(dto.getCaptainAcctCode()+ "Mo2");
+
 			
 			JSONObject obj = null;
 			obj = new JSONObject();			
