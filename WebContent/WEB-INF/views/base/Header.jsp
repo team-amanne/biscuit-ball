@@ -43,7 +43,7 @@
 						코트 정보
 						</a>
 					</li>
-					<li ${param.active == "crew" ? "class='active'" : "" }>
+					<%-- <li ${param.active == "crew" ? "class='active'" : "" }>
 						<a
 						<c:if test='${param.active != "crew" }'>
 						href = <c:url value=""></c:url>
@@ -60,7 +60,7 @@
 						>
 						대전
 						</a>
-					</li>
+					</li> --%>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
@@ -174,8 +174,8 @@
 				<ul class="nav navbar-nav">
 					<li><a href=<c:url value="/play/party"></c:url>>농구하기</a></li>
 					<li><a href=<c:url value="/court/search"></c:url>>코트검색</a></li>
-					<li><a href="#">크루</a></li>
-					<li><a href="#">대전</a></li>
+					<!-- <li><a href="#">크루</a></li>
+					<li><a href="#">대전</a></li> -->
 				</ul>
 			</div>
 
@@ -215,7 +215,6 @@
 						<li><a href=<c:url value="/logout"></c:url>>로그아웃</a></li>
 					</ul>
 				</div>
-
 			</c:if>
 
 			<c:if test="${sessionScope.adminInfo != null }">
